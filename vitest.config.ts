@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [WxtVitest()],
   test: {
     setupFiles: ['./lib/testing/setup-locks.ts'],
-    exclude: [...configDefaults.exclude, 'e2e/**', 'e2e-store/**'],
+    exclude: [...configDefaults.exclude, 'e2e/**', 'e2e-store/**', 'video/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],

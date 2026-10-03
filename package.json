@@ -54,6 +54,11 @@
     "test:watch": "vitest",
     "test:e2e": "wxt build && playwright test",
     "store:screenshots": "wxt build && playwright test -c playwright.store.config.ts",
+    "video:install": "bun install --cwd video",
+    "video:studio": "bun run --cwd video studio",
+    "video:check": "bun run --cwd video check",
+    "video:still": "bun run --cwd video still",
+    "video:render": "bun run --cwd video render",
     "postinstall": "wxt prepare",
     "prepare": "bunx --bun husky"
   },

@@ -11,5 +11,6 @@
     "noFallthroughCasesInSwitch": true,
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true
-  }
+  },
+  "exclude": ["node_modules", ".output", "video"]
 }

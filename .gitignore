@@ -18,6 +18,10 @@ coverage
 test-results
 playwright-report
 
+# promo video package (docs/adr/0009)
+video/out/
+video/node_modules/
+
 # forge coordination artifacts
 .forge
 .claude/worktrees
