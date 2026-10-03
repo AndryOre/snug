@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "将书签导出为 HTML、JSON、CSV、Markdown、OPML 或 XBEL，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。",
+    "message": "以常见格式导出书签，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

@@ -6,8 +6,8 @@ Snug – Lesezeichen exportieren, importieren und sichern
 
 ## Summary
 
-Lesezeichen als HTML, JSON, CSV, Markdown, OPML oder XBEL exportieren, aus
-Chrome oder Safari importieren, automatisch sichern.
+Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren
+und automatisch sichern. Alles lokal.
 
 ## Detailed description
 
@@ -15,12 +15,12 @@ Snug überträgt deine Lesezeichen zwischen Browsern, genau so, wie du sie
 hinterlassen hast – nichts wird irgendwohin gesendet, und ein Konto brauchst du
 nicht.
 
-Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl,
-als HTML, JSON, CSV, Markdown, OPML oder XBEL. Importiere aus HTML, JSON, CSV,
-XBEL, der Bookmarks-Datei eines Chrome-Profils oder aus Safari-Lesezeichen,
-zuerst mit einer Vorschau. Dann entscheidest du: mit deinen vorhandenen
-Lesezeichen zusammenführen, sie komplett ersetzen oder alles in einem neuen
-Ordner ablegen – jedes Mal deine Entscheidung.
+Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl, in
+gängigen Formaten wie HTML oder JSON. Importiere Dateien aus anderen
+Lesezeichen-Managern, die Bookmarks-Datei eines Chrome-Profils oder
+Safari-Lesezeichen, zuerst mit einer Vorschau. Dann entscheidest du: mit deinen
+vorhandenen Lesezeichen zusammenführen, sie komplett ersetzen oder alles in
+einem neuen Ordner ablegen – jedes Mal deine Entscheidung.
 
 Vor jedem Ersetzen legt Snug eine Sicherheitskopie deiner Lesezeichen an, damit
 du es rückgängig machen kannst. Die Seite Duplikate findet doppelte Lesezeichen

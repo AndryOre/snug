@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Экспорт закладок в HTML, JSON, CSV, Markdown, OPML и XBEL, импорт из Chrome и Safari, бэкапы по расписанию. Всё локально.",
+    "message": "Экспорт, импорт и резервные копии закладок в распространённых форматах, из Chrome и Safari. Всё локально.",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

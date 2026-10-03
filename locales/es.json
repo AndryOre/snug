@@ -4,7 +4,7 @@
     "description": "Nombre de la extensión."
   },
   "extensionDescription": {
-    "message": "Exporta marcadores a HTML, JSON, CSV, Markdown, OPML o XBEL, importa de Chrome o Safari y respalda con horario. Todo local.",
+    "message": "Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local.",
     "description": "Descripción de la extensión"
   },
   "welcomeSubtitle": {

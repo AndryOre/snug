@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Exporte favoritos em HTML, JSON, CSV, Markdown, OPML ou XBEL, importe do Chrome ou Safari e agende backups. Tudo local.",
+    "message": "Exporte, importe e faça backup dos favoritos em formatos comuns, do Chrome ou Safari. Tudo local.",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "ブックマークをHTML・JSON・CSV・Markdown・OPML・XBELで書き出し、ChromeやSafariから読み込み、自動バックアップ。すべて端末内。",
+    "message": "ブックマークを一般的な形式で書き出し、ChromeやSafariから読み込み、自動バックアップ。すべて端末内。",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

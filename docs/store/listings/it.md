@@ -6,8 +6,8 @@ Snug: esporta e fai il backup dei segnalibri, in locale
 
 ## Summary
 
-Esporta i segnalibri in HTML, JSON, CSV, Markdown, OPML o XBEL, importa da
-Chrome o Safari e pianifica i backup. Tutto in locale.
+Esporta, importa e fai il backup dei segnalibri in formati comuni, da Chrome o
+Safari. Tutto in locale.
 
 ## Detailed description
 
@@ -15,8 +15,8 @@ Snug sposta i tuoi segnalibri tra i browser, esattamente come li hai lasciati â€
 niente viene inviato da nessuna parte e non serve alcun account.
 
 Esporta l'intera struttura dei segnalibri o solo la cartella che scegli, in
-HTML, JSON, CSV, Markdown, OPML o XBEL. Importa da HTML, JSON, CSV, XBEL, dal
-file Bookmarks di un profilo Chrome o dai segnalibri di Safari, con prima
+formati comuni come HTML o JSON. Importa i file di altri gestori di segnalibri,
+il file Bookmarks di un profilo Chrome o i segnalibri di Safari, con prima
 un'anteprima. Poi decidi: unirli ai segnalibri esistenti, sostituirli del tutto
 o metterli in una nuova cartella â€” ogni volta scegli tu.
 
