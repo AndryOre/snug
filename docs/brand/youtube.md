@@ -224,6 +224,44 @@ Studio > Customization > Layout.
   - Audience: not made for kids.
   - Paid promotion: no.
   - Altered content: no.
-  - Comments: on, held for review.
+  - Comments: on, basic moderation.
   - License: Standard YouTube License.
   - Add to the "Getting started" playlist when it fits.
+
+## Applied state
+
+What is live in Studio as of 2026-10-04. Re-check here before changing a
+setting, and update this section when one changes.
+
+### Channel
+
+- **Handle and ID:** `@snugbookmarks`, `UChjCRHMk2Sw8yd1fr-6qFNg`.
+- **Branding:** banner, avatar and watermark come from [`youtube/`](youtube/).
+  The watermark is the Snug mark, shown for the entire video.
+- **Basic info:** English description plus the nine translations above, three
+  links, the business email, and the channel keywords.
+- **Home tab:** on. Channel trailer and featured video for returning subscribers
+  both use the EN promo. Sections: For You and Videos. The "Getting started"
+  playlist and the Popular section wait until there are more videos.
+
+### Upload defaults
+
+Description, tags, category (Science & Technology), language (English), and
+audience (not made for kids) follow the template below.
+
+### Community moderation
+
+- **Comments:** on, with basic moderation. Live chat moderation: none.
+- **Welcome message:**
+  `Welcome to Snug! Ask about exporting, importing and backing up bookmarks.`
+- **Channel guidelines**, shown to people before they comment:
+  1. `Be kind and stay on topic: Snug, bookmarks and browsers.`
+  2. `Don't share private data like bookmark files or passwords.`
+  3. `No spam, self-promotion or unrelated links.`
+
+### Videos
+
+All ten promos are public, titled `Snug — <localized hook>`, with a localized
+description, a thumbnail from [`youtube/thumbnails/`](youtube/thumbnails/), and
+the store link in the first line. The URLs live in the promo table in
+[`docs/store/README.md`](../store/README.md#promo-video).
