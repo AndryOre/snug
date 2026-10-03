@@ -1,0 +1,38 @@
+{
+  "name": "snug-promo-video",
+  "version": "1.0.0",
+  "description": "Snug Chrome Web Store promo video (Remotion)",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@remotion/bundler": "4.0.532",
+    "@remotion/cli": "4.0.532",
+    "@remotion/fonts": "4.0.532",
+    "@remotion/google-fonts": "4.0.532",
+    "@remotion/layout-utils": "4.0.532",
+    "@remotion/media": "4.0.532",
+    "@remotion/renderer": "4.0.532",
+    "@remotion/transitions": "4.0.532",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.532",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "studio": "remotion-studio src/index.ts --port 3123",
+    "still": "remotion still src/index.ts",
+    "render": "bun scripts/render-all.ts",
+    "typecheck": "tsc --noEmit",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "check": "bun run typecheck && bun run format:check"
+  }
+}

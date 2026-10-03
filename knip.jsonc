@@ -20,5 +20,8 @@
     // caller needs them, since acquireLock/releaseLock/resolveLockDirectory
     // cover every consumer so far (scripts/lint-docs.ts included).
     "scripts/locks.ts",
+    // isolated Remotion package (docs/adr/0009): own package.json, lockfile
+    // and tooling, so root knip must not analyze it.
+    "video/**",
   ],
 }
