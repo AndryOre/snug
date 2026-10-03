@@ -27,7 +27,12 @@ const NAV: { id: NavId; key: MessageKey; icon: IconName }[] = [
 
 export const APP_WINDOW_SIZE = { width: 1520, height: 860 } as const
 const TITLE_BAR = 56
+const TITLE_BAR_BORDER = 1.5
 const SIDEBAR = 300
+const SIDEBAR_PADDING_TOP = 28
+const BRAND_ROW = 72
+const NAV_GAP = 10
+const NAV_ITEM = 52
 
 /**
  * Layer coordinates of each nav entry's centre, for Cursor waypoints and
@@ -35,7 +40,14 @@ const SIDEBAR = 300
  */
 export const navItemCenter = (id: NavId): { x: number; y: number } => ({
   x: SIDEBAR / 2,
-  y: TITLE_BAR + 150 + NAV.findIndex((item) => item.id === id) * 62 + 26,
+  y:
+    TITLE_BAR +
+    TITLE_BAR_BORDER +
+    SIDEBAR_PADDING_TOP +
+    BRAND_ROW +
+    NAV_GAP +
+    NAV.findIndex((item) => item.id === id) * (NAV_ITEM + NAV_GAP) +
+    NAV_ITEM / 2,
 })
 
 export type AppWindowProps = {

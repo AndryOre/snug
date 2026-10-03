@@ -1,6 +1,11 @@
 import { interpolate, useCurrentFrame } from 'remotion'
 import { EASE, progressBetween } from './easing'
 
+const CLAMP = {
+  extrapolateLeft: 'clamp',
+  extrapolateRight: 'clamp',
+} as const
+
 export type Waypoint = {
   /** Frame the cursor arrives at this point. */
   frame: number
@@ -30,8 +35,8 @@ export const cursorPositionAt = (
   if (!to) return { x: from.x, y: from.y }
   const amount = progressBetween(frame, from.frame, to.frame, EASE.standard)
   return {
-    x: interpolate(amount, [0, 1], [from.x, to.x]),
-    y: interpolate(amount, [0, 1], [from.y, to.y]),
+    x: interpolate(amount, [0, 1], [from.x, to.x], CLAMP),
+    y: interpolate(amount, [0, 1], [from.y, to.y], CLAMP),
   }
 }
 

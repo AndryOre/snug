@@ -40,7 +40,7 @@ const splitWords = (text: string, locale: Locale): string[] => {
   >((words, segment) => {
     if (segment.trim() === '') return words
     const last = words[words.length - 1]
-    if (last !== undefined && /^\p{P}+$/u.test(segment)) {
+    if (last !== undefined && /^[\p{Pe}\p{Pf}\p{Po}]+$/u.test(segment)) {
       return [...words.slice(0, -1), last + segment]
     }
     return [...words, segment]

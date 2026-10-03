@@ -21,7 +21,10 @@ export const BlobMark = ({ size = 120, period = 90 }: BlobMarkProps) => {
   const frame = useCurrentFrame()
   const phase = (1 - Math.cos((frame / period) * Math.PI * 2)) / 2
   const radii = FROM.map((from, index) =>
-    interpolate(phase, [0, 1], [from, TO[index] ?? from]),
+    interpolate(phase, [0, 1], [from, TO[index] ?? from], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }),
   )
   const [a = 50, b = 50, c = 50, d = 50, e = 50, f = 50, g = 50, h = 50] = radii
   return (
