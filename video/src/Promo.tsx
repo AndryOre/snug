@@ -18,9 +18,9 @@ const transition = (
   />
 )
 
-export const Promo = ({ locale, music }: PromoProps) => (
+export const Promo = ({ locale, music, sfx }: PromoProps) => (
   <FontGate locale={locale}>
-    <Soundtrack music={music} />
+    <Soundtrack music={music} sfx={sfx} />
     <TransitionSeries>
       <TransitionSeries.Sequence durationInFrames={117}>
         <HookScene locale={locale} />

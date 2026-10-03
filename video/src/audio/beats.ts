@@ -1,18 +1,17 @@
 import { FPS, SCENE_RANGES, TOTAL_FRAMES } from '../timing'
 
 /**
- * Estimated tempo of the default track (Vaporware, cynicmusic), found by
- * onset autocorrelation. Pad-driven music has a soft pulse, so confirm by ear
- * and update this value together with `FIRST_BEAT_FRAME` when you swap tracks.
+ * Tempo of the default track (Comes Back Around, Mindme). At 120 BPM a beat is
+ * exactly 15 frames, so every storyboard cut lands on a beat. Update this
+ * together with `FIRST_BEAT_FRAME` when you swap tracks.
  */
-export const BPM = 79
+export const BPM = 120
 
 /**
- * Video frame at which the first beat lands. `Soundtrack` delays the track so
- * the grid below is the beat grid of the final mix. Chosen so the five scene
- * cuts sit within a few frames of a half-beat.
+ * Video frame at which the first beat lands. The Epidemic edit starts on a
+ * bar, so the track plays from frame 0 and the grid starts there.
  */
-export const FIRST_BEAT_FRAME = 11
+export const FIRST_BEAT_FRAME = 0
 
 /** Frames per beat, fractional on purpose: do not round before summing. */
 export const FRAMES_PER_BEAT = (60 / BPM) * FPS

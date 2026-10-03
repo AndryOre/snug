@@ -1,18 +1,18 @@
 import { Audio } from '@remotion/media'
 import { interpolate, Sequence, staticFile, useVideoConfig } from 'remotion'
+import { sfxPath } from '../schema'
 import { TOTAL_FRAMES } from '../timing'
-import { FIRST_BEAT_FRAME } from './beats'
 import { SFX_CUES } from './cues'
 
 const FADE_IN_SECONDS = 1
 const FADE_OUT_SECONDS = 2
 const SFX_FRAMES = 30
-const MUSIC_PEAK = 0.9
-const TRACK_FIRST_BEAT_FRAME = 1
+const MUSIC_PEAK = 0.42
 
 /**
- * Music gain at a final-cut frame: linear fade in over `fadeInFrames` from
- * frame 0 and linear fade out ending at `totalFrames`.
+ * Music gain at a frame: linear fade in over `fadeInFrames` from frame 0 and
+ * linear fade out ending at `totalFrames`. The peak trims the loud master
+ * (about -9.5 LUFS) to roughly -17 LUFS, a calm bed under the SFX.
  */
 export const musicVolumeAt = (
   frame: number,
@@ -28,41 +28,41 @@ export const musicVolumeAt = (
   )
 
 /**
- * Music bed (1 s fade in, 2 s fade out, delayed so the track's beat grid
- * matches `beats.ts`) plus the low-volume SFX layer. With a null `music` the
- * video is SFX only.
+ * Music bed (1 s fade in, 2 s fade out, beat 0 on frame 0) plus the
+ * low-volume SFX layer. Either layer is skipped when its prop says so.
  */
-export const Soundtrack = ({ music }: { music: string | null }) => {
+export const Soundtrack = ({
+  music,
+  sfx,
+}: {
+  music: string | null
+  sfx: boolean
+}) => {
   const { fps } = useVideoConfig()
   const fadeIn = FADE_IN_SECONDS * fps
   const fadeOut = FADE_OUT_SECONDS * fps
-  const delay = FIRST_BEAT_FRAME - TRACK_FIRST_BEAT_FRAME
   return (
     <>
       {music ? (
-        <Sequence
-          from={delay}
-          durationInFrames={TOTAL_FRAMES - delay}
-          layout="none"
-        >
-          <Audio
-            src={staticFile(music)}
-            volume={(frame) =>
-              musicVolumeAt(frame + delay, fadeIn, fadeOut, TOTAL_FRAMES)
-            }
-          />
-        </Sequence>
+        <Audio
+          src={staticFile(music)}
+          volume={(frame) =>
+            musicVolumeAt(frame, fadeIn, fadeOut, TOTAL_FRAMES)
+          }
+        />
       ) : null}
-      {SFX_CUES.map((cue) => (
-        <Sequence
-          key={`${cue.sfx}-${cue.frame}`}
-          from={cue.frame}
-          durationInFrames={SFX_FRAMES}
-          layout="none"
-        >
-          <Audio src={staticFile(`sfx/${cue.sfx}.ogg`)} volume={cue.volume} />
-        </Sequence>
-      ))}
+      {sfx
+        ? SFX_CUES.map((cue) => (
+            <Sequence
+              key={`${cue.sfx}-${cue.frame}`}
+              from={cue.frame}
+              durationInFrames={SFX_FRAMES}
+              layout="none"
+            >
+              <Audio src={staticFile(sfxPath(cue.sfx))} volume={cue.volume} />
+            </Sequence>
+          ))
+        : null}
     </>
   )
 }

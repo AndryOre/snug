@@ -12,14 +12,20 @@ export type SfxCue = {
   volume: number
 }
 
+/**
+ * Gains for SFX files peak-normalized to -3 dBFS (see README), so each value
+ * is its own peak level relative to full scale.
+ */
 const VOLUME = {
-  click: 0.18,
-  whoosh: 0.12,
-  pop: 0.1,
-  tick: 0.07,
-  chime: 0.14,
-  thud: 0.14,
+  click: 0.3,
+  whoosh: 0.35,
+  pop: 0.25,
+  tick: 0.2,
+  chime: 0.3,
+  thud: 0.3,
 } as const satisfies Record<SfxName, number>
+
+const WHOOSH_PEAK_FRAMES = 12
 
 const cue = (frame: number, sfx: SfxName): SfxCue => ({
   frame,
@@ -40,7 +46,7 @@ const TRANSITION_WHOOSHES: SfxCue[] = [
   SCENE_RANGES.autoExport,
   SCENE_RANGES.local,
   SCENE_RANGES.cta,
-].map((range) => cue(range.from - 4, 'whoosh'))
+].map((range) => cue(range.from - WHOOSH_PEAK_FRAMES, 'whoosh'))
 
 /** Every sound effect of the promo, in final-cut frames. */
 export const SFX_CUES: readonly SfxCue[] = [
