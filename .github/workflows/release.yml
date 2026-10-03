@@ -77,6 +77,7 @@ jobs:
         with:
           name: chrome-extension-zip
           path: .output/*-chrome.zip
+          include-hidden-files: true
           retention-days: 1
 
   publish-chrome-web-store:
