@@ -6,7 +6,12 @@ import { chromium } from 'playwright'
 /**
  * Regenerates the derived raster assets of the Snug brand kit from the SVG
  * sources in `docs/brand/logo`: the extension icon (`assets/icon.png`), PNG
- * marks, the Chrome Web Store icon and tiles, OG images and the README banner (a copy of the store marquee). Run with `bun run brand:export`.
+ * marks, the Chrome Web Store icon and tiles, OG images and the README banner (a copy of the store marquee), and the YouTube channel art
+ * (`docs/brand/youtube/`: banner, avatar, watermark). Run with `bun run brand:export`.
+ *
+ * The YouTube files are checked against their exact pixel dimensions and byte
+ * budgets, and the banner's text and lockup are checked to sit inside YouTube's
+ * 1546x423 safe area; the script throws on any miss.
  *
  * Icons are drawn at 75% of a transparent canvas: the SVG's fixed size is forced
  * to fill its container, sized so the painted bookmark spans 96 of 128 px.
@@ -26,6 +31,11 @@ const GROUND = '#17120A'
 const ICON_ART_RATIO = 0.75
 const MARK_ART_HEIGHT_RATIO = 70 / 84
 const OG_MAX_BYTES = 300 * 1024
+const MB = 1024 * 1024
+const YOUTUBE_SAFE_AREA = { width: 1546, height: 423 }
+const AVATAR_ART_DIAMETER_RATIO = 0.7
+const BANNER_TAGLINE =
+  'Export, import, and back up your bookmarks &mdash; all on your device.'
 
 const markSvg = await readFile(path.join(brandRoot, 'logo/mark.svg'), 'utf8')
 const lockupSvg = await readFile(
@@ -34,6 +44,11 @@ const lockupSvg = await readFile(
 )
 
 const auroraGlow = `radial-gradient(60% 70% at 20% 30%, rgba(255,162,48,0.22), transparent 68%), radial-gradient(44% 54% at 100% 100%, rgba(255,162,48,0.14), transparent 70%), ${GROUND}`
+
+const haloSvg = await readFile(
+  path.join(brandRoot, 'logo/mark-halo.svg'),
+  'utf8',
+)
 
 const fontRules = await Promise.all(
   [
@@ -143,6 +158,109 @@ async function renderMarquee(browser, outPath) {
   return finishPage(page, outPath)
 }
 
+async function assertPngSpec(outPath, { width, height, maxBytes }) {
+  const buffer = await readFile(outPath)
+  const actualWidth = buffer.readUInt32BE(16)
+  const actualHeight = buffer.readUInt32BE(20)
+  const name = path.basename(outPath)
+  if (actualWidth !== width || actualHeight !== height) {
+    throw new Error(
+      `${name} is ${actualWidth}x${actualHeight}, expected ${width}x${height}`,
+    )
+  }
+  if (buffer.length > maxBytes) {
+    throw new Error(`${name} is ${buffer.length} bytes, over ${maxBytes}`)
+  }
+}
+
+function bannerMotif(side) {
+  return
+  ;`<div style="position:absolute;top:50%;${side}:150px;width:260px;height:260px;margin-top:-130px;opacity:0.12">${markSvg}</div>`
+}
+
+async function renderYoutubeBanner(browser, outPath) {
+  const width = 2560
+  const height = 1440
+  const page = await browser.newPage({ viewport: { width, height } })
+  await page.setContent(`
+    <style>${fontFaces}svg{display:block;width:100%;height:100%}</style>
+    <body style="margin:0;width:${width}px;height:${height}px;position:relative;overflow:hidden;background:radial-gradient(55% 60% at 50% 50%, rgba(255,162,48,0.24), transparent 70%), ${auroraGlow}">
+      ${bannerMotif('left')}${bannerMotif('right')}
+      <div id="content" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div id="lockup" style="width:620px"><div style="width:620px;height:195px">${lockupSvg}</div></div>
+        <div id="tagline" style="font-family:Geist,system-ui,sans-serif;font-size:40px;color:#DCC8A6;white-space:nowrap;line-height:1.4;margin-top:40px">${BANNER_TAGLINE}</div>
+      </div>
+    </body>`)
+  await page.waitForFunction('document.fonts.status === "loaded"')
+  const bounds = []
+  for (const selector of ['#lockup', '#tagline']) {
+    const box = await page.locator(selector).boundingBox()
+    bounds.push({
+      left: box.x,
+      top: box.y,
+      right: box.x + box.width,
+      bottom: box.y + box.height,
+    })
+  }
+  const safeLeft = (width - YOUTUBE_SAFE_AREA.width) / 2
+  const safeTop = (height - YOUTUBE_SAFE_AREA.height) / 2
+  for (const box of bounds) {
+    if (
+      box.left < safeLeft ||
+      box.right > safeLeft + YOUTUBE_SAFE_AREA.width ||
+      box.top < safeTop ||
+      box.bottom > safeTop + YOUTUBE_SAFE_AREA.height
+    ) {
+      throw new Error(
+        `YouTube banner content leaves the safe area: ${JSON.stringify(box)}`,
+      )
+    }
+  }
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath })
+  await page.close()
+  await assertPngSpec(outPath, { width, height, maxBytes: 6 * MB })
+  console.log(path.relative(repoRoot, outPath))
+}
+
+async function renderYoutubeAvatar(browser, outPath) {
+  const size = 800
+  const page = await browser.newPage({
+    viewport: { width: size, height: size },
+  })
+  const markSize = Math.round(
+    (size * AVATAR_ART_DIAMETER_RATIO) / MARK_ART_HEIGHT_RATIO,
+  )
+  await page.setContent(`
+    <style>svg{display:block;width:100%;height:100%}</style>
+    <body style="margin:0;width:${size}px;height:${size}px;display:grid;place-items:center;background:radial-gradient(50% 50% at 50% 50%, rgba(255,162,48,0.38), transparent 75%), ${GROUND}">
+      <div style="width:${markSize}px;height:${markSize}px">${markSvg}</div>
+    </body>`)
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath })
+  await page.close()
+  await assertPngSpec(outPath, { width: size, height: size, maxBytes: 2 * MB })
+  console.log(path.relative(repoRoot, outPath))
+}
+
+async function renderYoutubeWatermark(browser, outPath) {
+  const size = 300
+  const page = await browser.newPage({
+    viewport: { width: size, height: size },
+  })
+  const markSize = Math.round((size * 0.85) / MARK_ART_HEIGHT_RATIO)
+  await page.setContent(`
+    <style>svg{display:block;width:100%;height:100%}</style>
+    <body style="margin:0;display:grid;place-items:center;width:${size}px;height:${size}px">
+      <div style="width:${markSize}px;height:${markSize}px">${haloSvg}</div>
+    </body>`)
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath, omitBackground: true })
+  await page.close()
+  await assertPngSpec(outPath, { width: size, height: size, maxBytes: 1 * MB })
+  console.log(path.relative(repoRoot, outPath))
+}
+
 function assertOgSize(fileName, size) {
   if (size > OG_MAX_BYTES) {
     throw new Error(`${fileName} exceeds ${OG_MAX_BYTES} bytes`)
@@ -188,6 +306,17 @@ try {
     })
     assertOgSize(fileName, size)
   }
+
+  const youtubeRoot = path.join(brandRoot, 'youtube')
+  await renderYoutubeBanner(
+    browser,
+    path.join(youtubeRoot, 'banner-2560x1440.png'),
+  )
+  await renderYoutubeAvatar(browser, path.join(youtubeRoot, 'avatar-800.png'))
+  await renderYoutubeWatermark(
+    browser,
+    path.join(youtubeRoot, 'watermark-300.png'),
+  )
 } finally {
   await browser.close()
 }
