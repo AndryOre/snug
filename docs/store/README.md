@@ -193,18 +193,18 @@ per language). Renders are `video/out/snug-promo-<locale>.mp4`. Fill the URL
 cells below once each video is public or unlisted; leave the others empty. A
 locale with no URL shows no video.
 
-| Locale | Video file             | YouTube URL |
-| ------ | ---------------------- | ----------- |
-| en     | `snug-promo-en.mp4`    |             |
-| es     | `snug-promo-es.mp4`    |             |
-| de     | `snug-promo-de.mp4`    |             |
-| fr     | `snug-promo-fr.mp4`    |             |
-| it     | `snug-promo-it.mp4`    |             |
-| ja     | `snug-promo-ja.mp4`    |             |
-| ko     | `snug-promo-ko.mp4`    |             |
-| pt_BR  | `snug-promo-pt_BR.mp4` |             |
-| ru     | `snug-promo-ru.mp4`    |             |
-| zh_CN  | `snug-promo-zh_CN.mp4` |             |
+| Locale | Video file             | YouTube URL                  |
+| ------ | ---------------------- | ---------------------------- |
+| en     | `snug-promo-en.mp4`    | https://youtu.be/2F3DndQFCLY |
+| es     | `snug-promo-es.mp4`    |                              |
+| de     | `snug-promo-de.mp4`    |                              |
+| fr     | `snug-promo-fr.mp4`    |                              |
+| it     | `snug-promo-it.mp4`    |                              |
+| ja     | `snug-promo-ja.mp4`    |                              |
+| ko     | `snug-promo-ko.mp4`    |                              |
+| pt_BR  | `snug-promo-pt_BR.mp4` |                              |
+| ru     | `snug-promo-ru.mp4`    |                              |
+| zh_CN  | `snug-promo-zh_CN.mp4` |                              |
 
 Screenshots: the v1.3.0 listing carries 5 global screenshots plus 5 localized
 for each of EN and ES. All of them show the old product and must be deleted.
