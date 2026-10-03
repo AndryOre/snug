@@ -7,12 +7,12 @@ import { SFX_CUES } from './cues'
 const FADE_IN_SECONDS = 1
 const FADE_OUT_SECONDS = 2
 const SFX_FRAMES = 30
-const MUSIC_PEAK = 0.6
+const MUSIC_PEAK = 0.42
 
 /**
  * Music gain at a frame: linear fade in over `fadeInFrames` from frame 0 and
  * linear fade out ending at `totalFrames`. The peak trims the loud master
- * (about -9.5 LUFS) to roughly -14 LUFS, YouTube's normalization target.
+ * (about -9.5 LUFS) to roughly -17 LUFS, a calm bed under the SFX.
  */
 export const musicVolumeAt = (
   frame: number,

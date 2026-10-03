@@ -25,7 +25,7 @@ const VOLUME = {
   thud: 0.3,
 } as const satisfies Record<SfxName, number>
 
-const WHOOSH_PEAK_FRAMES = 11
+const WHOOSH_PEAK_FRAMES = 12
 
 const cue = (frame: number, sfx: SfxName): SfxCue => ({
   frame,

@@ -84,8 +84,8 @@ cleared) and **local only**: the repo is public, so `public/music/` and
 once per missing layer (`music` prop falls back to `null`, `sfx` to `false`).
 
 - **Music:** `public/music/track.wav` through `@remotion/media` `Audio`, 1 s
-  fade in, 2 s fade out, gain 0.6 so the master (about -9.5 LUFS) lands near
-  -14 LUFS. The last measured `en` render was -13.9 LUFS, true peak -2.3 dBTP.
+  fade in, 2 s fade out, gain 0.42 so the master (about -9.5 LUFS) sits calmly under the
+  SFX. The last `en` render measured -16.7 LUFS, sample peak -3.8 dBFS.
 - **Beats:** `src/audio/beats.ts`. The track is 120 BPM, so a beat is 15
   frames and every storyboard cut (105, 330, 540, 705, 795) is on a beat. The
   Epidemic edit starts on a bar, so `FIRST_BEAT_FRAME` is 0; confirm by ear if
@@ -108,15 +108,15 @@ once per missing layer (`music` prop falls back to `null`, `sfx` to `false`).
 Re-download through the Epidemic MCP server (`DownloadRecordingEdit`,
 `DownloadSoundEffect`, WAV).
 
-| File                 | Epidemic title                                              | ID                                     |
-| -------------------- | ----------------------------------------------------------- | -------------------------------------- |
-| `music/track.wav`    | Comes Back Around (Instrumental Version), Mindme, 30 s edit | `de69a51e-c47f-4432-8240-f10a669bb442` |
-| `sfx/.../click.wav`  | User Interface, Click, UI Buttons, Glassy, Touch            | `45c94b43-2fb0-4970-98db-cc0fe6ea3678` |
-| `sfx/.../tick.wav`   | User Interface, Click, UI Buttons, Simple, Select           | `d637e4e8-6846-496b-84f9-19f3f7b59539` |
-| `sfx/.../pop.wav`    | User Interface, Click, UI Buttons, Bubbly, Option           | `19edc18a-387f-4987-9110-75d1abecc3fa` |
-| `sfx/.../whoosh.wav` | Designed, Whoosh, Soft Airy                                 | `073cf199-3d1b-4a67-9128-a5abd13870ff` |
-| `sfx/.../chime.wav`  | User Interface, Alert, Tonal, Soft Digital Confirm          | `d75eba4a-a132-4973-93b7-fabc9c748e4c` |
-| `sfx/.../thud.wav`   | User Interface, Click, UI Buttons, Confirm, Dull            | `46216b97-17a4-48ec-a7ec-999132ef096a` |
+| File                 | Epidemic title                                                     | ID                                     |
+| -------------------- | ------------------------------------------------------------------ | -------------------------------------- |
+| `music/track.wav`    | Comes Back Around (Instrumental Version), Mindme, 30 s edit        | `de69a51e-c47f-4432-8240-f10a669bb442` |
+| `sfx/.../click.wav`  | Computers, Keyboard & Mouse, Mouse, Apple, Mighty Mouse, Click     | `78e23a2d-c645-491d-b826-c5ca15d1efdd` |
+| `sfx/.../tick.wav`   | User Interface, Alert, Notifications, Notification, Digital, Tick  | `045d6e1e-742f-4cbb-98b3-6fe37fb84eae` |
+| `sfx/.../pop.wav`    | User Interface, Alert, Notifications, Notification, Alert, Digital | `bd861aa9-7b82-4f9f-afaa-355c83984107` |
+| `sfx/.../whoosh.wav` | Designed, Whoosh, Soft Resonant                                    | `3eb43b90-168b-404b-b6c2-28c69e53754b` |
+| `sfx/.../chime.wav`  | Musical, Chime, Twinkle, Wood, Positive, Short 02                  | `fa5cf124-455f-48af-a76f-74672dcf88f8` |
+| `sfx/.../thud.wav`   | User Interface, Alert, Warnings, Dull, Info                        | `a5dfd170-3cda-4a57-a99f-42a6928d44f1` |
 
 The music is a server-side edit: run `EditRecording` on the recording ID with
 `targetDurationMs` 30000 and `forceDuration`, then `DownloadRecordingEdit`.
