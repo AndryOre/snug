@@ -13,11 +13,11 @@ import ru from '../../../locales/ru.json'
 import zh_CN from '../../../locales/zh_CN.json'
 import { message, storeCaptions, type Locale } from '../copy'
 import { fontStackFor } from '../fonts'
+import { EXPORT_FILE_END } from './export'
 import {
   Camera,
   Cursor,
   KineticText,
-  MATCH_POINTS,
   MatchCut,
   EASE,
   SPRING,
@@ -40,14 +40,11 @@ import {
 } from '../ui'
 
 /**
- * Placeholder for the Export scene's closing file chip until AO-1152 exports
- * the real one: same screen point and scale, so the cut lines up once both
- * scenes use the shared value.
+ * The Export scene's closing file chip, reused so the match cut lines up.
  */
-export const EXPORT_FILE_END = {
-  at: MATCH_POINTS.fileChip,
+export const IMPORT_FILE_START = {
+  ...EXPORT_FILE_END,
   scale: 1,
-  size: 96,
   format: 'json',
 } as const
 
@@ -202,7 +199,7 @@ const FileCard = ({
     }}
   >
     <div style={{ width: FILE_ICON, opacity: fileVisible }}>
-      <FileIcon format={EXPORT_FILE_END.format} size={FILE_ICON} />
+      <FileIcon format={IMPORT_FILE_START.format} size={FILE_ICON} />
     </div>
     <div
       style={{
@@ -347,12 +344,13 @@ export const ImportScene = ({ locale }: SceneProps) => {
       FILE_CENTER.y * camera.zoom,
   }
   const chipScale =
-    EXPORT_FILE_END.scale +
-    ((FILE_ICON * camera.zoom) / EXPORT_FILE_END.size - EXPORT_FILE_END.scale) *
+    IMPORT_FILE_START.scale +
+    ((FILE_ICON * camera.zoom) / IMPORT_FILE_START.size -
+      IMPORT_FILE_START.scale) *
       flight
   const chipOffset = {
-    x: (landingScreen.x - EXPORT_FILE_END.at.x) * flight,
-    y: (landingScreen.y - EXPORT_FILE_END.at.y) * flight,
+    x: (landingScreen.x - IMPORT_FILE_START.at.x) * flight,
+    y: (landingScreen.y - IMPORT_FILE_START.at.y) * flight,
   }
 
   const segmentCenter = (index: number) =>
@@ -501,10 +499,10 @@ export const ImportScene = ({ locale }: SceneProps) => {
             transform: `translate(${chipOffset.x}px, ${chipOffset.y}px)`,
           }}
         >
-          <MatchCut at={EXPORT_FILE_END.at} scale={chipScale}>
+          <MatchCut at={IMPORT_FILE_START.at} scale={chipScale}>
             <FileIcon
-              format={EXPORT_FILE_END.format}
-              size={EXPORT_FILE_END.size}
+              format={IMPORT_FILE_START.format}
+              size={IMPORT_FILE_START.size}
             />
           </MatchCut>
         </div>
