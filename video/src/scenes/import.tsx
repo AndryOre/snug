@@ -102,8 +102,8 @@ const REMOVED_COUNT = 42
 
 const T = {
   windowIn: 4,
-  flyStart: 8,
-  land: 36,
+  flyStart: 12,
+  land: 40,
   treeStart: 44,
   treeStagger: 5,
   cursorModeArrive: 92,
@@ -134,7 +134,10 @@ const layerPoint = (x: number, y: number): { x: number; y: number } => ({
   y: ORIGIN.y + y,
 })
 
-const segmentWidthFor = (labels: readonly string[], family: string): number => {
+const segmentWidthFor = (
+  labels: readonly string[],
+  family: string,
+): { width: number; fontSize: number } => {
   const widest = Math.max(
     ...labels.map(
       (label) =>
@@ -147,7 +150,11 @@ const segmentWidthFor = (labels: readonly string[], family: string): number => {
         }).width,
     ),
   )
-  return Math.min(372, Math.max(220, Math.ceil(widest) + 56))
+  const width = Math.min(372, Math.max(220, Math.ceil(widest) + 56))
+  const available = width - 28
+  const fontSize =
+    widest > available ? Math.floor((20 * available) / widest) : 20
+  return { width, fontSize }
 }
 
 const SectionLabel = ({
@@ -289,7 +296,7 @@ export const ImportScene = ({ locale }: SceneProps) => {
     message(locale, 'importModeRestoreReplace'),
     message(locale, 'importModeFolder'),
   ]
-  const segmentWidth = useMemo(
+  const segments = useMemo(
     () => segmentWidthFor(modeLabels, family),
     [modeLabels.join('|'), family],
   )
@@ -354,7 +361,7 @@ export const ImportScene = ({ locale }: SceneProps) => {
   }
 
   const segmentCenter = (index: number) =>
-    layerPoint(5 + segmentWidth * (index + 0.5), SEGMENT_TOP + 28)
+    layerPoint(5 + segments.width * (index + 0.5), SEGMENT_TOP + 28)
   const buttonCenter = layerPoint(RIGHT_LEFT + 190, BUTTON_TOP + 30)
   const replaceTarget = segmentCenter(1)
   const waypoints: Waypoint[] = [
@@ -401,7 +408,8 @@ export const ImportScene = ({ locale }: SceneProps) => {
               <SegmentedControl
                 options={modeLabels}
                 position={modeProgress}
-                segmentWidth={segmentWidth}
+                segmentWidth={segments.width}
+                fontSize={segments.fontSize}
               />
             </div>
             <div

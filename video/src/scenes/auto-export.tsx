@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { fitText } from '@remotion/layout-utils'
+import { fitText, measureText } from '@remotion/layout-utils'
 import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from 'remotion'
 import { message, storeCaptions, type Locale } from '../copy'
 import { fontStackFor } from '../fonts'
@@ -14,6 +14,9 @@ import {
 import type { SceneProps } from '../schema'
 import { theme } from '../theme'
 import { AppWindow, FileIcon, SegmentedControl } from '../ui'
+
+const needsBodyFont = (locale: Locale): boolean =>
+  locale === 'ja' || locale === 'ko' || locale === 'zh_CN' || locale === 'ru'
 
 const SAFE_SIDE = 80
 const SAFE_TOP = 100
@@ -175,7 +178,7 @@ const DownloadsCard = ({ locale }: { locale: Locale }) => {
     >
       <div
         style={{
-          fontFamily: fonts.mono,
+          fontFamily: needsBodyFont(locale) ? fonts.body : fonts.mono,
           fontSize: 28,
           fontWeight: 600,
           color: theme.colors.accent,
@@ -229,9 +232,40 @@ const DownloadsCard = ({ locale }: { locale: Locale }) => {
   )
 }
 
+const SCHEDULE_SEGMENT_WIDTH = 210
+
+const scheduleFontSize = (
+  labels: readonly string[],
+  family: string,
+): number => {
+  const widest = Math.max(
+    ...labels.map(
+      (label) =>
+        measureText({
+          text: label,
+          fontFamily: family,
+          fontSize: 20,
+          fontWeight: '600',
+          validateFontIsLoaded: false,
+        }).width,
+    ),
+  )
+  const available = SCHEDULE_SEGMENT_WIDTH - 28
+  return widest > available ? Math.floor((20 * available) / widest) : 20
+}
+
 const ScheduleColumn = ({ locale }: { locale: Locale }) => {
   const frame = useCurrentFrame()
   const fonts = fontStackFor(locale)
+  const scheduleLabels = [
+    message(locale, 'autoExportPage_interval1h'),
+    message(locale, 'autoExportPage_interval1d'),
+    message(locale, 'autoExportPage_interval7d'),
+  ]
+  const scheduleSize = useMemo(
+    () => scheduleFontSize(scheduleLabels, fonts.body),
+    [scheduleLabels.join('|'), fonts.body],
+  )
   const sweep = progressBetween(frame, SWEEP_FROM, SWEEP_TO, EASE.standard)
   return (
     <div style={{ position: 'absolute', left: 0, top: 0, width: 640 }}>
@@ -247,13 +281,10 @@ const ScheduleColumn = ({ locale }: { locale: Locale }) => {
         {message(locale, 'autoExportPage_frequency')}
       </div>
       <SegmentedControl
-        options={[
-          message(locale, 'autoExportPage_interval1h'),
-          message(locale, 'autoExportPage_interval1d'),
-          message(locale, 'autoExportPage_interval7d'),
-        ]}
+        options={scheduleLabels}
         position={sweep * 2}
-        segmentWidth={200}
+        segmentWidth={SCHEDULE_SEGMENT_WIDTH}
+        fontSize={scheduleSize}
       />
       <div style={{ marginTop: 44, marginLeft: 20 }}>
         <Clock turn={sweep} />
