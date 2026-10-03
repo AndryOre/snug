@@ -15,7 +15,8 @@ from [`docs/store/listings/`](../store/listings/). URLs come from
   2. `@getsnug`
   3. `@snugextension`
   4. `@snug.bookmarks`
-- **Final handle:** _not set yet_
+- **Final handle:** `@snugbookmarks` (`https://www.youtube.com/@snugbookmarks`).
+  Channel ID `UChjCRHMk2Sw8yd1fr-6qFNg`.
 
 ## Channel description
 
@@ -184,8 +185,7 @@ on the banner.
 
 ## Contact
 
-Business email: `<contact-email>` (placeholder; the Studio ticket fills it in
-with the address the owner chooses to show publicly).
+Business email: `hello@andryore.dev`.
 
 ## Layout plan
 
