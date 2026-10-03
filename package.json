@@ -59,6 +59,7 @@
     "video:check": "bun run --cwd video check",
     "video:still": "bun run --cwd video still",
     "video:render": "bun run --cwd video render",
+    "video:thumbnails": "bun run --cwd video thumbnails",
     "postinstall": "wxt prepare",
     "prepare": "bunx --bun husky"
   },
