@@ -1,11 +1,12 @@
 import type { ComponentType } from 'react'
-import { Composition, Folder } from 'remotion'
+import { Composition, Folder, Still } from 'remotion'
 import { DEFAULT_LOCALE, LOCALES } from './copy'
 import { FontGate } from './FontGate'
 import { PrimitivesGallery } from './gallery/Primitives'
 import { Promo } from './Promo'
 import { calculatePromoMetadata } from './audio/metadata'
 import { DEFAULT_MUSIC, promoSchema, type SceneProps } from './schema'
+import { Thumbnail, THUMBNAIL_SIZE } from './thumbnail/Thumbnail'
 import { AutoExportScene } from './scenes/auto-export'
 import { CtaScene } from './scenes/cta'
 import { ExportScene } from './scenes/export'
@@ -83,6 +84,13 @@ export const RemotionRoot = () => (
         {...framing}
       />
     </Folder>
+    <Still
+      id="Thumbnail"
+      component={Thumbnail}
+      schema={promoSchema.pick({ locale: true })}
+      defaultProps={{ locale: DEFAULT_LOCALE }}
+      {...THUMBNAIL_SIZE}
+    />
     <Folder name="Locales">
       {LOCALES.map((locale) => (
         <Composition
