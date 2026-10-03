@@ -89,10 +89,16 @@ locale, then checks every file with ffprobe: duration 30 s +/- 0.1, 1920x1080,
   frames of a half-beat at 79 BPM; the track is delayed so the grid matches.
   The tempo is an onset-autocorrelation estimate, so confirm by ear and update
   `BPM` and `FIRST_BEAT_FRAME` when you swap tracks.
-- **SFX:** `public/sfx/*.ogg`, CC0 from Kenney (see `public/sfx/LICENSE.md`),
-  cued in `src/audio/cues.ts` on cursor clicks, the row ticks and chip fan-out
-  in Export, the file landing, the Import toast, and each scene transition.
-  Scenes export their cue frames (`EXPORT_AUDIO_FRAMES`, `IMPORT_AUDIO_FRAMES`).
+- **SFX:** two sets, picked by the `sfxSet` prop (default `epidemic`).
+  `public/sfx/epidemic/*.wav` is the preferred set: Epidemic Sound (Pro plan),
+  downloaded through its MCP server and kept local only (gitignored, the repo
+  is public). Record each sound's Epidemic title/ID here when downloaded so it
+  can be fetched again. When those files are missing the render falls back
+  to `public/sfx/*.ogg` (CC0 Kenney, see `public/sfx/LICENSE.md`) with one
+  warning. Cues live in `src/audio/cues.ts`: cursor clicks, the row ticks and
+  chip fan-out in Export, the file landing, the Import toast and each scene
+  transition. Scenes export their cue frames (`EXPORT_AUDIO_FRAMES`,
+  `IMPORT_AUDIO_FRAMES`).
 
 ### Music credit
 

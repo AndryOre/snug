@@ -1,5 +1,6 @@
 import { Audio } from '@remotion/media'
 import { interpolate, Sequence, staticFile, useVideoConfig } from 'remotion'
+import { sfxPath, type SfxSet } from '../schema'
 import { TOTAL_FRAMES } from '../timing'
 import { FIRST_BEAT_FRAME } from './beats'
 import { SFX_CUES } from './cues'
@@ -32,7 +33,13 @@ export const musicVolumeAt = (
  * matches `beats.ts`) plus the low-volume SFX layer. With a null `music` the
  * video is SFX only.
  */
-export const Soundtrack = ({ music }: { music: string | null }) => {
+export const Soundtrack = ({
+  music,
+  sfxSet,
+}: {
+  music: string | null
+  sfxSet: SfxSet
+}) => {
   const { fps } = useVideoConfig()
   const fadeIn = FADE_IN_SECONDS * fps
   const fadeOut = FADE_OUT_SECONDS * fps
@@ -60,7 +67,10 @@ export const Soundtrack = ({ music }: { music: string | null }) => {
           durationInFrames={SFX_FRAMES}
           layout="none"
         >
-          <Audio src={staticFile(`sfx/${cue.sfx}.ogg`)} volume={cue.volume} />
+          <Audio
+            src={staticFile(sfxPath(sfxSet, cue.sfx))}
+            volume={cue.volume}
+          />
         </Sequence>
       ))}
     </>
