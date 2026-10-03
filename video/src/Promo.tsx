@@ -1,5 +1,6 @@
 import { linearTiming, TransitionSeries } from '@remotion/transitions'
 import { fade } from '@remotion/transitions/fade'
+import { Soundtrack } from './audio/Soundtrack'
 import { FontGate } from './FontGate'
 import type { PromoProps } from './schema'
 import { AutoExportScene } from './scenes/auto-export'
@@ -17,8 +18,9 @@ const transition = (
   />
 )
 
-export const Promo = ({ locale }: PromoProps) => (
+export const Promo = ({ locale, music }: PromoProps) => (
   <FontGate locale={locale}>
+    <Soundtrack music={music} />
     <TransitionSeries>
       <TransitionSeries.Sequence durationInFrames={117}>
         <HookScene locale={locale} />

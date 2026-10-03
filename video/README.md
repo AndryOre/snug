@@ -74,3 +74,50 @@ locale, then checks every file with ffprobe: duration 30 s +/- 0.1, 1920x1080,
 | Auto-export | 540-705 | `scenes/auto-export.tsx` |
 | Local       | 705-795 | `scenes/local.tsx`       |
 | Proof + CTA | 795-900 | `scenes/cta.tsx`         |
+
+## Audio
+
+`Promo` mixes a music bed and a low-volume SFX layer (`src/audio/`).
+
+- **Music:** `public/music/track.mp3` through `@remotion/media` `Audio`, 1 s
+  fade in, 2 s fade out. The `music` prop (default `music/track.mp3`) is
+  dropped to `null` when the file is missing, so the render is silent and logs
+  one warning instead of failing. Pass `--props='{"locale":"en","music":null}'`
+  to force it.
+- **Beats:** `src/audio/beats.ts` holds the BPM, the first-beat frame and
+  `BEAT_FRAMES`. The storyboard cuts (105, 330, 540, 705, 795) land within 5
+  frames of a half-beat at 79 BPM; the track is delayed so the grid matches.
+  The tempo is an onset-autocorrelation estimate, so confirm by ear and update
+  `BPM` and `FIRST_BEAT_FRAME` when you swap tracks.
+- **SFX:** `public/sfx/*.ogg`, CC0 from Kenney (see `public/sfx/LICENSE.md`),
+  cued in `src/audio/cues.ts` on cursor clicks, the row ticks and chip fan-out
+  in Export, the file landing, the Import toast, and each scene transition.
+  Scenes export their cue frames (`EXPORT_AUDIO_FRAMES`, `IMPORT_AUDIO_FRAMES`).
+
+### Music credit
+
+Needed to dispute a Content ID claim on YouTube.
+
+- Title: Calm Piano 1 (Vaporware)
+- Artist: cynicmusic (The Cynic Project)
+- Source: https://opengameart.org/content/calm-piano-1-vaporware
+- License: CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/
+- File: `public/music/track.mp3` (first 40 s of candidate 1)
+
+Pixabay Music sits behind a Cloudflare challenge that blocks headless
+browsers, so the shortlist comes from OpenGameArt (CC0). The other two
+candidates, `candidates/2-another-august-cynicmusic.mp3` and
+`candidates/3-contemplation-cynicmusic.mp3`, stay in
+`public/music/candidates/` until a track is chosen. To switch, copy the pick
+over `track.mp3` and update this credit and `beats.ts`.
+
+## Render performance
+
+`remotion benchmark` on the 16-core host (one run each, ja): concurrency 4
+took 32.0 s, 8 took 25.8 s, 12 took 24.4 s. `render-all.ts` defaults to
+`--concurrency 8`: the gain beyond it is small and it leaves memory for other
+processes. Override with `bun run video:render -- --concurrency 12`.
+
+Motion blur was not added: no scene has a move fast enough to smear at 30 fps,
+and the cross-fade hand-offs (hook to export, export to import match-cut, local
+to proof) were checked frame by frame and read cleanly.

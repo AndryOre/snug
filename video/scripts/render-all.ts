@@ -13,6 +13,7 @@ const EXPECTED_SECONDS = TOTAL_FRAMES / FPS
 
 type ProbeStream = {
   codec_type: string
+  codec_name?: string
   width?: number
   height?: number
   r_frame_rate?: string
@@ -41,6 +42,22 @@ const parseLocales = (argv: string[]): Locale[] => {
     )
   }
   return requested.filter(isLocale)
+}
+
+const DEFAULT_CONCURRENCY = 8
+
+const parseConcurrency = (argv: string[]): number => {
+  const flagIndex = argv.findIndex(
+    (arg) => arg === '--concurrency' || arg.startsWith('--concurrency='),
+  )
+  if (flagIndex === -1) return DEFAULT_CONCURRENCY
+  const flag = argv[flagIndex] ?? ''
+  const raw = flag.includes('=') ? flag.split('=')[1] : argv[flagIndex + 1]
+  const value = Number(raw)
+  if (!Number.isInteger(value) || value < 1) {
+    throw new Error(`Invalid --concurrency "${raw ?? ''}". Use a whole number.`)
+  }
+  return value
 }
 
 const parseFrameRate = (rate: string | undefined): number => {
@@ -85,6 +102,9 @@ const verify = async (file: string): Promise<string[]> => {
     if (video.width !== WIDTH || video.height !== HEIGHT) {
       problems.push(`size ${video.width}x${video.height}`)
     }
+    if (video.codec_name !== 'h264') {
+      problems.push(`codec ${video.codec_name}`)
+    }
     if (parseFrameRate(video.r_frame_rate) !== FPS) {
       problems.push(`frame rate ${video.r_frame_rate}`)
     }
@@ -98,6 +118,7 @@ const verify = async (file: string): Promise<string[]> => {
 
 const main = async () => {
   const locales = parseLocales(process.argv.slice(2))
+  const concurrency = parseConcurrency(process.argv.slice(2))
   mkdirSync(OUT_DIR, { recursive: true })
   const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE ?? null
 
@@ -124,6 +145,7 @@ const main = async () => {
       outputLocation,
       inputProps,
       browserExecutable,
+      concurrency,
     })
     const problems = await verify(outputLocation)
     if (problems.length > 0) {
