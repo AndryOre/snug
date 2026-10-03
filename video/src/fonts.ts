@@ -1,4 +1,5 @@
 import { loadFont } from '@remotion/fonts'
+import { loadFont as loadGeistGoogle } from '@remotion/google-fonts/Geist'
 import { loadFont as loadNotoSansJP } from '@remotion/google-fonts/NotoSansJP'
 import { loadFont as loadNotoSansKR } from '@remotion/google-fonts/NotoSansKR'
 import { loadFont as loadNotoSansSC } from '@remotion/google-fonts/NotoSansSC'
@@ -73,6 +74,13 @@ const loadCjkFont = (locale: CjkLocale): Promise<unknown> => {
   return loadNotoSansSC('normal', options).waitUntilDone()
 }
 
+const loadCyrillicGeist = (): Promise<unknown> =>
+  loadGeistGoogle('normal', {
+    weights: ['400', '500', '600', '700'],
+    subsets: ['cyrillic'],
+    ignoreTooManyRequestsWarning: true,
+  }).waitUntilDone()
+
 const pending = new Map<Locale, Promise<unknown>>()
 
 /**
@@ -84,7 +92,9 @@ export const loadFontsFor = (locale: Locale): Promise<unknown> => {
   const brand = loadBrandFonts()
   const loading = isCjk(locale)
     ? Promise.all([brand, loadCjkFont(locale)])
-    : brand
+    : locale === 'ru'
+      ? Promise.all([brand, loadCyrillicGeist()])
+      : brand
   pending.set(locale, loading)
   return loading
 }

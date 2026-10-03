@@ -35,16 +35,30 @@ const splitWords = (text: string, locale: Locale): string[] => {
   const segmenter = new Intl.Segmenter(locale.replace('_', '-'), {
     granularity: 'word',
   })
-  return Array.from(segmenter.segment(text), (part) => part.segment).reduce<
-    string[]
-  >((words, segment) => {
-    if (segment.trim() === '') return words
-    const last = words[words.length - 1]
-    if (last !== undefined && /^[\p{Pe}\p{Pf}\p{Po}]+$/u.test(segment)) {
-      return [...words.slice(0, -1), last + segment]
+  const words: string[] = []
+  let joinNext = false
+  let previousWasSpace = true
+  for (const { segment } of segmenter.segment(text)) {
+    if (segment.trim() === '') {
+      previousWasSpace = true
+      joinNext = false
+      continue
     }
-    return [...words, segment]
-  }, [])
+    const last = words[words.length - 1]
+    const isDash = /^\p{Pd}+$/u.test(segment)
+    const isTrailingPunctuation = /^[\p{Pe}\p{Pf}\p{Po}]+$/u.test(segment)
+    if (
+      last !== undefined &&
+      (joinNext || isTrailingPunctuation || (isDash && !previousWasSpace))
+    ) {
+      words[words.length - 1] = last + segment
+    } else {
+      words.push(segment)
+    }
+    joinNext = isDash && !previousWasSpace
+    previousWasSpace = false
+  }
+  return words
 }
 
 /**

@@ -7,6 +7,8 @@ export type SegmentedControlProps = {
   position?: number
   /** Width of every segment in px. Default 220. */
   segmentWidth?: number
+  /** Label font size in px. Default 20. */
+  fontSize?: number
 }
 
 const HEIGHT = 56
@@ -19,6 +21,7 @@ export const SegmentedControl = ({
   options,
   position = 0,
   segmentWidth = 220,
+  fontSize = 20,
 }: SegmentedControlProps) => (
   <div
     style={{
@@ -57,7 +60,7 @@ export const SegmentedControl = ({
             justifyContent: 'center',
             padding: '0 12px',
             boxSizing: 'border-box',
-            fontSize: 20,
+            fontSize,
             fontWeight: 600,
             whiteSpace: 'nowrap',
             overflow: 'hidden',
