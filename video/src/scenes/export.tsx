@@ -94,6 +94,19 @@ const JSON_CLICK = 142
 const FILE_START = 148
 const FILE_FLIGHT_FRAMES = 44
 
+/**
+ * Scene-local frames the soundtrack hooks onto: cursor clicks, the cascade of
+ * row ticks, the chip fan-out pops and the file landing.
+ */
+export const EXPORT_AUDIO_FRAMES = {
+  clicks: [SELECT_FRAME, JSON_CLICK],
+  cascadeTicks: [0, 1, 2, 3].map(
+    (index) => CASCADE_START + index * CASCADE_STEP,
+  ),
+  chipPops: [0, 1, 2, 3, 4, 5].map((index) => CHIPS_START + index * CHIP_STEP),
+  fileLanding: FILE_START + FILE_FLIGHT_FRAMES - 6,
+} as const
+
 const developmentTarget = {
   x: 230,
   y: DEVELOPMENT_ROW * ROW_HEIGHT + ROW_HEIGHT / 2,

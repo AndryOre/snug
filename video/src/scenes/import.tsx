@@ -113,6 +113,13 @@ const T = {
   toastIn: 160,
 } as const
 
+/** Scene-local frames the soundtrack hooks onto. */
+export const IMPORT_AUDIO_FRAMES = {
+  clicks: [T.modeClick, T.buttonClick],
+  toast: T.toastIn,
+  fileLanding: T.land,
+} as const
+
 const CAMERA: CameraKeyframe[] = [
   { frame: 0, x: 760, y: 430, zoom: 0.68 },
   { frame: 82, x: 760, y: 440, zoom: 0.85 },

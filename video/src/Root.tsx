@@ -4,7 +4,8 @@ import { DEFAULT_LOCALE, LOCALES } from './copy'
 import { FontGate } from './FontGate'
 import { PrimitivesGallery } from './gallery/Primitives'
 import { Promo } from './Promo'
-import { promoSchema, type SceneProps } from './schema'
+import { calculatePromoMetadata } from './audio/metadata'
+import { DEFAULT_MUSIC, promoSchema, type SceneProps } from './schema'
 import { AutoExportScene } from './scenes/auto-export'
 import { CtaScene } from './scenes/cta'
 import { ExportScene } from './scenes/export'
@@ -52,7 +53,8 @@ export const RemotionRoot = () => (
       id="Promo"
       component={Promo}
       schema={promoSchema}
-      defaultProps={{ locale: DEFAULT_LOCALE }}
+      defaultProps={{ locale: DEFAULT_LOCALE, music: DEFAULT_MUSIC }}
+      calculateMetadata={calculatePromoMetadata}
       durationInFrames={TOTAL_FRAMES}
       {...framing}
     />
@@ -84,7 +86,8 @@ export const RemotionRoot = () => (
           id={compositionIdFor(locale)}
           component={Promo}
           schema={promoSchema}
-          defaultProps={{ locale }}
+          defaultProps={{ locale, music: DEFAULT_MUSIC }}
+          calculateMetadata={calculatePromoMetadata}
           durationInFrames={TOTAL_FRAMES}
           {...framing}
         />
