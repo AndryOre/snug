@@ -7,7 +7,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from '../src/timing'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const OUT_DIR = path.join(ROOT, 'out')
-const MUSIC_TRACK = path.join(ROOT, 'public', 'music', 'track.mp3')
+const MUSIC_TRACK = path.join(ROOT, 'public', 'music', 'track.wav')
 const DURATION_TOLERANCE_SECONDS = 0.1
 const EXPECTED_SECONDS = TOTAL_FRAMES / FPS
 
@@ -111,7 +111,7 @@ const verify = async (file: string): Promise<string[]> => {
   }
   const hasAudio = streams.some((stream) => stream.codec_type === 'audio')
   if (existsSync(MUSIC_TRACK) && !hasAudio) {
-    problems.push('missing audio stream although public/music/track.mp3 exists')
+    problems.push('missing audio stream although public/music/track.wav exists')
   }
   return problems
 }

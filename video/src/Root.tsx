@@ -56,7 +56,7 @@ export const RemotionRoot = () => (
       defaultProps={{
         locale: DEFAULT_LOCALE,
         music: DEFAULT_MUSIC,
-        sfxSet: 'epidemic',
+        sfx: true,
       }}
       calculateMetadata={calculatePromoMetadata}
       durationInFrames={TOTAL_FRAMES}
@@ -90,7 +90,7 @@ export const RemotionRoot = () => (
           id={compositionIdFor(locale)}
           component={Promo}
           schema={promoSchema}
-          defaultProps={{ locale, music: DEFAULT_MUSIC, sfxSet: 'epidemic' }}
+          defaultProps={{ locale, music: DEFAULT_MUSIC, sfx: true }}
           calculateMetadata={calculatePromoMetadata}
           durationInFrames={TOTAL_FRAMES}
           {...framing}

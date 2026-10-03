@@ -22,6 +22,7 @@ playwright-report
 video/out/
 video/node_modules/
 video/public/sfx/epidemic/
+video/public/music/
 
 # forge coordination artifacts
 .forge

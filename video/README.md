@@ -48,7 +48,7 @@ bun run video:render -- --locales en,ja
 
 `video:render` bundles once, renders `out/snug-promo-<locale>.mp4` for each
 locale, then checks every file with ffprobe: duration 30 s +/- 0.1, 1920x1080,
-30 fps, and an audio stream when `public/music/track.mp3` exists.
+30 fps, and an audio stream when `public/music/track.wav` exists.
 
 ## Layout
 
@@ -77,45 +77,49 @@ locale, then checks every file with ffprobe: duration 30 s +/- 0.1, 1920x1080,
 
 ## Audio
 
-`Promo` mixes a music bed and a low-volume SFX layer (`src/audio/`).
+`Promo` mixes a music bed and a low-volume SFX layer (`src/audio/`). All
+audio is Epidemic Sound (Pro plan, content published while subscribed stays
+cleared) and **local only**: the repo is public, so `public/music/` and
+`public/sfx/epidemic/` are gitignored. A clean clone renders silent and warns
+once per missing layer (`music` prop falls back to `null`, `sfx` to `false`).
 
-- **Music:** `public/music/track.mp3` through `@remotion/media` `Audio`, 1 s
-  fade in, 2 s fade out. The `music` prop (default `music/track.mp3`) is
-  dropped to `null` when the file is missing, so the render is silent and logs
-  one warning instead of failing. Pass `--props='{"locale":"en","music":null}'`
-  to force it.
-- **Beats:** `src/audio/beats.ts` holds the BPM, the first-beat frame and
-  `BEAT_FRAMES`. The storyboard cuts (105, 330, 540, 705, 795) land within 5
-  frames of a half-beat at 79 BPM; the track is delayed so the grid matches.
-  The tempo is an onset-autocorrelation estimate, so confirm by ear and update
-  `BPM` and `FIRST_BEAT_FRAME` when you swap tracks.
-- **SFX:** two sets, picked by the `sfxSet` prop (default `epidemic`).
-  `public/sfx/epidemic/*.wav` is the preferred set: Epidemic Sound (Pro plan),
-  downloaded through its MCP server and kept local only (gitignored, the repo
-  is public). Record each sound's Epidemic title/ID here when downloaded so it
-  can be fetched again. When those files are missing the render falls back
-  to `public/sfx/*.ogg` (CC0 Kenney, see `public/sfx/LICENSE.md`) with one
-  warning. Cues live in `src/audio/cues.ts`: cursor clicks, the row ticks and
-  chip fan-out in Export, the file landing, the Import toast and each scene
-  transition. Scenes export their cue frames (`EXPORT_AUDIO_FRAMES`,
-  `IMPORT_AUDIO_FRAMES`).
+- **Music:** `public/music/track.wav` through `@remotion/media` `Audio`, 1 s
+  fade in, 2 s fade out, gain 0.6 so the master (about -9.5 LUFS) lands near
+  -14 LUFS. The last measured `en` render was -13.9 LUFS, true peak -2.3 dBTP.
+- **Beats:** `src/audio/beats.ts`. The track is 120 BPM, so a beat is 15
+  frames and every storyboard cut (105, 330, 540, 705, 795) is on a beat. The
+  Epidemic edit starts on a bar, so `FIRST_BEAT_FRAME` is 0; confirm by ear if
+  you swap tracks.
+- **SFX:** cues in `src/audio/cues.ts` (cursor clicks, row ticks, chip pops,
+  the file landing, the Import toast, the CTA chime, and a whoosh before each
+  cut that peaks on the cut). The six production files are peak-normalized to
+  -3 dBFS at 48 kHz; the `VOLUME` table assumes that. Originals are in
+  `public/sfx/epidemic/raw/`, alternates in `candidates/`. Normalize a
+  replacement with:
 
-### Music credit
+  ```sh
+  ffmpeg -i raw/<name>.wav -af "aresample=48000,volume=<-3 - peak>dB" -c:a pcm_s16le <name>.wav
+  ```
 
-Needed to dispute a Content ID claim on YouTube.
+  Measure `<peak>` with `ffmpeg -i raw/<name>.wav -af volumedetect -f null -`.
 
-- Title: Calm Piano 1 (Vaporware)
-- Artist: cynicmusic (The Cynic Project)
-- Source: https://opengameart.org/content/calm-piano-1-vaporware
-- License: CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/
-- File: `public/music/track.mp3` (first 40 s of candidate 1)
+### Epidemic assets
 
-Pixabay Music sits behind a Cloudflare challenge that blocks headless
-browsers, so the shortlist comes from OpenGameArt (CC0). The other two
-candidates, `candidates/2-another-august-cynicmusic.mp3` and
-`candidates/3-contemplation-cynicmusic.mp3`, stay in
-`public/music/candidates/` until a track is chosen. To switch, copy the pick
-over `track.mp3` and update this credit and `beats.ts`.
+Re-download through the Epidemic MCP server (`DownloadRecordingEdit`,
+`DownloadSoundEffect`, WAV).
+
+| File                 | Epidemic title                                              | ID                                     |
+| -------------------- | ----------------------------------------------------------- | -------------------------------------- |
+| `music/track.wav`    | Comes Back Around (Instrumental Version), Mindme, 30 s edit | `de69a51e-c47f-4432-8240-f10a669bb442` |
+| `sfx/.../click.wav`  | User Interface, Click, UI Buttons, Glassy, Touch            | `45c94b43-2fb0-4970-98db-cc0fe6ea3678` |
+| `sfx/.../tick.wav`   | User Interface, Click, UI Buttons, Simple, Select           | `d637e4e8-6846-496b-84f9-19f3f7b59539` |
+| `sfx/.../pop.wav`    | User Interface, Click, UI Buttons, Bubbly, Option           | `19edc18a-387f-4987-9110-75d1abecc3fa` |
+| `sfx/.../whoosh.wav` | Designed, Whoosh, Soft Airy                                 | `073cf199-3d1b-4a67-9128-a5abd13870ff` |
+| `sfx/.../chime.wav`  | User Interface, Alert, Tonal, Soft Digital Confirm          | `d75eba4a-a132-4973-93b7-fabc9c748e4c` |
+| `sfx/.../thud.wav`   | User Interface, Click, UI Buttons, Confirm, Dull            | `46216b97-17a4-48ec-a7ec-999132ef096a` |
+
+The music is a server-side edit: run `EditRecording` on the recording ID with
+`targetDurationMs` 30000 and `forceDuration`, then `DownloadRecordingEdit`.
 
 ## Render performance
 

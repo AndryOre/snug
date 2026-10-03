@@ -19,15 +19,14 @@ const warnOnce = (key: string, message: string): void => {
 }
 
 /**
- * Drops the `music` prop when the track file is absent so the render stays
- * silent instead of failing, and falls back from the local-only Epidemic
- * sound effects to the committed Kenney set when they are not downloaded.
- * Each fallback warns once.
+ * Drops the `music` prop and turns `sfx` off when the local-only Epidemic
+ * files are absent, so a clean clone renders silent instead of failing. Each
+ * missing layer warns once.
  */
 export const calculatePromoMetadata: CalculateMetadataFunction<
   PromoProps
 > = async ({ props }) => {
-  let { music, sfxSet } = props
+  let { music, sfx } = props
   if (music && !(await fileExists(music))) {
     warnOnce(
       music,
@@ -35,12 +34,12 @@ export const calculatePromoMetadata: CalculateMetadataFunction<
     )
     music = null
   }
-  if (sfxSet === 'epidemic' && !(await fileExists(SFX_PROBE_FILE.epidemic))) {
+  if (sfx && !(await fileExists(SFX_PROBE_FILE))) {
     warnOnce(
-      'sfx-epidemic',
-      '[promo] No Epidemic sound effects in public/sfx/epidemic; using the Kenney set.',
+      'sfx',
+      '[promo] No sound effects in public/sfx/epidemic; rendering without them.',
     )
-    sfxSet = 'kenney'
+    sfx = false
   }
-  return { props: { ...props, music, sfxSet } }
+  return { props: { ...props, music, sfx } }
 }
