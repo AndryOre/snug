@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import { Composition, Folder } from 'remotion'
 import { DEFAULT_LOCALE, LOCALES } from './copy'
 import { FontGate } from './FontGate'
+import { PrimitivesGallery } from './gallery/Primitives'
 import { Promo } from './Promo'
 import { promoSchema, type SceneProps } from './schema'
 import { AutoExportScene } from './scenes/auto-export'
@@ -67,6 +68,14 @@ export const RemotionRoot = () => (
           {...framing}
         />
       ))}
+      <Composition
+        id="Scene-Primitives"
+        component={gated(PrimitivesGallery)}
+        schema={promoSchema}
+        defaultProps={{ locale: DEFAULT_LOCALE }}
+        durationInFrames={150}
+        {...framing}
+      />
     </Folder>
     <Folder name="Locales">
       {LOCALES.map((locale) => (
