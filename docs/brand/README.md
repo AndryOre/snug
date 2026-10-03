@@ -11,6 +11,8 @@ files.
 - [`competitors.md`](competitors.md) — market research and positioning lessons.
 - [`copy.md`](copy.md) — listing and product copy (EN/ES).
 - [`voice.md`](voice.md) — brand voice guidelines: tone, vocabulary, do/don't.
+- [`youtube.md`](youtube.md) — YouTube channel copy pack: description in 10
+  languages, links, layout plan and per-video metadata template.
 
 ## Assets
 
@@ -18,6 +20,9 @@ files.
 - [`logo/`](logo/) — SVG mark, variants and horizontal lockups; PNG marks at 16,
   32, 48 and 128 px in [`logo/png/`](logo/png/).
 - [`og/`](og/) — social preview images (`og-en.png`, `og-es.png`).
+- [`youtube/`](youtube/) — YouTube channel art: `banner-2560x1440.png` (text and
+  lockup inside the 1546x423 safe area), `avatar-800.png` (mark within 70% of
+  the circle) and `watermark-300.png` (transparent, halo mark).
 - [`brandbook/`](brandbook/index.html) — a standalone HTML brand book. Its fonts
   live in [`brandbook/fonts/`](brandbook/fonts/) with their license in
   [`OFL.md`](brandbook/fonts/OFL.md).
@@ -39,9 +44,11 @@ repository.
 
 ## Regenerating assets
 
-The PNG marks, the extension icon, OG images, store icon and tiles, and README
-cover are derived from the SVGs in [`logo/`](logo/). After changing a source
-SVG, run `bun run brand:export` (needs Chromium:
+The PNG marks, the extension icon, OG images, YouTube channel art, store icon
+and tiles, and README cover are derived from the SVGs in [`logo/`](logo/). After
+changing a source SVG, run `bun run brand:export` (needs Chromium:
 `bunx playwright install chromium`). The script embeds the fonts from
 [`brandbook/fonts/`](brandbook/fonts/), so output does not depend on fonts
-installed on the host. Its source is [`tools/export.mjs`](tools/export.mjs).
+installed on the host. The script throws if a YouTube file misses its dimensions
+or byte budget, or if banner content leaves the safe area. Its source is
+[`tools/export.mjs`](tools/export.mjs).

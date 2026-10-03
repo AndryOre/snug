@@ -30,6 +30,7 @@
     "studio": "remotion-studio src/index.ts --port 3123",
     "still": "remotion still src/index.ts",
     "render": "bun scripts/render-all.ts",
+    "thumbnails": "bun scripts/render-thumbnails.ts",
     "typecheck": "tsc --noEmit",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",

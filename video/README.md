@@ -50,6 +50,18 @@ bun run video:render -- --locales en,ja
 locale, then checks every file with ffprobe: duration 30 s +/- 0.1, 1920x1080,
 30 fps, and an audio stream when `public/music/track.wav` exists.
 
+## YouTube thumbnails
+
+```sh
+bun run video:thumbnails
+```
+
+Renders the `Thumbnail` still (1280x720, `locale` prop, hook from
+`VIDEO_COPY`) for all 10 locales through `renderStill` into
+`docs/brand/youtube/thumbnails/<locale>.png`, failing if any is not 1280x720 or
+exceeds 2 MB. Text stays out of the bottom-right 20%, where YouTube overlays the
+duration badge. Set `REMOTION_BROWSER_EXECUTABLE` as in Setup if needed.
+
 ## Layout
 
 - `src/Promo.tsx` wires the scenes with `TransitionSeries` (12-frame
