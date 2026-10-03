@@ -11,6 +11,8 @@ files.
 - [`competitors.md`](competitors.md) — market research and positioning lessons.
 - [`copy.md`](copy.md) — listing and product copy (EN/ES).
 - [`voice.md`](voice.md) — brand voice guidelines: tone, vocabulary, do/don't.
+- [`youtube.md`](youtube.md) — YouTube channel copy pack: description in 10
+  languages, links, layout plan and per-video metadata template.
 
 ## Assets
 
