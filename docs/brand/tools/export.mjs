@@ -174,8 +174,7 @@ async function assertPngSpec(outPath, { width, height, maxBytes }) {
 }
 
 function bannerMotif(side) {
-  return
-  ;`<div style="position:absolute;top:50%;${side}:150px;width:260px;height:260px;margin-top:-130px;opacity:0.12">${markSvg}</div>`
+  return `<div style="position:absolute;top:50%;${side}:150px;width:260px;height:260px;margin-top:-130px;opacity:0.12">${markSvg}</div>`
 }
 
 async function renderYoutubeBanner(browser, outPath) {
