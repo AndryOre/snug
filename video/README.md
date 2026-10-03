@@ -93,15 +93,14 @@ once per missing layer (`music` prop falls back to `null`, `sfx` to `false`).
 - **SFX:** cues in `src/audio/cues.ts` (cursor clicks, row ticks, chip pops,
   the file landing, the Import toast, the CTA chime, and a whoosh before each
   cut that peaks on the cut). The six production files are peak-normalized to
-  -3 dBFS at 48 kHz; the `VOLUME` table assumes that. Originals are in
-  `public/sfx/epidemic/raw/`. Normalize a
-  replacement with:
+  -3 dBFS at 48 kHz; the `VOLUME` table assumes that. After re-downloading a
+  sound (IDs below), normalize it with:
 
   ```sh
-  ffmpeg -i raw/<name>.wav -af "aresample=48000,volume=<-3 - peak>dB" -c:a pcm_s16le <name>.wav
+  ffmpeg -i <download>.wav -af "aresample=48000,volume=<-3 - peak>dB" -c:a pcm_s16le public/sfx/epidemic/<name>.wav
   ```
 
-  Measure `<peak>` with `ffmpeg -i raw/<name>.wav -af volumedetect -f null -`.
+  Measure `<peak>` with `ffmpeg -i <download>.wav -af volumedetect -f null -`.
 
 ### Epidemic assets
 
