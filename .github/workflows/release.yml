@@ -29,12 +29,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Check tag matches package.json version
+      - name: Check tag matches extension package.json version
         run: |
           tag_version="${GITHUB_REF_NAME#v}"
-          pkg_version=$(node -p "require('./package.json').version")
+          pkg_version=$(node -p "require('./apps/extension/package.json').version")
           if [[ "${tag_version}" != "${pkg_version}" ]]; then
-            echo "Tag ${GITHUB_REF_NAME} does not match package.json version ${pkg_version}"
+            echo "Tag ${GITHUB_REF_NAME} does not match apps/extension/package.json version ${pkg_version}"
             exit 1
           fi
 

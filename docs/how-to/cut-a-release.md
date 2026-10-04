@@ -1,6 +1,7 @@
 # How to cut a release
 
-1. Bump the `version` field in `package.json` to the new version number.
+1. Bump the `version` field in `apps/extension/package.json` to the new version
+   number.
 
 2. Add a new entry to the top of the array `getChangelog()` returns in
    `lib/changelog.ts`: a `version`, an `isoDate` (`YYYY-MM-DD`), and one or more
