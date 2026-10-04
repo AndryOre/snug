@@ -2,23 +2,31 @@
 
 Instructions for coding agents working in this repository.
 
-## Stack
+## Layout
 
-A Chrome MV3 web extension (WXT + `@wxt-dev/module-react`), React 19,
-TypeScript, Tailwind CSS v4, and shadcn/ui (`components/ui/**`). No backend, no
-network calls — every operation reads and writes the browser's own bookmarks
-tree. See [`docs/architecture.md`](docs/architecture.md) for the full code map.
+Snug is a bun-workspaces monorepo orchestrated by Turborepo
+([ADR 0010](docs/adr/0010-bun-workspaces-monorepo.md)). The root is tooling only
+(husky, commitlint, prettier, eslint, turbo, knip). Stack rules live next to the
+code they govern, and apply on top of this file:
+
+- [`apps/extension/AGENTS.md`](apps/extension/AGENTS.md) — the Chrome MV3
+  extension (WXT, React 19, Tailwind CSS v4).
+- [`packages/ui/AGENTS.md`](packages/ui/AGENTS.md) — the shared shadcn/ui and
+  theme package (`@workspace/ui`).
+
+The code map is [`docs/architecture.md`](docs/architecture.md). Skills stay in
+the root `.claude/skills`.
 
 ## Running scripts
 
-Always use `bun run <script>` — never call the underlying tool directly, and
-never mix in another package manager (this repo uses `bun.lock`). Read
-`package.json`'s `scripts` before inventing a command.
+Always use `bun run <script>` from the repo root — never call the underlying
+tool directly, and never mix in another package manager (this repo uses
+`bun.lock`). Read `package.json`'s `scripts` before inventing a command.
 
-- `bun run check` — format:check, lint, typecheck, knip. Run this after any
-  change.
-- `bun run test` — the Vitest suite. Run this after any change to `lib/**` or
-  its consumers.
+- `bun run check` — Turborepo runs each workspace's `check`, plus the root gate:
+  format:check, lint, typecheck, knip. Run this after any change.
+- `bun run test` — Turborepo runs each workspace's Vitest suite. Run this after
+  any change to tested code (`apps/extension/lib/**` and its consumers).
 - `bun run build` — **do not run unless explicitly asked.** It's slow and not
   needed to verify most changes.
 
@@ -31,17 +39,11 @@ convention (not lint-enforced). Detail:
 
 ## Code comments
 
-Every code comment (outside `components/ui/**`) is a TSDoc block on a
-non-obvious export — no `//` or non-JSDoc `/* */` comments, except lint/type
-directives. Detail:
+Every code comment (outside `packages/ui/**`) is a TSDoc block on a non-obvious
+export — no `//` or non-JSDoc `/* */` comments, except lint/type directives.
+Detail:
 [`docs/development.md#code-documentation`](docs/development.md#code-documentation),
 [`docs/adr/0002-tsdoc-only-code-comments.md`](docs/adr/0002-tsdoc-only-code-comments.md).
-
-## `components/ui/**` is untouchable
-
-This is the shadcn/ui-generated registry layer. Do not hand-edit it — add or
-change components via `shadcn` CLI conventions instead, and keep customizations
-in consumer components.
 
 ## Escalating a `@shadcn/lint` finding
 
