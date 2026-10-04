@@ -262,7 +262,7 @@ const eslintConfig = defineConfig([
     '**/.wxt/**',
     '**/coverage/**',
     '.claude/skills/**',
-    'video/**',
+    'apps/video/**',
   ]),
 ])
 

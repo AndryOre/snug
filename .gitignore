@@ -18,11 +18,11 @@ coverage
 test-results
 playwright-report
 
-# promo video package (docs/adr/0009)
-video/out/
-video/node_modules/
-video/public/sfx/epidemic/
-video/public/music/
+# promo video package (docs/adr/0010)
+apps/video/out/
+apps/video/node_modules/
+apps/video/public/sfx/epidemic/
+apps/video/public/music/
 
 # forge coordination artifacts
 .forge

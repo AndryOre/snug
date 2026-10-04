@@ -7,3 +7,4 @@ coverage
 .claude/skills/*
 !.claude/skills/migrate-radix-to-base/
 !.claude/skills/shadcn/
+apps/video/out
