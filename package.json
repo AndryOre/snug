@@ -31,10 +31,25 @@
   "engines": {
     "bun": "1.4.2"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "react": "^19.2.5",
+      "react-dom": "^19.2.5",
+      "typescript": "^6.0.3",
+      "tailwindcss": "^4.2.4",
+      "@tailwindcss/vite": "^4.2.4",
+      "@types/react": "^19.2.14",
+      "@types/react-dom": "^19.2.3",
+      "lucide-react": "^1.49.0",
+      "cn": "^0.4.0",
+      "vitest": "^5.0.3",
+      "@types/bun": "^1.4.2"
+    }
+  },
   "scripts": {
     "clean": "rm -rf apps/extension/.output apps/extension/.wxt apps/extension/node_modules node_modules",
     "cache:clear": "rm -rf .eslintcache node_modules/.cache",
@@ -73,7 +88,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@shadcn/lint": "^0.2.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/bun": "^1.4.2",
+    "@types/bun": "catalog:",
     "@vitest/eslint-plugin": "^1.6.27",
     "bun-types": "^1.4.2",
     "eslint": "^10.11.0",
@@ -90,8 +105,8 @@
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "turbo": "^2.11.7",
-    "typescript": "^6.0.3",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.71.0",
-    "vitest": "^5.0.3"
+    "vitest": "catalog:"
   }
 }

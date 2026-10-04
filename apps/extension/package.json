@@ -1,6 +1,6 @@
 {
   "name": "@snug/extension",
-  "description": "Export, import, and schedule automatic exports of your bookmarks \u2014 six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
+  "description": "Export, import, and schedule automatic exports of your bookmarks — six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
   "private": true,
   "version": "2.0.1",
   "type": "module",
@@ -22,27 +22,27 @@
     "@tanstack/react-virtual": "^3.14.13",
     "@workspace/ui": "workspace:*",
     "@wxt-dev/i18n": "^0.2.5",
-    "cn": "^0.4.0",
-    "lucide-react": "^1.49.0",
+    "cn": "catalog:",
+    "lucide-react": "catalog:",
     "papaparse": "^5.5.3",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@tailwindcss/vite": "^4.2.4",
-    "@types/bun": "^1.4.2",
+    "@tailwindcss/vite": "catalog:",
+    "@types/bun": "catalog:",
     "@types/chrome": "^0.3.4",
     "@types/papaparse": "^5.5.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitest/coverage-v8": "^5.0.3",
     "@wxt-dev/auto-icons": "^1.1.1",
     "@wxt-dev/browser": "^0.3.4",
     "@wxt-dev/module-react": "^1.2.2",
     "jsdom": "^30.1.1",
-    "typescript": "^6.0.3",
-    "vitest": "^5.0.3",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
     "wxt": "^0.21.4"
   }
 }
