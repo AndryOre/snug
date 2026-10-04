@@ -1,30 +1,44 @@
 # Development
 
+Snug is a bun-workspaces monorepo orchestrated by Turborepo (see
+[ADR 0010](adr/0010-bun-workspaces-monorepo.md)). Always run scripts from the
+repo root. Paths in this page are relative to the root unless they start with
+`apps/` or `packages/`.
+
+| Workspace        | Package           | What it holds                                            |
+| ---------------- | ----------------- | -------------------------------------------------------- |
+| `apps/extension` | `@snug/extension` | The WXT Chrome MV3 extension: entrypoints, `lib/`, tests |
+| `packages/ui`    | `@workspace/ui`   | Shared shadcn/ui components, hooks and theme tokens      |
+
+Agent and contributor rules are split the same way: the root `AGENTS.md` holds
+repo-wide rules, and `apps/extension/AGENTS.md` and `packages/ui/AGENTS.md` hold
+the stack rules for their workspace.
+
 ## Scripts
 
-| Script                      | What it does                                                                                               |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `bun run dev`               | Starts the WXT dev server (Chrome MV3).                                                                    |
-| `bun run build`             | Produces a production build (Chrome MV3).                                                                  |
-| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                             |
-| `bun run check`             | Aggregate gate: `format:check` → `lint` → `typecheck` → `knip`. Run before opening a PR.                   |
-| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                              |
-| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                               |
-| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                           |
-| `bun run clean`             | Removes build output and `node_modules`.                                                                   |
-| `bun run cache:clear`       | Clears ESLint and `node_modules/.cache` caches.                                                            |
-| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                               |
-| `bun run format:write`      | Formats the repo with Prettier.                                                                            |
-| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                  |
-| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                  |
-| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                     |
-| `bun run typecheck`         | Runs `tsc --noEmit`.                                                                                       |
-| `bun run test`              | Runs the Vitest suite once.                                                                                |
-| `bun run test:coverage`     | Runs the Vitest suite with coverage (`lib/**`, v8 provider, 80% lines/statements/functions, 50% branches). |
-| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                 |
-| `bun run test:e2e`          | Builds the extension (`wxt build`), then runs the Playwright E2E suite (`e2e/**`).                         |
-| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`e2e-store/**`).                      |
-| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                       |
+| Script                      | What it does                                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `bun run dev`               | Starts the WXT dev server for `apps/extension` (Chrome MV3).                                                                 |
+| `bun run build`             | Turborepo build of every workspace (Chrome MV3 for the extension).                                                           |
+| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                                               |
+| `bun run check`             | Aggregate gate: each workspace's `check`, then root `format:check` → `lint` → `typecheck` → `knip`. Run before opening a PR. |
+| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                                                |
+| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                 |
+| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                             |
+| `bun run clean`             | Removes build output and `node_modules`.                                                                                     |
+| `bun run cache:clear`       | Clears ESLint and `node_modules/.cache` caches.                                                                              |
+| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                 |
+| `bun run format:write`      | Formats the repo with Prettier.                                                                                              |
+| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                    |
+| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                    |
+| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                       |
+| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui` and in `apps/extension`.                                                   |
+| `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                              |
+| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).    |
+| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                   |
+| `bun run test:e2e`          | Builds the extension (`wxt build`), then runs the Playwright E2E suite (`apps/extension/e2e/**`).                            |
+| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                         |
+| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                         |
 
 ## Git hooks
 
@@ -80,10 +94,11 @@ e.g. `feat/csv-export`, `fix/popup-crash`, `chore/bump-deps`.
 
 ## Adding a `@shadcn/lint` contract
 
-`eslint.config.mjs` defines `shadcnNoRestyleContracts` — a list of per-component
-exceptions to the `shadcn/no-restyle` rule. Each entry pairs a component name
-`pattern` (regex) with an `allow` list of class categories/literal classes that
-component is permitted to add on top of its shadcn/ui defaults.
+The root `eslint.config.mjs` defines `shadcnNoRestyleContracts` — a list of
+per-component exceptions to the `shadcn/no-restyle` rule. Each entry pairs a
+component name `pattern` (regex) with an `allow` list of class
+categories/literal classes that component is permitted to add on top of its
+shadcn/ui defaults.
 
 To add a new contract:
 
@@ -101,10 +116,11 @@ To add a new contract:
 
 ## Brand tokens
 
-`entrypoints/popup/style.css` defines the Snug palette in `:root` (warm cream
-light theme) and `.dark` (dark-first amber on a warm ground), plus three
-brand-surface tokens exposed as Tailwind utilities via the `@theme inline`
-block:
+`packages/ui/src/styles/globals.css` (imported by
+`apps/extension/entrypoints/popup/style.css`) defines the Snug palette in
+`:root` (warm cream light theme) and `.dark` (dark-first amber on a warm
+ground), plus three brand-surface tokens exposed as Tailwind utilities via the
+`@theme inline` block:
 
 - **`--primary-text`** (Tailwind `text-primary-text`): text color for brand
   surfaces. Equals `--primary` in both themes (`#A35200` in light, `#FFA230` in
@@ -130,38 +146,40 @@ Rules for the brand tokens:
 
 ## `fakeBrowser` testing
 
-`lib/**` unit tests run against `wxt/testing/fake-browser`'s `fakeBrowser` — an
-in-memory implementation of the WebExtension APIs, wired in via `WxtVitest()` in
-`vitest.config.ts`.
+`apps/extension/lib/**` unit tests run against `wxt/testing/fake-browser`'s
+`fakeBrowser` — an in-memory implementation of the WebExtension APIs, wired in
+via `WxtVitest()` in `apps/extension/vitest.config.ts`.
 
 `@webext-core/fake-browser` (which `fakeBrowser` wraps) does not implement
 `browser.bookmarks.*` — every method throws "not implemented". This repo patches
 a minimal in-memory bookmark tree onto `fakeBrowser.bookmarks` via
-`lib/testing/fake-bookmarks.ts`, so tests can exercise real
+`apps/extension/lib/testing/fake-bookmarks.ts`, so tests can exercise real
 `browser.bookmarks.create/search/getTree/removeTree` calls end to end.
-`lib/testing/fake-i18n.ts` provides the same treatment for `browser.i18n`.
+`apps/extension/lib/testing/fake-i18n.ts` provides the same treatment for
+`browser.i18n`.
 
 `fakeBrowser.reset()` does not touch `bookmarks` (it only resets APIs that
 implement `resetState`), so call `resetFakeBookmarks()` (and `resetFakeI18n()`,
 if used) alongside it in `beforeEach`.
 
-Coverage is scoped to `lib/**` only (see `vitest.config.ts`), with an 80%
-threshold on lines/statements/functions and 50% on branches.
+Coverage is scoped to `apps/extension/lib/**` only (see
+`apps/extension/vitest.config.ts`), with an 80% threshold on
+lines/statements/functions and 50% on branches.
 
 See [CONTRIBUTING's `## Tests`](../CONTRIBUTING.md#tests) section for this
 repository's testing policy: what a PR is expected to cover and when.
 
 ## E2E testing
 
-`e2e/**` runs Playwright against the extension's real build output
-(`.output/chrome-mv3`, produced by `wxt build`), loaded into Playwright's
-bundled headless Chromium via `chromium.launchPersistentContext` +
-`--load-extension`. See
+`apps/extension/e2e/**` runs Playwright against the extension's real build
+output (`apps/extension/.output/chrome-mv3`, produced by `wxt build`), loaded
+into Playwright's bundled headless Chromium via
+`chromium.launchPersistentContext` + `--load-extension`. See
 [`docs/adr/0003-e2e-against-built-extension.md`](adr/0003-e2e-against-built-extension.md)
 for why this runs against the built extension instead of a component-test layer.
 
-- `e2e/fixtures.ts` is the shared harness every spec extends: the persistent
-  `context`, `extensionId`, the extension's `serviceWorker`, an
+- `apps/extension/e2e/fixtures.ts` is the shared harness every spec extends: the
+  persistent `context`, `extensionId`, the extension's `serviceWorker`, an
   `openExtensionPage(name)` helper (e.g. `openExtensionPage('popup.html')`), and
   `seedBookmarks`/`readBookmarkTree` helpers that drive `chrome.bookmarks.*`
   through `serviceWorker.evaluate` — not `fakeBrowser` — so bookmarks state goes
@@ -184,11 +202,11 @@ for why this runs against the built extension instead of a component-test layer.
   an a11y violation fails the same way any other lint error does). It catches
   issues like missing alt text, non-interactive elements with click handlers but
   no keyboard equivalent, and invalid ARIA attributes.
-- **Accessible primitives**: interactive UI is built from `components/ui/**`
-  (shadcn/ui components on top of Radix UI primitives), which ship correct ARIA
-  roles, keyboard handling, and focus management out of the box. Prefer
-  composing these primitives over hand-rolling interactive elements from
-  `div`/`span`.
+- **Accessible primitives**: interactive UI is built from
+  `packages/ui/src/components/**` (shadcn/ui components on top of Radix UI
+  primitives), which ship correct ARIA roles, keyboard handling, and focus
+  management out of the box. Prefer composing these primitives over hand-rolling
+  interactive elements from `div`/`span`.
 - **Keyboard operability**: every interactive control (buttons, links, form
   fields, dialogs) must be reachable and operable via keyboard alone — no
   handler that only responds to `onClick`/`onMouseOver` without a keyboard
@@ -216,7 +234,7 @@ permanently.
 
 ## Code documentation
 
-Every code comment in this repository (outside `components/ui/**`, the
+Every code comment in this repository (outside `packages/ui/**`, the
 shadcn/ui-generated layer) is a `/**` TSDoc block, added only where it earns its
 place on a non-obvious export — never restating what a signature already says.
 Plain `//` line comments and non-JSDoc `/* */` block comments are disallowed;

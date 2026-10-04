@@ -22,6 +22,12 @@ the threat model.
 
 ## Code map
 
+Snug is a bun-workspaces monorepo
+([ADR 0010](adr/0010-bun-workspaces-monorepo.md)). The extension lives in
+`apps/extension` (`@snug/extension`) and the shared shadcn/ui components, hooks
+and theme tokens in `packages/ui` (`@workspace/ui`). Every path below is
+relative to `apps/extension/` unless it starts with `packages/`.
+
 ### Entrypoints (`entrypoints/`)
 
 - **`background.ts`** — the MV3 service worker. Registers
@@ -153,9 +159,12 @@ the threat model.
 - **`components/duplicates/`** — the Duplicates page's group card.
 - **`components/popup/`** — the popup's `export-section.tsx`,
   `import-section.tsx`, `auto-export-status-item.tsx` and `footer.tsx`.
-- **`components/ui/`** — the shadcn/ui-generated primitives (`button.tsx`,
-  `dialog.tsx`, `select.tsx`, etc.). Generated registry code; not hand-authored,
-  not covered by the rest of this map's conventions.
+- **`packages/ui/src/components/`** — the shadcn/ui-generated primitives
+  (`button.tsx`, `dialog.tsx`, `select.tsx`, etc.), shared through the
+  `@workspace/ui` package along with `packages/ui/src/hooks`,
+  `packages/ui/src/lib/utils.ts` and the theme in
+  `packages/ui/src/styles/globals.css`. Generated registry code; not
+  hand-authored, not covered by the rest of this map's conventions.
 - Top-level: `export-options-panel.tsx` (the shared **Export options** panel),
   `time-picker.tsx` (locale-aware) and `theme-provider.tsx`.
 
