@@ -50,10 +50,13 @@ jobs:
           key: ${{ runner.os }}-turbo-quality-${{ github.sha }}
           restore-keys: ${{ runner.os }}-turbo-quality-
 
-      - name: Check and test (format, lint, typecheck, knip, unit tests)
+      - name: Check and test workspaces (typecheck, unit tests)
         run:
-          bunx turbo run check check:root test:coverage test:root ${{
-          github.event_name == 'pull_request' && '--affected' || '' }}
+          bunx turbo run check test:coverage ${{ github.event_name ==
+          'pull_request' && '--affected' || '' }}
+
+      - name: Check and test repo-wide (format, lint, knip, script tests)
+        run: bunx turbo run check:root test:root
 
   build:
     name: Build (extension zip)
