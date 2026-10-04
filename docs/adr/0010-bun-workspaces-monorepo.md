@@ -3,8 +3,8 @@
 ## Status
 
 Accepted. Supersedes the "not a bun workspace" decision in
-[ADR 0009](0009-promo-video-isolated-remotion-package.md); ADR 0009 is marked
-superseded once `video/` moves to `apps/video`.
+[ADR 0009](0009-promo-video-isolated-remotion-package.md), which is marked
+superseded; the promo video now lives in `apps/video`.
 
 ## Context
 

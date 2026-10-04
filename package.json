@@ -1,6 +1,6 @@
 {
   "name": "snug",
-  "description": "Export, import, and schedule automatic exports of your bookmarks — six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
+  "description": "Export, import, and schedule automatic exports of your bookmarks \u2014 six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
   "keywords": [
     "browser-extension",
     "bookmarks",
@@ -59,7 +59,7 @@
     "check": "turbo run check check:root",
     "fix": "bun run format:write && bun run lint:fix && bun run typecheck",
     "ci:local": "bun install --frozen-lockfile && bun run check && bun run lint:docs && bun run test",
-    "typecheck": "tsc --noEmit && bun run --cwd packages/ui check && bun run --cwd apps/extension check",
+    "typecheck": "tsc --noEmit && bun run --cwd packages/ui check && bun run --cwd apps/extension check && bun run --cwd apps/video check",
     "brand:export": "bun docs/brand/tools/export.mjs",
     "knip": "bunx knip",
     "lint": "bunx eslint . --max-warnings=0 --cache --cache-strategy content",
@@ -72,12 +72,10 @@
     "test:watch": "bun run --cwd apps/extension test:watch",
     "test:e2e": "turbo run test:e2e",
     "store:screenshots": "bun run --cwd apps/extension store:screenshots",
-    "video:install": "bun install --cwd video",
-    "video:studio": "bun run --cwd video studio",
-    "video:check": "bun run --cwd video check",
-    "video:still": "bun run --cwd video still",
-    "video:render": "bun run --cwd video render",
-    "video:thumbnails": "bun run --cwd video thumbnails",
+    "video:studio": "bun run --cwd apps/video studio",
+    "video:still": "bun run --cwd apps/video still",
+    "video:render": "bun run --cwd apps/video render",
+    "video:thumbnails": "bun run --cwd apps/video thumbnails",
     "prepare": "bunx --bun husky",
     "check:root": "bun run format:check && bun run lint && tsc --noEmit && bun run knip",
     "test:root": "vitest run"

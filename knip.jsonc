@@ -13,10 +13,12 @@
     // caller needs them, since acquireLock/releaseLock/resolveLockDirectory
     // cover every consumer so far (scripts/lint-docs.ts included).
     "scripts/locks.ts",
-    // isolated Remotion package (docs/adr/0009): own package.json, lockfile
-    // and tooling, so root knip must not analyze it.
-    "video/**",
   ],
+  // The video is composition code whose exports document scene timing and
+  // layout helpers, not a public API; only files and dependencies are policed.
+  "ignoreIssues": {
+    "apps/video/src/**": ["exports", "types"],
+  },
   "workspaces": {
     ".": {
       "wxt": false,
@@ -25,6 +27,12 @@
       "paths": {
         "#imports": [".wxt/types/imports-module.d.ts"],
       },
+    },
+    "apps/video": {
+      "entry": ["src/index.ts", "scripts/*.ts", "remotion.config.ts"],
+      "ignore": ["src/audio/beats.ts"],
+      "ignoreDependencies": ["@types/web"],
+      "ignoreBinaries": ["remotion-studio"],
     },
     "packages/ui": {
       "entry": ["src/components/*.tsx", "src/hooks/*.ts", "src/lib/*.ts"],
