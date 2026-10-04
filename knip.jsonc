@@ -1,13 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "paths": {
-    "#imports": [".wxt/types/imports-module.d.ts"],
-  },
   "ignore": [
-    // shadcn-managed primitives (regenerated wholesale by the `shadcn` CLI):
-    // ship the full upstream export surface even when this app only uses
-    // part of it today, so exports here are never "dead" in the usual sense.
-    "components/ui/**",
     // vendored agent skills (installed by `bunx skills`): their template
     // files are reference material, not part of this app's module graph.
     ".claude/skills/**",
@@ -24,4 +17,20 @@
     // and tooling, so root knip must not analyze it.
     "video/**",
   ],
+  "workspaces": {
+    ".": {
+      "wxt": false,
+    },
+    "apps/extension": {
+      "paths": {
+        "#imports": [".wxt/types/imports-module.d.ts"],
+      },
+      "ignore": [
+        // shadcn-managed primitives (regenerated wholesale by the `shadcn` CLI):
+        // ship the full upstream export surface even when this app only uses
+        // part of it today, so exports here are never "dead" in the usual sense.
+        "components/ui/**",
+      ],
+    },
+  },
 }

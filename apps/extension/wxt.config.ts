@@ -9,6 +9,9 @@ export default defineConfig({
     '@wxt-dev/i18n/module',
     '@wxt-dev/auto-icons',
   ],
+  zip: {
+    name: 'snug',
+  },
   imports: {
     eslintrc: {
       enabled: 9,

@@ -4,7 +4,7 @@ Copy and settings for Snug's YouTube channel. Voice follows
 [`voice.md`](voice.md): say "local" or "on-device", never "sync" or "cloud", and
 never quote the internal emotional promise as a slogan. Store terminology comes
 from [`docs/store/listings/`](../store/listings/). URLs come from
-[`lib/brand.ts`](../../lib/brand.ts).
+[`lib/brand.ts`](../../apps/extension/lib/brand.ts).
 
 ## Identity
 

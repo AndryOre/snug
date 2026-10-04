@@ -10,7 +10,7 @@ import unicorn from 'eslint-plugin-unicorn'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 
-import wxtAutoImports from './.wxt/eslint-auto-imports.mjs'
+import wxtAutoImports from './apps/extension/.wxt/eslint-auto-imports.mjs'
 import localPlugin from './eslint-rules/index.mjs'
 
 /**
@@ -197,7 +197,7 @@ const eslintConfig = defineConfig([
      * layer, exempt from these three rules for the same reasons as
      * andryore-dev's eslint.config.mjs.
      */
-    files: ['components/ui/**'],
+    files: ['**/components/ui/**'],
     rules: {
       'shadcn/no-restyle': 'off',
       'shadcn/no-arbitrary-values': 'off',
@@ -206,7 +206,7 @@ const eslintConfig = defineConfig([
   },
   {
     files: ['**/*.tsx'],
-    ignores: ['components/ui/**'],
+    ignores: ['**/components/ui/**'],
     rules: {
       'react/jsx-no-literals': [
         'error',
@@ -232,7 +232,7 @@ const eslintConfig = defineConfig([
      * React's `use` hook that `react-hooks/rules-of-hooks` otherwise flags
      * as a misplaced hook call.
      */
-    files: ['e2e/**'],
+    files: ['**/e2e/**'],
     rules: {
       'react-hooks/rules-of-hooks': 'off',
     },
@@ -248,7 +248,7 @@ const eslintConfig = defineConfig([
      * untouched).
      */
     files: ['**/*.{ts,tsx,mjs}'],
-    ignores: ['components/ui/**'],
+    ignores: ['**/components/ui/**'],
     plugins: {
       jsdoc: jsdoc.configs['flat/recommended-typescript-error'].plugins.jsdoc,
       local: localPlugin,
@@ -258,9 +258,9 @@ const eslintConfig = defineConfig([
   },
   prettierConfig,
   globalIgnores([
-    '.output/**',
-    '.wxt/**',
-    'coverage/**',
+    '**/.output/**',
+    '**/.wxt/**',
+    '**/coverage/**',
     '.claude/skills/**',
     'video/**',
   ]),

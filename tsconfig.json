@@ -1,16 +1,12 @@
 {
-  "extends": "./.wxt/tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "verbatimModuleSyntax": true,
-    "erasableSyntaxOnly": true
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "types": ["bun-types"]
   },
-  "exclude": ["node_modules", ".output", "video"]
+  "include": ["scripts", "eslint-rules", "vitest.config.ts"]
 }
