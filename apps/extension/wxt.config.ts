@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'wxt'
 
 import { GITHUB_URL } from './lib/brand'
@@ -11,6 +12,17 @@ export default defineConfig({
   ],
   zip: {
     name: 'snug',
+    zipSources: true,
+    sourcesRoot: fileURLToPath(new URL('../..', import.meta.url)),
+    includeSources: [
+      'package.json',
+      'bun.lock',
+      'bunfig.toml',
+      'tsconfig.base.json',
+      'apps/extension/**',
+      'packages/**',
+    ],
+    excludeSources: ['apps/extension/.output/**', 'apps/extension/.wxt/**'],
   },
   imports: {
     eslintrc: {
