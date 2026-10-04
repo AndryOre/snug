@@ -10,6 +10,7 @@ const ROOT = path.resolve(import.meta.dirname, '..')
 const OUT_DIR = path.resolve(
   ROOT,
   '..',
+  '..',
   'docs',
   'brand',
   'youtube',
