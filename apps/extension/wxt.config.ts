@@ -19,6 +19,7 @@ export default defineConfig({
       'bun.lock',
       'bunfig.toml',
       'tsconfig.base.json',
+      'turbo.json',
       'apps/extension/**',
       'packages/**',
     ],

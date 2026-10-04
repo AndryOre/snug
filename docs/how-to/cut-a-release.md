@@ -26,8 +26,8 @@
    sources archive for the new version, both in `apps/extension/.output/`:
    `snug-X.Y.Z-chrome.zip` and `snug-X.Y.Z-sources.zip`. The sources zip is
    rooted at the repo root and limited to an allowlist (`package.json`,
-   `bun.lock`, `bunfig.toml`, `tsconfig.base.json`, `apps/extension/**`,
-   `packages/**`), set by `zip.includeSources` in
+   `bun.lock`, `bunfig.toml`, `tsconfig.base.json`, `turbo.json`,
+   `apps/extension/**`, `packages/**`), set by `zip.includeSources` in
    `apps/extension/wxt.config.ts`. A reviewer rebuilds it with
    `bun install --frozen-lockfile && bun run build`. If a root file the build
    needs is added later, add it to that allowlist.
