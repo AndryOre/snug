@@ -5,7 +5,7 @@ import { chromium } from 'playwright'
 
 /**
  * Regenerates the derived raster assets of the Snug brand kit from the SVG
- * sources in `docs/brand/logo`: the extension icon (`assets/icon.png`), PNG
+ * sources in `docs/brand/logo`: the extension icon (`apps/extension/assets/icon.png`), PNG
  * marks, the Chrome Web Store icon and tiles, OG images and the README banner (a copy of the store marquee), and the YouTube channel art
  * (`docs/brand/youtube/`: banner, avatar, watermark). Run with `bun run brand:export`.
  *
@@ -276,7 +276,11 @@ try {
       path.join(brandRoot, 'logo/png', `mark-${size}.png`),
     )
   }
-  await renderIcon(browser, 512, path.join(repoRoot, 'assets/icon.png'))
+  await renderIcon(
+    browser,
+    512,
+    path.join(repoRoot, 'apps/extension/assets/icon.png'),
+  )
 
   const storeAssets = path.join(repoRoot, 'docs/store/assets')
   await renderIcon(browser, 128, path.join(storeAssets, 'store-icon-128.png'))

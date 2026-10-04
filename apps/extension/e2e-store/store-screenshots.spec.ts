@@ -8,7 +8,7 @@ import type { SeedBookmark } from '../e2e/fixtures'
 import { STORE_CAPTIONS } from './captions'
 import { composeLocalSlide, composeUiSlide } from './compose-slide'
 
-const SCREENSHOTS_ROOT = path.resolve('docs/store/assets/screenshots')
+const SCREENSHOTS_ROOT = path.resolve('../../docs/store/assets/screenshots')
 const DEFAULT_LOCALE = 'en'
 const SLIDE_FILES = [
   '01-export.png',

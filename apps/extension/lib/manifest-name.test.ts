@@ -10,13 +10,16 @@ const localeMessages = import.meta.glob<ManifestNameMessages>(
   '../locales/*.json',
   { eager: true, import: 'default' },
 )
-const listingSources = import.meta.glob<string>('../docs/store/listings/*.md', {
-  eager: true,
-  import: 'default',
-  query: '?raw',
-})
+const listingSources = import.meta.glob<string>(
+  '../../../docs/store/listings/*.md',
+  {
+    eager: true,
+    import: 'default',
+    query: '?raw',
+  },
+)
 const storeReadme = Object.values(
-  import.meta.glob<string>('../docs/store/README.md', {
+  import.meta.glob<string>('../../../docs/store/README.md', {
     eager: true,
     import: 'default',
     query: '?raw',

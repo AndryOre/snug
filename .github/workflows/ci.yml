@@ -85,14 +85,14 @@ jobs:
 
       - name: Report zip size
         run: |
-          zip_path=$(ls .output/*-chrome.zip)
+          zip_path=$(ls apps/extension/.output/*-chrome.zip)
           zip_size=$(du -h "$zip_path" | cut -f1)
           echo "**Extension zip size:** \`${zip_size}\` (\`$(basename "$zip_path")\`)" >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: extension-chrome-zip
-          path: .output/*-chrome.zip
+          path: apps/extension/.output/*-chrome.zip
           retention-days: 7
 
   e2e:
@@ -118,6 +118,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Install Playwright browsers
+        working-directory: apps/extension
         run: bunx playwright install --with-deps chromium
 
       - name: Run E2E tests
@@ -127,7 +128,7 @@ jobs:
         if: failure()
         with:
           name: playwright-report
-          path: playwright-report/
+          path: apps/extension/playwright-report/
           retention-days: 7
 
   commitlint:

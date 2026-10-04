@@ -1,16 +1,4 @@
 {
-  "extends": "./.wxt/tsconfig.json",
-  "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "jsx": "react-jsx",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "verbatimModuleSyntax": true,
-    "erasableSyntaxOnly": true
-  },
-  "exclude": ["node_modules", ".output", "video"]
+  "extends": ["./.wxt/tsconfig.json", "../../tsconfig.base.json"],
+  "exclude": ["node_modules", ".output"]
 }
