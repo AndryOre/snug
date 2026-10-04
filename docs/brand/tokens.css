@@ -1,7 +1,7 @@
 /**
  * Snug design tokens (shadcn-style variables, oklch) — Nova style.
  *
- * Mirror of `:root` and `.dark` in the app's `entrypoints/popup/style.css`,
+ * Mirror of `:root` and `.dark` in the shared `packages/ui/src/styles/globals.css`,
  * which is the live source of truth since AO-1035 (synced 2026-10-02). Both
  * the light and dark themes carry the Snug palette: amber accent
  * (`--primary`) on warm-brown grounds in dark, warm paper grounds in light.

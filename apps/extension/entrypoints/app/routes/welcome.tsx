@@ -1,13 +1,6 @@
 import { i18n } from '#i18n'
 import { Link } from '@tanstack/react-router'
-import {
-  CloudUploadIcon,
-  DownloadIcon,
-  type LucideIcon,
-  TimerResetIcon,
-} from 'lucide-react'
-
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@workspace/ui/components/button'
 import {
   Item,
   ItemActions,
@@ -16,7 +9,14 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
+} from '@workspace/ui/components/item'
+import {
+  CloudUploadIcon,
+  DownloadIcon,
+  type LucideIcon,
+  TimerResetIcon,
+} from 'lucide-react'
+
 import { Wordmark } from '@/components/wordmark'
 import { APP_ROUTES } from '@/lib/app-url'
 

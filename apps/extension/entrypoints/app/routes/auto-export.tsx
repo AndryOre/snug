@@ -1,11 +1,11 @@
 import { i18n } from '#i18n'
-import { CircleAlertIcon, CircleCheckIcon, DownloadIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
-
-import { TimePicker } from '@/components/time-picker'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '@workspace/ui/components/alert'
+import { Badge } from '@workspace/ui/components/badge'
+import { Button } from '@workspace/ui/components/button'
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@workspace/ui/components/card'
 import {
   Field,
   FieldContent,
@@ -23,13 +23,13 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from '@/components/ui/field'
+} from '@workspace/ui/components/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from '@/components/ui/input-group'
+} from '@workspace/ui/components/input-group'
 import {
   Select,
   SelectContent,
@@ -37,11 +37,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Spinner } from '@/components/ui/spinner'
-import { Switch } from '@/components/ui/switch'
-import { toast } from '@/components/ui/toast'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+} from '@workspace/ui/components/select'
+import { Spinner } from '@workspace/ui/components/spinner'
+import { Switch } from '@workspace/ui/components/switch'
+import { toast } from '@workspace/ui/components/toast'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@workspace/ui/components/toggle-group'
+import { CircleAlertIcon, CircleCheckIcon, DownloadIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+import { TimePicker } from '@/components/time-picker'
 import {
   readAutoExportLastRun,
   RUN_MANUAL_EXPORT_MESSAGE_TYPE,

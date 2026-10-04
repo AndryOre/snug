@@ -25,12 +25,9 @@
       "paths": {
         "#imports": [".wxt/types/imports-module.d.ts"],
       },
-      "ignore": [
-        // shadcn-managed primitives (regenerated wholesale by the `shadcn` CLI):
-        // ship the full upstream export surface even when this app only uses
-        // part of it today, so exports here are never "dead" in the usual sense.
-        "components/ui/**",
-      ],
+    },
+    "packages/ui": {
+      "entry": ["src/components/*.tsx", "src/hooks/*.ts", "src/lib/*.ts"],
     },
   },
 }

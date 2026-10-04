@@ -1,11 +1,11 @@
 import { i18n } from '#i18n'
-import { TriangleAlertIcon, UploadIcon } from 'lucide-react'
-import { useId, useRef, useState } from 'react'
-
-import { OperationProgressCard } from '@/components/operation-progress-card'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Field, FieldLabel } from '@/components/ui/field'
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '@workspace/ui/components/alert'
+import { Button } from '@workspace/ui/components/button'
+import { Field, FieldLabel } from '@workspace/ui/components/field'
 import {
   Select,
   SelectContent,
@@ -13,9 +13,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Spinner } from '@/components/ui/spinner'
-import { toast } from '@/components/ui/toast'
+} from '@workspace/ui/components/select'
+import { Spinner } from '@workspace/ui/components/spinner'
+import { toast } from '@workspace/ui/components/toast'
+import { TriangleAlertIcon, UploadIcon } from 'lucide-react'
+import { useId, useRef, useState } from 'react'
+
+import { OperationProgressCard } from '@/components/operation-progress-card'
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError } from '@/lib/import-control'

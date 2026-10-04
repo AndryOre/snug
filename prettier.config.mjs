@@ -16,7 +16,7 @@ const config = {
     '@trivago/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
   ],
-  tailwindStylesheet: './apps/extension/entrypoints/popup/style.css',
+  tailwindStylesheet: './packages/ui/src/styles/globals.css',
   tailwindFunctions: ['cn', 'cva', 'clsx'],
   importOrder: [
     '<THIRD_PARTY_MODULES>',

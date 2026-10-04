@@ -1,8 +1,5 @@
 import { i18n } from '#i18n'
-import { ArchiveIcon, CircleAlertIcon } from 'lucide-react'
-import { useRef, useState } from 'react'
-
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Alert, AlertDescription } from '@workspace/ui/components/alert'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,22 +8,22 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
+} from '@workspace/ui/components/alert-dialog'
+import { Button } from '@workspace/ui/components/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@workspace/ui/components/card'
 import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/components/ui/empty'
+} from '@workspace/ui/components/empty'
 import {
   Item,
   ItemActions,
@@ -34,8 +31,11 @@ import {
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
-import { Spinner } from '@/components/ui/spinner'
+} from '@workspace/ui/components/item'
+import { Spinner } from '@workspace/ui/components/spinner'
+import { ArchiveIcon, CircleAlertIcon } from 'lucide-react'
+import { useRef, useState } from 'react'
+
 import { countBookmarks } from '@/lib/count-bookmarks'
 import { formatCount } from '@/lib/format-count'
 import { formatSnapshotDate } from '@/lib/format-snapshot-date'

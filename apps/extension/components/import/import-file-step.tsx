@@ -1,17 +1,16 @@
 import { i18n } from '#i18n'
-import { FileIcon, FileUpIcon } from 'lucide-react'
-import { useId, useRef, useState } from 'react'
-import type { ChangeEvent, DragEvent } from 'react'
-
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import {
   Item,
   ItemActions,
   ItemContent,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
-import { cn } from '@/lib/utils'
+} from '@workspace/ui/components/item'
+import { cn } from '@workspace/ui/lib/utils'
+import { FileIcon, FileUpIcon } from 'lucide-react'
+import { useId, useRef, useState } from 'react'
+import type { ChangeEvent, DragEvent } from 'react'
 
 const ACCEPTED_FILE_TYPES = '.csv,.json,.html,.htm,.xbel,.xml'
 
