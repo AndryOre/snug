@@ -1,14 +1,14 @@
-import { ChevronDownIcon, ClockIcon } from 'lucide-react'
-import { useLayoutEffect, useRef, useState } from 'react'
-
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
+} from '@workspace/ui/components/popover'
+import { ScrollArea } from '@workspace/ui/components/scroll-area'
+import { Separator } from '@workspace/ui/components/separator'
+import { ChevronDownIcon, ClockIcon } from 'lucide-react'
+import { useLayoutEffect, useRef, useState } from 'react'
+
 import {
   type DayPeriod,
   formatTime24,

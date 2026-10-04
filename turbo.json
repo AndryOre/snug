@@ -1,0 +1,52 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "agentGuidance": false,
+  "globalDependencies": ["bun.lock", "tsconfig.base.json"],
+  "tasks": {
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "check": {
+      "dependsOn": ["transit"],
+      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["transit"],
+      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "outputs": []
+    },
+    "test:coverage": {
+      "dependsOn": ["transit"],
+      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "outputs": ["coverage/**"]
+    },
+    "test:e2e": {
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["transit"],
+      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!coverage/**", "!e2e/**"],
+      "outputs": [".output/**", ".wxt/**"]
+    },
+    "zip": {
+      "dependsOn": ["transit"],
+      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!coverage/**", "!e2e/**"],
+      "outputs": [".output/**", ".wxt/**"]
+    },
+    "//#check:root": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!apps/*/.output/**",
+        "!apps/*/.wxt/**",
+        "!**/coverage/**"
+      ],
+      "outputs": []
+    },
+    "//#test:root": {
+      "inputs": ["scripts/**", "eslint-rules/**", "vitest.config.ts"],
+      "outputs": []
+    }
+  }
+}

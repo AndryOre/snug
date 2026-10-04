@@ -1,8 +1,8 @@
+import { Toaster } from '@workspace/ui/components/toast'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/toast'
 import { applyDocumentLanguage } from '@/lib/document-language'
 import { applyCachedTheme } from '@/lib/theme-cache'
 

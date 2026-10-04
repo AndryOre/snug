@@ -1,14 +1,11 @@
 import { i18n } from '#i18n'
-import { useId } from 'react'
-
-import { SafetySnapshotCard } from '@/components/safety-snapshot-card'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@workspace/ui/components/card'
 import {
   Field,
   FieldContent,
@@ -17,7 +14,7 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from '@/components/ui/field'
+} from '@workspace/ui/components/field'
 import {
   Select,
   SelectContent,
@@ -25,9 +22,15 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Switch } from '@/components/ui/switch'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+} from '@workspace/ui/components/select'
+import { Switch } from '@workspace/ui/components/switch'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@workspace/ui/components/toggle-group'
+import { useId } from 'react'
+
+import { SafetySnapshotCard } from '@/components/safety-snapshot-card'
 import { getImportModeItems } from '@/lib/import-mode-items'
 import {
   autoExpandFoldersStore,

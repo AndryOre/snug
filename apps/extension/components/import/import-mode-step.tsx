@@ -1,15 +1,18 @@
 import { i18n } from '#i18n'
-import { TriangleAlertIcon } from 'lucide-react'
-
-import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Alert, AlertDescription } from '@workspace/ui/components/alert'
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldLabel,
   FieldTitle,
-} from '@/components/ui/field'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+} from '@workspace/ui/components/field'
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from '@workspace/ui/components/radio-group'
+import { TriangleAlertIcon } from 'lucide-react'
+
 import type { ImportMode } from '@/lib/types'
 
 interface ModeOption {

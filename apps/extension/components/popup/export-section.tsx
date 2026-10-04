@@ -1,9 +1,5 @@
 import { i18n } from '#i18n'
-import { DownloadIcon } from 'lucide-react'
-import { useState } from 'react'
-
-import { OperationProgressCard } from '@/components/operation-progress-card'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import {
   Select,
   SelectContent,
@@ -11,9 +7,16 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { toast } from '@/components/ui/toast'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+} from '@workspace/ui/components/select'
+import { toast } from '@workspace/ui/components/toast'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@workspace/ui/components/toggle-group'
+import { DownloadIcon } from 'lucide-react'
+import { useState } from 'react'
+
+import { OperationProgressCard } from '@/components/operation-progress-card'
 import { exportAllBookmarks } from '@/lib/export-all-bookmarks'
 import { ExportCanceledError } from '@/lib/export-control'
 import {

@@ -1,6 +1,6 @@
 {
   "name": "snug",
-  "description": "Export, import, and schedule automatic exports of your bookmarks \u2014 six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
+  "description": "Export, import, and schedule automatic exports of your bookmarks — six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
   "keywords": [
     "browser-extension",
     "bookmarks",
@@ -39,12 +39,12 @@
     "clean": "rm -rf apps/extension/.output apps/extension/.wxt apps/extension/node_modules node_modules",
     "cache:clear": "rm -rf .eslintcache node_modules/.cache",
     "dev": "bun run --cwd apps/extension dev",
-    "build": "bun run --cwd apps/extension build",
-    "zip": "bun run --cwd apps/extension zip",
-    "check": "bun run format:check && bun run lint && bun run typecheck && bun run knip",
+    "build": "turbo run build",
+    "zip": "turbo run zip",
+    "check": "turbo run check check:root",
     "fix": "bun run format:write && bun run lint:fix && bun run typecheck",
     "ci:local": "bun install --frozen-lockfile && bun run check && bun run lint:docs && bun run test",
-    "typecheck": "tsc --noEmit && bun run --cwd apps/extension typecheck",
+    "typecheck": "tsc --noEmit && bun run --cwd packages/ui check && bun run --cwd apps/extension check",
     "brand:export": "bun docs/brand/tools/export.mjs",
     "knip": "bunx knip",
     "lint": "bunx eslint . --max-warnings=0 --cache --cache-strategy content",
@@ -52,10 +52,10 @@
     "lint:fix": "bunx eslint . --fix --max-warnings=0 --cache --cache-strategy content",
     "format:check": "bunx --bun prettier --check \"**/*.{ts,tsx,js,jsx,mjs,mdx,json,json5,md,css,scss,yml,yaml}\" --cache",
     "format:write": "bunx --bun prettier --write \"**/*.{ts,tsx,js,jsx,mjs,mdx,json,json5,md,css,scss,yml,yaml}\" --cache",
-    "test": "bun run --cwd apps/extension test && vitest run",
-    "test:coverage": "bun run --cwd apps/extension test:coverage && vitest run",
+    "test": "turbo run test test:root",
+    "test:coverage": "turbo run test:coverage test:root",
     "test:watch": "bun run --cwd apps/extension test:watch",
-    "test:e2e": "bun run --cwd apps/extension test:e2e",
+    "test:e2e": "turbo run test:e2e",
     "store:screenshots": "bun run --cwd apps/extension store:screenshots",
     "video:install": "bun install --cwd video",
     "video:studio": "bun run --cwd video studio",
@@ -63,7 +63,9 @@
     "video:still": "bun run --cwd video still",
     "video:render": "bun run --cwd video render",
     "video:thumbnails": "bun run --cwd video thumbnails",
-    "prepare": "bunx --bun husky"
+    "prepare": "bunx --bun husky",
+    "check:root": "bun run format:check && bun run lint && tsc --noEmit && bun run knip",
+    "test:root": "vitest run"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.3",
@@ -87,6 +89,7 @@
     "playwright": "^1.63.0",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "turbo": "^2.11.7",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.0",
     "vitest": "^5.0.3"

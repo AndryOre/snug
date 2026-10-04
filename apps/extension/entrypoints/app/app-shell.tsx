@@ -1,9 +1,5 @@
 import { i18n } from '#i18n'
 import { Link, Outlet, useRouterState } from '@tanstack/react-router'
-import { cn } from 'cn'
-import type { LucideIcon } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-
 import {
   Sidebar,
   SidebarContent,
@@ -18,7 +14,11 @@ import {
   SidebarRail,
   SidebarTrigger,
   useSidebar,
-} from '@/components/ui/sidebar'
+} from '@workspace/ui/components/sidebar'
+import { cn } from 'cn'
+import type { LucideIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
 import { Wordmark } from '@/components/wordmark'
 import { APP_ROUTES } from '@/lib/app-url'
 import {

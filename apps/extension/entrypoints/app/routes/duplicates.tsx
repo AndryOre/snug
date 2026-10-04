@@ -1,8 +1,4 @@
 import { i18n } from '#i18n'
-import { CopyCheckIcon, TriangleAlertIcon } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
-
-import { DuplicateGroupCard } from '@/components/duplicates/duplicate-group-card'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,8 +7,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
+} from '@workspace/ui/components/alert-dialog'
+import { Button } from '@workspace/ui/components/button'
 import {
   Empty,
   EmptyContent,
@@ -20,11 +16,20 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/components/ui/empty'
-import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Spinner } from '@/components/ui/spinner'
-import { toast } from '@/components/ui/toast'
+} from '@workspace/ui/components/empty'
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemTitle,
+} from '@workspace/ui/components/item'
+import { Skeleton } from '@workspace/ui/components/skeleton'
+import { Spinner } from '@workspace/ui/components/spinner'
+import { toast } from '@workspace/ui/components/toast'
+import { CopyCheckIcon, TriangleAlertIcon } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
+import { DuplicateGroupCard } from '@/components/duplicates/duplicate-group-card'
 import {
   deleteBookmarksById,
   getCopyIdsToDelete,

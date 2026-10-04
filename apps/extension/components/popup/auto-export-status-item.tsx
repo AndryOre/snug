@@ -1,19 +1,19 @@
 import { i18n } from '#i18n'
 import {
-  CalendarClockIcon,
-  ChevronRightIcon,
-  CircleAlertIcon,
-} from 'lucide-react'
-import { useEffect, useState } from 'react'
-
-import {
   Item,
   ItemActions,
   ItemContent,
   ItemDescription,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
+} from '@workspace/ui/components/item'
+import {
+  CalendarClockIcon,
+  ChevronRightIcon,
+  CircleAlertIcon,
+} from 'lucide-react'
+import { useEffect, useState } from 'react'
+
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { readAutoExportLastRun } from '@/lib/auto-export'
 import { resolvePopupStatus } from '@/lib/popup-status'

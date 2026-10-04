@@ -1,8 +1,6 @@
 import { i18n } from '#i18n'
 import { Link } from '@tanstack/react-router'
-import { BookmarkXIcon, SearchXIcon, TriangleAlertIcon } from 'lucide-react'
-
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@workspace/ui/components/button'
 import {
   Empty,
   EmptyContent,
@@ -10,10 +8,12 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/components/ui/empty'
-import { Skeleton } from '@/components/ui/skeleton'
+} from '@workspace/ui/components/empty'
+import { Skeleton } from '@workspace/ui/components/skeleton'
+import { cn } from '@workspace/ui/lib/utils'
+import { BookmarkXIcon, SearchXIcon, TriangleAlertIcon } from 'lucide-react'
+
 import { APP_ROUTES } from '@/lib/app-url'
-import { cn } from '@/lib/utils'
 
 interface SkeletonRowProperties {
   indentClassName: string

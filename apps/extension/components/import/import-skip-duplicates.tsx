@@ -1,12 +1,12 @@
 import { i18n } from '#i18n'
-
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldLabel,
-} from '@/components/ui/field'
-import { Switch } from '@/components/ui/switch'
+} from '@workspace/ui/components/field'
+import { Switch } from '@workspace/ui/components/switch'
+
 import { formatCount } from '@/lib/format-count'
 
 interface ImportSkipDuplicatesProperties {

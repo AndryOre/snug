@@ -38,3 +38,6 @@ video/public/music/
 *.njsproj
 *.sln
 *.sw?
+
+# turborepo
+.turbo

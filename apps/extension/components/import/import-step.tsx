@@ -1,8 +1,7 @@
 import { i18n } from '#i18n'
+import { Badge } from '@workspace/ui/components/badge'
 import { CheckIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
-
-import { Badge } from '@/components/ui/badge'
 
 interface ImportStepProperties {
   number: number

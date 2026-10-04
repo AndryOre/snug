@@ -1,9 +1,12 @@
 import { i18n } from '#i18n'
+import { Button } from '@workspace/ui/components/button'
+import { Spinner } from '@workspace/ui/components/spinner'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@workspace/ui/components/toggle-group'
 import { DownloadIcon } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { Spinner } from '@/components/ui/spinner'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import {
   EXPORT_FORMAT_INFO,
   EXPORT_FORMATS,

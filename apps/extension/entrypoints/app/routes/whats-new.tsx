@@ -1,14 +1,14 @@
 import { i18n } from '#i18n'
-
-import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
+import { Badge } from '@workspace/ui/components/badge'
+import { buttonVariants } from '@workspace/ui/components/button'
 import {
   Item,
   ItemActions,
   ItemContent,
   ItemDescription,
   ItemTitle,
-} from '@/components/ui/item'
+} from '@workspace/ui/components/item'
+
 import { CHROME_WEB_STORE_URL } from '@/lib/brand'
 import { formatChangelogDate, getChangelog } from '@/lib/changelog'
 import { isChangelogEntryCurrent } from '@/lib/version'

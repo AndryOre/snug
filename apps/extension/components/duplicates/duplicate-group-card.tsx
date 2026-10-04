@@ -1,15 +1,18 @@
 import { i18n } from '#i18n'
-import { useId } from 'react'
-
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@workspace/ui/components/badge'
 import {
   Card,
   CardAction,
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+} from '@workspace/ui/components/card'
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from '@workspace/ui/components/radio-group'
+import { useId } from 'react'
+
 import { getKeptCopyId } from '@/lib/duplicate-selection'
 import type { KeptCopyIds } from '@/lib/duplicate-selection'
 import type { DuplicateGroup } from '@/lib/duplicates'
