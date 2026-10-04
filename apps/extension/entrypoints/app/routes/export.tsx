@@ -1,5 +1,6 @@
 import { i18n } from '#i18n'
 import { useNavigate, useSearch } from '@tanstack/react-router'
+import { toast } from '@workspace/ui/components/toast'
 import { useEffect, useRef, useState } from 'react'
 
 import { ExportOptionsPanel } from '@/components/export-options-panel'
@@ -13,7 +14,6 @@ import {
   ExportTreeSkeleton,
 } from '@/components/export/export-tree-states'
 import { OperationProgressCard } from '@/components/operation-progress-card'
-import { toast } from '@/components/ui/toast'
 import { APP_ROUTES } from '@/lib/app-url'
 import { exportBookmarks } from '@/lib/export-all-bookmarks'
 import { ExportCanceledError } from '@/lib/export-control'

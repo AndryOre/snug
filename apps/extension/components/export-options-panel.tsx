@@ -1,11 +1,11 @@
 import { i18n } from '#i18n'
 import type { WxtStorageItem } from '#imports'
+import { Field, FieldGroup, FieldLabel } from '@workspace/ui/components/field'
+import { Input } from '@workspace/ui/components/input'
+import { Separator } from '@workspace/ui/components/separator'
+import { Switch } from '@workspace/ui/components/switch'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Switch } from '@/components/ui/switch'
 import { formatFilenameTemplate } from '@/lib/filename-template'
 import {
   exportFilenameTemplateStore,

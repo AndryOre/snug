@@ -1,7 +1,7 @@
 import { i18n } from '#i18n'
+import { Button } from '@workspace/ui/components/button'
 import { SettingsIcon } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 
 function openAppRoute(route: string): void {

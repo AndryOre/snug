@@ -1,7 +1,11 @@
 import { i18n } from '#i18n'
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '@workspace/ui/components/alert'
 import { TriangleAlertIcon } from 'lucide-react'
 
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { formatCount } from '@/lib/format-count'
 import type { ReplaceDiff } from '@/lib/replace-diff'
 

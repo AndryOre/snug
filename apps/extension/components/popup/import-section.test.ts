@@ -1,9 +1,9 @@
 // @vitest-environment jsdom
+import { toast } from '@workspace/ui/components/toast'
 import { act, createElement } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
-import { toast } from '@/components/ui/toast'
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { IMPORT_LOCK_NAME } from '@/lib/import-lock'
 import { POPUP_IMPORT_BOOKMARK_LIMIT } from '@/lib/popup-import-plan'
@@ -26,7 +26,7 @@ vi.mock('@/lib/run-import', async (importOriginal) => {
   return { ...original, runImport: vi.fn(original.runImport) }
 })
 
-vi.mock('@/components/ui/toast', () => ({ toast: { add: vi.fn() } }))
+vi.mock('@workspace/ui/components/toast', () => ({ toast: { add: vi.fn() } }))
 
 const runImportMock = vi.mocked(runImport)
 const toastAddMock = vi.mocked(toast.add)

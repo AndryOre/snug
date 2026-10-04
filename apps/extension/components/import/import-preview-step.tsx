@@ -1,7 +1,4 @@
 import { i18n } from '#i18n'
-import { BookmarkIcon, FolderIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
-
 import {
   Item,
   ItemActions,
@@ -9,7 +6,10 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-} from '@/components/ui/item'
+} from '@workspace/ui/components/item'
+import { BookmarkIcon, FolderIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+
 import { formatCount } from '@/lib/format-count'
 import type { ImportPreview } from '@/lib/types'
 

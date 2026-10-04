@@ -155,7 +155,7 @@ const eslintConfig = defineConfig([
       ],
       /**
        * `lib/utils.ts` is shadcn/ui's own generated convention
-       * (`components.json` `aliases.utils` -> `@/lib/utils`) — renaming it
+       * (`components.json` `aliases.utils` -> `@workspace/ui/lib/utils`) — renaming it
        * would fight every future `shadcn add`. `scripts/lint-docs.ts`
        * mirrors `.github/workflows/lint-docs.yml`'s name (and
        * andryore-dev's own `scripts/lint-docs.ts`) — renaming it would
@@ -193,11 +193,11 @@ const eslintConfig = defineConfig([
   },
   {
     /**
-     * `components/ui/**` is the shadcn/ui registry code itself — generated
+     * `packages/ui/**` is the shadcn/ui registry code itself — generated
      * layer, exempt from these three rules for the same reasons as
      * andryore-dev's eslint.config.mjs.
      */
-    files: ['**/components/ui/**'],
+    files: ['packages/ui/**'],
     rules: {
       'shadcn/no-restyle': 'off',
       'shadcn/no-arbitrary-values': 'off',
@@ -206,7 +206,7 @@ const eslintConfig = defineConfig([
   },
   {
     files: ['**/*.tsx'],
-    ignores: ['**/components/ui/**'],
+    ignores: ['packages/ui/**'],
     rules: {
       'react/jsx-no-literals': [
         'error',
@@ -244,11 +244,11 @@ const eslintConfig = defineConfig([
      * `jsdoc/informative-docs`, and `@eslint-community/eslint-comments`'s
      * recommended rules plus `require-description`) — banning non-doc
      * comments and uninformative or undescribed directive comments.
-     * `components/ui/**` is permanently exempt (shadcn-generated,
+     * `packages/ui/**` is permanently exempt (shadcn-generated,
      * untouched).
      */
     files: ['**/*.{ts,tsx,mjs}'],
-    ignores: ['**/components/ui/**'],
+    ignores: ['packages/ui/**'],
     plugins: {
       jsdoc: jsdoc.configs['flat/recommended-typescript-error'].plugins.jsdoc,
       local: localPlugin,

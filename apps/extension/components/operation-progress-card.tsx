@@ -1,6 +1,5 @@
 import { i18n } from '#i18n'
-
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import {
   Card,
   CardContent,
@@ -8,9 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Spinner } from '@/components/ui/spinner'
+} from '@workspace/ui/components/card'
+import { Progress } from '@workspace/ui/components/progress'
+import { Spinner } from '@workspace/ui/components/spinner'
+
 import { formatCount } from '@/lib/format-count'
 import type { OperationProgressState } from '@/lib/use-operation-progress'
 
