@@ -4,6 +4,11 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.1] - 2026-10-04
+
+- Rewrote the store descriptions in all 10 languages to read as plain sentences.
+  No functional changes since 2.0.0, which was never published.
+
 ## [2.0.0] - 2026-10-02
 
 - The extension is now called **Snug**, with a new name and icon. Same
