@@ -66,19 +66,19 @@ manifest-only name key described in the checklist:
 Snug: Bookmark Export, Import & Backup
 ```
 
-Summary, from `locales/en.json` `extensionDescription` (128 chars, limit 132):
+Summary, from `locales/en.json` `extensionDescription` (122 chars, limit 132):
 
 ```text
-Export bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL, import from Chrome or Safari, and back up on a schedule. All local.
+Export, import and back up your bookmarks in common formats, from Chrome or Safari, on a schedule. Everything stays local.
 ```
 
 Detailed description, from the English listing (copy.md section 1 holds the
-original short form; 1330 chars):
+original short form; 1333 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
 
-Export your whole bookmark tree or just the folder you choose, as HTML, JSON, CSV, Markdown, OPML, or XBEL. Import from HTML, JSON, CSV, XBEL, a Chrome profile Bookmarks file, or Safari bookmarks, with a preview first. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
+Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers, a Chrome profile Bookmarks file, or Safari bookmarks, with a preview first. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
 
 Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
@@ -101,21 +101,21 @@ Title, proposed with descriptor (44 chars, limit 75):
 Snug: exporta, importa y respalda marcadores
 ```
 
-Summary, from `locales/es.json` `extensionDescription` (123 chars, limit 132):
+Summary, from `locales/es.json` `extensionDescription` (111 chars, limit 132):
 
 ```text
-Exporta marcadores a HTML, JSON, CSV, Markdown, OPML o XBEL, importa de Chrome o Safari y respalda con horario. Todo local.
+Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local.
 ```
 
 The locale file is the source of truth for the Spanish summary. The earlier
 134-character `copy.md` variant was over the limit and is retired.
 
-Detailed description (1501 chars):
+Detailed description (1509 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.
 
-Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en HTML, JSON, CSV, Markdown, OPML o XBEL. Importa desde HTML, JSON, CSV, XBEL, el archivo Bookmarks de un perfil de Chrome o marcadores de Safari, con una vista previa primero. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
+Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos comunes como HTML o JSON. Importa archivos de otros gestores de marcadores, el archivo Bookmarks de un perfil de Chrome o marcadores de Safari, con una vista previa primero. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
 
 Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
 

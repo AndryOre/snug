@@ -6,13 +6,13 @@ Snug：书签导出、导入与备份
 
 ## Summary
 
-将书签导出为 HTML、JSON、CSV、Markdown、OPML 或 XBEL，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。
+以常见格式导出书签，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。
 
 ## Detailed description
 
 Snug 在浏览器之间原样迁移你的书签：不会向任何地方发送数据，也无需账号。
 
-可导出整个书签树或你选择的文件夹，格式包括 HTML、JSON、CSV、Markdown、OPML 和 XBEL。可从 HTML、JSON、CSV、XBEL、Chrome 配置文件的 Bookmarks 文件或 Safari 书签导入，并先提供预览。然后由你决定：与现有书签合并、完全替换，或全部放进一个新文件夹。每次都由你决定。
+可导出整个书签树或你选择的文件夹，支持 HTML 或 JSON 等常见格式。可导入其他书签管理工具的文件、Chrome 配置文件的 Bookmarks 文件或 Safari 书签，并先提供预览。然后由你决定：与现有书签合并、完全替换，或全部放进一个新文件夹。每次都由你决定。
 
 每次替换之前，Snug 都会先保存书签的安全快照，方便你撤销。“重复项”页面可查找重复书签，并只删除你选中的；导入时也可以跳过重复项。
 

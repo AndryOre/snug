@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Export bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL, import from Chrome or Safari, and back up on a schedule. All local.",
+    "message": "Export, import and back up your bookmarks in common formats, from Chrome or Safari, on a schedule. Everything stays local.",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Exportez vos favoris en HTML, JSON, CSV, Markdown, OPML ou XBEL, importez depuis Chrome ou Safari, sauvegardez. Tout en local.",
+    "message": "Exportez, importez et sauvegardez vos favoris dans des formats courants, depuis Chrome ou Safari. Tout en local.",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {

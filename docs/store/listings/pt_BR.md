@@ -6,19 +6,19 @@ Snug — Backup e transferência de favoritos
 
 ## Summary
 
-Exporte favoritos em HTML, JSON, CSV, Markdown, OPML ou XBEL, importe do Chrome
-ou Safari e agende backups. Tudo local.
+Exporte, importe e faça backup dos favoritos em formatos comuns, do Chrome ou
+Safari. Tudo local.
 
 ## Detailed description
 
 O Snug leva seus favoritos entre navegadores, exatamente como você os deixou —
 nada é enviado a lugar nenhum e você não precisa de conta.
 
-Exporte toda a árvore de favoritos ou só a pasta que escolher, em HTML, JSON,
-CSV, Markdown, OPML ou XBEL. Importe de HTML, JSON, CSV, XBEL, do arquivo
-Bookmarks de um perfil do Chrome ou dos favoritos do Safari, com uma prévia
-primeiro. Depois decida: mesclar com os favoritos atuais, substituí-los por
-completo ou colocar tudo em uma pasta nova — a escolha é sempre sua.
+Exporte toda a árvore de favoritos ou só a pasta que escolher, em formatos
+comuns como HTML ou JSON. Importe arquivos de outros gerenciadores de favoritos,
+o arquivo Bookmarks de um perfil do Chrome ou os favoritos do Safari, com uma
+prévia primeiro. Depois decida: mesclar com os favoritos atuais, substituí-los
+por completo ou colocar tudo em uma pasta nova — a escolha é sempre sua.
 
 Antes de qualquer substituição, o Snug salva um instantâneo de segurança dos
 seus favoritos, para você poder desfazer. Uma página Duplicados encontra

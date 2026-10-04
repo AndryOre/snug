@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Lesezeichen als HTML, JSON, CSV, Markdown, OPML oder XBEL exportieren, aus Chrome oder Safari importieren, automatisch sichern.",
+    "message": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal.",
     "description": "Description of the extension"
   },
   "welcomeSubtitle": {
