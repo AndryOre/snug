@@ -21,8 +21,16 @@
 4. Run `bun run check` and `bun run test` to confirm the version bump, changelog
    entry, and locale keys are all consistent.
 
-5. Run `bun run zip` (the `zip` script, which runs `wxt zip`) to produce the
-   distributable extension archive for the new version.
+5. Run `bun run zip` (the root `zip` script, which runs `wxt zip` in
+   `apps/extension`) to produce the distributable extension archive and the
+   sources archive for the new version, both in `apps/extension/.output/`:
+   `snug-X.Y.Z-chrome.zip` and `snug-X.Y.Z-sources.zip`. The sources zip is
+   rooted at the repo root and limited to an allowlist (`package.json`,
+   `bun.lock`, `bunfig.toml`, `tsconfig.base.json`, `apps/extension/**`,
+   `packages/**`), set by `zip.includeSources` in
+   `apps/extension/wxt.config.ts`. A reviewer rebuilds it with
+   `bun install --frozen-lockfile && bun run build`. If a root file the build
+   needs is added later, add it to that allowlist.
 
 6. After the release PR merges, tag the merge commit with a **signed** tag and
    push it: `git tag -s vX.Y.Z <merge-commit-sha> && git push origin vX.Y.Z`.
