@@ -78,7 +78,9 @@ why.
 
 ## Local Development
 
-See [`docs/development.md`](docs/development.md) for the rest.
+Snug is a bun-workspaces monorepo: the extension lives in `apps/extension` and
+the shared UI in `packages/ui`. Run every script from the repo root. See
+[`docs/development.md`](docs/development.md) for the rest.
 
 ```bash
 git clone https://github.com/AndryOre/snug.git
@@ -90,7 +92,10 @@ bun run dev
 ## Contributors
 
 Contributions are welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup,
-branch naming, and commit/PR conventions.
+branch naming, and commit/PR conventions. Agent instructions live in
+[`AGENTS.md`](AGENTS.md) (repo-wide) plus one per workspace:
+[`apps/extension/AGENTS.md`](apps/extension/AGENTS.md) and
+[`packages/ui/AGENTS.md`](packages/ui/AGENTS.md).
 
 [![Contributors](https://contrib.rocks/image?repo=AndryOre/snug)](https://github.com/AndryOre/snug/graphs/contributors)
 

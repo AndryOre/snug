@@ -38,7 +38,7 @@
     assignees: ['AndryOre'],
   },
 
-  // Lockfile refresh — fixed in PR #38694; remaining bugs (#24459, #41593) are Bun workspace-only
+  // Lockfile refresh — covers the bun workspaces and the root catalog
   lockFileMaintenance: {
     enabled: true,
     schedule: ['before 12pm on monday'],
@@ -72,6 +72,13 @@
     {
       groupName: 'radix + lucide',
       matchPackageNames: ['radix-ui', 'lucide-react'],
+    },
+    // Shared versions live once in the root catalog (package.json workspaces.catalog),
+    // so a single update PR covers every workspace that references them
+    {
+      groupName: 'workspace catalog',
+      matchFileNames: ['package.json'],
+      matchDepNames: ['cn', '@types/bun'],
     },
     {
       groupName: 'tailwindcss',
