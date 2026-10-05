@@ -193,6 +193,11 @@
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
 }
 
+@utility journey-boundary {
+  border: 1.5px dashed var(--primary);
+  border-radius: 18px;
+}
+
 @utility defer-render-sm {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;

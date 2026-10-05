@@ -13,7 +13,15 @@
     "subheadline": "Snug는 Chrome과 다른 Chromium 기반 브라우저에서 북마크를 내보내고, 가져오고, 백업해요. 네트워크 호출을 하지 않고 계정도 필요 없어요.",
     "install": "Chrome에 추가",
     "note": "무료. 오픈 소스. Chrome, Edge, Brave, Opera에서 작동해요.",
-    "source": "GitHub에서 소스 코드 보기"
+    "source": "GitHub에서 소스 코드 보기",
+    "journey": {
+      "device": "내 기기",
+      "from": "내 브라우저",
+      "file": "파일 하나",
+      "to": "다른 브라우저",
+      "network": "네트워크 호출: 없음",
+      "description": "북마크는 여섯 가지 형식으로 제공되는 bookmarks.html 파일 하나로 브라우저에서 내보내져 다른 브라우저에서 열립니다. 모든 과정이 내 기기 안에서만 이루어집니다."
+    }
   },
   "trust": {
     "heading": "믿어야 할 서버가 없는 확장 프로그램",

@@ -13,7 +13,15 @@
     "subheadline": "Snug exports, imports and backs up your bookmarks in Chrome and other Chromium browsers. It makes no network calls and needs no account.",
     "install": "Add to Chrome",
     "note": "Free. Open source. Works in Chrome, Edge, Brave and Opera.",
-    "source": "See the source on GitHub"
+    "source": "See the source on GitHub",
+    "journey": {
+      "device": "Your device",
+      "from": "Your browser",
+      "file": "One file",
+      "to": "Another browser",
+      "network": "Network calls: none",
+      "description": "Your bookmarks leave your browser as one bookmarks.html file, available in six formats, and open in another browser. All of it stays on your device."
+    }
   },
   "trust": {
     "heading": "An extension that has no server to trust",

@@ -13,7 +13,15 @@
     "subheadline": "Snug esporta, importa e fa il backup dei tuoi segnalibri in Chrome e in altri browser Chromium. Non effettua chiamate di rete e non richiede alcun account.",
     "install": "Aggiungi a Chrome",
     "note": "Gratis. Open source. Funziona in Chrome, Edge, Brave e Opera.",
-    "source": "Vedi il codice sorgente su GitHub"
+    "source": "Vedi il codice sorgente su GitHub",
+    "journey": {
+      "device": "Il tuo dispositivo",
+      "from": "Il tuo browser",
+      "file": "Un file",
+      "to": "Un altro browser",
+      "network": "Chiamate di rete: nessuna",
+      "description": "I tuoi segnalibri lasciano il tuo browser come un unico file bookmarks.html, disponibile in sei formati, e si aprono in un altro browser. Tutto resta sul tuo dispositivo."
+    }
   },
   "trust": {
     "heading": "Un'estensione senza un server di cui fidarsi",

@@ -13,7 +13,15 @@
     "subheadline": "Snug exporte, importe et sauvegarde vos favoris dans Chrome et d'autres navigateurs Chromium. Il ne fait aucun appel réseau et n'exige aucun compte.",
     "install": "Ajouter à Chrome",
     "note": "Gratuit. Open source. Fonctionne dans Chrome, Edge, Brave et Opera.",
-    "source": "Voir le code source sur GitHub"
+    "source": "Voir le code source sur GitHub",
+    "journey": {
+      "device": "Votre appareil",
+      "from": "Votre navigateur",
+      "file": "Un fichier",
+      "to": "Un autre navigateur",
+      "network": "Appels réseau : aucun",
+      "description": "Vos favoris quittent votre navigateur sous la forme d'un seul fichier bookmarks.html, disponible en six formats, et s'ouvrent dans un autre navigateur. Tout reste sur votre appareil."
+    }
   },
   "trust": {
     "heading": "Une extension sans serveur à qui faire confiance",

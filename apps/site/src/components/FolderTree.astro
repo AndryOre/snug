@@ -1,0 +1,17 @@
+---
+import { Folder } from 'lucide-react'
+
+const FOLDERS = ['Research', 'Job search']
+---
+
+<ul class="flex flex-col gap-2" translate="no">
+  {FOLDERS.map((folder) => (
+    <li class="flex min-w-0 items-center gap-2 text-sm break-words">
+      <Folder
+        className="size-4 shrink-0 text-primary-text"
+        aria-hidden="true"
+      />
+      {folder}
+    </li>
+  ))}
+</ul>
