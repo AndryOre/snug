@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, stat } from 'node:fs/promises'
+import { copyFile, mkdir, readdir, readFile, rm, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
@@ -6,12 +6,18 @@ import { chromium } from 'playwright'
 /**
  * Regenerates the derived raster assets of the Snug brand kit from the SVG
  * sources in `docs/brand/logo`: the extension icon (`apps/extension/assets/icon.png`), PNG
- * marks, the Chrome Web Store icon and tiles, OG images and the README banner (a copy of the store marquee), and the YouTube channel art
+ * marks, the Chrome Web Store icon and tiles, the per-locale OG images and the README banner (a copy of the store marquee), and the YouTube channel art
  * (`docs/brand/youtube/`: banner, avatar, watermark). Run with `bun run brand:export`.
  *
  * The YouTube files are checked against their exact pixel dimensions and byte
  * budgets, and the banner's text and lockup are checked to sit inside YouTube's
  * 1546x423 safe area; the script throws on any miss.
+ *
+ * The OG images (`apps/site/public/og/og-<locale>.png`, 1200x630, under 300 KB)
+ * are generated for every file in `apps/extension/locales`, using that locale's
+ * `extensionDescription` as the tagline. Cyrillic and CJK glyphs come from fonts
+ * installed on the host (Noto Sans, Liberation Sans, Noto Sans CJK, WenQuanYi);
+ * Latin text uses the embedded Geist.
  *
  * Icons are drawn at 75% of a transparent canvas: the SVG's fixed size is forced
  * to fill its container, sized so the painted bookmark spans 96 of 128 px.
@@ -31,6 +37,10 @@ const GROUND = '#17120A'
 const ICON_ART_RATIO = 0.75
 const MARK_ART_HEIGHT_RATIO = 70 / 84
 const OG_MAX_BYTES = 300 * 1024
+const OG_SIZE = { width: 1200, height: 630 }
+const OG_TAGLINE_FONT_SIZE = 34
+const NON_LATIN_FONT_FALLBACKS =
+  "'Noto Sans','Liberation Sans','Noto Sans CJK JP','Noto Sans CJK KR','Noto Sans CJK SC','Source Han Sans','WenQuanYi Zen Hei'"
 const MB = 1024 * 1024
 const YOUTUBE_SAFE_AREA = { width: 1546, height: 423 }
 const AVATAR_ART_DIAMETER_RATIO = 0.7
@@ -80,18 +90,18 @@ async function renderIcon(browser, size, outPath) {
 
 async function renderBanner(
   browser,
-  { width, height, outPath, lockupWidth, tagline },
+  { width, height, outPath, lockupWidth, tagline, taglineFontSize, language },
 ) {
   const page = await browser.newPage({ viewport: { width, height } })
   const taglineHtml = tagline
-    ? `<div style="font-family: Geist, system-ui, sans-serif; font-size: ${Math.round(height * 0.032)}px; color: #DCC8A6; max-width: ${Math.round(width * 0.72)}px; text-align: center; line-height: 1.5; margin-top: ${Math.round(height * 0.04)}px">${tagline}</div>`
+    ? `<div style="font-family: Geist, ${NON_LATIN_FONT_FALLBACKS}, system-ui, sans-serif; font-size: ${taglineFontSize ?? Math.round(height * 0.032)}px; color: #DCC8A6; max-width: ${Math.round(width * 0.72)}px; text-align: center; line-height: 1.5; margin-top: ${Math.round(height * 0.04)}px">${tagline}</div>`
     : ''
   await page.setContent(`
-    <style>${fontFaces}svg{display:block;width:100%;height:auto}</style>
+    <html lang="${language ?? 'en'}"><style>${fontFaces}svg{display:block;width:100%;height:auto}</style>
     <body style="margin:0;width:${width}px;height:${height}px;background:${auroraGlow};display:flex;align-items:center;justify-content:center;flex-direction:column;box-sizing:border-box">
       <div style="width:${lockupWidth}px">${lockupSvg}</div>
       ${taglineHtml}
-    </body>`)
+    </body></html>`)
   return finishPage(page, outPath)
 }
 
@@ -260,9 +270,46 @@ async function renderYoutubeWatermark(browser, outPath) {
   console.log(path.relative(repoRoot, outPath))
 }
 
-function assertOgSize(fileName, size) {
-  if (size > OG_MAX_BYTES) {
-    throw new Error(`${fileName} exceeds ${OG_MAX_BYTES} bytes`)
+function escapeHtml(text) {
+  return text
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+}
+
+async function readOgTaglines() {
+  const localesRoot = path.join(repoRoot, 'apps/extension/locales')
+  const entries = await readdir(localesRoot)
+  const fileNames = entries
+    .filter((name) => name.endsWith('.json'))
+    .toSorted((first, second) => first.localeCompare(second))
+  return Promise.all(
+    fileNames.map(async (fileName) => {
+      const raw = await readFile(path.join(localesRoot, fileName), 'utf8')
+      const messages = JSON.parse(raw)
+      return {
+        locale: path.basename(fileName, '.json'),
+        tagline: messages.extensionDescription.message,
+      }
+    }),
+  )
+}
+
+async function renderOgImages(browser) {
+  const ogRoot = path.join(repoRoot, 'apps/site/public/og')
+  await rm(ogRoot, { recursive: true, force: true })
+  const taglines = await readOgTaglines()
+  for (const { locale, tagline } of taglines) {
+    const outPath = path.join(ogRoot, `og-${locale}.png`)
+    await renderBanner(browser, {
+      ...OG_SIZE,
+      outPath,
+      lockupWidth: 360,
+      tagline: escapeHtml(tagline),
+      taglineFontSize: OG_TAGLINE_FONT_SIZE,
+      language: locale.replace('_', '-'),
+    })
+    await assertPngSpec(outPath, { ...OG_SIZE, maxBytes: OG_MAX_BYTES })
   }
 }
 
@@ -294,21 +341,7 @@ try {
   await mkdir(path.dirname(readmeBannerPath), { recursive: true })
   await copyFile(marqueePath, readmeBannerPath)
 
-  const ogTaglines = {
-    en: 'Export, import, and schedule automatic backups for your bookmarks &mdash; HTML, JSON, or CSV, all on your device, no account, no cloud.',
-    es: 'Programa respaldos autom&aacute;ticos de tus bookmarks, exporta e importa en HTML, JSON o CSV &mdash; todo en tu dispositivo, sin cuenta ni nube.',
-  }
-  for (const [language, tagline] of Object.entries(ogTaglines)) {
-    const fileName = `og-${language}.png`
-    const size = await renderBanner(browser, {
-      width: 1200,
-      height: 630,
-      outPath: path.join(brandRoot, 'og', fileName),
-      lockupWidth: 360,
-      tagline,
-    })
-    assertOgSize(fileName, size)
-  }
+  await renderOgImages(browser)
 
   const youtubeRoot = path.join(brandRoot, 'youtube')
   await renderYoutubeBanner(

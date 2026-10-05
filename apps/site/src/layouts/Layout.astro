@@ -1,23 +1,30 @@
 ---
 import '@workspace/ui/globals.css'
 
-import { getContent } from '../i18n/content'
+import { getPageMeta } from '../i18n/content'
 import {
   hreflangAlternates,
   languageTag,
   localePath,
+  ogImagePath,
   SITE_ORIGIN,
   type Locale,
 } from '../i18n/locales'
+import { buildSoftwareAppJsonLd } from '../seo/structured-data'
 
 interface Props {
   locale: Locale
+  notFound?: boolean
 }
 
-const { locale } = Astro.props
-const meta = getContent(locale).meta as Record<string, string>
+const { locale, notFound = false } = Astro.props
+const meta = getPageMeta(locale)
 const alternates = hreflangAlternates()
 const canonical = `${SITE_ORIGIN}${localePath(locale)}`
+const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
+const jsonLd = JSON.stringify(
+  buildSoftwareAppJsonLd(locale, meta.description),
+).replaceAll('<', '\\u003c')
 ---
 
 <html lang={languageTag(locale)} dir="ltr">
@@ -25,12 +32,31 @@ const canonical = `${SITE_ORIGIN}${localePath(locale)}`
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
-    <meta name="description" content={meta.description} />
-    <link rel="canonical" href={canonical} />
     {
-      alternates.map(({ hreflang, href }) => (
-        <link rel="alternate" hreflang={hreflang} href={href} />
-      ))
+      notFound ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <meta name="description" content={meta.description} />
+          <link rel="canonical" href={canonical} />
+          {alternates.map(({ hreflang, href }) => (
+            <link rel="alternate" hreflang={hreflang} href={href} />
+          ))}
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Snug" />
+          <meta property="og:title" content={meta.title} />
+          <meta property="og:description" content={meta.description} />
+          <meta property="og:url" content={canonical} />
+          <meta property="og:locale" content={locale} />
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:alt" content={meta.title} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={meta.title} />
+          <meta name="twitter:description" content={meta.description} />
+          <meta name="twitter:image" content={ogImage} />
+          <script type="application/ld+json" set:html={jsonLd} />
+        </>
+      )
     }
   </head>
   <body class="bg-background font-sans text-foreground">

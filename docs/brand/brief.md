@@ -255,12 +255,12 @@ zero visual change.
 Produces: `logo/png/mark-{16,32,48,128,512}.png` (flat gradient, transparent —
 the same files serve Chrome, Edge, and Firefox/AMO; none of the three needs a
 different design at these sizes), `store/small-tile-440x280.png` and
-`store/marquee-1400x560.png` (CWS listing), `og/og-{en,es}.png` (1200×630, real
-short-summary copy from `copy.md`, both under the 300 KB budget),
-`readme/cover-1280x640.png` (README banner, using `copy.md`'s README tagline).
-**Not generated**: CWS screenshots (1280×800) — those need the real running
-popup UI after the rebrand ships, not a brand-kit render; left for the `/forge`
-application pass.
+`store/marquee-1400x560.png` (CWS listing),
+`apps/site/public/og/og-<locale>.png` (1200×630, real short-summary copy from
+`copy.md`, both under the 300 KB budget), `readme/cover-1280x640.png` (README
+banner, using `copy.md`'s README tagline). **Not generated**: CWS screenshots
+(1280×800) — those need the real running popup UI after the rebrand ships, not a
+brand-kit render; left for the `/forge` application pass.
 
 - A name tied to "import/export" literally, or to "bookmarks" in a way that
   blocks the tool from ever covering more than bookmarks later.

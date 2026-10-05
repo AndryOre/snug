@@ -44,4 +44,5 @@ apps/video/public/music/
 
 # landing page (apps/site)
 apps/site/dist/
+apps/site/dist-test/
 apps/site/.astro/
