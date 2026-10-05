@@ -31,6 +31,7 @@
       "ignoreBinaries": ["remotion-studio"],
     },
     "apps/site": {
+      "entry": ["src/scripts/render-security-headers.ts"],
       "ignoreDependencies": ["lighthouse"],
     },
     "packages/ui": {

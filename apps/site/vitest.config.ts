@@ -7,7 +7,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'lcov'],
       include: ['src/**/*.ts'],
-      exclude: ['src/**/*.test.ts'],
+      exclude: ['src/**/*.test.ts', 'src/scripts/render-security-headers.ts'],
       thresholds: { lines: 80, statements: 80, branches: 50, functions: 80 },
     },
   },

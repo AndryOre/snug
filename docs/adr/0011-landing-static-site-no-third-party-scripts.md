@@ -46,3 +46,11 @@ which install buttons work.
 - The access log must be kept short-lived and written to a place Coolify
   retains.
 - Adding any script later means revisiting this decision and the privacy page.
+- The Content-Security-Policy allows scripts by hash, not `'unsafe-inline'`.
+  Astro's CSP support hashes the island bootstrap and every inline script at
+  build time, and the container build copies those hashes into the nginx
+  `script-src`, so a build change cannot silently break scripts. The no
+  third-party rule is unchanged: `script-src` stays `'self'` plus hashes, and
+  YouTube is reachable only through `frame-src`, after the video click.
+  `style-src` keeps `'unsafe-inline'` because the islands render inline `style`
+  attributes that a hash cannot allow.

@@ -51,6 +51,9 @@ if sed 's#frame-src https://www\.youtube-nocookie\.com\(;\|$\)#frame-src\1#' <<<
   fail "CSP names a third-party origin"
 fi
 grep -q 'frame-src https://www.youtube-nocookie.com' <<<"$csp" || fail "CSP lacks the YouTube frame-src"
+script_src="$(tr ';' '\n' <<<"$csp" | grep -E '^ ?script-src ')"
+case "$script_src" in *"'unsafe-inline'"*) fail "script-src allows unsafe-inline" ;; esac
+grep -q "'sha256-" <<<"$script_src" || fail "script-src has no hashes"
 for header in cross-origin-opener-policy cross-origin-resource-policy strict-transport-security; do
   grep -qi "^$header:" <<<"$headers" || fail "missing $header"
 done

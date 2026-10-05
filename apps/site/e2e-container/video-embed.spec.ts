@@ -23,7 +23,13 @@ test('the promo video iframe loads under the production CSP', async ({
     })
   })
 
-  await page.goto('/')
+  const youtubeRequests: string[] = []
+  page.on('request', (request) => {
+    if (request.url().includes('youtube')) youtubeRequests.push(request.url())
+  })
+
+  await page.goto('/', { waitUntil: 'networkidle' })
+  expect(youtubeRequests).toEqual([])
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
   await expect(
@@ -44,6 +50,8 @@ test('the promo video iframe loads under the production CSP', async ({
       return content?.title()
     })
     .toBe('mock player')
+
+  expect(youtubeRequests.length).toBeGreaterThan(0)
 
   const violations = await page.evaluate(
     () => (globalThis as unknown as ViolationWindow).cspViolations,

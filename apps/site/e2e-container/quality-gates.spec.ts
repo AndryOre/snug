@@ -1,8 +1,10 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
+import { hydratedFaq } from '../e2e/faq-helpers'
 import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
 
 const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
@@ -144,5 +146,85 @@ for (const path of ['/', '/privacy/']) {
       .withTags(AXE_TAGS)
       .analyze()
     expect(violations).toEqual([])
+  })
+}
+
+test('the served CSP allows scripts by hash only', async ({ request }) => {
+  for (const path of ['/', '/privacy/', '/nope/', '/de/nope/']) {
+    const response = await request.get(path)
+    const policy = response.headers()['content-security-policy'] ?? ''
+    const scriptSource = policy
+      .split(';')
+      .map((directive) => directive.trim())
+      .find((directive) => directive.startsWith('script-src '))
+    expect(scriptSource, path).toMatch(/'sha256-[^']+'/)
+    expect(scriptSource, path).not.toContain("'unsafe-inline'")
+  }
+})
+
+const EXECUTABLE_INLINE_SCRIPT =
+  /<script(?![^>]*\bsrc=)(?![^>]*\btype="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g
+
+test('every inline script in the built page is hash-allowed by the header', async ({
+  request,
+}) => {
+  const response = await request.get('/')
+  const policy = response.headers()['content-security-policy'] ?? ''
+  const html = await response.text()
+  const hashes = html
+    .matchAll(EXECUTABLE_INLINE_SCRIPT)
+    .map((match) => {
+      const digest = createHash('sha256')
+        .update(match[1] ?? '')
+        .digest('base64')
+      return `'sha256-${digest}'`
+    })
+    .toArray()
+  expect(hashes.length).toBeGreaterThan(0)
+  for (const hash of hashes) expect(policy).toContain(hash)
+})
+
+const CSP_PAGES = [
+  ...LOCALE_PATHS.map((path) => ({ path, interactive: true })),
+  { path: '/privacy/', interactive: false },
+  { path: '/nope/', interactive: false },
+]
+
+for (const { path, interactive } of CSP_PAGES) {
+  test(`${path} raises no CSP violation`, async ({ page }) => {
+    const problems: string[] = []
+    page.on('console', (message) => {
+      if (
+        (message.type() === 'error' &&
+          !message.text().includes('status of 404')) ||
+        /content security/i.test(message.text())
+      )
+        problems.push(`console: ${message.text()}`)
+    })
+    page.on('pageerror', (error) => {
+      problems.push(`pageerror: ${error.message}`)
+    })
+    await page.addInitScript(() => {
+      document.addEventListener('securitypolicyviolation', (event) => {
+        console.error(
+          `securitypolicyviolation ${event.violatedDirective} ${event.blockedURI}`,
+        )
+      })
+    })
+
+    await page.goto(path, { waitUntil: 'networkidle' })
+    if (interactive) {
+      const faq = await hydratedFaq(page)
+      const trigger = faq.getByRole('button').first()
+      await trigger.click()
+      await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      await expect(
+        page.locator('astro-island:has([data-language-switcher])'),
+      ).not.toHaveAttribute('ssr', '')
+      await page.locator('[data-language-switcher]').getByRole('button').click()
+      await expect(page.locator('[data-language-menu]')).toBeVisible()
+    }
+    await page.waitForTimeout(250)
+    expect(problems).toEqual([])
   })
 }
