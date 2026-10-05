@@ -46,6 +46,8 @@ which install buttons work.
 - The access log must be kept short-lived and written to a place Coolify
   retains.
 - Adding any script later means revisiting this decision and the privacy page.
+  The theme script and the `localStorage` preference it reads were added this
+  way, in [ADR 0014](0014-landing-theme-follows-system-with-stored-override.md).
 - The Content-Security-Policy allows scripts by hash, not `'unsafe-inline'`.
   Astro's CSP support hashes the island bootstrap and every inline script at
   build time, and the container build copies those hashes into the nginx

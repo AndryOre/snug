@@ -75,8 +75,9 @@ illustration; labelled folders (Research, Job search) are illustrative.
 
 ## Decisions a builder must not invent
 
-- Dark is the default. Whether the page also follows the visitor's light theme
-  is open; the tokens already carry a light palette.
+- The page follows the visitor's system theme and offers a System, Light, Dark
+  menu (ADR 0014). Both themes use the shared tokens; the brand stays dark-first
+  and the promo video poster stays dark.
 - Section order, copy and the Network calls line are fixed; do not add claims
   about sync, cloud, accounts, pricing or importing several files.
 - Video section ships only when a video exists (content.md section 5).

@@ -20,7 +20,11 @@ anchor-positioning CSS with a fallback that misaligns between 1240 and 1352px.
   `client:visible` and the language menu with `client:idle`; `client:load` is
   never used.
 - Every FAQ answer stays in the server-rendered HTML (panels are kept in the
-  DOM, collapsed), so crawlers and the FAQPage structured data still see them.
+  DOM, collapsed), so crawlers still see them. No FAQPage structured data is
+  emitted: Google no longer shows FAQ rich results.
+- The header island also holds the theme menu
+  ([ADR 0014](0014-landing-theme-follows-system-with-stored-override.md)), so
+  the header still hydrates once, with `client:idle`.
 - The footer lists every locale as plain links, so changing language works
   without JavaScript.
 - The promo video island keeps its own `client:visible` behavior and still
