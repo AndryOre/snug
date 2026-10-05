@@ -1,17 +1,11 @@
 import { expect, test } from '@playwright/test'
 
-const ROUTES = [
-  { path: '/', lang: 'en' },
-  { path: '/es/', lang: 'es' },
-  { path: '/de/', lang: 'de' },
-  { path: '/fr/', lang: 'fr' },
-  { path: '/it/', lang: 'it' },
-  { path: '/ja/', lang: 'ja' },
-  { path: '/ko/', lang: 'ko' },
-  { path: '/pt-br/', lang: 'pt-BR' },
-  { path: '/ru/', lang: 'ru' },
-  { path: '/zh-cn/', lang: 'zh-CN' },
-]
+import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
+
+const ROUTES = LOCALES.map((locale) => ({
+  path: localePath(locale),
+  lang: languageTag(locale),
+}))
 
 const EXPECTED_HREFLANGS = [...ROUTES.map((route) => route.lang), 'x-default']
 
