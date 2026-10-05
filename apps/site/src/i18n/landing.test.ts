@@ -1,11 +1,15 @@
 import { describe, expect, it } from 'vitest'
 
+import { STORE_FACTS } from '../seo/store-facts'
 import {
   FEATURE_KEYS,
+  FOOTER_LINK_HREFS,
+  getClosingCopy,
   getLandingCopy,
   installHref,
   PROMO_VIDEO_IDS,
   SHOT_KEYS,
+  TRUST_LINK_HREFS,
   youtubeEmbedUrl,
   youtubeWatchUrl,
 } from './landing'
@@ -49,5 +53,37 @@ describe('landing copy', () => {
     expect(youtubeEmbedUrl('abc')).toContain(
       'https://www.youtube-nocookie.com/embed/abc?autoplay=1',
     )
+  })
+
+  it('has distinct image descriptions for every screenshot', () => {
+    for (const locale of LOCALES) {
+      const { interface: shots } = getLandingCopy(locale)
+      for (const key of SHOT_KEYS) {
+        expect(shots.alts[key].length).toBeGreaterThan(0)
+        expect(shots.alts[key]).not.toBe(shots.shots[key])
+      }
+    }
+  })
+
+  it('has header, footer navigation and not-found copy in every locale', () => {
+    for (const locale of LOCALES) {
+      const { header, notFound, footer } = getClosingCopy(locale)
+      expect(header.languageLabel.length).toBeGreaterThan(0)
+      expect(header.skipLink.length).toBeGreaterThan(0)
+      expect(header.homeLabel.length).toBeGreaterThan(0)
+      expect(footer.navLabel.length).toBeGreaterThan(0)
+      expect(notFound.title.length).toBeGreaterThan(0)
+      expect(notFound.body.length).toBeGreaterThan(0)
+      expect(notFound.backLink.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('links the privacy page with a trailing slash everywhere', () => {
+    expect(TRUST_LINK_HREFS.privacy).toBe('/privacy/')
+    expect(FOOTER_LINK_HREFS.privacy).toBe('/privacy/')
+  })
+
+  it('shares one source url between the trust links and the store facts', () => {
+    expect(STORE_FACTS.sourceUrl).toBe(TRUST_LINK_HREFS.source)
   })
 })

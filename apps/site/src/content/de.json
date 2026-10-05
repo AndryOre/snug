@@ -74,6 +74,12 @@
       "import": "Importvorschau: sehen, was sich ändert, dann Zusammenführen, Ersetzen oder neuer Ordner wählen.",
       "autoExport": "Auto-Export: täglich, in HTML, JSON und Markdown, mit dem nächsten Lauf.",
       "popup": "Das Popup in der Symbolleiste exportiert alles mit einem Klick."
+    },
+    "alts": {
+      "export": "Exportseite von Snug: ein Ordnerbaum der Lesezeichen, eine Formatauswahl und die Schaltfläche Exportieren",
+      "import": "Importvorschau von Snug: eine Liste von Lesezeichen zum Hinzufügen, Ändern oder Überspringen, mit den Optionen Zusammenführen, Ersetzen und Neu",
+      "autoExport": "Einstellungen für den automatischen Export in Snug: ein täglicher Zeitplan, drei Formate und der Zeitpunkt des nächsten Laufs",
+      "popup": "Snug-Popup in der Symbolleiste mit einer einzigen Schaltfläche zum Exportieren aller Lesezeichen"
     }
   },
   "video": {
@@ -148,6 +154,17 @@
     "privacy": "Datenschutzerklärung",
     "listing": "Eintrag im Chrome Web Store",
     "changelog": "Änderungsprotokoll",
-    "note": "Snug ist Open Source unter der MIT-Lizenz."
+    "note": "Snug ist Open Source unter der MIT-Lizenz.",
+    "navLabel": "Fußbereich"
+  },
+  "header": {
+    "languageLabel": "Sprache",
+    "skipLink": "Zum Inhalt springen",
+    "homeLabel": "Snug-Startseite"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "body": "Diese Adresse führt ins Leere. Vielleicht hat sich ein Tippfehler eingeschlichen, oder die Seite wurde verschoben.",
+    "backLink": "Zurück zu Snug"
   }
 }

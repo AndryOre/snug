@@ -13,11 +13,11 @@
   "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
-    "components": "@/components",
+    "components": "@workspace/ui/components",
     "utils": "@workspace/ui/lib/utils",
     "ui": "@workspace/ui/components",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "lib": "@workspace/ui/lib",
+    "hooks": "@workspace/ui/hooks"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

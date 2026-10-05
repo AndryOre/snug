@@ -74,6 +74,12 @@
       "import": "Vista previa de importación: mira qué cambia y elige combinar, reemplazar o carpeta nueva.",
       "autoExport": "Exportación automática: a diario, en HTML, JSON y Markdown, con la próxima ejecución a la vista.",
       "popup": "La ventana de la barra de herramientas exporta todo con un clic."
+    },
+    "alts": {
+      "export": "Página de exportación de Snug: un árbol de carpetas de marcadores, un selector de formato y el botón Exportar",
+      "import": "Vista previa de importación de Snug: una lista de marcadores por añadir, cambiar u omitir, con las opciones combinar, reemplazar y nuevo",
+      "autoExport": "Ajustes de exportación automática de Snug: una programación diaria, tres formatos y la hora de la próxima ejecución",
+      "popup": "Ventana emergente de Snug en la barra de herramientas con un solo botón para exportar todos los marcadores"
     }
   },
   "video": {
@@ -148,6 +154,17 @@
     "privacy": "Política de privacidad",
     "listing": "Listado en la Chrome Web Store",
     "changelog": "Registro de cambios",
-    "note": "Snug es de código abierto con licencia MIT."
+    "note": "Snug es de código abierto con licencia MIT.",
+    "navLabel": "Pie de página"
+  },
+  "header": {
+    "languageLabel": "Idioma",
+    "skipLink": "Saltar al contenido",
+    "homeLabel": "Inicio de Snug"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "Esta dirección no lleva a ningún sitio. Puede que esté mal escrita o que la página se haya movido.",
+    "backLink": "Volver a Snug"
   }
 }

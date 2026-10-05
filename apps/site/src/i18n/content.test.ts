@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { assertSameKeys, flattenKeys, loadAllContent } from './content'
+import {
+  assertSameKeys,
+  flattenKeys,
+  getContent,
+  loadAllContent,
+} from './content'
 import { LOCALES } from './locales'
 
 describe('content', () => {
@@ -30,5 +35,10 @@ describe('content', () => {
     expect(
       Object.keys(loadAllContent()).toSorted((a, b) => a.localeCompare(b)),
     ).toEqual(LOCALES.toSorted((a, b) => a.localeCompare(b)))
+  })
+
+  it('memoizes the bundled content', () => {
+    expect(loadAllContent()).toBe(loadAllContent())
+    expect(getContent('en')).toBe(getContent('en'))
   })
 })

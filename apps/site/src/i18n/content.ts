@@ -1,8 +1,14 @@
+import type enContent from '../content/en.json'
 import { DEFAULT_LOCALE, type Locale, LOCALES } from './locales'
 
 export type ContentTree = { [key: string]: string | ContentTree }
 
-type ContentFiles = Record<string, { default: ContentTree }>
+/**
+ * Shape of every locale's content, taken from the English source file.
+ */
+export type SiteContent = typeof enContent
+
+type ContentFiles = Record<string, { default: SiteContent }>
 
 /**
  * Flattens a nested content tree to sorted dotted key paths.
@@ -42,26 +48,24 @@ export function assertSameKeys(
   )
 }
 
-const bundledFiles: ContentFiles = import.meta.glob('../content/*.json', {
-  eager: true,
-})
+const bundledFiles = import.meta.glob<{ default: SiteContent }>(
+  '../content/*.json',
+  { eager: true },
+)
 
-/**
- * Loads and validates the content of every locale. Throws if a locale file is
- * absent or its keys diverge from English.
- * @param files - Content modules keyed by `../content/<locale>.json`.
- * @returns Validated content for every locale.
- */
-export function loadAllContent(
-  files: ContentFiles = bundledFiles,
-): Record<Locale, ContentTree> {
+const validatedByFiles = new WeakMap<
+  ContentFiles,
+  Record<Locale, SiteContent>
+>()
+
+function readAllContent(files: ContentFiles): Record<Locale, SiteContent> {
   const byLocale = Object.fromEntries(
     LOCALES.map((locale) => {
       const file = files[`../content/${locale}.json`]
       if (!file) throw new Error(`Missing content file for "${locale}"`)
       return [locale, file.default]
     }),
-  ) as Record<Locale, ContentTree>
+  ) as Record<Locale, SiteContent>
   const reference = byLocale[DEFAULT_LOCALE]
   for (const locale of LOCALES) {
     assertSameKeys(reference, locale, byLocale[locale])
@@ -70,11 +74,28 @@ export function loadAllContent(
 }
 
 /**
+ * Loads and validates the content of every locale. Throws if a locale file is
+ * absent or its keys diverge from English. The bundled files are validated
+ * once per file set and reused.
+ * @param files - Content modules keyed by `../content/<locale>.json`.
+ * @returns Validated content for every locale.
+ */
+export function loadAllContent(
+  files: ContentFiles = bundledFiles,
+): Record<Locale, SiteContent> {
+  const cached = validatedByFiles.get(files)
+  if (cached) return cached
+  const content = readAllContent(files)
+  validatedByFiles.set(files, content)
+  return content
+}
+
+/**
  * Validated content for one locale.
  * @param locale - A supported locale code.
- * @returns The locale's content tree.
+ * @returns The locale's content.
  */
-export function getContent(locale: Locale): ContentTree {
+export function getContent(locale: Locale): SiteContent {
   return loadAllContent()[locale]
 }
 
@@ -83,19 +104,6 @@ export function getContent(locale: Locale): ContentTree {
  * @param locale - A supported locale code.
  * @returns The locale's `meta.title` and `meta.description`.
  */
-export function getPageMeta(locale: Locale): {
-  title: string
-  description: string
-} {
-  const meta = getContent(locale).meta
-  if (
-    typeof meta === 'string' ||
-    typeof meta?.title !== 'string' ||
-    typeof meta.description !== 'string'
-  ) {
-    throw new TypeError(
-      `Missing meta.title or meta.description for "${locale}"`,
-    )
-  }
-  return { title: meta.title, description: meta.description }
+export function getPageMeta(locale: Locale): SiteContent['meta'] {
+  return getContent(locale).meta
 }
