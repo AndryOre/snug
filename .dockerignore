@@ -1,0 +1,15 @@
+**/node_modules
+**/.astro
+**/dist
+**/.output
+**/.wxt
+.git
+.claude
+.forge
+.turbo
+.eslintcache
+coverage
+apps/video/out
+apps/extension
+apps/video
+docs
