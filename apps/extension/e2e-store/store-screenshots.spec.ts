@@ -7,11 +7,16 @@ import { expect, test } from '../e2e/fixtures'
 import type { SeedBookmark } from '../e2e/fixtures'
 import { STORE_CAPTIONS } from './captions'
 import { composeLocalSlide, composeUiSlide } from './compose-slide'
+import type { SlideTheme } from './compose-slide'
 
 const EXTENSION_ROOT = path.resolve(import.meta.dirname, '..')
+const THEME: SlideTheme =
+  process.env.STORE_SCREENSHOT_THEME === 'light' ? 'light' : 'dark'
 const SCREENSHOTS_ROOT = path.resolve(
   EXTENSION_ROOT,
-  '../../docs/store/assets/screenshots',
+  THEME === 'light'
+    ? '../site/src/assets/screenshots'
+    : '../../docs/store/assets/screenshots',
 )
 const DEFAULT_LOCALE = 'en'
 const SLIDE_FILES = [
@@ -95,7 +100,7 @@ async function captureRaw(
 }
 
 test.use({
-  colorScheme: 'dark',
+  colorScheme: THEME,
   deviceScaleFactor: DEVICE_SCALE_FACTOR,
   viewport: APP_CAPTURE,
 })
@@ -124,9 +129,12 @@ test('composes the five store screenshots', async ({
     if (!entry) throw new Error(`Missing ${key} in locales/${locale}.json`)
     return entry.message
   }
-  const localeDirectory = path.join(SCREENSHOTS_ROOT, locale)
+  const localeDirectory =
+    THEME === 'light'
+      ? path.join(SCREENSHOTS_ROOT, locale, 'light')
+      : path.join(SCREENSHOTS_ROOT, locale)
   await mkdir(localeDirectory, { recursive: true })
-  if (locale === DEFAULT_LOCALE)
+  if (THEME === 'dark' && locale === DEFAULT_LOCALE)
     await mkdir(SCREENSHOTS_ROOT, { recursive: true })
   const composerBrowser = await chromium.launch({ channel: 'chromium' })
   const composer = await composerBrowser.newPage({
@@ -136,7 +144,7 @@ test('composes the five store screenshots', async ({
   const outputPath = (fileName: string): string =>
     path.join(localeDirectory, fileName)
 
-  await seedStorage({ theme: 'dark' })
+  await seedStorage({ theme: THEME })
   await seedBookmarks(SEED_BOOKMARKS)
 
   const exportPage = await openExtensionPage('app.html#/export')
@@ -153,7 +161,9 @@ test('composes the five store screenshots', async ({
     .getByRole('treeitem', { name: 'Development', exact: true })
     .focus()
   await exportPage.keyboard.press('Space')
-  await expect(exportPage.locator('html.dark')).toHaveCount(1)
+  await expect(exportPage.locator('html.dark')).toHaveCount(
+    THEME === 'dark' ? 1 : 0,
+  )
   const exportShot = await captureRaw(exportPage, 'body', '01-export.png')
   await composeUiSlide(
     composer,
@@ -162,6 +172,7 @@ test('composes the five store screenshots', async ({
       screenshot: exportShot,
       cardWidth: CARD_WIDTH,
       cardTop: CARD_TOP,
+      theme: THEME,
     },
     outputPath('01-export.png'),
   )
@@ -188,6 +199,7 @@ test('composes the five store screenshots', async ({
       screenshot: importShot,
       cardWidth: CARD_WIDTH,
       cardTop: CARD_TOP,
+      theme: THEME,
     },
     outputPath('02-import.png'),
   )
@@ -233,6 +245,7 @@ test('composes the five store screenshots', async ({
       screenshot: autoExportShot,
       cardWidth: CARD_WIDTH,
       cardTop: CARD_TOP,
+      theme: THEME,
     },
     outputPath('03-auto-export.png'),
   )
@@ -260,23 +273,25 @@ test('composes the five store screenshots', async ({
       cardWidth: Math.round((popupBox.width * POPUP_HEIGHT) / popupBox.height),
       cardTop: POPUP_CARD_TOP,
       cardHeight: POPUP_HEIGHT,
+      theme: THEME,
     },
     outputPath('04-popup.png'),
   )
 
-  await composeLocalSlide(
-    composer,
-    { headline: captions.local.headline },
-    [
-      { icon: 'account', text: captions.local.claims[0] },
-      { icon: 'upload', text: captions.local.claims[1] },
-      { icon: 'tracking', text: captions.local.claims[2] },
-      { icon: 'source', text: captions.local.claims[3] },
-    ],
-    outputPath('05-local.png'),
-  )
+  if (THEME === 'dark')
+    await composeLocalSlide(
+      composer,
+      { headline: captions.local.headline },
+      [
+        { icon: 'account', text: captions.local.claims[0] },
+        { icon: 'upload', text: captions.local.claims[1] },
+        { icon: 'tracking', text: captions.local.claims[2] },
+        { icon: 'source', text: captions.local.claims[3] },
+      ],
+      outputPath('05-local.png'),
+    )
   await composerBrowser.close()
-  if (locale === DEFAULT_LOCALE) {
+  if (THEME === 'dark' && locale === DEFAULT_LOCALE) {
     for (const fileName of SLIDE_FILES)
       await copyFile(
         path.join(localeDirectory, fileName),

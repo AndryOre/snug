@@ -14,8 +14,29 @@ const FONTS_DIRECTORY = path.resolve(
 const STORE_ICON_PATH = path.resolve(EXTENSION_ROOT, 'assets/icon.png')
 const AMBER = '#FFA230'
 
-const AURORA_GROUND =
-  'radial-gradient(60% 70% at 20% 30%, rgba(255,162,48,0.22), transparent 68%), radial-gradient(44% 54% at 100% 100%, rgba(255,162,48,0.14), transparent 70%), #17120A'
+const SLIDE_THEMES = {
+  dark: {
+    ground:
+      'radial-gradient(60% 70% at 20% 30%, rgba(255,162,48,0.22), transparent 68%), radial-gradient(44% 54% at 100% 100%, rgba(255,162,48,0.14), transparent 70%), #17120A',
+    headline: '#F3EBDE',
+    subtitle: '#DCC8A6',
+    cardBorder: 'rgba(243,235,222,0.12)',
+    cardShadow: '0 24px 64px rgb(0 0 0 / .45)',
+  },
+  light: {
+    ground:
+      'radial-gradient(60% 70% at 20% 30%, rgba(255,162,48,0.20), transparent 68%), radial-gradient(44% 54% at 100% 100%, rgba(255,162,48,0.12), transparent 70%), #FBF6EC',
+    headline: '#2A2013',
+    subtitle: '#6B5A3E',
+    cardBorder: 'rgba(42,32,19,0.14)',
+    cardShadow: '0 24px 64px rgb(60 40 10 / .18)',
+  },
+} as const
+
+/**
+ * The frame theme of a composed slide.
+ */
+export type SlideTheme = keyof typeof SLIDE_THEMES
 
 const FONT_FILES = [
   ['Geist', 'Geist-var.woff2', '400 700'],
@@ -35,6 +56,7 @@ export type UiSlide = SlideCaption & {
   cardWidth: number
   cardTop: number
   cardHeight?: number
+  theme?: SlideTheme
 }
 
 /**
@@ -85,17 +107,19 @@ async function renderDocument(
   page: Page,
   body: string,
   outputPath: string,
+  theme: SlideTheme = 'dark',
 ): Promise<void> {
+  const palette = SLIDE_THEMES[theme]
   const fontFaces = await buildFontFaces()
   await page.setViewportSize(CANVAS)
   await page.setContent(`<!doctype html><html><head><style>
     ${fontFaces}
     *{box-sizing:border-box}
     html,body{margin:0;width:${CANVAS.width}px;height:${CANVAS.height}px;overflow:hidden}
-    body{position:relative;background:${AURORA_GROUND};font-family:Geist,system-ui,sans-serif}
-    .headline{position:absolute;top:64px;left:0;right:0;margin:0;text-align:center;font:600 60px/66px 'Space Grotesk',sans-serif;color:#F3EBDE;white-space:nowrap}
-    .subtitle{position:absolute;top:146px;left:0;right:0;margin:0;text-align:center;font:400 26px/34px Geist,sans-serif;color:#DCC8A6}
-    .card{position:absolute;left:50%;transform:translateX(-50%);overflow:hidden;border-radius:16px;border:1px solid rgba(243,235,222,0.12);box-shadow:0 24px 64px rgb(0 0 0 / .45)}
+    body{position:relative;background:${palette.ground};font-family:Geist,system-ui,sans-serif}
+    .headline{position:absolute;top:64px;left:0;right:0;margin:0;text-align:center;font:600 60px/66px 'Space Grotesk',sans-serif;color:${palette.headline};white-space:nowrap}
+    .subtitle{position:absolute;top:146px;left:0;right:0;margin:0;text-align:center;font:400 26px/34px Geist,sans-serif;color:${palette.subtitle}}
+    .card{position:absolute;left:50%;transform:translateX(-50%);overflow:hidden;border-radius:16px;border:1px solid ${palette.cardBorder};box-shadow:${palette.cardShadow}}
     .card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
   </style></head><body>${body}</body></html>`)
   await page.evaluate('document.fonts.ready')
@@ -143,7 +167,7 @@ export async function composeUiSlide(
 ): Promise<void> {
   const height = slide.cardHeight ?? CANVAS.height - slide.cardTop + 2
   const body = `${captionHtml(slide)}<div class="card" style="top:${slide.cardTop}px;width:${slide.cardWidth}px;height:${height}px"><img src="${toDataUri(slide.screenshot)}" alt=""></div>`
-  await renderDocument(page, body, outputPath)
+  await renderDocument(page, body, outputPath, slide.theme)
 }
 
 /**
