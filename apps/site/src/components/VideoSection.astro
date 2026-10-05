@@ -4,6 +4,7 @@ import { getImage } from 'astro:assets'
 
 import { getLandingCopy, PROMO_VIDEO_IDS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
+import Section from './Section.astro'
 import VideoFacade from './VideoFacade'
 
 interface Props {
@@ -21,36 +22,24 @@ const poster = posters[`../assets/video-posters/${locale}.png`]!.default
 const posterImage = await getImage({ src: poster, width: 1280, format: 'webp' })
 ---
 
-<section
-  data-section="video"
-  aria-labelledby="video-heading"
+<Section
+  section="video"
+  heading={copy.heading}
+  lead={copy.caption}
   class="[contain-intrinsic-size:auto_900px] [content-visibility:auto]"
 >
-  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
-    <h2
-      id="video-heading"
-      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
-    >
-      {copy.heading}
-    </h2>
-    <p
-      class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
-    >
-      {copy.caption}
+  <div class="mt-10 max-w-4xl">
+    <VideoFacade
+      client:idle
+      videoId={PROMO_VIDEO_IDS[locale]}
+      title={copy.heading}
+      playLabel={copy.play}
+      posterSrc={posterImage.src}
+      posterWidth={poster.width}
+      posterHeight={poster.height}
+    />
+    <p class="mt-3 text-sm leading-[1.55] text-muted-foreground">
+      {copy.note}
     </p>
-    <div class="mt-10 max-w-4xl">
-      <VideoFacade
-        client:idle
-        videoId={PROMO_VIDEO_IDS[locale]}
-        title={copy.heading}
-        playLabel={copy.play}
-        posterSrc={posterImage.src}
-        posterWidth={poster.width}
-        posterHeight={poster.height}
-      />
-      <p class="mt-3 text-sm leading-[1.55] text-muted-foreground">
-        {copy.note}
-      </p>
-    </div>
   </div>
-</section>
+</Section>

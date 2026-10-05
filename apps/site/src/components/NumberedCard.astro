@@ -1,0 +1,23 @@
+---
+import Eyebrow from './Eyebrow.astro'
+import Panel from './Panel.astro'
+
+interface Props {
+  numeral: string
+  title: string
+  body: string
+}
+
+const { numeral, title, body } = Astro.props
+---
+
+<Panel>
+  <Eyebrow as="span" aria-hidden="true">{numeral}</Eyebrow>
+  <h3
+    class="mt-3 font-heading text-2xl leading-tight font-medium break-words hyphens-auto"
+  >
+    {title}
+  </h3>
+  <p class="mt-3 leading-[1.55] text-muted-foreground">{body}</p>
+  <slot />
+</Panel>
