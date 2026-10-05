@@ -5,9 +5,10 @@ import LanguageSwitcher from './LanguageSwitcher.astro'
 
 interface Props {
   locale: Locale
+  markCurrent?: boolean
 }
 
-const { locale } = Astro.props
+const { locale, markCurrent = true } = Astro.props
 const { header } = getClosingCopy(locale)
 ---
 
@@ -43,6 +44,6 @@ const { header } = getClosingCopy(locale)
       </svg>
       <span class="text-lg font-semibold tracking-tight">Snug</span>
     </a>
-    <LanguageSwitcher locale={locale} />
+    <LanguageSwitcher locale={locale} markCurrent={markCurrent} />
   </div>
 </header>

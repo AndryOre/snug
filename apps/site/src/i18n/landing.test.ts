@@ -44,6 +44,7 @@ describe('landing copy', () => {
       }
       expect(video.note.length).toBeGreaterThan(0)
       expect(video.play.length).toBeGreaterThan(0)
+      expect(video.labelSeparator.length).toBeGreaterThan(0)
       expect(PROMO_VIDEO_IDS[locale]).toMatch(/^[\w-]{11}$/)
     }
   })
@@ -69,6 +70,7 @@ describe('landing copy', () => {
     for (const locale of LOCALES) {
       const { header, notFound, footer } = getClosingCopy(locale)
       expect(header.languageLabel.length).toBeGreaterThan(0)
+      expect(header.languageSeparator.length).toBeGreaterThan(0)
       expect(header.skipLink.length).toBeGreaterThan(0)
       expect(header.homeLabel.length).toBeGreaterThan(0)
       expect(footer.navLabel.length).toBeGreaterThan(0)

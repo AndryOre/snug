@@ -1,0 +1,40 @@
+---
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+} from '@workspace/ui/components/empty'
+
+import { getClosingCopy } from '../i18n/landing'
+import { localePath, type Locale } from '../i18n/locales'
+import Layout from '../layouts/Layout.astro'
+import SectionHeading from './SectionHeading.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { notFound } = getClosingCopy(locale)
+const standalone = {
+  title: `${notFound.title} | Snug`,
+  description: notFound.body,
+  path: '/404/',
+}
+---
+
+<Layout locale={locale} notFound standalone={standalone}>
+  <main id="main" class="flex flex-1 px-4">
+    <Empty>
+      <EmptyHeader className="max-w-prose">
+        <SectionHeading as="h1">{notFound.title}</SectionHeading>
+        <EmptyDescription>{notFound.body}</EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <TextLink href={localePath(locale)}>{notFound.backLink}</TextLink>
+      </EmptyContent>
+    </Empty>
+  </main>
+</Layout>

@@ -8,6 +8,15 @@ import {
 } from './content'
 import { LOCALES } from './locales'
 
+function flattenValues(node: unknown, prefix = ''): [string, string][] {
+  if (typeof node === 'string') return [[prefix, node]]
+  const entries: [string, string][] = []
+  for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
+    entries.push(...flattenValues(value, prefix ? `${prefix}.${key}` : key))
+  }
+  return entries
+}
+
 describe('content', () => {
   it('flattens nested keys', () => {
     expect(flattenKeys({ b: 'x', a: { c: 'y' } })).toEqual(['a.c', 'b'])
@@ -40,5 +49,23 @@ describe('content', () => {
   it('memoizes the bundled content', () => {
     expect(loadAllContent()).toBe(loadAllContent())
     expect(getContent('en')).toBe(getContent('en'))
+  })
+
+  it('has no backtick in any content value of any locale', () => {
+    for (const locale of LOCALES) {
+      const offenders = flattenValues(getContent(locale))
+        .filter(([, value]) => value.includes('`'))
+        .map(([key]) => `${locale}:${key}`)
+      expect(offenders).toEqual([])
+    }
+  })
+
+  it('quotes the Bookmarks file name in the preview card and formats FAQ', () => {
+    const quoted = /[“«„「]\u{A0}?Bookmarks\u{A0}?[”»“」]/u
+    for (const locale of LOCALES) {
+      const content = getContent(locale)
+      expect(content.features.items.preview.body).toMatch(quoted)
+      expect(content.faq.items.formats.answer).toMatch(quoted)
+    }
   })
 })
