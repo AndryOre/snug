@@ -1,6 +1,8 @@
 ---
 import '@workspace/ui/globals.css'
 
+import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
+
 import { getPageMeta } from '../i18n/content'
 import {
   hreflangAlternates,
@@ -10,6 +12,7 @@ import {
   SITE_ORIGIN,
   type Locale,
 } from '../i18n/locales'
+import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import { buildSoftwareAppJsonLd } from '../seo/structured-data'
 
 interface Props {
@@ -35,6 +38,16 @@ const jsonLd = standalone
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#17120a" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={spaceGroteskLatin}
+      crossorigin
+    />
     {
       notFound ? (
         <meta name="robots" content="noindex" />
@@ -50,9 +63,15 @@ const jsonLd = standalone
           <meta property="og:title" content={meta.title} />
           <meta property="og:description" content={meta.description} />
           <meta property="og:url" content={canonical} />
-          <meta property="og:locale" content={locale} />
+          <meta property="og:locale" content={ogLocale(locale)} />
+          {ogLocaleAlternates(locale).map((code) => (
+            <meta property="og:locale:alternate" content={code} />
+          ))}
           <meta property="og:image" content={ogImage} />
-          <meta property="og:image:alt" content={meta.title} />
+          <meta property="og:image:width" content={String(OG_IMAGE.width)} />
+          <meta property="og:image:height" content={String(OG_IMAGE.height)} />
+          <meta property="og:image:type" content={OG_IMAGE.type} />
+          <meta property="og:image:alt" content={meta.description} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={meta.title} />
           <meta name="twitter:description" content={meta.description} />

@@ -1,0 +1,16 @@
+{
+  "name": "Snug",
+  "short_name": "Snug",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#17120a",
+  "theme_color": "#17120a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
