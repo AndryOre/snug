@@ -1,8 +1,7 @@
-import { build } from 'astro'
-import { existsSync, readFileSync, rmSync } from 'node:fs'
+import { expect, test } from '@playwright/test'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 import {
   hreflangAlternates,
@@ -10,11 +9,11 @@ import {
   LOCALES,
   ogImagePath,
   SITE_ORIGIN,
-} from '../i18n/locales'
-import { ogLocale, ogLocaleAlternates } from './open-graph'
+} from '../src/i18n/locales'
+import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
 
-const siteRoot = fileURLToPath(new URL('../..', import.meta.url))
-const builtSite = path.join(siteRoot, 'dist-test')
+const siteRoot = fileURLToPath(new URL('..', import.meta.url))
+const builtSite = path.join(siteRoot, 'dist')
 
 function readBuilt(relativePath: string): string {
   return readFileSync(path.join(builtSite, relativePath), 'utf8')
@@ -39,59 +38,57 @@ function jsonLd(html: string): Record<string, unknown> {
   return JSON.parse(match[1] ?? '') as Record<string, unknown>
 }
 
-beforeAll(async () => {
-  await build({ root: siteRoot, outDir: builtSite, logLevel: 'error' })
-}, 180_000)
+test.describe('built pages', () => {
+  for (const locale of LOCALES) {
+    test(`${locale} has metadata, social tags and JSON-LD`, () => {
+      const html = readBuilt(pageFile(locale))
+      const canonical = `${SITE_ORIGIN}${localePath(locale)}`
+      const image = `${SITE_ORIGIN}${ogImagePath(locale)}`
 
-afterAll(() => {
-  rmSync(builtSite, { recursive: true, force: true })
-})
+      expect(html).toMatch(/<title>.+<\/title>/)
+      expect(metaContent(html, 'name', 'description').length).toBeGreaterThan(
+        20,
+      )
+      expect(html).toContain(`<link rel="canonical" href="${canonical}"`)
+      expect(metaContent(html, 'property', 'og:image')).toBe(image)
+      const imageFile = path.join(builtSite, ogImagePath(locale))
+      expect(existsSync(imageFile)).toBe(true)
+      expect(metaContent(html, 'name', 'twitter:image')).toBe(image)
+      expect(metaContent(html, 'property', 'og:url')).toBe(canonical)
+      expect(metaContent(html, 'property', 'og:locale')).toBe(ogLocale(locale))
+      expect(html).toContain(
+        `<meta property="og:locale:alternate" content="${ogLocaleAlternates(locale)[0]}"`,
+      )
+      expect(html.match(/property="og:locale:alternate"/g)).toHaveLength(
+        LOCALES.length - 1,
+      )
+      expect(metaContent(html, 'property', 'og:image:width')).toBe('1200')
+      expect(metaContent(html, 'property', 'og:image:height')).toBe('630')
+      expect(metaContent(html, 'property', 'og:image:type')).toBe('image/png')
+      expect(
+        metaContent(html, 'property', 'og:image:alt').length,
+      ).toBeGreaterThan(20)
+      expect(html).toContain('<link rel="icon" href="/favicon.svg"')
+      expect(html).toContain(
+        '<link rel="manifest" href="/manifest.webmanifest"',
+      )
+      expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
+      expect(html).toMatch(
+        /<link rel="preload" as="font" type="font\/woff2" href="\/_astro\/space-grotesk-latin-wght-normal[^"]*\.woff2" crossorigin/,
+      )
 
-describe('built pages', () => {
-  it.each(LOCALES)('%s has metadata, social tags and JSON-LD', (locale) => {
-    const html = readBuilt(pageFile(locale))
-    const canonical = `${SITE_ORIGIN}${localePath(locale)}`
-    const image = `${SITE_ORIGIN}${ogImagePath(locale)}`
-
-    expect(html).toMatch(/<title>.+<\/title>/)
-    expect(metaContent(html, 'name', 'description').length).toBeGreaterThan(20)
-    expect(html).toContain(`<link rel="canonical" href="${canonical}"`)
-    expect(metaContent(html, 'property', 'og:image')).toBe(image)
-    const imageFile = path.join(builtSite, ogImagePath(locale))
-    expect(existsSync(imageFile)).toBe(true)
-    expect(metaContent(html, 'name', 'twitter:image')).toBe(image)
-    expect(metaContent(html, 'property', 'og:url')).toBe(canonical)
-    expect(metaContent(html, 'property', 'og:locale')).toBe(ogLocale(locale))
-    expect(html).toContain(
-      `<meta property="og:locale:alternate" content="${ogLocaleAlternates(locale)[0]}"`,
-    )
-    expect(html.match(/property="og:locale:alternate"/g)).toHaveLength(
-      LOCALES.length - 1,
-    )
-    expect(metaContent(html, 'property', 'og:image:width')).toBe('1200')
-    expect(metaContent(html, 'property', 'og:image:height')).toBe('630')
-    expect(metaContent(html, 'property', 'og:image:type')).toBe('image/png')
-    expect(
-      metaContent(html, 'property', 'og:image:alt').length,
-    ).toBeGreaterThan(20)
-    expect(html).toContain('<link rel="icon" href="/favicon.svg"')
-    expect(html).toContain('<link rel="manifest" href="/manifest.webmanifest"')
-    expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
-    expect(html).toMatch(
-      /<link rel="preload" as="font" type="font\/woff2" href="\/_astro\/space-grotesk-latin-wght-normal[^"]*\.woff2" crossorigin/,
-    )
-
-    const data = jsonLd(html)
-    expect(data['@type']).toBe('SoftwareApplication')
-    expect(data.url).toBe(canonical)
-    expect(data.isAccessibleForFree).toBe(true)
-    expect(data.aggregateRating).toMatchObject({
-      ratingValue: 4.8,
-      ratingCount: 20,
+      const data = jsonLd(html)
+      expect(data['@type']).toBe('SoftwareApplication')
+      expect(data.url).toBe(canonical)
+      expect(data.isAccessibleForFree).toBe(true)
+      expect(data.aggregateRating).toMatchObject({
+        ratingValue: 4.8,
+        ratingCount: 20,
+      })
     })
-  })
+  }
 
-  it('gives every page a unique title, description and canonical', () => {
+  test('gives every page a unique title, description and canonical', () => {
     const pages = LOCALES.map((locale) => readBuilt(pageFile(locale)))
     const titles = pages.map((html) => /<title>(.+)<\/title>/.exec(html)?.[1])
     const descriptions = pages.map((html) =>
@@ -102,8 +99,8 @@ describe('built pages', () => {
   })
 })
 
-describe('root files', () => {
-  it('lists every locale with alternates in the sitemap', () => {
+test.describe('root files', () => {
+  test('lists every locale with alternates in the sitemap', () => {
     const sitemap = readBuilt('sitemap.xml')
     for (const locale of LOCALES) {
       expect(sitemap).toContain(
@@ -117,7 +114,7 @@ describe('root files', () => {
     }
   })
 
-  it('allows search crawlers and disallows training crawlers in robots.txt', () => {
+  test('allows search crawlers and disallows training crawlers in robots.txt', () => {
     const robots = readBuilt('robots.txt')
     const groups = robots.split('\n\n')
     const groupFor = (agent: string): string =>
@@ -129,7 +126,7 @@ describe('root files', () => {
     expect(robots).toContain(`Sitemap: ${SITE_ORIGIN}/sitemap.xml`)
   })
 
-  it('serves llms.txt and a noindex 404', () => {
+  test('serves llms.txt and a noindex 404', () => {
     expect(readBuilt('llms.txt')).toMatch(/^# Snug/)
     expect(readBuilt('404.html')).toContain(
       '<meta name="robots" content="noindex"',
@@ -137,7 +134,7 @@ describe('root files', () => {
   })
 })
 
-describe('privacy page', () => {
+test.describe('privacy page', () => {
   const policy = readFileSync(
     path.join(siteRoot, '../../PRIVACY_POLICY.md'),
     'utf8',
@@ -147,7 +144,7 @@ describe('privacy page', () => {
     .map((match) => match[1])
     .toArray()
 
-  it('renders every policy heading from PRIVACY_POLICY.md', () => {
+  test('renders every policy heading from PRIVACY_POLICY.md', () => {
     const html = readBuilt('privacy/index.html')
     expect(headings.length).toBeGreaterThan(3)
     for (const heading of headings) {
@@ -155,7 +152,7 @@ describe('privacy page', () => {
     }
   })
 
-  it('states the English-only scope and the log-only visit counting', () => {
+  test('states the English-only scope and the log-only visit counting', () => {
     const html = readBuilt('privacy/index.html')
     expect(html).toContain('<html lang="en"')
     expect(html).toContain('English only')
@@ -165,7 +162,7 @@ describe('privacy page', () => {
     expect(html).not.toMatch(/<script src=/)
   })
 
-  it('is canonical, indexed and listed in the sitemap', () => {
+  test('is canonical, indexed and listed in the sitemap', () => {
     const html = readBuilt('privacy/index.html')
     expect(html).toContain(
       `<link rel="canonical" href="${SITE_ORIGIN}/privacy/"`,
@@ -175,7 +172,9 @@ describe('privacy page', () => {
     )
   })
 
-  it.each(LOCALES)('%s links the trust section to /privacy', (locale) => {
-    expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
-  })
+  for (const locale of LOCALES) {
+    test(`${locale} links the trust section to /privacy`, () => {
+      expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
+    })
+  }
 })

@@ -8,7 +8,7 @@ out="$(mktemp -d)"
 declare -A budget=([performance]=95 [accessibility]=100 [best-practices]=95 [seo]=100)
 failed=0
 
-for path in / /privacy; do
+for path in / /ru/ /ja/ /privacy/; do
   report="$out/report.json"
   bunx lighthouse "$base$path" \
     --quiet --output=json --output-path="$report" \

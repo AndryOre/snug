@@ -40,3 +40,7 @@ tokens of its own. The code map is
   every locale carries the same keys. The source copy and voice are in
   [`docs/landing/content.md`](../../docs/landing/content.md).
 - Never run `bun run build`. Verify with `bun run check` from the repo root.
+- E2E specs build their locale paths with `LOCALES.map` from `src/i18n/locales`,
+  never a copied list. Build-output assertions live in
+  `e2e/built-output.spec.ts`, which reads the `dist` that `bun run test:e2e`
+  builds; `vitest run` never builds.

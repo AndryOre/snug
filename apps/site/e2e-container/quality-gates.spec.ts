@@ -1,18 +1,9 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-const LOCALE_PATHS = [
-  '/',
-  '/es/',
-  '/de/',
-  '/fr/',
-  '/it/',
-  '/ja/',
-  '/ko/',
-  '/pt-br/',
-  '/ru/',
-  '/zh-cn/',
-]
+import { localePath, LOCALES } from '../src/i18n/locales'
+
+const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
 
@@ -53,7 +44,7 @@ for (const path of LOCALE_PATHS) {
   })
 }
 
-for (const path of ['/', '/privacy']) {
+for (const path of ['/', '/privacy/']) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
