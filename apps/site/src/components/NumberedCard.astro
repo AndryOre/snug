@@ -12,10 +12,10 @@ const { numeral, title, body } = Astro.props
 ---
 
 <Panel>
-  <Eyebrow as="span" aria-hidden="true">{numeral}</Eyebrow>
-  <h3
-    class="mt-3 font-heading text-2xl leading-tight font-medium break-words hyphens-auto"
-  >
+  <Eyebrow as="span" aria-hidden="true">
+    {numeral}
+  </Eyebrow>
+  <h3 class="mt-3 font-heading text-2xl leading-tight font-medium break-words hyphens-auto">
     {title}
   </h3>
   <p class="mt-3 leading-body text-muted-foreground">{body}</p>

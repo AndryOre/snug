@@ -9,6 +9,8 @@ interface Props {
 const { as: Tag = 'li', class: className } = Astro.props
 ---
 
-<Tag class={cn('rounded-xl border border-border bg-card p-5 md:p-7', className)}>
+<Tag
+  class={cn('rounded-xl border border-border bg-card p-5 md:p-7', className)}
+>
   <slot />
 </Tag>

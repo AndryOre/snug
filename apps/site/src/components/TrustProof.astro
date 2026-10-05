@@ -28,19 +28,19 @@ const linkKeys = [
 
 <Section section="trust" heading={trust.heading} lead={trust.intro}>
   <CardGrid as="ol">
-    {points.map((point) => <NumberedCard {...point} />)}
+    {points.map((point) => (
+      <NumberedCard {...point} />
+    ))}
   </CardGrid>
   <p class="mt-8 max-w-2xl leading-body text-muted-foreground">
     {trust.access}
   </p>
   <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-    {
-      linkKeys.map((key) => (
-        <li>
-          <TextLink href={TRUST_LINK_HREFS[key]}>{trust.links[key]}</TextLink>
-        </li>
-      ))
-    }
+    {linkKeys.map((key) => (
+      <li>
+        <TextLink href={TRUST_LINK_HREFS[key]}>{trust.links[key]}</TextLink>
+      </li>
+    ))}
   </ul>
   <div class="mt-10">
     <InstallButton placement="trust" label={hero.install} />

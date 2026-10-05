@@ -69,6 +69,10 @@ test.describe('built pages', () => {
         metaContent(html, 'property', 'og:image:alt').length,
       ).toBeGreaterThan(20)
       expect(html).toContain('<link rel="icon" href="/favicon.svg"')
+      expect(html).toContain('<link rel="icon" href="/favicon.ico"')
+      expect(html).toContain(
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png"',
+      )
       expect(html).toContain(
         '<link rel="manifest" href="/manifest.webmanifest"',
       )

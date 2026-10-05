@@ -17,6 +17,7 @@ for (const path of PATHS) {
     await page.goto(path)
     await page.waitForLoadState('networkidle')
 
+    await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark')
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('[data-section="hero"]')).toBeVisible()
     await expect(page.locator('[data-section="trust"]')).toBeVisible()

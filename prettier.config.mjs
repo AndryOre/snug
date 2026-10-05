@@ -13,9 +13,11 @@ const config = {
   endOfLine: 'lf',
   arrowParens: 'always',
   plugins: [
+    'prettier-plugin-astro',
     '@trivago/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
   ],
+  overrides: [{ files: '*.astro', options: { parser: 'astro' } }],
   tailwindStylesheet: './packages/ui/src/styles/globals.css',
   tailwindFunctions: ['cn', 'cva', 'clsx'],
   importOrder: [

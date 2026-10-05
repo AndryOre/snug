@@ -37,21 +37,19 @@ const { header } = getClosingCopy(locale)
     class="language-panel w-56 max-w-panel rounded-xl border border-border bg-card p-2 text-foreground"
   >
     <ul>
-      {
-        LOCALES.map((code) => (
-          <li>
-            <a
-              href={localePath(code)}
-              lang={languageTag(code)}
-              hreflang={languageTag(code)}
-              aria-current={code === locale ? 'page' : undefined}
-              class="flex min-h-11 items-center rounded-md px-3 outline-hidden hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:text-primary-text"
-            >
-              {LOCALE_NAMES[code]}
-            </a>
-          </li>
-        ))
-      }
+      {LOCALES.map((code) => (
+        <li>
+          <a
+            href={localePath(code)}
+            lang={languageTag(code)}
+            hreflang={languageTag(code)}
+            aria-current={code === locale ? 'page' : undefined}
+            class="flex min-h-11 items-center rounded-md px-3 outline-hidden hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:text-primary-text"
+          >
+            {LOCALE_NAMES[code]}
+          </a>
+        </li>
+      ))}
     </ul>
   </nav>
 </div>

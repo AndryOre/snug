@@ -26,32 +26,26 @@ const { locale } = Astro.props
 const copy = getLandingCopy(locale).interface
 ---
 
-<Section
-  section="interface"
-  heading={copy.heading}
-  class="defer-render-lg"
->
+<Section section="interface" heading={copy.heading} class="defer-render-lg">
   <div class="mt-10 grid gap-6 md:grid-cols-2">
-    {
-      SHOT_KEYS.map((key) => (
-        <figure class="m-0">
-          <Image
-            src={
-              screenshots[
-                `../assets/screenshots/${locale}/${SHOT_FILES[key]}.png`
-              ]!.default
-            }
-            alt={copy.alts[key]}
-            widths={[640, 960, 1280]}
-            sizes="(min-width: 1240px) 552px, (min-width: 768px) calc((100vw - 136px) / 2), calc(100vw - 32px)"
-            format="webp"
-            class="h-auto w-full rounded-2xl border border-border"
-          />
-          <figcaption class="mt-3 text-sm leading-body text-muted-foreground">
-            {copy.shots[key]}
-          </figcaption>
-        </figure>
-      ))
-    }
+    {SHOT_KEYS.map((key) => (
+      <figure class="m-0">
+        <Image
+          src={
+            screenshots[
+              `../assets/screenshots/${locale}/${SHOT_FILES[key]}.png`
+            ]!.default
+          }
+          alt={copy.alts[key]}
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 1240px) 552px, (min-width: 768px) calc((100vw - 136px) / 2), calc(100vw - 32px)"
+          format="webp"
+          class="h-auto w-full rounded-2xl border border-border"
+        />
+        <figcaption class="mt-3 text-sm leading-body text-muted-foreground">
+          {copy.shots[key]}
+        </figcaption>
+      </figure>
+    ))}
   </div>
 </Section>

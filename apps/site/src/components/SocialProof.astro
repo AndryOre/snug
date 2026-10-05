@@ -16,35 +16,33 @@ const { proof } = getClosingCopy(Astro.props.locale)
 ---
 
 <Section section="proof" heading={proof.heading}>
-  <Eyebrow data-proof="numbers" class="mt-5 max-w-2xl">{proof.numbers}</Eyebrow>
+  <Eyebrow data-proof="numbers" class="mt-5 max-w-2xl">
+    {proof.numbers}
+  </Eyebrow>
   <p
     data-proof="rename-note"
     class="mt-5 max-w-2xl text-lead text-muted-foreground"
   >
     {proof.renameNote}
   </p>
-  {
-    proof.reviewsLead !== '' && (
-      <p class="mt-3 max-w-2xl leading-body text-muted-foreground">
-        {proof.reviewsLead}
-      </p>
-    )
-  }
+  {proof.reviewsLead !== '' && (
+    <p class="mt-3 max-w-2xl leading-body text-muted-foreground">
+      {proof.reviewsLead}
+    </p>
+  )}
   <CardGrid>
-    {
-      REVIEWS.map((review) => (
-        <Panel>
-          <figure lang="en" class="flex h-full flex-col justify-between gap-6">
-            <blockquote class="leading-body">
-              &ldquo;{review.quote}&rdquo;
-            </blockquote>
-            <figcaption class="font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
-              {review.author}, {review.date}
-            </figcaption>
-          </figure>
-        </Panel>
-      ))
-    }
+    {REVIEWS.map((review) => (
+      <Panel>
+        <figure lang="en" class="flex h-full flex-col justify-between gap-6">
+          <blockquote class="leading-body">
+            &ldquo;{review.quote}&rdquo;
+          </blockquote>
+          <figcaption class="font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
+            {review.author}, {review.date}
+          </figcaption>
+        </figure>
+      </Panel>
+    ))}
   </CardGrid>
   <p class="mt-8">
     <TextLink href={STORE_REVIEWS_URL} data-reviews-link>
