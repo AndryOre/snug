@@ -85,3 +85,20 @@ export function hreflangAlternates(): HreflangAlternate[] {
 export function ogImagePath(locale: Locale): string {
   return `/og/og-${locale}.png`
 }
+
+/**
+ * Each locale's name in its own language, shown by the language switcher.
+ * Never translated, so a visitor can find their language from any page.
+ */
+export const LOCALE_NAMES: Record<Locale, string> = {
+  en: 'English',
+  es: 'Español',
+  de: 'Deutsch',
+  fr: 'Français',
+  it: 'Italiano',
+  ja: '日本語',
+  ko: '한국어',
+  pt_BR: 'Português (Brasil)',
+  ru: 'Русский',
+  zh_CN: '简体中文',
+}

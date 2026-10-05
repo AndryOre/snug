@@ -37,5 +37,73 @@
       "ci": "CI 상태",
       "privacy": "개인정보처리방침"
     }
+  },
+  "proof": {
+    "heading": "사용자 후기",
+    "numbers": "사용자 5,000명. Chrome 웹 스토어 평점 4.8점(20개 평가, 2026-10-05).",
+    "renameNote": "Chrome 웹 스토어에 공개된 후기를게시된 영어 그대로 실었어요. 대부분 Snug 이름이 바뀌기 전, 등록 이름이 \"Bookmark Import/Export\"였을 때 작성되어서 현재 인터페이스가 아니라 내보내기와가져오기를 이야기해요.",
+    "reviewsLead": "후기 4개를 영어 원문 그대로 실었어요:",
+    "link": "Chrome 웹 스토어에서 후기 모두 읽기"
+  },
+  "faq": {
+    "heading": "자주 묻는 질문",
+    "items": {
+      "network": {
+        "question": "Snug가 북마크를 어딘가로 보내나요?",
+        "answer": "아니요. Snug는 네트워크 호출을 하지않아요. 기기에서 브라우저의 북마크를 읽고 쓸 뿐이고, 직접 확인할 수 있도록 소스코드도 공개되어 있어요."
+      },
+      "account": {
+        "question": "계정이 필요한가요?",
+        "answer": "아니요. 설치하고 바로 내보내면 돼요."
+      },
+      "sync": {
+        "question": "기기 간에 북마크를 동기화하나요?",
+        "answer": "아니요. Snug에는 동기화도 클라우드도없어요. 북마크를 다른 브라우저나 컴퓨터로 옮기려면 파일로 내보내서 그쪽에서가져오세요."
+      },
+      "oneFile": {
+        "question": "파일을 여러 개 한꺼번에 가져올 수 있나요?",
+        "answer": "아니요. Snug는 한 번에 파일 하나만가져와요. 여러 개를 가져오려면 하나씩 차례로 가져오세요."
+      },
+      "permissions": {
+        "question": "왜 모든 북마크에 접근해야 하나요?",
+        "answer": "북마크를 읽고 쓰는 것이 확장 프로그램이북마크를 내보내고 가져올 수 있는 유일한 방법이에요. Snug는 네트워크 호출을 하지않으므로 읽은 내용이 기기 밖으로 나갈 수 없어요."
+      },
+      "builtin": {
+        "question": "브라우저도 HTML로 내보낼 수 있는데 왜 Snug를 쓰나요?",
+        "answer": "기본 내보내기에는 폴더선택, 미리보기, 실행 취소, 일정, 중복 확인, 추가 형식이 없어요. Snug에는 모두있어요."
+      },
+      "overwrite": {
+        "question": "현재 북마크를 덮어쓰나요?",
+        "answer": "교체를 선택할 때만 그래요. 먼저 미리보기를 볼 수있고, 교체하면 복원할 수 있는 안전 스냅샷이 저장돼요."
+      },
+      "formats": {
+        "question": "어떤 형식을 지원하나요?",
+        "answer": "HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내요. HTML, JSON, CSV, XBEL, Chrome 프로필의 `Bookmarks` 파일, Safari 내보내기 파일을가져와요."
+      },
+      "browsers": {
+        "question": "어떤 브라우저에서 작동하나요?",
+        "answer": "Chrome과 Edge, Brave, Opera 같은 Chromium 기반브라우저에서 작동해요."
+      },
+      "safe": {
+        "question": "1인 개발자의 확장 프로그램을 설치해도 안전한가요?",
+        "answer": "소스 코드가 공개되어 있고, CodeQL이 검사하고, 프로젝트에 OpenSSF Scorecard와 Best Practices 배지가 있고, CI는 버전을 고정해 실행해요. GitHub에서 직접 판단해 보세요."
+      },
+      "cost": {
+        "question": "Snug는 유료인가요?",
+        "answer": "아니요. 무료예요."
+      }
+    }
+  },
+  "final": {
+    "heading": "북마크를 가지고 다니세요",
+    "line": "Snug를 Chrome에 추가하고 몇 번의 클릭으로 내보내기, 가져오기, 백업을해 보세요. 무료이고 오픈 소스이며, 기기 밖으로는 아무것도 나가지 않아요.",
+    "button": "Chrome에 추가"
+  },
+  "footer": {
+    "source": "GitHub 소스",
+    "privacy": "개인정보처리방침",
+    "listing": "Chrome 웹 스토어 등록 페이지",
+    "changelog": "변경 내역",
+    "note": "Snug는 MIT 라이선스의 오픈 소스예요."
   }
 }

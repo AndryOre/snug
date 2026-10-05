@@ -41,7 +41,7 @@ for (const path of PATHS) {
       '/install?c=trust',
     )
     const storeLinks = await page
-      .locator('a[href*="chromewebstore.google.com"]')
+      .locator('a[href*="chromewebstore.google.com"]:not([data-reviews-link])')
       .count()
     expect(storeLinks).toBe(0)
 
