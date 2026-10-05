@@ -73,6 +73,9 @@ describe('landing copy', () => {
       expect(header.languageSeparator.length).toBeGreaterThan(0)
       expect(header.skipLink.length).toBeGreaterThan(0)
       expect(header.homeLabel.length).toBeGreaterThan(0)
+      for (const key of Object.values(header.theme)) {
+        expect(key.length).toBeGreaterThan(0)
+      }
       expect(footer.navLabel.length).toBeGreaterThan(0)
       expect(notFound.title.length).toBeGreaterThan(0)
       expect(notFound.body.length).toBeGreaterThan(0)

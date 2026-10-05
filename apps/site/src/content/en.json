@@ -165,7 +165,13 @@
     "languageLabel": "Language",
     "languageSeparator": ": ",
     "skipLink": "Skip to content",
-    "homeLabel": "Snug home"
+    "homeLabel": "Snug home",
+    "theme": {
+      "label": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "notFound": {
     "title": "Page not found",

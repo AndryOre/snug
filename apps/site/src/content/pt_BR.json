@@ -165,7 +165,13 @@
     "languageLabel": "Idioma",
     "languageSeparator": ": ",
     "skipLink": "Ir para o conteúdo",
-    "homeLabel": "Página inicial do Snug"
+    "homeLabel": "Página inicial do Snug",
+    "theme": {
+      "label": "Tema",
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Escuro"
+    }
   },
   "notFound": {
     "title": "Página não encontrada",

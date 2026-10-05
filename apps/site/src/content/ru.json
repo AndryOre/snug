@@ -165,7 +165,13 @@
     "languageLabel": "Язык",
     "languageSeparator": ": ",
     "skipLink": "Перейти к содержимому",
-    "homeLabel": "Главная Snug"
+    "homeLabel": "Главная Snug",
+    "theme": {
+      "label": "Тема",
+      "system": "Системная",
+      "light": "Светлая",
+      "dark": "Тёмная"
+    }
   },
   "notFound": {
     "title": "Страница не найдена",
