@@ -33,6 +33,16 @@ relative to `apps/extension/` unless it starts with `packages/`.
 - **`packages/ui`** — shared shadcn/ui components, hooks and the theme tokens
   (`src/styles/globals.css`, mirrored by `docs/brand/tokens.css`). The extension
   imports it as `@workspace/ui/...`.
+- **`apps/site`** (`@snug/site`) — the static Astro landing page, in ten locales
+  (English at `/`, the rest under their own path). Pages are `.astro` files in
+  `src/pages`; React islands (`@astrojs/react`) are used only where
+  interactivity is needed. It reuses `@workspace/ui` for components and the
+  theme: pages import `@workspace/ui/globals.css` once and compose
+  `@workspace/ui/components/*`, with Tailwind wired through `@tailwindcss/vite`
+  in `astro.config.ts`, so brand tokens stay in one place. It makes no
+  third-party requests
+  ([ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
+  video it has no runtime link to the extension. Rules: `apps/site/AGENTS.md`.
 - **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
   thumbnails. It has no runtime link to the extension: it reads
   `apps/extension/locales/*.json` and `apps/extension/e2e-store/captions.ts` by
