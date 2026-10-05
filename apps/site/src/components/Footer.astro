@@ -2,6 +2,7 @@
 import { FOOTER_LINK_HREFS, getClosingCopy, installHref } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import LanguageSwitcher from './LanguageSwitcher.astro'
+import TextLink from './TextLink.astro'
 
 interface Props {
   locale: Locale
@@ -29,13 +30,9 @@ const links = [
       {
         links.map((link) => (
           <li>
-            <a
-              href={link.href}
-              data-footer-link={link.key}
-              class="inline-flex min-h-11 items-center rounded-md text-foreground underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
-            >
+            <TextLink href={link.href} data-footer-link={link.key}>
               {link.label}
-            </a>
+            </TextLink>
           </li>
         ))
       }

@@ -1,0 +1,37 @@
+---
+import { cn } from '@workspace/ui/lib/utils'
+
+import SectionHeading from './SectionHeading.astro'
+
+interface Props {
+  section: string
+  heading?: string
+  lead?: string
+  class?: string
+}
+
+const { section, heading, lead, class: className } = Astro.props
+const headingId = heading === undefined ? undefined : `${section}-heading`
+---
+
+<section
+  data-section={section}
+  aria-labelledby={headingId}
+  class={cn(className)}
+>
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    {
+      heading !== undefined && (
+        <SectionHeading id={headingId}>{heading}</SectionHeading>
+      )
+    }
+    {
+      lead !== undefined && (
+        <p class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground">
+          {lead}
+        </p>
+      )
+    }
+    <slot />
+  </div>
+</section>
