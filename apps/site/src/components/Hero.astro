@@ -15,17 +15,17 @@ const { hero } = getLandingCopy(Astro.props.locale)
 
 <Section
   section="hero"
-  class="bg-[radial-gradient(60rem_32rem_at_0%_0%,color-mix(in_oklch,var(--primary)_14%,transparent),transparent),radial-gradient(40rem_28rem_at_100%_20%,color-mix(in_oklch,var(--primary)_6%,transparent),transparent)]"
+  class="bg-hero-glow"
 >
   <Eyebrow class="mb-6">{hero.eyebrow}</Eyebrow>
   <h1
-    class="max-w-4xl font-heading text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] font-bold tracking-[-0.025em] break-words hyphens-auto text-balance"
+    class="max-w-4xl font-heading text-display font-bold break-words hyphens-auto text-balance"
   >
     <span class="block">{hero.headlineLead}</span>
     <span class="block text-primary-text">{hero.headlineAccent}</span>
   </h1>
   <p
-    class="mt-6 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
+    class="mt-6 max-w-2xl text-lead text-muted-foreground"
   >
     {hero.subheadline}
   </p>

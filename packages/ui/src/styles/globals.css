@@ -146,6 +146,94 @@
   --bookmark-folder: oklch(0.795 0.184 86.047);
 }
 
+@theme {
+  --container-site: 77.5rem;
+  --container-panel: calc(100vw - 2rem);
+  --text-display: clamp(2.5rem, 6vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.025em;
+  --text-display-sm: clamp(2.5rem, 6vw, 4rem);
+  --text-display-sm--line-height: 1.05;
+  --text-display-sm--letter-spacing: -0.025em;
+  --text-headline: clamp(1.875rem, 4vw, 3.25rem);
+  --text-headline--line-height: 1.08;
+  --text-headline--letter-spacing: -0.02em;
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.55;
+  --text-eyebrow: 0.8125rem;
+  --text-code: 0.9em;
+  --leading-body: 1.55;
+  --leading-prose: 1.65;
+  --tracking-eyebrow: 0.12em;
+}
+
+@theme inline {
+  --background-image-hero-glow:
+    radial-gradient(
+      60rem 32rem at 0% 0%,
+      color-mix(in oklch, var(--primary) 14%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      40rem 28rem at 100% 20%,
+      color-mix(in oklch, var(--primary) 6%, transparent),
+      transparent
+    );
+  --background-image-final-cta-glow: radial-gradient(
+    50rem 24rem at 50% 100%,
+    color-mix(in oklch, var(--primary) 10%, transparent),
+    transparent
+  );
+}
+
+@utility grid-cols-auto-cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+@utility defer-render-sm {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@utility defer-render-md {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1100px;
+}
+
+@utility defer-render-lg {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1600px;
+}
+
+@utility language-trigger {
+  @supports (anchor-name: --language-trigger) {
+    anchor-name: --language-trigger;
+  }
+}
+
+@utility language-panel {
+  inset: auto;
+  top: 3.5rem;
+  right: 1rem;
+  margin: 0;
+  overflow-y: auto;
+  max-height: calc(100dvh - 4.5rem);
+  @media (min-width: 48rem) {
+    right: 3.5rem;
+  }
+  @media (min-width: 1352px) {
+    right: calc((100vw - var(--container-site)) / 2 + 3.5rem);
+  }
+  @supports (anchor-name: --language-trigger) {
+    position-anchor: --language-trigger;
+    position-area: block-end span-inline-start;
+    position-try-fallbacks: flip-inline;
+    margin-block-start: 0.5rem;
+    top: auto;
+    right: auto;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

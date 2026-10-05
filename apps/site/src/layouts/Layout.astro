@@ -31,7 +31,7 @@ const jsonLd = standalone
   ? null
   : JSON.stringify(
       buildSoftwareAppJsonLd(locale, meta.description),
-    ).replaceAll('<', '\\u003c')
+    ).replaceAll('<', String.raw`\u003c`)
 ---
 
 <html lang={languageTag(locale)} dir="ltr" class="dark">
