@@ -17,7 +17,7 @@ import { theme } from '../theme'
 import { AppWindow, FileIcon, SegmentedControl } from '../ui'
 
 const needsBodyFont = (locale: Locale): boolean =>
-  locale === 'ja' || locale === 'ko' || locale === 'zh_CN' || locale === 'ru'
+  ['ja', 'ko', 'zh_CN', 'ru'].includes(locale)
 
 const SAFE_SIDE = 80
 const SAFE_TOP = 100
@@ -146,7 +146,7 @@ const BackupRow = ({
       }}
     >
       <FileIcon format="json" size={40} />
-      {`snug-backup-${String(index + 1).padStart(4, '0')}.json`}
+      {backupFileName(index)}
     </div>
   )
 }
@@ -234,6 +234,8 @@ const DownloadsCard = ({ locale }: { locale: Locale }) => {
 }
 
 const SCHEDULE_SEGMENT_WIDTH = 210
+const backupFileName = (index: number): string =>
+  `snug-backup-${String(index + 1).padStart(4, '0')}.json`
 
 const scheduleFontSize = (
   labels: readonly string[],
@@ -263,9 +265,11 @@ const ScheduleColumn = ({ locale }: { locale: Locale }) => {
     message(locale, 'autoExportPage_interval1d'),
     message(locale, 'autoExportPage_interval7d'),
   ]
+  const scheduleLabelsKey = JSON.stringify(scheduleLabels)
   const scheduleSize = useMemo(
-    () => scheduleFontSize(scheduleLabels, fonts.body),
-    [scheduleLabels.join('|'), fonts.body],
+    () =>
+      scheduleFontSize(JSON.parse(scheduleLabelsKey) as string[], fonts.body),
+    [scheduleLabelsKey, fonts.body],
   )
   const sweep = progressBetween(frame, SWEEP_FROM, SWEEP_TO, EASE.standard)
   return (

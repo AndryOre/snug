@@ -18,12 +18,16 @@ export const FontGate = ({
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    loadFontsFor(locale)
-      .then(() => {
+    const load = async () => {
+      try {
+        await loadFontsFor(locale)
         setReady(true)
         continueRender(handle)
-      })
-      .catch((error: unknown) => cancelRender(error))
+      } catch (error: unknown) {
+        cancelRender(error)
+      }
+    }
+    void load()
   }, [locale, handle])
 
   return ready ? <>{children}</> : null

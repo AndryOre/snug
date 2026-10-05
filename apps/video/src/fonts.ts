@@ -28,7 +28,7 @@ const NOTO: Record<CjkLocale, string> = {
 }
 
 const isCjk = (locale: Locale): locale is CjkLocale =>
-  locale === 'ja' || locale === 'ko' || locale === 'zh_CN'
+  ['ja', 'ko', 'zh_CN'].includes(locale)
 
 const stack = (display: string, body: string): FontStack => ({
   display: `'${display}', ${FALLBACK}`,
@@ -42,8 +42,7 @@ const stack = (display: string, body: string): FontStack => ({
  */
 export const fontStackFor = (locale: Locale): FontStack => {
   if (isCjk(locale)) return stack(NOTO[locale], NOTO[locale])
-  if (locale === 'ru') return stack(GEIST, GEIST)
-  return stack(SPACE_GROTESK, GEIST)
+  return stack(locale === 'ru' ? GEIST : SPACE_GROTESK, GEIST)
 }
 
 const loadBrandFonts = (): Promise<void[]> =>
@@ -71,8 +70,9 @@ const loadCjkFont = (locale: CjkLocale): Promise<unknown> => {
     ignoreTooManyRequestsWarning: true,
   }
   if (locale === 'ja') return loadNotoSansJP('normal', options).waitUntilDone()
-  if (locale === 'ko') return loadNotoSansKR('normal', options).waitUntilDone()
-  return loadNotoSansSC('normal', options).waitUntilDone()
+  return locale === 'ko'
+    ? loadNotoSansKR('normal', options).waitUntilDone()
+    : loadNotoSansSC('normal', options).waitUntilDone()
 }
 
 const loadCyrillicGeist = (): Promise<unknown> =>

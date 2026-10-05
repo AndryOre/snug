@@ -76,10 +76,11 @@ const plural = (
   const template = (count === 1 ? entry['1'] : undefined) ?? entry['n']
   if (template === undefined)
     throw new Error(`No plural "${key}" for ${locale}`)
-  return values.reduce(
-    (text, value, index) => text.replace(`$${index + 1}`, value),
-    template,
-  )
+  let text = template
+  for (const [index, value] of values.entries()) {
+    text = text.replace(`$${index + 1}`, () => value)
+  }
+  return text
 }
 
 const VIEWPORT = { left: 80, top: 376, width: 1760, height: 604 } as const
@@ -88,6 +89,7 @@ const LAYER = { width: 1520, height: 860 } as const
 const ORIGIN = { x: 344, y: 158 } as const
 
 const FILE_ICON = 64
+const IMPORT_FILE_NAME = 'bookmarks.json'
 const FILE_CENTER = { x: ORIGIN.x + 56, y: ORIGIN.y + 50 } as const
 const MODE_TOP = 128
 const SEGMENT_TOP = MODE_TOP + 34
@@ -114,7 +116,9 @@ const T = {
   toastIn: 160,
 } as const
 
-/** Scene-local frames the soundtrack hooks onto. */
+/**
+ * Scene-local frames the soundtrack hooks onto.
+ */
 export const IMPORT_AUDIO_FRAMES = {
   clicks: [T.modeClick, T.buttonClick],
   toast: T.toastIn,
@@ -226,7 +230,7 @@ const FileCard = ({
         gap: 4,
       }}
     >
-      <div style={{ fontSize: 26, fontWeight: 700 }}>bookmarks.json</div>
+      <div style={{ fontSize: 26, fontWeight: 700 }}>{IMPORT_FILE_NAME}</div>
       <div style={{ fontSize: 20, color: theme.ui.mutedText }}>{countText}</div>
     </div>
     <div
@@ -304,9 +308,10 @@ export const ImportScene = ({ locale }: SceneProps) => {
     message(locale, 'importModeRestoreReplace'),
     message(locale, 'importModeFolder'),
   ]
+  const modeLabelsKey = JSON.stringify(modeLabels)
   const segments = useMemo(
-    () => segmentWidthFor(modeLabels, family),
-    [modeLabels.join('|'), family],
+    () => segmentWidthFor(JSON.parse(modeLabelsKey) as string[], family),
+    [modeLabelsKey, family],
   )
 
   const countText = plural(locale, 'importPreviewCount', BOOKMARK_COUNT, [
