@@ -1,6 +1,7 @@
 ---
 import { Content as PrivacyPolicy } from '../../../../PRIVACY_POLICY.md'
 import standaloneContent from '../content/standalone/en.json'
+import { Separator } from '@workspace/ui/components/separator'
 import TextLink from '../components/TextLink.astro'
 import Layout from '../layouts/Layout.astro'
 
@@ -20,16 +21,14 @@ const standalone = { ...privacy.meta, path: '/privacy/' }
       <p class="mt-6 max-w-2xl text-sm text-muted-foreground">
         {privacy.englishOnly}
       </p>
-      <article
-        data-section="policy"
-        class="mt-8 max-w-2xl leading-prose [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 [&_a:hover]:decoration-primary [&_code]:font-mono [&_code]:text-code [&_h1]:font-heading [&_h1]:text-display-sm [&_h1]:font-bold [&_h1]:text-balance [&_h2]:mt-12 [&_h2]:font-heading [&_h2]:text-2xl [&_h2]:font-medium [&_h3]:mt-8 [&_h3]:font-heading [&_h3]:text-lg [&_h3]:font-medium [&_li]:mt-2 [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6"
-      >
+      <article data-section="policy" class="prose-policy mt-8 max-w-2xl">
         <PrivacyPolicy />
       </article>
+      <Separator className="mt-14 max-w-2xl" />
       <section
         data-section="website-statement"
         aria-labelledby="website-heading"
-        class="mt-14 max-w-2xl border-t border-border pt-10"
+        class="mt-10 max-w-2xl"
       >
         <h2 id="website-heading" class="font-heading text-2xl font-medium">
           {privacy.website.heading}
