@@ -12,7 +12,7 @@ interface LanguageOption {
   name: string
 }
 
-interface LanguageSwitcherProperties {
+export interface LanguageSwitcherProperties {
   current: string
   currentTag: string
   currentName: string

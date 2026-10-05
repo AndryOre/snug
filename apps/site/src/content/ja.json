@@ -165,7 +165,13 @@
     "languageLabel": "言語",
     "languageSeparator": "：",
     "skipLink": "本文へスキップ",
-    "homeLabel": "Snug ホーム"
+    "homeLabel": "Snug ホーム",
+    "theme": {
+      "label": "テーマ",
+      "system": "システム",
+      "light": "ライト",
+      "dark": "ダーク"
+    }
   },
   "notFound": {
     "title": "ページが見つかりません",

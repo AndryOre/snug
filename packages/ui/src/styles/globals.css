@@ -8,6 +8,7 @@
 @source '../components';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant js (&:is(.js *));
 
 @theme inline {
   --font-heading: 'Space Grotesk Variable', 'Geist Variable', sans-serif;

@@ -9,7 +9,7 @@ import {
   LOCALES,
   type Locale,
 } from '../i18n/locales'
-import LanguageSwitcher from './LanguageSwitcher'
+import HeaderMenus from './HeaderMenus'
 
 interface Props {
   locale: Locale
@@ -61,15 +61,18 @@ const options = LOCALES.map((code) => ({
       </svg>
       <span class="text-lg font-semibold tracking-tight">Snug</span>
     </a>
-    <LanguageSwitcher
+    <HeaderMenus
       client:idle
-      current={locale}
-      currentTag={languageTag(locale)}
-      currentName={LOCALE_NAMES[locale]}
-      label={header.languageLabel}
-      separator={header.languageSeparator}
-      options={options}
-      markCurrent={markCurrent}
+      theme={header.theme}
+      language={{
+        current: locale,
+        currentTag: languageTag(locale),
+        currentName: LOCALE_NAMES[locale],
+        label: header.languageLabel,
+        separator: header.languageSeparator,
+        options,
+        markCurrent,
+      }}
     />
   </div>
 </header>

@@ -165,7 +165,13 @@
     "languageLabel": "语言",
     "languageSeparator": "：",
     "skipLink": "跳到正文",
-    "homeLabel": "Snug 首页"
+    "homeLabel": "Snug 首页",
+    "theme": {
+      "label": "主题",
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色"
+    }
   },
   "notFound": {
     "title": "找不到页面",
