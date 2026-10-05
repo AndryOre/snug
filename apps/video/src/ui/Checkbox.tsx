@@ -4,7 +4,7 @@ import { theme } from '../theme'
 
 export type CheckboxProps = {
   /**
-  0 is unchecked, 1 is checked; animate it with `progressBetween`.
+   * 0 is unchecked, 1 is checked; animate it with `progressBetween`.
    */
   progress?: number
   size?: number

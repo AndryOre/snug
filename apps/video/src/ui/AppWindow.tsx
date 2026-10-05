@@ -47,15 +47,15 @@ export const navItemCenter = (id: NavId): { x: number; y: number } => ({
 export type AppWindowProps = {
   locale: Locale
   /**
-  Highlighted nav entry; its label is also the page heading.
+   * Highlighted nav entry; its label is also the page heading.
    */
   active: NavId
   /**
-  0..1 amber highlight on a hovered nav entry, per id.
+   * 0..1 amber highlight on a hovered nav entry, per id.
    */
   hover?: Partial<Record<NavId, number>>
   /**
-  Content area, laid out below the page heading.
+   * Content area, laid out below the page heading.
    */
   children?: ReactNode
 }

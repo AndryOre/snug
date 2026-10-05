@@ -6,19 +6,19 @@ export type TreeRowProps = {
   kind: 'folder' | 'bookmark'
   label: string
   /**
-  Indent level, 0 is a root.
+   * Indent level, 0 is a root.
    */
   depth?: number
   /**
-  Folder chevron state; ignored for bookmarks.
+   * Folder chevron state; ignored for bookmarks.
    */
   expanded?: boolean
   /**
-  0..1 check animation; omit to hide the checkbox.
+   * 0..1 check animation; omit to hide the checkbox.
    */
   checkProgress?: number
   /**
-  0..1 hover/focus highlight, e.g. while the cursor is on the row.
+   * 0..1 hover/focus highlight, e.g. while the cursor is on the row.
    */
   highlight?: number
 }
