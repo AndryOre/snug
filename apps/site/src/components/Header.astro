@@ -1,0 +1,50 @@
+---
+import { getClosingCopy } from '../i18n/landing'
+import { localePath, type Locale } from '../i18n/locales'
+import LanguageSwitcher from './LanguageSwitcher.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { header } = getClosingCopy(locale)
+---
+
+<header data-section="header">
+  <a
+    href="#main"
+    class="sr-only rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground outline-hidden focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50 focus-visible:ring-3 focus-visible:ring-ring/50"
+  >
+    {header.skipLink}
+  </a>
+  <div
+    class="mx-auto flex h-14 max-w-[1240px] items-center justify-between gap-2 px-4 md:px-14"
+  >
+    <a
+      href={localePath(locale)}
+      aria-label={header.homeLabel}
+      class="flex min-h-11 shrink-0 items-center gap-2 rounded-md outline-hidden focus-visible:ring-3 focus-visible:ring-ring/50"
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 84 84"
+        class="size-6"
+        focusable="false"
+      >
+        <defs>
+          <linearGradient id="header-tag" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFA230"></stop>
+            <stop offset="1" stop-color="#FFD37A"></stop>
+          </linearGradient>
+        </defs>
+        <path
+          fill="url(#header-tag)"
+          d="M20 8 L64 8 Q70 8 70 14 L70 68 Q70 78 61 72 L42 59 L23 72 Q14 78 14 68 L14 14 Q14 8 20 8 Z"
+        ></path>
+      </svg>
+      <span class="text-lg font-semibold tracking-tight">Snug</span>
+    </a>
+    <LanguageSwitcher locale={locale} />
+  </div>
+</header>

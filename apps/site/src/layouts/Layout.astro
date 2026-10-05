@@ -3,6 +3,7 @@ import '@workspace/ui/globals.css'
 
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
+import Header from '../components/Header.astro'
 import { getPageMeta } from '../i18n/content'
 import {
   hreflangAlternates,
@@ -82,6 +83,7 @@ const jsonLd = standalone
     }
   </head>
   <body class="bg-background font-sans text-foreground">
+    <Header locale={locale} />
     <slot />
   </body>
 </html>

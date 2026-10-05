@@ -1,7 +1,6 @@
 ---
 import { FOOTER_LINK_HREFS, getClosingCopy, installHref } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
-import LanguageSwitcher from './LanguageSwitcher.astro'
 import TextLink from './TextLink.astro'
 
 interface Props {
@@ -26,20 +25,19 @@ const links = [
   <div
     class="mx-auto flex max-w-[1240px] flex-col gap-6 px-4 py-10 md:px-14"
   >
-    <ul class="flex flex-wrap gap-x-6 gap-y-2">
-      {
-        links.map((link) => (
-          <li>
-            <TextLink href={link.href} data-footer-link={link.key}>
-              {link.label}
-            </TextLink>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex flex-wrap items-center justify-between gap-4">
-      <p class="text-sm text-muted-foreground">{footer.note}</p>
-      <LanguageSwitcher locale={locale} />
-    </div>
+    <nav aria-label={footer.navLabel}>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {
+          links.map((link) => (
+            <li>
+              <TextLink href={link.href} data-footer-link={link.key}>
+                {link.label}
+              </TextLink>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <p class="text-sm text-muted-foreground">{footer.note}</p>
   </div>
 </footer>

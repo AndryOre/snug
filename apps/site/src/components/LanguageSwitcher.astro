@@ -16,18 +16,25 @@ const { locale } = Astro.props
 const { header } = getClosingCopy(locale)
 ---
 
-<details class="relative" data-language-switcher>
-  <summary
-    class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-md px-3 text-foreground outline-hidden marker:hidden hover:text-primary-text focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden"
+<div class="min-w-0" data-language-switcher>
+  <button
+    type="button"
+    popovertarget="language-menu"
+    class="language-trigger flex min-h-11 max-w-full cursor-pointer items-center gap-2 rounded-md px-3 text-foreground outline-hidden hover:text-primary-text focus-visible:ring-3 focus-visible:ring-ring/50"
   >
-    <span aria-hidden="true" class="font-mono text-primary-text">
+    <span class="sr-only">{header.languageLabel}: </span>
+    <span lang={languageTag(locale)} class="min-w-0 truncate">
+      {LOCALE_NAMES[locale]}
+    </span>
+    <span class="shrink-0 font-mono text-sm text-primary-text">
       {languageTag(locale)}
     </span>
-    <span lang={languageTag(locale)}>{LOCALE_NAMES[locale]}</span>
-  </summary>
+  </button>
   <nav
+    id="language-menu"
+    popover="auto"
     aria-label={header.languageLabel}
-    class="absolute bottom-full left-0 z-10 mb-2 min-w-56 rounded-[14px] border border-border bg-card p-2"
+    class="language-panel w-56 max-w-[calc(100vw-2rem)] rounded-[14px] border border-border bg-card p-2 text-foreground"
   >
     <ul>
       {
@@ -47,4 +54,38 @@ const { header } = getClosingCopy(locale)
       }
     </ul>
   </nav>
-</details>
+</div>
+
+<style>
+  .language-panel {
+    inset: auto;
+    top: 3.5rem;
+    right: 1rem;
+    margin: 0;
+    overflow-y: auto;
+    max-height: calc(100dvh - 4.5rem);
+  }
+  @media (min-width: 48rem) {
+    .language-panel {
+      right: 3.5rem;
+    }
+  }
+  @media (min-width: 1352px) {
+    .language-panel {
+      right: calc((100vw - 1240px) / 2 + 3.5rem);
+    }
+  }
+  @supports (anchor-name: --language-trigger) {
+    .language-trigger {
+      anchor-name: --language-trigger;
+    }
+    .language-panel {
+      position-anchor: --language-trigger;
+      position-area: block-end span-inline-start;
+      position-try-fallbacks: flip-inline;
+      margin-block-start: 0.5rem;
+      top: auto;
+      right: auto;
+    }
+  }
+</style>
