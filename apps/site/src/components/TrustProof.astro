@@ -1,0 +1,76 @@
+---
+import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import InstallButton from './InstallButton.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { hero, trust } = getLandingCopy(Astro.props.locale)
+const points = [
+  { numeral: '01', ...trust.points.network },
+  { numeral: '02', ...trust.points.account },
+  { numeral: '03', ...trust.points.source },
+]
+const linkKeys = [
+  'source',
+  'scorecard',
+  'bestPractices',
+  'ci',
+  'privacy',
+] as const
+---
+
+<section data-section="trust" aria-labelledby="trust-heading">
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <h2
+      id="trust-heading"
+      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
+    >
+      {trust.heading}
+    </h2>
+    <p
+      class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
+    >
+      {trust.intro}
+    </p>
+    <ol class="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
+      {
+        points.map((point) => (
+          <li class="rounded-[14px] border border-border bg-card p-7">
+            <span class="font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text">
+              {point.numeral}
+            </span>
+            <h3 class="mt-3 font-heading text-2xl leading-tight font-medium">
+              {point.title}
+            </h3>
+            <p class="mt-3 leading-[1.55] text-muted-foreground">
+              {point.body}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="mt-8 max-w-2xl leading-[1.55] text-muted-foreground">
+      {trust.access}
+    </p>
+    <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+      {
+        linkKeys.map((key) => (
+          <li>
+            <a
+              href={TRUST_LINK_HREFS[key]}
+              class="rounded-md py-2 text-foreground underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              {trust.links[key]}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-10">
+      <InstallButton placement="trust" label={hero.install} />
+    </div>
+  </div>
+</section>

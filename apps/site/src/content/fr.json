@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: Exportation, importation et sauvegarde de favoris",
     "description": "Exportez, importez et sauvegardez vos favoris dans des formats courants, depuis Chrome ou Safari. Tout en local."
+  },
+  "hero": {
+    "eyebrow": "Exportation, importation et sauvegarde de favoris",
+    "headlineLead": "Emportez vos favoris.",
+    "headlineAccent": "Rien ne quitte votre appareil.",
+    "subheadline": "Snug exporte, importe et sauvegarde vos favoris dans Chrome et d'autres navigateurs Chromium. Il ne fait aucun appel réseau et n'exige aucun compte.",
+    "install": "Ajouter à Chrome",
+    "note": "Gratuit. Open source. Fonctionne dans Chrome, Edge, Brave et Opera.",
+    "source": "Voir le code source sur GitHub"
+  },
+  "trust": {
+    "heading": "Une extension sans serveur à qui faire confiance",
+    "intro": "Snug lit et écrit l'arborescence de favoris de votre propre navigateur, sur votre appareil. Il ne se connecte à rien, vos favoris n'ont donc nulle part où aller.",
+    "points": {
+      "network": {
+        "title": "Aucun appel réseau",
+        "body": "Snug n'en fait aucun. Chaque exportation et chaque importation se fait en local."
+      },
+      "account": {
+        "title": "Aucun compte",
+        "body": "Il n'y a rien à créer et aucune connexion à effectuer."
+      },
+      "source": {
+        "title": "Open source",
+        "body": "Le code est public. Lisez-le, ou consultez les badges OpenSSF Scorecard et Best Practices du projet, les analyses CodeQL et les exécutions de CI."
+      }
+    },
+    "access": "Lire et écrire vos favoris est le seul moyen pour une extension de les exporter et de les importer. Snug fait cela et rien d'autre.",
+    "links": {
+      "source": "Code source",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "statut de la CI",
+      "privacy": "Politique de confidentialité"
+    }
   }
 }

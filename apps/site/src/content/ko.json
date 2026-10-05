@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: 북마크 내보내기, 가져오기, 백업",
     "description": "북마크를 일반적인 형식으로 내보내고 Chrome·Safari에서 가져오며 자동 백업까지. 모든 작업은 기기 안에서."
+  },
+  "hero": {
+    "eyebrow": "북마크 내보내기, 가져오기, 백업",
+    "headlineLead": "북마크를 그대로 옮기세요.",
+    "headlineAccent": "기기 밖으로는 아무것도 나가지 않아요.",
+    "subheadline": "Snug는 Chrome과 다른 Chromium 기반 브라우저에서 북마크를 내보내고, 가져오고, 백업해요. 네트워크 호출을 하지 않고 계정도 필요 없어요.",
+    "install": "Chrome에 추가",
+    "note": "무료. 오픈 소스. Chrome, Edge, Brave, Opera에서 작동해요.",
+    "source": "GitHub에서 소스 코드 보기"
+  },
+  "trust": {
+    "heading": "믿어야 할 서버가 없는 확장 프로그램",
+    "intro": "Snug는 기기에서 브라우저 자체의 북마크 트리를 읽고 써요. 어디에도 연결하지 않으니 북마크가 갈 곳이 없어요.",
+    "points": {
+      "network": {
+        "title": "네트워크 호출 없음",
+        "body": "Snug는 하지 않아요. 내보내기와 가져오기는 모두 기기 안에서 이루어져요."
+      },
+      "account": {
+        "title": "계정 없음",
+        "body": "가입하거나 로그인할 것이 없어요."
+      },
+      "source": {
+        "title": "오픈 소스",
+        "body": "코드가 공개되어 있어요. 직접 읽어 보거나, 프로젝트의 OpenSSF Scorecard 및 Best Practices 배지, CodeQL 검사, CI 실행 기록을 확인해 보세요."
+      }
+    },
+    "access": "북마크를 읽고 쓰는 것이 확장 프로그램이 북마크를 내보내고 가져올 수 있는 유일한 방법이에요. Snug는 그것만 해요.",
+    "links": {
+      "source": "소스 코드",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "CI 상태",
+      "privacy": "개인정보처리방침"
+    }
   }
 }

@@ -1,0 +1,23 @@
+---
+import { buttonVariants } from '@workspace/ui/components/button'
+
+import { installHref, type InstallPlacement } from '../i18n/landing'
+
+interface Props {
+  placement: InstallPlacement
+  label: string
+}
+
+const { placement, label } = Astro.props
+---
+
+<a
+  href={installHref(placement)}
+  data-install={placement}
+  class:list={[
+    buttonVariants(),
+    'h-auto rounded-[10px] px-7 py-4 text-base font-semibold motion-safe:transition-transform motion-safe:duration-150 motion-safe:hover:-translate-y-px',
+  ]}
+>
+  {label}
+</a>
