@@ -124,8 +124,8 @@ a blurred copy of the mark behind it.
 
 - **Primary button:** flat amber, dark text, 600 weight, 10px radius. Always
   links to `/install`, never to the store listing.
-- **Panel:** `--card` fill, hairline border, 14px radius, mono numeral in amber,
-  Space Grotesk 500 title, muted body.
+- **Card (shadcn):** `--card` fill, hairline border, 14px radius, mono numeral
+  in amber, Space Grotesk 500 title, muted body.
 - **Journey card:** a panel; the middle card (the file) gets an amber border at
   50% alpha. Folder icons are Lucide `folder`, 2px stroke, amber.
 - **Format chip:** Geist Mono 12px, 1px hairline border, 6px radius.

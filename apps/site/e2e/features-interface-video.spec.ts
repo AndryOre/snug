@@ -62,7 +62,7 @@ test('video loads YouTube only after keyboard activation', async ({ page }) => {
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
   await expect(
-    page.locator('astro-island[client="visible"]'),
+    page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')
   await poster.focus()
   await expect(poster).toBeFocused()
@@ -118,7 +118,7 @@ test('modified click on the poster does not swap in the player', async ({
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
   await expect(
-    page.locator('astro-island[client="visible"]'),
+    page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')
   await page.route(/youtube/, (route) =>
     route.fulfill({ contentType: 'text/html', body: '<p>watch</p>' }),
@@ -132,3 +132,37 @@ test('modified click on the poster does not swap in the player', async ({
   await poster.click()
   await expect(page.locator('iframe[data-video-player]')).toBeVisible()
 })
+
+for (const width of [768, 900, 1024]) {
+  test(`poster sizes match the rendered width at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 800 })
+    await page.goto('/')
+    const poster = page.locator('[data-video-poster] img')
+    await poster.scrollIntoViewIfNeeded()
+    const { declared, rendered } = await poster.evaluate(
+      (image: HTMLImageElement) => {
+        const entries = image.sizes.split(/,(?![^(]*\))/).map((entry) => {
+          const match = /^\s*(\([^)]*\))?\s*(.+?)\s*$/.exec(entry)!
+          return { media: match[1], length: match[2]! }
+        })
+        const chosen = entries.find(
+          (entry) =>
+            entry.media === undefined || matchMedia(entry.media).matches,
+        )!
+        const probe = document.createElement('div')
+        probe.style.position = 'absolute'
+        probe.style.width = chosen.length
+        document.body.append(probe)
+        const declaredWidth = probe.getBoundingClientRect().width
+        probe.remove()
+        return {
+          declared: declaredWidth,
+          rendered: image.getBoundingClientRect().width,
+        }
+      },
+    )
+    expect(Math.abs(declared - rendered)).toBeLessThanOrEqual(1)
+  })
+}

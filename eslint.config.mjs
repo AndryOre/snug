@@ -54,11 +54,26 @@ const shadcnNoRestyleContracts = [
   },
   {
     pattern: '^CardTitle$',
-    allow: ['layout', 'text-sm', 'font-semibold'],
+    allow: [
+      'layout',
+      'text-sm',
+      'font-semibold',
+      'text-2xl',
+      'leading-tight',
+      'hyphens-auto',
+    ],
+  },
+  {
+    pattern: '^Badge$',
+    allow: ['layout', 'font-mono'],
+  },
+  {
+    pattern: '^CardFooter$',
+    allow: ['layout', 'border-t-0', 'bg-transparent', 'pt-0'],
   },
   {
     pattern: '^CardDescription$',
-    allow: ['layout', 'text-xs'],
+    allow: ['layout', 'text-xs', 'text-base'],
   },
 ]
 

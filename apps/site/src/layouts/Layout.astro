@@ -4,6 +4,7 @@ import { cn } from '@workspace/ui/lib/utils'
 
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
+import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import { getPageMeta } from '../i18n/content'
 import {
@@ -96,5 +97,6 @@ const jsonLd = standalone
   >
     <Header locale={locale} markCurrent={!standalone} />
     <slot />
+    <Footer locale={locale} markCurrent={!standalone} />
   </body>
 </html>

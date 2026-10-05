@@ -1,3 +1,5 @@
+import { buttonVariants } from '@workspace/ui/components/button'
+import { cn } from '@workspace/ui/lib/utils'
 import { type MouseEvent, useRef, useState } from 'react'
 
 import { youtubeEmbedUrl, youtubeWatchUrl } from '../i18n/landing'
@@ -88,7 +90,13 @@ export default function VideoFacade({
         className="h-full w-full object-cover"
       />
       <span className="absolute inset-0 grid place-items-center">
-        <span className="grid size-16 place-items-center rounded-full bg-primary text-primary-foreground motion-safe:transition-transform motion-safe:duration-150 motion-safe:group-hover:scale-105 motion-safe:group-active:scale-95">
+        <span
+          aria-hidden="true"
+          className={cn(
+            buttonVariants({ size: 'icon-lg' }),
+            'size-16 rounded-full motion-safe:duration-150 motion-safe:group-hover:scale-105 motion-safe:group-active:scale-95',
+          )}
+        >
           <svg
             viewBox="0 0 24 24"
             className="size-7 translate-x-px fill-current"

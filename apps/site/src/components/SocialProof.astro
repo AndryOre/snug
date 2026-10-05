@@ -1,10 +1,10 @@
 ---
+import { Card, CardContent } from '@workspace/ui/components/card'
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
 import CardGrid from './CardGrid.astro'
 import Eyebrow from './Eyebrow.astro'
-import Panel from './Panel.astro'
 import Section from './Section.astro'
 import TextLink from './TextLink.astro'
 
@@ -32,16 +32,20 @@ const { proof } = getClosingCopy(Astro.props.locale)
   )}
   <CardGrid>
     {REVIEWS.map((review) => (
-      <Panel>
-        <figure lang="en" class="flex h-full flex-col justify-between gap-6">
-          <blockquote class="leading-body">
-            &ldquo;{review.quote}&rdquo;
-          </blockquote>
-          <figcaption class="font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
-            {review.author}, {review.date}
-          </figcaption>
-        </figure>
-      </Panel>
+      <li class="flex">
+        <Card lang="en" size="lg" className="w-full">
+          <figure class="contents">
+            <CardContent className="flex-1">
+              <blockquote class="leading-body text-base">
+                &ldquo;{review.quote}&rdquo;
+              </blockquote>
+            </CardContent>
+            <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
+              {review.author}, {review.date}
+            </figcaption>
+          </figure>
+        </Card>
+      </li>
     ))}
   </CardGrid>
   <p class="mt-8">

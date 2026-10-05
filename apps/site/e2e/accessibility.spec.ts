@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { firstFaqTrigger } from './faq-helpers'
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
 
@@ -55,9 +56,20 @@ test('the 404 page has no accessibility violations', async ({ page }) => {
 test.describe('opened states', () => {
   test('FAQ open has no accessibility violations', async ({ page }) => {
     await page.goto('/')
-    const first = page.locator('[data-section="faq"] details').first()
-    await first.locator('summary').click()
-    await expect(first).toHaveAttribute('open', '')
+    const first = await firstFaqTrigger(page)
+    await first.click()
+    await expect(first).toHaveAttribute('aria-expanded', 'true')
+    await expectNoViolations(page)
+  })
+
+  test('FAQ open has no accessibility violations at 320px', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 640 })
+    await page.goto('/')
+    const first = await firstFaqTrigger(page)
+    await first.click()
+    await expect(first).toHaveAttribute('aria-expanded', 'true')
     await expectNoViolations(page)
   })
 
@@ -65,9 +77,11 @@ test.describe('opened states', () => {
     page,
   }) => {
     await page.goto('/')
-    const switcher = page.locator('[data-language-switcher]')
-    await switcher.getByRole('button').click()
-    await expect(switcher.locator('nav')).toBeVisible()
+    await expect(
+      page.locator('astro-island[client="idle"]'),
+    ).not.toHaveAttribute('ssr', '')
+    await page.locator('[data-language-switcher]').getByRole('button').click()
+    await expect(page.locator('[data-language-menu]')).toBeVisible()
     await expectNoViolations(page)
   })
 
@@ -82,7 +96,7 @@ test.describe('opened states', () => {
     const poster = page.locator('[data-video-poster]')
     await poster.scrollIntoViewIfNeeded()
     await expect(
-      page.locator('astro-island[client="visible"]'),
+      page.locator('astro-island:has([data-video-poster])'),
     ).not.toHaveAttribute('ssr', '')
     await poster.click()
     await expect(page.locator('iframe[data-video-player]')).toBeVisible()

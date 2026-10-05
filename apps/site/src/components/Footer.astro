@@ -1,14 +1,23 @@
 ---
 import { FOOTER_LINK_HREFS, getClosingCopy, installHref } from '../i18n/landing'
-import type { Locale } from '../i18n/locales'
+import { Separator } from '@workspace/ui/components/separator'
+
+import {
+  languageTag,
+  LOCALE_NAMES,
+  localePath,
+  LOCALES,
+  type Locale,
+} from '../i18n/locales'
 import TextLink from './TextLink.astro'
 
 interface Props {
   locale: Locale
+  markCurrent?: boolean
 }
 
-const { locale } = Astro.props
-const { footer } = getClosingCopy(locale)
+const { locale, markCurrent = true } = Astro.props
+const { footer, header } = getClosingCopy(locale)
 const links = [
   { key: 'source', href: FOOTER_LINK_HREFS.source, label: footer.source },
   { key: 'privacy', href: FOOTER_LINK_HREFS.privacy, label: footer.privacy },
@@ -29,6 +38,24 @@ const links = [
           <li>
             <TextLink href={link.href} data-footer-link={link.key}>
               {link.label}
+            </TextLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <Separator />
+    <nav aria-label={header.languageLabel} data-footer-languages>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {LOCALES.map((code) => (
+          <li>
+            <TextLink
+              href={localePath(code)}
+              lang={languageTag(code)}
+              hreflang={languageTag(code)}
+              aria-current={markCurrent && code === locale ? 'page' : undefined}
+              class="aria-[current=page]:text-primary-text"
+            >
+              {LOCALE_NAMES[code]}
             </TextLink>
           </li>
         ))}
