@@ -13,20 +13,13 @@ interface Props {
 const { hero } = getLandingCopy(Astro.props.locale)
 ---
 
-<Section
-  section="hero"
-  class="bg-hero-glow"
->
+<Section section="hero" class="bg-hero-glow">
   <Eyebrow class="mb-6">{hero.eyebrow}</Eyebrow>
-  <h1
-    class="max-w-4xl font-heading text-display font-bold break-words hyphens-auto text-balance"
-  >
+  <h1 class="max-w-4xl font-heading text-display font-bold break-words hyphens-auto text-balance">
     <span class="block">{hero.headlineLead}</span>
     <span class="block text-primary-text">{hero.headlineAccent}</span>
   </h1>
-  <p
-    class="mt-6 max-w-2xl text-lead text-muted-foreground"
-  >
+  <p class="mt-6 max-w-2xl text-lead text-muted-foreground">
     {hero.subheadline}
   </p>
   <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">

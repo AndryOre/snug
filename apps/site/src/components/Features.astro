@@ -12,30 +12,24 @@ interface Props {
 const { features } = getLandingCopy(Astro.props.locale)
 ---
 
-<Section
-  section="features"
-  heading={features.heading}
-  class="defer-render-md"
->
+<Section section="features" heading={features.heading} class="defer-render-md">
   <CardGrid as="ol">
-    {
-      FEATURE_KEYS.map((key, index) => (
-        <NumberedCard
-          numeral={String(index + 1).padStart(2, '0')}
-          title={features.items[key].title}
-          body={features.items[key].body}
-        >
-          {FEATURE_FORMATS[key] && (
-            <ul class="mt-5 flex flex-wrap gap-2" aria-hidden="true">
-              {FEATURE_FORMATS[key].map((format) => (
-                <li class="rounded-md border border-border px-2 py-1 font-mono text-xs">
-                  {format}
-                </li>
-              ))}
-            </ul>
-          )}
-        </NumberedCard>
-      ))
-    }
+    {FEATURE_KEYS.map((key, index) => (
+      <NumberedCard
+        numeral={String(index + 1).padStart(2, '0')}
+        title={features.items[key].title}
+        body={features.items[key].body}
+      >
+        {FEATURE_FORMATS[key] && (
+          <ul class="mt-5 flex flex-wrap gap-2" aria-hidden="true">
+            {FEATURE_FORMATS[key].map((format) => (
+              <li class="rounded-md border border-border px-2 py-1 font-mono text-xs">
+                {format}
+              </li>
+            ))}
+          </ul>
+        )}
+      </NumberedCard>
+    ))}
   </CardGrid>
 </Section>
