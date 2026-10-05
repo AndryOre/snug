@@ -38,6 +38,7 @@
         "react-dom",
         "@types/react",
         "@types/react-dom",
+        "lighthouse",
       ],
       "ignoreBinaries": ["astro"],
     },
