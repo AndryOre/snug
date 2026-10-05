@@ -74,6 +74,12 @@
       "import": "Import preview: see what will change, then pick merge, replace or new.",
       "autoExport": "Auto-export: daily, in HTML, JSON and Markdown, with the next run shown.",
       "popup": "The toolbar popup exports everything in one click."
+    },
+    "alts": {
+      "export": "Snug's export page: a bookmark folder tree, a format picker and the Export button",
+      "import": "Snug's import preview: a list of bookmarks to add, change or skip, with merge, replace and new options",
+      "autoExport": "Snug's auto-export settings: a daily schedule, three formats and the next run time",
+      "popup": "Snug's toolbar popup with a single button to export all bookmarks"
     }
   },
   "video": {
@@ -148,6 +154,17 @@
     "privacy": "Privacy Policy",
     "listing": "Chrome Web Store listing",
     "changelog": "Changelog",
-    "note": "Snug is open source under the MIT license."
+    "note": "Snug is open source under the MIT license.",
+    "navLabel": "Footer"
+  },
+  "header": {
+    "languageLabel": "Language",
+    "skipLink": "Skip to content",
+    "homeLabel": "Snug home"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This address doesn't lead anywhere. It may be mistyped, or the page may have moved.",
+    "backLink": "Back to Snug"
   }
 }

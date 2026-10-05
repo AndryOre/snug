@@ -1,0 +1,14 @@
+{
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | Snug",
+      "description": "How Snug handles your data: the extension sends nothing anywhere, and this website runs no analytics scripts."
+    },
+    "homeLink": "Snug",
+    "englishOnly": "This page is available in English only. The other languages link here.",
+    "website": {
+      "heading": "This website",
+      "body": "This website runs no analytics scripts and loads nothing from third parties. Visits are counted only from the web server's access log, where IP addresses are masked, and the log is read offline."
+    }
+  }
+}
