@@ -40,13 +40,6 @@ export function buildSoftwareAppJsonLd(locale: Locale, description: string) {
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: STORE_FACTS.ratingValue,
-      ratingCount: STORE_FACTS.ratingCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
     interactionStatistic: {
       '@type': 'InteractionCounter',
       interactionType: 'https://schema.org/InstallAction',

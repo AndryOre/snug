@@ -17,6 +17,27 @@ export const LOCALES = [
 export type Locale = (typeof LOCALES)[number]
 
 /**
+ * Per-locale presentation settings: the text direction for `<html dir>` and
+ * whether the Latin Space Grotesk subset is worth preloading (CJK pages
+ * barely use it).
+ */
+export const LOCALE_CONFIG: Record<
+  Locale,
+  { dir: 'ltr' | 'rtl'; preloadLatinFont: boolean }
+> = {
+  en: { dir: 'ltr', preloadLatinFont: true },
+  es: { dir: 'ltr', preloadLatinFont: true },
+  de: { dir: 'ltr', preloadLatinFont: true },
+  fr: { dir: 'ltr', preloadLatinFont: true },
+  it: { dir: 'ltr', preloadLatinFont: true },
+  ja: { dir: 'ltr', preloadLatinFont: false },
+  ko: { dir: 'ltr', preloadLatinFont: false },
+  pt_BR: { dir: 'ltr', preloadLatinFont: true },
+  ru: { dir: 'ltr', preloadLatinFont: true },
+  zh_CN: { dir: 'ltr', preloadLatinFont: false },
+}
+
+/**
  * English is served at the site root; every other locale gets a path prefix.
  */
 export const DEFAULT_LOCALE: Locale = 'en'
