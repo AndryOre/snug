@@ -1,13 +1,21 @@
 import { theme } from '../theme'
 
 export type SegmentedControlProps = {
-  /** Option labels, e.g. merge / replace / new folder, already localized. */
+  /**
+  Option labels, e.g. merge / replace / new folder, already localized.
+   */
   options: readonly string[]
-  /** Active option as a fractional index; animate it for a sliding thumb. */
+  /**
+  Active option as a fractional index; animate it for a sliding thumb.
+   */
   position?: number
-  /** Width of every segment in px. Default 220. */
+  /**
+  Width of every segment in px. Default 220.
+   */
   segmentWidth?: number
-  /** Label font size in px. Default 20. */
+  /**
+  Label font size in px. Default 20.
+   */
   fontSize?: number
 }
 
