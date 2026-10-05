@@ -27,5 +27,6 @@ jobs:
           args: >-
             --offline --include-fragments=anchor-only --no-progress README.md
             PRIVACY_POLICY.md CODE_OF_CONDUCT.md CONTRIBUTING.md AGENTS.md
-            CONTEXT.md 'docs/**/*.md' '.github/*.md'
+            CONTEXT.md 'docs/**/*.md' '.github/*.md' 'apps/*/*.md'
+            'packages/*/*.md'
           fail: true

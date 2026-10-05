@@ -20,7 +20,7 @@
 
   rangeStrategy: 'bump',
   // Main requires the PR branch to be up to date before merging
-  // (strict_required_status_checks_policy in scripts/repo-settings/main-ruleset.json),
+  // (strict_required_status_checks_policy in the main branch ruleset),
   // so automerge branches must be kept current, not just conflict-free
   rebaseWhen: 'behind-base-branch',
 
@@ -70,11 +70,11 @@
       matchPackageNames: ['react', 'react-dom', '@types/react*'],
     },
     {
-      groupName: 'radix + lucide',
-      matchPackageNames: ['radix-ui', 'lucide-react'],
+      groupName: 'base ui + lucide',
+      matchPackageNames: ['@base-ui/react', 'lucide-react'],
     },
-    // Shared versions live once in the root catalog (package.json workspaces.catalog),
-    // so a single update PR covers every workspace that references them
+    // Catalog entries without a group of their own below move together: Renovate
+    // bumps the root catalog once for every workspace that references them
     {
       groupName: 'workspace catalog',
       matchFileNames: ['package.json'],

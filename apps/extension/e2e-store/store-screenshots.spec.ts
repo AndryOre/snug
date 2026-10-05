@@ -8,7 +8,11 @@ import type { SeedBookmark } from '../e2e/fixtures'
 import { STORE_CAPTIONS } from './captions'
 import { composeLocalSlide, composeUiSlide } from './compose-slide'
 
-const SCREENSHOTS_ROOT = path.resolve('../../docs/store/assets/screenshots')
+const EXTENSION_ROOT = path.resolve(import.meta.dirname, '..')
+const SCREENSHOTS_ROOT = path.resolve(
+  EXTENSION_ROOT,
+  '../../docs/store/assets/screenshots',
+)
 const DEFAULT_LOCALE = 'en'
 const SLIDE_FILES = [
   '01-export.png',
@@ -17,7 +21,7 @@ const SLIDE_FILES = [
   '04-popup.png',
   '05-local.png',
 ]
-const RAW_DIRECTORY = path.resolve('test-results/store/raw')
+const RAW_DIRECTORY = path.resolve(EXTENSION_ROOT, 'test-results/store/raw')
 const DEVICE_SCALE_FACTOR = 2
 const APP_CAPTURE = { width: 1280, height: 716 }
 const CANVAS = { width: 1280, height: 800 }
@@ -99,7 +103,10 @@ test.use({
 async function readMessages(
   locale: string,
 ): Promise<Record<string, { message: string }>> {
-  const raw = await readFile(path.resolve('locales', `${locale}.json`), 'utf8')
+  const raw = await readFile(
+    path.resolve(EXTENSION_ROOT, 'locales', `${locale}.json`),
+    'utf8',
+  )
   return JSON.parse(raw) as Record<string, { message: string }>
 }
 

@@ -81,6 +81,8 @@ export const LYCHEE_ARGS = [
   'CONTEXT.md',
   'docs/**/*.md',
   '.github/*.md',
+  'apps/*/*.md',
+  'packages/*/*.md',
 ] as const
 
 /**

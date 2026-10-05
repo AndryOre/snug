@@ -21,9 +21,16 @@ export default defineConfig({
       'tsconfig.base.json',
       'turbo.json',
       'apps/extension/**',
+      'apps/video/package.json',
       'packages/**',
     ],
-    excludeSources: ['apps/extension/.output/**', 'apps/extension/.wxt/**'],
+    excludeSources: [
+      'apps/extension/.output/**',
+      'apps/extension/.wxt/**',
+      'apps/extension/coverage/**',
+      'apps/extension/test-results/**',
+      'apps/extension/playwright-report/**',
+    ],
   },
   imports: {
     eslintrc: {

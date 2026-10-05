@@ -4,19 +4,19 @@
    number.
 
 2. Add a new entry to the top of the array `getChangelog()` returns in
-   `lib/changelog.ts`: a `version`, an `isoDate` (`YYYY-MM-DD`), and one or more
-   `items` (each an object with a `textKey` and, optionally, a `linkKey` +
-   `linkUrl` for entries that link to a specific page, e.g. an App route built
-   with `getAppUrl` (`lib/app-url.ts`) or via `browser.runtime.getURL`). Add the
-   same entry (version, date, and items) to the top of the root `CHANGELOG.md`
-   at the same time.
+   `apps/extension/lib/changelog.ts`: a `version`, an `isoDate` (`YYYY-MM-DD`),
+   and one or more `items` (each an object with a `textKey` and, optionally, a
+   `linkKey` + `linkUrl` for entries that link to a specific page, e.g. an App
+   route built with `getAppUrl` (`apps/extension/lib/app-url.ts`) or via
+   `browser.runtime.getURL`). Add the same entry (version, date, and items) to
+   the top of the root `CHANGELOG.md` at the same time.
 
 3. Add the i18n keys that entry references (every item's `textKey` and any
-   `linkKey`; the date needs no key) to **every** file in `locales/` (all 10:
-   `de`, `en`, `es`, `fr`, `it`, `ja`, `ko`, `pt_BR`, `ru`, `zh_CN`).
-   `lib/locale-parity.test.ts` requires every locale to carry the same top-level
-   key set as `en.json`, so a new changelog entry with keys missing from either
-   file fails that test.
+   `linkKey`; the date needs no key) to **every** file in
+   `apps/extension/locales/` (all 10: `de`, `en`, `es`, `fr`, `it`, `ja`, `ko`,
+   `pt_BR`, `ru`, `zh_CN`). `apps/extension/lib/locale-parity.test.ts` requires
+   every locale to carry the same top-level key set as `en.json`, so a new
+   changelog entry with keys missing from either file fails that test.
 
 4. Run `bun run check` and `bun run test` to confirm the version bump, changelog
    entry, and locale keys are all consistent.
@@ -27,10 +27,10 @@
    `snug-X.Y.Z-chrome.zip` and `snug-X.Y.Z-sources.zip`. The sources zip is
    rooted at the repo root and limited to an allowlist (`package.json`,
    `bun.lock`, `bunfig.toml`, `tsconfig.base.json`, `turbo.json`,
-   `apps/extension/**`, `packages/**`), set by `zip.includeSources` in
-   `apps/extension/wxt.config.ts`. A reviewer rebuilds it with
-   `bun install --frozen-lockfile && bun run build`. If a root file the build
-   needs is added later, add it to that allowlist.
+   `apps/extension/**`, `apps/video/package.json`, `packages/**`), set by
+   `zip.includeSources` in `apps/extension/wxt.config.ts`. A reviewer rebuilds
+   it with `bun install --frozen-lockfile && bun run build`. If a root file the
+   build needs is added later, add it to that allowlist.
 
 6. After the release PR merges, tag the merge commit with a **signed** tag and
    push it: `git tag -s vX.Y.Z <merge-commit-sha> && git push origin vX.Y.Z`.

@@ -5,6 +5,9 @@ v2.0.0. Every field is a plain-text block you can copy straight into the
 dashboard, with a character count next to each limited field. Nothing in this
 pack has been uploaded or submitted.
 
+> Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e-store/`) are
+> relative to `apps/extension/`.
+
 The live listing is still "Bookmark Import/Export" v1.3.0 (old name, old copy,
 old screenshots, a two-permission privacy tab and URLs on the old repository
 slug). The "current" values quoted below come from a dashboard snapshot taken on

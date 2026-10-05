@@ -6,6 +6,9 @@ short today. It's written for users, badge reviewers (OpenSSF Best Practices,
 OpenSSF Scorecard), and security researchers. Terms below (root folder, import
 mode, Import preview, and so on) follow [`CONTEXT.md`](../CONTEXT.md).
 
+> Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e-store/`) are
+> relative to `apps/extension/`.
+
 To report a vulnerability, see [`.github/SECURITY.md`](../.github/SECURITY.md)
 instead — this document is about the extension's design, not the reporting
 process.

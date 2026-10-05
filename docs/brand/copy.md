@@ -147,9 +147,10 @@ corrections came out of that check, now also fixed upstream in `brief.md` and
    filename templates for exports"). This copy mentions it as something Snug
    already does, not something it's fixing.
 4. **The "no completion feedback" pain was real at the time, and is now fixed.**
-   Exports and imports now confirm with a toast (`components/ui/toast.tsx`, used
-   by the popup and the App), and a failed scheduled backup raises a
-   notification. The original claim that no toast existed is historical.
+   Exports and imports now confirm with a toast
+   (`packages/ui/src/components/toast.tsx`, used by the popup and the App), and
+   a failed scheduled backup raises a notification. The original claim that no
+   toast existed is historical.
 
 ## Closed items (as shipped in v2.0.0)
 

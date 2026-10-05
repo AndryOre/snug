@@ -7,6 +7,10 @@ the default. Each slide is a translated caption on the aurora ground over a crop
 of the real built extension running in that locale, seeded with example
 bookmarks.
 
+> Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e-store/`) are
+> relative to `apps/extension/`. Test output lands in
+> `apps/extension/test-results/`.
+
 ## Locales
 
 `en`, `es`, `de`, `fr`, `it`, `ja`, `ko`, `pt_BR`, `ru`, `zh_CN`. The folder
