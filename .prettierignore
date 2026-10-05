@@ -8,3 +8,5 @@ coverage
 !.claude/skills/migrate-radix-to-base/
 !.claude/skills/shadcn/
 apps/video/out
+apps/site/dist
+apps/site/.astro
