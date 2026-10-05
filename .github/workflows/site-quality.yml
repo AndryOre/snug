@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/site/**'
       - 'packages/ui/**'
+      - 'PRIVACY_POLICY.md'
       - '.github/workflows/site-quality.yml'
 
 concurrency:

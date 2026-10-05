@@ -9,6 +9,7 @@ RUN bun install --frozen-lockfile --filter @snug/site --ignore-scripts
 
 COPY packages/ui packages/ui
 COPY apps/site apps/site
+COPY PRIVACY_POLICY.md PRIVACY_POLICY.md
 RUN bun run --cwd apps/site build
 
 FROM nginx:1.29-alpine
