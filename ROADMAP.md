@@ -26,6 +26,21 @@ all shipped in v2.0.0. New ideas are welcome as
 [GitHub issues](https://github.com/AndryOre/snug/issues); being listed here
 would never be a promise that they ship.
 
+## Landing page
+
+The landing page at snug.andryore.dev is being built. These are deliberately
+left for after it ships; each is tracked as a backlog item in Linear:
+
+- Comparison pages ("X alternative").
+- Docs and changelog inside the site.
+- Blog and programmatic SEO.
+- A mascot.
+- A launch plan and directory submissions.
+- A cookieless analytics dashboard, once there is traffic data to justify one
+  (see [ADR 0011](docs/adr/0011-landing-static-site-no-third-party-scripts.md)).
+- A translated privacy policy.
+- A post-launch audit pass (SEO, performance, accessibility, design).
+
 ## Out of scope
 
 The following are explicitly not planned, in keeping with the project's privacy

@@ -110,3 +110,13 @@ run, retry.
 
 **Failure notification** The system notification Snug shows when an Auto-export
 run fails; successful runs never notify. _Avoid_: alert, error toast, warning.
+
+**Landing page** The marketing site at snug.andryore.dev: a static, multilingual
+page whose one job is to send visitors to the Chrome Web Store listing. It is
+separate from the App and the popup, which live inside the extension. _Avoid_:
+website, homepage, marketing site, promo page.
+
+**Install redirect** The landing page's `/install` route, which sends the
+visitor to the Chrome Web Store listing with attribution tags so install clicks
+can be counted without cookies or scripts. _Avoid_: download link, store link,
+CTA link.
