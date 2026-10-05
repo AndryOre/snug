@@ -10,15 +10,25 @@ import { SPRING } from './easing'
 export type KineticTextProps = {
   text: string
   locale: Locale
-  /** Width the text must fit inside, in px. */
+  /**
+   * Width the text must fit inside, in px.
+   */
   maxWidth: number
-  /** Preferred size; shrinks to fit, never grows. Default 96. */
+  /**
+   * Preferred size; shrinks to fit, never grows. Default 96.
+   */
   fontSize?: number
-  /** Stagger unit. Default `word`; CJK locales segment by word natively. */
+  /**
+   * Stagger unit. Default `word`; CJK locales segment by word natively.
+   */
   unit?: 'word' | 'char'
-  /** Frame the entrance starts, relative to the enclosing Sequence. */
+  /**
+   * Frame the entrance starts, relative to the enclosing Sequence.
+   */
   delay?: number
-  /** Frames between units. Default 3. */
+  /**
+   * Frames between units. Default 3.
+   */
   stagger?: number
   align?: 'left' | 'center'
   weight?: number
@@ -30,7 +40,7 @@ const WRAP_THRESHOLD = 0.62
 const WRAP_WIDTH_FACTOR = 1.7
 
 const isCjk = (locale: Locale): boolean =>
-  locale === 'ja' || locale === 'ko' || locale === 'zh_CN'
+  ['ja', 'ko', 'zh_CN'].includes(locale)
 
 const splitWords = (text: string, locale: Locale): string[] => {
   const segmenter = new Intl.Segmenter(locale.replace('_', '-'), {
@@ -45,7 +55,7 @@ const splitWords = (text: string, locale: Locale): string[] => {
       joinNext = false
       continue
     }
-    const last = words[words.length - 1]
+    const last = words.at(-1)
     const isDash = /^\p{Pd}+$/u.test(segment)
     const isTrailingPunctuation = /^[\p{Pe}\p{Pf}\p{Po}]+$/u.test(segment)
     if (
@@ -82,8 +92,9 @@ const fitFontSize = (
       validateFontIsLoaded: false,
     }).fontSize
   const oneLine = Math.min(preferred, measure(maxWidth))
-  if (oneLine >= preferred * WRAP_THRESHOLD) return Math.floor(oneLine)
-  return Math.floor(Math.min(preferred, measure(maxWidth * WRAP_WIDTH_FACTOR)))
+  return oneLine >= preferred * WRAP_THRESHOLD
+    ? Math.floor(oneLine)
+    : Math.floor(Math.min(preferred, measure(maxWidth * WRAP_WIDTH_FACTOR)))
 }
 
 /**
@@ -110,7 +121,7 @@ export const KineticText = ({
     [text, fontFamily, weight, maxWidth, fontSize],
   )
   const units = useMemo(
-    () => (unit === 'char' ? Array.from(text) : splitWords(text, locale)),
+    () => (unit === 'char' ? [...text] : splitWords(text, locale)),
     [text, unit, locale],
   )
   const gap = unit === 'word' && !isCjk(locale) ? '0.28em' : 0

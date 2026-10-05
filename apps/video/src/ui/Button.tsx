@@ -4,7 +4,9 @@ import { theme } from '../theme'
 
 export type ButtonProps = {
   variant?: 'primary' | 'outline' | 'ghost'
-  /** 0..1 press squash, e.g. driven by a Cursor click frame. */
+  /**
+   * 0..1 press squash, e.g. driven by a Cursor click frame.
+   */
   press?: number
   children: ReactNode
 }

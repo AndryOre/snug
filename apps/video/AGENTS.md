@@ -18,8 +18,12 @@ pinned to one exact version together. See
   across the workspace boundary by relative path; never copy strings.
 - Run scripts from the repo root: `bun run video:studio`, `video:still`,
   `video:render`, `video:thumbnails`. `check` runs `tsc --noEmit` through
-  Turborepo and Prettier runs at the root. ESLint ignores `apps/video` (Remotion
-  needs inline styles that the shadcn rules reject), so lint does not cover it.
+  Turborepo and Prettier runs at the root. ESLint lints `apps/video` through a
+  scoped override in `eslint.config.mjs`: all `shadcn/*` rules are off (Remotion
+  needs inline styles), as are `jsdoc/require-param`, `jsdoc/require-returns`,
+  `unicorn/name-replacements` and `unicorn/consistent-boolean-name`. Everything
+  else, including the TSDoc-only comment rule, applies. Scripts report failure
+  with `process.exitCode`, never `process.exit`.
 - Keep `remotion` and every `@remotion/*` dependency on the same exact version.
 - Never use sudo. Setup, the headless browser fallback and render details are in
   [`README.md`](README.md).

@@ -4,7 +4,9 @@ import { theme } from '../theme'
 
 export type BlobMarkProps = {
   size?: number
-  /** Frames for one full morph cycle. Default 90. */
+  /**
+   * Frames for one full morph cycle. Default 90.
+   */
   period?: number
 }
 

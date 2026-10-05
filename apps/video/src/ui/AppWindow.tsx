@@ -6,16 +6,8 @@ import { theme } from '../theme'
 import { BlobMark } from './BlobMark'
 import { Icon, type IconName } from './Icon'
 
-export type NavId = (typeof NAV_IDS)[number]
-
-const NAV_IDS = [
-  'export',
-  'import',
-  'duplicates',
-  'autoExport',
-  'settings',
-  'whatsNew',
-] as const
+export type NavId =
+  'export' | 'import' | 'duplicates' | 'autoExport' | 'settings' | 'whatsNew'
 
 const NAV: { id: NavId; key: MessageKey; icon: IconName }[] = [
   { id: 'export', key: 'shell_navExport', icon: 'download' },
@@ -34,6 +26,7 @@ const SIDEBAR_PADDING_TOP = 28
 const BRAND_ROW = 72
 const NAV_GAP = 10
 const NAV_ITEM = 52
+const BRAND_NAME = 'Snug'
 
 /**
  * Layer coordinates of each nav entry's centre, for Cursor waypoints and
@@ -53,11 +46,17 @@ export const navItemCenter = (id: NavId): { x: number; y: number } => ({
 
 export type AppWindowProps = {
   locale: Locale
-  /** Highlighted nav entry; its label is also the page heading. */
+  /**
+   * Highlighted nav entry; its label is also the page heading.
+   */
   active: NavId
-  /** 0..1 amber highlight on a hovered nav entry, per id. */
+  /**
+   * 0..1 amber highlight on a hovered nav entry, per id.
+   */
   hover?: Partial<Record<NavId, number>>
-  /** Content area, laid out below the page heading. */
+  /**
+   * Content area, laid out below the page heading.
+   */
   children?: ReactNode
 }
 
@@ -141,7 +140,7 @@ export const AppWindow = ({
             }}
           >
             <BlobMark size={48} />
-            Snug
+            {BRAND_NAME}
           </div>
           {NAV.map((item) => {
             const isActive = item.id === active
