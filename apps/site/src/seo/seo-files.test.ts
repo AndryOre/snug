@@ -75,11 +75,12 @@ describe('root file routes', () => {
     expect(await response.text()).toMatch(/^# Snug\n/)
   })
 
-  it('serves a sitemap with one url per locale', async () => {
+  it('serves a sitemap with one url per locale plus the privacy page', async () => {
     const response = getSitemapXml()
     expect(response.headers.get('Content-Type')).toContain('application/xml')
     const xml = await response.text()
-    expect(xml.match(/<url>/g)).toHaveLength(LOCALES.length)
+    expect(xml.match(/<url>/g)).toHaveLength(LOCALES.length + 1)
+    expect(xml).toContain(`<loc>${SITE_ORIGIN}/privacy/</loc>`)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       LOCALES.length * hreflangAlternates().length,
     )

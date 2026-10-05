@@ -69,12 +69,15 @@ Snug is a free, open-source Chromium browser extension. It makes no network call
 /**
  * The XML sitemap listing every locale page with `xhtml:link` alternates.
  * @param entries - Absolute page URLs.
- * @param alternates - The hreflang alternates shared by every page.
+ * @param alternates - The hreflang alternates shared by every locale page.
+ * @param standaloneEntries - Absolute URLs of pages with no translations,
+ * listed without alternates.
  * @returns A complete `sitemap.xml` document.
  */
 export function buildSitemapXml(
   entries: readonly string[],
   alternates: readonly { hreflang: string; href: string }[],
+  standaloneEntries: readonly string[] = [],
 ): string {
   const links = alternates
     .map(
@@ -85,9 +88,13 @@ export function buildSitemapXml(
   const urls = entries
     .map((loc) => `  <url>\n    <loc>${loc}</loc>\n${links}\n  </url>`)
     .join('\n')
+  const standaloneUrls = standaloneEntries.map(
+    (loc) => `  <url>\n    <loc>${loc}</loc>\n  </url>`,
+  )
+  const allUrls = [urls, ...standaloneUrls].join('\n')
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls}
+${allUrls}
 </urlset>
 `
 }

@@ -64,7 +64,7 @@ export const TRUST_LINK_HREFS = {
   scorecard: 'https://scorecard.dev/viewer/?uri=github.com/AndryOre/snug',
   bestPractices: 'https://www.bestpractices.dev/projects/15093',
   ci: 'https://github.com/AndryOre/snug/actions/workflows/ci.yml',
-  privacy: 'https://github.com/AndryOre/snug/blob/main/PRIVACY_POLICY.md',
+  privacy: '/privacy/',
 } as const
 
 /**

@@ -116,3 +116,46 @@ describe('root files', () => {
     )
   })
 })
+
+describe('privacy page', () => {
+  const policy = readFileSync(
+    path.join(siteRoot, '../../PRIVACY_POLICY.md'),
+    'utf8',
+  )
+  const headings = policy
+    .matchAll(/^##+ (.+)$/gm)
+    .map((match) => match[1])
+    .toArray()
+
+  it('renders every policy heading from PRIVACY_POLICY.md', () => {
+    const html = readBuilt('privacy/index.html')
+    expect(headings.length).toBeGreaterThan(3)
+    for (const heading of headings) {
+      expect(html).toContain(`>${heading}</h`)
+    }
+  })
+
+  it('states the English-only scope and the log-only visit counting', () => {
+    const html = readBuilt('privacy/index.html')
+    expect(html).toContain('<html lang="en"')
+    expect(html).toContain('English only')
+    expect(html).toContain('no analytics')
+    expect(html).toContain('masked')
+    expect(html).not.toMatch(/Plausible|PostHog|Umami|Google Analytics/)
+    expect(html).not.toMatch(/<script src=/)
+  })
+
+  it('is canonical, indexed and listed in the sitemap', () => {
+    const html = readBuilt('privacy/index.html')
+    expect(html).toContain(
+      `<link rel="canonical" href="${SITE_ORIGIN}/privacy/"`,
+    )
+    expect(readBuilt('sitemap.xml')).toContain(
+      `<loc>${SITE_ORIGIN}/privacy/</loc>`,
+    )
+  })
+
+  it.each(LOCALES)('%s links the trust section to /privacy', (locale) => {
+    expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
+  })
+})

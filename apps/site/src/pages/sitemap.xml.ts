@@ -8,7 +8,10 @@ import { buildSitemapXml } from '../seo/crawlers'
 
 export function GET() {
   const entries = LOCALES.map((locale) => `${SITE_ORIGIN}${localePath(locale)}`)
-  return new Response(buildSitemapXml(entries, hreflangAlternates()), {
-    headers: { 'Content-Type': 'application/xml; charset=utf-8' },
-  })
+  return new Response(
+    buildSitemapXml(entries, hreflangAlternates(), [`${SITE_ORIGIN}/privacy/`]),
+    {
+      headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+    },
+  )
 }
