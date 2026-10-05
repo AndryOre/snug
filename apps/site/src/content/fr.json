@@ -47,7 +47,7 @@
       },
       "preview": {
         "title": "Aperçu avant l'import",
-        "body": "Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier `Bookmarks` de profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture. Snug détecte le format et affiche un aperçu. Vous fusionnez ensuite, remplacez, ou ajoutez tout dans un nouveau dossier."
+        "body": "Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier « Bookmarks » de profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture. Snug détecte le format et affiche un aperçu. Vous fusionnez ensuite, remplacez, ou ajoutez tout dans un nouveau dossier."
       },
       "undo": {
         "title": "Annulez un remplacement",
@@ -86,7 +86,8 @@
     "heading": "Voyez-le en action",
     "caption": "Une courte démonstration : exporter un dossier, puis l'importer avec un aperçu.",
     "note": "La vidéo ne se charge depuis YouTube que lorsque vous appuyez sur lecture. D'ici là, la page ne contacte personne.",
-    "play": "Lire la vidéo"
+    "play": "Lire la vidéo",
+    "labelSeparator": " : "
   },
   "proof": {
     "heading": "Ce qu'en disent les utilisateurs",
@@ -128,7 +129,7 @@
       },
       "formats": {
         "question": "Quels formats gère-t-il ?",
-        "answer": "Export en HTML, JSON, CSV, Markdown, OPML ou XBEL. Import de HTML, JSON, CSV ou XBEL, d'un fichier `Bookmarks` de profil Chrome, ou d'un export Safari."
+        "answer": "Export en HTML, JSON, CSV, Markdown, OPML ou XBEL. Import de HTML, JSON, CSV ou XBEL, d'un fichier « Bookmarks » de profil Chrome, ou d'un export Safari."
       },
       "browsers": {
         "question": "Dans quels navigateurs fonctionne-t-il ?",
@@ -159,6 +160,7 @@
   },
   "header": {
     "languageLabel": "Langue",
+    "languageSeparator": " : ",
     "skipLink": "Aller au contenu",
     "homeLabel": "Accueil de Snug"
   },

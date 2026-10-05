@@ -22,7 +22,10 @@ const { header } = getClosingCopy(locale)
     popovertarget="language-menu"
     class="language-trigger flex min-h-11 max-w-full cursor-pointer items-center gap-2 rounded-md px-3 text-foreground outline-hidden hover:text-primary-text focus-visible:ring-3 focus-visible:ring-ring/50"
   >
-    <span class="sr-only">{header.languageLabel}: </span>
+    <span class="sr-only">
+      {header.languageLabel}
+      {header.languageSeparator}
+    </span>
     <span lang={languageTag(locale)} class="min-w-0 truncate">
       {LOCALE_NAMES[locale]}
     </span>

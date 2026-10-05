@@ -47,7 +47,7 @@
       },
       "preview": {
         "title": "导入前先预览",
-        "body": "可导入 HTML、JSON、CSV 或 XBEL 文件、Chrome 配置文件的 `Bookmarks` 文件，或包含个人收藏和阅读列表的 Safari 导出文件。Snug 会检测格式并显示预览。然后你可以合并、替换，或把全部内容添加到一个新文件夹。"
+        "body": "可导入 HTML、JSON、CSV 或 XBEL 文件、Chrome 配置文件的 “Bookmarks” 文件，或包含个人收藏和阅读列表的 Safari 导出文件。Snug 会检测格式并显示预览。然后你可以合并、替换，或把全部内容添加到一个新文件夹。"
       },
       "undo": {
         "title": "撤销替换",
@@ -86,7 +86,8 @@
     "heading": "看看它如何工作",
     "caption": "简短演示：导出一个文件夹，再带预览地导入。",
     "note": "视频只有在你点击播放时才会从 YouTube 加载。在此之前，页面不会联系任何人。",
-    "play": "播放视频"
+    "play": "播放视频",
+    "labelSeparator": "："
   },
   "proof": {
     "heading": "用户怎么说",
@@ -128,7 +129,7 @@
       },
       "formats": {
         "question": "支持哪些格式？",
-        "answer": "可导出为 HTML、JSON、CSV、Markdown、OPML 或 XBEL。可导入 HTML、JSON、CSV 或 XBEL、Chrome 配置文件的 `Bookmarks` 文件，或 Safari 导出文件。"
+        "answer": "可导出为 HTML、JSON、CSV、Markdown、OPML 或 XBEL。可导入 HTML、JSON、CSV 或 XBEL、Chrome 配置文件的 “Bookmarks” 文件，或 Safari 导出文件。"
       },
       "browsers": {
         "question": "适用于哪些浏览器？",
@@ -159,6 +160,7 @@
   },
   "header": {
     "languageLabel": "语言",
+    "languageSeparator": "：",
     "skipLink": "跳到正文",
     "homeLabel": "Snug 首页"
   },

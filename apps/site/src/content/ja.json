@@ -47,7 +47,7 @@
       },
       "preview": {
         "title": "読み込む前にプレビュー",
-        "body": "HTML、JSON、CSV、XBEL のファイル、Chrome プロファイルの `Bookmarks` ファイル、お気に入りとリーディングリストを含む Safari の書き出しファイルを読み込めます。Snug が形式を検出してプレビューを表示します。そのあと、統合する、置き換える、すべてを新しいフォルダーに追加する、のいずれかを選びます。"
+        "body": "HTML、JSON、CSV、XBEL のファイル、Chrome プロファイルの 「Bookmarks」 ファイル、お気に入りとリーディングリストを含む Safari の書き出しファイルを読み込めます。Snug が形式を検出してプレビューを表示します。そのあと、統合する、置き換える、すべてを新しいフォルダーに追加する、のいずれかを選びます。"
       },
       "undo": {
         "title": "置き換えを元に戻す",
@@ -86,7 +86,8 @@
     "heading": "動作を見る",
     "caption": "フォルダーを書き出し、プレビューつきで読み込むまでの短い紹介です。",
     "note": "動画は、再生を押したときにだけ YouTube から読み込まれます。それまでページは外部と通信しません。",
-    "play": "動画を再生"
+    "play": "動画を再生",
+    "labelSeparator": "："
   },
   "proof": {
     "heading": "ユーザーの声",
@@ -128,7 +129,7 @@
       },
       "formats": {
         "question": "どの形式に対応していますか？",
-        "answer": "書き出しは HTML、JSON、CSV、Markdown、OPML、XBEL。読み込みは HTML、JSON、CSV、XBEL、Chrome プロファイルの `Bookmarks` ファイル、Safari の書き出しファイルです。"
+        "answer": "書き出しは HTML、JSON、CSV、Markdown、OPML、XBEL。読み込みは HTML、JSON、CSV、XBEL、Chrome プロファイルの 「Bookmarks」 ファイル、Safari の書き出しファイルです。"
       },
       "browsers": {
         "question": "どのブラウザーで使えますか？",
@@ -159,6 +160,7 @@
   },
   "header": {
     "languageLabel": "言語",
+    "languageSeparator": "：",
     "skipLink": "本文へスキップ",
     "homeLabel": "Snug ホーム"
   },

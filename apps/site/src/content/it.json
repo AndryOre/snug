@@ -47,7 +47,7 @@
       },
       "preview": {
         "title": "Anteprima prima di importare",
-        "body": "Importa file HTML, JSON, CSV o XBEL, un file `Bookmarks` di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura. Snug rileva il formato e mostra un'anteprima. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella."
+        "body": "Importa file HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura. Snug rileva il formato e mostra un'anteprima. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella."
       },
       "undo": {
         "title": "Annulla una sostituzione",
@@ -86,7 +86,8 @@
     "heading": "Guardalo in azione",
     "caption": "Un breve percorso: esportare una cartella e importarla con un'anteprima.",
     "note": "Il video si carica da YouTube solo quando premi play. Fino ad allora la pagina non contatta nessuno.",
-    "play": "Riproduci video"
+    "play": "Riproduci video",
+    "labelSeparator": ": "
   },
   "proof": {
     "heading": "Cosa dicono le persone",
@@ -128,7 +129,7 @@
       },
       "formats": {
         "question": "Quali formati gestisce?",
-        "answer": "Esporta in HTML, JSON, CSV, Markdown, OPML o XBEL. Importa HTML, JSON, CSV o XBEL, un file `Bookmarks` di un profilo Chrome oppure un'esportazione di Safari."
+        "answer": "Esporta in HTML, JSON, CSV, Markdown, OPML o XBEL. Importa HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari."
       },
       "browsers": {
         "question": "In quali browser funziona?",
@@ -159,6 +160,7 @@
   },
   "header": {
     "languageLabel": "Lingua",
+    "languageSeparator": ": ",
     "skipLink": "Vai al contenuto",
     "homeLabel": "Home di Snug"
   },
