@@ -1,5 +1,5 @@
 ---
-import { Card, CardContent, CardFooter } from '@workspace/ui/components/card'
+import { Card, CardContent } from '@workspace/ui/components/card'
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
@@ -34,16 +34,16 @@ const { proof } = getClosingCopy(Astro.props.locale)
     {REVIEWS.map((review) => (
       <li class="flex">
         <Card lang="en" size="lg" className="w-full">
-          <CardContent className="flex-1">
-            <blockquote class="leading-body text-base">
-              &ldquo;{review.quote}&rdquo;
-            </blockquote>
-          </CardContent>
-          <CardFooter className="border-t-0 bg-transparent pt-0">
-            <p class="font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
+          <figure class="contents">
+            <CardContent className="flex-1">
+              <blockquote class="leading-body text-base">
+                &ldquo;{review.quote}&rdquo;
+              </blockquote>
+            </CardContent>
+            <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
               {review.author}, {review.date}
-            </p>
-          </CardFooter>
+            </figcaption>
+          </figure>
         </Card>
       </li>
     ))}
