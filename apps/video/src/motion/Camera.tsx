@@ -4,9 +4,13 @@ import { spring, useCurrentFrame, useVideoConfig } from 'remotion'
 import { SPRING } from './easing'
 
 export type CameraKeyframe = {
-  /** Frame at which the move to this keyframe starts. */
+  /**
+   * Frame at which the move to this keyframe starts.
+   */
   frame: number
-  /** Point of the layer, in layer coordinates, that lands on the anchor. */
+  /**
+   * Point of the layer, in layer coordinates, that lands on the anchor.
+   */
   x: number
   y: number
   zoom: number
@@ -27,13 +31,14 @@ export const cameraStateAt = (
   fps: number,
   moveFrames: number,
 ): CameraState => {
+  // eslint-disable-next-line unicorn/no-array-sort -- toSorted is not in the ES2022 lib; this sorts a fresh copy
   const sorted = [...keyframes].sort((a, b) => a.frame - b.frame)
   const first = sorted[0]
   if (!first) return { x: 0, y: 0, zoom: 1 }
   let index = 0
-  sorted.forEach((keyframe, position) => {
+  for (const [position, keyframe] of sorted.entries()) {
     if (keyframe.frame <= frame) index = position
-  })
+  }
   const current = sorted[index] ?? first
   const previous = sorted[index - 1]
   if (!previous) return current
@@ -52,14 +57,22 @@ export const cameraStateAt = (
 
 export type CameraProps = {
   keyframes: readonly CameraKeyframe[]
-  /** Frames a move takes. Default 24. */
+  /**
+   * Frames a move takes. Default 24.
+   */
   moveFrames?: number
-  /** Screen point (viewport pixels) the focus lands on. Default: centre. */
+  /**
+   * Screen point (viewport pixels) the focus lands on. Default: centre.
+   */
   anchor?: { x: number; y: number }
-  /** Viewport size. Default: the composition size. */
+  /**
+   * Viewport size. Default: the composition size.
+   */
   width?: number
   height?: number
-  /** Size of the transformed layer. Default: the viewport size. */
+  /**
+   * Size of the transformed layer. Default: the viewport size.
+   */
   layer?: { width: number; height: number }
   children: ReactNode
 }

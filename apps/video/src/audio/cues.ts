@@ -5,10 +5,14 @@ import { SCENE_RANGES } from '../timing'
 export type SfxName = 'click' | 'whoosh' | 'pop' | 'tick' | 'chime' | 'thud'
 
 export type SfxCue = {
-  /** Frame in the final cut. */
+  /**
+   * Frame in the final cut.
+   */
   frame: number
   sfx: SfxName
-  /** 0 to 1, kept low so the music stays in front. */
+  /**
+   * 0 to 1, kept low so the music stays in front.
+   */
   volume: number
 }
 
@@ -48,7 +52,9 @@ const TRANSITION_WHOOSHES: SfxCue[] = [
   SCENE_RANGES.cta,
 ].map((range) => cue(range.from - WHOOSH_PEAK_FRAMES, 'whoosh'))
 
-/** Every sound effect of the promo, in final-cut frames. */
+/**
+ * Every sound effect of the promo, in final-cut frames.
+ */
 export const SFX_CUES: readonly SfxCue[] = [
   ...TRANSITION_WHOOSHES,
   ...atScene('export', EXPORT_AUDIO_FRAMES.clicks, 'click'),
@@ -58,4 +64,5 @@ export const SFX_CUES: readonly SfxCue[] = [
   ...atScene('import', IMPORT_AUDIO_FRAMES.clicks, 'click'),
   ...atScene('import', [IMPORT_AUDIO_FRAMES.toast], 'chime'),
   cue(SCENE_RANGES.cta.from + 14, 'chime'),
+  // eslint-disable-next-line unicorn/no-array-sort -- toSorted is not in the ES2022 lib; the array literal is a fresh copy
 ].sort((a, b) => a.frame - b.frame)

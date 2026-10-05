@@ -13,14 +13,20 @@ export const BPM = 120
  */
 export const FIRST_BEAT_FRAME = 0
 
-/** Frames per beat, fractional on purpose: do not round before summing. */
+/**
+ * Frames per beat, fractional on purpose: do not round before summing.
+ */
 export const FRAMES_PER_BEAT = (60 / BPM) * FPS
 
-/** Frame of beat `index` (0 is the first beat), rounded to a whole frame. */
+/**
+ * Frame of beat `index` (0 is the first beat), rounded to a whole frame.
+ */
 export const beatFrame = (index: number): number =>
   Math.round(FIRST_BEAT_FRAME + index * FRAMES_PER_BEAT)
 
-/** Frames of every beat inside the video, in order. */
+/**
+ * Frames of every beat inside the video, in order.
+ */
 export const BEAT_FRAMES: readonly number[] = Array.from(
   { length: Math.ceil((TOTAL_FRAMES - FIRST_BEAT_FRAME) / FRAMES_PER_BEAT) },
   (_, index) => beatFrame(index),
