@@ -20,6 +20,8 @@ Related files:
 - [`baseline-2026-09.md`](baseline-2026-09.md) — pre-rename analytics, for
   comparison after the rename.
 - [`assets/`](assets/) — promo tiles and screenshots.
+- [`featured-nomination.md`](featured-nomination.md) — the Featured badge
+  nomination form answers, evidence and dashboard audit checklist.
 
 ## Findings
 
