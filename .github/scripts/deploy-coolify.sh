@@ -12,13 +12,16 @@ if [[ -z "${COOLIFY_API_TOKEN:-}" || -z "${COOLIFY_APP_UUID:-}" ]]; then
   exit 1
 fi
 
-coolify_get() {
+coolify_request() {
+  local method="$1"
+  local path="$2"
   curl --silent --show-error --fail --max-time 30 \
+    --request "${method}" \
     --header "Authorization: Bearer ${COOLIFY_API_TOKEN}" \
-    "${api_base}/$1"
+    "${api_base}/${path}"
 }
 
-trigger_response=$(coolify_get "deploy?uuid=${COOLIFY_APP_UUID}&force=false") || {
+trigger_response=$(coolify_request POST "deploy?uuid=${COOLIFY_APP_UUID}&force=false") || {
   echo "::error::Coolify rejected the deploy request."
   exit 1
 }
@@ -31,7 +34,7 @@ fi
 echo "Deployment queued: ${deployment_uuid}"
 
 for ((poll = 1; poll <= max_polls; poll++)); do
-  status=$(coolify_get "deployments/${deployment_uuid}" | jq -r '.status // "unknown"') || status="unknown"
+  status=$(coolify_request GET "deployments/${deployment_uuid}" | jq -r '.status // "unknown"') || status="unknown"
   echo "Deployment status: ${status}"
   case "${status}" in
     finished)
