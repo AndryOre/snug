@@ -8,7 +8,9 @@ const CLAMP = {
 } as const
 
 export type Waypoint = {
-  /** Frame the cursor arrives at this point. */
+  /**
+   * Frame the cursor arrives at this point.
+   */
   frame: number
   x: number
   y: number
@@ -28,9 +30,9 @@ export const cursorPositionAt = (
   const first = waypoints[0]
   if (!first) return { x: 0, y: 0 }
   let index = 0
-  waypoints.forEach((waypoint, position) => {
+  for (const [position, waypoint] of waypoints.entries()) {
     if (waypoint.frame <= frame) index = position
-  })
+  }
   const from = waypoints[index] ?? first
   const to = waypoints[index + 1]
   if (!to) return { x: from.x, y: from.y }
@@ -50,9 +52,13 @@ export const clicksBy = (clicks: readonly number[], frame: number): number =>
 
 export type CursorProps = {
   waypoints: readonly Waypoint[]
-  /** Frames at which a click lands. */
+  /**
+   * Frames at which a click lands.
+   */
   clicks?: readonly number[]
-  /** Arrow scale, 1 is 20x28 px. Default 1.4. */
+  /**
+   * Arrow scale, 1 is 20x28 px. Default 1.4.
+   */
   scale?: number
 }
 

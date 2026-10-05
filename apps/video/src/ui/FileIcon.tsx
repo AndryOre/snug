@@ -22,7 +22,9 @@ const EXTENSIONS: Record<ExportFormat, string> = {
 
 export type FileIconProps = {
   format: ExportFormat
-  /** Width in px; height is 1.25x. Default 96. */
+  /**
+   * Width in px; height is 1.25x. Default 96.
+   */
   size?: number
 }
 

@@ -12,7 +12,9 @@ export const MATCH_POINTS = {
 export type MatchPoint = { x: number; y: number }
 
 export type MatchCutProps = {
-  /** Screen position (1920x1080 space) of the element's centre. */
+  /**
+   * Screen position (1920x1080 space) of the element's centre.
+   */
   at: MatchPoint
   scale?: number
   children: ReactNode
