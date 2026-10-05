@@ -20,9 +20,10 @@ const WINDOW_LEFT = 740
 const WINDOW_TOP = 200
 const BLOB_SIZE = 76
 const WORDMARK_SIZE = 56
+const WORDMARK_TEXT = 'Snug'
 
 const isCjk = (locale: Locale): boolean =>
-  locale === 'ja' || locale === 'ko' || locale === 'zh_CN'
+  ['ja', 'ko', 'zh_CN'].includes(locale)
 
 /**
  * Hook font size for a locale. CJK glyphs are visually lighter per character
@@ -41,8 +42,7 @@ export const hookSizeFor = (locale: Locale): number => {
 export const hookLinesFor = (locale: Locale): string[] => {
   const hook = VIDEO_COPY[locale].hook
   if (locale === 'ja') return hook.split(/(?<=、)/)
-  if (locale === 'ru') return [hook.replace(' — ', '\u00A0— ')]
-  return [hook]
+  return [locale === 'ru' ? hook.replace(' — ', '\u{A0}— ') : hook]
 }
 
 /**
@@ -92,7 +92,7 @@ export const Thumbnail = ({ locale }: SceneProps) => {
               letterSpacing: '-0.02em',
             }}
           >
-            Snug
+            {WORDMARK_TEXT}
           </span>
         </div>
         <div

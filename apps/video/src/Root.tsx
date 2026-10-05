@@ -23,13 +23,14 @@ import {
   WIDTH,
 } from './timing'
 
-const gated =
-  (Scene: ComponentType<SceneProps>): ComponentType<SceneProps> =>
-  ({ locale }) => (
+const gated = (Scene: ComponentType<SceneProps>): ComponentType<SceneProps> => {
+  const GatedScene = ({ locale }: SceneProps) => (
     <FontGate locale={locale}>
       <Scene locale={locale} />
     </FontGate>
   )
+  return GatedScene
+}
 
 const SCENES: {
   id: SceneId
