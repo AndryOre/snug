@@ -28,7 +28,7 @@ status() { curl -s -o /dev/null -w '%{http_code}' "$1"; }
 [ "$(location "$base/install")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=direct" ] || fail "default campaign"
 [ "$(location "$base/install?c=hero")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=hero" ] || fail "c=hero"
 case "$(location "$base/install?c=a%26b")" in *campaign=direct) ;; *) fail "unsafe tag not rejected" ;; esac
-[ "$(status "$base/nope")" = 404 ] || fail "missing page is not 404"
+[ "$(status "$base/nope/")" = 404 ] || fail "missing page is not 404"
 
 headers="$(curl -s -o /dev/null -D - "$base/" | tr -d '\r')"
 for header in content-security-policy x-content-type-options referrer-policy permissions-policy; do
