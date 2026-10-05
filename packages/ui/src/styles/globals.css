@@ -261,35 +261,6 @@
   }
 }
 
-@utility language-trigger {
-  @supports (anchor-name: --language-trigger) {
-    anchor-name: --language-trigger;
-  }
-}
-
-@utility language-panel {
-  inset: auto;
-  top: 3.5rem;
-  right: 1rem;
-  margin: 0;
-  overflow-y: auto;
-  max-height: calc(100dvh - 4.5rem);
-  @media (min-width: 48rem) {
-    right: 3.5rem;
-  }
-  @media (min-width: 1352px) {
-    right: calc((100vw - var(--container-site)) / 2 + 3.5rem);
-  }
-  @supports (anchor-name: --language-trigger) {
-    position-anchor: --language-trigger;
-    position-area: block-end span-inline-start;
-    position-try-fallbacks: flip-inline;
-    margin-block-start: 0.5rem;
-    top: auto;
-    right: auto;
-  }
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

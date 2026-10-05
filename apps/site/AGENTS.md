@@ -18,8 +18,8 @@ tokens of its own. The code map is
 - `.astro` files are linted by the same `shadcn/*` rules and TSDoc-only comment
   rule as `.ts`/`.tsx` (`eslint-plugin-astro` in the root `eslint.config.mjs`).
   Fluid type sizes, line heights, gradients, the site max-width and the
-  `content-visibility` and language-panel CSS are tokens and `@utility` entries
-  in `packages/ui/src/styles/globals.css`, never arbitrary values or `<style>`
+  `content-visibility` CSS are tokens and `@utility` entries in
+  `packages/ui/src/styles/globals.css`, never arbitrary values or `<style>`
   blocks. The React JSX rules do not apply to `.astro` templates.
 
 - No third-party scripts, fonts, embeds or requests on page load, and no
