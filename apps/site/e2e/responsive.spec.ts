@@ -12,6 +12,12 @@ async function expectNoHorizontalOverflow(page: Page): Promise<void> {
   expect(scrollWidth).toBeLessThanOrEqual(innerWidth)
 }
 
+test('/privacy/ has no horizontal overflow', async ({ page }) => {
+  await page.goto('/privacy/')
+  await expect(page.locator('h1')).toBeVisible()
+  await expectNoHorizontalOverflow(page)
+})
+
 for (const path of PATHS) {
   test(`${path} has no horizontal overflow`, async ({ page }) => {
     await page.goto(path)

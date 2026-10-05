@@ -21,6 +21,31 @@ for (const path of PAGES) {
   })
 }
 
+test('/privacy/ has no accessibility violations at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 })
+  await page.goto('/privacy/')
+  await expectNoViolations(page)
+})
+
+test('/privacy/ inline links are underlined with visible contrast', async ({
+  page,
+}) => {
+  await page.goto('/privacy/')
+  const link = page.locator('[data-section="policy"] a').first()
+  const style = await link.evaluate((element) => {
+    const computed = globalThis.getComputedStyle(element)
+    return {
+      line: computed.textDecorationLine,
+      color: computed.textDecorationColor,
+      text: computed.color,
+      thickness: Number(computed.textDecorationThickness.replace('px', '')),
+    }
+  })
+  expect(style.line).toBe('underline')
+  expect(style.color).toBe(style.text)
+  expect(style.thickness).toBeGreaterThanOrEqual(1)
+})
+
 test('the 404 page has no accessibility violations', async ({ page }) => {
   const response = await page.goto('/nope')
   expect(response?.status()).toBe(404)
