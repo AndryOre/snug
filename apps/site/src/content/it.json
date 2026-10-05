@@ -3,6 +3,9 @@
     "title": "Snug: Esportazione, importazione e backup dei segnalibri",
     "description": "Esporta, importa e fai il backup dei segnalibri in formati comuni, da Chrome o Safari. Tutto in locale."
   },
+  "seo": {
+    "ogImageAlt": "Logo di Snug, un’icona di segnalibro color ambra, sopra una breve descrizione dell’estensione su sfondo scuro."
+  },
   "hero": {
     "eyebrow": "Esportazione, importazione e backup dei segnalibri",
     "headlineLead": "Porta con te i tuoi segnalibri.",
@@ -92,7 +95,7 @@
   "proof": {
     "heading": "Cosa dicono le persone",
     "numbers": "5.000 utenti. 4,8 stelle su 20 valutazioni nel Chrome Web Store (2026-10-05).",
-    "renameNote": "Sono recensioni pubbliche del Chrome Web Store, in inglese come sono state pubblicate. La maggior parte è stata scritta prima che Snug cambiasse nome, quando la scheda si chiamava \"Bookmark Import/Export\", quindi descrivono l'esportazione e l'importazione, non l'interfaccia attuale.",
+    "renameNote": "Sono recensioni pubbliche del Chrome Web Store, in inglese come sono state pubblicate. La maggior parte è stata scritta prima che Snug cambiasse nome, quando la scheda si chiamava «Bookmark Import/Export», quindi descrivono l'esportazione e l'importazione, non l'interfaccia attuale.",
     "reviewsLead": "Quattro recensioni, nell'originale inglese:",
     "link": "Leggi tutte le recensioni nel Chrome Web Store"
   },

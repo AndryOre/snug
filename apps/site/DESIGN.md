@@ -65,17 +65,21 @@ components:
 The landing inherits the shipped Snug brand
 ([`docs/brand/brief.md`](../../docs/brand/brief.md)); it adds composition rules,
 not a new identity. The live token source is
-`packages/ui/src/styles/globals.css`. Values above mirror its `.dark` theme; do
-not redefine them here.
+`packages/ui/src/styles/globals.css`. Values above mirror its `.dark` theme (the
+light theme is the `:root` set: cream `--background`, same amber brand); do not
+redefine them here. The landing ships both themes: it follows the system
+(`prefers-color-scheme`) and honors a stored `snug:theme` override
+(`system | light | dark`), applied by a blocking head script that toggles
+`.dark` on `<html>` before first paint.
 
 ## Overview
 
-**Creative North Star: "The file's journey."** A calm, warm, dark page that
-proves a claim by drawing it: one file moves from a browser to another browser
-inside a dashed boundary labelled Your device, and nothing exists outside it. It
-sounds like the product: precise, quietly warm, never loud. Anti-references: the
-centered headline over three feature cards, cloud or sync imagery, gradients in
-UI chrome, a stock mascot, hype copy.
+**Creative North Star: "The file's journey."** A calm, warm page (dark or light,
+following the system) that proves a claim by drawing it: one file moves from a
+browser to another browser inside a dashed boundary labelled Your device, and
+nothing exists outside it. It sounds like the product: precise, quietly warm,
+never loud. Anti-references: the centered headline over three feature cards,
+cloud or sync imagery, gradients in UI chrome, a stock mascot, hype copy.
 
 ## Colors
 
@@ -93,8 +97,8 @@ shrinking it.
 Space Grotesk 700 for display and headlines, 500 for card titles. Geist for
 text. Geist Mono for eyebrows, file names, format chips and the Network calls
 line, uppercase with wide tracking only at label sizes. Fonts are self-hosted
-through `@fontsource-variable/*` (ADR 0011); Geist Mono is not imported by
-`globals.css` yet. German and Russian run long, and CJK needs its own fallback
+through `@fontsource-variable/*` (ADR 0011); Geist Mono is imported in
+`globals.css`. German and Russian run long, and CJK needs its own fallback
 stack, so no heading or card may rely on a fixed width.
 
 ## Layout

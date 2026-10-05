@@ -1,0 +1,17 @@
+{
+  "prerender": [
+    {
+      "where": {
+        "and": [
+          { "href_matches": "/*" },
+          {
+            "not": {
+              "href_matches": ["/install", "/install/", "/reviews", "/reviews/"]
+            }
+          }
+        ]
+      },
+      "eagerness": "moderate"
+    }
+  ]
+}

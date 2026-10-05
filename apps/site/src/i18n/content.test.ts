@@ -60,6 +60,22 @@ describe('content', () => {
     }
   })
 
+  it('has no leaked authoring note, TODO or straight double quote in any prose value', () => {
+    const forbidden = /Sources:|Context:|Product:|TODO|"/
+    for (const locale of LOCALES) {
+      const offenders = flattenValues(getContent(locale))
+        .filter(([, value]) => forbidden.test(value))
+        .map(([key]) => `${locale}:${key}`)
+      expect(offenders).toEqual([])
+    }
+  })
+
+  it('gives every locale its own non-empty OG image alt', () => {
+    const alts = LOCALES.map((locale) => getContent(locale).seo.ogImageAlt)
+    for (const alt of alts) expect(alt.trim().length).toBeGreaterThan(20)
+    expect(new Set(alts).size).toBe(LOCALES.length)
+  })
+
   it('quotes the Bookmarks file name in the preview card and formats FAQ', () => {
     const quoted = /[“«„「]\u{A0}?Bookmarks\u{A0}?[”»“」]/u
     for (const locale of LOCALES) {

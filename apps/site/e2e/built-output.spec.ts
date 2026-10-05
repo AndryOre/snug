@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   hreflangAlternates,
+  languageTag,
   LOCALE_CONFIG,
   localePath,
   LOCALES,
@@ -31,12 +32,15 @@ function metaContent(html: string, attribute: string, name: string): string {
   return match[1] ?? ''
 }
 
-function jsonLd(html: string): Record<string, unknown> {
+type GraphNode = Record<string, unknown>
+
+function jsonLdGraph(html: string): GraphNode[] {
   const match = /<script type="application\/ld\+json">(.*?)<\/script>/s.exec(
     html,
   )
   if (!match) throw new Error('Missing JSON-LD')
-  return JSON.parse(match[1] ?? '') as Record<string, unknown>
+  const data = JSON.parse(match[1] ?? '') as { '@graph': GraphNode[] }
+  return data['@graph']
 }
 
 test.describe('built pages', () => {
@@ -83,6 +87,9 @@ test.describe('built pages', () => {
       expect(metaContent(html, 'property', 'og:image:width')).toBe('1200')
       expect(metaContent(html, 'property', 'og:image:height')).toBe('630')
       expect(metaContent(html, 'property', 'og:image:type')).toBe('image/png')
+      expect(metaContent(html, 'property', 'og:image:alt')).not.toBe(
+        metaContent(html, 'name', 'description'),
+      )
       expect(
         metaContent(html, 'property', 'og:image:alt').length,
       ).toBeGreaterThan(20)
@@ -100,12 +107,27 @@ test.describe('built pages', () => {
         LOCALE_CONFIG[locale].preloadLatinFont,
       )
 
-      const data = jsonLd(html)
-      expect(data['@type']).toBe('SoftwareApplication')
-      expect(data.url).toBe(canonical)
-      expect(data.isAccessibleForFree).toBe(true)
-      expect(data).not.toHaveProperty('aggregateRating')
-      expect(data).toHaveProperty('interactionStatistic')
+      expect(html).toContain('<link rel="describedby" href="/llms.txt"')
+
+      const graph = jsonLdGraph(html)
+      const nodeOf = (type: string): GraphNode => {
+        const node = graph.find((entry) => entry['@type'] === type)
+        if (!node) throw new Error(`Missing ${type} node`)
+        return node
+      }
+      const app = nodeOf('SoftwareApplication')
+      expect(nodeOf('WebSite')).toMatchObject({
+        url: canonical,
+        inLanguage: languageTag(locale),
+      })
+      expect(app.url).toBe(canonical)
+      expect(app.isAccessibleForFree).toBe(true)
+      expect(app.author).toEqual({ '@id': nodeOf('Person')['@id'] })
+      expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
+      expect(app.featureList).toHaveLength(6)
+      expect(app).not.toHaveProperty('aggregateRating')
+      expect(app).toHaveProperty('interactionStatistic')
+      expect(JSON.stringify(graph)).not.toContain('FAQPage')
     })
   }
 
@@ -144,11 +166,18 @@ test.describe('root files', () => {
     expect(groupFor('OAI-SearchBot')).not.toContain('Disallow: /')
     expect(groupFor('GPTBot')).toContain('Disallow: /')
     expect(groupFor('GPTBot')).not.toContain('Allow: /')
+    expect(robots).not.toContain('User-agent: Google-Extended')
     expect(robots).toContain(`Sitemap: ${SITE_ORIGIN}/sitemap.xml`)
   })
 
   test('serves llms.txt and a noindex 404', () => {
-    expect(readBuilt('llms.txt')).toMatch(/^# Snug/)
+    const llms = readBuilt('llms.txt')
+    expect(llms).toMatch(/^# Snug/)
+    for (const locale of LOCALES) {
+      expect(llms).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
+    }
+    expect(readBuilt('llms-full.txt')).toMatch(/^# Snug/)
+    expect(readBuilt('sitemap.xml')).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}</)
     expect(readBuilt('404.html')).toContain(
       '<meta name="robots" content="noindex"',
     )

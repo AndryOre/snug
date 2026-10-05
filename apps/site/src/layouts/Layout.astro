@@ -6,7 +6,7 @@ import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-gr
 
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import { getPageMeta } from '../i18n/content'
+import { getContent, getPageMeta } from '../i18n/content'
 import {
   hreflangAlternates,
   LOCALE_CONFIG,
@@ -17,7 +17,8 @@ import {
   type Locale,
 } from '../i18n/locales'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
-import { buildSoftwareAppJsonLd } from '../seo/structured-data'
+import { buildStructuredData } from '../seo/structured-data'
+import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
 
 interface Props {
   locale: Locale
@@ -30,15 +31,19 @@ const meta = standalone ?? getPageMeta(locale)
 const alternates = standalone ? [] : hreflangAlternates()
 const canonical = `${SITE_ORIGIN}${standalone?.path ?? localePath(locale)}`
 const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
+const content = getContent(locale)
+const ogImageAlt = content.seo.ogImageAlt
+const featureTitles = Object.values(content.features.items).map(
+  (item) => item.title,
+)
 const jsonLd = standalone
   ? null
-  : JSON.stringify(buildSoftwareAppJsonLd(locale, meta.description)).replaceAll(
-      '<',
-      String.raw`\u003c`,
-    )
+  : JSON.stringify(
+      buildStructuredData(locale, meta.description, featureTitles),
+    ).replaceAll('<', String.raw`\u003c`)
 ---
 
-<html lang={languageTag(locale)} dir={LOCALE_CONFIG[locale].dir} class="dark">
+<html lang={languageTag(locale)} dir={LOCALE_CONFIG[locale].dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,7 +52,18 @@ const jsonLd = standalone
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#17120a" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#fbf7f0"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#17120a"
+      media="(prefers-color-scheme: dark)"
+    />
+    <script is:inline set:html={THEME_INIT_SCRIPT} />
     {LOCALE_CONFIG[locale].preloadLatinFont && (
       <link
         rel="preload"
@@ -63,6 +79,7 @@ const jsonLd = standalone
       <>
         <meta name="description" content={meta.description} />
         <link rel="canonical" href={canonical} />
+        <link rel="describedby" href="/llms.txt" />
         {alternates.map(({ hreflang, href }) => (
           <link rel="alternate" hreflang={hreflang} href={href} />
         ))}
@@ -80,7 +97,7 @@ const jsonLd = standalone
         <meta property="og:image:width" content={String(OG_IMAGE.width)} />
         <meta property="og:image:height" content={String(OG_IMAGE.height)} />
         <meta property="og:image:type" content={OG_IMAGE.type} />
-        <meta property="og:image:alt" content={meta.description} />
+        <meta property="og:image:alt" content={ogImageAlt} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />

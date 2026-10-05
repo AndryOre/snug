@@ -1,7 +1,10 @@
 {
   "meta": {
-    "title": "Snug: Exportation, importation et sauvegarde de favoris",
+    "title": "Snug : Exportation, importation et sauvegarde de favoris",
     "description": "Exportez, importez et sauvegardez vos favoris dans des formats courants, depuis Chrome ou Safari. Tout en local."
+  },
+  "seo": {
+    "ogImageAlt": "Logo Snug, une icône de marque-page ambrée, au-dessus d’un court résumé de l’extension sur fond sombre."
   },
   "hero": {
     "eyebrow": "Exportation, importation et sauvegarde de favoris",
@@ -70,77 +73,77 @@
   "interface": {
     "heading": "La vraie interface",
     "shots": {
-      "export": "Page d'exportation : choisissez des dossiers dans l'arborescence, un format, puis exportez.",
-      "import": "Aperçu de l'import : voyez ce qui change, puis choisissez fusionner, remplacer ou nouveau dossier.",
-      "autoExport": "Exportation automatique : chaque jour, en HTML, JSON et Markdown, avec la prochaine exécution affichée.",
+      "export": "Page d'exportation : choisissez des dossiers dans l'arborescence, un format, puis exportez.",
+      "import": "Aperçu de l'import : voyez ce qui change, puis choisissez fusionner, remplacer ou nouveau dossier.",
+      "autoExport": "Exportation automatique : chaque jour, en HTML, JSON et Markdown, avec la prochaine exécution affichée.",
       "popup": "La fenêtre de la barre d'outils exporte tout en un clic."
     },
     "alts": {
-      "export": "Page d'export de Snug : une arborescence de dossiers de favoris, un sélecteur de format et le bouton Exporter",
-      "import": "Aperçu d'import de Snug : une liste de favoris à ajouter, modifier ou ignorer, avec les options fusionner, remplacer et nouveau",
-      "autoExport": "Réglages de l'export automatique de Snug : une planification quotidienne, trois formats et l'heure de la prochaine exécution",
+      "export": "Page d'export de Snug : une arborescence de dossiers de favoris, un sélecteur de format et le bouton Exporter",
+      "import": "Aperçu d'import de Snug : une liste de favoris à ajouter, modifier ou ignorer, avec les options fusionner, remplacer et nouveau",
+      "autoExport": "Réglages de l'export automatique de Snug : une planification quotidienne, trois formats et l'heure de la prochaine exécution",
       "popup": "Fenêtre contextuelle de Snug dans la barre d'outils avec un seul bouton pour exporter tous les favoris"
     }
   },
   "video": {
     "heading": "Voyez-le en action",
-    "caption": "Une courte démonstration : exporter un dossier, puis l'importer avec un aperçu.",
+    "caption": "Une courte démonstration : exporter un dossier, puis l'importer avec un aperçu.",
     "note": "La vidéo ne se charge depuis YouTube que lorsque vous appuyez sur lecture. D'ici là, la page ne contacte personne.",
     "play": "Lire la vidéo",
     "labelSeparator": " : "
   },
   "proof": {
     "heading": "Ce qu'en disent les utilisateurs",
-    "numbers": "5 000 utilisateurs. 4,8 étoiles sur 20 notes dans le Chrome Web Store (2026-10-05).",
-    "renameNote": "Ce sont des avis publics du Chrome Web Store, en anglais, tels que publiés. La plupart ont été écrits avant le changement de nom de Snug, quand la fiche s'appelait « Bookmark Import/Export » ; ils décrivent donc l'export et l'import, pas l'interface actuelle.",
-    "reviewsLead": "Quatre avis, dans leur version originale en anglais :",
+    "numbers": "5 000 utilisateurs. 4,8 étoiles sur 20 notes dans le Chrome Web Store (2026-10-05).",
+    "renameNote": "Ce sont des avis publics du Chrome Web Store, en anglais, tels que publiés. La plupart ont été écrits avant le changement de nom de Snug, quand la fiche s'appelait « Bookmark Import/Export » ; ils décrivent donc l'export et l'import, pas l'interface actuelle.",
+    "reviewsLead": "Quatre avis, dans leur version originale en anglais :",
     "link": "Lire tous les avis dans le Chrome Web Store"
   },
   "faq": {
     "heading": "Questions fréquentes",
     "items": {
       "network": {
-        "question": "Snug envoie-t-il mes favoris quelque part ?",
+        "question": "Snug envoie-t-il mes favoris quelque part ?",
         "answer": "Non. Snug ne fait aucun appel réseau. Il lit et écrit les favoris de votre navigateur sur votre appareil, et le code source est public pour que vous puissiez vérifier."
       },
       "account": {
-        "question": "Ai-je besoin d'un compte ?",
+        "question": "Ai-je besoin d'un compte ?",
         "answer": "Non. Installez-le et commencez à exporter."
       },
       "sync": {
-        "question": "Synchronise-t-il mes favoris entre appareils ?",
+        "question": "Synchronise-t-il mes favoris entre appareils ?",
         "answer": "Non. Snug n'a ni synchronisation ni cloud. Pour transférer vos favoris vers un autre navigateur ou ordinateur, exportez un fichier et importez-le là-bas."
       },
       "oneFile": {
-        "question": "Puis-je importer plusieurs fichiers à la fois ?",
+        "question": "Puis-je importer plusieurs fichiers à la fois ?",
         "answer": "Non. Snug importe un fichier à la fois. Pour en importer plusieurs, importez-les l'un après l'autre."
       },
       "permissions": {
-        "question": "Pourquoi a-t-il besoin d'accéder à tous mes favoris ?",
-        "answer": "Les lire et les écrire est le seul moyen pour une extension de les exporter et de les importer. Snug ne fait aucun appel réseau : rien de ce qu'il lit ne peut quitter votre appareil."
+        "question": "Pourquoi a-t-il besoin d'accéder à tous mes favoris ?",
+        "answer": "Les lire et les écrire est le seul moyen pour une extension de les exporter et de les importer. Snug ne fait aucun appel réseau : rien de ce qu'il lit ne peut quitter votre appareil."
       },
       "builtin": {
-        "question": "Mon navigateur exporte déjà en HTML. Pourquoi utiliser Snug ?",
+        "question": "Mon navigateur exporte déjà en HTML. Pourquoi utiliser Snug ?",
         "answer": "L'export intégré n'offre ni sélection de dossiers, ni aperçu, ni annulation, ni horaire, ni détection des doublons, ni formats supplémentaires. Snug propose tout cela."
       },
       "overwrite": {
-        "question": "Va-t-il écraser mes favoris actuels ?",
+        "question": "Va-t-il écraser mes favoris actuels ?",
         "answer": "Seulement si vous choisissez Remplacer. Vous voyez d'abord un aperçu, et Remplacer enregistre un instantané de sécurité que vous pouvez restaurer."
       },
       "formats": {
-        "question": "Quels formats gère-t-il ?",
+        "question": "Quels formats gère-t-il ?",
         "answer": "Export en HTML, JSON, CSV, Markdown, OPML ou XBEL. Import de HTML, JSON, CSV ou XBEL, d'un fichier « Bookmarks » de profil Chrome, ou d'un export Safari."
       },
       "browsers": {
-        "question": "Dans quels navigateurs fonctionne-t-il ?",
+        "question": "Dans quels navigateurs fonctionne-t-il ?",
         "answer": "Dans Chrome et d'autres navigateurs Chromium comme Edge, Brave et Opera."
       },
       "safe": {
-        "question": "Est-il sûr d'installer l'extension d'un développeur indépendant ?",
+        "question": "Est-il sûr d'installer l'extension d'un développeur indépendant ?",
         "answer": "Le code source est public, CodeQL l'analyse, le projet a les badges OpenSSF Scorecard et Best Practices, et la CI utilise des versions épinglées. Jugez par vous-même sur GitHub."
       },
       "cost": {
-        "question": "Snug est-il payant ?",
+        "question": "Snug est-il payant ?",
         "answer": "Non. Il est gratuit."
       }
     }

@@ -3,6 +3,9 @@
     "title": "Snug: Exportar, importar y respaldar marcadores",
     "description": "Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local."
   },
+  "seo": {
+    "ogImageAlt": "Logotipo de Snug, un icono de marcador ámbar, sobre un breve resumen de la extensión en fondo oscuro."
+  },
   "hero": {
     "eyebrow": "Exportar, importar y respaldar marcadores",
     "headlineLead": "Lleva tus marcadores contigo.",
@@ -92,7 +95,7 @@
   "proof": {
     "heading": "Lo que dice la gente",
     "numbers": "5.000 usuarios. 4,8 estrellas con 20 valoraciones en la Chrome Web Store (2026-10-05).",
-    "renameNote": "Son reseñas públicas de la Chrome Web Store, en inglés tal como se publicaron. La mayoría se escribió antes de que Snug cambiara de nombre, cuando el listado se llamaba \"Bookmark Import/Export\", así que hablan de la exportación y la importación, no de la interfaz actual.",
+    "renameNote": "Son reseñas públicas de la Chrome Web Store, en inglés tal como se publicaron. La mayoría se escribió antes de que Snug cambiara de nombre, cuando el listado se llamaba «Bookmark Import/Export», así que hablan de la exportación y la importación, no de la interfaz actual.",
     "reviewsLead": "",
     "link": "Leer todas las reseñas en la Chrome Web Store"
   },

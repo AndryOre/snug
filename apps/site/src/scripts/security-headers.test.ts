@@ -7,6 +7,7 @@ import {
   renderSecurityHeaders,
   SCRIPT_HASHES_PLACEHOLDER,
 } from './security-headers'
+import { THEME_INIT_HASH, THEME_INIT_SCRIPT } from './theme-init'
 
 const sha = (body: string) =>
   `'sha256-${createHash('sha256').update(body).digest('base64')}'`
@@ -56,5 +57,13 @@ describe('renderSecurityHeaders', () => {
     expect(() => renderSecurityHeaders(SCRIPT_HASHES_PLACEHOLDER, [])).toThrow(
       /no script hashes/i,
     )
+  })
+})
+
+describe('theme init script', () => {
+  it('has a CSP hash that matches the script exactly as it is inlined', () => {
+    expect(
+      findInlineScriptHashes(`<script>${THEME_INIT_SCRIPT}</script>`),
+    ).toEqual([`'${THEME_INIT_HASH}'`])
   })
 })
