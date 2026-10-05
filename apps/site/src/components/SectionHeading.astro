@@ -3,13 +3,14 @@ import { cn } from '@workspace/ui/lib/utils'
 
 interface Props {
   id?: string
+  as?: 'h1' | 'h2'
   class?: string
 }
 
-const { id, class: className } = Astro.props
+const { id, as: Tag = 'h2', class: className } = Astro.props
 ---
 
-<h2
+<Tag
   id={id}
   class={cn(
     'max-w-3xl font-heading text-headline font-bold break-words hyphens-auto text-balance',
@@ -17,4 +18,4 @@ const { id, class: className } = Astro.props
   )}
 >
   <slot />
-</h2>
+</Tag>

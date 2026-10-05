@@ -1,0 +1,18 @@
+---
+import NotFoundPage from '../../components/NotFoundPage.astro'
+import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../i18n/locales'
+
+export function getStaticPaths() {
+  return LOCALES.filter((locale) => locale !== DEFAULT_LOCALE).map(
+    (locale) => ({ params: { locale: languageTag(locale).toLowerCase() } }),
+  )
+}
+
+const segment = Astro.params.locale
+const locale = LOCALES.find(
+  (candidate) => languageTag(candidate).toLowerCase() === segment,
+)
+if (!locale) throw new Error(`Unknown locale "${segment}"`)
+---
+
+<NotFoundPage locale={locale} />
