@@ -1,10 +1,19 @@
 ---
+import { getClosingCopy } from '../i18n/landing'
 import Layout from '../layouts/Layout.astro'
+
+const { notFound } = getClosingCopy('en')
+const standalone = {
+  title: `${notFound.title} | Snug`,
+  description: notFound.body,
+  path: '/404/',
+}
 ---
 
-<Layout locale="en" notFound>
+<Layout locale="en" notFound standalone={standalone}>
   <main class="grid min-h-screen place-content-center gap-4 text-center">
-    <h1>Page not found</h1>
-    <p><a href="/">Back to Snug</a></p>
+    <h1>{notFound.title}</h1>
+    <p>{notFound.body}</p>
+    <p><a href="/">{notFound.backLink}</a></p>
   </main>
 </Layout>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 84" width="84" height="84">
+  <defs>
+    <linearGradient id="snug-tag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFA230"/>
+      <stop offset="1" stop-color="#FFD37A"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#snug-tag)" d="M20 8 L64 8 Q70 8 70 14 L70 68 Q70 78 61 72 L42 59 L23 72 Q14 78 14 68 L14 14 Q14 8 20 8 Z"/>
+</svg>

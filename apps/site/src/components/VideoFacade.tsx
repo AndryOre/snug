@@ -62,7 +62,7 @@ export default function VideoFacade({
       href={youtubeWatchUrl(videoId)}
       aria-label={`${playLabel}: ${title}`}
       onClick={activate}
-      className="group relative block aspect-video w-full overflow-hidden rounded-2xl border border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      className="group relative block aspect-video w-full overflow-hidden rounded-2xl border border-border outline-hidden focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       <img
         src={posterSrc}

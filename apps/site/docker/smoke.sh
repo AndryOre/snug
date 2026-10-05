@@ -28,15 +28,27 @@ status() { curl -s -o /dev/null -w '%{http_code}' "$1"; }
 [ "$(location "$base/install")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=direct" ] || fail "default campaign"
 [ "$(location "$base/install?c=hero")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=hero" ] || fail "c=hero"
 case "$(location "$base/install?c=a%26b")" in *campaign=direct) ;; *) fail "unsafe tag not rejected" ;; esac
-[ "$(status "$base/nope")" = 404 ] || fail "missing page is not 404"
+[ "$(status "$base/nope/")" = 404 ] || fail "missing page is not 404"
 
 headers="$(curl -s -o /dev/null -D - "$base/" | tr -d '\r')"
 for header in content-security-policy x-content-type-options referrer-policy permissions-policy; do
   grep -qi "^$header:" <<<"$headers" || fail "missing $header"
 done
-if grep -i '^content-security-policy:' <<<"$headers" | grep -Eq 'https?://'; then
+csp="$(grep -i '^content-security-policy:' <<<"$headers")"
+if sed 's#frame-src https://www\.youtube-nocookie\.com\(;\|$\)#frame-src\1#' <<<"$csp" | grep -Eq 'https?://'; then
   fail "CSP names a third-party origin"
 fi
+grep -q 'frame-src https://www.youtube-nocookie.com' <<<"$csp" || fail "CSP lacks the YouTube frame-src"
+for header in cross-origin-opener-policy cross-origin-resource-policy strict-transport-security; do
+  grep -qi "^$header:" <<<"$headers" || fail "missing $header"
+done
+
+[ "$(status "$base/de")" = 301 ] || fail "/de is not 301"
+[ "$(location "$base/de")" = "/de/" ] || fail "/de does not redirect to /de/"
+[ "$(status "$base/de/")" = 200 ] || fail "/de/ is not 200"
+for file in robots.txt sitemap.xml llms.txt; do
+  [ "$(status "$base/$file")" = 200 ] || fail "$file is not 200"
+done
 
 logs="$(docker logs "$name" 2>&1)"
 grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.0 ' <<<"$logs" || fail "log not masked"

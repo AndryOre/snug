@@ -1,0 +1,22 @@
+---
+import { cn } from '@workspace/ui/lib/utils'
+
+interface Props {
+  href: string
+  class?: string
+  [attribute: string]: unknown
+}
+
+const { href, class: className, ...rest } = Astro.props
+---
+
+<a
+  href={href}
+  class={cn(
+    'inline-flex min-h-11 items-center rounded-md text-foreground underline decoration-border underline-offset-4 outline-hidden hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50',
+    className,
+  )}
+  {...rest}
+>
+  <slot />
+</a>

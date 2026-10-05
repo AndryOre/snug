@@ -20,4 +20,5 @@ export const STORE_FACTS = {
   userCount: 5000,
   license: 'https://opensource.org/license/mit',
   sourceUrl: 'https://github.com/AndryOre/snug',
+  author: { name: 'Andry Orellana', url: 'https://github.com/AndryOre' },
 } as const

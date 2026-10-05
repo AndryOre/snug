@@ -1,4 +1,5 @@
 ---
+import { getClosingCopy } from '../i18n/landing'
 import {
   languageTag,
   LOCALE_NAMES,
@@ -12,11 +13,12 @@ interface Props {
 }
 
 const { locale } = Astro.props
+const { header } = getClosingCopy(locale)
 ---
 
 <details class="relative" data-language-switcher>
   <summary
-    class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-md px-3 text-foreground outline-none marker:hidden hover:text-primary-text focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden"
+    class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-md px-3 text-foreground outline-hidden marker:hidden hover:text-primary-text focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden"
   >
     <span aria-hidden="true" class="font-mono text-primary-text">
       {languageTag(locale)}
@@ -24,7 +26,7 @@ const { locale } = Astro.props
     <span lang={languageTag(locale)}>{LOCALE_NAMES[locale]}</span>
   </summary>
   <nav
-    aria-label="Language"
+    aria-label={header.languageLabel}
     class="absolute bottom-full left-0 z-10 mb-2 min-w-56 rounded-[14px] border border-border bg-card p-2"
   >
     <ul>
@@ -36,7 +38,7 @@ const { locale } = Astro.props
               lang={languageTag(code)}
               hreflang={languageTag(code)}
               aria-current={code === locale ? 'page' : undefined}
-              class="flex min-h-11 items-center rounded-md px-3 outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:text-primary-text"
+              class="flex min-h-11 items-center rounded-md px-3 outline-hidden hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:text-primary-text"
             >
               {LOCALE_NAMES[code]}
             </a>

@@ -74,6 +74,12 @@
       "import": "导入预览：查看将发生的更改，再选择合并、替换或新建文件夹。",
       "autoExport": "自动导出：每天一次，格式为 HTML、JSON 和 Markdown，并显示下次运行时间。",
       "popup": "工具栏弹出窗口一键导出全部书签。"
+    },
+    "alts": {
+      "export": "Snug 的导出页面：书签文件夹树、格式选择器和导出按钮",
+      "import": "Snug 的导入预览：将要添加、更改或跳过的书签列表，以及合并、替换和新建选项",
+      "autoExport": "Snug 的自动导出设置：每日计划、三种格式和下次运行时间",
+      "popup": "工具栏中的 Snug 弹窗，只有一个导出全部书签的按钮"
     }
   },
   "video": {
@@ -148,6 +154,17 @@
     "privacy": "隐私政策",
     "listing": "Chrome 应用商店页面",
     "changelog": "更新日志",
-    "note": "Snug 以 MIT 许可证开源。"
+    "note": "Snug 以 MIT 许可证开源。",
+    "navLabel": "页脚"
+  },
+  "header": {
+    "languageLabel": "语言",
+    "skipLink": "跳到正文",
+    "homeLabel": "Snug 首页"
+  },
+  "notFound": {
+    "title": "找不到页面",
+    "body": "这个地址没有对应的页面。可能是地址输错了，或者页面已经移动。",
+    "backLink": "返回 Snug"
   }
 }

@@ -1,43 +1,16 @@
-import { getContent } from './content'
+import { STORE_FACTS } from '../seo/store-facts'
+import { getContent, type SiteContent } from './content'
 import type { Locale } from './locales'
 
 /**
  * Copy for the hero section of one locale.
  */
-export interface HeroCopy {
-  eyebrow: string
-  headlineLead: string
-  headlineAccent: string
-  subheadline: string
-  install: string
-  note: string
-  source: string
-}
-
-/**
- * Title and body of one trust point.
- */
-interface TrustPoint {
-  title: string
-  body: string
-}
+export type HeroCopy = SiteContent['hero']
 
 /**
  * Copy for the trust proof section of one locale.
  */
-export interface TrustCopy {
-  heading: string
-  intro: string
-  points: { network: TrustPoint; account: TrustPoint; source: TrustPoint }
-  access: string
-  links: {
-    source: string
-    scorecard: string
-    bestPractices: string
-    ci: string
-    privacy: string
-  }
-}
+export type TrustCopy = SiteContent['trust']
 
 /**
  * Keys of the feature cards, in display order.
@@ -59,28 +32,17 @@ export const SHOT_KEYS = ['export', 'import', 'autoExport', 'popup'] as const
 /**
  * Copy for the features section of one locale.
  */
-export interface FeaturesCopy {
-  heading: string
-  items: Record<(typeof FEATURE_KEYS)[number], TrustPoint>
-}
+export type FeaturesCopy = SiteContent['features']
 
 /**
  * Copy for the real-interface section of one locale.
  */
-export interface InterfaceCopy {
-  heading: string
-  shots: Record<(typeof SHOT_KEYS)[number], string>
-}
+export type InterfaceCopy = SiteContent['interface']
 
 /**
  * Copy for the click-to-load video section of one locale.
  */
-export interface VideoCopy {
-  heading: string
-  caption: string
-  note: string
-  play: string
-}
+export type VideoCopy = SiteContent['video']
 
 /**
  * Landing copy for one locale. Key parity across locales is enforced by
@@ -95,14 +57,8 @@ export function getLandingCopy(locale: Locale): {
   interface: InterfaceCopy
   video: VideoCopy
 } {
-  const content = getContent(locale)
-  return {
-    hero: content.hero as unknown as HeroCopy,
-    trust: content.trust as unknown as TrustCopy,
-    features: content.features as unknown as FeaturesCopy,
-    interface: content.interface as unknown as InterfaceCopy,
-    video: content.video as unknown as VideoCopy,
-  }
+  const { hero, trust, features, interface: shots, video } = getContent(locale)
+  return { hero, trust, features, interface: shots, video }
 }
 
 /**
@@ -153,7 +109,7 @@ export function youtubeEmbedUrl(videoId: string): string {
  * External targets of the trust links.
  */
 export const TRUST_LINK_HREFS = {
-  source: 'https://github.com/AndryOre/snug',
+  source: STORE_FACTS.sourceUrl,
   scorecard: 'https://scorecard.dev/viewer/?uri=github.com/AndryOre/snug',
   bestPractices: 'https://www.bestpractices.dev/projects/15093',
   ci: 'https://github.com/AndryOre/snug/actions/workflows/ci.yml',
@@ -178,68 +134,48 @@ export function installHref(placement: InstallPlacement): string {
  * Copy for the social proof section of one locale. `reviewsLead` is empty
  * where the rename note already introduces the reviews.
  */
-export interface ProofCopy {
-  heading: string
-  numbers: string
-  renameNote: string
-  reviewsLead: string
-  link: string
-}
-
-/**
- * Question and answer of one FAQ entry.
- */
-interface FaqEntry {
-  question: string
-  answer: string
-}
+export type ProofCopy = SiteContent['proof']
 
 /**
  * Copy for the FAQ section of one locale, entries in display order.
  */
-export interface FaqCopy {
-  heading: string
-  items: Record<string, FaqEntry>
-}
+export type FaqCopy = SiteContent['faq']
 
 /**
  * Copy for the final install call to action of one locale.
  */
-export interface FinalCopy {
-  heading: string
-  line: string
-  button: string
-}
+export type FinalCopy = SiteContent['final']
 
 /**
  * Copy for the footer of one locale.
  */
-export interface FooterCopy {
-  source: string
-  privacy: string
-  listing: string
-  changelog: string
-  note: string
-}
+export type FooterCopy = SiteContent['footer']
 
 /**
- * Proof, FAQ, final call to action and footer copy for one locale.
+ * Copy for the page header of one locale.
+ */
+export type HeaderCopy = SiteContent['header']
+
+/**
+ * Copy for the 404 page of one locale.
+ */
+export type NotFoundCopy = SiteContent['notFound']
+
+/**
+ * Proof, FAQ, final call to action, footer, header and 404 copy for one locale.
  * @param locale - A supported locale code.
- * @returns The locale's `proof`, `faq`, `final` and `footer` content.
+ * @returns The locale's `proof`, `faq`, `final`, `footer`, `header` and `notFound` content.
  */
 export function getClosingCopy(locale: Locale): {
   proof: ProofCopy
   faq: FaqCopy
   final: FinalCopy
   footer: FooterCopy
+  header: HeaderCopy
+  notFound: NotFoundCopy
 } {
-  const content = getContent(locale)
-  return {
-    proof: content.proof as unknown as ProofCopy,
-    faq: content.faq as unknown as FaqCopy,
-    final: content.final as unknown as FinalCopy,
-    footer: content.footer as unknown as FooterCopy,
-  }
+  const { proof, faq, final, footer, header, notFound } = getContent(locale)
+  return { proof, faq, final, footer, header, notFound }
 }
 
 /**
@@ -247,6 +183,6 @@ export function getClosingCopy(locale: Locale): {
  */
 export const FOOTER_LINK_HREFS = {
   source: TRUST_LINK_HREFS.source,
-  privacy: '/privacy',
+  privacy: TRUST_LINK_HREFS.privacy,
   changelog: 'https://github.com/AndryOre/snug/blob/main/CHANGELOG.md',
 } as const

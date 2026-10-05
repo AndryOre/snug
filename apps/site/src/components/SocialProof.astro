@@ -2,6 +2,11 @@
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
+import CardGrid from './CardGrid.astro'
+import Eyebrow from './Eyebrow.astro'
+import Panel from './Panel.astro'
+import Section from './Section.astro'
+import TextLink from './TextLink.astro'
 
 interface Props {
   locale: Locale
@@ -10,60 +15,40 @@ interface Props {
 const { proof } = getClosingCopy(Astro.props.locale)
 ---
 
-<section data-section="proof" aria-labelledby="proof-heading">
-  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
-    <h2
-      id="proof-heading"
-      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
-    >
-      {proof.heading}
-    </h2>
-    <p
-      data-proof="numbers"
-      class="mt-5 max-w-2xl font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text uppercase"
-    >
-      {proof.numbers}
-    </p>
-    <p
-      data-proof="rename-note"
-      class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
-    >
-      {proof.renameNote}
-    </p>
+<Section section="proof" heading={proof.heading}>
+  <Eyebrow data-proof="numbers" class="mt-5 max-w-2xl">{proof.numbers}</Eyebrow>
+  <p
+    data-proof="rename-note"
+    class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
+  >
+    {proof.renameNote}
+  </p>
+  {
+    proof.reviewsLead !== '' && (
+      <p class="mt-3 max-w-2xl leading-[1.55] text-muted-foreground">
+        {proof.reviewsLead}
+      </p>
+    )
+  }
+  <CardGrid>
     {
-      proof.reviewsLead !== '' && (
-        <p class="mt-3 max-w-2xl leading-[1.55] text-muted-foreground">
-          {proof.reviewsLead}
-        </p>
-      )
+      REVIEWS.map((review) => (
+        <Panel>
+          <figure lang="en" class="flex h-full flex-col justify-between gap-6">
+            <blockquote class="leading-[1.55]">
+              &ldquo;{review.quote}&rdquo;
+            </blockquote>
+            <figcaption class="font-mono text-[0.8125rem] tracking-[0.12em] text-muted-foreground">
+              {review.author}, {review.date}
+            </figcaption>
+          </figure>
+        </Panel>
+      ))
     }
-    <ul
-      class="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4"
-    >
-      {
-        REVIEWS.map((review) => (
-          <li class="rounded-[14px] border border-border bg-card p-7">
-            <figure lang="en" class="flex h-full flex-col justify-between gap-6">
-              <blockquote class="leading-[1.55]">
-                &ldquo;{review.quote}&rdquo;
-              </blockquote>
-              <figcaption class="font-mono text-[0.8125rem] tracking-[0.12em] text-muted-foreground">
-                {review.author}, {review.date}
-              </figcaption>
-            </figure>
-          </li>
-        ))
-      }
-    </ul>
-    <p class="mt-8">
-      <a
-        href={STORE_REVIEWS_URL}
-        data-reviews-link
-        rel="noopener"
-        class="rounded-md py-2 text-foreground underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
-      >
-        {proof.link}
-      </a>
-    </p>
-  </div>
-</section>
+  </CardGrid>
+  <p class="mt-8">
+    <TextLink href={STORE_REVIEWS_URL} data-reviews-link rel="noopener">
+      {proof.link}
+    </TextLink>
+  </p>
+</Section>

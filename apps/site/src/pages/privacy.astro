@@ -1,13 +1,10 @@
 ---
 import { Content as PrivacyPolicy } from '../../../../PRIVACY_POLICY.md'
+import standaloneContent from '../content/standalone/en.json'
 import Layout from '../layouts/Layout.astro'
 
-const standalone = {
-  title: 'Privacy Policy | Snug',
-  description:
-    'How Snug handles your data: the extension sends nothing anywhere, and this website runs no analytics scripts.',
-  path: '/privacy/',
-}
+const { privacy } = standaloneContent
+const standalone = { ...privacy.meta, path: '/privacy/' }
 ---
 
 <Layout locale="en" standalone={standalone}>
@@ -15,12 +12,12 @@ const standalone = {
     <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
       <a
         href="/"
-        class="rounded-md py-2 font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text uppercase underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+        class="rounded-md py-2 font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text uppercase underline decoration-border underline-offset-4 outline-hidden hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
       >
-        Snug
+        {privacy.homeLink}
       </a>
       <p class="mt-6 max-w-2xl text-sm text-muted-foreground">
-        This page is available in English only. The other languages link here.
+        {privacy.englishOnly}
       </p>
       <article
         data-section="policy"
@@ -34,13 +31,9 @@ const standalone = {
         class="mt-14 max-w-2xl border-t border-border pt-10"
       >
         <h2 id="website-heading" class="font-heading text-[1.5rem] font-medium">
-          This website
+          {privacy.website.heading}
         </h2>
-        <p class="mt-4 leading-[1.65]">
-          This website runs no analytics scripts and loads nothing from third
-          parties. Visits are counted only from the web server's access log,
-          where IP addresses are masked, and the log is read offline.
-        </p>
+        <p class="mt-4 leading-[1.65]">{privacy.website.body}</p>
       </section>
     </div>
   </main>
