@@ -1,0 +1,39 @@
+---
+import '@workspace/ui/globals.css'
+
+import { getContent } from '../i18n/content'
+import {
+  hreflangAlternates,
+  languageTag,
+  localePath,
+  SITE_ORIGIN,
+  type Locale,
+} from '../i18n/locales'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const meta = getContent(locale).meta as Record<string, string>
+const alternates = hreflangAlternates()
+const canonical = `${SITE_ORIGIN}${localePath(locale)}`
+---
+
+<html lang={languageTag(locale)} dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    {
+      alternates.map(({ hreflang, href }) => (
+        <link rel="alternate" hreflang={hreflang} href={href} />
+      ))
+    }
+  </head>
+  <body class="bg-background font-sans text-foreground">
+    <slot />
+  </body>
+</html>
