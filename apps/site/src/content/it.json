@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: Esportazione, importazione e backup dei segnalibri",
     "description": "Esporta, importa e fai il backup dei segnalibri in formati comuni, da Chrome o Safari. Tutto in locale."
+  },
+  "hero": {
+    "eyebrow": "Esportazione, importazione e backup dei segnalibri",
+    "headlineLead": "Porta con te i tuoi segnalibri.",
+    "headlineAccent": "Niente lascia il tuo dispositivo.",
+    "subheadline": "Snug esporta, importa e fa il backup dei tuoi segnalibri in Chrome e in altri browser Chromium. Non effettua chiamate di rete e non richiede alcun account.",
+    "install": "Aggiungi a Chrome",
+    "note": "Gratis. Open source. Funziona in Chrome, Edge, Brave e Opera.",
+    "source": "Vedi il codice sorgente su GitHub"
+  },
+  "trust": {
+    "heading": "Un'estensione senza un server di cui fidarsi",
+    "intro": "Snug legge e scrive l'albero dei segnalibri del tuo browser, sul tuo dispositivo. Non si connette a nulla, quindi i tuoi segnalibri non hanno dove andare.",
+    "points": {
+      "network": {
+        "title": "Nessuna chiamata di rete",
+        "body": "Snug non ne fa. Ogni esportazione e importazione avviene in locale."
+      },
+      "account": {
+        "title": "Nessun account",
+        "body": "Non c'è niente a cui registrarsi né dove accedere."
+      },
+      "source": {
+        "title": "Open source",
+        "body": "Il codice è pubblico. Leggilo, oppure controlla i badge OpenSSF Scorecard e Best Practices del progetto, le scansioni CodeQL e le esecuzioni della CI."
+      }
+    },
+    "access": "Leggere e scrivere i tuoi segnalibri è l'unico modo in cui un'estensione può esportarli e importarli. Snug fa questo e nient'altro.",
+    "links": {
+      "source": "Codice sorgente",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "stato della CI",
+      "privacy": "Informativa sulla privacy"
+    }
   }
 }

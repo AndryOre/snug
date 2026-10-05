@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: Exportar, importar y respaldar marcadores",
     "description": "Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local."
+  },
+  "hero": {
+    "eyebrow": "Exportar, importar y respaldar marcadores",
+    "headlineLead": "Lleva tus marcadores contigo.",
+    "headlineAccent": "Nada sale de tu dispositivo.",
+    "subheadline": "Snug exporta, importa y respalda tus marcadores en Chrome y en otros navegadores Chromium. No hace llamadas de red y no necesita cuenta.",
+    "install": "Añadir a Chrome",
+    "note": "Gratis. Código abierto. Funciona en Chrome, Edge, Brave y Opera.",
+    "source": "Ver el código en GitHub"
+  },
+  "trust": {
+    "heading": "Una extensión sin servidor en el que confiar",
+    "intro": "Snug lee y escribe el árbol de marcadores de tu propio navegador, en tu dispositivo. Nunca se conecta a nada, así que tus marcadores no tienen a dónde ir.",
+    "points": {
+      "network": {
+        "title": "Sin llamadas de red",
+        "body": "Snug no hace ninguna. Cada exportación e importación ocurre en local."
+      },
+      "account": {
+        "title": "Sin cuenta",
+        "body": "No hay nada a lo que registrarse ni dónde iniciar sesión."
+      },
+      "source": {
+        "title": "Código abierto",
+        "body": "El código es público. Léelo, o revisa las insignias OpenSSF Scorecard y Best Practices del proyecto, los análisis de CodeQL y las ejecuciones de CI."
+      }
+    },
+    "access": "Leer y escribir tus marcadores es la única forma en que una extensión puede exportarlos e importarlos. Snug hace eso y nada más.",
+    "links": {
+      "source": "Código fuente",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "estado de CI",
+      "privacy": "Política de privacidad"
+    }
   }
 }

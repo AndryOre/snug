@@ -1,0 +1,45 @@
+---
+import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import InstallButton from './InstallButton.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { hero } = getLandingCopy(Astro.props.locale)
+---
+
+<section
+  data-section="hero"
+  class="bg-[radial-gradient(60rem_32rem_at_0%_0%,color-mix(in_oklch,var(--primary)_14%,transparent),transparent),radial-gradient(40rem_28rem_at_100%_20%,color-mix(in_oklch,var(--primary)_6%,transparent),transparent)]"
+>
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <p
+      class="mb-6 font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text uppercase"
+    >
+      {hero.eyebrow}
+    </p>
+    <h1
+      class="max-w-4xl font-heading text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] font-bold tracking-[-0.025em] text-balance"
+    >
+      <span class="block">{hero.headlineLead}</span>
+      <span class="block text-primary-text">{hero.headlineAccent}</span>
+    </h1>
+    <p
+      class="mt-6 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
+    >
+      {hero.subheadline}
+    </p>
+    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+      <InstallButton placement="hero" label={hero.install} />
+      <a
+        href={TRUST_LINK_HREFS.source}
+        class="rounded-md py-2 text-foreground underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+      >
+        {hero.source}
+      </a>
+    </div>
+    <p class="mt-4 text-sm text-muted-foreground">{hero.note}</p>
+  </div>
+</section>
