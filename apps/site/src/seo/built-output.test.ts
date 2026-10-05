@@ -1,5 +1,5 @@
 import { build } from 'astro'
-import { readFileSync, rmSync } from 'node:fs'
+import { existsSync, readFileSync, rmSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
@@ -56,6 +56,8 @@ describe('built pages', () => {
     expect(metaContent(html, 'name', 'description').length).toBeGreaterThan(20)
     expect(html).toContain(`<link rel="canonical" href="${canonical}"`)
     expect(metaContent(html, 'property', 'og:image')).toBe(image)
+    const imageFile = path.join(builtSite, ogImagePath(locale))
+    expect(existsSync(imageFile)).toBe(true)
     expect(metaContent(html, 'name', 'twitter:image')).toBe(image)
     expect(metaContent(html, 'property', 'og:url')).toBe(canonical)
 
@@ -97,8 +99,13 @@ describe('root files', () => {
 
   it('allows search crawlers and disallows training crawlers in robots.txt', () => {
     const robots = readBuilt('robots.txt')
-    expect(robots).toMatch(/User-agent: OAI-SearchBot\n(.*\n)*?Allow: \//)
-    expect(robots).toMatch(/User-agent: GPTBot\n(.*\n)*?Disallow: \//)
+    const groups = robots.split('\n\n')
+    const groupFor = (agent: string): string =>
+      groups.find((entry) => entry.includes(`User-agent: ${agent}\n`)) ?? ''
+    expect(groupFor('OAI-SearchBot')).toContain('Allow: /')
+    expect(groupFor('OAI-SearchBot')).not.toContain('Disallow: /')
+    expect(groupFor('GPTBot')).toContain('Disallow: /')
+    expect(groupFor('GPTBot')).not.toContain('Allow: /')
     expect(robots).toContain(`Sitemap: ${SITE_ORIGIN}/sitemap.xml`)
   })
 
