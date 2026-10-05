@@ -20,7 +20,8 @@ const { locale } = Astro.props
 const copy = getLandingCopy(locale).video
 const poster = posters[`../assets/video-posters/${locale}.png`]!.default
 const POSTER_WIDTHS = [640, 960, 1280] as const
-const POSTER_SIZES = '(min-width: 1024px) 896px, calc(100vw - 32px)'
+const POSTER_SIZES =
+  '(min-width: 1024px) 894px, (min-width: 768px) calc(100vw - 114px), calc(100vw - 34px)'
 const posterImages = await Promise.all(
   POSTER_WIDTHS.map((width) =>
     getImage({ src: poster, width, format: 'webp' }),
