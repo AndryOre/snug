@@ -44,6 +44,9 @@
     schedule: ['before 12pm on monday'],
   },
 
+  // apps/site (Astro, @astrojs/*) needs no dedicated rule: its dependencies fall
+  // under the dependencies/devDependencies and all non-major rules below, and
+  // react/tailwind come from the root catalog groups
   packageRules: [
     {
       matchDepTypes: ['devDependencies'],

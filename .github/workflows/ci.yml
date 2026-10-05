@@ -50,6 +50,8 @@ jobs:
           key: ${{ runner.os }}-turbo-quality-${{ github.sha }}
           restore-keys: ${{ runner.os }}-turbo-quality-
 
+      # apps/site is picked up automatically: turbo runs its check script and
+      # --affected scopes pull requests to it and packages/ui
       - name: Check and test workspaces (typecheck, unit tests)
         run:
           bunx turbo run check test:coverage ${{ github.event_name ==
