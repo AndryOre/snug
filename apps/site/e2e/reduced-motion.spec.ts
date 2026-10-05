@@ -42,6 +42,34 @@ for (const path of PATHS) {
   })
 }
 
+test('language popover has no transform animation under reduced motion', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute(
+    'ssr',
+    '',
+  )
+  await page.locator('[data-language-switcher]').getByRole('button').click()
+  await expect(page.locator('[data-language-menu]')).toBeVisible()
+  const popup = page.locator('[data-slot="popover-content"]')
+  const transforms = await popup.evaluate((element) =>
+    element
+      .getAnimations()
+      .flatMap((animation) =>
+        (animation.effect as KeyframeEffect)
+          .getKeyframes()
+          .map((keyframe) => String(keyframe.transform ?? 'none')),
+      ),
+  )
+  const distinct = new Set(
+    transforms.map((value) =>
+      value.replaceAll(/\s+/g, '').replaceAll(/(?<![\d.])0(px)?/g, '0'),
+    ),
+  )
+  expect(distinct.size).toBeLessThanOrEqual(1)
+})
+
 test('FAQ accordion has no transitions under reduced motion', async ({
   page,
 }) => {

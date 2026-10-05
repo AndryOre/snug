@@ -276,4 +276,27 @@
   html {
     @apply font-sans;
   }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection {
+    background-color: color-mix(in oklch, var(--primary) 30%, transparent);
+    color: inherit;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  [data-slot='card-title'],
+  [data-slot='accordion-trigger'] {
+    text-wrap: balance;
+  }
+  a,
+  button,
+  summary,
+  [role='button'],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
 }
