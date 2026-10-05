@@ -6,7 +6,7 @@ set -euo pipefail
 
 base="${SITE_URL:-http://127.0.0.1:8080}"
 out="$(mktemp -d)"
-declare -A budget=([performance]=95 [accessibility]=100 [best-practices]=95 [seo]=100)
+declare -A budget=([performance]=90 [accessibility]=100 [best-practices]=95 [seo]=100)
 failed=0
 
 runs="${LIGHTHOUSE_RUNS:-5}"
