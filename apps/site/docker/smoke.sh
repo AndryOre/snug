@@ -54,6 +54,10 @@ grep -q 'frame-src https://www.youtube-nocookie.com' <<<"$csp" || fail "CSP lack
 script_src="$(tr ';' '\n' <<<"$csp" | grep -E '^ ?script-src ')"
 case "$script_src" in *"'unsafe-inline'"*) fail "script-src allows unsafe-inline" ;; esac
 grep -q "'sha256-" <<<"$script_src" || fail "script-src has no hashes"
+for directive in "base-uri 'none'" upgrade-insecure-requests "require-trusted-types-for 'script'"; do
+  grep -qF "$directive" <<<"$csp" || fail "CSP lacks $directive"
+done
+grep -qi '^speculation-rules: "/speculation-rules.json"' <<<"$headers" || fail "missing Speculation-Rules"
 for header in cross-origin-opener-policy cross-origin-resource-policy strict-transport-security; do
   grep -qi "^$header:" <<<"$headers" || fail "missing $header"
 done
