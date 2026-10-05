@@ -20,18 +20,12 @@ const headingId = heading === undefined ? undefined : `${section}-heading`
   class={cn(className)}
 >
   <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
-    {
-      heading !== undefined && (
-        <SectionHeading id={headingId}>{heading}</SectionHeading>
-      )
-    }
-    {
-      lead !== undefined && (
-        <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
-          {lead}
-        </p>
-      )
-    }
+    {heading !== undefined && (
+      <SectionHeading id={headingId}>{heading}</SectionHeading>
+    )}
+    {lead !== undefined && (
+      <p class="mt-5 max-w-2xl text-lead text-muted-foreground">{lead}</p>
+    )}
     <slot />
   </div>
 </section>

@@ -9,11 +9,6 @@ interface Props {
 const { as: Tag = 'ul', class: className } = Astro.props
 ---
 
-<Tag
-  class={cn(
-    'mt-10 grid grid-cols-auto-cards gap-4',
-    className,
-  )}
->
+<Tag class={cn('mt-10 grid grid-cols-auto-cards gap-4', className)}>
   <slot />
 </Tag>

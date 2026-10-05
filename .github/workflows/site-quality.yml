@@ -49,6 +49,9 @@ jobs:
           docker logs snug-site
           exit 1
 
+      - name: Run the nginx smoke script
+        run: bash apps/site/docker/smoke.sh
+
       - name: Install Playwright browser
         working-directory: apps/site
         run: bunx playwright install --with-deps chromium
@@ -68,6 +71,8 @@ jobs:
         if: failure()
         with:
           name: site-playwright-report
-          path: apps/site/playwright-report/
+          path: |
+            apps/site/playwright-report/
+            apps/site/test-results/
           if-no-files-found: ignore
           retention-days: 7

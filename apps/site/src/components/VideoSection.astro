@@ -22,7 +22,9 @@ const poster = posters[`../assets/video-posters/${locale}.png`]!.default
 const POSTER_WIDTHS = [640, 960, 1280] as const
 const POSTER_SIZES = '(min-width: 1024px) 896px, calc(100vw - 32px)'
 const posterImages = await Promise.all(
-  POSTER_WIDTHS.map((width) => getImage({ src: poster, width, format: 'webp' })),
+  POSTER_WIDTHS.map((width) =>
+    getImage({ src: poster, width, format: 'webp' }),
+  ),
 )
 const posterImage = posterImages.at(-1)!
 const posterSourceSet = posterImages
@@ -48,8 +50,6 @@ const posterSourceSet = posterImages
       posterWidth={poster.width}
       posterHeight={poster.height}
     />
-    <p class="mt-3 text-sm leading-body text-muted-foreground">
-      {copy.note}
-    </p>
+    <p class="mt-3 text-sm leading-body text-muted-foreground">{copy.note}</p>
   </div>
 </Section>
