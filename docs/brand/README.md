@@ -19,7 +19,8 @@ files.
 - [`tokens.css`](tokens.css) — design tokens (colors, type, radii).
 - [`logo/`](logo/) — SVG mark, variants and horizontal lockups; PNG marks at 16,
   32, 48 and 128 px in [`logo/png/`](logo/png/).
-- [`og/`](og/) — social preview images (`og-en.png`, `og-es.png`).
+- Social preview images are generated, not hand-made: one 1200x630 PNG per
+  locale in `apps/site/public/og/` (`og-<locale>.png`), see below.
 - [`youtube/`](youtube/) — YouTube channel art: `banner-2560x1440.png` (text and
   lockup inside the 1546x423 safe area), `avatar-800.png` (mark within 70% of
   the circle) and `watermark-300.png` (transparent, halo mark).
@@ -50,5 +51,17 @@ changing a source SVG, run `bun run brand:export` (needs Chromium:
 `bunx playwright install chromium`). The script embeds the fonts from
 [`brandbook/fonts/`](brandbook/fonts/), so output does not depend on fonts
 installed on the host. The script throws if a YouTube file misses its dimensions
-or byte budget, or if banner content leaves the safe area. Its source is
+or byte budget, or if banner content leaves the safe area.
+
+### Social preview images
+
+`bun run brand:export` also regenerates `apps/site/public/og/og-<locale>.png`
+for every file in `apps/extension/locales`, rendering that locale's
+`extensionDescription` (the short summary) under the lockup. The output folder
+is wiped first, so a removed locale leaves no stale image. The script throws if
+an image is not exactly 1200x630 or is over 300 KB. Latin text uses the embedded
+Geist; Cyrillic and CJK glyphs come from fonts installed on the host (Noto Sans,
+Liberation Sans, Noto Sans CJK or WenQuanYi Zen Hei), so check the regenerated
+ja, ko, ru and zh_CN images by eye after running it on a new machine. To add a
+locale's image, add its locale file; no script change. Its source is
 [`tools/export.mjs`](tools/export.mjs).
