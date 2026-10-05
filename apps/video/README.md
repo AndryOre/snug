@@ -69,8 +69,8 @@ duration badge. Set `REMOTION_BROWSER_EXECUTABLE` as in Setup if needed.
   transitions, durations inline so Studio can edit them).
 - `src/scenes/{hook,export,import,auto-export,local,cta}.tsx` one file per
   scene.
-- `src/copy/` typed access to `../../extension/locales/*.json` and
-  `../../extension/e2e-store/captions.ts`; video-only strings are in
+- `src/copy/` typed access to `apps/extension/locales/*.json` and
+  `apps/extension/e2e-store/captions.ts`; video-only strings are in
   `video-copy.ts`.
 - `src/theme.ts` brand tokens ported from `docs/brand/tokens.css`.
 - `public/fonts/` vendored Geist, Geist Mono and Space Grotesk (OFL). ja, ko and

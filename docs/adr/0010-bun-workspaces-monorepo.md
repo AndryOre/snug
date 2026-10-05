@@ -23,7 +23,7 @@ filters) assumes a single package at the root.
   break.
 - The extension moves to `apps/extension`, the shadcn primitives, `cn`, hooks
   and theme tokens to `packages/ui` (`@workspace/ui`, shadcn monorepo mode), and
-  the promo video to `apps/video`. Every app has its own `components.json`
+  the promo video to `apps/video`. Every UI app has its own `components.json`
   pointing at the shared package, so the future Astro landing consumes the same
   components.
 - Turborepo orchestrates `check`, `test`, `build` and `zip`, with local cache

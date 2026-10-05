@@ -37,6 +37,9 @@ issues early.
 
 ## Tests
 
+Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e-store/`) are
+relative to `apps/extension/`.
+
 New functionality and bug fixes in `lib/**` must add or update Vitest tests in
 the same PR. See
 [`docs/development.md`](docs/development.md#fakebrowser-testing) for how

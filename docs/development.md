@@ -9,36 +9,41 @@ repo root. Paths in this page are relative to the root unless they start with
 | ---------------- | ----------------- | -------------------------------------------------------- |
 | `apps/extension` | `@snug/extension` | The WXT Chrome MV3 extension: entrypoints, `lib/`, tests |
 | `packages/ui`    | `@workspace/ui`   | Shared shadcn/ui components, hooks and theme tokens      |
+| `apps/video`     | `@snug/video`     | The Remotion promo video and its thumbnails              |
 
 Agent and contributor rules are split the same way: the root `AGENTS.md` holds
-repo-wide rules, and `apps/extension/AGENTS.md` and `packages/ui/AGENTS.md` hold
-the stack rules for their workspace.
+repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
+`apps/video/AGENTS.md` hold the stack rules for their workspace.
 
 ## Scripts
 
-| Script                      | What it does                                                                                                                 |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `bun run dev`               | Starts the WXT dev server for `apps/extension` (Chrome MV3).                                                                 |
-| `bun run build`             | Turborepo build of every workspace (Chrome MV3 for the extension).                                                           |
-| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                                               |
-| `bun run check`             | Aggregate gate: each workspace's `check`, then root `format:check` → `lint` → `typecheck` → `knip`. Run before opening a PR. |
-| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                                                |
-| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                 |
-| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                             |
-| `bun run clean`             | Removes build output and `node_modules`.                                                                                     |
-| `bun run cache:clear`       | Clears ESLint and `node_modules/.cache` caches.                                                                              |
-| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                 |
-| `bun run format:write`      | Formats the repo with Prettier.                                                                                              |
-| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                    |
-| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                    |
-| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                       |
-| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui` and in `apps/extension`.                                                   |
-| `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                              |
-| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).    |
-| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                   |
-| `bun run test:e2e`          | Builds the extension (`wxt build`), then runs the Playwright E2E suite (`apps/extension/e2e/**`).                            |
-| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                         |
-| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                         |
+| Script                      | What it does                                                                                                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bun run dev`               | Starts the WXT dev server for `apps/extension` (Chrome MV3).                                                                                                 |
+| `bun run build`             | Turborepo build of every workspace (Chrome MV3 for the extension).                                                                                           |
+| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                                                                               |
+| `bun run check`             | Aggregate gate: each workspace's `check` plus the root `format:check` → `lint` → `typecheck` → `knip`, in parallel under Turborepo. Run before opening a PR. |
+| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                                                                                |
+| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                                                 |
+| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                                                             |
+| `bun run clean`             | Removes build output, `.turbo` and every workspace's `node_modules`.                                                                                         |
+| `bun run cache:clear`       | Clears ESLint, Turborepo and `node_modules/.cache` caches.                                                                                                   |
+| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                                                 |
+| `bun run format:write`      | Formats the repo with Prettier.                                                                                                                              |
+| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                    |
+| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                    |
+| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                       |
+| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension` and `apps/video`.                                                                        |
+| `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                                                              |
+| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).                                    |
+| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                                                   |
+| `bun run test:e2e`          | Builds the extension (`wxt build`), then runs the Playwright E2E suite (`apps/extension/e2e/**`).                                                            |
+| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                                                         |
+| `bun run video:studio`      | Starts Remotion Studio for `apps/video` (Tailscale-bound wrapper when installed).                                                                            |
+| `bun run video:still`       | Renders one still frame of the promo (`remotion still`).                                                                                                     |
+| `bun run video:render`      | Renders the promo for every locale into `apps/video/out/`.                                                                                                   |
+| `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                              |
+| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                         |
 
 ## Git hooks
 
@@ -203,7 +208,7 @@ for why this runs against the built extension instead of a component-test layer.
   issues like missing alt text, non-interactive elements with click handlers but
   no keyboard equivalent, and invalid ARIA attributes.
 - **Accessible primitives**: interactive UI is built from
-  `packages/ui/src/components/**` (shadcn/ui components on top of Radix UI
+  `packages/ui/src/components/**` (shadcn/ui components on top of Base UI
   primitives), which ship correct ARIA roles, keyboard handling, and focus
   management out of the box. Prefer composing these primitives over hand-rolling
   interactive elements from `div`/`span`.

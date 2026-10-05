@@ -30,9 +30,10 @@ into `/forge` itself, identical in every repo, and nothing below needs to
 restate it.
 
 A fresh worktree needs `bun install` (`worktree.bootstrap` in
-`forge.config.json`) — `postinstall` runs `wxt prepare`, which regenerates the
-`.wxt/` types a worker needs before `tsc` will pass. No env files to copy from
-the main checkout; this extension has no runtime secrets.
+`forge.config.json`) — `postinstall` runs `wxt prepare` in `apps/extension`,
+which regenerates the `apps/extension/.wxt/` types a worker needs before `tsc`
+will pass. No env files to copy from the main checkout; this extension has no
+runtime secrets.
 
 ## Self-check
 

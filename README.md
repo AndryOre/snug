@@ -94,8 +94,9 @@ bun run dev
 Contributions are welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup,
 branch naming, and commit/PR conventions. Agent instructions live in
 [`AGENTS.md`](AGENTS.md) (repo-wide) plus one per workspace:
-[`apps/extension/AGENTS.md`](apps/extension/AGENTS.md) and
-[`packages/ui/AGENTS.md`](packages/ui/AGENTS.md).
+[`apps/extension/AGENTS.md`](apps/extension/AGENTS.md),
+[`packages/ui/AGENTS.md`](packages/ui/AGENTS.md) and
+[`apps/video/AGENTS.md`](apps/video/AGENTS.md).
 
 [![Contributors](https://contrib.rocks/image?repo=AndryOre/snug)](https://github.com/AndryOre/snug/graphs/contributors)
 

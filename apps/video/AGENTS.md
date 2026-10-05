@@ -18,7 +18,8 @@ pinned to one exact version together. See
   across the workspace boundary by relative path; never copy strings.
 - Run scripts from the repo root: `bun run video:studio`, `video:still`,
   `video:render`, `video:thumbnails`. `check` runs `tsc --noEmit` through
-  Turborepo; Prettier and ESLint run at the root.
+  Turborepo and Prettier runs at the root. ESLint ignores `apps/video` (Remotion
+  needs inline styles that the shadcn rules reject), so lint does not cover it.
 - Keep `remotion` and every `@remotion/*` dependency on the same exact version.
 - Never use sudo. Setup, the headless browser fallback and render details are in
   [`README.md`](README.md).

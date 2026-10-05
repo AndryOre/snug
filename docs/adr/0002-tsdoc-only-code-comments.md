@@ -50,7 +50,7 @@ documentation on top of, rather than instead of, free-form comments.
   that constant's own declaration instead, since a bare value with no
   explanation would fail the "why does this exist" review bar the old comments
   were meeting.
-- `components/ui/**` (the shadcn/ui generated registry layer) is permanently
+- `packages/ui/**` (the shadcn/ui generated registry layer) is permanently
   exempt from this policy — it is vendored, not hand-authored, and holding it to
   a hand-authored documentation standard would fight every future `shadcn add`.
 - Existing Spanish comments across the app are not migrated by this decision

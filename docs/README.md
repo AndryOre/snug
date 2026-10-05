@@ -45,6 +45,11 @@ An index of every document in this repository.
 - [`docs/adr/0008-safety-snapshot-in-extension-storage.md`](adr/0008-safety-snapshot-in-extension-storage.md)
   — the ADR documenting why the Safety snapshot lives in extension storage and
   in a download.
+- [`docs/adr/0009-promo-video-isolated-remotion-package.md`](adr/0009-promo-video-isolated-remotion-package.md)
+  — the ADR documenting the isolated Remotion promo video package, superseded by
+  ADR 0010.
+- [`docs/adr/0010-bun-workspaces-monorepo.md`](adr/0010-bun-workspaces-monorepo.md)
+  — the ADR documenting the bun workspaces and Turborepo monorepo.
 
 ## How-to
 

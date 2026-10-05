@@ -242,11 +242,12 @@ icon-library picker's full list). Lucide's 2px rounded-stroke geometry already
 echoes the mark's modest corner radius (6 of 84, ~7%) and Geist's
 precise-but-friendly register; none of the alternatives offered a meaningfully
 different character for this product. Lucide is also the shadcn Nova Style
-default and is already wired through every `components/ui/**` primitive and the
-rest of the extension (`lucide-react` in `package.json`) — switching would mean
-re-auditing icon size/padding/optical alignment across the whole popup for no
-brand-signal gain, since icon-library choice carries far less weight than type,
-color, and the logo (already decided). Zero migration cost, zero visual change.
+default and is already wired through every `packages/ui/src/components/**`
+primitive and the rest of the extension (`lucide-react` in the root catalog) —
+switching would mean re-auditing icon size/padding/optical alignment across the
+whole popup for no brand-signal gain, since icon-library choice carries far less
+weight than type, color, and the logo (already decided). Zero migration cost,
+zero visual change.
 
 **Assets (2026-10-01): raster exports done via `tools/export.mjs`.** Run with
 `BRAND_TOOLS_MODULES=<bookmarks-import-export checkout> node tools/export.mjs`
