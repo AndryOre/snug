@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -31,7 +32,9 @@ for (const path of PATHS) {
       'Bookmark Import/Export',
     )
 
-    await expect(page.locator('[data-section="faq"] details')).toHaveCount(11)
+    await expect(
+      page.locator('[data-section="faq"]').getByRole('heading', { level: 3 }),
+    ).toHaveCount(11)
     await expect(page.locator('[data-section="final"]')).toBeVisible()
     await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
       'href',
@@ -54,28 +57,29 @@ test('English figures match the content document', async ({ page }) => {
 
 test('FAQ opens and closes by keyboard', async ({ page }) => {
   await page.goto('/')
-  const first = page.locator('[data-section="faq"] details').first()
-  const summary = first.locator('summary')
-  await summary.focus()
-  await expect(first).not.toHaveAttribute('open', '')
+  const trigger = await firstFaqTrigger(page)
+  await trigger.focus()
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await page.keyboard.press('Enter')
-  await expect(first).toHaveAttribute('open', '')
-  await expect(first.locator('p')).toBeVisible()
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true')
   await page.keyboard.press('Space')
-  await expect(first).not.toHaveAttribute('open', '')
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  await page.keyboard.press('Space')
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true')
 })
 
 test('FAQ questions are headings and only one answer is open', async ({
   page,
 }) => {
   await page.goto('/')
-  const items = page.locator('[data-section="faq"] details')
-  await expect(page.locator('[data-section="faq"] summary h3')).toHaveCount(11)
-  await items.nth(0).locator('summary').click()
-  await expect(items.nth(0)).toHaveAttribute('open', '')
-  await items.nth(1).locator('summary').click()
-  await expect(items.nth(1)).toHaveAttribute('open', '')
-  await expect(items.nth(0)).not.toHaveAttribute('open', '')
+  const faq = await hydratedFaq(page)
+  const triggers = faq.getByRole('button')
+  await expect(faq.getByRole('heading', { level: 3 })).toHaveCount(11)
+  await triggers.nth(0).click()
+  await expect(triggers.nth(0)).toHaveAttribute('aria-expanded', 'true')
+  await triggers.nth(1).click()
+  await expect(triggers.nth(1)).toHaveAttribute('aria-expanded', 'true')
+  await expect(triggers.nth(0)).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('language switcher moves between locales without redirecting', async ({

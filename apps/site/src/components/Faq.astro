@@ -1,6 +1,7 @@
 ---
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
+import FaqAccordion from './FaqAccordion'
 import Section from './Section.astro'
 
 interface Props {
@@ -12,20 +13,5 @@ const entries = Object.values(faq.items)
 ---
 
 <Section section="faq" heading={faq.heading}>
-  <div class="mt-10 max-w-3xl divide-y divide-border border-y border-border">
-    {entries.map((entry) => (
-      <details name="faq" class="group">
-        <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 font-heading text-xl leading-tight font-medium outline-hidden marker:hidden focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
-          <h3>{entry.question}</h3>
-          <span
-            aria-hidden="true"
-            class="shrink-0 font-mono text-primary-text transition-transform group-open:rotate-45 motion-reduce:transition-none"
-          >
-            +
-          </span>
-        </summary>
-        <p class="pb-5 leading-body text-muted-foreground">{entry.answer}</p>
-      </details>
-    ))}
-  </div>
+  <FaqAccordion client:visible entries={entries} />
 </Section>

@@ -41,6 +41,23 @@ function jsonLd(html: string): Record<string, unknown> {
 
 test.describe('built pages', () => {
   for (const locale of LOCALES) {
+    test(`${locale} keeps every FAQ answer in the server-rendered markup`, () => {
+      const html = readBuilt(pageFile(locale))
+        .replaceAll(/<script type="application\/ld\+json">.*?<\/script>/gs, '')
+        .replaceAll('&#39;', "'")
+        .replaceAll('&quot;', '"')
+        .replaceAll('&amp;', '&')
+      const content = JSON.parse(
+        readFileSync(
+          path.join(siteRoot, 'src/content', `${locale}.json`),
+          'utf8',
+        ),
+      ) as { faq: { items: Record<string, { answer: string }> } }
+      for (const entry of Object.values(content.faq.items)) {
+        expect(html).toContain(entry.answer)
+      }
+    })
+
     test(`${locale} has metadata, social tags and JSON-LD`, () => {
       const html = readBuilt(pageFile(locale))
       const canonical = `${SITE_ORIGIN}${localePath(locale)}`

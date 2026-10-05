@@ -1,6 +1,7 @@
 import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { firstFaqTrigger } from './faq-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -32,6 +33,17 @@ for (const path of PATHS) {
     const switcher = page.locator('[data-language-switcher]')
     await switcher.getByRole('button').click()
     await expect(switcher.locator('nav')).toBeVisible()
+    await expectNoHorizontalOverflow(page)
+  })
+
+  test(`${path} has no horizontal overflow at 320px with a FAQ answer open`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 640 })
+    await page.goto(path)
+    const first = await firstFaqTrigger(page)
+    await first.click()
+    await expect(first).toHaveAttribute('aria-expanded', 'true')
     await expectNoHorizontalOverflow(page)
   })
 }
