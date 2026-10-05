@@ -60,6 +60,10 @@ jobs:
         working-directory: apps/site
         run: bun run test:container
 
+      - name: Run the visual regression suite
+        working-directory: apps/site
+        run: bun run test:visual
+
       - name: Enforce the Lighthouse budget
         working-directory: apps/site
         run: |

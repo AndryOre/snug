@@ -6,6 +6,8 @@ import { defineConfig } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './e2e-container',
+  snapshotPathTemplate: '{testDir}/{testFileName}-snapshots/{arg}{ext}',
+  expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.002 } },
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [['html', { open: 'never' }]] : 'list',
