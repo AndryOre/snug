@@ -7,6 +7,8 @@ on:
       - 'apps/site/**'
       - 'packages/ui/**'
       - 'PRIVACY_POLICY.md'
+      - '.github/scripts/deploy-coolify.sh'
+      - '.github/workflows/deploy-site.yml'
 
 concurrency:
   group: ${{ github.workflow }}
