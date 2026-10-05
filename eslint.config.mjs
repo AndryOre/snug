@@ -256,13 +256,37 @@ const eslintConfig = defineConfig([
     },
     rules: commentPolicyRules,
   },
+  {
+    /**
+     * `apps/video/**` is linted with the full rule set except the groups
+     * that do not fit Remotion composition code: every `shadcn/*` rule is
+     * off because Remotion renders frames from inline styles, raw colors and
+     * arbitrary values rather than shadcn/ui components, and
+     * `jsdoc/require-param`, `jsdoc/require-returns`,
+     * `unicorn/name-replacements` and `unicorn/consistent-boolean-name` are
+     * off because parameter docs and naming conventions are out of scope for
+     * composition code.
+     */
+    files: ['apps/video/**'],
+    rules: {
+      'shadcn/no-restyle': 'off',
+      'shadcn/no-raw-colors': 'off',
+      'shadcn/no-arbitrary-values': 'off',
+      'shadcn/no-inline-styles': 'off',
+      'shadcn/no-unknown-classes': 'off',
+      'shadcn/require-static-classes': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-returns': 'off',
+      'unicorn/name-replacements': 'off',
+      'unicorn/consistent-boolean-name': 'off',
+    },
+  },
   prettierConfig,
   globalIgnores([
     '**/.output/**',
     '**/.wxt/**',
     '**/coverage/**',
     '.claude/skills/**',
-    'apps/video/**',
   ]),
 ])
 

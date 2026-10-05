@@ -34,7 +34,7 @@ const parseLocales = (argv: string[]): Locale[] => {
   )
   if (flagIndex === -1) return [...LOCALES]
   const flag = argv[flagIndex] ?? ''
-  const raw = flag.includes('=') ? flag.split('=')[1] : argv[flagIndex + 1]
+  const raw = flag.includes('=') ? flag.split('=', 2)[1] : argv[flagIndex + 1]
   const requested = (raw ?? '').split(',').filter(Boolean)
   const unknown = requested.filter((code) => !isLocale(code))
   if (requested.length === 0 || unknown.length > 0) {
@@ -53,9 +53,9 @@ const parseConcurrency = (argv: string[]): number => {
   )
   if (flagIndex === -1) return DEFAULT_CONCURRENCY
   const flag = argv[flagIndex] ?? ''
-  const raw = flag.includes('=') ? flag.split('=')[1] : argv[flagIndex + 1]
+  const raw = flag.includes('=') ? flag.split('=', 2)[1] : argv[flagIndex + 1]
   const value = Number(raw)
-  if (!Number.isInteger(value) || value < 1) {
+  if (!Number.isSafeInteger(value) || value < 1) {
     throw new Error(`Invalid --concurrency "${raw ?? ''}". Use a whole number.`)
   }
   return value
@@ -97,9 +97,7 @@ const verify = async (file: string): Promise<string[]> => {
   if (Math.abs(duration - EXPECTED_SECONDS) > DURATION_TOLERANCE_SECONDS) {
     problems.push(`duration ${duration}s, expected ${EXPECTED_SECONDS}s`)
   }
-  if (!video) {
-    problems.push('no video stream')
-  } else {
+  if (video) {
     if (video.width !== WIDTH || video.height !== HEIGHT) {
       problems.push(`size ${video.width}x${video.height}`)
     }
@@ -109,9 +107,11 @@ const verify = async (file: string): Promise<string[]> => {
     if (parseFrameRate(video.r_frame_rate) !== FPS) {
       problems.push(`frame rate ${video.r_frame_rate}`)
     }
+  } else {
+    problems.push('no video stream')
   }
   const hasAudio = streams.some((stream) => stream.codec_type === 'audio')
-  if (existsSync(MUSIC_TRACK) && !hasAudio) {
+  if (!hasAudio && existsSync(MUSIC_TRACK)) {
     problems.push('missing audio stream although public/music/track.wav exists')
   }
   return problems
@@ -161,7 +161,9 @@ const main = async () => {
   }
 }
 
-main().catch((error: unknown) => {
+try {
+  await main()
+} catch (error: unknown) {
   console.error(error)
-  process.exit(1)
-})
+  process.exitCode = 1
+}

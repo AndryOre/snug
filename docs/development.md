@@ -225,6 +225,22 @@ for why this runs against the built extension instead of a component-test layer.
   component per this repo's
   [`@shadcn/lint` contract](#adding-a-shadcnlint-contract) rules.
 
+## Linting `apps/video`
+
+ESLint lints `apps/video` with the full root rule set plus one scoped override
+in `eslint.config.mjs` (`files: ['apps/video/**']`). The override turns off:
+
+- every `shadcn/*` rule (`no-restyle`, `no-raw-colors`, `no-arbitrary-values`,
+  `no-inline-styles`, `no-unknown-classes`, `require-static-classes`) — Remotion
+  renders frames from inline styles, raw colors and arbitrary values, not
+  shadcn/ui components;
+- `jsdoc/require-param` and `jsdoc/require-returns`, and
+  `unicorn/name-replacements` and `unicorn/consistent-boolean-name` — parameter
+  docs and naming conventions are out of scope for composition code.
+
+Everything else stays on, including `react-hooks`, `unicorn`,
+`jsdoc/informative-docs` and the TSDoc-only comment rule.
+
 ## Repository settings
 
 This repo's GitHub settings (rulesets on `main` and `v*` tags, merge strategy,
