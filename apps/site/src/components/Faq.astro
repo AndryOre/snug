@@ -15,9 +15,9 @@ const entries = Object.values(faq.items)
   <div class="mt-10 max-w-3xl divide-y divide-border border-y border-border">
     {
       entries.map((entry) => (
-        <details class="group">
+        <details name="faq" class="group">
           <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 font-heading text-xl leading-tight font-medium outline-hidden marker:hidden focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
-            <span>{entry.question}</span>
+            <h3>{entry.question}</h3>
             <span
               aria-hidden="true"
               class="shrink-0 font-mono text-primary-text transition-transform group-open:rotate-45 motion-reduce:transition-none"

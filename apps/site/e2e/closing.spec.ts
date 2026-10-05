@@ -74,6 +74,19 @@ test('FAQ opens and closes by keyboard', async ({ page }) => {
   await expect(first).not.toHaveAttribute('open', '')
 })
 
+test('FAQ questions are headings and only one answer is open', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const items = page.locator('[data-section="faq"] details')
+  await expect(page.locator('[data-section="faq"] summary h3')).toHaveCount(11)
+  await items.nth(0).locator('summary').click()
+  await expect(items.nth(0)).toHaveAttribute('open', '')
+  await items.nth(1).locator('summary').click()
+  await expect(items.nth(1)).toHaveAttribute('open', '')
+  await expect(items.nth(0)).not.toHaveAttribute('open', '')
+})
+
 test('language switcher moves between locales without redirecting', async ({
   page,
 }) => {
