@@ -1,7 +1,11 @@
 ---
+import Faq from '../../components/Faq.astro'
 import Features from '../../components/Features.astro'
+import FinalCta from '../../components/FinalCta.astro'
+import Footer from '../../components/Footer.astro'
 import Hero from '../../components/Hero.astro'
 import RealInterface from '../../components/RealInterface.astro'
+import SocialProof from '../../components/SocialProof.astro'
 import TrustProof from '../../components/TrustProof.astro'
 import VideoSection from '../../components/VideoSection.astro'
 import Layout from '../../layouts/Layout.astro'
@@ -27,5 +31,9 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
     <Features locale={locale} />
     <RealInterface locale={locale} />
     <VideoSection locale={locale} />
+    <SocialProof locale={locale} />
+    <Faq locale={locale} />
+    <FinalCta locale={locale} />
   </main>
+  <Footer locale={locale} />
 </Layout>

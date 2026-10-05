@@ -81,5 +81,73 @@
     "caption": "简短演示：导出一个文件夹，再带预览地导入。",
     "note": "视频只有在你点击播放时才会从 YouTube 加载。在此之前，页面不会联系任何人。",
     "play": "播放视频"
+  },
+  "proof": {
+    "heading": "用户怎么说",
+    "numbers": "5,000 位用户。Chrome 应用商店 20 个评分，平均 4.8 星（2026-10-05）。",
+    "renameNote": "以下是 Chrome 应用商店的公开评价，保持发布时的英文原文。大多数写于 Snug 更名之前，当时商店页面叫“Bookmark Import/Export”，因此它们讲的是导出和导入，而不是当前的界面。",
+    "reviewsLead": "四条评价，保留英文原文：",
+    "link": "在 Chrome 应用商店阅读全部评价"
+  },
+  "faq": {
+    "heading": "常见问题",
+    "items": {
+      "network": {
+        "question": "Snug 会把我的书签发送到别处吗？",
+        "answer": "不会。Snug 不发起任何网络请求。它在你的设备上读写浏览器的书签，源代码也是公开的，你可以自行核查。"
+      },
+      "account": {
+        "question": "需要账号吗？",
+        "answer": "不需要。安装后即可开始导出。"
+      },
+      "sync": {
+        "question": "它会在设备之间同步书签吗？",
+        "answer": "不会。Snug 没有同步功能，也没有云端。要把书签转移到另一个浏览器或电脑，请导出文件，然后在那边导入。"
+      },
+      "oneFile": {
+        "question": "可以一次导入多个文件吗？",
+        "answer": "不可以。Snug 一次导入一个文件。要导入多个，请逐个依次导入。"
+      },
+      "permissions": {
+        "question": "为什么它需要访问我的所有书签？",
+        "answer": "读写书签是扩展程序导出和导入书签的唯一方式。Snug 不发起网络请求，因此它读取的内容不可能离开你的设备。"
+      },
+      "builtin": {
+        "question": "我的浏览器已经能导出 HTML，为什么还要用 Snug？",
+        "answer": "浏览器内置的导出没有文件夹选择、预览、撤销、计划、重复项检查和额外格式。Snug 全都有。"
+      },
+      "overwrite": {
+        "question": "它会覆盖我现有的书签吗？",
+        "answer": "只有在你选择“替换”时才会。你会先看到预览，而且替换会保存一份可恢复的安全快照。"
+      },
+      "formats": {
+        "question": "支持哪些格式？",
+        "answer": "可导出为 HTML、JSON、CSV、Markdown、OPML 或 XBEL。可导入 HTML、JSON、CSV 或 XBEL、Chrome 配置文件的 `Bookmarks` 文件，或 Safari 导出文件。"
+      },
+      "browsers": {
+        "question": "适用于哪些浏览器？",
+        "answer": "Chrome 以及 Edge、Brave、Opera 等其他基于 Chromium 的浏览器。"
+      },
+      "safe": {
+        "question": "安装独立开发者的扩展程序安全吗？",
+        "answer": "源代码是公开的，CodeQL 会对其扫描，项目有 OpenSSF Scorecard 和 Best Practices 徽章，CI 使用固定版本运行。请到 GitHub 上自行判断。"
+      },
+      "cost": {
+        "question": "Snug 收费吗？",
+        "answer": "不收费。它是免费的。 Sources: Context: Objections table (all five objections), Anti-persona, Differentiation; Product: Capabilities and Constraints (\"Imports one file at a time. No sync, no cloud, no account, no pricing\")."
+      }
+    }
+  },
+  "final": {
+    "heading": "带上你的书签",
+    "line": "把 Snug 添加到 Chrome，几次点击就能导出、导入或备份。免费、开源，任何内容都不会离开你的设备。",
+    "button": "添加至 Chrome"
+  },
+  "footer": {
+    "source": "GitHub 源代码",
+    "privacy": "隐私政策",
+    "listing": "Chrome 应用商店页面",
+    "changelog": "更新日志",
+    "note": "Snug 以 MIT 许可证开源。"
   }
 }

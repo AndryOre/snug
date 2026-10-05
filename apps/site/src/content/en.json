@@ -81,5 +81,73 @@
     "caption": "A short walkthrough of exporting a folder and importing it with a preview.",
     "note": "The video loads from YouTube only when you press play. Until then the page contacts no one.",
     "play": "Play video"
+  },
+  "proof": {
+    "heading": "What people say",
+    "numbers": "5,000 users. 4.8 stars from 20 ratings on the Chrome Web Store (2026-10-05).",
+    "renameNote": "These are public Chrome Web Store reviews. Most were written before Snug was renamed, when the listing was called \"Bookmark Import/Export\", so they describe the export and import, not the current interface.",
+    "reviewsLead": "",
+    "link": "Read all reviews on the Chrome Web Store"
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "items": {
+      "network": {
+        "question": "Does Snug send my bookmarks anywhere?",
+        "answer": "No. Snug makes no network calls. It reads and writes your browser's bookmarks on your device, and the source code is public so you can check."
+      },
+      "account": {
+        "question": "Do I need an account?",
+        "answer": "No. Install it and start exporting."
+      },
+      "sync": {
+        "question": "Does it sync my bookmarks between devices?",
+        "answer": "No. Snug has no sync and no cloud. To move bookmarks to another browser or computer, export a file and import it there."
+      },
+      "oneFile": {
+        "question": "Can I import several files at once?",
+        "answer": "No. Snug imports one file at a time. To bring in more than one, import them one after another."
+      },
+      "permissions": {
+        "question": "Why does it need access to all my bookmarks?",
+        "answer": "Reading and writing them is the only way an extension can export and import them. Snug makes no network calls, so nothing it reads can leave your device."
+      },
+      "builtin": {
+        "question": "My browser already exports HTML. Why use Snug?",
+        "answer": "The built-in export has no folder selection, preview, undo, schedule, duplicate check or extra formats. Snug has all of them."
+      },
+      "overwrite": {
+        "question": "Will it overwrite my current bookmarks?",
+        "answer": "Only if you choose Replace. You see a preview first, and Replace saves a Safety snapshot you can restore."
+      },
+      "formats": {
+        "question": "Which formats does it handle?",
+        "answer": "Export as HTML, JSON, CSV, Markdown, OPML or XBEL. Import HTML, JSON, CSV or XBEL, a Chrome profile `Bookmarks` file, or a Safari export."
+      },
+      "browsers": {
+        "question": "Which browsers does it work in?",
+        "answer": "Chrome and other Chromium browsers such as Edge, Brave and Opera."
+      },
+      "safe": {
+        "question": "Is it safe to install a solo developer's extension?",
+        "answer": "The source is public, CodeQL scans it, the project has OpenSSF Scorecard and Best Practices badges, and CI runs pinned. Judge it yourself on GitHub."
+      },
+      "cost": {
+        "question": "Does Snug cost anything?",
+        "answer": "No. It is free."
+      }
+    }
+  },
+  "final": {
+    "heading": "Take your bookmarks with you",
+    "line": "Add Snug to Chrome and export, import or back up in a few clicks. Free, open source, and nothing leaves your device.",
+    "button": "Add to Chrome"
+  },
+  "footer": {
+    "source": "Source on GitHub",
+    "privacy": "Privacy Policy",
+    "listing": "Chrome Web Store listing",
+    "changelog": "Changelog",
+    "note": "Snug is open source under the MIT license."
   }
 }
