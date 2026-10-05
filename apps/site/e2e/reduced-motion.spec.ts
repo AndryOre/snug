@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { hydratedFaq } from './faq-helpers'
 
 test.use({ reducedMotion: 'reduce' })
 
@@ -40,3 +41,33 @@ for (const path of PATHS) {
     expect(problems).toEqual([])
   })
 }
+
+test('FAQ accordion has no transitions under reduced motion', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const faq = await hydratedFaq(page)
+  const trigger = faq.getByRole('button').first()
+  await trigger.click()
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+  const durations = await faq.evaluate((section) =>
+    [
+      ...section.querySelectorAll(
+        '[data-slot="accordion-trigger"], [data-slot="accordion-trigger-icon"], [data-slot="accordion-content"]',
+      ),
+    ].map((element) => {
+      const style = globalThis.getComputedStyle(element)
+      return [style.transitionDuration, style.animationDuration]
+    }),
+  )
+  expect(durations.length).toBeGreaterThan(0)
+  for (const pair of durations) {
+    for (const duration of pair) {
+      expect(
+        duration
+          .split(',')
+          .every((part) => Number(part.trim().replace('s', '')) === 0),
+      ).toBe(true)
+    }
+  }
+})
