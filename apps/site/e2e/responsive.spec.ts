@@ -1,17 +1,10 @@
-import { expect, type Page, test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger } from './faq-helpers'
+import { expectNoHorizontalOverflow } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
-
-async function expectNoHorizontalOverflow(page: Page): Promise<void> {
-  const { scrollWidth, innerWidth } = await page.evaluate(() => ({
-    scrollWidth: globalThis.document.documentElement.scrollWidth,
-    innerWidth: globalThis.innerWidth,
-  }))
-  expect(scrollWidth).toBeLessThanOrEqual(innerWidth)
-}
 
 test('/privacy/ has no horizontal overflow', async ({ page }) => {
   await page.goto('/privacy/')
