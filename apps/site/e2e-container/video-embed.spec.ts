@@ -27,7 +27,7 @@ test('the promo video iframe loads under the production CSP', async ({
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
   await expect(
-    page.locator('astro-island[client="visible"]'),
+    page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')
   await poster.click()
 
