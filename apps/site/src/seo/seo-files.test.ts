@@ -62,6 +62,15 @@ describe('buildSoftwareAppJsonLd', () => {
   })
 
   it.each(LOCALES)(
+    '%s points downloadUrl at the counted /install',
+    (locale) => {
+      const data = buildSoftwareAppJsonLd(locale, 'Description')
+
+      expect(data.downloadUrl).toBe('https://snug.andryore.dev/install')
+    },
+  )
+
+  it.each(LOCALES)(
     '%s omits aggregateRating and keeps interactionStatistic',
     (locale) => {
       const data: Record<string, unknown> = buildSoftwareAppJsonLd(
@@ -101,7 +110,9 @@ describe('root file routes', () => {
   it('serves llms.txt as plain text', async () => {
     const response = getLlmsTxt()
     expect(response.headers.get('Content-Type')).toContain('text/plain')
-    expect(await response.text()).toMatch(/^# Snug\n/)
+    const text = await response.text()
+    expect(text).toMatch(/^# Snug\n/)
+    expect(text).not.toContain('chromewebstore.google.com')
   })
 
   it('serves a sitemap with one url per locale plus the privacy page', async () => {

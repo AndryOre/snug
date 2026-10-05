@@ -63,7 +63,7 @@ Snug is a free, open-source Chromium browser extension. It makes no network call
 
 ## Optional
 
-- [Chrome Web Store listing](https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn)
+- [Chrome Web Store reviews](${SITE_ORIGIN}/reviews): what users say about Snug
 `
 }
 

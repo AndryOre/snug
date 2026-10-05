@@ -28,6 +28,18 @@ status() { curl -s -o /dev/null -w '%{http_code}' "$1"; }
 [ "$(location "$base/install")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=direct" ] || fail "default campaign"
 [ "$(location "$base/install?c=hero")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=hero" ] || fail "c=hero"
 case "$(location "$base/install?c=a%26b")" in *campaign=direct) ;; *) fail "unsafe tag not rejected" ;; esac
+[ "$(status "$base/install/")" = 302 ] || fail "/install/ is not 302"
+[ "$(location "$base/install/")" = "$(location "$base/install")" ] || fail "/install/ differs from /install"
+[ "$(status "$base/reviews")" = 302 ] || fail "/reviews is not 302"
+[ "$(location "$base/reviews?c=proof")" = "$store/reviews?utm_source=landing&utm_medium=web&utm_campaign=proof" ] || fail "/reviews campaign"
+for alias in pt-BR pt_BR; do
+  [ "$(status "$base/$alias/")" = 301 ] || fail "/$alias/ is not 301"
+  [ "$(location "$base/$alias/")" = "/pt-br/" ] || fail "/$alias/ does not redirect to /pt-br/"
+done
+for alias in zh-CN zh_CN; do
+  [ "$(status "$base/$alias/")" = 301 ] || fail "/$alias/ is not 301"
+  [ "$(location "$base/$alias/")" = "/zh-cn/" ] || fail "/$alias/ does not redirect to /zh-cn/"
+done
 [ "$(status "$base/nope/")" = 404 ] || fail "missing page is not 404"
 
 headers="$(curl -s -o /dev/null -D - "$base/" | tr -d '\r')"
@@ -41,6 +53,19 @@ fi
 grep -q 'frame-src https://www.youtube-nocookie.com' <<<"$csp" || fail "CSP lacks the YouTube frame-src"
 for header in cross-origin-opener-policy cross-origin-resource-policy strict-transport-security; do
   grep -qi "^$header:" <<<"$headers" || fail "missing $header"
+done
+
+for prefix in es de fr it ja ko pt-br ru zh-cn; do
+  [ "$(status "$base/$prefix/nope/")" = 404 ] || fail "/$prefix/nope/ is not 404"
+  page="$(curl -s "$base/$prefix/nope/")"
+  grep -q "<html lang=\"$(sed 's/-br/-BR/;s/-cn/-CN/' <<<"$prefix")\"" <<<"$page" || fail "/$prefix/nope/ is not the $prefix 404"
+done
+grep -q '<html lang="en"' <<<"$(curl -s "$base/nope/")" || fail "root 404 is not English"
+
+corp() { curl -s -o /dev/null -D - "$1" | tr -d '\r' | awk 'tolower($1)=="cross-origin-resource-policy:"{print $2}'; }
+[ "$(corp "$base/og/og-en.png")" = cross-origin ] || fail "/og/ CORP is not cross-origin"
+for path in / /llms.txt /privacy/ /nope/; do
+  [ "$(corp "$base$path")" = same-origin ] || fail "$path CORP is not same-origin"
 done
 
 [ "$(status "$base/de")" = 301 ] || fail "/de is not 301"

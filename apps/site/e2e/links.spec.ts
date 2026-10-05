@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 
-const SERVER_HANDLED_PATHS = new Set(['/install'])
+const SERVER_HANDLED_PATHS = new Set(['/install', '/reviews'])
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 

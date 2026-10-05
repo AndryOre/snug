@@ -1,5 +1,3 @@
-import { STORE_LISTING_URL } from '../seo/store-facts'
-
 /**
  * One public Chrome Web Store review, quoted verbatim in every locale.
  */
@@ -40,6 +38,7 @@ export const REVIEWS: readonly Review[] = [
 ]
 
 /**
- * Where "read all reviews" points: the reviews tab of the store listing.
+ * Where "read all reviews" points: the counted `/reviews` redirect, which the
+ * server answers with a 302 to the store listing's reviews tab.
  */
-export const STORE_REVIEWS_URL = `${STORE_LISTING_URL}/reviews`
+export const STORE_REVIEWS_URL = '/reviews?c=proof'
