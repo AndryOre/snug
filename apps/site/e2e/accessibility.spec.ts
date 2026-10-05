@@ -54,7 +54,12 @@ test.describe('opened states', () => {
       }),
     )
     await page.goto('/')
-    await page.locator('[data-video-poster]').click()
+    const poster = page.locator('[data-video-poster]')
+    await poster.scrollIntoViewIfNeeded()
+    await expect(
+      page.locator('astro-island[client="visible"]'),
+    ).not.toHaveAttribute('ssr', '')
+    await poster.click()
     await expect(page.locator('iframe[data-video-player]')).toBeVisible()
     await expectNoViolations(page)
   })
