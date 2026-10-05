@@ -59,8 +59,20 @@ describe('buildSoftwareAppJsonLd', () => {
     expect(data.name).toBe(STORE_FACTS.name)
     expect(data.isAccessibleForFree).toBe(true)
     expect(data.offers.price).toBe('0')
-    expect(data.aggregateRating.ratingValue).toBe(STORE_FACTS.ratingValue)
   })
+
+  it.each(LOCALES)(
+    '%s omits aggregateRating and keeps interactionStatistic',
+    (locale) => {
+      const data: Record<string, unknown> = buildSoftwareAppJsonLd(
+        locale,
+        'Description',
+      )
+
+      expect(data).not.toHaveProperty('aggregateRating')
+      expect(data).toHaveProperty('interactionStatistic')
+    },
+  )
 
   it.each(LOCALES)('%s points screenshot at its OG image', (locale) => {
     const data = buildSoftwareAppJsonLd(locale, 'Description')

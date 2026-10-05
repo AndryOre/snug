@@ -2,9 +2,26 @@ import { readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
-import { hreflangAlternates, languageTag, localePath, LOCALES } from './locales'
+import {
+  hreflangAlternates,
+  languageTag,
+  LOCALE_CONFIG,
+  localePath,
+  LOCALES,
+} from './locales'
 
 describe('locales', () => {
+  it.each(LOCALES)('%s carries a direction', (locale) => {
+    expect(['ltr', 'rtl']).toContain(LOCALE_CONFIG[locale].dir)
+  })
+
+  it('skips the Latin font preload only for CJK locales', () => {
+    const skipped = LOCALES.filter(
+      (locale) => !LOCALE_CONFIG[locale].preloadLatinFont,
+    )
+    expect(skipped).toEqual(['ja', 'ko', 'zh_CN'])
+  })
+
   it('matches the extension locale files', () => {
     const directory = fileURLToPath(
       new URL('../../../extension/locales', import.meta.url),

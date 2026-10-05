@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   hreflangAlternates,
+  LOCALE_CONFIG,
   localePath,
   LOCALES,
   ogImagePath,
@@ -77,18 +78,17 @@ test.describe('built pages', () => {
         '<link rel="manifest" href="/manifest.webmanifest"',
       )
       expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
-      expect(html).toMatch(
-        /<link rel="preload" as="font" type="font\/woff2" href="\/_astro\/space-grotesk-latin-wght-normal[^"]*\.woff2" crossorigin/,
+      expect(html).toContain(`dir="${LOCALE_CONFIG[locale].dir}"`)
+      expect(/rel="preload" as="font"/.test(html)).toBe(
+        LOCALE_CONFIG[locale].preloadLatinFont,
       )
 
       const data = jsonLd(html)
       expect(data['@type']).toBe('SoftwareApplication')
       expect(data.url).toBe(canonical)
       expect(data.isAccessibleForFree).toBe(true)
-      expect(data.aggregateRating).toMatchObject({
-        ratingValue: 4.8,
-        ratingCount: 20,
-      })
+      expect(data).not.toHaveProperty('aggregateRating')
+      expect(data).toHaveProperty('interactionStatistic')
     })
   }
 
@@ -164,6 +164,10 @@ test.describe('privacy page', () => {
     expect(html).toContain('masked')
     expect(html).not.toMatch(/Plausible|PostHog|Umami|Google Analytics/)
     expect(html).not.toMatch(/<script src=/)
+  })
+
+  test('has no og:locale:alternate', () => {
+    expect(readBuilt('privacy/index.html')).not.toContain('og:locale:alternate')
   })
 
   test('is canonical, indexed and listed in the sitemap', () => {
