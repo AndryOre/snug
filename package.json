@@ -51,8 +51,8 @@
     }
   },
   "scripts": {
-    "clean": "rm -rf apps/extension/.output apps/extension/.wxt apps/extension/node_modules node_modules",
-    "cache:clear": "rm -rf .eslintcache node_modules/.cache",
+    "clean": "rm -rf apps/extension/.output apps/extension/.wxt apps/extension/node_modules apps/video/node_modules packages/ui/node_modules .turbo node_modules",
+    "cache:clear": "rm -rf .eslintcache .turbo node_modules/.cache",
     "dev": "bun run --cwd apps/extension dev",
     "build": "turbo run build",
     "zip": "turbo run zip",

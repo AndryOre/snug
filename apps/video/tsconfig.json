@@ -1,22 +1,16 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "Preserve",
     "moduleResolution": "Bundler",
-    "jsx": "react-jsx",
-    "strict": true,
     "noEmit": true,
     "lib": ["ES2022", "DOM"],
     "types": ["bun"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noUncheckedIndexedAccess": true,
-    "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": true
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src", "scripts", "remotion.config.ts"]
 }

@@ -2,7 +2,7 @@ import { configDefaults, defineConfig } from 'vitest/config'
 import { WxtVitest } from 'wxt/testing/vitest-plugin'
 
 export default defineConfig({
-  plugins: [WxtVitest()],
+  plugins: [WxtVitest({ root: import.meta.dirname })],
   test: {
     setupFiles: ['./lib/testing/setup-locks.ts'],
     exclude: [...configDefaults.exclude, 'e2e/**', 'e2e-store/**'],
