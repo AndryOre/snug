@@ -290,8 +290,9 @@ brand-kit render; left for the `/forge` application pass.
   "by Andry Orellana" signature on the mark, listing, or logo. Authorship stays
   visible only where a repo normally shows it (LICENSE, GitHub profile, commit
   history) — never as brand furniture.
-- No domain purchase for this product at this stage. The planned landing page
-  uses the `snug.andryore.dev` subdomain.
+- The official homepage is the live landing site at <https://snug.andryore.dev/>
+  (privacy page: <https://snug.andryore.dev/privacy/>), served from an
+  `andryore.dev` subdomain. No separate domain is bought for this product.
 
 ## Out of scope for branding (not pursued in v2.0.0)
 

@@ -34,8 +34,10 @@ pack. Each one still needs its manual dashboard step (see the checklist).
    each has a justification below. Enter them on the Privacy tab.
 2. **Resolved in the pack:** the single-purpose text now covers exporting,
    importing, backing up and cleaning up bookmarks.
-3. **Resolved in the pack:** every URL points to `AndryOre/snug`. Replace the
-   old repository slug in the dashboard's homepage, support and privacy URLs.
+3. **Resolved in the pack:** the homepage and privacy URLs point to the live
+   site (`https://snug.andryore.dev/` and `/privacy/`) and the support URL to
+   `AndryOre/snug/issues`. Replace the old repository URLs in the dashboard's
+   homepage, support and privacy fields.
 4. **Resolved in the pack:** the old screenshots (global and localized EN/ES)
    are replaced by the new set in [`screenshots.md`](screenshots.md). Delete the
    old ones in the dashboard.
@@ -152,7 +154,7 @@ Official URL: none (unchanged).
 Homepage URL:
 
 ```text
-https://github.com/AndryOre/snug
+https://snug.andryore.dev/
 ```
 
 Support URL:
@@ -161,11 +163,10 @@ Support URL:
 https://github.com/AndryOre/snug/issues
 ```
 
-Privacy policy URL (`PRIVACY_POLICY.md` exists at the repository root and is
-titled "Privacy Policy for Snug"):
+Privacy policy URL (the live site's privacy page):
 
 ```text
-https://github.com/AndryOre/snug/blob/main/PRIVACY_POLICY.md
+https://snug.andryore.dev/privacy/
 ```
 
 Mature content: off (unchanged).
@@ -340,7 +341,7 @@ All three certifications are ticked, as on v1.3.0.
 Privacy policy URL:
 
 ```text
-https://github.com/AndryOre/snug/blob/main/PRIVACY_POLICY.md
+https://snug.andryore.dev/privacy/
 ```
 
 ## Distribution

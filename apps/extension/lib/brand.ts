@@ -20,6 +20,11 @@ export const CHROME_WEB_STORE_URL = `https://chromewebstore.google.com/detail/${
 export const PRODUCT_NAME = 'Snug'
 
 /**
+ * The product's official homepage: the live landing site.
+ */
+export const SITE_URL = 'https://snug.andryore.dev/'
+
+/**
  * The project's GitHub repository URL.
  */
 export const GITHUB_URL = 'https://github.com/AndryOre/snug'
