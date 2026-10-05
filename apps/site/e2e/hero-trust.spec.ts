@@ -2,6 +2,8 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 
+const SCHEMES = ['light', 'dark'] as const
+
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
 for (const path of PATHS) {
@@ -17,7 +19,6 @@ for (const path of PATHS) {
     await page.goto(path)
     await page.waitForLoadState('networkidle')
 
-    await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark')
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('[data-section="hero"]')).toBeVisible()
     await expect(page.locator('[data-section="trust"]')).toBeVisible()
@@ -53,6 +54,16 @@ test('install button shows a visible keyboard focus ring', async ({ page }) => {
   )
   expect(boxShadow).not.toBe('none')
 })
+
+for (const colorScheme of SCHEMES) {
+  test(`the root color-scheme follows a ${colorScheme} system`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme })
+    await page.goto('/')
+    await expect(page.locator('html')).toHaveCSS('color-scheme', colorScheme)
+  })
+}
 
 test('works without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false })
