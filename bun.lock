@@ -79,6 +79,7 @@
         "@tailwindcss/vite": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
+        "@vitest/coverage-v8": "^5.0.3",
         "typescript": "catalog:",
         "vitest": "catalog:",
       },
