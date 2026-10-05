@@ -79,7 +79,8 @@ test('language switcher moves between locales without redirecting', async ({
 }) => {
   await page.goto('/')
   const switcher = page.locator('[data-language-switcher]')
-  await switcher.locator('summary').focus()
+  const trigger = switcher.getByRole('button')
+  await trigger.focus()
   await page.keyboard.press('Enter')
   const links = switcher.locator('nav a')
   await expect(links).toHaveCount(10)
@@ -89,10 +90,88 @@ test('language switcher moves between locales without redirecting', async ({
   await expect(page).toHaveURL(/\/de\/$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'de')
 
-  await page.locator('[data-language-switcher]').locator('summary').click()
+  await page.locator('[data-language-switcher]').getByRole('button').click()
   await page.getByRole('link', { name: 'English' }).click()
   await expect(page).toHaveURL(/localhost:4399\/$/)
 })
+
+test('language switcher closes on Escape and returns focus to the trigger', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const switcher = page.locator('[data-language-switcher]')
+  const trigger = switcher.getByRole('button')
+  const panel = switcher.locator('nav')
+  await trigger.click()
+  await expect(panel).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(panel).toBeHidden()
+  await expect(trigger).toBeFocused()
+})
+
+test('language switcher closes on outside click', async ({ page }) => {
+  await page.goto('/')
+  const switcher = page.locator('[data-language-switcher]')
+  const panel = switcher.locator('nav')
+  await switcher.getByRole('button').click()
+  await expect(panel).toBeVisible()
+  await page.mouse.click(10, 400)
+  await expect(panel).toBeHidden()
+})
+
+for (const width of [320, 375, 768, 1240]) {
+  test(`language switcher opens within the viewport at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 800 })
+    await page.goto('/pt-br/')
+    const switcher = page.locator('[data-language-switcher]')
+    await switcher.getByRole('button').click()
+    const box = await switcher.locator('nav').boundingBox()
+    expect(box).not.toBeNull()
+    expect(box!.x).toBeGreaterThanOrEqual(0)
+    expect(box!.x + box!.width).toBeLessThanOrEqual(width)
+    const scrollWidth = await page
+      .locator('html')
+      .evaluate((root) => root.scrollWidth)
+    expect(scrollWidth).toBeLessThanOrEqual(width)
+  })
+}
+
+test('header keeps brand and switcher on one row at 320px', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 800 })
+  await page.goto('/pt-br/')
+  const header = page.locator('header')
+  const brand = await header.getByRole('link', { name: 'Snug' }).boundingBox()
+  const trigger = await header
+    .locator('[data-language-switcher]')
+    .getByRole('button')
+    .boundingBox()
+  expect(brand!.y).toBeLessThan(trigger!.y + trigger!.height)
+  expect(trigger!.y).toBeLessThan(brand!.y + brand!.height)
+  expect((await header.boundingBox())!.height).toBeLessThanOrEqual(64)
+})
+
+test('skip link is first in tab order and reaches main', async ({ page }) => {
+  await page.goto('/')
+  await page.keyboard.press('Tab')
+  const skip = page.locator('a[href="#main"]')
+  await expect(skip).toBeFocused()
+  await expect(skip).toBeVisible()
+  await page.keyboard.press('Enter')
+  await expect(page).toHaveURL(/#main$/)
+  await expect(page.locator('main#main')).toHaveCount(1)
+})
+
+for (const path of ['/de/', '/privacy/', '/404/']) {
+  test(`header is present on ${path}`, async ({ page }) => {
+    await page.goto(path)
+    await expect(page.locator('header [data-language-switcher]')).toBeVisible()
+    await expect(page.locator('main#main')).toHaveCount(1)
+  })
+}
 
 test('visiting a locale never redirects to another', async ({ page }) => {
   const response = await page.goto('/ja/')
