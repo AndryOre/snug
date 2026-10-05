@@ -228,3 +228,92 @@ for (const { path, interactive } of CSP_PAGES) {
     expect(problems).toEqual([])
   })
 }
+
+test('the served CSP carries the hardening directives and no strict-dynamic', async ({
+  request,
+}) => {
+  const response = await request.get('/')
+  const policy = response.headers()['content-security-policy'] ?? ''
+  const directives = policy.split(';').map((directive) => directive.trim())
+  expect(directives).toContain("base-uri 'none'")
+  expect(directives).toContain('upgrade-insecure-requests')
+  expect(directives).toContain("require-trusted-types-for 'script'")
+  expect(policy).not.toContain('strict-dynamic')
+  expect(policy).not.toContain('report-to')
+})
+
+test('the speculation rules resolve with the right MIME type', async ({
+  request,
+}) => {
+  const page = await request.get('/')
+  expect(page.headers()['speculation-rules']).toBe('"/speculation-rules.json"')
+
+  const rules = await request.get('/speculation-rules.json')
+  expect(rules.status()).toBe(200)
+  expect(rules.headers()['content-type']).toContain(
+    'application/speculationrules+json',
+  )
+  const parsed = (await rules.json()) as {
+    prerender: { eagerness: string; where: unknown }[]
+  }
+  expect(parsed.prerender[0]?.eagerness).toBe('moderate')
+  const serialized = JSON.stringify(parsed.prerender[0]?.where)
+  expect(serialized).toContain('/install')
+  expect(serialized).toContain('/reviews')
+})
+
+test('og images, favicons and the manifest are cached for a day', async ({
+  request,
+}) => {
+  const paths = [
+    '/og/og-en.png',
+    '/favicon.ico',
+    '/favicon.svg',
+    '/apple-touch-icon.png',
+    '/manifest.webmanifest',
+  ]
+  for (const path of paths) {
+    const response = await request.get(path)
+    expect(response.status(), path).toBe(200)
+    expect(response.headers()['cache-control'], path).toBe(
+      'public, max-age=86400',
+    )
+  }
+})
+
+test('activating the video raises no CSP or Trusted Types violation', async ({
+  page,
+}) => {
+  await page.route('https://www.youtube-nocookie.com/**', (route) =>
+    route.fulfill({
+      contentType: 'text/html',
+      body: '<!doctype html><title>mock player</title>',
+    }),
+  )
+  const problems: string[] = []
+  page.on('console', (message) => {
+    if (/content security|trusted ?type/i.test(message.text()))
+      problems.push(message.text())
+  })
+  page.on('pageerror', (error) => {
+    problems.push(error.message)
+  })
+  await page.addInitScript(() => {
+    document.addEventListener('securitypolicyviolation', (event) => {
+      console.error(
+        `securitypolicyviolation ${event.violatedDirective} ${event.blockedURI}`,
+      )
+    })
+  })
+
+  await page.goto('/', { waitUntil: 'networkidle' })
+  const poster = page.locator('[data-video-poster]')
+  await poster.scrollIntoViewIfNeeded()
+  await expect(
+    page.locator('astro-island:has([data-video-poster])'),
+  ).not.toHaveAttribute('ssr', '')
+  await poster.click()
+  await expect(page.locator('iframe[data-video-player]')).toBeVisible()
+  await page.waitForTimeout(250)
+  expect(problems).toEqual([])
+})
