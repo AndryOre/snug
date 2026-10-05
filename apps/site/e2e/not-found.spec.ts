@@ -10,6 +10,7 @@ import {
   localePath,
   LOCALES,
 } from '../src/i18n/locales'
+import { expectNoHorizontalOverflow } from './layout-helpers'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
@@ -83,14 +84,13 @@ test.describe('rendered 404 pages', () => {
         await expect(
           page.getByRole('link', { name: notFound.backLink }),
         ).toHaveAttribute('href', localePath(locale))
-        const { scrollHeight, scrollWidth } = await page.evaluate(() => ({
-          scrollHeight: globalThis.document.documentElement.scrollHeight,
-          scrollWidth: globalThis.document.documentElement.scrollWidth,
-        }))
         if (viewport.width >= 1280) {
+          const scrollHeight = await page.evaluate(
+            () => globalThis.document.documentElement.scrollHeight,
+          )
           expect(scrollHeight).toBeLessThanOrEqual(viewport.height)
         }
-        expect(scrollWidth).toBeLessThanOrEqual(viewport.width)
+        await expectNoHorizontalOverflow(page)
       }
 
       await page.setViewportSize({ width: 320, height: 568 })

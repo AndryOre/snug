@@ -201,6 +201,25 @@ for why this runs against the built extension instead of a component-test layer.
   `bunx playwright install --with-deps chromium` and uploads the Playwright HTML
   report as an artifact on failure.
 
+### Landing visual regression
+
+`apps/site/e2e-container/visual.spec.ts` takes full-page `toHaveScreenshot`
+baselines of `/` and `/de/` at 1280, 768, 375 and 320 px in both color schemes
+(16 PNGs in `apps/site/e2e-container/visual.spec.ts-snapshots/`). The YouTube
+facade, iframes and `<time>` elements are masked and animations are disabled.
+
+- `bun run --cwd apps/site test:visual` builds the site image and runs the spec
+  inside the official Playwright Docker image (`scripts/visual.sh` pins the
+  image tag to the `@playwright/test` version in `bun.lock`), so fonts and
+  rasterization are identical everywhere. CI runs it in the `site-quality` job
+  and uploads `test-results/` (expected, actual and diff PNGs) on failure.
+- `bun run --cwd apps/site test:visual:update` regenerates the baselines. Run it
+  only after an intentional visual change, review the PNG diff in the PR, and
+  commit the images with the change. Never commit baselines produced outside
+  this script: a local Chromium renders fonts differently and breaks CI.
+- `test:container` skips these tests (`--grep-invert @visual`); Docker is
+  required for `test:visual`.
+
 ## Accessibility
 
 - **Linting**: `eslint-plugin-jsx-a11y`'s `recommended` config is enabled in

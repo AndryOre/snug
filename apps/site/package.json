@@ -16,7 +16,9 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "astro build && playwright test",
-    "test:container": "playwright test -c playwright.container.config.ts",
+    "test:container": "playwright test -c playwright.container.config.ts --grep-invert @visual",
+    "test:visual": "bash scripts/visual.sh test",
+    "test:visual:update": "bash scripts/visual.sh update",
     "lighthouse": "bash scripts/lighthouse-budget.sh"
   },
   "dependencies": {

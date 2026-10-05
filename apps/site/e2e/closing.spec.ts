@@ -2,6 +2,7 @@ import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
+import { expectNoHorizontalOverflow, MIN_TOUCH_TARGET } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -162,7 +163,9 @@ test('language menu items are at least 44px tall', async ({ page }) => {
   await expect(links).toHaveCount(LOCALES.length)
   const items = await links.all()
   for (const link of items) {
-    expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+    expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(
+      MIN_TOUCH_TARGET,
+    )
   }
 })
 
@@ -183,10 +186,7 @@ for (const width of [320, 375, 768, 1240, 1280, 1300, 1400]) {
       Math.abs(box!.x + box!.width - (triggerBox.x + triggerBox.width)),
     ).toBeLessThanOrEqual(1)
     expect(box!.y).toBeGreaterThanOrEqual(triggerBox.y + triggerBox.height)
-    const scrollWidth = await page
-      .locator('html')
-      .evaluate((root) => root.scrollWidth)
-    expect(scrollWidth).toBeLessThanOrEqual(width)
+    await expectNoHorizontalOverflow(page)
   })
 }
 

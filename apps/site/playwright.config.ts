@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const RESPONSIVE_SPEC = /responsive\.spec\.ts$/
+const LAYOUT_SPECS =
+  /(responsive|accessibility|hero-trust|closing|theme|theme-menu|layout-matrix)\.spec\.ts$/
 
 export default defineConfig({
   testDir: './e2e',
@@ -12,12 +13,12 @@ export default defineConfig({
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     {
       name: 'iphone-se',
-      testMatch: RESPONSIVE_SPEC,
+      testMatch: LAYOUT_SPECS,
       use: { ...devices['iPhone SE'], browserName: 'chromium' },
     },
     {
       name: 'narrow-320',
-      testMatch: RESPONSIVE_SPEC,
+      testMatch: LAYOUT_SPECS,
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 320, height: 640 },
@@ -25,8 +26,23 @@ export default defineConfig({
     },
     {
       name: 'pixel-7',
-      testMatch: RESPONSIVE_SPEC,
+      testMatch: LAYOUT_SPECS,
       use: { ...devices['Pixel 7'] },
+    },
+    {
+      name: 'ipad-mini',
+      testMatch: LAYOUT_SPECS,
+      use: { ...devices['iPad Mini'], browserName: 'chromium' },
+    },
+    {
+      name: 'landscape-phone',
+      testMatch: LAYOUT_SPECS,
+      use: {
+        ...devices['Pixel 7'],
+        viewport: { width: 844, height: 390 },
+        isMobile: true,
+        hasTouch: true,
+      },
     },
   ],
   webServer: {

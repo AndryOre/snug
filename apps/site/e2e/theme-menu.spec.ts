@@ -1,7 +1,8 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
-const MIN_TOUCH_TARGET = 44
+import { MIN_TOUCH_TARGET } from './layout-helpers'
+
 const WIDTHS = [320, 375, 768, 1280]
 
 async function visit(page: Page, path = '/') {
