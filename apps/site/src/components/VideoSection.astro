@@ -25,7 +25,7 @@ const posterImages = await Promise.all(
   POSTER_WIDTHS.map((width) => getImage({ src: poster, width, format: 'webp' })),
 )
 const posterImage = posterImages.at(-1)!
-const posterSrcSet = posterImages
+const posterSourceSet = posterImages
   .map((image, index) => `${image.src} ${POSTER_WIDTHS[index]}w`)
   .join(', ')
 ---
@@ -34,7 +34,7 @@ const posterSrcSet = posterImages
   section="video"
   heading={copy.heading}
   lead={copy.caption}
-  class="[contain-intrinsic-size:auto_900px] [content-visibility:auto]"
+  class="defer-render-sm"
 >
   <div class="mt-10 max-w-4xl">
     <VideoFacade
@@ -43,12 +43,12 @@ const posterSrcSet = posterImages
       title={copy.heading}
       playLabel={copy.play}
       posterSrc={posterImage.src}
-      posterSrcSet={posterSrcSet}
+      posterSrcSet={posterSourceSet}
       posterSizes={POSTER_SIZES}
       posterWidth={poster.width}
       posterHeight={poster.height}
     />
-    <p class="mt-3 text-sm leading-[1.55] text-muted-foreground">
+    <p class="mt-3 text-sm leading-body text-muted-foreground">
       {copy.note}
     </p>
   </div>

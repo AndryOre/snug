@@ -1,17 +1,8 @@
 import { expect, test } from '@playwright/test'
 
-const PATHS = [
-  '/',
-  '/es/',
-  '/de/',
-  '/fr/',
-  '/it/',
-  '/ja/',
-  '/ko/',
-  '/pt-br/',
-  '/ru/',
-  '/zh-cn/',
-]
+import { localePath, LOCALES } from '../src/i18n/locales'
+
+const PATHS = LOCALES.map((locale) => localePath(locale))
 
 for (const path of PATHS) {
   test(`${path} renders hero, trust proof and tagged install actions`, async ({

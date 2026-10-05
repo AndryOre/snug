@@ -15,7 +15,7 @@ const { features } = getLandingCopy(Astro.props.locale)
 <Section
   section="features"
   heading={features.heading}
-  class="[contain-intrinsic-size:auto_1100px] [content-visibility:auto]"
+  class="defer-render-md"
 >
   <CardGrid as="ol">
     {

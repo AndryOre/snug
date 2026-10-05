@@ -50,8 +50,9 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 Hooks are installed via Husky and live in `.husky/`:
 
 - **`pre-commit`** — runs `bunx lint-staged`, which applies Prettier + ESLint to
-  staged `*.{js,jsx,ts,tsx,mjs}` files and Prettier alone to staged
-  `*.{json,md,mdx,css,scss,yml,yaml}` files (see `lint-staged.config.mjs`).
+  staged `*.{js,jsx,ts,tsx,mjs}` files, ESLint alone to staged `*.astro` files,
+  and Prettier alone to staged `*.{json,md,mdx,css,scss,yml,yaml}` files (see
+  `lint-staged.config.mjs`).
 - **`commit-msg`** — runs `bunx commitlint --edit $1` against
   `commitlint.config.mjs`, which only extends `@commitlint/config-conventional`.
   It enforces the Conventional Commits `<type>: <subject>` shape and the type
@@ -224,6 +225,17 @@ for why this runs against the built extension instead of a component-test layer.
   already include a visible focus-visible style; keep it when customizing a
   component per this repo's
   [`@shadcn/lint` contract](#adding-a-shadcnlint-contract) rules.
+
+## Linting `.astro` files
+
+`.astro` files (almost all of `apps/site`) are linted through
+`eslint-plugin-astro` and `astro-eslint-parser`, with the same `shadcn/*` rules
+and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React JSX rules
+(`react/jsx-key`, `react/no-unknown-property`) are off for `.astro` templates,
+and `Props` is allowed as Astro's component-props interface name. Anything the
+rules flag in a template (arbitrary type sizes, gradients, `<style>` blocks)
+moves into `@theme` or `@utility` entries in
+`packages/ui/src/styles/globals.css`.
 
 ## Linting `apps/video`
 

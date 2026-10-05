@@ -34,7 +34,7 @@ const { header } = getClosingCopy(locale)
     id="language-menu"
     popover="auto"
     aria-label={header.languageLabel}
-    class="language-panel w-56 max-w-[calc(100vw-2rem)] rounded-[14px] border border-border bg-card p-2 text-foreground"
+    class="language-panel w-56 max-w-panel rounded-xl border border-border bg-card p-2 text-foreground"
   >
     <ul>
       {
@@ -55,37 +55,3 @@ const { header } = getClosingCopy(locale)
     </ul>
   </nav>
 </div>
-
-<style>
-  .language-panel {
-    inset: auto;
-    top: 3.5rem;
-    right: 1rem;
-    margin: 0;
-    overflow-y: auto;
-    max-height: calc(100dvh - 4.5rem);
-  }
-  @media (min-width: 48rem) {
-    .language-panel {
-      right: 3.5rem;
-    }
-  }
-  @media (min-width: 1352px) {
-    .language-panel {
-      right: calc((100vw - 1240px) / 2 + 3.5rem);
-    }
-  }
-  @supports (anchor-name: --language-trigger) {
-    .language-trigger {
-      anchor-name: --language-trigger;
-    }
-    .language-panel {
-      position-anchor: --language-trigger;
-      position-area: block-end span-inline-start;
-      position-try-fallbacks: flip-inline;
-      margin-block-start: 0.5rem;
-      top: auto;
-      right: auto;
-    }
-  }
-</style>

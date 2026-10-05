@@ -10,10 +10,10 @@ const standalone = { ...privacy.meta, path: '/privacy/' }
 
 <Layout locale="en" standalone={standalone}>
   <main id="main">
-    <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
       <TextLink
         href="/"
-        class="py-2 font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text uppercase"
+        class="py-2 font-mono text-eyebrow tracking-eyebrow text-primary-text uppercase"
       >
         {privacy.homeLink}
       </TextLink>
@@ -22,7 +22,7 @@ const standalone = { ...privacy.meta, path: '/privacy/' }
       </p>
       <article
         data-section="policy"
-        class="mt-8 max-w-2xl leading-[1.65] [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 [&_a:hover]:decoration-primary [&_code]:font-mono [&_code]:text-[0.9em] [&_h1]:font-heading [&_h1]:text-[clamp(2.5rem,6vw,4rem)] [&_h1]:leading-[1.05] [&_h1]:font-bold [&_h1]:tracking-[-0.025em] [&_h1]:text-balance [&_h2]:mt-12 [&_h2]:font-heading [&_h2]:text-[1.5rem] [&_h2]:font-medium [&_h3]:mt-8 [&_h3]:font-heading [&_h3]:text-[1.125rem] [&_h3]:font-medium [&_li]:mt-2 [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6"
+        class="mt-8 max-w-2xl leading-prose [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 [&_a:hover]:decoration-primary [&_code]:font-mono [&_code]:text-code [&_h1]:font-heading [&_h1]:text-display-sm [&_h1]:font-bold [&_h1]:text-balance [&_h2]:mt-12 [&_h2]:font-heading [&_h2]:text-2xl [&_h2]:font-medium [&_h3]:mt-8 [&_h3]:font-heading [&_h3]:text-lg [&_h3]:font-medium [&_li]:mt-2 [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6"
       >
         <PrivacyPolicy />
       </article>
@@ -31,10 +31,10 @@ const standalone = { ...privacy.meta, path: '/privacy/' }
         aria-labelledby="website-heading"
         class="mt-14 max-w-2xl border-t border-border pt-10"
       >
-        <h2 id="website-heading" class="font-heading text-[1.5rem] font-medium">
+        <h2 id="website-heading" class="font-heading text-2xl font-medium">
           {privacy.website.heading}
         </h2>
-        <p class="mt-4 leading-[1.65]">{privacy.website.body}</p>
+        <p class="mt-4 leading-prose">{privacy.website.body}</p>
       </section>
     </div>
   </main>

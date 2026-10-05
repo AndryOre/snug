@@ -1,6 +1,6 @@
 {
   "name": "snug",
-  "description": "Export, import, and schedule automatic exports of your bookmarks \u2014 six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
+  "description": "Export, import, and schedule automatic exports of your bookmarks — six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
   "keywords": [
     "browser-extension",
     "bookmarks",
@@ -93,6 +93,7 @@
     "bun-types": "^1.4.2",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-jsdoc": "^65.0.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
