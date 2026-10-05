@@ -32,6 +32,12 @@ describe('findInlineScriptHashes', () => {
       '<script>a()</script><script type="application/ld+json">{}</script><script src="/x.js"></script><script type="module">b()</script>'
     expect(findInlineScriptHashes(html)).toEqual([sha('a()'), sha('b()')])
   })
+
+  it('matches script tags regardless of case and closing-tag spacing', () => {
+    expect(
+      findInlineScriptHashes('<SCRIPT>c()</SCRIPT ><script>d()</script>'),
+    ).toEqual([sha('c()'), sha('d()')])
+  })
 })
 
 describe('renderSecurityHeaders', () => {

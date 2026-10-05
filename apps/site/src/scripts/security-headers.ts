@@ -7,7 +7,8 @@ import { createHash } from 'node:crypto'
 export const SCRIPT_HASHES_PLACEHOLDER = '__SCRIPT_HASHES__'
 
 const HASH_SOURCE = /'sha(?:256|384|512)-[^']+'/g
-const INLINE_SCRIPT = /<script(?<attributes>[^>]*)>(?<body>[\s\S]*?)<\/script>/g
+const INLINE_SCRIPT =
+  /<script\b(?<attributes>[^>]*)>(?<body>[\s\S]*?)<\/script\s*>/gi
 const META_CSP =
   /<meta http-equiv="content-security-policy" content="(?<policy>[^"]*)"/
 
