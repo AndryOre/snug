@@ -41,3 +41,29 @@ bookmark managers (Raindrop.io, Workona, Diigo — different category, skipped).
 - No competitor frames itself as part of a **creator's own tool family** (the
   "by Andry Orellana" / AndryOre endorsed-brand angle) — this is unclaimed and
   consistent with the brief's emotional promise.
+
+## Verified 2026-10-05
+
+Re-checked on the live Chrome Web Store listings. The tables above are the
+snapshot taken during the rebrand and stay as the historical record.
+
+| Listing                         | Users | Rating   | Last update | Change vs the snapshot above                          |
+| ------------------------------- | ----- | -------- | ----------- | ----------------------------------------------------- |
+| Snug (our listing)              | 5,000 | 4.8 (20) | 2026-10-05  | Renamed from Bookmark Import/Export; was 4.72 from 18 |
+| Selective Bookmarks Export Tool | 10k   | 4.8 (48) | 2026-10-03  | Rating 4.9 (47) to 4.8 (48); new v1.7.0 after a gap   |
+| Export Selective Bookmarks      | 5k    | 4.2 (48) | 2026-06-30  | No change                                             |
+| 101 Export History/Bookmarks    | 30k   | 3.1 (71) | 2026-08-18  | No change; still JSON only, CSV/XLS needs a converter |
+| Bookmark Folder Import & Export | 408   | 5.0 (1)  | 2026-04-21  | Users 361 to 408                                      |
+| Bookmarks Exporter (oneryx)     | 2k    | 5.0 (7)  | 2022-08-22  | No change; not updated since 2022                     |
+| Bookmarks folder exporter       | 101   | 5.0 (1)  | 2025-01-23  | Users 107 to 101                                      |
+
+New since the snapshot:
+
+- **Maple Backup — Bookmark Snapshots** (7k users, 4.0 from 57 ratings, updated
+  2026-09-21). Scheduled local snapshots with restore, plus optional copies to
+  Google Drive, OneDrive or Dropbox. Its listing declares it handles personally
+  identifiable information, authentication information and website content. It
+  is the closest overlap with Snug's scheduled backups; Snug handles none of
+  that data.
+- **EverSync** (cloud sync and backup service, about 200k users per a search
+  snippet, not verified on the store). Indirect competitor.
