@@ -1,9 +1,10 @@
 # Featured badge nomination pack
 
 Everything needed to nominate Snug for the Chrome Web Store Featured badge:
-where the form lives, copy-ready answers, the evidence behind each form
-confirmation, and a dashboard audit checklist. Nothing here has been submitted.
-A human fills the form and clicks Submit.
+copy-ready answers, the evidence behind each form confirmation, and a dashboard
+audit checklist. As of 2026-10-05 the nomination form is unreachable; see
+[Current status](#current-status-2026-10-05). Nothing here has been submitted. A
+human fills the form and clicks Submit.
 
 > Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e/`) are
 > relative to `apps/extension/`.
@@ -12,7 +13,24 @@ The Featured badge is editorial and cannot be paid for. It is requested through
 One Stop Support, not the Developer Dashboard. Listing facts below come from the
 live listing as checked on 2026-10-05.
 
-## Form path
+## Current status (2026-10-05)
+
+Attempts made on 2026-10-05, signed in as the publisher:
+
+| Route                                                                 | What was done                                                                                                                            | Outcome                                                                                                                                                 |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `https://support.google.com/chrome_webstore/contact/one_stop_support` | Opened with and without `hl=en`.                                                                                                         | Redirects server-side to the Help Center home (`https://support.google.com/chrome_webstore/?...&rd=1#topic=6243095`). The "My item" menus never appear. |
+| `https://support.google.com/chrome_webstore?p=contact`                | Chose "Contact us", entered the text "Nominate my extension for a Featured badge", picked the category "Featured badge", then Next step. | Ends with "Based on your answers, our support specialists won't be able to help you fix this problem." and offers no contact options.                   |
+| `https://developer.chrome.com/docs/webstore/discovery`                | Read the page.                                                                                                                           | Still links to the One Stop Support URL and calls the nomination option a "trial".                                                                      |
+| `https://support.google.com/chrome_webstore/answer/1050673`           | Read the page.                                                                                                                           | Has no nomination steps.                                                                                                                                |
+
+Conclusion: no route to nominate is available from this account, and nothing was
+submitted.
+
+## Form path (stale, unreachable on 2026-10-05)
+
+Step 1 currently redirects to the Help Center home, so the later steps cannot be
+reached.
 
 1. Open the One Stop Support form:
 
@@ -32,7 +50,34 @@ live listing as checked on 2026-10-05.
    I want to nominate my extension to receive a Featured badge and be eligible for merchandising
    ```
 
-Expected review time: 2-3 days, and up to a month.
+Reported review time (third-party reports, not a Google promise): 2-3 days, up
+to a month.
+
+## Re-check
+
+1. Open the One Stop Support URL signed in as the publisher:
+
+   ```text
+   https://support.google.com/chrome_webstore/contact/one_stop_support
+   ```
+
+2. It works if the page shows a contact form with a "My item (extensions, app,
+   or theme)" choice instead of the Help Center home.
+3. Also re-read the discovery docs page for wording changes:
+
+   ```text
+   https://developer.chrome.com/docs/webstore/discovery
+   ```
+
+4. If it works, use the copy-ready answers below and record the submission in
+   this pack.
+
+## If it stays unreachable
+
+- Keep the listing clean; the audit result below covers it.
+- Do not use unofficial channels or paid "badge" services. The badge cannot be
+  paid for.
+- Revisit when the discovery docs change.
 
 ## Copy-ready answers
 
