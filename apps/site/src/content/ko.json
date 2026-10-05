@@ -47,7 +47,7 @@
       },
       "preview": {
         "title": "가져오기 전에 미리보기",
-        "body": "HTML, JSON, CSV, XBEL 파일, Chrome 프로필의 `Bookmarks` 파일, 즐겨찾기와 읽기 목록이 들어 있는 Safari 내보내기 파일을 가져와요. Snug가 형식을 감지해서 미리보기를 보여 줘요. 그런 다음 병합하거나, 교체하거나, 모두 새 폴더에 추가해요."
+        "body": "HTML, JSON, CSV, XBEL 파일, Chrome 프로필의 “Bookmarks” 파일, 즐겨찾기와 읽기 목록이 들어 있는 Safari 내보내기 파일을 가져와요. Snug가 형식을 감지해서 미리보기를 보여 줘요. 그런 다음 병합하거나, 교체하거나, 모두 새 폴더에 추가해요."
       },
       "undo": {
         "title": "교체 되돌리기",
@@ -86,7 +86,8 @@
     "heading": "작동하는 모습 보기",
     "caption": "폴더를 내보내고 미리보기와 함께 가져오는 과정을 짧게 보여 줘요.",
     "note": "동영상은 재생을 누를 때만 YouTube에서 불러와요. 그 전까지 페이지는 누구와도 통신하지 않아요.",
-    "play": "동영상 재생"
+    "play": "동영상 재생",
+    "labelSeparator": ": "
   },
   "proof": {
     "heading": "사용자 후기",
@@ -128,7 +129,7 @@
       },
       "formats": {
         "question": "어떤 형식을 지원하나요?",
-        "answer": "HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내요. HTML, JSON, CSV, XBEL, Chrome 프로필의 `Bookmarks` 파일, Safari 내보내기 파일을가져와요."
+        "answer": "HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내요. HTML, JSON, CSV, XBEL, Chrome 프로필의 “Bookmarks” 파일, Safari 내보내기 파일을 가져와요."
       },
       "browsers": {
         "question": "어떤 브라우저에서 작동하나요?",
@@ -159,6 +160,7 @@
   },
   "header": {
     "languageLabel": "언어",
+    "languageSeparator": ": ",
     "skipLink": "본문으로 건너뛰기",
     "homeLabel": "Snug 홈"
   },

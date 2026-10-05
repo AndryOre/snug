@@ -6,6 +6,7 @@ interface VideoFacadeProperties {
   videoId: string
   title: string
   playLabel: string
+  labelSeparator: string
   posterSrc: string
   posterSrcSet: string
   posterSizes: string
@@ -21,6 +22,7 @@ interface VideoFacadeProperties {
  * @param props.videoId - YouTube video id.
  * @param props.title - Accessible title of the player.
  * @param props.playLabel - Accessible name of the play action.
+ * @param props.labelSeparator - Locale glue between the play label and title.
  * @param props.posterSrc - Local poster image URL.
  * @param props.posterSrcSet - Responsive `srcset` of the poster.
  * @param props.posterSizes - `sizes` attribute matching the poster layout.
@@ -32,6 +34,7 @@ export default function VideoFacade({
   videoId,
   title,
   playLabel,
+  labelSeparator,
   posterSrc,
   posterSrcSet,
   posterSizes,
@@ -69,7 +72,7 @@ export default function VideoFacade({
     <a
       data-video-poster
       href={youtubeWatchUrl(videoId)}
-      aria-label={`${playLabel}: ${title}`}
+      aria-label={`${playLabel}${labelSeparator}${title}`}
       onClick={activate}
       className="group relative block aspect-video w-full overflow-hidden rounded-2xl border border-border outline-hidden focus-visible:ring-3 focus-visible:ring-ring/50"
     >
