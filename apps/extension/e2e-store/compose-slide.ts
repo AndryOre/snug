@@ -6,8 +6,12 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 
 const CANVAS = { width: 1280, height: 800 }
-const FONTS_DIRECTORY = path.resolve('../../docs/brand/brandbook/fonts')
-const STORE_ICON_PATH = path.resolve('assets/icon.png')
+const EXTENSION_ROOT = path.resolve(import.meta.dirname, '..')
+const FONTS_DIRECTORY = path.resolve(
+  EXTENSION_ROOT,
+  '../../docs/brand/brandbook/fonts',
+)
+const STORE_ICON_PATH = path.resolve(EXTENSION_ROOT, 'assets/icon.png')
 const AMBER = '#FFA230'
 
 const AURORA_GROUND =

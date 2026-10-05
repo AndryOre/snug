@@ -106,6 +106,7 @@ jobs:
         with:
           name: extension-chrome-zip
           path: apps/extension/.output/*-chrome.zip
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
 

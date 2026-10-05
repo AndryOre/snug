@@ -23,7 +23,8 @@
       "outputs": ["coverage/**"]
     },
     "test:e2e": {
-      "cache": false
+      "cache": false,
+      "passThroughEnv": ["PWDEBUG"]
     },
     "build": {
       "dependsOn": ["transit"],

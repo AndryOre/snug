@@ -26,9 +26,11 @@ export REMOTION_BROWSER_EXECUTABLE=$(ls ~/.cache/ms-playwright/chromium_headless
 
 ## Studio
 
-Over Tailscale, always start Studio through the package script, which runs
-`remotion-studio src/index.ts --port 3123`. Never run a bare `remotion studio`:
-it listens on all interfaces.
+Always start Studio through the package script. It runs the optional
+`remotion-studio` wrapper (`~/.local/bin`, binds Studio to the Tailscale IP
+only) when it is on `PATH`, and otherwise falls back to a plain
+`remotion studio`, which listens on all interfaces. On a shared or public
+network, install the wrapper first.
 
 ```sh
 bun run video:studio

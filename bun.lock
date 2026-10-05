@@ -82,6 +82,7 @@
         "zod": "4.5.4",
       },
       "devDependencies": {
+        "@snug/extension": "workspace:*",
         "@types/bun": "catalog:",
         "@types/react": "catalog:",
         "@types/web": "0.0.166",

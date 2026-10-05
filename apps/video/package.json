@@ -20,13 +20,14 @@
     "zod": "4.5.4"
   },
   "devDependencies": {
+    "@snug/extension": "workspace:*",
     "@types/bun": "catalog:",
     "@types/react": "catalog:",
     "@types/web": "0.0.166",
     "typescript": "catalog:"
   },
   "scripts": {
-    "studio": "remotion-studio src/index.ts --port 3123",
+    "studio": "if command -v remotion-studio >/dev/null 2>&1; then remotion-studio src/index.ts --port 3123; else remotion studio src/index.ts --port 3123; fi",
     "still": "remotion still src/index.ts",
     "render": "bun scripts/render-all.ts",
     "thumbnails": "bun scripts/render-thumbnails.ts",
