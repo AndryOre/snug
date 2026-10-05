@@ -1,5 +1,6 @@
 ---
 import '@workspace/ui/globals.css'
+import { cn } from '@workspace/ui/lib/utils'
 
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
@@ -87,8 +88,13 @@ const jsonLd = standalone
       </>
     )}
   </head>
-  <body class="bg-background font-sans text-foreground">
-    <Header locale={locale} />
+  <body
+    class={cn(
+      'bg-background font-sans text-foreground',
+      notFound && 'flex min-h-dvh flex-col',
+    )}
+  >
+    <Header locale={locale} markCurrent={!standalone} />
     <slot />
   </body>
 </html>

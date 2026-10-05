@@ -10,9 +10,10 @@ import {
 
 interface Props {
   locale: Locale
+  markCurrent?: boolean
 }
 
-const { locale } = Astro.props
+const { locale, markCurrent = true } = Astro.props
 const { header } = getClosingCopy(locale)
 ---
 
@@ -46,7 +47,7 @@ const { header } = getClosingCopy(locale)
             href={localePath(code)}
             lang={languageTag(code)}
             hreflang={languageTag(code)}
-            aria-current={code === locale ? 'page' : undefined}
+            aria-current={markCurrent && code === locale ? 'page' : undefined}
             class="flex min-h-11 items-center rounded-md px-3 outline-hidden hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:text-primary-text"
           >
             {LOCALE_NAMES[code]}
