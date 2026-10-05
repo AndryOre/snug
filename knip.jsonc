@@ -30,17 +30,6 @@
       "ignoreDependencies": ["@types/web", "@snug/extension"],
       "ignoreBinaries": ["remotion-studio"],
     },
-    "apps/site": {
-      // React and its types are peers of `@astrojs/react`, wired in by
-      // `astro.config.ts`; the `astro` binary is run by the package scripts.
-      "ignoreDependencies": [
-        "react",
-        "react-dom",
-        "@types/react",
-        "@types/react-dom",
-      ],
-      "ignoreBinaries": ["astro"],
-    },
     "packages/ui": {
       "entry": ["src/components/*.tsx", "src/hooks/*.ts", "src/lib/*.ts"],
     },

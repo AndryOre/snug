@@ -74,6 +74,7 @@
         "astro": "^7.3.5",
         "react": "catalog:",
         "react-dom": "catalog:",
+        "sharp": "^0.35.5",
       },
       "devDependencies": {
         "@playwright/test": "^1.63.0",

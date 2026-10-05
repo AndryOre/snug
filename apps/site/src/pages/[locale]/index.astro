@@ -1,6 +1,9 @@
 ---
+import Features from '../../components/Features.astro'
 import Hero from '../../components/Hero.astro'
+import RealInterface from '../../components/RealInterface.astro'
 import TrustProof from '../../components/TrustProof.astro'
+import VideoSection from '../../components/VideoSection.astro'
 import Layout from '../../layouts/Layout.astro'
 import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../i18n/locales'
 
@@ -21,5 +24,8 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
   <main>
     <Hero locale={locale} />
     <TrustProof locale={locale} />
+    <Features locale={locale} />
+    <RealInterface locale={locale} />
+    <VideoSection locale={locale} />
   </main>
 </Layout>

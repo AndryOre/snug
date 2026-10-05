@@ -37,5 +37,49 @@
       "ci": "CI status",
       "privacy": "Privacy Policy"
     }
+  },
+  "features": {
+    "heading": "What Snug does",
+    "items": {
+      "export": {
+        "title": "Export what you choose",
+        "body": "Export the whole tree or only the folders you pick, as HTML, JSON, CSV, Markdown, OPML or XBEL. Filenames can include the date, so you can tell them apart later."
+      },
+      "preview": {
+        "title": "Preview before you import",
+        "body": "Import HTML, JSON, CSV or XBEL files, a Chrome profile `Bookmarks` file, or a Safari export with Favorites and Reading List. Snug detects the format and shows a preview. Then you merge, replace, or add everything to a new folder."
+      },
+      "undo": {
+        "title": "Undo a replace",
+        "body": "Replace saves a Safety snapshot first. If the result is not what you wanted, restore it."
+      },
+      "duplicates": {
+        "title": "Clean up duplicates",
+        "body": "A Duplicates page finds repeated bookmarks. On import, Skip duplicates leaves out URLs you already have."
+      },
+      "backup": {
+        "title": "Back up on a schedule",
+        "body": "Auto-export saves your bookmarks to the Downloads folder on a schedule you set. Retention keeps only the newest files, and you can get a notification if a run fails."
+      },
+      "works": {
+        "title": "Works where you are",
+        "body": "Chrome, Edge, Brave, Opera and other Chromium browsers. The interface comes in 10 languages and follows your browser's theme and language."
+      }
+    }
+  },
+  "interface": {
+    "heading": "The real interface",
+    "shots": {
+      "export": "Export page: pick folders from the tree, choose a format, export.",
+      "import": "Import preview: see what will change, then pick merge, replace or new.",
+      "autoExport": "Auto-export: daily, in HTML, JSON and Markdown, with the next run shown.",
+      "popup": "The toolbar popup exports everything in one click."
+    }
+  },
+  "video": {
+    "heading": "See it work",
+    "caption": "A short walkthrough of exporting a folder and importing it with a preview.",
+    "note": "The video loads from YouTube only when you press play. Until then the page contacts no one.",
+    "play": "Play video"
   }
 }

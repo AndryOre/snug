@@ -1,0 +1,64 @@
+---
+import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
+
+import { getLandingCopy, SHOT_KEYS } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+
+interface Props {
+  locale: Locale
+}
+
+const SHOT_FILES = {
+  export: '01-export',
+  import: '02-import',
+  autoExport: '03-auto-export',
+  popup: '04-popup',
+} as const
+
+const screenshots = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screenshots/*/*.png',
+  { eager: true },
+)
+
+const { locale } = Astro.props
+const copy = getLandingCopy(locale).interface
+---
+
+<section
+  data-section="interface"
+  aria-labelledby="interface-heading"
+  class="[contain-intrinsic-size:auto_1600px] [content-visibility:auto]"
+>
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <h2
+      id="interface-heading"
+      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
+    >
+      {copy.heading}
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        SHOT_KEYS.map((key) => (
+          <figure class="m-0">
+            <Image
+              src={
+                screenshots[
+                  `../assets/screenshots/${locale}/${SHOT_FILES[key]}.png`
+                ]!.default
+              }
+              alt={copy.shots[key]}
+              widths={[640, 960, 1280]}
+              sizes="(min-width: 768px) 588px, calc(100vw - 32px)"
+              format="webp"
+              class="h-auto w-full rounded-2xl border border-border"
+            />
+            <figcaption class="mt-3 text-sm leading-[1.55] text-muted-foreground">
+              {copy.shots[key]}
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
