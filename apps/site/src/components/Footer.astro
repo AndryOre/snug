@@ -28,6 +28,7 @@ const links = [
   },
   { key: 'listing', href: installHref('footer'), label: footer.listing },
 ]
+const noteParts = footer.note.split('Snug')
 ---
 
 <footer data-section="footer" class="border-t border-border">
@@ -61,6 +62,13 @@ const links = [
         ))}
       </ul>
     </nav>
-    <p class="text-sm text-muted-foreground">{footer.note}</p>
+    <p class="text-sm text-muted-foreground">
+      {noteParts.map((part, index) => (
+        <>
+          {index > 0 && <span translate="no">Snug</span>}
+          {part}
+        </>
+      ))}
+    </p>
   </div>
 </footer>

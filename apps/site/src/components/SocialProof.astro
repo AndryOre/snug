@@ -4,7 +4,6 @@ import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
 import CardGrid from './CardGrid.astro'
-import Eyebrow from './Eyebrow.astro'
 import Section from './Section.astro'
 import TextLink from './TextLink.astro'
 
@@ -16,9 +15,9 @@ const { proof } = getClosingCopy(Astro.props.locale)
 ---
 
 <Section section="proof" heading={proof.heading}>
-  <Eyebrow data-proof="numbers" class="mt-5 max-w-2xl">
+  <p data-proof="numbers" class="mt-5 max-w-2xl text-lead tabular-nums">
     {proof.numbers}
-  </Eyebrow>
+  </p>
   <p
     data-proof="rename-note"
     class="mt-5 max-w-2xl text-lead text-muted-foreground"

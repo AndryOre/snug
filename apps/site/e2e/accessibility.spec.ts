@@ -65,6 +65,22 @@ for (const colorScheme of SCHEMES) {
   })
 }
 
+for (const path of PAGES) {
+  test(`${path} has one h1 and no skipped heading levels`, async ({ page }) => {
+    await page.goto(path)
+    const levels = await page
+      .locator('h1, h2, h3, h4, h5, h6')
+      .evaluateAll((headings) =>
+        headings.map((heading) => Number(heading.tagName.slice(1))),
+      )
+    expect(levels.filter((level) => level === 1)).toHaveLength(1)
+    expect(levels[0]).toBe(1)
+    for (const [index, level] of levels.entries()) {
+      if (index > 0) expect(level - levels[index - 1]!).toBeLessThanOrEqual(1)
+    }
+  })
+}
+
 test.describe('opened states', () => {
   test('FAQ open has no accessibility violations', async ({ page }) => {
     await page.goto('/')
