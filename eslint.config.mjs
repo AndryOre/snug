@@ -2,6 +2,7 @@ import eslintComments from '@eslint-community/eslint-plugin-eslint-comments'
 import { plugin as shadcn } from '@shadcn/lint'
 import vitest from '@vitest/eslint-plugin'
 import prettierConfig from 'eslint-config-prettier'
+import astro from 'eslint-plugin-astro'
 import jsdoc from 'eslint-plugin-jsdoc'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
@@ -124,6 +125,13 @@ const eslintConfig = defineConfig([
       '@typescript-eslint/no-deprecated': 'warn',
     },
   },
+  astro.configs['flat/base'],
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: { parser: tseslint.parser },
+    },
+  },
   react.configs.flat.recommended,
   react.configs.flat['jsx-runtime'],
   {
@@ -177,7 +185,32 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    /**
+     * `.astro` templates are HTML, not JSX: `class`, `hreflang`, `set:html`
+     * and keyless `.map()` output are all valid there, so the React JSX
+     * rules that the global React config would otherwise apply are off.
+     * `Props` is Astro's own convention for a component's props interface.
+     */
+    files: ['**/*.astro'],
+    rules: {
+      'react/jsx-key': 'off',
+      'react/no-unknown-property': 'off',
+      'unicorn/name-replacements': [
+        'error',
+        {
+          allowList: {
+            utils: true,
+            docs: true,
+            doc: true,
+            props: true,
+            Props: true,
+          },
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx,astro}'],
     plugins: { shadcn },
     rules: {
       'shadcn/no-restyle': [
@@ -247,7 +280,7 @@ const eslintConfig = defineConfig([
      * `packages/ui/**` is permanently exempt (shadcn-generated,
      * untouched).
      */
-    files: ['**/*.{ts,tsx,mjs}'],
+    files: ['**/*.{ts,tsx,mjs,astro}'],
     ignores: ['packages/ui/**'],
     plugins: {
       jsdoc: jsdoc.configs['flat/recommended-typescript-error'].plugins.jsdoc,

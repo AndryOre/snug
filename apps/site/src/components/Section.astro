@@ -19,7 +19,7 @@ const headingId = heading === undefined ? undefined : `${section}-heading`
   aria-labelledby={headingId}
   class={cn(className)}
 >
-  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+  <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
     {
       heading !== undefined && (
         <SectionHeading id={headingId}>{heading}</SectionHeading>
@@ -27,7 +27,7 @@ const headingId = heading === undefined ? undefined : `${section}-heading`
     }
     {
       lead !== undefined && (
-        <p class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground">
+        <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
           {lead}
         </p>
       )

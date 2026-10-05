@@ -19,13 +19,13 @@ const { proof } = getClosingCopy(Astro.props.locale)
   <Eyebrow data-proof="numbers" class="mt-5 max-w-2xl">{proof.numbers}</Eyebrow>
   <p
     data-proof="rename-note"
-    class="mt-5 max-w-2xl text-[1.0625rem] leading-[1.55] text-muted-foreground"
+    class="mt-5 max-w-2xl text-lead text-muted-foreground"
   >
     {proof.renameNote}
   </p>
   {
     proof.reviewsLead !== '' && (
-      <p class="mt-3 max-w-2xl leading-[1.55] text-muted-foreground">
+      <p class="mt-3 max-w-2xl leading-body text-muted-foreground">
         {proof.reviewsLead}
       </p>
     )
@@ -35,10 +35,10 @@ const { proof } = getClosingCopy(Astro.props.locale)
       REVIEWS.map((review) => (
         <Panel>
           <figure lang="en" class="flex h-full flex-col justify-between gap-6">
-            <blockquote class="leading-[1.55]">
+            <blockquote class="leading-body">
               &ldquo;{review.quote}&rdquo;
             </blockquote>
-            <figcaption class="font-mono text-[0.8125rem] tracking-[0.12em] text-muted-foreground">
+            <figcaption class="font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
               {review.author}, {review.date}
             </figcaption>
           </figure>

@@ -29,7 +29,7 @@ const copy = getLandingCopy(locale).interface
 <Section
   section="interface"
   heading={copy.heading}
-  class="[contain-intrinsic-size:auto_1600px] [content-visibility:auto]"
+  class="defer-render-lg"
 >
   <div class="mt-10 grid gap-6 md:grid-cols-2">
     {
@@ -47,7 +47,7 @@ const copy = getLandingCopy(locale).interface
             format="webp"
             class="h-auto w-full rounded-2xl border border-border"
           />
-          <figcaption class="mt-3 text-sm leading-[1.55] text-muted-foreground">
+          <figcaption class="mt-3 text-sm leading-body text-muted-foreground">
             {copy.shots[key]}
           </figcaption>
         </figure>
