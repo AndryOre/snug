@@ -28,6 +28,17 @@ Snug is a bun-workspaces monorepo
 and theme tokens in `packages/ui` (`@workspace/ui`). Every path below is
 relative to `apps/extension/` unless it starts with `packages/`.
 
+### Other workspaces
+
+- **`packages/ui`** — shared shadcn/ui components, hooks and the theme tokens
+  (`src/styles/globals.css`, mirrored by `docs/brand/tokens.css`). The extension
+  imports it as `@workspace/ui/...`.
+- **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
+  thumbnails. It has no runtime link to the extension: it reads
+  `apps/extension/locales/*.json` and `apps/extension/e2e-store/captions.ts` by
+  relative path, so copy changes flow into the video. See
+  `apps/video/README.md`.
+
 ### Entrypoints (`entrypoints/`)
 
 - **`background.ts`** — the MV3 service worker. Registers
