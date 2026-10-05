@@ -31,6 +31,7 @@ describe('buildLlmsTxt', () => {
     expect(body).toMatch(/^# Snug\n/)
     expect(body).toContain('> A short description.')
     expect(body).toContain(`${SITE_ORIGIN}/install`)
+    expect(body).toContain(`${SITE_ORIGIN}/privacy/`)
   })
 })
 
@@ -59,6 +60,22 @@ describe('buildSoftwareAppJsonLd', () => {
     expect(data.isAccessibleForFree).toBe(true)
     expect(data.offers.price).toBe('0')
     expect(data.aggregateRating.ratingValue).toBe(STORE_FACTS.ratingValue)
+  })
+
+  it.each(LOCALES)('%s points screenshot at its OG image', (locale) => {
+    const data = buildSoftwareAppJsonLd(locale, 'Description')
+
+    expect(data.screenshot).toBe(`${SITE_ORIGIN}/og/og-${locale}.png`)
+  })
+
+  it('credits the author as a Person', () => {
+    const data = buildSoftwareAppJsonLd('en', 'Description')
+
+    expect(data.author).toMatchObject({
+      '@type': 'Person',
+      name: STORE_FACTS.author.name,
+      url: STORE_FACTS.author.url,
+    })
   })
 })
 

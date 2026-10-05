@@ -11,6 +11,7 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../i18n/locales'
+import { ogLocale, ogLocaleAlternates } from './open-graph'
 
 const siteRoot = fileURLToPath(new URL('../..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist-test')
@@ -60,6 +61,25 @@ describe('built pages', () => {
     expect(existsSync(imageFile)).toBe(true)
     expect(metaContent(html, 'name', 'twitter:image')).toBe(image)
     expect(metaContent(html, 'property', 'og:url')).toBe(canonical)
+    expect(metaContent(html, 'property', 'og:locale')).toBe(ogLocale(locale))
+    expect(html).toContain(
+      `<meta property="og:locale:alternate" content="${ogLocaleAlternates(locale)[0]}"`,
+    )
+    expect(html.match(/property="og:locale:alternate"/g)).toHaveLength(
+      LOCALES.length - 1,
+    )
+    expect(metaContent(html, 'property', 'og:image:width')).toBe('1200')
+    expect(metaContent(html, 'property', 'og:image:height')).toBe('630')
+    expect(metaContent(html, 'property', 'og:image:type')).toBe('image/png')
+    expect(
+      metaContent(html, 'property', 'og:image:alt').length,
+    ).toBeGreaterThan(20)
+    expect(html).toContain('<link rel="icon" href="/favicon.svg"')
+    expect(html).toContain('<link rel="manifest" href="/manifest.webmanifest"')
+    expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
+    expect(html).toMatch(
+      /<link rel="preload" as="font" type="font\/woff2" href="\/_astro\/space-grotesk-latin-wght-normal[^"]*\.woff2" crossorigin/,
+    )
 
     const data = jsonLd(html)
     expect(data['@type']).toBe('SoftwareApplication')

@@ -2,6 +2,7 @@ import {
   languageTag,
   type Locale,
   localePath,
+  ogImagePath,
   SITE_ORIGIN,
 } from '../i18n/locales'
 import { STORE_FACTS, STORE_LISTING_URL } from './store-facts'
@@ -25,6 +26,12 @@ export function buildSoftwareAppJsonLd(locale: Locale, description: string) {
     operatingSystem: STORE_FACTS.operatingSystem,
     browserRequirements: STORE_FACTS.browserRequirements,
     downloadUrl: STORE_LISTING_URL,
+    screenshot: `${SITE_ORIGIN}${ogImagePath(locale)}`,
+    author: {
+      '@type': 'Person',
+      name: STORE_FACTS.author.name,
+      url: STORE_FACTS.author.url,
+    },
     license: STORE_FACTS.license,
     isAccessibleForFree: true,
     offers: {
