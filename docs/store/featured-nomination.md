@@ -1,21 +1,36 @@
-# Featured badge nomination pack
+# Featured badge nomination pack (program closed)
 
-Everything needed to nominate Snug for the Chrome Web Store Featured badge:
-copy-ready answers, the evidence behind each form confirmation, and a dashboard
-audit checklist. As of 2026-10-05 the nomination form is unreachable; see
-[Current status](#current-status-2026-10-05). Nothing here has been submitted. A
-human fills the form and clicks Submit.
+Reference only: Google closed self-nominations for the Chrome Web Store Featured
+badge on 2026-08-20 and is sunsetting the badge program later in 2026. Do not
+try to nominate Snug. This pack keeps the copy-ready answers, the evidence
+behind each form confirmation and the dashboard audit result, so they can be
+reused if Google reopens nominations or for a similar listing review. Nothing
+here was ever submitted.
 
 > Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e/`) are
 > relative to `apps/extension/`.
 
-The Featured badge is editorial and cannot be paid for. It is requested through
-One Stop Support, not the Developer Dashboard. Listing facts below come from the
-live listing as checked on 2026-10-05.
+The Featured badge was editorial and could not be paid for. Listing facts below
+come from the live listing as checked on 2026-10-05.
 
-## Current status (2026-10-05)
+## Status: program closed
 
-Attempts made on 2026-10-05, signed in as the publisher:
+Source: the Chrome team's post
+[Chrome Web Store updates: Faster reviews, new publication limits, badge updates, and more](https://developer.chrome.com/blog/cws-review-updates-2026),
+published 2026-08-20.
+
+- The post says the team is "sunsetting the 'Featured' badge program later this
+  year", because baseline review standards for security and performance raised
+  the bar for every extension and made the badge a less meaningful signal.
+- "Self-nominations will close today and all currently pending self-nominations
+  will be closed."
+- Google points developers to its refreshed rating system as the strongest
+  quality signal. The refreshed rating focuses on more recent reviews.
+- The post does not say what happens to extensions that already carry the badge.
+
+## What was tried on 2026-10-05
+
+Signed in as the publisher, before the post above was found:
 
 | Route                                                                 | What was done                                                                                                                            | Outcome                                                                                                                                                 |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -24,13 +39,14 @@ Attempts made on 2026-10-05, signed in as the publisher:
 | `https://developer.chrome.com/docs/webstore/discovery`                | Read the page.                                                                                                                           | Still links to the One Stop Support URL and calls the nomination option a "trial".                                                                      |
 | `https://support.google.com/chrome_webstore/answer/1050673`           | Read the page.                                                                                                                           | Has no nomination steps.                                                                                                                                |
 
-Conclusion: no route to nominate is available from this account, and nothing was
-submitted.
+Conclusion: the unreachable form matches the closure announced on 2026-08-20.
+Nothing was submitted.
 
-## Form path (stale, unreachable on 2026-10-05)
+## Old form path (closed)
 
-Step 1 currently redirects to the Help Center home, so the later steps cannot be
-reached.
+The path below no longer exists. Step 1 redirects to the Help Center home, so
+the later steps cannot be reached. It is kept so the form can be recognised if
+it ever returns.
 
 1. Open the One Stop Support form:
 
@@ -53,31 +69,21 @@ reached.
 Reported review time (third-party reports, not a Google promise): 2-3 days, up
 to a month.
 
-## Re-check
+## What to do instead
 
-1. Open the One Stop Support URL signed in as the publisher:
+- Treat the star rating as the quality signal that counts now. Ask for reviews
+  from real users in a legitimate way, and never buy or fake them.
+- Keep the listing accurate and complete. The audit result below shows it
+  matched the dashboard on 2026-10-05.
+- Re-read the discovery docs page now and then in case the badge programs
+  change:
 
-   ```text
-   https://support.google.com/chrome_webstore/contact/one_stop_support
-   ```
+  ```text
+  https://developer.chrome.com/docs/webstore/discovery
+  ```
 
-2. It works if the page shows a contact form with a "My item (extensions, app,
-   or theme)" choice instead of the Help Center home.
-3. Also re-read the discovery docs page for wording changes:
-
-   ```text
-   https://developer.chrome.com/docs/webstore/discovery
-   ```
-
-4. If it works, use the copy-ready answers below and record the submission in
-   this pack.
-
-## If it stays unreachable
-
-- Keep the listing clean; the audit result below covers it.
-- Do not use unofficial channels or paid "badge" services. The badge cannot be
-  paid for.
-- Revisit when the discovery docs change.
+- Do not use unofficial channels or paid "badge" services. Badges cannot be paid
+  for.
 
 ## Copy-ready answers
 

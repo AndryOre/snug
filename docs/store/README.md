@@ -21,7 +21,8 @@ Related files:
   comparison after the rename.
 - [`assets/`](assets/) — promo tiles and screenshots.
 - [`featured-nomination.md`](featured-nomination.md) — the Featured badge
-  nomination form answers, evidence and dashboard audit checklist.
+  nomination pack (program closed 2026-08-20): answers, evidence and the
+  dashboard audit result, kept for reference.
 
 ## Findings
 
