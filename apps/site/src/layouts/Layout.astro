@@ -18,6 +18,7 @@ import {
 } from '../i18n/locales'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import { buildStructuredData } from '../seo/structured-data'
+import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
 
 interface Props {
   locale: Locale
@@ -62,24 +63,7 @@ const jsonLd = standalone
       content="#17120a"
       media="(prefers-color-scheme: dark)"
     />
-    <script is:inline>
-      {
-        const root = document.documentElement
-        let theme = 'system'
-        try {
-          const stored = localStorage.getItem('snug:theme')
-          if (stored === 'light' || stored === 'dark') theme = stored
-        } catch {
-          theme = 'system'
-        }
-        const dark =
-          theme === 'dark' ||
-          (theme === 'system' &&
-            matchMedia('(prefers-color-scheme: dark)').matches)
-        root.classList.toggle('dark', dark)
-        root.classList.add('js')
-      }
-    </script>
+    <script is:inline set:html={THEME_INIT_SCRIPT} />
     {LOCALE_CONFIG[locale].preloadLatinFont && (
       <link
         rel="preload"
