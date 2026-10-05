@@ -298,7 +298,7 @@ Includes what Snug does not do. Each answer is plain and short.
 reads and writes your browser's bookmarks on your device, and the source code is
 public so you can check.
 
-**Do I need an account?** No account, no signup, no cost.
+**Do I need an account?** No. Install it and start exporting.
 
 **Does it sync my bookmarks between devices?** No. Snug has no sync and no
 cloud. To move bookmarks to another browser or computer, export a file and
@@ -337,7 +337,7 @@ and CI runs pinned. Judge it yourself on GitHub.
 Lee y escribe los marcadores de tu navegador en tu dispositivo, y el código
 fuente es público para que lo verifiques.
 
-**¿Necesito una cuenta?** No necesitas cuenta, registro ni pagar nada.
+**¿Necesito una cuenta?** No. Instálalo y empieza a exportar.
 
 **¿Sincroniza mis marcadores entre dispositivos?** No. Snug no tiene
 sincronización ni nube. Para pasar tus marcadores a otro navegador o equipo,
