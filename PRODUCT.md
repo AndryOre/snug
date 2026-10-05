@@ -71,8 +71,10 @@ Terms: Auto-export, Safety snapshot, Retention, Skip duplicates.
 The name is **Snug**, a fully independent brand: no "by AndryOre" signature on
 the product. Copy is English first, with Spanish adapted for meaning (neutral
 Latin American, tú). The product must be honest about scope: it never names a
-format or capability it does not ship. No binding visual constraints were set;
-the landing page's visual direction is open and decided in design work.
+format or capability it does not ship. The visual identity is the shipped Snug
+brand in `docs/brand/` (Aurora ground, amber accent, Space Grotesk and Geist,
+ribbon-tag mark); every surface inherits it. The landing's composition is
+documented in `apps/site/DESIGN.md`.
 
 ## Evidence on Hand
 
