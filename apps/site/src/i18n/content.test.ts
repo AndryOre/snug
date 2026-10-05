@@ -70,6 +70,12 @@ describe('content', () => {
     }
   })
 
+  it('gives every locale its own non-empty OG image alt', () => {
+    const alts = LOCALES.map((locale) => getContent(locale).seo.ogImageAlt)
+    for (const alt of alts) expect(alt.trim().length).toBeGreaterThan(20)
+    expect(new Set(alts).size).toBe(LOCALES.length)
+  })
+
   it('quotes the Bookmarks file name in the preview card and formats FAQ', () => {
     const quoted = /[“«„「]\u{A0}?Bookmarks\u{A0}?[”»“」]/u
     for (const locale of LOCALES) {

@@ -6,7 +6,7 @@ import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-gr
 
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
-import { getPageMeta } from '../i18n/content'
+import { getContent, getPageMeta } from '../i18n/content'
 import {
   hreflangAlternates,
   LOCALE_CONFIG,
@@ -17,7 +17,7 @@ import {
   type Locale,
 } from '../i18n/locales'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
-import { buildSoftwareAppJsonLd } from '../seo/structured-data'
+import { buildStructuredData } from '../seo/structured-data'
 
 interface Props {
   locale: Locale
@@ -30,12 +30,16 @@ const meta = standalone ?? getPageMeta(locale)
 const alternates = standalone ? [] : hreflangAlternates()
 const canonical = `${SITE_ORIGIN}${standalone?.path ?? localePath(locale)}`
 const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
+const content = getContent(locale)
+const ogImageAlt = content.seo.ogImageAlt
+const featureTitles = Object.values(content.features.items).map(
+  (item) => item.title,
+)
 const jsonLd = standalone
   ? null
-  : JSON.stringify(buildSoftwareAppJsonLd(locale, meta.description)).replaceAll(
-      '<',
-      String.raw`\u003c`,
-    )
+  : JSON.stringify(
+      buildStructuredData(locale, meta.description, featureTitles),
+    ).replaceAll('<', String.raw`\u003c`)
 ---
 
 <html lang={languageTag(locale)} dir={LOCALE_CONFIG[locale].dir}>
@@ -91,6 +95,7 @@ const jsonLd = standalone
       <>
         <meta name="description" content={meta.description} />
         <link rel="canonical" href={canonical} />
+        <link rel="describedby" href="/llms.txt" />
         {alternates.map(({ hreflang, href }) => (
           <link rel="alternate" hreflang={hreflang} href={href} />
         ))}
@@ -108,7 +113,7 @@ const jsonLd = standalone
         <meta property="og:image:width" content={String(OG_IMAGE.width)} />
         <meta property="og:image:height" content={String(OG_IMAGE.height)} />
         <meta property="og:image:type" content={OG_IMAGE.type} />
-        <meta property="og:image:alt" content={meta.description} />
+        <meta property="og:image:alt" content={ogImageAlt} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />

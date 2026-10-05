@@ -3,6 +3,9 @@
     "title": "Snug: Bookmark export, import and backup",
     "description": "Export, import and back up your bookmarks in common formats, from Chrome or Safari, on a schedule. Everything stays local."
   },
+  "seo": {
+    "ogImageAlt": "Snug logo, an amber bookmark icon, above a short summary of the extension on a dark background."
+  },
   "hero": {
     "eyebrow": "Bookmark export, import and backup",
     "headlineLead": "Move your bookmarks.",
