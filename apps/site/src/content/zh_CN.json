@@ -141,7 +141,7 @@
       },
       "cost": {
         "question": "Snug 收费吗？",
-        "answer": "不收费。它是免费的。 Sources: Context: Objections table (all five objections), Anti-persona, Differentiation; Product: Capabilities and Constraints (\"Imports one file at a time. No sync, no cloud, no account, no pricing\")."
+        "answer": "不收费。它是免费的。"
       }
     }
   },
