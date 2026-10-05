@@ -38,7 +38,14 @@
 3. Wire the locale into `@wxt-dev/i18n` by adding the file under
    `apps/extension/locales/` — the module auto-discovers locale files there, the
    same way `en.json` (the manifest's `default_locale`) and `es.json` already
-   are. No manual registration elsewhere is required.
+   are. No manual registration is required for the extension itself.
 
-4. Run `bun run check` and `bun run test` to confirm the new locale doesn't
+4. Promo assets are not auto-discovered. To ship the new locale in the promo
+   video and the store pack, also add it to the hard-coded locale lists in
+   `apps/video/src/copy/locales.ts` and `apps/video/src/copy/messages.ts`, add
+   its captions to `apps/extension/e2e-store/captions.ts`, and add its
+   `apps/video/public/screenshots/<locale>/` slides. Skip this step if the
+   locale is extension-only.
+
+5. Run `bun run check` and `bun run test` to confirm the new locale doesn't
    break type generation or parity.
