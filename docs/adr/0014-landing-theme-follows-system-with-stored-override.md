@@ -24,7 +24,9 @@ page should follow the visitor's theme.
   every inline script on the site, its hash is added to the
   Content-Security-Policy at build time
   ([ADR 0011](0011-landing-static-site-no-third-party-scripts.md)).
-- Without JavaScript the page follows the system theme and the menu is hidden.
+- Without JavaScript the page shows the light theme and the menu is hidden: the
+  theme tokens switch on the `.dark` class, which only the script sets. The
+  `color-scheme` and `theme-color` metas still follow the system.
 - The menu is the shared shadcn DropdownMenu with a radio group, rendered in the
   same `client:idle` island as the language menu, so the header hydrates once
   ([ADR 0013](0013-landing-islands-for-faq-and-language-switcher.md)).
