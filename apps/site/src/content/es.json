@@ -37,5 +37,49 @@
       "ci": "estado de CI",
       "privacy": "Política de privacidad"
     }
+  },
+  "features": {
+    "heading": "Lo que hace Snug",
+    "items": {
+      "export": {
+        "title": "Exporta lo que elijas",
+        "body": "Exporta todo el árbol o solo las carpetas que escojas, en HTML, JSON, CSV, Markdown, OPML o XBEL. Los nombres de archivo pueden incluir la fecha, así los distingues después."
+      },
+      "preview": {
+        "title": "Vista previa antes de importar",
+        "body": "Importa archivos HTML, JSON, CSV o XBEL, un archivo `Bookmarks` de un perfil de Chrome, o una exportación de Safari con Favoritos y Lista de lectura. Snug detecta el formato y te muestra una vista previa. Después combinas, reemplazas o añades todo a una carpeta nueva."
+      },
+      "undo": {
+        "title": "Deshaz un reemplazo",
+        "body": "Antes de reemplazar, Snug guarda una instantánea de seguridad. Si el resultado no es el que querías, la restauras."
+      },
+      "duplicates": {
+        "title": "Limpia duplicados",
+        "body": "Una página de Duplicados encuentra marcadores repetidos. Al importar, Omitir duplicados deja fuera las URL que ya tienes."
+      },
+      "backup": {
+        "title": "Respalda con un horario",
+        "body": "La exportación automática guarda tus marcadores en la carpeta de Descargas con el horario que definas. La retención conserva solo los archivos más recientes, y puedes recibir una notificación si una ejecución falla."
+      },
+      "works": {
+        "title": "Funciona donde estés",
+        "body": "Chrome, Edge, Brave, Opera y otros navegadores Chromium. La interfaz está en 10 idiomas y sigue el tema y el idioma de tu navegador."
+      }
+    }
+  },
+  "interface": {
+    "heading": "La interfaz real",
+    "shots": {
+      "export": "Página de exportación: elige carpetas del árbol, un formato y exporta.",
+      "import": "Vista previa de importación: mira qué cambia y elige combinar, reemplazar o carpeta nueva.",
+      "autoExport": "Exportación automática: a diario, en HTML, JSON y Markdown, con la próxima ejecución a la vista.",
+      "popup": "La ventana de la barra de herramientas exporta todo con un clic."
+    }
+  },
+  "video": {
+    "heading": "Míralo en acción",
+    "caption": "Un recorrido breve: exportar una carpeta e importarla con vista previa.",
+    "note": "El video se carga desde YouTube solo cuando pulsas reproducir. Hasta entonces, la página no se conecta con nadie.",
+    "play": "Reproducir video"
   }
 }

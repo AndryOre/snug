@@ -37,5 +37,49 @@
       "ci": "CI 状态",
       "privacy": "隐私政策"
     }
+  },
+  "features": {
+    "heading": "Snug 能做什么",
+    "items": {
+      "export": {
+        "title": "导出你选择的内容",
+        "body": "导出整个书签树或你选中的文件夹，格式可选 HTML、JSON、CSV、Markdown、OPML 或 XBEL。文件名可包含日期，方便日后区分。"
+      },
+      "preview": {
+        "title": "导入前先预览",
+        "body": "可导入 HTML、JSON、CSV 或 XBEL 文件、Chrome 配置文件的 `Bookmarks` 文件，或包含个人收藏和阅读列表的 Safari 导出文件。Snug 会检测格式并显示预览。然后你可以合并、替换，或把全部内容添加到一个新文件夹。"
+      },
+      "undo": {
+        "title": "撤销替换",
+        "body": "替换前，Snug 会先保存安全快照。如果结果不是你想要的，可以恢复。"
+      },
+      "duplicates": {
+        "title": "清理重复项",
+        "body": "“重复项”页面可找出重复的书签。导入时，“跳过重复项”会略过你已有的 URL。"
+      },
+      "backup": {
+        "title": "定时备份",
+        "body": "自动导出会按你设定的计划，把书签保存到下载文件夹。保留设置只留下最新的文件，某次运行失败时你可以收到通知。"
+      },
+      "works": {
+        "title": "随处可用",
+        "body": "适用于 Chrome、Edge、Brave、Opera 和其他基于 Chromium 的浏览器。界面支持 10 种语言，并跟随浏览器的主题和语言。"
+      }
+    }
+  },
+  "interface": {
+    "heading": "真实界面",
+    "shots": {
+      "export": "导出页面：从树中选择文件夹和格式，然后导出。",
+      "import": "导入预览：查看将发生的更改，再选择合并、替换或新建文件夹。",
+      "autoExport": "自动导出：每天一次，格式为 HTML、JSON 和 Markdown，并显示下次运行时间。",
+      "popup": "工具栏弹出窗口一键导出全部书签。"
+    }
+  },
+  "video": {
+    "heading": "看看它如何工作",
+    "caption": "简短演示：导出一个文件夹，再带预览地导入。",
+    "note": "视频只有在你点击播放时才会从 YouTube 加载。在此之前，页面不会联系任何人。",
+    "play": "播放视频"
   }
 }

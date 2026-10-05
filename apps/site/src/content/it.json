@@ -37,5 +37,49 @@
       "ci": "stato della CI",
       "privacy": "Informativa sulla privacy"
     }
+  },
+  "features": {
+    "heading": "Cosa fa Snug",
+    "items": {
+      "export": {
+        "title": "Esporta ciò che scegli",
+        "body": "Esporta l'intero albero o solo le cartelle che selezioni, in HTML, JSON, CSV, Markdown, OPML o XBEL. I nomi dei file possono includere la data, così li distingui più avanti."
+      },
+      "preview": {
+        "title": "Anteprima prima di importare",
+        "body": "Importa file HTML, JSON, CSV o XBEL, un file `Bookmarks` di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura. Snug rileva il formato e mostra un'anteprima. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella."
+      },
+      "undo": {
+        "title": "Annulla una sostituzione",
+        "body": "Prima di sostituire, Snug salva un'istantanea di sicurezza. Se il risultato non è quello che volevi, ripristinala."
+      },
+      "duplicates": {
+        "title": "Elimina i duplicati",
+        "body": "Una pagina Duplicati trova i segnalibri ripetuti. In importazione, Salta i duplicati lascia fuori gli URL che hai già."
+      },
+      "backup": {
+        "title": "Backup programmato",
+        "body": "L'esportazione automatica salva i tuoi segnalibri nella cartella Download con la pianificazione che imposti. La Conservazione tiene solo i file più recenti e puoi ricevere una notifica se un'esecuzione fallisce."
+      },
+      "works": {
+        "title": "Funziona dove sei",
+        "body": "Chrome, Edge, Brave, Opera e altri browser Chromium. L'interfaccia è in 10 lingue e segue il tema e la lingua del tuo browser."
+      }
+    }
+  },
+  "interface": {
+    "heading": "L'interfaccia reale",
+    "shots": {
+      "export": "Pagina di esportazione: scegli le cartelle dall'albero, un formato ed esporta.",
+      "import": "Anteprima di importazione: vedi cosa cambia, poi scegli unisci, sostituisci o nuova cartella.",
+      "autoExport": "Esportazione automatica: ogni giorno, in HTML, JSON e Markdown, con la prossima esecuzione in vista.",
+      "popup": "Il popup nella barra degli strumenti esporta tutto con un clic."
+    }
+  },
+  "video": {
+    "heading": "Guardalo in azione",
+    "caption": "Un breve percorso: esportare una cartella e importarla con un'anteprima.",
+    "note": "Il video si carica da YouTube solo quando premi play. Fino ad allora la pagina non contatta nessuno.",
+    "play": "Riproduci video"
   }
 }

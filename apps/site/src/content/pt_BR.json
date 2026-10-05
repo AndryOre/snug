@@ -37,5 +37,49 @@
       "ci": "status da CI",
       "privacy": "Política de Privacidade"
     }
+  },
+  "features": {
+    "heading": "O que o Snug faz",
+    "items": {
+      "export": {
+        "title": "Exporte o que escolher",
+        "body": "Exporte a árvore inteira ou só as pastas que escolher, em HTML, JSON, CSV, Markdown, OPML ou XBEL. Os nomes de arquivo podem incluir a data, para você distingui-los depois."
+      },
+      "preview": {
+        "title": "Pré-visualização antes de importar",
+        "body": "Importe arquivos HTML, JSON, CSV ou XBEL, um arquivo `Bookmarks` de perfil do Chrome ou uma exportação do Safari com Favoritos e Lista de Leitura. O Snug detecta o formato e mostra uma pré-visualização. Depois você mescla, substitui ou adiciona tudo a uma pasta nova."
+      },
+      "undo": {
+        "title": "Desfaça uma substituição",
+        "body": "Antes de substituir, o Snug salva um instantâneo de segurança. Se o resultado não for o que você queria, restaure-o."
+      },
+      "duplicates": {
+        "title": "Limpe duplicados",
+        "body": "Uma página Duplicados encontra favoritos repetidos. Na importação, Ignorar duplicados deixa de fora as URLs que você já tem."
+      },
+      "backup": {
+        "title": "Faça backup com agendamento",
+        "body": "A exportação automática salva seus favoritos na pasta Downloads no agendamento que você definir. A Retenção mantém só os arquivos mais recentes, e você pode receber um aviso se uma execução falhar."
+      },
+      "works": {
+        "title": "Funciona onde você está",
+        "body": "Chrome, Edge, Brave, Opera e outros navegadores baseados em Chromium. A interface está em 10 idiomas e segue o tema e o idioma do seu navegador."
+      }
+    }
+  },
+  "interface": {
+    "heading": "A interface real",
+    "shots": {
+      "export": "Página de exportação: escolha pastas da árvore, um formato e exporte.",
+      "import": "Pré-visualização da importação: veja o que muda e escolha mesclar, substituir ou pasta nova.",
+      "autoExport": "Exportação automática: diária, em HTML, JSON e Markdown, com a próxima execução à vista.",
+      "popup": "O pop-up da barra de ferramentas exporta tudo com um clique."
+    }
+  },
+  "video": {
+    "heading": "Veja em ação",
+    "caption": "Um passo a passo curto: exportar uma pasta e importá-la com pré-visualização.",
+    "note": "O vídeo só carrega do YouTube quando você aperta o play. Até lá, a página não contata ninguém.",
+    "play": "Reproduzir vídeo"
   }
 }

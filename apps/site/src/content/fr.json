@@ -37,5 +37,49 @@
       "ci": "statut de la CI",
       "privacy": "Politique de confidentialité"
     }
+  },
+  "features": {
+    "heading": "Ce que fait Snug",
+    "items": {
+      "export": {
+        "title": "Exportez ce que vous choisissez",
+        "body": "Exportez toute l'arborescence ou seulement les dossiers que vous sélectionnez, en HTML, JSON, CSV, Markdown, OPML ou XBEL. Les noms de fichier peuvent inclure la date, pour les distinguer plus tard."
+      },
+      "preview": {
+        "title": "Aperçu avant l'import",
+        "body": "Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier `Bookmarks` de profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture. Snug détecte le format et affiche un aperçu. Vous fusionnez ensuite, remplacez, ou ajoutez tout dans un nouveau dossier."
+      },
+      "undo": {
+        "title": "Annulez un remplacement",
+        "body": "Avant de remplacer, Snug enregistre un instantané de sécurité. Si le résultat ne vous convient pas, restaurez-le."
+      },
+      "duplicates": {
+        "title": "Nettoyez les doublons",
+        "body": "Une page Doublons repère les favoris en double. À l'import, Ignorer les doublons laisse de côté les URL que vous avez déjà."
+      },
+      "backup": {
+        "title": "Sauvegardez selon un horaire",
+        "body": "L'exportation automatique enregistre vos favoris dans le dossier Téléchargements selon l'horaire que vous définissez. La Rétention ne garde que les fichiers les plus récents, et vous pouvez recevoir une notification si une exécution échoue."
+      },
+      "works": {
+        "title": "Fonctionne où vous êtes",
+        "body": "Chrome, Edge, Brave, Opera et d'autres navigateurs Chromium. L'interface existe en 10 langues et suit le thème et la langue de votre navigateur."
+      }
+    }
+  },
+  "interface": {
+    "heading": "La vraie interface",
+    "shots": {
+      "export": "Page d'exportation : choisissez des dossiers dans l'arborescence, un format, puis exportez.",
+      "import": "Aperçu de l'import : voyez ce qui change, puis choisissez fusionner, remplacer ou nouveau dossier.",
+      "autoExport": "Exportation automatique : chaque jour, en HTML, JSON et Markdown, avec la prochaine exécution affichée.",
+      "popup": "La fenêtre de la barre d'outils exporte tout en un clic."
+    }
+  },
+  "video": {
+    "heading": "Voyez-le en action",
+    "caption": "Une courte démonstration : exporter un dossier, puis l'importer avec un aperçu.",
+    "note": "La vidéo ne se charge depuis YouTube que lorsque vous appuyez sur lecture. D'ici là, la page ne contacte personne.",
+    "play": "Lire la vidéo"
   }
 }
