@@ -4,9 +4,13 @@ import { theme } from '../theme'
 import { Icon } from './Icon'
 
 export type ToastProps = {
-  /** 0..1 entrance; slides up and fades in. Default 1. */
+  /**
+  0..1 entrance; slides up and fades in. Default 1.
+   */
   enter?: number
-  /** Content, normally `Toast.Message` and `Toast.Action`. */
+  /**
+  Content, normally `Toast.Message` and `Toast.Action`.
+   */
   children: ReactNode
 }
 

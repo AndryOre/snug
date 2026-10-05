@@ -5,7 +5,9 @@ import { type ExportFormat, FORMAT_LABELS } from './FileIcon'
 
 export type ChipProps = {
   format: ExportFormat
-  /** `active` is the amber selected state. */
+  /**
+  `active` is the amber selected state.
+   */
   tone?: 'default' | 'active'
 }
 
