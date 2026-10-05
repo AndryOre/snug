@@ -50,20 +50,20 @@ gdhpeilfkeeajillmcncaelnppiakjhn
 
 Related domain: No.
 
-Description of functionality, target audience and use cases (977 chars, about
+Description of functionality, target audience and use cases (997 chars, about
 1,000 at most). The opening line is the store description opening from
 [`README.md`](README.md); the capabilities match its single-purpose text:
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
 
-What it does: export your whole bookmark tree or one folder as HTML, JSON, CSV, Markdown, OPML or XBEL. Import those formats, a Chrome profile Bookmarks file or Safari bookmarks, with a preview first, then merge, replace or drop everything into a new folder. A safety snapshot lets you undo any replace, a Duplicates page deletes only the copies you pick, and scheduled backups save to your Downloads folder with retention and a failure notification.
+What it does: export your whole bookmark tree or one folder as HTML, JSON, CSV, Markdown, OPML or XBEL. Import HTML, JSON, CSV or XBEL files, a Chrome profile Bookmarks file or Safari bookmarks, with a preview first, then merge, replace or drop everything into a new folder. A safety snapshot lets you undo any replace, a Duplicates page deletes only the copies you pick, and scheduled backups save to your Downloads folder with retention and a failure notification.
 
 Who it is for: anyone switching browsers, anyone who wants a safety net before a cleanup, and anyone with a large bookmark library who wants regular local backups.
 
-Use cases: move to a new browser, back up on a schedule, clean up duplicates, restore after a mistake.
+Use cases: switch browsers, schedule backups, clean up duplicates, undo a mistake.
 
-Everything runs on your device — no account, no cloud, no server, no analytics. Works with the keyboard and screen readers, in 10 languages.
+Everything runs on your device — no account, no cloud, no server, no analytics. The bookmark tree works fully with the keyboard and screen readers, in 10 languages.
 ```
 
 ## Evidence table
@@ -82,7 +82,7 @@ repository root.
 | Privacy                    | No data collected or transmitted; permissions explained in a public policy.                                                        | [`PRIVACY_POLICY.md`](../../PRIVACY_POLICY.md) ("Information Collection and Use", "Permissions", "Third-Party Services"); policy URL in [`README.md`](README.md).                                                                                                                                               | verified   |
 | Performance                | Large libraries are handled well.                                                                                                  | No benchmark or profiling result in the repo. `unlimitedStorage` is requested for large safety snapshots ([`docs/security.md`](../security.md)), which shows intent, not measured speed.                                                                                                                        | unverified |
 | UX                         | Keyboard and screen reader operable, ten languages, previewed imports and undoable replaces.                                       | [`docs/development.md`](../development.md) "Accessibility" (jsx-a11y lint, keyboard rule); ten files in `apps/extension/locales/`; listing text in [`README.md`](README.md). No manual screen reader pass is recorded.                                                                                          | unverified |
-| Clear and accurate listing | Title, summary, description, screenshots, tiles and promo videos exist for all ten locales, and match the product.                 | [`README.md`](README.md) "Store listing" and "Graphic assets"; [`screenshots.md`](screenshots.md); [`listings/`](listings/). Live listing shows English plus 9 other locales and a YouTube promo video per locale (checked 2026-10-05). Per-locale accuracy against the dashboard is the audit checklist below. | verified   |
+| Clear and accurate listing | Title, summary, description, screenshots, tiles and promo videos exist for all ten locales, and match the product.                 | [`README.md`](README.md) "Store listing" and "Graphic assets"; [`screenshots.md`](screenshots.md); [`listings/`](listings/). Live listing shows English plus 9 other locales and a YouTube promo video per locale (checked 2026-10-05). Per-locale accuracy against the dashboard is the audit checklist below. | unverified |
 
 ## Dashboard audit checklist
 
