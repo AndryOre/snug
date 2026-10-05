@@ -8,6 +8,7 @@
 @source '../components';
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant js (&:is(.js *));
 
 @theme inline {
   --font-heading: 'Space Grotesk Variable', 'Geist Variable', sans-serif;
@@ -192,6 +193,11 @@
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
 }
 
+@utility journey-boundary {
+  border: 1.5px dashed var(--primary);
+  border-radius: 18px;
+}
+
 @utility defer-render-sm {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
@@ -275,5 +281,28 @@
   }
   html {
     @apply font-sans;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection {
+    background-color: color-mix(in oklch, var(--primary) 30%, transparent);
+    color: inherit;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  [data-slot='card-title'],
+  [data-slot='accordion-trigger'] {
+    text-wrap: balance;
+  }
+  a,
+  button,
+  summary,
+  [role='button'],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
   }
 }

@@ -1,10 +1,32 @@
+import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+import type { Locator } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
 const ORIGIN = 'http://localhost:4399'
+const SCHEMES = ['light', 'dark'] as const
+const SHOT_IMAGES = '[data-section="interface"] img'
+
+const measureSizes = (image: Locator) =>
+  image.evaluate((element: HTMLImageElement) => {
+    const entries = element.sizes.split(/,(?![^(]*\))/).map((entry) => {
+      const match = /^\s*(\([^)]*\))?\s*(.+?)\s*$/.exec(entry)!
+      return { media: match[1], length: match[2]! }
+    })
+    const chosen = entries.find(
+      (entry) => entry.media === undefined || matchMedia(entry.media).matches,
+    )!
+    const probe = document.createElement('div')
+    probe.style.position = 'absolute'
+    probe.style.width = chosen.length
+    document.body.append(probe)
+    const declared = probe.getBoundingClientRect().width
+    probe.remove()
+    return { declared, rendered: element.getBoundingClientRect().width }
+  })
 
 for (const path of PATHS) {
   test(`${path} renders features, interface and video sections`, async ({
@@ -25,15 +47,19 @@ for (const path of PATHS) {
 
     const figures = page.locator('[data-section="interface"] figure')
     await expect(figures).toHaveCount(4)
-    const images = page.locator('[data-section="interface"] img')
-    for (let index = 0; index < 4; index++) {
+    const images = page.locator(SHOT_IMAGES)
+    await expect(images).toHaveCount(8)
+    for (let index = 0; index < 8; index++) {
       const image = images.nth(index)
       await expect(image).toHaveAttribute('loading', 'lazy')
       await expect(image).toHaveAttribute('width', '1280')
       await expect(image).toHaveAttribute('height', '800')
       const alt = await image.getAttribute('alt')
       expect(alt?.length).toBeGreaterThan(10)
-      const caption = await figures.nth(index).locator('figcaption').innerText()
+      const caption = await figures
+        .nth(Math.floor(index / 2))
+        .locator('figcaption')
+        .innerText()
       expect(alt).not.toBe(caption)
     }
 
@@ -163,6 +189,90 @@ for (const width of [768, 900, 1024]) {
         }
       },
     )
+    expect(Math.abs(declared - rendered)).toBeLessThanOrEqual(1)
+  })
+}
+
+for (const colorScheme of SCHEMES) {
+  test(`only the ${colorScheme} screenshots load under ${colorScheme}`, async ({
+    page,
+  }) => {
+    const requested: string[] = []
+    page.on('request', (request) => {
+      requested.push(request.url())
+    })
+    await page.emulateMedia({ colorScheme })
+    await page.goto('/')
+
+    const hiddenTheme = colorScheme === 'light' ? 'dark' : 'light'
+    const visible = page.locator(
+      `${SHOT_IMAGES}[data-shot-theme="${colorScheme}"]`,
+    )
+    const hidden = page.locator(
+      `${SHOT_IMAGES}[data-shot-theme="${hiddenTheme}"]`,
+    )
+    await expect(visible).toHaveCount(4)
+    await expect(hidden).toHaveCount(4)
+
+    for (let index = 0; index < 4; index++) {
+      await visible.nth(index).scrollIntoViewIfNeeded()
+      await expect
+        .poll(() =>
+          visible
+            .nth(index)
+            .evaluate((element: HTMLImageElement) => element.currentSrc),
+        )
+        .not.toBe('')
+    }
+    await page.waitForLoadState('networkidle')
+
+    await expect(hidden.first()).toBeHidden()
+    for (let index = 0; index < 4; index++) {
+      expect(
+        await hidden
+          .nth(index)
+          .evaluate((element: HTMLImageElement) => element.currentSrc),
+      ).toBe('')
+    }
+
+    const hiddenUrls = await hidden.evaluateAll((elements) =>
+      elements.flatMap((element) =>
+        (element as HTMLImageElement).srcset
+          .split(',')
+          .map(
+            (candidate) =>
+              new URL(candidate.trim().split(' ', 1)[0]!, document.baseURI)
+                .href,
+          ),
+      ),
+    )
+    expect(hiddenUrls.length).toBeGreaterThan(0)
+    expect(requested.filter((url) => hiddenUrls.includes(url))).toEqual([])
+  })
+
+  test(`the interface section has no accessibility violations in ${colorScheme}`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme })
+    await page.goto('/')
+    const { violations } = await new AxeBuilder({ page })
+      .include('[data-section="interface"]')
+      .analyze()
+    expect(violations).toEqual([])
+  })
+}
+
+for (const width of [375, 768, 1024]) {
+  test(`screenshot sizes match the rendered width at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 800 })
+    await page.goto('/')
+    const image = page
+      .locator(`${SHOT_IMAGES}[data-shot-theme="light"]`)
+      .first()
+    await image.scrollIntoViewIfNeeded()
+    const { declared, rendered } = await measureSizes(image)
     expect(Math.abs(declared - rendered)).toBeLessThanOrEqual(1)
   })
 }

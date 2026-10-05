@@ -1,7 +1,17 @@
 ---
+import { Badge } from '@workspace/ui/components/badge'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@workspace/ui/components/card'
+import { ArrowRight, FileText } from 'lucide-react'
+
 import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import Eyebrow from './Eyebrow.astro'
+import FolderTree from './FolderTree.astro'
 import InstallButton from './InstallButton.astro'
 import Section from './Section.astro'
 import TextLink from './TextLink.astro'
@@ -10,7 +20,10 @@ interface Props {
   locale: Locale
 }
 
+const FORMATS = ['HTML', 'JSON', 'CSV', 'Markdown', 'TXT', 'XML']
+
 const { hero } = getLandingCopy(Astro.props.locale)
+const { journey } = hero
 ---
 
 <Section section="hero" class="bg-hero-glow">
@@ -27,4 +40,75 @@ const { hero } = getLandingCopy(Astro.props.locale)
     <TextLink href={TRUST_LINK_HREFS.source}>{hero.source}</TextLink>
   </div>
   <p class="mt-4 text-sm text-muted-foreground">{hero.note}</p>
+  <figure
+    class="mt-14 mb-0 max-w-5xl"
+    aria-labelledby="journey-device"
+    aria-describedby="journey-description"
+  >
+    <p id="journey-description" class="sr-only">
+      {journey.description}
+    </p>
+    <div class="relative journey-boundary p-4 pt-8 md:p-6 md:pt-9">
+      <p
+        id="journey-device"
+        class="absolute top-0 left-5 -translate-y-1/2 bg-background px-3 font-mono text-xs tracking-eyebrow text-primary-text uppercase"
+      >
+        {journey.device}
+      </p>
+      <div class="flex flex-col items-stretch gap-3 md:flex-row md:gap-4">
+        <Card size="sm" className="min-w-0 flex-1">
+          <CardHeader>
+            <CardTitle className="break-words">{journey.from}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <FolderTree />
+          </CardContent>
+        </Card>
+        <ArrowRight className="size-6 shrink-0 rotate-90 self-center text-primary-text md:rotate-0" />
+        <Card size="sm" className="min-w-0 flex-1">
+          <CardHeader>
+            <CardTitle className="break-words">{journey.file}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="flex flex-col gap-3">
+              <p
+                translate="no"
+                class="flex items-center gap-2 font-mono text-sm break-all text-foreground"
+              >
+                <FileText
+                  className="size-4 shrink-0 text-primary-text"
+                  aria-hidden="true"
+                />
+                bookmarks.html
+              </p>
+              <ul class="flex flex-wrap gap-1.5" translate="no">
+                {FORMATS.map((format) => (
+                  <li>
+                    <Badge variant="secondary" className="font-mono">
+                      {format}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+        <ArrowRight className="size-6 shrink-0 rotate-90 self-center text-primary-text md:rotate-0" />
+        <Card size="sm" className="min-w-0 flex-1">
+          <CardHeader>
+            <CardTitle className="break-words">{journey.to}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <FolderTree />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+    <figcaption
+      data-journey="network"
+      class="mt-4 font-mono text-sm text-muted-foreground"
+    >
+      {journey.network}
+    </figcaption>
+  </figure>
 </Section>

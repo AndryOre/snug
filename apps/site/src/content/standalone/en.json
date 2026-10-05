@@ -9,6 +9,7 @@
     "website": {
       "heading": "This website",
       "body": "This website runs no analytics scripts and loads nothing from third parties. Visits are counted only from the web server's access log, where IP addresses are masked, and the log is read offline."
-    }
+    },
+    "theme": "Your theme choice is stored only in your browser."
   }
 }

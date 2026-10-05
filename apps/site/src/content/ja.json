@@ -13,7 +13,15 @@
     "subheadline": "Snug は、Chrome などの Chromium ベースのブラウザーで、ブックマークの書き出し、読み込み、バックアップを行います。ネットワーク通信は行わず、アカウントも不要です。",
     "install": "Chrome に追加",
     "note": "無料。オープンソース。Chrome、Edge、Brave、Opera で使えます。",
-    "source": "GitHub でソースコードを見る"
+    "source": "GitHub でソースコードを見る",
+    "journey": {
+      "device": "お使いのデバイス",
+      "from": "お使いのブラウザ",
+      "file": "1つのファイル",
+      "to": "別のブラウザ",
+      "network": "ネットワーク通信：なし",
+      "description": "ブックマークは、6つの形式で利用できる1つの bookmarks.html ファイルとしてブラウザから書き出され、別のブラウザで開かれます。すべてお使いのデバイス内で完結します。"
+    }
   },
   "trust": {
     "heading": "信頼すべきサーバーのない拡張機能",
@@ -165,7 +173,13 @@
     "languageLabel": "言語",
     "languageSeparator": "：",
     "skipLink": "本文へスキップ",
-    "homeLabel": "Snug ホーム"
+    "homeLabel": "Snug ホーム",
+    "theme": {
+      "label": "テーマ",
+      "system": "システム",
+      "light": "ライト",
+      "dark": "ダーク"
+    }
   },
   "notFound": {
     "title": "ページが見つかりません",

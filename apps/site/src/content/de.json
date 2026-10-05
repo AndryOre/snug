@@ -13,7 +13,15 @@
     "subheadline": "Snug exportiert, importiert und sichert deine Lesezeichen in Chrome und anderen Chromium-Browsern. Es stellt keine Netzwerkverbindungen her und braucht kein Konto.",
     "install": "Zu Chrome hinzufügen",
     "note": "Kostenlos. Open Source. Funktioniert in Chrome, Edge, Brave und Opera.",
-    "source": "Quellcode auf GitHub ansehen"
+    "source": "Quellcode auf GitHub ansehen",
+    "journey": {
+      "device": "Dein Gerät",
+      "from": "Dein Browser",
+      "file": "Eine Datei",
+      "to": "Ein anderer Browser",
+      "network": "Netzwerkaufrufe: keine",
+      "description": "Deine Lesezeichen verlassen deinen Browser als eine einzige Datei bookmarks.html, in sechs Formaten verfügbar, und öffnen sich in einem anderen Browser. Alles bleibt auf deinem Gerät."
+    }
   },
   "trust": {
     "heading": "Eine Erweiterung ohne Server, dem du vertrauen musst",
@@ -165,7 +173,13 @@
     "languageLabel": "Sprache",
     "languageSeparator": ": ",
     "skipLink": "Zum Inhalt springen",
-    "homeLabel": "Snug-Startseite"
+    "homeLabel": "Snug-Startseite",
+    "theme": {
+      "label": "Design",
+      "system": "System",
+      "light": "Hell",
+      "dark": "Dunkel"
+    }
   },
   "notFound": {
     "title": "Seite nicht gefunden",

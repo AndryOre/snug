@@ -13,7 +13,15 @@
     "subheadline": "Snug 可在 Chrome 和其他基于 Chromium 的浏览器中导出、导入和备份书签。它不发起任何网络请求，也无需账号。",
     "install": "添加至 Chrome",
     "note": "免费。开源。适用于 Chrome、Edge、Brave 和 Opera。",
-    "source": "在 GitHub 上查看源代码"
+    "source": "在 GitHub 上查看源代码",
+    "journey": {
+      "device": "你的设备",
+      "from": "你的浏览器",
+      "file": "一个文件",
+      "to": "另一个浏览器",
+      "network": "网络请求：无",
+      "description": "你的书签以一个 bookmarks.html 文件的形式从浏览器导出，提供六种格式，并在另一个浏览器中打开。全程都保留在你的设备上。"
+    }
   },
   "trust": {
     "heading": "无需信任任何服务器的扩展程序",
@@ -165,7 +173,13 @@
     "languageLabel": "语言",
     "languageSeparator": "：",
     "skipLink": "跳到正文",
-    "homeLabel": "Snug 首页"
+    "homeLabel": "Snug 首页",
+    "theme": {
+      "label": "主题",
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色"
+    }
   },
   "notFound": {
     "title": "找不到页面",

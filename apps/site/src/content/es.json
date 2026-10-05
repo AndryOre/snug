@@ -13,7 +13,15 @@
     "subheadline": "Snug exporta, importa y respalda tus marcadores en Chrome y en otros navegadores Chromium. No hace llamadas de red y no necesita cuenta.",
     "install": "Añadir a Chrome",
     "note": "Gratis. Código abierto. Funciona en Chrome, Edge, Brave y Opera.",
-    "source": "Ver el código en GitHub"
+    "source": "Ver el código en GitHub",
+    "journey": {
+      "device": "Tu dispositivo",
+      "from": "Tu navegador",
+      "file": "Un archivo",
+      "to": "Otro navegador",
+      "network": "Llamadas de red: ninguna",
+      "description": "Tus marcadores salen de tu navegador como un solo archivo bookmarks.html, disponible en seis formatos, y se abren en otro navegador. Todo permanece en tu dispositivo."
+    }
   },
   "trust": {
     "heading": "Una extensión sin servidor en el que confiar",
@@ -165,7 +173,13 @@
     "languageLabel": "Idioma",
     "languageSeparator": ": ",
     "skipLink": "Saltar al contenido",
-    "homeLabel": "Inicio de Snug"
+    "homeLabel": "Inicio de Snug",
+    "theme": {
+      "label": "Tema",
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Oscuro"
+    }
   },
   "notFound": {
     "title": "Página no encontrada",

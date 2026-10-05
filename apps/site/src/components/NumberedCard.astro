@@ -24,12 +24,8 @@ const hasExtras = Astro.slots.has('default')
       <Eyebrow as="span" aria-hidden="true">
         {numeral}
       </Eyebrow>
-      <CardTitle
-        role="heading"
-        aria-level={3}
-        className="mt-3 text-2xl leading-tight break-words hyphens-auto"
-      >
-        {title}
+      <CardTitle className="mt-3 text-2xl leading-tight break-words hyphens-auto">
+        <h3>{title}</h3>
       </CardTitle>
       <CardDescription className="mt-3 text-base">{body}</CardDescription>
     </CardHeader>

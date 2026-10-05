@@ -25,7 +25,7 @@ const { features } = getLandingCopy(Astro.props.locale)
           <ul class="flex flex-wrap gap-2" aria-hidden="true">
             {FEATURE_FORMATS[key].map((format) => (
               <li>
-                <Badge variant="outline" className="font-mono">
+                <Badge variant="outline" className="font-mono" translate="no">
                   {format}
                 </Badge>
               </li>
