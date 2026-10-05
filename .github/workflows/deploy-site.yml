@@ -1,0 +1,44 @@
+name: Deploy Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/site/**'
+      - 'packages/ui/**'
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build container and deploy via Coolify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Build container
+        run: docker build -f apps/site/Dockerfile -t snug-site:ci .
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version-file: package.json
+          no-cache: true
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile --ignore-scripts
+
+      # The token is dotenvx-encrypted in .env (ADR 0012); dotenvx decrypts it
+      # with DOTENV_PRIVATE_KEY and the script never echoes it.
+      - name: Trigger Coolify deploy and wait for the result
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          COOLIFY_APP_UUID: ${{ vars.SNUG_COOLIFY_APP_UUID }}
+        run: bunx dotenvx run -- bash .github/scripts/deploy-coolify.sh
