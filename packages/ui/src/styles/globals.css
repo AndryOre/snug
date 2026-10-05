@@ -4,6 +4,8 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/space-grotesk';
 
+@source '../components';
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

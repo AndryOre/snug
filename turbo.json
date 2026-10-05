@@ -9,17 +9,38 @@
     },
     "check": {
       "dependsOn": ["transit"],
-      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!.output/**",
+        "!.wxt/**",
+        "!dist/**",
+        "!.astro/**",
+        "!coverage/**"
+      ],
       "outputs": []
     },
     "test": {
       "dependsOn": ["transit"],
-      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!.output/**",
+        "!.wxt/**",
+        "!dist/**",
+        "!.astro/**",
+        "!coverage/**"
+      ],
       "outputs": []
     },
     "test:coverage": {
       "dependsOn": ["transit"],
-      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!.wxt/**", "!coverage/**"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!.output/**",
+        "!.wxt/**",
+        "!dist/**",
+        "!.astro/**",
+        "!coverage/**"
+      ],
       "outputs": ["coverage/**"]
     },
     "test:e2e": {
@@ -28,19 +49,35 @@
     },
     "build": {
       "dependsOn": ["transit"],
-      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!coverage/**", "!e2e/**"],
-      "outputs": [".output/**", ".wxt/**"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!.output/**",
+        "!dist/**",
+        "!.astro/**",
+        "!coverage/**",
+        "!e2e/**"
+      ],
+      "outputs": [".output/**", ".wxt/**", "dist/**", ".astro/**"]
     },
     "zip": {
       "dependsOn": ["transit"],
-      "inputs": ["$TURBO_DEFAULT$", "!.output/**", "!coverage/**", "!e2e/**"],
-      "outputs": [".output/**", ".wxt/**"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!.output/**",
+        "!dist/**",
+        "!.astro/**",
+        "!coverage/**",
+        "!e2e/**"
+      ],
+      "outputs": [".output/**", ".wxt/**", "dist/**", ".astro/**"]
     },
     "//#check:root": {
       "inputs": [
         "$TURBO_DEFAULT$",
         "!apps/*/.output/**",
         "!apps/*/.wxt/**",
+        "!apps/*/dist/**",
+        "!apps/*/.astro/**",
         "!**/coverage/**"
       ],
       "outputs": []

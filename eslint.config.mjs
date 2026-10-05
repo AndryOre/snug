@@ -285,6 +285,8 @@ const eslintConfig = defineConfig([
   globalIgnores([
     '**/.output/**',
     '**/.wxt/**',
+    '**/.astro/**',
+    'apps/site/dist/**',
     '**/coverage/**',
     '.claude/skills/**',
   ]),
