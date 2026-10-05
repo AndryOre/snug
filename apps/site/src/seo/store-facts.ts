@@ -1,11 +1,4 @@
 /**
- * Chrome Web Store listing URL, the source of every fact in the page's
- * structured data.
- */
-export const STORE_LISTING_URL =
-  'https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn'
-
-/**
  * Facts shown on the store listing, read on 2026-10-05
  * (see `docs/landing/content.md`). Re-check before launch.
  */

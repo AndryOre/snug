@@ -5,7 +5,7 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../i18n/locales'
-import { STORE_FACTS, STORE_LISTING_URL } from './store-facts'
+import { STORE_FACTS } from './store-facts'
 
 /**
  * `SoftwareApplication` JSON-LD for one locale's page. Name and description
@@ -25,7 +25,7 @@ export function buildSoftwareAppJsonLd(locale: Locale, description: string) {
     applicationCategory: STORE_FACTS.category,
     operatingSystem: STORE_FACTS.operatingSystem,
     browserRequirements: STORE_FACTS.browserRequirements,
-    downloadUrl: STORE_LISTING_URL,
+    downloadUrl: `${SITE_ORIGIN}/install`,
     screenshot: `${SITE_ORIGIN}${ogImagePath(locale)}`,
     author: {
       '@type': 'Person',
