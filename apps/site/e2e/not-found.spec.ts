@@ -66,7 +66,9 @@ test.describe('built 404 pages', () => {
 
 test.describe('rendered 404 pages', () => {
   for (const locale of LOCALES) {
-    test(`${locale} 404 fits the viewport and passes axe`, async ({ page }) => {
+    test(`${locale} 404 fits the width, shows the footer and passes axe`, async ({
+      page,
+    }) => {
       const notFound = getNotFoundCopy(locale)
       for (const viewport of [
         { width: 320, height: 568 },
@@ -85,7 +87,9 @@ test.describe('rendered 404 pages', () => {
           scrollHeight: globalThis.document.documentElement.scrollHeight,
           scrollWidth: globalThis.document.documentElement.scrollWidth,
         }))
-        expect(scrollHeight).toBeLessThanOrEqual(viewport.height)
+        if (viewport.width >= 1280) {
+          expect(scrollHeight).toBeLessThanOrEqual(viewport.height)
+        }
         expect(scrollWidth).toBeLessThanOrEqual(viewport.width)
       }
 
@@ -96,6 +100,7 @@ test.describe('rendered 404 pages', () => {
         .analyze()
       expect(violations).toEqual([])
       await expect(page.locator('a[aria-current]')).toHaveCount(0)
+      await expect(page.locator('footer')).toBeVisible()
     })
   }
 })
