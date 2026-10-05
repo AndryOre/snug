@@ -29,7 +29,9 @@ tokens of its own. The code map is
   may load from YouTube only after the visitor clicks it.
 - Default to `.astro` components that render to static HTML. Use a React island
   (`client:*`) only for real interactivity, and prefer `client:visible` or
-  `client:idle` over `client:load`.
+  `client:idle` over `client:load`. The FAQ accordion and the language popover
+  are the two sanctioned islands besides the video
+  ([ADR 0013](../../docs/adr/0013-landing-islands-for-faq-and-language-switcher.md)).
 - Install buttons link to `/install`, which the server answers with a 302 to the
   Chrome Web Store listing with UTM tags. Never link the listing directly.
 - Ten locales: English at `/`, plus `es`, `de`, `fr`, `it`, `ja`, `ko`, `pt_BR`,
