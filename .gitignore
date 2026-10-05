@@ -46,3 +46,6 @@ apps/video/public/music/
 apps/site/dist/
 apps/site/dist-test/
 apps/site/.astro/
+
+# env files (encrypted .env files are safe to commit)
+.env.keys
