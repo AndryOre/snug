@@ -322,6 +322,7 @@ const eslintConfig = defineConfig([
     'apps/site/dist/**',
     '**/coverage/**',
     '.claude/skills/**',
+    '.claude/worktrees/**',
   ]),
 ])
 
