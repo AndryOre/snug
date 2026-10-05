@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: ブックマークの書き出し、読み込み、バックアップ",
     "description": "ブックマークを一般的な形式で書き出し、ChromeやSafariから読み込み、自動バックアップ。すべて端末内。"
+  },
+  "hero": {
+    "eyebrow": "ブックマークの書き出し、読み込み、バックアップ",
+    "headlineLead": "ブックマークをそのまま移せます。",
+    "headlineAccent": "データは端末の外に出ません。",
+    "subheadline": "Snug は、Chrome などの Chromium ベースのブラウザーで、ブックマークの書き出し、読み込み、バックアップを行います。ネットワーク通信は行わず、アカウントも不要です。",
+    "install": "Chrome に追加",
+    "note": "無料。オープンソース。Chrome、Edge、Brave、Opera で使えます。",
+    "source": "GitHub でソースコードを見る"
+  },
+  "trust": {
+    "heading": "信頼すべきサーバーのない拡張機能",
+    "intro": "Snug は、お使いのブラウザー自身のブックマークツリーを端末上で読み書きします。どこにも接続しないので、ブックマークの行き先がありません。",
+    "points": {
+      "network": {
+        "title": "ネットワーク通信なし",
+        "body": "Snug は一切行いません。書き出しも読み込みもすべて端末内で完結します。"
+      },
+      "account": {
+        "title": "アカウント不要",
+        "body": "登録もログインも必要ありません。"
+      },
+      "source": {
+        "title": "オープンソース",
+        "body": "コードは公開されています。コードを読むか、プロジェクトの OpenSSF Scorecard と Best Practices のバッジ、CodeQL のスキャン、CI の実行結果を確認できます。"
+      }
+    },
+    "access": "ブックマークを読み書きすることが、拡張機能がそれらを書き出し・読み込みできる唯一の方法です。Snug はそれ以外のことはしません。",
+    "links": {
+      "source": "ソースコード",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "CI のステータス",
+      "privacy": "プライバシーポリシー"
+    }
   }
 }

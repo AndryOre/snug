@@ -1,6 +1,6 @@
 ---
-import { Button } from '@workspace/ui/components/button'
-
+import Hero from '../../components/Hero.astro'
+import TrustProof from '../../components/TrustProof.astro'
 import Layout from '../../layouts/Layout.astro'
 import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../i18n/locales'
 
@@ -18,5 +18,8 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
 ---
 
 <Layout locale={locale}>
-  <Button client:load>Snug</Button>
+  <main>
+    <Hero locale={locale} />
+    <TrustProof locale={locale} />
+  </main>
 </Layout>

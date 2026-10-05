@@ -1,9 +1,12 @@
 ---
-import { Button } from '@workspace/ui/components/button'
-
+import Hero from '../components/Hero.astro'
+import TrustProof from '../components/TrustProof.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout locale="en">
-  <Button client:load>Snug</Button>
+  <main>
+    <Hero locale="en" />
+    <TrustProof locale="en" />
+  </main>
 </Layout>

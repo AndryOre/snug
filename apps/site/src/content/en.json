@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: Bookmark export, import and backup",
     "description": "Export, import and back up your bookmarks in common formats, from Chrome or Safari, on a schedule. Everything stays local."
+  },
+  "hero": {
+    "eyebrow": "Bookmark export, import and backup",
+    "headlineLead": "Move your bookmarks.",
+    "headlineAccent": "Nothing leaves your device.",
+    "subheadline": "Snug exports, imports and backs up your bookmarks in Chrome and other Chromium browsers. It makes no network calls and needs no account.",
+    "install": "Add to Chrome",
+    "note": "Free. Open source. Works in Chrome, Edge, Brave and Opera.",
+    "source": "See the source on GitHub"
+  },
+  "trust": {
+    "heading": "An extension that has no server to trust",
+    "intro": "Snug reads and writes your browser's own bookmarks tree, on your device. It never connects to anything, so there is nowhere for your bookmarks to go.",
+    "points": {
+      "network": {
+        "title": "No network calls",
+        "body": "Snug makes none. Every export and import happens locally."
+      },
+      "account": {
+        "title": "No account",
+        "body": "There is nothing to sign up for and nothing to log in to."
+      },
+      "source": {
+        "title": "Open source",
+        "body": "The code is public. Read it, or check the project's OpenSSF Scorecard and Best Practices badges, CodeQL scans and CI runs."
+      }
+    },
+    "access": "Reading and writing your bookmarks is the only way an extension can export and import them. Snug does that and nothing else.",
+    "links": {
+      "source": "Source code",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "CI status",
+      "privacy": "Privacy Policy"
+    }
   }
 }

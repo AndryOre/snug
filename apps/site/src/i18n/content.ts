@@ -74,7 +74,7 @@ export function loadAllContent(
  * @param locale - A supported locale code.
  * @returns The locale's content tree.
  */
-function getContent(locale: Locale): ContentTree {
+export function getContent(locale: Locale): ContentTree {
   return loadAllContent()[locale]
 }
 

@@ -2,5 +2,40 @@
   "meta": {
     "title": "Snug: Lesezeichen exportieren, importieren und sichern",
     "description": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal."
+  },
+  "hero": {
+    "eyebrow": "Lesezeichen exportieren, importieren und sichern",
+    "headlineLead": "Nimm deine Lesezeichen mit.",
+    "headlineAccent": "Nichts verlässt dein Gerät.",
+    "subheadline": "Snug exportiert, importiert und sichert deine Lesezeichen in Chrome und anderen Chromium-Browsern. Es stellt keine Netzwerkverbindungen her und braucht kein Konto.",
+    "install": "Zu Chrome hinzufügen",
+    "note": "Kostenlos. Open Source. Funktioniert in Chrome, Edge, Brave und Opera.",
+    "source": "Quellcode auf GitHub ansehen"
+  },
+  "trust": {
+    "heading": "Eine Erweiterung ohne Server, dem du vertrauen musst",
+    "intro": "Snug liest und schreibt den Lesezeichenbaum deines Browsers, auf deinem Gerät. Es verbindet sich mit nichts, deshalb können deine Lesezeichen nirgendwohin gelangen.",
+    "points": {
+      "network": {
+        "title": "Keine Netzwerkaufrufe",
+        "body": "Snug macht keine. Jeder Export und Import läuft lokal."
+      },
+      "account": {
+        "title": "Kein Konto",
+        "body": "Du musst dich nirgends registrieren oder anmelden."
+      },
+      "source": {
+        "title": "Open Source",
+        "body": "Der Code ist öffentlich. Lies ihn, oder sieh dir die OpenSSF-Scorecard- und Best-Practices-Badges des Projekts, die CodeQL-Scans und die CI-Läufe an."
+      }
+    },
+    "access": "Lesezeichen zu lesen und zu schreiben ist die einzige Möglichkeit, wie eine Erweiterung sie exportieren und importieren kann. Snug tut das und sonst nichts.",
+    "links": {
+      "source": "Quellcode",
+      "scorecard": "OpenSSF Scorecard",
+      "bestPractices": "OpenSSF Best Practices",
+      "ci": "CI-Status",
+      "privacy": "Datenschutzerklärung"
+    }
   }
 }
