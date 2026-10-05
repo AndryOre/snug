@@ -32,9 +32,13 @@ test('the promo video iframe loads under the production CSP', async ({
     'src',
     /^https:\/\/www\.youtube-nocookie\.com\/embed\//,
   )
-  await expect(
-    page.frameLocator('iframe[data-video-player]').locator('title'),
-  ).toHaveText('mock player')
+  await expect
+    .poll(async () => {
+      const handle = await frame.elementHandle()
+      const content = await handle?.contentFrame()
+      return content?.title()
+    })
+    .toBe('mock player')
 
   const violations = await page.evaluate(
     () => (globalThis as unknown as ViolationWindow).cspViolations,
