@@ -41,3 +41,7 @@ apps/video/public/music/
 
 # turborepo
 .turbo
+
+# landing page (apps/site)
+apps/site/dist/
+apps/site/.astro/
