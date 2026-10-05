@@ -253,6 +253,18 @@ for the target state this repository's settings were brought to, the reasoning
 behind each choice, and why the script was removed rather than kept around
 permanently.
 
+## Agent skills
+
+Third-party skills live in `.claude/skills` and are installed with
+`bunx skills add <owner>/<repo>#<commit> -s <skill> -a claude-code`, always
+pinned to a commit so `skills-lock.json` records the exact `ref`. Read each
+`SKILL.md` and any bundled script before committing it. `bunx skills update`
+moves the pins, so review the diff the same way.
+
+The marketing skills read `.agents/product-marketing.md` first; run the
+`product-marketing` skill to create it before using the others. Snug is a free
+consumer extension with no pricing or signup, so say so up front.
+
 ## Code documentation
 
 Every code comment in this repository (outside `packages/ui/**`, the
