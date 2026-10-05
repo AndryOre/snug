@@ -15,6 +15,12 @@ for path in / /ru/ /ja/ /privacy/; do
     --only-categories=performance,accessibility,best-practices,seo \
     --chrome-flags="--headless=new --no-sandbox"
   for category in "${!budget[@]}"; do
+    raw="$(jq -r --arg c "$category" '.categories[$c].score // "null"' "$report")"
+    if [ "$raw" = "null" ]; then
+      echo "FAIL $path $category score is null (Lighthouse could not compute it)" >&2
+      failed=1
+      continue
+    fi
     score="$(jq -r --arg c "$category" '(.categories[$c].score * 100) | round' "$report")"
     if [ "$score" -lt "${budget[$category]}" ]; then
       echo "FAIL $path $category $score < ${budget[$category]}" >&2
