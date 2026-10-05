@@ -15,16 +15,19 @@ import { buildSoftwareAppJsonLd } from '../seo/structured-data'
 interface Props {
   locale: Locale
   notFound?: boolean
+  standalone?: { title: string; description: string; path: string }
 }
 
-const { locale, notFound = false } = Astro.props
-const meta = getPageMeta(locale)
-const alternates = hreflangAlternates()
-const canonical = `${SITE_ORIGIN}${localePath(locale)}`
+const { locale, notFound = false, standalone } = Astro.props
+const meta = standalone ?? getPageMeta(locale)
+const alternates = standalone ? [] : hreflangAlternates()
+const canonical = `${SITE_ORIGIN}${standalone?.path ?? localePath(locale)}`
 const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
-const jsonLd = JSON.stringify(
-  buildSoftwareAppJsonLd(locale, meta.description),
-).replaceAll('<', '\\u003c')
+const jsonLd = standalone
+  ? null
+  : JSON.stringify(
+      buildSoftwareAppJsonLd(locale, meta.description),
+    ).replaceAll('<', '\\u003c')
 ---
 
 <html lang={languageTag(locale)} dir="ltr" class="dark">
@@ -54,7 +57,7 @@ const jsonLd = JSON.stringify(
           <meta name="twitter:title" content={meta.title} />
           <meta name="twitter:description" content={meta.description} />
           <meta name="twitter:image" content={ogImage} />
-          <script type="application/ld+json" set:html={jsonLd} />
+          {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
         </>
       )
     }

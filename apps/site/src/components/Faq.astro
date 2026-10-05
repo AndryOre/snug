@@ -1,0 +1,42 @@
+---
+import { getClosingCopy } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+
+interface Props {
+  locale: Locale
+}
+
+const { faq } = getClosingCopy(Astro.props.locale)
+const entries = Object.values(faq.items)
+---
+
+<section data-section="faq" aria-labelledby="faq-heading">
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <h2
+      id="faq-heading"
+      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
+    >
+      {faq.heading}
+    </h2>
+    <div class="mt-10 max-w-3xl divide-y divide-border border-y border-border">
+      {
+        entries.map((entry) => (
+          <details class="group">
+            <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-md py-4 font-heading text-xl leading-tight font-medium outline-none marker:hidden focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
+              <span>{entry.question}</span>
+              <span
+                aria-hidden="true"
+                class="shrink-0 font-mono text-primary-text transition-transform group-open:rotate-45 motion-reduce:transition-none"
+              >
+                +
+              </span>
+            </summary>
+            <p class="pb-5 leading-[1.55] text-muted-foreground">
+              {entry.answer}
+            </p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

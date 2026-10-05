@@ -37,5 +37,117 @@
       "ci": "CI-Status",
       "privacy": "Datenschutzerklärung"
     }
+  },
+  "features": {
+    "heading": "Was Snug kann",
+    "items": {
+      "export": {
+        "title": "Exportiere, was du willst",
+        "body": "Exportiere den ganzen Baum oder nur die Ordner, die du auswählst, als HTML, JSON, CSV, Markdown, OPML oder XBEL. Dateinamen können das Datum enthalten, damit du sie später unterscheiden kannst."
+      },
+      "preview": {
+        "title": "Vorschau vor dem Import",
+        "body": "Importiere HTML-, JSON-, CSV- oder XBEL-Dateien, eine `Bookmarks`-Datei eines Chrome-Profils oder einen Safari-Export mit Favoriten und Leseliste. Snug erkennt das Format und zeigt eine Vorschau. Dann führst du zusammen, ersetzt oder legst alles in einem neuen Ordner ab."
+      },
+      "undo": {
+        "title": "Ersetzen rückgängig machen",
+        "body": "Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot. Entspricht das Ergebnis nicht deinen Vorstellungen, stellst du ihn wieder her."
+      },
+      "duplicates": {
+        "title": "Duplikate bereinigen",
+        "body": "Eine Seite Duplikate findet doppelte Lesezeichen. Beim Import lässt Duplikate überspringen die URLs aus, die du schon hast."
+      },
+      "backup": {
+        "title": "Nach Zeitplan sichern",
+        "body": "Auto-Export speichert deine Lesezeichen nach einem Zeitplan, den du festlegst, im Download-Ordner. Aufbewahrung behält nur die neuesten Dateien, und bei einem fehlgeschlagenen Lauf kannst du dich benachrichtigen lassen."
+      },
+      "works": {
+        "title": "Funktioniert, wo du bist",
+        "body": "Chrome, Edge, Brave, Opera und andere Chromium-Browser. Die Oberfläche gibt es in 10 Sprachen, und sie folgt dem Design und der Sprache deines Browsers."
+      }
+    }
+  },
+  "interface": {
+    "heading": "Die echte Oberfläche",
+    "shots": {
+      "export": "Exportseite: Ordner aus dem Baum wählen, Format festlegen, exportieren.",
+      "import": "Importvorschau: sehen, was sich ändert, dann Zusammenführen, Ersetzen oder neuer Ordner wählen.",
+      "autoExport": "Auto-Export: täglich, in HTML, JSON und Markdown, mit dem nächsten Lauf.",
+      "popup": "Das Popup in der Symbolleiste exportiert alles mit einem Klick."
+    }
+  },
+  "video": {
+    "heading": "Sieh es in Aktion",
+    "caption": "Ein kurzer Durchgang: einen Ordner exportieren und mit Vorschau wieder importieren.",
+    "note": "Das Video wird von YouTube erst geladen, wenn du auf Abspielen drückst. Bis dahin nimmt die Seite zu niemandem Kontakt auf.",
+    "play": "Video abspielen"
+  },
+  "proof": {
+    "heading": "Das sagen Nutzer",
+    "numbers": "5.000 Nutzer. 4,8 Sterne bei 20 Bewertungen im Chrome Web Store (2026-10-05).",
+    "renameNote": "Das sind öffentliche Rezensionen aus dem Chrome Web Store, auf Englisch, wie sie veröffentlicht wurden. Die meisten entstanden vor der Umbenennung von Snug, als der Eintrag noch \"Bookmark Import/Export\" hieß, deshalb beschreiben sie Export und Import, nicht die aktuelle Oberfläche.",
+    "reviewsLead": "Vier Rezensionen, im englischen Original:",
+    "link": "Alle Rezensionen im Chrome Web Store lesen"
+  },
+  "faq": {
+    "heading": "Häufige Fragen",
+    "items": {
+      "network": {
+        "question": "Sendet Snug meine Lesezeichen irgendwohin?",
+        "answer": "Nein. Snug stellt keine Netzwerkverbindungen her. Es liest und schreibt die Lesezeichen deines Browsers auf deinem Gerät, und der Quellcode ist öffentlich, damit du es prüfen kannst."
+      },
+      "account": {
+        "question": "Brauche ich ein Konto?",
+        "answer": "Nein. Installieren und losexportieren."
+      },
+      "sync": {
+        "question": "Synchronisiert es meine Lesezeichen zwischen Geräten?",
+        "answer": "Nein. Snug hat weder Synchronisierung noch Cloud. Um Lesezeichen in einen anderen Browser oder auf einen anderen Computer zu übertragen, exportiere eine Datei und importiere sie dort."
+      },
+      "oneFile": {
+        "question": "Kann ich mehrere Dateien gleichzeitig importieren?",
+        "answer": "Nein. Snug importiert eine Datei nach der anderen. Um mehrere zu übernehmen, importiere sie nacheinander."
+      },
+      "permissions": {
+        "question": "Warum braucht es Zugriff auf alle meine Lesezeichen?",
+        "answer": "Sie zu lesen und zu schreiben ist die einzige Möglichkeit, wie eine Erweiterung sie exportieren und importieren kann. Snug stellt keine Netzwerkverbindungen her, deshalb kann nichts von dem, was es liest, dein Gerät verlassen."
+      },
+      "builtin": {
+        "question": "Mein Browser exportiert schon HTML. Wozu Snug?",
+        "answer": "Dem integrierten Export fehlen Ordnerauswahl, Vorschau, Rückgängig, Zeitplan, Duplikatprüfung und zusätzliche Formate. Snug bietet alle."
+      },
+      "overwrite": {
+        "question": "Überschreibt es meine aktuellen Lesezeichen?",
+        "answer": "Nur, wenn du Ersetzen wählst. Vorher siehst du eine Vorschau, und Ersetzen speichert einen Sicherheits-Snapshot, den du wiederherstellen kannst."
+      },
+      "formats": {
+        "question": "Welche Formate unterstützt es?",
+        "answer": "Export als HTML, JSON, CSV, Markdown, OPML oder XBEL. Import von HTML, JSON, CSV oder XBEL, einer `Bookmarks`-Datei eines Chrome-Profils oder einem Safari-Export."
+      },
+      "browsers": {
+        "question": "In welchen Browsern funktioniert es?",
+        "answer": "In Chrome und anderen Chromium-Browsern wie Edge, Brave und Opera."
+      },
+      "safe": {
+        "question": "Ist es sicher, die Erweiterung eines Einzelentwicklers zu installieren?",
+        "answer": "Der Quellcode ist öffentlich, CodeQL scannt ihn, das Projekt hat OpenSSF-Scorecard- und Best-Practices-Badges, und die CI läuft mit festgelegten Versionen. Urteile selbst auf GitHub."
+      },
+      "cost": {
+        "question": "Kostet Snug etwas?",
+        "answer": "Nein. Es ist kostenlos."
+      }
+    }
+  },
+  "final": {
+    "heading": "Nimm deine Lesezeichen mit",
+    "line": "Füge Snug zu Chrome hinzu und exportiere, importiere oder sichere mit wenigen Klicks. Kostenlos, Open Source, und nichts verlässt dein Gerät.",
+    "button": "Zu Chrome hinzufügen"
+  },
+  "footer": {
+    "source": "Quellcode auf GitHub",
+    "privacy": "Datenschutzerklärung",
+    "listing": "Eintrag im Chrome Web Store",
+    "changelog": "Änderungsprotokoll",
+    "note": "Snug ist Open Source unter der MIT-Lizenz."
   }
 }

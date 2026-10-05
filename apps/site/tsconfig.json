@@ -4,8 +4,10 @@
     ".astro/types.d.ts",
     "astro.config.ts",
     "playwright.config.ts",
+    "playwright.container.config.ts",
     "vitest.config.ts",
     "e2e/**/*",
+    "e2e-container/**/*",
     "src/**/*"
   ],
   "exclude": ["node_modules", "dist"]

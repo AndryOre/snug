@@ -1,0 +1,51 @@
+---
+import { FEATURE_FORMATS, FEATURE_KEYS, getLandingCopy } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+
+interface Props {
+  locale: Locale
+}
+
+const { features } = getLandingCopy(Astro.props.locale)
+---
+
+<section
+  data-section="features"
+  aria-labelledby="features-heading"
+  class="[contain-intrinsic-size:auto_1100px] [content-visibility:auto]"
+>
+  <div class="mx-auto max-w-[1240px] px-4 py-14 md:px-14 md:py-24">
+    <h2
+      id="features-heading"
+      class="max-w-3xl font-heading text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.02em] text-balance"
+    >
+      {features.heading}
+    </h2>
+    <ol class="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
+      {
+        FEATURE_KEYS.map((key, index) => (
+          <li class="rounded-[14px] border border-border bg-card p-7">
+            <span class="font-mono text-[0.8125rem] tracking-[0.12em] text-primary-text">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="mt-3 font-heading text-2xl leading-tight font-medium">
+              {features.items[key].title}
+            </h3>
+            <p class="mt-3 leading-[1.55] text-muted-foreground">
+              {features.items[key].body}
+            </p>
+            {FEATURE_FORMATS[key] && (
+              <ul class="mt-5 flex flex-wrap gap-2" aria-hidden="true">
+                {FEATURE_FORMATS[key].map((format) => (
+                  <li class="rounded-md border border-border px-2 py-1 font-mono text-xs">
+                    {format}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

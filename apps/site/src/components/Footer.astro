@@ -1,0 +1,48 @@
+---
+import { FOOTER_LINK_HREFS, getClosingCopy, installHref } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import LanguageSwitcher from './LanguageSwitcher.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { footer } = getClosingCopy(locale)
+const links = [
+  { key: 'source', href: FOOTER_LINK_HREFS.source, label: footer.source },
+  { key: 'privacy', href: FOOTER_LINK_HREFS.privacy, label: footer.privacy },
+  {
+    key: 'changelog',
+    href: FOOTER_LINK_HREFS.changelog,
+    label: footer.changelog,
+  },
+  { key: 'listing', href: installHref('footer'), label: footer.listing },
+]
+---
+
+<footer data-section="footer" class="border-t border-border">
+  <div
+    class="mx-auto flex max-w-[1240px] flex-col gap-6 px-4 py-10 md:px-14"
+  >
+    <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              data-footer-link={link.key}
+              class="inline-flex min-h-11 items-center rounded-md text-foreground underline decoration-border underline-offset-4 outline-none hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <p class="text-sm text-muted-foreground">{footer.note}</p>
+      <LanguageSwitcher locale={locale} />
+    </div>
+  </div>
+</footer>

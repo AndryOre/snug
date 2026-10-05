@@ -1,0 +1,73 @@
+name: Site Quality
+
+on:
+  pull_request:
+    paths:
+      - 'apps/site/**'
+      - 'packages/ui/**'
+      - 'PRIVACY_POLICY.md'
+      - '.github/workflows/site-quality.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  site-quality:
+    name: Smoke, accessibility and Lighthouse budget
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version-file: package.json
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile --ignore-scripts
+
+      - name: Build and start the container
+        run: |
+          docker build -f apps/site/Dockerfile -t snug-site:ci .
+          docker run -d --name snug-site -p 127.0.0.1:8080:80 snug-site:ci
+          for _ in $(seq 1 30); do
+            curl -fs -o /dev/null http://127.0.0.1:8080/ && exit 0
+            sleep 1
+          done
+          docker logs snug-site
+          exit 1
+
+      - name: Install Playwright browser
+        working-directory: apps/site
+        run: bunx playwright install --with-deps chromium
+
+      - name: Run the smoke and accessibility spec
+        working-directory: apps/site
+        run: bun run test:container
+
+      - name: Enforce the Lighthouse budget
+        working-directory: apps/site
+        run: |
+          CHROME_PATH="$(bun -e "import { chromium } from '@playwright/test'; console.log(chromium.executablePath())")"
+          export CHROME_PATH
+          bun run lighthouse
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: failure()
+        with:
+          name: site-playwright-report
+          path: apps/site/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
