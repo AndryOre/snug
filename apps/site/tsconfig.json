@@ -1,7 +1,6 @@
 {
   "extends": ["astro/tsconfigs/strict", "../../tsconfig.base.json"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@workspace/ui/*": ["../../packages/ui/src/*"]
