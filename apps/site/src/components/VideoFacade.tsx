@@ -7,6 +7,8 @@ interface VideoFacadeProperties {
   title: string
   playLabel: string
   posterSrc: string
+  posterSrcSet: string
+  posterSizes: string
   posterWidth: number
   posterHeight: number
 }
@@ -20,6 +22,8 @@ interface VideoFacadeProperties {
  * @param props.title - Accessible title of the player.
  * @param props.playLabel - Accessible name of the play action.
  * @param props.posterSrc - Local poster image URL.
+ * @param props.posterSrcSet - Responsive `srcset` of the poster.
+ * @param props.posterSizes - `sizes` attribute matching the poster layout.
  * @param props.posterWidth - Poster width in pixels.
  * @param props.posterHeight - Poster height in pixels.
  * @returns The poster link, or the player iframe once activated.
@@ -29,6 +33,8 @@ export default function VideoFacade({
   title,
   playLabel,
   posterSrc,
+  posterSrcSet,
+  posterSizes,
   posterWidth,
   posterHeight,
 }: VideoFacadeProperties) {
@@ -36,6 +42,9 @@ export default function VideoFacade({
   const frameReference = useRef<HTMLIFrameElement>(null)
 
   function activate(event: MouseEvent<HTMLAnchorElement>) {
+    const shouldOpenNatively =
+      event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey
+    if (shouldOpenNatively) return
     event.preventDefault()
     setActive(true)
     requestAnimationFrame(() => frameReference.current?.focus())
@@ -66,6 +75,8 @@ export default function VideoFacade({
     >
       <img
         src={posterSrc}
+        srcSet={posterSrcSet}
+        sizes={posterSizes}
         alt=""
         width={posterWidth}
         height={posterHeight}

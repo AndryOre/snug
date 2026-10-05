@@ -42,6 +42,8 @@ for (const path of PATHS) {
       await expect(image).toHaveAttribute('height', '800')
       const alt = await image.getAttribute('alt')
       expect(alt?.length).toBeGreaterThan(10)
+      const caption = await figures.nth(index).locator('figcaption').innerText()
+      expect(alt).not.toBe(caption)
     }
 
     await expect(page.locator('[data-video-poster]')).toHaveCount(1)
@@ -68,6 +70,9 @@ test('video loads YouTube only after keyboard activation', async ({ page }) => {
 
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
+  await expect(
+    page.locator('astro-island[client="visible"]'),
+  ).not.toHaveAttribute('ssr', '')
   await poster.focus()
   await expect(poster).toBeFocused()
   await page.keyboard.press('Enter')
@@ -95,4 +100,44 @@ test('without JavaScript the poster links to the watch page', async ({
     'https://www.youtube.com/watch?v=2F3DndQFCLY',
   )
   await context.close()
+})
+
+test('poster serves a smaller file on phones', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 })
+  await page.goto('/')
+  const poster = page.locator('[data-video-poster] img')
+  await poster.scrollIntoViewIfNeeded()
+  await expect(poster).toHaveJSProperty('complete', true)
+  const { current, smallest } = await poster.evaluate(
+    (image: HTMLImageElement) => ({
+      current: image.currentSrc,
+      smallest: new URL(
+        image.srcset.split(',', 1)[0]!.trim().split(' ', 1)[0]!,
+        image.baseURI,
+      ).href,
+    }),
+  )
+  expect(current).toBe(smallest)
+})
+
+test('modified click on the poster does not swap in the player', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const poster = page.locator('[data-video-poster]')
+  await poster.scrollIntoViewIfNeeded()
+  await expect(
+    page.locator('astro-island[client="visible"]'),
+  ).not.toHaveAttribute('ssr', '')
+  await page.route(/youtube/, (route) =>
+    route.fulfill({ contentType: 'text/html', body: '<p>watch</p>' }),
+  )
+  const popup = page.context().waitForEvent('page')
+  await poster.click({ modifiers: ['ControlOrMeta'] })
+  const opened = await popup
+  await opened.waitForURL(/youtube\.com/)
+  await expect(page.locator('iframe')).toHaveCount(0)
+
+  await poster.click()
+  await expect(page.locator('iframe[data-video-player]')).toBeVisible()
 })

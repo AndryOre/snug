@@ -19,7 +19,15 @@ const posters = import.meta.glob<{ default: ImageMetadata }>(
 const { locale } = Astro.props
 const copy = getLandingCopy(locale).video
 const poster = posters[`../assets/video-posters/${locale}.png`]!.default
-const posterImage = await getImage({ src: poster, width: 1280, format: 'webp' })
+const POSTER_WIDTHS = [640, 960, 1280] as const
+const POSTER_SIZES = '(min-width: 1024px) 896px, calc(100vw - 32px)'
+const posterImages = await Promise.all(
+  POSTER_WIDTHS.map((width) => getImage({ src: poster, width, format: 'webp' })),
+)
+const posterImage = posterImages.at(-1)!
+const posterSrcSet = posterImages
+  .map((image, index) => `${image.src} ${POSTER_WIDTHS[index]}w`)
+  .join(', ')
 ---
 
 <Section
@@ -30,11 +38,13 @@ const posterImage = await getImage({ src: poster, width: 1280, format: 'webp' })
 >
   <div class="mt-10 max-w-4xl">
     <VideoFacade
-      client:idle
+      client:visible
       videoId={PROMO_VIDEO_IDS[locale]}
       title={copy.heading}
       playLabel={copy.play}
       posterSrc={posterImage.src}
+      posterSrcSet={posterSrcSet}
+      posterSizes={POSTER_SIZES}
       posterWidth={poster.width}
       posterHeight={poster.height}
     />

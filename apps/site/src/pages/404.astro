@@ -1,5 +1,6 @@
 ---
 import { getClosingCopy } from '../i18n/landing'
+import TextLink from '../components/TextLink.astro'
 import Layout from '../layouts/Layout.astro'
 
 const { notFound } = getClosingCopy('en')
@@ -11,9 +12,9 @@ const standalone = {
 ---
 
 <Layout locale="en" notFound standalone={standalone}>
-  <main id="main" class="grid min-h-screen place-content-center gap-4 text-center">
+  <main id="main" class="grid min-h-dvh place-content-center gap-4 text-center">
     <h1>{notFound.title}</h1>
     <p>{notFound.body}</p>
-    <p><a href="/">{notFound.backLink}</a></p>
+    <p><TextLink href="/">{notFound.backLink}</TextLink></p>
   </main>
 </Layout>
