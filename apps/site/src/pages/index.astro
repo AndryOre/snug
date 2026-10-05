@@ -1,15 +1,9 @@
 ---
-import '@workspace/ui/globals.css'
 import { Button } from '@workspace/ui/components/button'
+
+import Layout from '../layouts/Layout.astro'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Snug</title>
-  </head>
-  <body class="bg-background font-sans text-foreground">
-    <Button client:load>Snug</Button>
-  </body>
-</html>
+<Layout locale="en">
+  <Button client:load>Snug</Button>
+</Layout>

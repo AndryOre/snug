@@ -8,7 +8,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "astro build && playwright test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
@@ -19,9 +22,12 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "typescript": "catalog:"
+    "@vitest/coverage-v8": "^5.0.3",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

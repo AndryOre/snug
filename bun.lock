@@ -75,10 +75,13 @@
         "react-dom": "catalog:",
       },
       "devDependencies": {
+        "@playwright/test": "^1.63.0",
         "@tailwindcss/vite": "catalog:",
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
+        "@vitest/coverage-v8": "^5.0.3",
         "typescript": "catalog:",
+        "vitest": "catalog:",
       },
     },
     "apps/video": {

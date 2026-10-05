@@ -13,6 +13,8 @@ code they govern, and apply on top of this file:
   extension (WXT, React 19, Tailwind CSS v4).
 - [`packages/ui/AGENTS.md`](packages/ui/AGENTS.md) — the shared shadcn/ui and
   theme package (`@workspace/ui`).
+- [`apps/site/AGENTS.md`](apps/site/AGENTS.md) — the Astro landing page
+  (`@snug/site`), reusing `@workspace/ui`.
 - [`apps/video/AGENTS.md`](apps/video/AGENTS.md) — the Remotion promo video.
 
 The code map is [`docs/architecture.md`](docs/architecture.md). Skills stay in
