@@ -74,6 +74,28 @@ export function loadAllContent(
  * @param locale - A supported locale code.
  * @returns The locale's content tree.
  */
-export function getContent(locale: Locale): ContentTree {
+function getContent(locale: Locale): ContentTree {
   return loadAllContent()[locale]
+}
+
+/**
+ * Title and description for one locale's page metadata.
+ * @param locale - A supported locale code.
+ * @returns The locale's `meta.title` and `meta.description`.
+ */
+export function getPageMeta(locale: Locale): {
+  title: string
+  description: string
+} {
+  const meta = getContent(locale).meta
+  if (
+    typeof meta === 'string' ||
+    typeof meta?.title !== 'string' ||
+    typeof meta.description !== 'string'
+  ) {
+    throw new TypeError(
+      `Missing meta.title or meta.description for "${locale}"`,
+    )
+  }
+  return { title: meta.title, description: meta.description }
 }

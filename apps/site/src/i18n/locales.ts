@@ -74,3 +74,14 @@ export function hreflangAlternates(): HreflangAlternate[] {
     },
   ]
 }
+
+/**
+ * Site-relative path of the Open Graph image for a locale. The image files
+ * live in `public/og/` and are named after the lowercase BCP 47 tag, e.g.
+ * `/og/en.png` and `/og/pt-br.png`.
+ * @param locale - A supported locale code.
+ * @returns Path such as `/og/de.png`.
+ */
+export function ogImagePath(locale: Locale): string {
+  return `/og/${languageTag(locale).toLowerCase()}.png`
+}
