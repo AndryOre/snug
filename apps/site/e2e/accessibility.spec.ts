@@ -15,11 +15,18 @@ async function expectNoViolations(page: Page): Promise<void> {
   expect(violations).toEqual([])
 }
 
-for (const path of PAGES) {
-  test(`${path} has no accessibility violations`, async ({ page }) => {
-    await page.goto(path)
-    await expectNoViolations(page)
-  })
+const SCHEMES = ['light', 'dark'] as const
+
+for (const colorScheme of SCHEMES) {
+  for (const path of PAGES) {
+    test(`${path} has no accessibility violations in ${colorScheme}`, async ({
+      page,
+    }) => {
+      await page.emulateMedia({ colorScheme })
+      await page.goto(path)
+      await expectNoViolations(page)
+    })
+  }
 }
 
 test('/privacy/ has no accessibility violations at 320px', async ({ page }) => {
@@ -47,11 +54,16 @@ test('/privacy/ inline links are underlined with visible contrast', async ({
   expect(style.thickness).toBeGreaterThanOrEqual(1)
 })
 
-test('the 404 page has no accessibility violations', async ({ page }) => {
-  const response = await page.goto('/nope')
-  expect(response?.status()).toBe(404)
-  await expectNoViolations(page)
-})
+for (const colorScheme of SCHEMES) {
+  test(`the 404 page has no accessibility violations in ${colorScheme}`, async ({
+    page,
+  }) => {
+    await page.emulateMedia({ colorScheme })
+    const response = await page.goto('/nope')
+    expect(response?.status()).toBe(404)
+    await expectNoViolations(page)
+  })
+}
 
 test.describe('opened states', () => {
   test('FAQ open has no accessibility violations', async ({ page }) => {
