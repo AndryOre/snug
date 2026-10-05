@@ -2,7 +2,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'wxt'
 
-import { GITHUB_URL } from './lib/brand'
+import { SITE_URL } from './lib/brand'
 
 export default defineConfig({
   modules: [
@@ -42,7 +42,7 @@ export default defineConfig({
     description: '__MSG_extensionDescription__',
     default_locale: 'en',
     minimum_chrome_version: '119',
-    homepage_url: GITHUB_URL,
+    homepage_url: SITE_URL,
     options_ui: { page: 'app.html', open_in_tab: true },
     permissions: [
       'bookmarks',

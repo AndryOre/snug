@@ -61,9 +61,9 @@ describe('manifest', () => {
     expect(manifest.permissions).not.toContain('tabs')
   })
 
-  it('requires Chrome 119 and links the repository', () => {
+  it('requires Chrome 119 and links the live site', () => {
     expect(manifest.minimum_chrome_version).toBe('119')
-    expect(manifest.homepage_url).toMatch(/^https:\/\/github\.com\//)
+    expect(manifest.homepage_url).toBe('https://snug.andryore.dev/')
   })
 
   it('names the extension with the manifest-only message', () => {

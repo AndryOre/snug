@@ -10,6 +10,9 @@
 
 Export, import, and back up your bookmarks — entirely on your device.
 
+Website: <https://snug.andryore.dev/> · Privacy policy:
+<https://snug.andryore.dev/privacy/>
+
 Snug is a browser extension that moves your bookmarks between browsers, exactly
 as you left them. Export your whole tree or just a folder, in six formats.
 Import back with a preview, then merge, replace, or drop everything into a new
