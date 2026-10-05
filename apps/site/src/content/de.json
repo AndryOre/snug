@@ -3,6 +3,9 @@
     "title": "Snug: Lesezeichen exportieren, importieren und sichern",
     "description": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal."
   },
+  "seo": {
+    "ogImageAlt": "Snug-Logo mit einem bernsteinfarbenen Lesezeichen-Symbol über einer kurzen Beschreibung der Erweiterung auf dunklem Hintergrund."
+  },
   "hero": {
     "eyebrow": "Lesezeichen exportieren, importieren und sichern",
     "headlineLead": "Nimm deine Lesezeichen mit.",
