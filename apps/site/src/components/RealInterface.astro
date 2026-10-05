@@ -41,9 +41,9 @@ const copy = getLandingCopy(locale).interface
                 `../assets/screenshots/${locale}/${SHOT_FILES[key]}.png`
               ]!.default
             }
-            alt={copy.shots[key]}
+            alt={copy.alts[key]}
             widths={[640, 960, 1280]}
-            sizes="(min-width: 768px) 588px, calc(100vw - 32px)"
+            sizes="(min-width: 1240px) 552px, (min-width: 768px) calc((100vw - 136px) / 2), calc(100vw - 32px)"
             format="webp"
             class="h-auto w-full rounded-2xl border border-border"
           />
