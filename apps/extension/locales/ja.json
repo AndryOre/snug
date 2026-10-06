@@ -1222,5 +1222,21 @@
   },
   "changelog_2_0_2_1_link": {
     "message": "snug.andryore.dev を開く"
+  },
+  "reviewPrompt_title": {
+    "message": "Snug は役に立っていますか？",
+    "description": "Popup Review prompt card title (also its accessible name)"
+  },
+  "reviewPrompt_description": {
+    "message": "Chrome ウェブストアでの率直なレビューは、ほかの人が Snug を見つける助けになります。",
+    "description": "Popup Review prompt card description"
+  },
+  "reviewPrompt_leaveReview": {
+    "message": "レビューを書く",
+    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+  },
+  "reviewPrompt_notNow": {
+    "message": "今はしない",
+    "description": "Popup Review prompt button that dismisses the card"
   }
 }
