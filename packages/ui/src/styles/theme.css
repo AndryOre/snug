@@ -191,6 +191,12 @@
   border-radius: 18px;
 }
 
+@utility phrase-break {
+  &:lang(ja) {
+    word-break: auto-phrase;
+  }
+}
+
 @utility defer-render-sm {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;

@@ -84,13 +84,15 @@ cloud or sync imagery, gradients in UI chrome, a stock mascot, hype copy.
 ## Colors
 
 Aurora ground with a warm radial glow behind the top of the page (an amber wash
-at low alpha, strongest at the top left, a fainter one on the right edge). One
-flat amber accent does every accent job: the headline's second line, eyebrows,
-icons, numerals, arrows and the boundary line. Panels sit one tonal step above
-the ground. The brand gradient (`--brand-gradient`) appears only on the mark and
-wordmark. Muted text is for supporting copy, never for primary claims. Use amber
-text only at large sizes or bold; check contrast against `--background` before
-shrinking it.
+at low alpha, strongest at the top left, a fainter one on the right edge). The
+glow starts at the very top of the page and sits behind the 56px header (the
+hero pulls up under it), so the header and hero read as one surface with no seam
+in either theme. One flat amber accent does every accent job: the headline's
+second line, eyebrows, icons, numerals, arrows and the boundary line. Panels sit
+one tonal step above the ground. The brand gradient (`--brand-gradient`) appears
+only on the mark and wordmark. Muted text is for supporting copy, never for
+primary claims. Use amber text only at large sizes or bold; check contrast
+against `--background` before shrinking it.
 
 ## Typography
 
@@ -99,7 +101,11 @@ text. Geist Mono for eyebrows, file names, format chips and the Network calls
 line, uppercase with wide tracking only at label sizes. Fonts are self-hosted
 through `@fontsource-variable/*` (ADR 0011); Geist Mono is imported in
 `globals.css`. German and Russian run long, and CJK needs its own fallback
-stack, so no heading or card may rely on a fixed width.
+stack, so no heading or card may rely on a fixed width. Japanese headings use
+`word-break: auto-phrase` (the `phrase-break` utility, applied for `:lang(ja)`)
+so they never split inside a phrase. The German h1 uses manual hyphenation
+(`hyphens-manual`) so "Lesezeichen" is never hyphenated; other locales keep
+`hyphens-auto`.
 
 ## Layout
 
@@ -130,9 +136,11 @@ a blurred copy of the mark behind it.
   links to `/install`, never to the store listing.
 - **Card (shadcn):** `--card` fill, hairline border, 14px radius, mono numeral
   in amber, Space Grotesk 500 title, muted body.
-- **Journey card:** a panel; the middle card (the file) gets an amber border at
-  50% alpha. Folder icons are Lucide `folder`, 2px stroke, amber.
-- **Format chip:** Geist Mono 12px, 1px hairline border, 6px radius.
+- **Journey card:** a panel; the middle card (the file) gets a 1px
+  `ring-primary/50` amber ring and the other two stay plain. Folder icons are
+  Lucide `folder`, 2px stroke, amber.
+- **Format chip:** one outline Badge style for the hero and the feature cards:
+  Geist Mono 12px, 1px hairline border, no fill, pill radius.
 - **Real interface:** the real extension screenshot in a 16px-radius frame with
   a hairline border and the caption from the content document.
 
