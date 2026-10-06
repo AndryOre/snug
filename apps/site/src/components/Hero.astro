@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@workspace/ui/components/card'
+import { cn } from '@workspace/ui/lib/utils'
 import { ArrowRight, FileText } from 'lucide-react'
 
 import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
@@ -26,9 +27,14 @@ const { hero } = getLandingCopy(Astro.props.locale)
 const { journey } = hero
 ---
 
-<Section section="hero" class="bg-hero-glow">
+<Section section="hero" class="-mt-14 bg-hero-glow pt-14">
   <Eyebrow class="mb-6">{hero.eyebrow}</Eyebrow>
-  <h1 class="max-w-4xl font-heading text-display font-bold break-words hyphens-auto text-balance">
+  <h1
+    class={cn(
+      'max-w-4xl font-heading text-display font-bold break-words phrase-break text-balance',
+      Astro.props.locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
+    )}
+  >
     <span class="block">{hero.headlineLead}</span>
     <span class="block text-primary-text">{hero.headlineAccent}</span>
   </h1>
@@ -61,11 +67,11 @@ const { journey } = hero
             <CardTitle className="break-words">{journey.from}</CardTitle>
           </CardHeader>
           <CardContent>
-            <FolderTree />
+            <FolderTree locale={Astro.props.locale} />
           </CardContent>
         </Card>
         <ArrowRight className="size-6 shrink-0 rotate-90 self-center text-primary-text md:rotate-0" />
-        <Card size="sm" className="min-w-0 flex-1">
+        <Card size="sm" className="min-w-0 flex-1 ring-primary/50">
           <CardHeader>
             <CardTitle className="break-words">{journey.file}</CardTitle>
           </CardHeader>
@@ -84,7 +90,7 @@ const { journey } = hero
               <ul class="flex flex-wrap gap-1.5" translate="no">
                 {FORMATS.map((format) => (
                   <li>
-                    <Badge variant="secondary" className="font-mono">
+                    <Badge variant="outline" className="font-mono">
                       {format}
                     </Badge>
                   </li>
@@ -99,7 +105,7 @@ const { journey } = hero
             <CardTitle className="break-words">{journey.to}</CardTitle>
           </CardHeader>
           <CardContent>
-            <FolderTree />
+            <FolderTree locale={Astro.props.locale} />
           </CardContent>
         </Card>
       </div>

@@ -64,6 +64,24 @@ test.describe('built pages', () => {
       }
     })
 
+    test(`${locale} server-renders every collapsed FAQ panel as hidden until found`, () => {
+      const html = readBuilt(pageFile(locale))
+      const panels = html.match(
+        /<div\b[^>]*\bdata-slot="accordion-content"[^>]*>/g,
+      )
+      const content = JSON.parse(
+        readFileSync(
+          path.join(siteRoot, 'src/content', `${locale}.json`),
+          'utf8',
+        ),
+      ) as { faq: { items: Record<string, unknown> } }
+      expect(panels).toHaveLength(Object.keys(content.faq.items).length)
+      const panelTags = panels ?? []
+      for (const panel of panelTags) {
+        expect(panel).toContain('hidden="until-found"')
+      }
+    })
+
     test(`${locale} has metadata, social tags and JSON-LD`, () => {
       const html = readBuilt(pageFile(locale))
       const canonical = `${SITE_ORIGIN}${localePath(locale)}`

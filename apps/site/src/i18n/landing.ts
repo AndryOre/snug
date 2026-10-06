@@ -1,6 +1,7 @@
 import { STORE_FACTS } from '../seo/store-facts'
 import { getContent, type SiteContent } from './content'
-import type { Locale } from './locales'
+import { languageTag, type Locale } from './locales'
+import { formatRatingsSentence } from './proof'
 
 /**
  * Copy for the hero section of one locale.
@@ -175,7 +176,17 @@ export function getClosingCopy(locale: Locale): {
   notFound: NotFoundCopy
 } {
   const { proof, faq, final, footer, header, notFound } = getContent(locale)
-  return { proof, faq, final, footer, header, notFound }
+  return {
+    proof: {
+      ...proof,
+      numbers: formatRatingsSentence(proof.numbers, languageTag(locale)),
+    },
+    faq,
+    final,
+    footer,
+    header,
+    notFound,
+  }
 }
 
 /**

@@ -19,6 +19,8 @@
       "from": "Dein Browser",
       "file": "Eine Datei",
       "to": "Ein anderer Browser",
+      "folderResearch": "Recherche",
+      "folderJobSearch": "Jobsuche",
       "network": "Netzwerkaufrufe: keine",
       "description": "Deine Lesezeichen verlassen deinen Browser als eine einzige Datei bookmarks.html, in sechs Formaten verfügbar, und öffnen sich in einem anderen Browser. Alles bleibt auf deinem Gerät."
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "Das sagen Nutzer",
-    "numbers": "5.000 Nutzer. 4,8 Sterne bei 20 Bewertungen im Chrome Web Store (2026-10-05).",
+    "numbers": "5.000 Nutzer. 4,8 Sterne bei 20 Bewertungen im Chrome Web Store ({date}).",
     "renameNote": "Das sind öffentliche Rezensionen aus dem Chrome Web Store, auf Englisch, wie sie veröffentlicht wurden. Die meisten entstanden vor der Umbenennung von Snug, als der Eintrag noch „Bookmark Import/Export“ hieß, deshalb beschreiben sie Export und Import, nicht die aktuelle Oberfläche.",
     "reviewsLead": "Vier Rezensionen, im englischen Original:",
     "link": "Alle Rezensionen im Chrome Web Store lesen"

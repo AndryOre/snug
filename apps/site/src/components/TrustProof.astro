@@ -12,11 +12,7 @@ interface Props {
 }
 
 const { hero, trust } = getLandingCopy(Astro.props.locale)
-const points = [
-  { numeral: '01', ...trust.points.network },
-  { numeral: '02', ...trust.points.account },
-  { numeral: '03', ...trust.points.source },
-]
+const points = [trust.points.network, trust.points.account, trust.points.source]
 const linkKeys = [
   'source',
   'scorecard',
@@ -27,7 +23,7 @@ const linkKeys = [
 ---
 
 <Section section="trust" heading={trust.heading} lead={trust.intro}>
-  <CardGrid as="ol">
+  <CardGrid as="ol" columns="three">
     {points.map((point) => (
       <NumberedCard {...point} />
     ))}

@@ -2,6 +2,7 @@ import react from '@astrojs/react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
+import { hiddenUntilFound } from './src/scripts/hidden-until-found'
 import { THEME_INIT_HASH } from './src/scripts/theme-init'
 
 export default defineConfig({
@@ -13,6 +14,6 @@ export default defineConfig({
       styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
     },
   },
-  integrations: [react()],
+  integrations: [react(), hiddenUntilFound()],
   vite: { plugins: [tailwindcss()] },
 })

@@ -18,7 +18,9 @@ cleanup() {
 }
 trap cleanup EXIT
 
-docker build -f "${repo_root}/apps/site/Dockerfile" -t "$site_image" "$repo_root"
+docker build -f "${repo_root}/apps/site/Dockerfile" \
+  --build-arg LAST_MODIFIED_DATES="$(bash "${repo_root}/apps/site/docker/last-modified.sh")" \
+  -t "$site_image" "$repo_root"
 docker rm -f "$site_container" >/dev/null 2>&1 || true
 docker run -d --name "$site_container" -p "127.0.0.1:${site_port}:80" "$site_image" >/dev/null
 

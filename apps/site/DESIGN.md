@@ -5,11 +5,11 @@ description:
   inheriting the shipped Snug brand.
 colors:
   aurora-ground: 'oklch(0.186 0.017 79.1)'
-  aurora-panel: 'oklch(0.226 0.023 69.2)'
+  aurora-panel: 'oklch(0.25 0.023 69.2)'
   paper-text: 'oklch(0.943 0.019 80.1)'
   muted-text: 'oklch(0.74 0.041 82.3)'
   amber: 'oklch(0.789 0.161 65.7)'
-  hairline: 'oklch(0.943 0.019 80.1 / 12%)'
+  hairline: 'oklch(0.943 0.019 80.1 / 16%)'
 typography:
   display:
     fontFamily: 'Space Grotesk Variable, sans-serif'
@@ -84,13 +84,15 @@ cloud or sync imagery, gradients in UI chrome, a stock mascot, hype copy.
 ## Colors
 
 Aurora ground with a warm radial glow behind the top of the page (an amber wash
-at low alpha, strongest at the top left, a fainter one on the right edge). One
-flat amber accent does every accent job: the headline's second line, eyebrows,
-icons, numerals, arrows and the boundary line. Panels sit one tonal step above
-the ground. The brand gradient (`--brand-gradient`) appears only on the mark and
-wordmark. Muted text is for supporting copy, never for primary claims. Use amber
-text only at large sizes or bold; check contrast against `--background` before
-shrinking it.
+at low alpha, strongest at the top left, a fainter one on the right edge). The
+glow starts at the very top of the page and sits behind the 56px header (the
+hero pulls up under it), so the header and hero read as one surface with no seam
+in either theme. One flat amber accent does every accent job: the headline's
+second line, eyebrows, icons, numerals, arrows and the boundary line. Panels sit
+one tonal step above the ground. The brand gradient (`--brand-gradient`) appears
+only on the mark and wordmark. Muted text is for supporting copy, never for
+primary claims. Use amber text only at large sizes or bold; check contrast
+against `--background` before shrinking it.
 
 ## Typography
 
@@ -99,7 +101,11 @@ text. Geist Mono for eyebrows, file names, format chips and the Network calls
 line, uppercase with wide tracking only at label sizes. Fonts are self-hosted
 through `@fontsource-variable/*` (ADR 0011); Geist Mono is imported in
 `globals.css`. German and Russian run long, and CJK needs its own fallback
-stack, so no heading or card may rely on a fixed width.
+stack, so no heading or card may rely on a fixed width. Japanese headings use
+`word-break: auto-phrase` (the `phrase-break` utility, applied for `:lang(ja)`)
+so they never split inside a phrase. The German h1 uses manual hyphenation
+(`hyphens-manual`) so "Lesezeichen" is never hyphenated; other locales keep
+`hyphens-auto`.
 
 ## Layout
 
@@ -108,14 +114,17 @@ and 16px on phones. Sections are separated by 96px of space on desktop and 56px
 on phones. Section order is fixed by the spec: Hero, Trust proof, Features, Real
 interface, Video, Social proof, FAQ, Final call to action and footer. The
 journey row is a three-card grid joined by arrows on desktop and a vertical
-stack with down arrows on phones. Card grids use
-`repeat(auto-fit, minmax(260px, 1fr))`.
+stack with down arrows on phones. The trust and feature grids are one column on
+phones and a fixed three columns from `lg` up (two even rows of three for the
+six features); other card grids use `repeat(auto-fit, minmax(260px, 1fr))`.
 
 ## Elevation & Depth
 
 Flat and tonal. Depth is a panel one step lighter than the ground plus a 1px
-hairline. No drop shadows. The amber glow is the only atmospheric effect and
-stays behind content.
+hairline (`--card-border`). A card reads at least 1.15:1 against the ground and
+its hairline at least 1.5:1 against the card in both themes; a unit test in
+`src/styles/card-contrast.test.ts` guards both. No drop shadows. The amber glow
+is the only atmospheric effect and stays behind content.
 
 ## Shapes
 
@@ -128,11 +137,19 @@ a blurred copy of the mark behind it.
 
 - **Primary button:** flat amber, dark text, 600 weight, 10px radius. Always
   links to `/install`, never to the store listing.
-- **Card (shadcn):** `--card` fill, hairline border, 14px radius, mono numeral
-  in amber, Space Grotesk 500 title, muted body.
-- **Journey card:** a panel; the middle card (the file) gets an amber border at
-  50% alpha. Folder icons are Lucide `folder`, 2px stroke, amber.
-- **Format chip:** Geist Mono 12px, 1px hairline border, 6px radius.
+- **Card (shadcn):** `--card` fill, `--card-border` hairline, 14px radius, Space
+  Grotesk 500 title, muted body. Feature cards add a mono numeral in amber;
+  trust cards carry none because they are not steps.
+- **FAQ item:** Base UI accordion island. Open answers use `text-lead` (17px),
+  line height 1.6, `pt-1` under the question, in a column about 832px wide. The
+  server HTML marks every collapsed panel `hidden="until-found"` so find-in-page
+  and text-fragment links open it before hydration. The panel itself animates
+  height; reduced motion removes the transition.
+- **Journey card:** a panel; the middle card (the file) gets a 1px
+  `ring-primary/50` amber ring and the other two stay plain. Folder icons are
+  Lucide `folder`, 2px stroke, amber.
+- **Format chip:** one outline Badge style for the hero and the feature cards:
+  Geist Mono 12px, 1px hairline border, no fill, pill radius.
 - **Real interface:** the real extension screenshot in a 16px-radius frame with
   a hairline border and the caption from the content document.
 

@@ -19,6 +19,8 @@
       "from": "Il tuo browser",
       "file": "Un file",
       "to": "Un altro browser",
+      "folderResearch": "Ricerca",
+      "folderJobSearch": "Ricerca di lavoro",
       "network": "Chiamate di rete: nessuna",
       "description": "I tuoi segnalibri lasciano il tuo browser come un unico file bookmarks.html, disponibile in sei formati, e si aprono in un altro browser. Tutto resta sul tuo dispositivo."
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "Cosa dicono le persone",
-    "numbers": "5.000 utenti. 4,8 stelle su 20 valutazioni nel Chrome Web Store (2026-10-05).",
+    "numbers": "5.000 utenti. 4,8 stelle su 20 valutazioni nel Chrome Web Store ({date}).",
     "renameNote": "Sono recensioni pubbliche del Chrome Web Store, in inglese come sono state pubblicate. La maggior parte è stata scritta prima che Snug cambiasse nome, quando la scheda si chiamava «Bookmark Import/Export», quindi descrivono l'esportazione e l'importazione, non l'interfaccia attuale.",
     "reviewsLead": "Quattro recensioni, nell'originale inglese:",
     "link": "Leggi tutte le recensioni nel Chrome Web Store"
