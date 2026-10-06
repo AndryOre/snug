@@ -72,7 +72,12 @@ function writeChoice(choice: ThemeChoice) {
 function applyChoice(choice: ThemeChoice) {
   const isDark =
     choice === 'dark' || (choice === 'system' && matchMedia(DARK_QUERY).matches)
-  document.documentElement.classList.toggle('dark', isDark)
+  const root = document.documentElement
+  root.classList.add('theme-switching')
+  root.classList.toggle('dark', isDark)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => root.classList.remove('theme-switching'))
+  })
 }
 
 function selectChoice(value: string) {

@@ -158,3 +158,42 @@ test('the theme menu is hidden without JavaScript', async ({ browser }) => {
   await expect(page.locator('[data-theme-menu]')).toBeHidden()
   await context.close()
 })
+
+test('a theme switch runs no colour transition on the frame it flips', async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: 'light' })
+  await visit(page)
+  await page.evaluate(() => {
+    const samples: string[] = []
+    const targets = [
+      globalThis.document.querySelector('a[data-install]'),
+      globalThis.document.querySelector('[data-slot="accordion-trigger"]'),
+    ]
+    // eslint-disable-next-line unicorn/isolated-functions -- runs in the browser, where MutationObserver exists
+    new MutationObserver(() => {
+      if (!globalThis.document.documentElement.matches('.theme-switching')) {
+        return
+      }
+      for (const target of targets) {
+        if (target) {
+          samples.push(globalThis.getComputedStyle(target).transitionProperty)
+        }
+      }
+    }).observe(globalThis.document.documentElement, {
+      attributeFilter: ['class'],
+    })
+    Object.assign(globalThis, { transitionSamples: samples })
+  })
+  await openMenu(page)
+  await page.getByRole('menuitemradio', { name: 'Dark' }).click()
+  await expect(page.locator('html')).toHaveClass(/\bdark\b/)
+  const samples = await page.evaluate(
+    () =>
+      (globalThis as unknown as { transitionSamples: string[] })
+        .transitionSamples,
+  )
+  expect(samples.length).toBeGreaterThan(1)
+  for (const sample of samples) expect(sample).toBe('none')
+  await expect(page.locator('html')).not.toHaveClass(/theme-switching/)
+})

@@ -56,3 +56,12 @@
     'Geist Fallback', sans-serif;
   --font-sans: 'Geist Variable', 'Geist Fallback', sans-serif;
 }
+
+@layer base {
+  .theme-switching,
+  .theme-switching *,
+  .theme-switching ::before,
+  .theme-switching ::after {
+    transition: none !important;
+  }
+}
