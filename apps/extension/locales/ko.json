@@ -1204,5 +1204,17 @@
   "progress_exportCanceledDescription": {
     "message": "다운로드된 파일이 없습니다.",
     "description": "Text shown after an export was canceled"
+  },
+  "siteLocalePath": {
+    "message": "/ko/",
+    "description": "Path of this language on the landing site. Do not translate."
+  },
+  "shell_siteLink": {
+    "message": "웹사이트",
+    "description": "App sidebar footer link to the Snug website"
+  },
+  "shell_privacyLink": {
+    "message": "개인정보",
+    "description": "App sidebar footer link to the privacy policy"
   }
 }

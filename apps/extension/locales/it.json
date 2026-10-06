@@ -1217,5 +1217,17 @@
   "progress_exportCanceledDescription": {
     "message": "Nessun file è stato scaricato.",
     "description": "Text shown after an export was canceled"
+  },
+  "siteLocalePath": {
+    "message": "/it/",
+    "description": "Path of this language on the landing site. Do not translate."
+  },
+  "shell_siteLink": {
+    "message": "Sito web",
+    "description": "App sidebar footer link to the Snug website"
+  },
+  "shell_privacyLink": {
+    "message": "Privacy",
+    "description": "App sidebar footer link to the privacy policy"
   }
 }

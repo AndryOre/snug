@@ -1204,5 +1204,17 @@
   "progress_exportCanceledDescription": {
     "message": "ファイルはダウンロードされませんでした。",
     "description": "Text shown after an export was canceled"
+  },
+  "siteLocalePath": {
+    "message": "/ja/",
+    "description": "Path of this language on the landing site. Do not translate."
+  },
+  "shell_siteLink": {
+    "message": "ウェブサイト",
+    "description": "App sidebar footer link to the Snug website"
+  },
+  "shell_privacyLink": {
+    "message": "プライバシー",
+    "description": "App sidebar footer link to the privacy policy"
   }
 }

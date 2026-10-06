@@ -3,6 +3,7 @@ import { Link, Outlet, useRouterState } from '@tanstack/react-router'
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -17,10 +18,12 @@ import {
 } from '@workspace/ui/components/sidebar'
 import { cn } from 'cn'
 import type { LucideIcon } from 'lucide-react'
+import { ExternalLinkIcon, GlobeIcon, ShieldCheckIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { Wordmark } from '@/components/wordmark'
 import { APP_ROUTES } from '@/lib/app-url'
+import { getSiteUrl, SITE_PRIVACY_URL } from '@/lib/brand'
 import {
   autoExportConfigStore,
   autoExportLastRunStore,
@@ -145,6 +148,36 @@ function NavLinkButton(properties: NavLinkButtonProperties) {
   )
 }
 
+interface SiteLinkButtonProperties {
+  href: string
+  label: string
+  icon: LucideIcon
+}
+
+/**
+ * A sidebar footer link that opens a landing-site page in a new tab. The
+ * trailing external-link glyph is decorative and hidden in the icon rail.
+ * @param properties The destination URL, visible label and leading icon.
+ * @returns The external link button.
+ */
+function SiteLinkButton(properties: SiteLinkButtonProperties) {
+  const { href, label, icon: Icon } = properties
+  return (
+    <SidebarMenuButton
+      tooltip={label}
+      // eslint-disable-next-line jsx-a11y/anchor-has-content -- SidebarMenuButton's render prop injects the children into this anchor
+      render={<a href={href} target="_blank" rel="noopener noreferrer" />}
+    >
+      <Icon />
+      <span>{label}</span>
+      <ExternalLinkIcon
+        aria-hidden="true"
+        className="ml-auto size-3 text-muted-foreground group-data-[collapsible=icon]:hidden"
+      />
+    </SidebarMenuButton>
+  )
+}
+
 /**
  * The App's root layout: collapsible sidebar (offcanvas when narrow), a 48px
  * header with the page title, and a scrolling content area that renders the
@@ -233,6 +266,24 @@ export function AppShell() {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SiteLinkButton
+                href={getSiteUrl()}
+                label={i18n.t('shell_siteLink')}
+                icon={GlobeIcon}
+              />
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SiteLinkButton
+                href={SITE_PRIVACY_URL}
+                label={i18n.t('shell_privacyLink')}
+                icon={ShieldCheckIcon}
+              />
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
         <SidebarRail />
       </Sidebar>
       <SidebarInset className="h-svh overflow-hidden">

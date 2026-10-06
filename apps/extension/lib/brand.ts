@@ -1,3 +1,6 @@
+import type { GeneratedI18nStructure } from '#i18n'
+import { createI18n } from '@wxt-dev/i18n'
+
 /**
  * The extension's published Chrome Web Store item ID. Stable across listing
  * renames, unlike the store slug embedded in {@link CHROME_WEB_STORE_URL}'s
@@ -23,6 +26,23 @@ export const PRODUCT_NAME = 'Snug'
  * The product's official homepage: the live landing site.
  */
 export const SITE_URL = 'https://snug.andryore.dev/'
+
+/**
+ * The landing site's privacy policy page. English only, so it is the same in
+ * every locale.
+ */
+export const SITE_PRIVACY_URL = 'https://snug.andryore.dev/privacy/'
+
+const i18n = createI18n<GeneratedI18nStructure>()
+
+/**
+ * The landing site's URL in the active UI language: the site origin plus the
+ * locale's `siteLocalePath` message (`/`, `/es/`, `/pt-br/`, ...).
+ * @returns The localized landing page URL.
+ */
+export function getSiteUrl(): string {
+  return `${new URL(SITE_URL).origin}${i18n.t('siteLocalePath')}`
+}
 
 /**
  * The project's GitHub repository URL.
