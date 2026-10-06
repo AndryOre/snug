@@ -1248,7 +1248,7 @@
     "message": "Visiter snug.andryore.dev"
   },
   "changelog_2_0_3_1": {
-    "message": "Après votre première exportation, Snug vous demande une seule fois si vous souhaitez laisser un avis. Fermez-la et elle ne reviendra pas."
+    "message": "Après votre première exportation, Snug vous demande une seule fois si vous souhaitez laisser un avis. Fermez la carte et elle ne reviendra plus."
   },
   "reviewPrompt_title": {
     "message": "Snug vous convient-il ?",

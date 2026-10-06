@@ -1237,7 +1237,7 @@
     "message": "Visita snug.andryore.dev"
   },
   "changelog_2_0_3_1": {
-    "message": "Después de tu primera exportación, Snug te pregunta una sola vez si quieres dejar una reseña. Si la descartas, no vuelve a aparecer."
+    "message": "Después de tu primera exportación, Snug te pregunta una sola vez si quieres dejar una reseña. Si descartas la tarjeta, no vuelve a aparecer."
   },
   "reviewPrompt_title": {
     "message": "¿Snug te funciona bien?",
