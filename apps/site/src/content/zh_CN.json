@@ -19,6 +19,8 @@
       "from": "你的浏览器",
       "file": "一个文件",
       "to": "另一个浏览器",
+      "folderResearch": "调研",
+      "folderJobSearch": "求职",
       "network": "网络请求：无",
       "description": "你的书签以一个 bookmarks.html 文件的形式从浏览器导出，提供六种格式，并在另一个浏览器中打开。全程都保留在你的设备上。"
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "用户怎么说",
-    "numbers": "5,000 位用户。Chrome 应用商店 20 个评分，平均 4.8 星（2026-10-05）。",
+    "numbers": "5,000 位用户。Chrome 应用商店 20 个评分，平均 4.8 星（{date}）。",
     "renameNote": "以下是 Chrome 应用商店的公开评价，保持发布时的英文原文。大多数写于 Snug 更名之前，当时商店页面叫“Bookmark Import/Export”，因此它们讲的是导出和导入，而不是当前的界面。",
     "reviewsLead": "四条评价，保留英文原文：",
     "link": "在 Chrome 应用商店阅读全部评价"

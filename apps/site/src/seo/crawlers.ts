@@ -1,7 +1,7 @@
 import type { SiteContent } from '../i18n/content'
 import { PROMO_VIDEO_IDS, youtubeWatchUrl } from '../i18n/landing'
 import { SITE_ORIGIN } from '../i18n/locales'
-import { REVIEWS } from '../i18n/proof'
+import { formatRatingsSentence, REVIEWS } from '../i18n/proof'
 import { STORE_FACTS } from './store-facts'
 
 const SEARCH_AND_ANSWER_CRAWLERS = [
@@ -138,7 +138,7 @@ export function buildLlmsFullTxt(content: SiteContent): string {
     ),
     section(
       content.proof.heading,
-      content.proof.numbers,
+      formatRatingsSentence(content.proof.numbers, 'en'),
       content.proof.renameNote,
       ...reviewQuotes,
       `[${content.proof.link}](${SITE_ORIGIN}/reviews)`,

@@ -26,6 +26,23 @@ for (const { path, lang } of ROUTES) {
   })
 }
 
+test('ja renders its own folder names in both journey trees', async ({
+  page,
+}) => {
+  await page.goto(localePath('ja'))
+  const folders = page.locator('[data-section="hero"] ul li', {
+    hasText: /リサーチ|求職/,
+  })
+  await expect(folders).toHaveText(['リサーチ', '求職', 'リサーチ', '求職'])
+})
+
+test('de formats the ratings date for its locale', async ({ page }) => {
+  await page.goto(localePath('de'))
+  const numbers = page.locator('[data-proof="numbers"]')
+  await expect(numbers).toContainText('05.10.2026')
+  await expect(numbers).not.toContainText('2026-10-05')
+})
+
 test('does not redirect by browser language', async ({ browser }) => {
   const context = await browser.newContext({ locale: 'es-ES' })
   const page = await context.newPage()

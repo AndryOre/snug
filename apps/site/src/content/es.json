@@ -19,6 +19,8 @@
       "from": "Tu navegador",
       "file": "Un archivo",
       "to": "Otro navegador",
+      "folderResearch": "Investigación",
+      "folderJobSearch": "Búsqueda de empleo",
       "network": "Llamadas de red: ninguna",
       "description": "Tus marcadores salen de tu navegador como un solo archivo bookmarks.html, disponible en seis formatos, y se abren en otro navegador. Todo permanece en tu dispositivo."
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "Lo que dice la gente",
-    "numbers": "5.000 usuarios. 4,8 estrellas con 20 valoraciones en la Chrome Web Store (2026-10-05).",
+    "numbers": "5.000 usuarios. 4,8 estrellas con 20 valoraciones en la Chrome Web Store ({date}).",
     "renameNote": "Son reseñas públicas de la Chrome Web Store, en inglés tal como se publicaron. La mayoría se escribió antes de que Snug cambiara de nombre, cuando el listado se llamaba «Bookmark Import/Export», así que hablan de la exportación y la importación, no de la interfaz actual.",
     "reviewsLead": "",
     "link": "Leer todas las reseñas en la Chrome Web Store"
