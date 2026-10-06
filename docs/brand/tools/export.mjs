@@ -6,7 +6,8 @@ import { chromium } from 'playwright'
 /**
  * Regenerates the derived raster assets of the Snug brand kit from the SVG
  * sources in `docs/brand/logo`: the extension icon (`apps/extension/assets/icon.png`), PNG
- * marks, the Chrome Web Store icon and tiles, the per-locale OG images and the README banner (a copy of the store marquee), and the YouTube channel art
+ * marks, the Chrome Web Store icon and tiles, the per-locale OG images and the README banner (a copy of the store marquee), the GitHub social preview
+ * (`docs/assets/github-social-preview-1280x640.png`, 1280x640, under 1 MB, content kept inside a 5% safe margin), and the YouTube channel art
  * (`docs/brand/youtube/`: banner, avatar, watermark). Run with `bun run brand:export`.
  *
  * The YouTube files are checked against their exact pixel dimensions and byte
@@ -163,6 +164,34 @@ async function renderMarquee(browser, outPath) {
           ${treeRow(0, 180, true)}
         </div>
         <div style="display:flex;flex-direction:column;gap:22px;width:170px">${chips}</div>
+      </div>
+    </body>`)
+  return finishPage(page, outPath)
+}
+
+async function renderGithubSocialPreview(browser, outPath) {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 640 } })
+  const chips = ['HTML', 'JSON', 'CSV']
+    .map(
+      (label) =>
+        `<div style="font-family:'Space Grotesk',Geist,sans-serif;font-weight:700;font-size:32px;letter-spacing:0.04em;color:#17120A;background:linear-gradient(135deg,#FFA230,#FFD37A);border-radius:999px;padding:13px 30px;text-align:center">${label}</div>`,
+    )
+    .join('')
+  await page.setContent(`
+    <style>${fontFaces}svg{display:block}</style>
+    <body style="margin:0;width:1280px;height:640px;position:relative;overflow:hidden;background:radial-gradient(45% 80% at 72% 50%, rgba(255,162,48,0.26), transparent 70%), ${auroraGlow}">
+      <div style="position:absolute;left:96px;top:0;width:480px;height:640px;display:flex;flex-direction:column;justify-content:center">
+        <div style="width:360px">${lockupSvg.replace(/width="267" height="84"/, 'width="360" height="113"')}</div>
+        <div style="font-family:Geist,system-ui,sans-serif;font-size:30px;color:#DCC8A6;line-height:1.4;margin-top:36px">Export, import, and back up your bookmarks &mdash; all on your device.</div>
+      </div>
+      <div style="position:absolute;left:620px;top:0;width:564px;height:640px;display:flex;align-items:center;gap:30px">
+        <div style="width:380px;box-sizing:border-box;padding:36px 32px;border-radius:16px;background:#231A10;border:1px solid rgba(255,162,48,0.25);box-shadow:0 24px 60px rgba(0,0,0,0.45);display:flex;flex-direction:column;gap:28px">
+          ${treeRow(0, 170, true)}
+          ${treeRow(44, 130, true)}
+          ${treeRow(44, 100, false)}
+          ${treeRow(0, 150, true)}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px;width:150px">${chips}</div>
       </div>
     </body>`)
   return finishPage(page, outPath)
@@ -340,6 +369,17 @@ try {
   const readmeBannerPath = path.join(repoRoot, 'docs/assets/readme-banner.png')
   await mkdir(path.dirname(readmeBannerPath), { recursive: true })
   await copyFile(marqueePath, readmeBannerPath)
+
+  const githubPreviewPath = path.join(
+    repoRoot,
+    'docs/assets/github-social-preview-1280x640.png',
+  )
+  await renderGithubSocialPreview(browser, githubPreviewPath)
+  await assertPngSpec(githubPreviewPath, {
+    width: 1280,
+    height: 640,
+    maxBytes: 1_000_000,
+  })
 
   await renderOgImages(browser)
 

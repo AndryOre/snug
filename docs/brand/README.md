@@ -20,7 +20,8 @@ files.
 - [`logo/`](logo/) — SVG mark, variants and horizontal lockups; PNG marks at 16,
   32, 48 and 128 px in [`logo/png/`](logo/png/).
 - Social preview images are generated, not hand-made: one 1200x630 PNG per
-  locale in `apps/site/public/og/` (`og-<locale>.png`), see below.
+  locale in `apps/site/public/og/` (`og-<locale>.png`), plus the GitHub social
+  preview at `docs/assets/github-social-preview-1280x640.png`, see below.
 - [`youtube/`](youtube/) — YouTube channel art: `banner-2560x1440.png` (text and
   lockup inside the 1546x423 safe area), `avatar-800.png` (mark within 70% of
   the circle) and `watermark-300.png` (transparent, halo mark).
@@ -65,3 +66,13 @@ Liberation Sans, Noto Sans CJK or WenQuanYi Zen Hei), so check the regenerated
 ja, ko, ru and zh_CN images by eye after running it on a new machine. To add a
 locale's image, add its locale file; no script change. Its source is
 [`tools/export.mjs`](tools/export.mjs).
+
+#### GitHub
+
+`bun run brand:export` also writes
+`docs/assets/github-social-preview-1280x640.png` (1280x640, under 1 MB, same
+look as the store marquee with all content inside a safe margin because GitHub
+crops about 5% on some surfaces). The script throws if the size or byte budget
+is missed. GitHub has no API for the repository social preview, so upload the
+file by hand in the repository's Settings → Social preview after regenerating
+it.
