@@ -8,7 +8,9 @@ image="snug-site-smoke"
 name="snug-site-smoke-$$"
 store="https://chromewebstore.google.com/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn"
 
-docker build -f "$root/apps/site/Dockerfile" -t "$image" "$root"
+docker build -f "$root/apps/site/Dockerfile" \
+  --build-arg LAST_MODIFIED_DATES="$(bash "$root/apps/site/docker/last-modified.sh")" \
+  -t "$image" "$root"
 docker run -d --rm --name "$name" -p 127.0.0.1:0:80 "$image" >/dev/null
 trap 'docker rm -f "$name" >/dev/null 2>&1 || true' EXIT
 port="$(docker port "$name" 80/tcp | head -n1 | sed 's/.*://')"
