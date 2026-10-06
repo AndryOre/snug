@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import standaloneEn from '../content/standalone/en.json'
 import {
   assertSameKeys,
   flattenKeys,
@@ -7,6 +8,20 @@ import {
   loadAllContent,
 } from './content'
 import { LOCALES } from './locales'
+
+const CJK_LOCALES = new Set(['ja', 'ko', 'zh_CN'])
+
+function visualWidth(text: string): number {
+  let width = 0
+  for (const character of text) {
+    width += /[\u{2E80}-\u{9FFF}\u{AC00}-\u{D7AF}\u{FF00}-\u{FFEF}]/u.test(
+      character,
+    )
+      ? 2
+      : 1
+  }
+  return width
+}
 
 function flattenValues(node: unknown, prefix = ''): [string, string][] {
   if (typeof node === 'string') return [[prefix, node]]
@@ -83,5 +98,39 @@ describe('content', () => {
       expect(content.features.items.preview.body).toMatch(quoted)
       expect(content.faq.items.formats.answer).toMatch(quoted)
     }
+  })
+
+  it('keeps every meta title keyword-first, Chrome-tagged, within 60 visual columns and ending with the brand', () => {
+    for (const locale of LOCALES) {
+      const { title } = getContent(locale).meta
+      expect(title).toMatch(/ – .*Chrome.* \| Snug$/u)
+      expect(title.startsWith('Snug')).toBe(false)
+      expect(visualWidth(title)).toBeLessThanOrEqual(60)
+    }
+  })
+
+  it('keeps Latin-script meta descriptions between 140 and 160 characters', () => {
+    for (const locale of LOCALES) {
+      if (CJK_LOCALES.has(locale)) continue
+      const { description } = getContent(locale).meta
+      expect([...description].length).toBeGreaterThanOrEqual(140)
+      expect([...description].length).toBeLessThanOrEqual(160)
+    }
+  })
+
+  it('names Chrome in every meta description', () => {
+    for (const locale of LOCALES) {
+      expect(getContent(locale).meta.description).toContain('Chrome')
+    }
+  })
+
+  it('uses the scheduled-backups wording in the Spanish description', () => {
+    const { description } = getContent('es').meta
+    expect(description).not.toContain('con horario')
+    expect(description).toContain('copias automáticas programadas')
+  })
+
+  it('titles the privacy page with the same brand separator', () => {
+    expect(standaloneEn.privacy.meta.title).toMatch(/ \| Snug$/u)
   })
 })

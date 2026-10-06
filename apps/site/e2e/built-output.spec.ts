@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -12,7 +12,9 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../src/i18n/locales'
+import { REVIEWS } from '../src/i18n/proof'
 import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
+import { STORE_FACTS } from '../src/seo/store-facts'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
@@ -93,6 +95,9 @@ test.describe('built pages', () => {
       expect(
         metaContent(html, 'property', 'og:image:alt').length,
       ).toBeGreaterThan(20)
+      expect(metaContent(html, 'name', 'twitter:image:alt')).toBe(
+        metaContent(html, 'property', 'og:image:alt'),
+      )
       expect(html).toContain('<link rel="icon" href="/favicon.svg"')
       expect(html).toContain('<link rel="icon" href="/favicon.ico"')
       expect(html).toContain(
@@ -103,9 +108,20 @@ test.describe('built pages', () => {
       )
       expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
       expect(html).toContain(`dir="${LOCALE_CONFIG[locale].dir}"`)
-      expect(/rel="preload" as="font"/.test(html)).toBe(
-        LOCALE_CONFIG[locale].preloadLatinFont,
-      )
+      const preloads = html
+        .matchAll(/<link rel="preload" as="font"[^>]*href="([^"]+)"/g)
+        .map((match) => match[1])
+        .toArray()
+      const expectedPreloads =
+        locale === 'ru'
+          ? ['geist-cyrillic-wght-normal']
+          : LOCALE_CONFIG[locale].preloadFonts.length > 0
+            ? ['space-grotesk-latin-wght-normal']
+            : []
+      expect(preloads).toHaveLength(expectedPreloads.length)
+      for (const [index, name] of expectedPreloads.entries()) {
+        expect(preloads[index]).toContain(name)
+      }
 
       expect(html).toContain('<link rel="describedby" href="/llms.txt"')
 
@@ -117,10 +133,28 @@ test.describe('built pages', () => {
       }
       const app = nodeOf('SoftwareApplication')
       expect(nodeOf('WebSite')).toMatchObject({
+        '@id': `${SITE_ORIGIN}/#website`,
+        url: `${SITE_ORIGIN}/`,
+      })
+      expect(nodeOf('WebPage')).toMatchObject({
         url: canonical,
         inLanguage: languageTag(locale),
+        isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
       })
-      expect(app.url).toBe(canonical)
+      expect(app['@id']).toBe(`${SITE_ORIGIN}/#software`)
+      expect(app.sameAs).toEqual([STORE_FACTS.sourceUrl])
+      expect(nodeOf('VideoObject')).toMatchObject({
+        name: expect.any(String),
+        description: expect.any(String),
+        thumbnailUrl: expect.stringMatching(
+          /^https:\/\/i\.ytimg\.com\/vi\/[\w-]+\//,
+        ),
+        uploadDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+        embedUrl: expect.stringMatching(
+          /^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]+$/,
+        ),
+      })
+      expect(JSON.stringify(graph)).not.toContain('chromewebstore.google.com')
       expect(app.isAccessibleForFree).toBe(true)
       expect(app.author).toEqual({ '@id': nodeOf('Person')['@id'] })
       expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
@@ -176,8 +210,21 @@ test.describe('root files', () => {
     for (const locale of LOCALES) {
       expect(llms).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }
-    expect(readBuilt('llms-full.txt')).toMatch(/^# Snug/)
-    expect(readBuilt('sitemap.xml')).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}</)
+    const llmsFull = readBuilt('llms-full.txt')
+    expect(llmsFull).toMatch(/^# Snug/)
+    for (const file of [llms, llmsFull]) {
+      expect(file).toContain(`${SITE_ORIGIN}/install`)
+      expect(file).not.toContain('chromewebstore.google.com')
+    }
+    expect(llmsFull).toContain(REVIEWS[0]!.quote)
+    expect(llmsFull).toMatch(/https:\/\/www\.youtube\.com\/watch\?v=[\w-]+/)
+    expect(llmsFull.match(/^## Move your bookmarks\. /gm)).toHaveLength(1)
+    const lastmods = readBuilt('sitemap.xml')
+      .matchAll(/<lastmod>([^<]+)</g)
+      .map((match) => match[1])
+      .toArray()
+    expect(lastmods.length).toBeGreaterThan(0)
+    for (const stamp of lastmods) expect(stamp).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(readBuilt('404.html')).toContain(
       '<meta name="robots" content="noindex"',
     )
@@ -229,6 +276,70 @@ test.describe('privacy page', () => {
   for (const locale of LOCALES) {
     test(`${locale} links the trust section to /privacy`, () => {
       expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
+    })
+  }
+})
+
+test.describe('site stylesheet', () => {
+  const stylesheet = readdirSync(path.join(builtSite, '_astro'))
+    .filter((file) => file.endsWith('.css'))
+    .map((file) => readBuilt(path.join('_astro', file)))
+    .join('\n')
+
+  for (const slot of ['sidebar', 'tabs', 'toast', 'select', 'input-group']) {
+    test(`omits ${slot} rules of unused shared components`, () => {
+      expect(stylesheet).not.toContain(`data-slot=${slot}`)
+      expect(stylesheet).not.toContain(`data-slot="${slot}`)
+    })
+  }
+
+  test('omits sidebar utilities and sidebar component selectors', () => {
+    expect(stylesheet).not.toMatch(/\.(bg|text|border)-sidebar/)
+    expect(stylesheet).not.toContain('data-sidebar')
+    expect(stylesheet).not.toContain('sidebar-wrapper')
+  })
+
+  test('declares metric-matched fallback faces for both families', () => {
+    for (const family of ['Geist Fallback', 'Space Grotesk Fallback']) {
+      const face = new RegExp(
+        String.raw`@font-face\{[^}]*font-family:"?${family}"?[^}]*size-adjust:`,
+      )
+      expect(stylesheet).toMatch(face)
+    }
+  })
+
+  test('keeps Cyrillic out of the Space Grotesk fallback face', () => {
+    const face = stylesheet.match(
+      /@font-face\{[^}]*font-family:"?Space Grotesk Fallback"?[^}]*\}/,
+    )?.[0]
+    expect(face).toBeDefined()
+    const range = face!.match(/unicode-range:([^;}]+)/)?.[1]
+    expect(range).toBeDefined()
+    expect(range).not.toMatch(/U\+04/i)
+  })
+
+  test('ships only the latin subset of Geist Mono', () => {
+    expect(stylesheet).toContain('geist-mono-latin-wght-normal')
+    expect(stylesheet).not.toContain('geist-mono-latin-ext')
+    expect(stylesheet).not.toContain('geist-mono-cyrillic')
+  })
+})
+
+test.describe('font requests', () => {
+  for (const route of ['/', '/de/']) {
+    test(`${route} downloads neither geist-cyrillic nor geist-mono-latin-ext`, async ({
+      page,
+    }) => {
+      const fontUrls: string[] = []
+      page.on('request', (request) => {
+        if (request.resourceType() === 'font') fontUrls.push(request.url())
+      })
+      await page.goto(route, { waitUntil: 'networkidle' })
+      expect(fontUrls.length).toBeGreaterThan(0)
+      for (const url of fontUrls) {
+        expect(url).not.toContain('geist-cyrillic')
+        expect(url).not.toContain('geist-mono-latin-ext')
+      }
     })
   }
 })

@@ -9,6 +9,9 @@ import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
 
 const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
 
+const STORE_LISTING_PATH =
+  '/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn'
+
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
 
 for (const path of LOCALE_PATHS) {
@@ -25,6 +28,7 @@ test('/install redirects with the three UTM tags', async ({ request }) => {
 
   const location = new URL(response.headers()['location'] ?? '')
   expect(location.hostname).toBe('chromewebstore.google.com')
+  expect(location.pathname).toBe(STORE_LISTING_PATH)
   expect(location.searchParams.get('utm_source')).toBe('landing')
   expect(location.searchParams.get('utm_medium')).toBe('web')
   expect(location.searchParams.get('utm_campaign')).toBe('direct')
@@ -45,7 +49,7 @@ test('/reviews redirects to the store reviews with the UTM tags', async ({
 
   const location = new URL(response.headers()['location'] ?? '')
   expect(location.hostname).toBe('chromewebstore.google.com')
-  expect(location.pathname.endsWith('/reviews')).toBe(true)
+  expect(location.pathname).toBe(`${STORE_LISTING_PATH}/reviews`)
   expect(location.searchParams.get('utm_source')).toBe('landing')
   expect(location.searchParams.get('utm_medium')).toBe('web')
   expect(location.searchParams.get('utm_campaign')).toBe('proof')
@@ -316,4 +320,76 @@ test('activating the video raises no CSP or Trusted Types violation', async ({
   await expect(page.locator('iframe[data-video-player]')).toBeVisible()
   await page.waitForTimeout(250)
   expect(problems).toEqual([])
+})
+
+for (const path of [
+  '/llms.txt',
+  '/llms-full.txt',
+  '/robots.txt',
+  '/sitemap.xml',
+]) {
+  test(`${path} is served as utf-8`, async ({ request }) => {
+    const response = await request.get(path)
+    expect(response.status()).toBe(200)
+    expect(response.headers()['content-type']).toMatch(/charset=utf-8/i)
+  })
+}
+
+test('the manifest is served as application/manifest+json', async ({
+  request,
+}) => {
+  const response = await request.get('/manifest.webmanifest')
+  expect(response.headers()['content-type']).toMatch(
+    /^application\/manifest\+json/,
+  )
+})
+
+for (const { duplicate, canonical } of [
+  { duplicate: '/index.html', canonical: '/' },
+  { duplicate: '/es/index.html', canonical: '/es/' },
+]) {
+  test(`${duplicate} redirects to ${canonical}`, async ({ request }) => {
+    const response = await request.get(duplicate, { maxRedirects: 0 })
+    expect(response.status()).toBe(301)
+    expect(response.headers()['location']).toBe(canonical)
+  })
+}
+
+test('the locale 404 routes are internal', async ({ request }) => {
+  const response = await request.get('/es/404/', { maxRedirects: 0 })
+  expect(response.status()).toBe(404)
+})
+
+test('every 404 sends Cache-Control: no-cache', async ({ request }) => {
+  for (const path of ['/nope/', '/ja/nope/']) {
+    const response = await request.get(path)
+    expect(response.status()).toBe(404)
+    expect(response.headers()['cache-control']).toBe('no-cache')
+  }
+})
+
+test('HSTS includes subdomains and is not preload', async ({ request }) => {
+  const response = await request.get('/')
+  expect(response.headers()['strict-transport-security']).toBe(
+    'max-age=63072000; includeSubDomains',
+  )
+})
+
+test('the container gzips text and leaves binaries alone', async ({
+  request,
+}) => {
+  for (const path of ['/', '/llms.txt', '/sitemap.xml']) {
+    const response = await request.get(path, {
+      headers: { 'accept-encoding': 'gzip' },
+    })
+    expect(response.headers()['content-encoding']).toBe('gzip')
+  }
+  const page = await request.get('/')
+  const html = await page.text()
+  const font = html.match(/\/_astro\/[^"']+\.woff2/)?.[0]
+  expect(font).toBeDefined()
+  const response = await request.get(font!, {
+    headers: { 'accept-encoding': 'gzip' },
+  })
+  expect(response.headers()['content-encoding']).toBeUndefined()
 })

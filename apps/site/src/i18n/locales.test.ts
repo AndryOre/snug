@@ -15,11 +15,17 @@ describe('locales', () => {
     expect(['ltr', 'rtl']).toContain(LOCALE_CONFIG[locale].dir)
   })
 
-  it('skips the Latin font preload only for CJK locales', () => {
+  it('skips the font preload only for CJK locales', () => {
     const skipped = LOCALES.filter(
-      (locale) => !LOCALE_CONFIG[locale].preloadLatinFont,
+      (locale) => LOCALE_CONFIG[locale].preloadFonts.length === 0,
     )
     expect(skipped).toEqual(['ja', 'ko', 'zh_CN'])
+  })
+
+  it('preloads Geist Cyrillic for ru and Space Grotesk latin for Latin locales', () => {
+    expect(LOCALE_CONFIG.ru.preloadFonts).toEqual(['geist-cyrillic'])
+    expect(LOCALE_CONFIG.en.preloadFonts).toEqual(['space-grotesk-latin'])
+    expect(LOCALE_CONFIG.pt_BR.preloadFonts).toEqual(['space-grotesk-latin'])
   })
 
   it('matches the extension locale files', () => {
