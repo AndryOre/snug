@@ -281,3 +281,13 @@ test('localized pages mark only the active footer locale as current', async ({
   await expect(current).toHaveCount(1)
   await expect(current).toHaveText('Deutsch')
 })
+
+test('language trigger is announced as the label plus the language name', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await waitForLanguageIsland(page)
+  await expect(
+    page.locator('[data-language-switcher]').getByRole('button'),
+  ).toHaveAccessibleName('Language: English')
+})

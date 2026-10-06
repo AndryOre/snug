@@ -160,6 +160,7 @@
   --leading-prose: 1.65;
   --tracking-eyebrow: 0.12em;
   --font-system: system-ui, sans-serif;
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @theme inline {
