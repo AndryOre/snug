@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  getCurrentChangelogVersion,
   isChangelogEntryCurrent,
   isMinorOrMajorUpdate,
   isWhatsNewUnseen,
@@ -45,5 +46,23 @@ describe('isChangelogEntryCurrent', () => {
     ['1.9', '2.0.1', false],
   ])('entry %s against installed %s is %s', (entry, installed, expected) => {
     expect(isChangelogEntryCurrent(entry, installed)).toBe(expected)
+  })
+})
+
+describe('getCurrentChangelogVersion', () => {
+  it('flags only the newest entry on the installed line', () => {
+    expect(
+      getCurrentChangelogVersion(['2.0.2', '2.0.0', '1.7.0'], '2.0.2'),
+    ).toBe('2.0.2')
+  })
+
+  it('flags the line entry when the installed patch has no entry', () => {
+    expect(getCurrentChangelogVersion(['2.0.0', '1.7.0'], '2.0.3')).toBe(
+      '2.0.0',
+    )
+  })
+
+  it('returns undefined when no entry is on the installed line', () => {
+    expect(getCurrentChangelogVersion(['1.7.0'], '2.0.2')).toBeUndefined()
   })
 })

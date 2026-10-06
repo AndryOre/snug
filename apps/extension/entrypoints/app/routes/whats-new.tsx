@@ -16,7 +16,7 @@ import {
   getChangelog,
   isExternalChangelogUrl,
 } from '@/lib/changelog'
-import { isChangelogEntryCurrent } from '@/lib/version'
+import { getCurrentChangelogVersion } from '@/lib/version'
 
 /**
  * The What's new screen: a changelog timeline (newest first, installed
@@ -28,6 +28,10 @@ import { isChangelogEntryCurrent } from '@/lib/version'
 export function WhatsNewRoute() {
   const installedVersion = browser.runtime.getManifest().version
   const changelog = getChangelog()
+  const currentVersion = getCurrentChangelogVersion(
+    changelog.map((entry) => entry.version),
+    installedVersion,
+  )
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
@@ -50,7 +54,7 @@ export function WhatsNewRoute() {
                   <h2 className="font-heading text-base font-semibold">
                     {version}
                   </h2>
-                  {isChangelogEntryCurrent(version, installedVersion) && (
+                  {version === currentVersion && (
                     <Badge>{i18n.t('whatsNew_current')}</Badge>
                   )}
                   <span className="text-sm text-muted-foreground">
