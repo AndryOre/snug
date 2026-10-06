@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Snug: Lesezeichen exportieren, importieren und sichern",
-    "description": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal."
+    "title": "Lesezeichen exportieren/sichern – Chrome-Erweiterung | Snug",
+    "description": "Snug ist eine Chrome-Erweiterung zum Exportieren, Importieren und Sichern deiner Lesezeichen, auch automatisch nach Zeitplan. Ohne Konto, ohne Netzwerkzugriff."
   },
   "seo": {
     "ogImageAlt": "Snug-Logo mit einem bernsteinfarbenen Lesezeichen-Symbol über einer kurzen Beschreibung der Erweiterung auf dunklem Hintergrund."

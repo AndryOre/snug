@@ -26,7 +26,7 @@ document is content only: it does not decide layout, visuals or components.
   Re-check on the listing before launch.
 
 Section order: 1 Hero, 2 Trust proof, 3 Features, 4 Real interface, 5 Video, 6
-Social proof, 7 FAQ, 8 Final call to action and footer.
+Social proof, 7 FAQ, 8 Final call to action and footer, 9 Search metadata.
 
 ---
 
@@ -1470,6 +1470,87 @@ time. No sync, no cloud, no account, no pricing").
 Sources: Product: Positioning, Capabilities and Constraints. MIT license is
 stated in [`docs/store/screenshots.md`](../store/screenshots.md) (slide 5
 claims). The Privacy Policy page is `/privacy` (separate ticket).
+
+---
+
+## 9. Search metadata
+
+The `meta.title` and `meta.description` of every locale
+(`apps/site/src/content/<locale>.json`). Titles lead with the keyword, name
+Chrome and end with `| Snug`, at most 60 characters (CJK counted by visual
+width, two columns each). Latin-script descriptions run 140 to 160 characters
+and state the platform and the privacy promise. The privacy page title is
+`Privacy Policy | Snug`. The h1 does not change.
+
+### EN
+
+- **Title:** Export, Import & Back Up Bookmarks – Chrome Extension | Snug
+- **Description:** Snug is a Chrome extension that exports, imports and backs up
+  your bookmarks, with scheduled backups. It needs no account and makes no
+  network calls.
+
+### ES
+
+- **Title:** Exportar, importar y respaldar marcadores – Chrome | Snug
+- **Description:** Snug es una extensión de Chrome para exportar, importar y
+  respaldar tus marcadores, con copias automáticas programadas. No pide cuenta y
+  no usa la red.
+
+### DE
+
+- **Title:** Lesezeichen exportieren/sichern – Chrome-Erweiterung | Snug
+- **Description:** Snug ist eine Chrome-Erweiterung zum Exportieren, Importieren
+  und Sichern deiner Lesezeichen, auch automatisch nach Zeitplan. Ohne Konto,
+  ohne Netzwerkzugriff.
+
+### FR
+
+- **Title:** Exporter et sauvegarder favoris – Extension Chrome | Snug
+- **Description:** Snug est une extension Chrome pour exporter, importer et
+  sauvegarder vos favoris, avec des sauvegardes programmées. Sans compte ni
+  appel réseau.
+
+### IT
+
+- **Title:** Esporta e salva i segnalibri – Estensione Chrome | Snug
+- **Description:** Snug è un’estensione di Chrome per esportare, importare e
+  salvare i tuoi segnalibri, con backup automatici programmati. Senza account né
+  chiamate di rete.
+
+### JA
+
+- **Title:** ブックマークの書き出し・バックアップ – Chrome拡張 | Snug
+- **Description:**
+  Chrome拡張機能Snugで、ブックマークを書き出し、読み込み、定時バックアップ。アカウントは不要で、ネットワーク通信も行いません。
+
+### KO
+
+- **Title:** 북마크 내보내기·가져오기·백업 – Chrome 확장 | Snug
+- **Description:** Snug는 북마크를 내보내고 가져오고 예약 백업까지 해 주는
+  Chrome 확장 프로그램입니다. 계정이 필요 없고 네트워크 호출도 하지 않습니다.
+
+### PT_BR
+
+- **Title:** Exportar e backup de favoritos – Extensão Chrome | Snug
+- **Description:** O Snug é uma extensão do Chrome para exportar, importar e
+  fazer backup dos seus favoritos, com backups automáticos agendados. Não pede
+  conta e não usa a rede.
+
+### RU
+
+- **Title:** Экспорт, импорт и бэкап закладок – расширение Chrome | Snug
+- **Description:** Snug – расширение Chrome для экспорта, импорта и резервного
+  копирования закладок, в том числе по расписанию. Не требует аккаунта и не
+  обращается к сети.
+
+### ZH_CN
+
+- **Title:** 书签导出、导入与备份 – Chrome 扩展 | Snug
+- **Description:**
+  Snug 是一款 Chrome 扩展，可导出、导入书签，并按计划自动备份。无需账号，也不会发起任何网络请求。
+
+Sources: Product: Positioning, Capabilities and Constraints. Scheduled backups
+ship in `lib/auto-export.ts`.
 
 ---
 
