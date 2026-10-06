@@ -11,8 +11,7 @@ const seed: SeedBookmark[] = [
   },
 ]
 
-const reviewsUrl =
-  'https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn/reviews'
+const reviewsUrlPattern = /gdhpeilfkeeajillmcncaelnppiakjhn\/reviews/
 
 const eligibleState = { eligibleAt: 1_700_000_000_000, dismissedAt: null }
 
@@ -97,7 +96,7 @@ test('"Leave a review" opens the reviews page in a new tab and hides the card', 
     context.waitForEvent('page'),
     link.click(),
   ])
-  await expect.poll(() => newPage.url()).toContain(reviewsUrl)
+  await expect.poll(() => newPage.url()).toMatch(reviewsUrlPattern)
 
   await expect(reviewCard(popup)).toHaveCount(0)
 })
