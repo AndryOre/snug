@@ -53,6 +53,10 @@ const shadcnNoRestyleContracts = [
     allow: ['layout', 'text-xs', 'text-muted-foreground'],
   },
   {
+    pattern: '^Card$',
+    allow: ['layout', 'ring-primary/50'],
+  },
+  {
     pattern: '^CardTitle$',
     allow: [
       'layout',
