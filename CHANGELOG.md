@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.3] - 2026-10-06
+
+- The popup now shows a one-time, dismissible Review prompt after your first
+  successful export.
+- The privacy policy now describes the prompt's local-only state.
+
 ## [2.0.2] - 2026-10-06
 
 - The App sidebar now links to the Snug website and the privacy policy.

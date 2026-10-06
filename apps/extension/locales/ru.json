@@ -1223,6 +1223,9 @@
   "changelog_2_0_2_1_link": {
     "message": "Перейти на snug.andryore.dev"
   },
+  "changelog_2_0_3_1": {
+    "message": "После вашего первого экспорта Snug один раз спросит, не хотите ли вы оставить отзыв. Закройте карточку, и она больше не появится."
+  },
   "reviewPrompt_title": {
     "message": "Snug вам подходит?",
     "description": "Popup Review prompt card title (also its accessible name)"

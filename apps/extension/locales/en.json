@@ -1235,6 +1235,9 @@
   "changelog_2_0_2_1_link": {
     "message": "Visit snug.andryore.dev"
   },
+  "changelog_2_0_3_1": {
+    "message": "After your first export, Snug now asks once if you'd like to leave a review. Dismiss it and it's gone for good."
+  },
   "reviewPrompt_title": {
     "message": "Is Snug working for you?",
     "description": "Popup Review prompt card title (also its accessible name)"
