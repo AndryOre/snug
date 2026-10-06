@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { getContent } from '../i18n/content'
+import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
   hreflangAlternates,
   languageTag,
@@ -8,6 +9,7 @@ import {
   LOCALES,
   SITE_ORIGIN,
 } from '../i18n/locales'
+import { REVIEWS } from '../i18n/proof'
 import { GET as getLlmsFullTxt } from '../pages/llms-full.txt'
 import { GET as getLlmsTxt } from '../pages/llms.txt'
 import { GET as getRobotsTxt } from '../pages/robots.txt'
@@ -18,6 +20,7 @@ import {
   buildRobotsTxt,
   buildSitemapXml,
 } from './crawlers'
+import { lastCommitDate } from './last-modified'
 import { STORE_FACTS } from './store-facts'
 import { buildStructuredData } from './structured-data'
 
@@ -76,6 +79,26 @@ describe('buildLlmsFullTxt', () => {
     expect(body).toContain(getContent('en').hero.subheadline)
   })
 
+  it('links the counted redirects, never the raw store URL', () => {
+    expect(body).toContain(`${SITE_ORIGIN}/reviews`)
+    expect(body).not.toContain('chromewebstore.google.com')
+  })
+
+  it('quotes every review with attribution and links the video', () => {
+    for (const { quote, author, date } of REVIEWS) {
+      expect(body).toContain(quote)
+      expect(body).toContain(`${author}, ${date}`)
+    }
+    expect(body).toContain(
+      `https://www.youtube.com/watch?v=${PROMO_VIDEO_IDS.en}`,
+    )
+  })
+
+  it('joins the hero headline into one heading', () => {
+    const { headlineLead, headlineAccent } = getContent('en').hero
+    expect(body).toContain(`## ${headlineLead} ${headlineAccent}\n`)
+  })
+
   it('keeps every FAQ question and answer', () => {
     for (const item of Object.values(getContent('en').faq.items)) {
       expect(body).toContain(`### ${item.question}`)
@@ -86,24 +109,37 @@ describe('buildLlmsFullTxt', () => {
 
 describe('buildSitemapXml', () => {
   it('lists every entry with every alternate', () => {
-    const entries = ['https://example.test/', 'https://example.test/es/']
+    const entries = [
+      { loc: 'https://example.test/', lastmod: '2026-10-05' },
+      { loc: 'https://example.test/es/' },
+    ]
     const alternates = [
       { hreflang: 'en', href: 'https://example.test/' },
       { hreflang: 'es', href: 'https://example.test/es/' },
     ]
-    const xml = buildSitemapXml(entries, alternates, [], '2026-10-05')
+    const xml = buildSitemapXml(entries, alternates, [])
 
     expect(xml.match(/<url>/g)).toHaveLength(entries.length)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       entries.length * alternates.length,
     )
   })
+
+  it('omits lastmod for entries without a known date', () => {
+    const xml = buildSitemapXml([{ loc: 'https://example.test/' }], [], [])
+
+    expect(xml).not.toContain('<lastmod>')
+  })
 })
 
 const FEATURES = ['Export what you choose', 'Undo a replace']
 
 function graphNodes(locale: (typeof LOCALES)[number]) {
-  const data = buildStructuredData(locale, 'Description', FEATURES)
+  const data = buildStructuredData(locale, 'Description', FEATURES, {
+    title: `Snug ${locale}`,
+    videoId: PROMO_VIDEO_IDS[locale],
+    videoDescription: `Walkthrough ${locale}`,
+  })
   const find = (type: string) =>
     data['@graph'].find((node) => node['@type'] === type)
   return {
@@ -113,6 +149,8 @@ function graphNodes(locale: (typeof LOCALES)[number]) {
     },
     site: find('WebSite'),
     person: find('Person'),
+    page: find('WebPage'),
+    video: find('VideoObject'),
   }
 }
 
@@ -121,9 +159,9 @@ describe('buildStructuredData', () => {
     const { data, app, site, person } = graphNodes(locale)
 
     expect(data['@context']).toBe('https://schema.org')
-    expect(data['@graph']).toHaveLength(3)
-    expect(app['@id']).toBe(`${SITE_ORIGIN}${localePath(locale)}#software`)
-    expect(site?.['@id']).toBe(`${SITE_ORIGIN}${localePath(locale)}#website`)
+    expect(data['@graph']).toHaveLength(5)
+    expect(app['@id']).toBe(`${SITE_ORIGIN}/#software`)
+    expect(site?.['@id']).toBe(`${SITE_ORIGIN}/#website`)
     expect(app.author).toEqual({ '@id': person?.['@id'] })
   })
 
@@ -139,10 +177,36 @@ describe('buildStructuredData', () => {
   })
 
   it.each(LOCALES)('%s points the install links at /install', (locale) => {
-    const { app } = graphNodes(locale)
+    const { app, data } = graphNodes(locale)
 
-    expect(app.downloadUrl).toBe('https://snug.andryore.dev/install')
-    expect(app.installUrl).toBe('https://snug.andryore.dev/install')
+    expect(app.downloadUrl).toBe(`${SITE_ORIGIN}/install`)
+    expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
+    expect(app.sameAs).toEqual([STORE_FACTS.sourceUrl])
+    expect(JSON.stringify(data)).not.toContain('chromewebstore.google.com')
+  })
+
+  it.each(LOCALES)('%s expresses the locale on a WebPage node', (locale) => {
+    const { page, site } = graphNodes(locale)
+
+    expect(page).toMatchObject({
+      '@type': 'WebPage',
+      url: `${SITE_ORIGIN}${localePath(locale)}`,
+      inLanguage: languageTag(locale),
+      isPartOf: { '@id': site?.['@id'] },
+    })
+  })
+
+  it.each(LOCALES)('%s has a complete VideoObject', (locale) => {
+    const { video } = graphNodes(locale)
+
+    expect(video).toMatchObject({
+      '@type': 'VideoObject',
+      name: `Snug ${locale}`,
+      description: `Walkthrough ${locale}`,
+      thumbnailUrl: expect.stringContaining(PROMO_VIDEO_IDS[locale]),
+      uploadDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+      embedUrl: `https://www.youtube-nocookie.com/embed/${PROMO_VIDEO_IDS[locale]}`,
+    })
   })
 
   it.each(LOCALES)('%s names the site in its own language', (locale) => {
@@ -151,8 +215,7 @@ describe('buildStructuredData', () => {
     expect(site).toMatchObject({
       '@type': 'WebSite',
       name: STORE_FACTS.name,
-      url: `${SITE_ORIGIN}${localePath(locale)}`,
-      inLanguage: languageTag(locale),
+      url: `${SITE_ORIGIN}/`,
     })
   })
 
@@ -187,12 +250,11 @@ describe('buildStructuredData', () => {
 })
 
 describe('buildSitemapXml lastmod', () => {
-  it('stamps every url, standalone ones included', () => {
+  it('stamps every url that has a date, standalone ones included', () => {
     const xml = buildSitemapXml(
-      ['https://example.test/'],
+      [{ loc: 'https://example.test/', lastmod: '2026-10-05' }],
       [],
-      ['https://example.test/privacy/'],
-      '2026-10-05',
+      [{ loc: 'https://example.test/privacy/', lastmod: '2026-10-05' }],
     )
 
     expect(xml.match(/<lastmod>2026-10-05<\/lastmod>/g)).toHaveLength(2)
@@ -211,6 +273,7 @@ describe('root file routes', () => {
     expect(response.headers.get('Content-Type')).toContain('text/plain')
     const text = await response.text()
     expect(text).toMatch(/^# Snug\n/)
+    expect(text).toContain(`${SITE_ORIGIN}/install`)
     expect(text).not.toContain('chromewebstore.google.com')
     for (const locale of LOCALES) {
       expect(text).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
@@ -228,12 +291,28 @@ describe('root file routes', () => {
     expect(response.headers.get('Content-Type')).toContain('application/xml')
     const xml = await response.text()
     expect(xml.match(/<url>/g)).toHaveLength(LOCALES.length + 1)
-    expect(xml.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g)).toHaveLength(
-      LOCALES.length + 1,
-    )
+    for (const locale of LOCALES) {
+      const expected = lastCommitDate([`src/content/${locale}.json`])
+      expect(expected).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(xml).toContain(
+        `<loc>${SITE_ORIGIN}${localePath(locale)}</loc>\n    <lastmod>${expected}</lastmod>`,
+      )
+    }
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/privacy/</loc>`)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       LOCALES.length * hreflangAlternates().length,
     )
+  })
+})
+
+describe('lastCommitDate', () => {
+  it('returns the commit date of a tracked file', () => {
+    expect(lastCommitDate(['src/content/en.json'])).toMatch(
+      /^\d{4}-\d{2}-\d{2}$/,
+    )
+  })
+
+  it('returns undefined for a path git has never seen', () => {
+    expect(lastCommitDate(['src/content/never-committed.json'])).toBeUndefined()
   })
 })

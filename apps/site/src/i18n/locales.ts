@@ -17,24 +17,32 @@ export const LOCALES = [
 export type Locale = (typeof LOCALES)[number]
 
 /**
+ * A font subset worth preloading for a locale's first paint.
+ */
+export type FontPreload = 'space-grotesk-latin' | 'geist-cyrillic'
+
+const LATIN_PRELOAD: readonly FontPreload[] = ['space-grotesk-latin']
+
+/**
  * Per-locale presentation settings: the text direction for `<html dir>` and
- * whether the Latin Space Grotesk subset is worth preloading (CJK pages
- * barely use it).
+ * the font subsets to preload. Latin locales preload Space Grotesk latin;
+ * Russian has no Space Grotesk Cyrillic, so it preloads Geist Cyrillic; CJK
+ * pages barely use either and preload nothing.
  */
 export const LOCALE_CONFIG: Record<
   Locale,
-  { dir: 'ltr' | 'rtl'; preloadLatinFont: boolean }
+  { dir: 'ltr' | 'rtl'; preloadFonts: readonly FontPreload[] }
 > = {
-  en: { dir: 'ltr', preloadLatinFont: true },
-  es: { dir: 'ltr', preloadLatinFont: true },
-  de: { dir: 'ltr', preloadLatinFont: true },
-  fr: { dir: 'ltr', preloadLatinFont: true },
-  it: { dir: 'ltr', preloadLatinFont: true },
-  ja: { dir: 'ltr', preloadLatinFont: false },
-  ko: { dir: 'ltr', preloadLatinFont: false },
-  pt_BR: { dir: 'ltr', preloadLatinFont: true },
-  ru: { dir: 'ltr', preloadLatinFont: true },
-  zh_CN: { dir: 'ltr', preloadLatinFont: false },
+  en: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  es: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  de: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  fr: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  it: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  ja: { dir: 'ltr', preloadFonts: [] },
+  ko: { dir: 'ltr', preloadFonts: [] },
+  pt_BR: { dir: 'ltr', preloadFonts: LATIN_PRELOAD },
+  ru: { dir: 'ltr', preloadFonts: ['geist-cyrillic'] },
+  zh_CN: { dir: 'ltr', preloadFonts: [] },
 }
 
 /**

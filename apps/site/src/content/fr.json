@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Snug : Exportation, importation et sauvegarde de favoris",
-    "description": "Exportez, importez et sauvegardez vos favoris dans des formats courants, depuis Chrome ou Safari. Tout en local."
+    "title": "Exporter et sauvegarder favoris – Extension Chrome | Snug",
+    "description": "Snug est une extension Chrome pour exporter, importer et sauvegarder vos favoris, avec des sauvegardes programmées. Sans compte ni appel réseau."
   },
   "seo": {
     "ogImageAlt": "Logo Snug, une icône de marque-page ambrée, au-dessus d’un court résumé de l’extension sur fond sombre."
