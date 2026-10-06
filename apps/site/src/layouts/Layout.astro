@@ -1,7 +1,8 @@
 ---
-import '@workspace/ui/globals.css'
+import '../styles/site.css'
 import { cn } from '@workspace/ui/lib/utils'
 
+import geistCyrillic from '@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2?url'
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
 import Footer from '../components/Footer.astro'
@@ -14,11 +15,17 @@ import {
   localePath,
   ogImagePath,
   SITE_ORIGIN,
+  type FontPreload,
   type Locale,
 } from '../i18n/locales'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import { buildStructuredData } from '../seo/structured-data'
 import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
+
+const FONT_PRELOAD_URLS: Record<FontPreload, string> = {
+  'space-grotesk-latin': spaceGroteskLatin,
+  'geist-cyrillic': geistCyrillic,
+}
 
 interface Props {
   locale: Locale
@@ -64,15 +71,15 @@ const jsonLd = standalone
       media="(prefers-color-scheme: dark)"
     />
     <script is:inline set:html={THEME_INIT_SCRIPT} />
-    {LOCALE_CONFIG[locale].preloadLatinFont && (
+    {LOCALE_CONFIG[locale].preloadFonts.map((font) => (
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        href={spaceGroteskLatin}
+        href={FONT_PRELOAD_URLS[font]}
         crossorigin
       />
-    )}
+    ))}
     {notFound ? (
       <meta name="robots" content="noindex" />
     ) : (

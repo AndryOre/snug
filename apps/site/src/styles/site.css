@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/space-grotesk';
+@import '@workspace/ui/theme.css';
+
+@source '../';
+@source '../../../../packages/ui/src/components/accordion.tsx';
+@source '../../../../packages/ui/src/components/badge.tsx';
+@source '../../../../packages/ui/src/components/button.tsx';
+@source '../../../../packages/ui/src/components/card.tsx';
+@source '../../../../packages/ui/src/components/dropdown-menu.tsx';
+@source '../../../../packages/ui/src/components/empty.tsx';
+@source '../../../../packages/ui/src/components/popover.tsx';
+@source '../../../../packages/ui/src/components/separator.tsx';
+
+@font-face {
+  font-family: 'Geist Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('../../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2')
+    format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Helvetica');
+  size-adjust: 105.83%;
+  ascent-override: 94.96%;
+  descent-override: 27.87%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Helvetica');
+  size-adjust: 111.33%;
+  ascent-override: 88.38%;
+  descent-override: 26.23%;
+  line-gap-override: 0%;
+}
+
+@theme inline {
+  --font-heading:
+    'Space Grotesk Variable', 'Space Grotesk Fallback', 'Geist Variable',
+    'Geist Fallback', sans-serif;
+  --font-sans: 'Geist Variable', 'Geist Fallback', sans-serif;
+}
