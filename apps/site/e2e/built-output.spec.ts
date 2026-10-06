@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -108,9 +108,20 @@ test.describe('built pages', () => {
       )
       expect(html).toMatch(/<meta name="theme-color" content="#[0-9a-f]{6}"/)
       expect(html).toContain(`dir="${LOCALE_CONFIG[locale].dir}"`)
-      expect(/rel="preload" as="font"/.test(html)).toBe(
-        LOCALE_CONFIG[locale].preloadLatinFont,
-      )
+      const preloads = html
+        .matchAll(/<link rel="preload" as="font"[^>]*href="([^"]+)"/g)
+        .map((match) => match[1])
+        .toArray()
+      const expectedPreloads =
+        locale === 'ru'
+          ? ['geist-cyrillic-wght-normal']
+          : LOCALE_CONFIG[locale].preloadFonts.length > 0
+            ? ['space-grotesk-latin-wght-normal']
+            : []
+      expect(preloads).toHaveLength(expectedPreloads.length)
+      for (const [index, name] of expectedPreloads.entries()) {
+        expect(preloads[index]).toContain(name)
+      }
 
       expect(html).toContain('<link rel="describedby" href="/llms.txt"')
 
@@ -265,6 +276,60 @@ test.describe('privacy page', () => {
   for (const locale of LOCALES) {
     test(`${locale} links the trust section to /privacy`, () => {
       expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
+    })
+  }
+})
+
+test.describe('site stylesheet', () => {
+  const stylesheet = readdirSync(path.join(builtSite, '_astro'))
+    .filter((file) => file.endsWith('.css'))
+    .map((file) => readBuilt(path.join('_astro', file)))
+    .join('\n')
+
+  for (const slot of ['sidebar', 'tabs', 'toast', 'select', 'input-group']) {
+    test(`omits ${slot} rules of unused shared components`, () => {
+      expect(stylesheet).not.toContain(`data-slot=${slot}`)
+      expect(stylesheet).not.toContain(`data-slot="${slot}`)
+    })
+  }
+
+  test('omits sidebar utilities and sidebar component selectors', () => {
+    expect(stylesheet).not.toMatch(/\.(bg|text|border)-sidebar/)
+    expect(stylesheet).not.toContain('data-sidebar')
+    expect(stylesheet).not.toContain('sidebar-wrapper')
+  })
+
+  test('declares metric-matched fallback faces for both families', () => {
+    for (const family of ['Geist Fallback', 'Space Grotesk Fallback']) {
+      const face = new RegExp(
+        String.raw`@font-face\{[^}]*font-family:"?${family}"?[^}]*size-adjust:`,
+      )
+      expect(stylesheet).toMatch(face)
+    }
+  })
+
+  test('ships only the latin subset of Geist Mono', () => {
+    expect(stylesheet).toContain('geist-mono-latin-wght-normal')
+    expect(stylesheet).not.toContain('geist-mono-latin-ext')
+    expect(stylesheet).not.toContain('geist-mono-cyrillic')
+  })
+})
+
+test.describe('font requests', () => {
+  for (const route of ['/', '/de/']) {
+    test(`${route} downloads neither geist-cyrillic nor geist-mono-latin-ext`, async ({
+      page,
+    }) => {
+      const fontUrls: string[] = []
+      page.on('request', (request) => {
+        if (request.resourceType() === 'font') fontUrls.push(request.url())
+      })
+      await page.goto(route, { waitUntil: 'networkidle' })
+      expect(fontUrls.length).toBeGreaterThan(0)
+      for (const url of fontUrls) {
+        expect(url).not.toContain('geist-cyrillic')
+        expect(url).not.toContain('geist-mono-latin-ext')
+      }
     })
   }
 })
