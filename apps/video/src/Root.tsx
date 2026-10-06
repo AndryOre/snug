@@ -13,7 +13,7 @@ import { HookScene } from './scenes/hook'
 import { ImportScene } from './scenes/import'
 import { LocalScene } from './scenes/local'
 import { DEFAULT_MUSIC, promoSchema, type SceneProps } from './schema'
-import { Thumbnail, THUMBNAIL_SIZE } from './thumbnail/Thumbnail'
+import { LandingPoster, Thumbnail, THUMBNAIL_SIZE } from './thumbnail/Thumbnail'
 import {
   FPS,
   HEIGHT,
@@ -89,6 +89,13 @@ export const RemotionRoot = () => (
     <Still
       id="Thumbnail"
       component={Thumbnail}
+      schema={promoSchema.pick({ locale: true })}
+      defaultProps={{ locale: DEFAULT_LOCALE }}
+      {...THUMBNAIL_SIZE}
+    />
+    <Still
+      id="LandingPoster"
+      component={LandingPoster}
       schema={promoSchema.pick({ locale: true })}
       defaultProps={{ locale: DEFAULT_LOCALE }}
       {...THUMBNAIL_SIZE}
