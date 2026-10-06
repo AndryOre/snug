@@ -4,6 +4,7 @@ import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 
 import {
   CHROME_WEB_STORE_EXTENSION_ID,
+  CHROME_WEB_STORE_REVIEWS_URL,
   CHROME_WEB_STORE_URL,
   getSiteUrl,
   GITHUB_URL,
@@ -42,6 +43,14 @@ describe('CHROME_WEB_STORE_URL', () => {
   it('is the slugless detail URL form', () => {
     expect(CHROME_WEB_STORE_URL).toBe(
       `https://chromewebstore.google.com/detail/${CHROME_WEB_STORE_EXTENSION_ID}`,
+    )
+  })
+})
+
+describe('CHROME_WEB_STORE_REVIEWS_URL', () => {
+  it('is the listing reviews tab with no tracking parameters', () => {
+    expect(CHROME_WEB_STORE_REVIEWS_URL).toBe(
+      `https://chromewebstore.google.com/detail/${CHROME_WEB_STORE_EXTENSION_ID}/reviews`,
     )
   })
 })

@@ -1222,5 +1222,21 @@
   },
   "changelog_2_0_2_1_link": {
     "message": "snug.andryore.dev 방문하기"
+  },
+  "reviewPrompt_title": {
+    "message": "Snug가 잘 작동하나요?",
+    "description": "Popup Review prompt card title (also its accessible name)"
+  },
+  "reviewPrompt_description": {
+    "message": "Chrome 웹 스토어의 솔직한 리뷰는 다른 사람들이 Snug를 찾는 데 도움이 됩니다.",
+    "description": "Popup Review prompt card description"
+  },
+  "reviewPrompt_leaveReview": {
+    "message": "리뷰 남기기",
+    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+  },
+  "reviewPrompt_notNow": {
+    "message": "나중에",
+    "description": "Popup Review prompt button that dismisses the card"
   }
 }

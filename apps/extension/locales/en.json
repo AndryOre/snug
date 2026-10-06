@@ -1234,5 +1234,21 @@
   },
   "changelog_2_0_2_1_link": {
     "message": "Visit snug.andryore.dev"
+  },
+  "reviewPrompt_title": {
+    "message": "Is Snug working for you?",
+    "description": "Popup Review prompt card title (also its accessible name)"
+  },
+  "reviewPrompt_description": {
+    "message": "An honest review on the Chrome Web Store helps other people find it.",
+    "description": "Popup Review prompt card description"
+  },
+  "reviewPrompt_leaveReview": {
+    "message": "Leave a review",
+    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+  },
+  "reviewPrompt_notNow": {
+    "message": "Not now",
+    "description": "Popup Review prompt button that dismisses the card"
   }
 }
