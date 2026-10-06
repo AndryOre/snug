@@ -12,10 +12,6 @@ export const STORE_FACTS = {
   ratingCount: 20,
   userCount: 5000,
   license: 'https://opensource.org/license/mit',
-  storeUrl:
-    'https://chromewebstore.google.com/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn',
-  storeReviewsUrl:
-    'https://chromewebstore.google.com/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn/reviews',
   promoVideoUploadDate: '2026-10-05',
   sourceUrl: 'https://github.com/AndryOre/snug',
   author: { name: 'Andry Orellana', url: 'https://github.com/AndryOre' },

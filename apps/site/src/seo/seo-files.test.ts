@@ -24,8 +24,6 @@ import { lastCommitDate } from './last-modified'
 import { STORE_FACTS } from './store-facts'
 import { buildStructuredData } from './structured-data'
 
-const REDIRECT_LINK = /snug\.andryore\.dev\/(install|reviews)/
-
 describe('buildRobotsTxt', () => {
   it('keeps search crawlers and training crawlers in separate groups', () => {
     const groups = buildRobotsTxt().split('\n\n')
@@ -57,9 +55,7 @@ describe('buildLlmsTxt', () => {
     const body = buildLlmsTxt('A short description.', pages)
     expect(body).toMatch(/^# Snug\n/)
     expect(body).toContain('> A short description.')
-    expect(body).toContain(STORE_FACTS.storeUrl)
-    expect(body).toContain(STORE_FACTS.storeReviewsUrl)
-    expect(body).not.toMatch(REDIRECT_LINK)
+    expect(body).toContain(`${SITE_ORIGIN}/install`)
     expect(body).toContain(`${SITE_ORIGIN}/privacy/`)
   })
 
@@ -83,10 +79,9 @@ describe('buildLlmsFullTxt', () => {
     expect(body).toContain(getContent('en').hero.subheadline)
   })
 
-  it('links the canonical store and reviews tab, never the redirects', () => {
-    expect(body).toContain(STORE_FACTS.storeUrl)
-    expect(body).toContain(STORE_FACTS.storeReviewsUrl)
-    expect(body).not.toMatch(REDIRECT_LINK)
+  it('links the counted redirects, never the raw store URL', () => {
+    expect(body).toContain(`${SITE_ORIGIN}/reviews`)
+    expect(body).not.toContain('chromewebstore.google.com')
   })
 
   it('quotes every review with attribution and links the video', () => {
@@ -181,13 +176,13 @@ describe('buildStructuredData', () => {
     expect(app.featureList).toEqual(FEATURES)
   })
 
-  it.each(LOCALES)('%s points install links at the store', (locale) => {
+  it.each(LOCALES)('%s points the install links at /install', (locale) => {
     const { app, data } = graphNodes(locale)
 
-    expect(app.downloadUrl).toBe(STORE_FACTS.storeUrl)
-    expect(app.installUrl).toBe(STORE_FACTS.storeUrl)
-    expect(app.sameAs).toEqual([STORE_FACTS.storeUrl, STORE_FACTS.sourceUrl])
-    expect(JSON.stringify(data)).not.toContain('/install')
+    expect(app.downloadUrl).toBe(`${SITE_ORIGIN}/install`)
+    expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
+    expect(app.sameAs).toEqual([STORE_FACTS.sourceUrl])
+    expect(JSON.stringify(data)).not.toContain('chromewebstore.google.com')
   })
 
   it.each(LOCALES)('%s expresses the locale on a WebPage node', (locale) => {
@@ -278,8 +273,8 @@ describe('root file routes', () => {
     expect(response.headers.get('Content-Type')).toContain('text/plain')
     const text = await response.text()
     expect(text).toMatch(/^# Snug\n/)
-    expect(text).toContain(STORE_FACTS.storeUrl)
-    expect(text).not.toMatch(REDIRECT_LINK)
+    expect(text).toContain(`${SITE_ORIGIN}/install`)
+    expect(text).not.toContain('chromewebstore.google.com')
     for (const locale of LOCALES) {
       expect(text).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }

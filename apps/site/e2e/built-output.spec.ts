@@ -142,7 +142,7 @@ test.describe('built pages', () => {
         isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
       })
       expect(app['@id']).toBe(`${SITE_ORIGIN}/#software`)
-      expect(app.sameAs).toEqual([STORE_FACTS.storeUrl, STORE_FACTS.sourceUrl])
+      expect(app.sameAs).toEqual([STORE_FACTS.sourceUrl])
       expect(nodeOf('VideoObject')).toMatchObject({
         name: expect.any(String),
         description: expect.any(String),
@@ -154,10 +154,10 @@ test.describe('built pages', () => {
           /^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]+$/,
         ),
       })
-      expect(JSON.stringify(graph)).not.toContain('/install')
+      expect(JSON.stringify(graph)).not.toContain('chromewebstore.google.com')
       expect(app.isAccessibleForFree).toBe(true)
       expect(app.author).toEqual({ '@id': nodeOf('Person')['@id'] })
-      expect(app.installUrl).toBe(STORE_FACTS.storeUrl)
+      expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
       expect(app.featureList).toHaveLength(6)
       expect(app).not.toHaveProperty('aggregateRating')
       expect(app).toHaveProperty('interactionStatistic')
@@ -213,8 +213,8 @@ test.describe('root files', () => {
     const llmsFull = readBuilt('llms-full.txt')
     expect(llmsFull).toMatch(/^# Snug/)
     for (const file of [llms, llmsFull]) {
-      expect(file).toContain(STORE_FACTS.storeUrl)
-      expect(file).not.toMatch(/snug\.andryore\.dev\/(install|reviews)/)
+      expect(file).toContain(`${SITE_ORIGIN}/install`)
+      expect(file).not.toContain('chromewebstore.google.com')
     }
     expect(llmsFull).toContain(REVIEWS[0]!.quote)
     expect(llmsFull).toMatch(/https:\/\/www\.youtube\.com\/watch\?v=[\w-]+/)

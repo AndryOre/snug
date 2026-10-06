@@ -82,14 +82,14 @@ ${localeLines}
 ## Pages
 
 - [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page as Markdown
-- [Chrome Web Store listing](${STORE_FACTS.storeUrl}): install Snug
+- [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store listing
 - [Privacy policy](${SITE_ORIGIN}/privacy/): what Snug stores and what it never sends
 - [Source code](${STORE_FACTS.sourceUrl}): MIT-licensed repository
 - [Sitemap](${SITE_ORIGIN}/sitemap.xml): all ten language versions
 
 ## Optional
 
-- [Chrome Web Store reviews](${STORE_FACTS.storeReviewsUrl}): what users say about Snug
+- [Chrome Web Store reviews](${SITE_ORIGIN}/reviews): what users say about Snug
 `
 }
 
@@ -141,7 +141,7 @@ export function buildLlmsFullTxt(content: SiteContent): string {
       content.proof.numbers,
       content.proof.renameNote,
       ...reviewQuotes,
-      `[${content.proof.link}](${STORE_FACTS.storeReviewsUrl})`,
+      `[${content.proof.link}](${SITE_ORIGIN}/reviews)`,
     ),
     section(content.faq.heading, ...faqItems),
     section(content.final.heading, content.final.line),

@@ -21,8 +21,8 @@ export interface StructuredDataPage {
  * One schema.org `@graph` for a locale's page. The `WebSite`,
  * `SoftwareApplication` and author `Person` share one `@id` across every
  * locale; the locale is expressed by the `WebPage` and `VideoObject` nodes.
- * Carries no `aggregateRating`, `review` or `FAQPage`, and never points at
- * `/install`.
+ * Carries no `aggregateRating`, `review` or `FAQPage`. Install links use the
+ * counted `/install` redirect, never the raw store URL.
  * @param locale - A supported locale code.
  * @param description - The locale's meta description.
  * @param featureList - The locale's feature titles.
@@ -40,6 +40,7 @@ export function buildStructuredData(
   const websiteId = `${SITE_ORIGIN}/#website`
   const softwareId = `${SITE_ORIGIN}/#software`
   const videoId = `${pageUrl}#video`
+  const installUrl = `${SITE_ORIGIN}/install`
   const language = languageTag(locale)
   return {
     '@context': 'https://schema.org',
@@ -79,12 +80,12 @@ export function buildStructuredData(
         description,
         url: `${SITE_ORIGIN}/`,
         inLanguage: language,
-        sameAs: [STORE_FACTS.storeUrl, STORE_FACTS.sourceUrl],
+        sameAs: [STORE_FACTS.sourceUrl],
         applicationCategory: STORE_FACTS.category,
         operatingSystem: STORE_FACTS.operatingSystem,
         browserRequirements: STORE_FACTS.browserRequirements,
-        downloadUrl: STORE_FACTS.storeUrl,
-        installUrl: STORE_FACTS.storeUrl,
+        downloadUrl: installUrl,
+        installUrl,
         featureList,
         screenshot: `${SITE_ORIGIN}${ogImagePath(locale)}`,
         author: { '@id': authorId },
