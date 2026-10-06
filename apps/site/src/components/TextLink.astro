@@ -13,7 +13,7 @@ const { href, class: className, ...rest } = Astro.props
 <a
   href={href}
   class={cn(
-    'inline-flex min-h-11 items-center rounded-md text-foreground underline decoration-border underline-offset-4 outline-hidden hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring/50',
+    'inline-flex min-h-11 items-center rounded-md text-foreground underline decoration-border underline-offset-4 outline-hidden hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     className,
   )}
   {...rest}

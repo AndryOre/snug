@@ -58,7 +58,10 @@ export default function LanguageSwitcher({
           <span lang={currentTag} className="min-w-0 truncate">
             {currentName}
           </span>
-          <span className="shrink-0 font-mono text-sm text-primary-text">
+          <span
+            aria-hidden="true"
+            className="shrink-0 font-mono text-sm text-primary-text"
+          >
             {currentTag}
           </span>
         </PopoverTrigger>

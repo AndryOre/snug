@@ -1,6 +1,6 @@
 import { chromium } from '@playwright/test'
 import type { Page } from '@playwright/test'
-import { copyFile, mkdir, readFile } from 'node:fs/promises'
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import { expect, test } from '../e2e/fixtures'
@@ -12,9 +12,12 @@ import type { SlideTheme } from './compose-slide'
 const EXTENSION_ROOT = path.resolve(import.meta.dirname, '..')
 const THEME: SlideTheme =
   process.env.STORE_SCREENSHOT_THEME === 'light' ? 'light' : 'dark'
+const IS_LANDING = process.env.STORE_SCREENSHOT_VARIANT === 'landing'
+if (THEME === 'light' && !IS_LANDING)
+  throw new Error('The light theme is only generated for the landing variant')
 const SCREENSHOTS_ROOT = path.resolve(
   EXTENSION_ROOT,
-  THEME === 'light'
+  IS_LANDING
     ? '../site/src/assets/screenshots'
     : '../../docs/store/assets/screenshots',
 )
@@ -28,7 +31,9 @@ const SLIDE_FILES = [
 ]
 const RAW_DIRECTORY = path.resolve(EXTENSION_ROOT, 'test-results/store/raw')
 const DEVICE_SCALE_FACTOR = 2
-const APP_CAPTURE = { width: 1280, height: 716 }
+const STORE_APP_CAPTURE = { width: 1280, height: 716 }
+const LANDING_APP_CAPTURE = { width: 700, height: 525 }
+const APP_CAPTURE = IS_LANDING ? LANDING_APP_CAPTURE : STORE_APP_CAPTURE
 const CANVAS = { width: 1280, height: 800 }
 const CARD_WIDTH = 1040
 const CARD_TOP = 220
@@ -99,6 +104,23 @@ async function captureRaw(
   })
 }
 
+async function emitSlide(
+  composer: Page,
+  rawShot: Buffer,
+  outputPath: string,
+  slide: Omit<Parameters<typeof composeUiSlide>[1], 'screenshot' | 'theme'>,
+): Promise<void> {
+  if (IS_LANDING) {
+    await writeFile(outputPath, rawShot)
+    return
+  }
+  await composeUiSlide(
+    composer,
+    { ...slide, screenshot: rawShot, theme: THEME },
+    outputPath,
+  )
+}
+
 test.use({
   colorScheme: THEME,
   deviceScaleFactor: DEVICE_SCALE_FACTOR,
@@ -130,11 +152,11 @@ test('composes the five store screenshots', async ({
     return entry.message
   }
   const localeDirectory =
-    THEME === 'light'
+    IS_LANDING && THEME === 'light'
       ? path.join(SCREENSHOTS_ROOT, locale, 'light')
       : path.join(SCREENSHOTS_ROOT, locale)
   await mkdir(localeDirectory, { recursive: true })
-  if (THEME === 'dark' && locale === DEFAULT_LOCALE)
+  if (!IS_LANDING && locale === DEFAULT_LOCALE)
     await mkdir(SCREENSHOTS_ROOT, { recursive: true })
   const composerBrowser = await chromium.launch({ channel: 'chromium' })
   const composer = await composerBrowser.newPage({
@@ -164,18 +186,16 @@ test('composes the five store screenshots', async ({
   await expect(exportPage.locator('html.dark')).toHaveCount(
     THEME === 'dark' ? 1 : 0,
   )
+  if (IS_LANDING)
+    await exportPage.addStyleTag({
+      content: 'p.truncate.tabular-nums { visibility: hidden; }',
+    })
   const exportShot = await captureRaw(exportPage, 'body', '01-export.png')
-  await composeUiSlide(
-    composer,
-    {
-      ...captions.export,
-      screenshot: exportShot,
-      cardWidth: CARD_WIDTH,
-      cardTop: CARD_TOP,
-      theme: THEME,
-    },
-    outputPath('01-export.png'),
-  )
+  await emitSlide(composer, exportShot, outputPath('01-export.png'), {
+    ...captions.export,
+    cardWidth: CARD_WIDTH,
+    cardTop: CARD_TOP,
+  })
 
   const importPage = await openExtensionPage('app.html#/import')
   await expect(
@@ -192,17 +212,11 @@ test('composes the five store screenshots', async ({
   await expect(importPage.getByRole('radio')).toHaveCount(3)
   await importPage.getByRole('radio').nth(1).click()
   const importShot = await captureRaw(importPage, 'body', '02-import.png')
-  await composeUiSlide(
-    composer,
-    {
-      ...captions.import,
-      screenshot: importShot,
-      cardWidth: CARD_WIDTH,
-      cardTop: CARD_TOP,
-      theme: THEME,
-    },
-    outputPath('02-import.png'),
-  )
+  await emitSlide(composer, importShot, outputPath('02-import.png'), {
+    ...captions.import,
+    cardWidth: CARD_WIDTH,
+    cardTop: CARD_TOP,
+  })
 
   const hourInMilliseconds = 60 * 60 * 1000
   await seedStorage({
@@ -238,47 +252,55 @@ test('composes the five store screenshots', async ({
     'body',
     '03-auto-export.png',
   )
-  await composeUiSlide(
-    composer,
-    {
-      ...captions.autoExport,
-      screenshot: autoExportShot,
-      cardWidth: CARD_WIDTH,
-      cardTop: CARD_TOP,
-      theme: THEME,
-    },
-    outputPath('03-auto-export.png'),
-  )
+  await emitSlide(composer, autoExportShot, outputPath('03-auto-export.png'), {
+    ...captions.autoExport,
+    cardWidth: CARD_WIDTH,
+    cardTop: CARD_TOP,
+  })
 
   const popup = await openExtensionPage('popup.html')
   await expect(popup.getByTestId('popup-frame')).toBeVisible()
-  await popup.addStyleTag({
-    content: `
-      html, body { background: transparent !important; }
-      [data-testid="popup-frame"] { background: var(--popover); border-radius: 16px; }
-    `,
-  })
-  const popupShot = await captureRaw(
-    popup,
-    '[data-testid="popup-frame"]',
-    '04-popup.png',
-  )
-  const popupBox = await popup.getByTestId('popup-frame').boundingBox()
-  if (!popupBox) throw new Error('The popup frame has no bounding box')
-  await composeUiSlide(
-    composer,
-    {
-      ...captions.popup,
-      screenshot: popupShot,
-      cardWidth: Math.round((popupBox.width * POPUP_HEIGHT) / popupBox.height),
-      cardTop: POPUP_CARD_TOP,
-      cardHeight: POPUP_HEIGHT,
-      theme: THEME,
-    },
-    outputPath('04-popup.png'),
-  )
+  if (IS_LANDING) {
+    await popup.addStyleTag({
+      content: `
+        html, body { margin: 0; width: ${LANDING_APP_CAPTURE.width}px; height: ${LANDING_APP_CAPTURE.height}px; background: var(--background) !important; }
+        body { display: grid; place-items: center; }
+        [data-testid="popup-frame"] { background: var(--popover); border-radius: 16px; border: 1px solid var(--border); }
+      `,
+    })
+    const landingPopupShot = await captureRaw(popup, 'body', '04-popup.png')
+    await writeFile(outputPath('04-popup.png'), landingPopupShot)
+  } else {
+    await popup.addStyleTag({
+      content: `
+        html, body { background: transparent !important; }
+        [data-testid="popup-frame"] { background: var(--popover); border-radius: 16px; }
+      `,
+    })
+    const popupShot = await captureRaw(
+      popup,
+      '[data-testid="popup-frame"]',
+      '04-popup.png',
+    )
+    const popupBox = await popup.getByTestId('popup-frame').boundingBox()
+    if (!popupBox) throw new Error('The popup frame has no bounding box')
+    await composeUiSlide(
+      composer,
+      {
+        ...captions.popup,
+        screenshot: popupShot,
+        cardWidth: Math.round(
+          (popupBox.width * POPUP_HEIGHT) / popupBox.height,
+        ),
+        cardTop: POPUP_CARD_TOP,
+        cardHeight: POPUP_HEIGHT,
+        theme: THEME,
+      },
+      outputPath('04-popup.png'),
+    )
+  }
 
-  if (THEME === 'dark')
+  if (!IS_LANDING)
     await composeLocalSlide(
       composer,
       { headline: captions.local.headline },
@@ -291,7 +313,7 @@ test('composes the five store screenshots', async ({
       outputPath('05-local.png'),
     )
   await composerBrowser.close()
-  if (THEME === 'dark' && locale === DEFAULT_LOCALE) {
+  if (!IS_LANDING && locale === DEFAULT_LOCALE) {
     for (const fileName of SLIDE_FILES)
       await copyFile(
         path.join(localeDirectory, fileName),
