@@ -18,6 +18,7 @@ import { APP_ROUTES } from '@/lib/app-url'
 import { exportBookmarks } from '@/lib/export-all-bookmarks'
 import { ExportCanceledError } from '@/lib/export-control'
 import { formatCount } from '@/lib/format-count'
+import { markReviewPromptEligible } from '@/lib/review-prompt'
 import { lastExportFormatStore } from '@/lib/storage'
 import type { BookmarkTreeHandle, CheckedState } from '@/lib/types'
 import { useOperationProgress } from '@/lib/use-operation-progress'
@@ -110,6 +111,7 @@ export function ExportRoute() {
         signal,
         onProgress: progress.report,
       })
+      await markReviewPromptEligible(Date.now())
       toast.add({
         type: 'success',
         title: i18n.t('exportPage_successTitle', count, [formatCount(count)]),

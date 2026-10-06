@@ -26,6 +26,7 @@ import {
   POPUP_TOGGLE_FORMAT_LIMIT,
 } from '@/lib/export-formats'
 import { formatCount } from '@/lib/format-count'
+import { markReviewPromptEligible } from '@/lib/review-prompt'
 import { lastExportFormatStore } from '@/lib/storage'
 import { useOperationProgress } from '@/lib/use-operation-progress'
 import { useStorageItem } from '@/lib/use-storage-item'
@@ -54,6 +55,7 @@ export function ExportSection() {
         signal,
         onProgress: progress.report,
       })
+      await markReviewPromptEligible(Date.now())
       toast.add({
         type: 'success',
         title: i18n.t('popup_exportSuccessTitle', count, [formatCount(count)]),

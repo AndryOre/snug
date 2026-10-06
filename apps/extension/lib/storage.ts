@@ -5,6 +5,7 @@ import type {
   AutoExportConfig,
   AutoExportLastRun,
   ImportMode,
+  ReviewPromptState,
 } from '@/lib/types'
 
 /**
@@ -185,4 +186,13 @@ export const defaultImportModeStore = storage.defineItem<ImportMode>(
 export const skipDuplicatesStore = storage.defineItem<boolean>(
   'local:skipDuplicates',
   { fallback: true },
+)
+
+/**
+ * Local state of the one-time Review prompt. A fresh profile is neither
+ * eligible nor dismissed. See `lib/review-prompt.ts` for the rules.
+ */
+export const reviewPromptStore = storage.defineItem<ReviewPromptState>(
+  'local:reviewPrompt',
+  { fallback: { eligibleAt: null, dismissedAt: null } },
 )

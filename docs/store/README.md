@@ -260,15 +260,17 @@ resolves base64 data (`getFaviconBase64`); it is used by
 `components/export/bookmark-tree.tsx` and the three exporters in
 `lib/exporters/`.
 
-`storage` (251 chars):
+`storage` (506 chars):
 
 ```text
-Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times. Before a "Restore — replace" import it also keeps one safety snapshot of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
+Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import it also keeps one safety snapshot of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
 ```
 
 Code: `lib/storage.ts` defines every setting with `storage.defineItem` under a
 `local:` key, which uses `chrome.storage.local`. The background worker watches
-`autoExportConfigStore` in `entrypoints/background.ts`.
+`autoExportConfigStore` in `entrypoints/background.ts`. The Review prompt state
+is `local:reviewPrompt` (`{ eligibleAt, dismissedAt }`, both timestamps or
+null); it adds no permission, network call or data category.
 
 `unlimitedStorage`:
 
@@ -336,7 +338,9 @@ it; `entrypoints/background.ts` wires the click listener.
 | Certification 2 | I do not use or transfer user data for purposes that are unrelated to my item's single purpose. |
 | Certification 3 | I do not use or transfer user data to determine creditworthiness or for lending purposes.       |
 
-All three certifications are ticked, as on v1.3.0.
+All three certifications are ticked, as on v1.3.0. The Review prompt changes
+none of these fields: it collects no data, adds no permission and makes no
+network call, so only the `storage` justification text changes.
 
 Privacy policy URL:
 

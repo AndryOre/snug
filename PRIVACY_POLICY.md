@@ -1,6 +1,6 @@
 # Privacy Policy for Snug
 
-Last updated: October 3, 2026
+Last updated: October 6, 2026
 
 ## Introduction
 
@@ -64,6 +64,13 @@ data to external servers.
   display options, export options, the filename template, and your automatic
   export configuration — using the browser's local storage (`storage.local`).
   This data stays on your device and is never transmitted anywhere.
+- Snug may show a one-time, dismissible card in the popup inviting you to review
+  the extension on the Chrome Web Store after your first successful export. To
+  show it only once, Snug stores two local timestamps in `storage.local`: when
+  the card became available and when you dismissed it. They contain no bookmark
+  content, no personal information and no identifier, and are never transmitted
+  anywhere. The card is only a link: opening the store page is your choice, and
+  Snug itself makes no network request for it.
 - Before every "Restore — replace" import, Snug saves a safety snapshot of your
   bookmarks bar and other bookmarks so the import can be undone. This stores
   your bookmark content (titles, addresses and folder structure) locally in the

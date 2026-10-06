@@ -134,6 +134,16 @@ export interface AutoExportLastRun {
   trigger: AutoExportTrigger
 }
 
+/**
+ * Persisted state of the one-time Review prompt: when the user first
+ * completed a successful export and when they retired the prompt, both epoch
+ * milliseconds or `null`. Rules live in `lib/review-prompt.ts`.
+ */
+export interface ReviewPromptState {
+  eligibleAt: number | null
+  dismissedAt: number | null
+}
+
 export interface ImportPreview {
   format: BookmarkFormat
   bookmarksBarCount: number
