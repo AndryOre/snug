@@ -5,11 +5,11 @@ description:
   inheriting the shipped Snug brand.
 colors:
   aurora-ground: 'oklch(0.186 0.017 79.1)'
-  aurora-panel: 'oklch(0.226 0.023 69.2)'
+  aurora-panel: 'oklch(0.25 0.023 69.2)'
   paper-text: 'oklch(0.943 0.019 80.1)'
   muted-text: 'oklch(0.74 0.041 82.3)'
   amber: 'oklch(0.789 0.161 65.7)'
-  hairline: 'oklch(0.943 0.019 80.1 / 12%)'
+  hairline: 'oklch(0.943 0.019 80.1 / 16%)'
 typography:
   display:
     fontFamily: 'Space Grotesk Variable, sans-serif'
@@ -108,14 +108,17 @@ and 16px on phones. Sections are separated by 96px of space on desktop and 56px
 on phones. Section order is fixed by the spec: Hero, Trust proof, Features, Real
 interface, Video, Social proof, FAQ, Final call to action and footer. The
 journey row is a three-card grid joined by arrows on desktop and a vertical
-stack with down arrows on phones. Card grids use
-`repeat(auto-fit, minmax(260px, 1fr))`.
+stack with down arrows on phones. The trust and feature grids are one column on
+phones and a fixed three columns from `lg` up (two even rows of three for the
+six features); other card grids use `repeat(auto-fit, minmax(260px, 1fr))`.
 
 ## Elevation & Depth
 
 Flat and tonal. Depth is a panel one step lighter than the ground plus a 1px
-hairline. No drop shadows. The amber glow is the only atmospheric effect and
-stays behind content.
+hairline (`--card-border`). A card reads at least 1.15:1 against the ground and
+its hairline at least 1.5:1 against the card in both themes; a unit test in
+`src/styles/card-contrast.test.ts` guards both. No drop shadows. The amber glow
+is the only atmospheric effect and stays behind content.
 
 ## Shapes
 
@@ -128,8 +131,14 @@ a blurred copy of the mark behind it.
 
 - **Primary button:** flat amber, dark text, 600 weight, 10px radius. Always
   links to `/install`, never to the store listing.
-- **Card (shadcn):** `--card` fill, hairline border, 14px radius, mono numeral
-  in amber, Space Grotesk 500 title, muted body.
+- **Card (shadcn):** `--card` fill, `--card-border` hairline, 14px radius, Space
+  Grotesk 500 title, muted body. Feature cards add a mono numeral in amber;
+  trust cards carry none because they are not steps.
+- **FAQ item:** Base UI accordion island. Open answers use `text-lead` (17px),
+  line height 1.6, `pt-1` under the question, in a column about 832px wide. The
+  server HTML marks every collapsed panel `hidden="until-found"` so find-in-page
+  and text-fragment links open it before hydration. The panel itself animates
+  height; reduced motion removes the transition.
 - **Journey card:** a panel; the middle card (the file) gets an amber border at
   50% alpha. Folder icons are Lucide `folder`, 2px stroke, amber.
 - **Format chip:** Geist Mono 12px, 1px hairline border, 6px radius.

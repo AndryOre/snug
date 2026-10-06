@@ -6,10 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@workspace/ui/components/card'
+import { cn } from '@workspace/ui/lib/utils'
 import Eyebrow from './Eyebrow.astro'
 
 interface Props {
-  numeral: string
+  numeral?: string
   title: string
   body: string
 }
@@ -21,10 +22,17 @@ const hasExtras = Astro.slots.has('default')
 <li class="flex">
   <Card size="lg" className="w-full">
     <CardHeader>
-      <Eyebrow as="span" aria-hidden="true">
-        {numeral}
-      </Eyebrow>
-      <CardTitle className="mt-3 text-2xl leading-tight break-words hyphens-auto">
+      {numeral && (
+        <Eyebrow as="span" aria-hidden="true">
+          {numeral}
+        </Eyebrow>
+      )}
+      <CardTitle
+        className={cn(
+          'text-2xl leading-tight break-words hyphens-auto',
+          numeral && 'mt-3',
+        )}
+      >
         <h3>{title}</h3>
       </CardTitle>
       <CardDescription className="mt-3 text-base">{body}</CardDescription>
