@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Snug: Exportar, importar y respaldar marcadores",
-    "description": "Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local."
+    "title": "Exportar, importar y respaldar marcadores – Chrome | Snug",
+    "description": "Snug es una extensión de Chrome para exportar, importar y respaldar tus marcadores, con copias automáticas programadas. No pide cuenta y no usa la red."
   },
   "seo": {
     "ogImageAlt": "Logotipo de Snug, un icono de marcador ámbar, sobre un breve resumen de la extensión en fondo oscuro."

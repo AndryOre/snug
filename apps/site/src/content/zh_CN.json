@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Snug: 书签导出、导入与备份",
-    "description": "以常见格式导出书签，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。"
+    "title": "书签导出、导入与备份 – Chrome 扩展 | Snug",
+    "description": "Snug 是一款 Chrome 扩展，可导出、导入书签，并按计划自动备份。无需账号，也不会发起任何网络请求。"
   },
   "seo": {
     "ogImageAlt": "Snug 徽标(琥珀色书签图标)及扩展程序的简短说明,深色背景。"
