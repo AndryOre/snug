@@ -67,7 +67,7 @@ Saturdays and 1126 on Tuesdays. D = **2026-10-11**.
 | When         | What                                                                               |
 | ------------ | ---------------------------------------------------------------------------------- |
 | Before D     | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
-| Week 1       | Batch 1 directories, starting the day after D                                      |
+| Week 1       | Batch 1 directories, submitted before D                                            |
 | Weeks 2 to 3 | Batch 2 and Batch 3 directories                                                    |
 | Day D        | Product Hunt, X thread, YouTube community post and description refresh             |
 | D+2 to D+7   | Show HN, then the three Reddit posts, one per day                                  |
@@ -119,7 +119,7 @@ Work the remaining directory rows. When a listing goes live, set `Status` and
       Checked 2026-10-06: 4.8, 20 ratings, 5,000 users.
 - [x] The listing is on 2.x (Snug, not Bookmark Import/Export 1.x). 2.0.3 on
       2026-10-06.
-- [ ] The accounts needed are logged in to the cws-dash Chrome.
+- [x] The accounts needed are logged in to the cws-dash Chrome.
 - [ ] Facts quoted in the copy match [`../store/README.md`](../store/README.md)
       and [`.agents/product-marketing.md`](../../.agents/product-marketing.md).
 - [ ] Every `Website URL` and `Install URL` in `directories.csv` opens and
