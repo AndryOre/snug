@@ -104,7 +104,7 @@ account.
 - Import preview, three import modes, undo for replace
 - Scheduled Auto-export with Retention and Failure notification
 - Duplicates page for cleaning up before or after an import
-- Open source, zero network calls, no account
+- Open source, and it never touches the network
 
 **Tags:** bookmark export alternative, bookmark importer, bookmark backup,
 export bookmarks to Markdown, export bookmarks to OPML, Chrome extension,
@@ -174,21 +174,20 @@ nothing to send it to.
 
 - **Name:** Snug
 - **Tagline** (56/60): Bookmark export and backup that never leaves your device
-- **Short description** (137/160): Snug exports, imports and backs up your
-  bookmarks with no account, no ads, no data collection and no network calls.
-  The source is public.
+- **Short description** (124/160): Snug exports, imports and backs up your
+  bookmarks on your device, without an account or network calls. The source is
+  public.
 - **Campaign tag:** the directory's own tag from `directories.csv`
 
-**Long description** (548 characters)
+**Long description** (540 characters)
 
 Your bookmarks are years of curated work, and handing them to an unknown
 extension feels riskier than it should. Snug reads and writes the browser
 bookmarks tree on your device and makes no network calls, so there is no server
-to trust. It has no account, no ads and no data collection. You can export
-everything or one folder, import with a preview, undo a replace from a Safety
-snapshot, and schedule backups to your Downloads folder. The source is public,
-with CodeQL and an OpenSSF Scorecard. Snug 2.0 is the relaunch of Bookmark
-Import/Export.
+to trust. It needs no account and collects no data. You can export everything or
+one folder, import with a preview, undo a replace from a Safety snapshot, and
+schedule backups to your Downloads folder. The source is public, with CodeQL and
+an OpenSSF Scorecard. Snug 2.0 is the relaunch of Bookmark Import/Export.
 
 **Feature bullets**
 
@@ -242,7 +241,7 @@ programadas en Descargas. No hace llamadas de red ni pide cuenta.
 - Vista previa al importar; combina, reemplaza o añade a una carpeta nueva
 - Deshaz un reemplazo con la copia de seguridad automática
 - Exportación automática programada, con retención y aviso si falla
-- Sin cuenta, sin anuncios y sin llamadas de red; el código es público
+- No necesita cuenta ni usa la red; el código es público
 - Disponible en 10 idiomas
 
 **Tags:** marcadores, exportar marcadores, importar marcadores, copia de

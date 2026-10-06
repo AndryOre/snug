@@ -158,7 +158,7 @@ What it does: export the whole bookmark tree or selected folders as HTML, JSON, 
 
 Everything reads and writes the browser's own bookmarks tree on the device. The extension makes no network calls and has no account, so the privacy claim can be checked in the source instead of taken from a policy. MIT licensed: https://github.com/AndryOre/snug
 
-Limits: it imports one file at a time, Markdown and OPML are export-only, and there is no sync. Auto-export writes to Downloads, because that is where an extension can write without extra permissions.
+Limits: it imports one file at a time, Markdown and OPML are export-only, and there is no sync. Auto-export writes to Downloads, because the downloads API can only write inside that folder.
 
 Install: https://snug.andryore.dev/install?c=hn
 
