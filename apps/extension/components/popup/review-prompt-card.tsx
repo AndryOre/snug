@@ -8,7 +8,7 @@ import {
   ItemTitle,
 } from '@workspace/ui/components/item'
 import { ExternalLinkIcon } from 'lucide-react'
-import { useId } from 'react'
+import { type MouseEvent, useId } from 'react'
 
 import { useAutoExportLastRun } from '@/components/popup/auto-export-status-item'
 import { CHROME_WEB_STORE_REVIEWS_URL } from '@/lib/brand'
@@ -18,6 +18,12 @@ import { useStorageItem } from '@/lib/use-storage-item'
 
 function dismiss() {
   void dismissReviewPrompt(Date.now())
+}
+
+async function openReviewsPage(event: MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault()
+  await dismissReviewPrompt(Date.now())
+  await browser.tabs.create({ url: CHROME_WEB_STORE_REVIEWS_URL })
 }
 
 /**
@@ -51,7 +57,7 @@ export function ReviewPromptCard() {
           target="_blank"
           rel="noopener noreferrer"
           className={buttonVariants({ size: 'sm' })}
-          onClick={dismiss}
+          onClick={openReviewsPage}
         >
           {i18n.t('reviewPrompt_leaveReview')}
           <ExternalLinkIcon data-icon="inline-end" />
