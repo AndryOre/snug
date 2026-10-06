@@ -6,7 +6,7 @@ set -euo pipefail
 root="$(git rev-parse --show-toplevel)"
 image="snug-site-smoke"
 name="snug-site-smoke-$$"
-store="https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn"
+store="https://chromewebstore.google.com/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn"
 
 docker build -f "$root/apps/site/Dockerfile" -t "$image" "$root"
 docker run -d --rm --name "$name" -p 127.0.0.1:0:80 "$image" >/dev/null
@@ -81,6 +81,24 @@ done
 for file in robots.txt sitemap.xml llms.txt; do
   [ "$(status "$base/$file")" = 200 ] || fail "$file is not 200"
 done
+
+header_of() { curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, br' "$2" | tr -d '\r' | awk -v name="$1:" 'tolower($1)==name{sub(/^[^ ]+ /,""); print}'; }
+
+for file in llms.txt llms-full.txt robots.txt sitemap.xml; do
+  grep -qi 'charset=utf-8' <<<"$(header_of content-type "$base/$file")" || fail "$file lacks charset=utf-8"
+  [ -z "$(header_of content-encoding "$base/$file")" ] || fail "$file is compressed by the container"
+done
+[ -z "$(header_of content-encoding "$base/")" ] || fail "/ is compressed by the container"
+grep -q '^application/manifest+json' <<<"$(header_of content-type "$base/manifest.webmanifest")" || fail "manifest type"
+for pair in "/index.html:/" "/es/index.html:/es/"; do
+  [ "$(status "$base${pair%%:*}")" = 301 ] || fail "${pair%%:*} is not 301"
+  [ "$(location "$base${pair%%:*}")" = "${pair##*:}" ] || fail "${pair%%:*} does not redirect to ${pair##*:}"
+done
+[ "$(status "$base/es/404/")" = 404 ] || fail "/es/404/ is not 404"
+for path in /nope/ /ja/nope/; do
+  [ "$(header_of cache-control "$base$path")" = no-cache ] || fail "$path 404 lacks no-cache"
+done
+[ "$(header_of strict-transport-security "$base/")" = "max-age=63072000; includeSubDomains" ] || fail "HSTS value"
 
 logs="$(docker logs "$name" 2>&1)"
 grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.0 ' <<<"$logs" || fail "log not masked"
