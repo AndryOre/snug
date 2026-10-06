@@ -144,5 +144,8 @@ a blurred copy of the mark behind it.
 - Don't imply cloud, sync, an account, pricing or multi-file import, in copy or
   in imagery.
 - Don't add third-party fonts, scripts or embeds on load.
+- Do focus links with a full-opacity `ring-ring` 3px ring and a 2px
+  `ring-offset-background` offset (3:1 minimum, WCAG 1.4.11); never
+  `ring-ring/50`.
 - Don't put the brand gradient in UI chrome or copy.
 - Don't use a side-stripe border on cards or gradient text.
