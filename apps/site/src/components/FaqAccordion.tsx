@@ -20,7 +20,7 @@ export default function FaqAccordion({ entries }: FaqAccordionProperties) {
       variant="faq"
       hiddenUntilFound
       keepMounted
-      className="mt-10 max-w-3xl"
+      className="mt-10 max-w-208"
     >
       {entries.map((entry, index) => (
         <AccordionItem key={entry.question} value={`faq-${index}`}>

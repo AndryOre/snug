@@ -3,12 +3,19 @@ import { cn } from '@workspace/ui/lib/utils'
 
 interface Props {
   as?: 'ol' | 'ul'
+  columns?: 'auto' | 'three'
   class?: string
 }
 
-const { as: Tag = 'ul', class: className } = Astro.props
+const { as: Tag = 'ul', columns = 'auto', class: className } = Astro.props
 ---
 
-<Tag class={cn('mt-10 grid grid-cols-auto-cards gap-4', className)}>
+<Tag
+  class={cn(
+    'mt-10 grid gap-4',
+    columns === 'three' ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-auto-cards',
+    className,
+  )}
+>
   <slot />
 </Tag>

@@ -14,7 +14,7 @@ const { features } = getLandingCopy(Astro.props.locale)
 ---
 
 <Section section="features" heading={features.heading} class="defer-render-md">
-  <CardGrid as="ol">
+  <CardGrid as="ol" columns="three">
     {FEATURE_KEYS.map((key, index) => (
       <NumberedCard
         numeral={String(index + 1).padStart(2, '0')}
