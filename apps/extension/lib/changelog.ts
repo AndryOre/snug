@@ -1,6 +1,7 @@
 import type { GeneratedI18nStructure } from '#i18n'
 
 import { APP_ROUTES, getAppUrl } from './app-url'
+import { getSiteUrl } from './brand'
 
 /**
  * Every changelog key is rendered as plain, argument-less text, so this
@@ -15,6 +16,16 @@ type I18nKey = {
     ? K
     : never
 }[keyof GeneratedI18nStructure]
+
+/**
+ * Whether a changelog link leaves the extension (an `http(s)://` URL) and so
+ * should open in a new tab, as opposed to an App route that stays in place.
+ * @param url The changelog item's `linkUrl`.
+ * @returns `true` for external web URLs.
+ */
+export function isExternalChangelogUrl(url: string): boolean {
+  return /^https?:\/\//.test(url)
+}
 
 export interface ChangelogEntry {
   version: string
@@ -41,7 +52,8 @@ interface ChangelogItem {
  * item and its optional link label (see the generated
  * `GeneratedI18nStructure` for the actual message strings). `linkUrl`
  * pairs with `linkKey` to make an item's link label point at an
- * App route (built with `getAppUrl`).
+ * App route (built with `getAppUrl`) or an external page such as the
+ * landing site (built with `getSiteUrl`).
  *
  * The root `CHANGELOG.md` mirrors these entries for human readers outside
  * the extension and must be kept in sync by hand alongside this function.
@@ -54,6 +66,17 @@ export function getChangelog(): ChangelogEntry[] {
   const duplicatesUrl = getAppUrl(APP_ROUTES.duplicates)
 
   return [
+    {
+      version: '2.0.2',
+      isoDate: '2026-10-06',
+      items: [
+        {
+          textKey: 'changelog_2_0_2_1',
+          linkKey: 'changelog_2_0_2_1_link',
+          linkUrl: getSiteUrl(),
+        },
+      ],
+    },
     {
       version: '2.0.0',
       isoDate: '2026-10-02',

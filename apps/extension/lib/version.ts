@@ -20,7 +20,8 @@ export function isMinorOrMajorUpdate(
 /**
  * Whether the installed version has a changelog entry the user has not seen.
  * A never-recorded version counts as unseen; otherwise only a major or minor
- * difference does, since patch releases ship no changelog entry.
+ * difference does, so a patch release can list a changelog entry without
+ * raising the indicator or opening What's new.
  * @param lastSeenVersion The last version whose changelog was seen, if any.
  * @param installedVersion The currently installed version.
  * @returns `true` while the "New" indicator should show.
@@ -36,15 +37,33 @@ export function isWhatsNewUnseen(
 }
 
 /**
- * Whether a changelog entry describes the installed release. Patch releases
- * ship no changelog entry, so only major and minor are compared.
+ * Whether a changelog entry belongs to the installed release line. Only major
+ * and minor are compared, so several entries can match; use
+ * {@link getCurrentChangelogVersion} to flag a single one as "Current".
  * @param entryVersion Version label of one changelog entry.
  * @param installedVersion Version in the extension manifest.
- * @returns `true` when the entry should be flagged "Current".
+ * @returns `true` when the entry is on the installed major.minor line.
  */
 export function isChangelogEntryCurrent(
   entryVersion: string,
   installedVersion: string,
 ): boolean {
   return !isMinorOrMajorUpdate(entryVersion, installedVersion)
+}
+
+/**
+ * The single changelog entry to flag "Current": the newest one on the
+ * installed major.minor line, so a patch entry does not leave older entries
+ * of the same line flagged too.
+ * @param entryVersions Changelog entry versions, newest first.
+ * @param installedVersion Version in the extension manifest.
+ * @returns The version label to flag, or `undefined` when none matches.
+ */
+export function getCurrentChangelogVersion(
+  entryVersions: readonly string[],
+  installedVersion: string,
+): string | undefined {
+  return entryVersions.find((entryVersion) =>
+    isChangelogEntryCurrent(entryVersion, installedVersion),
+  )
 }

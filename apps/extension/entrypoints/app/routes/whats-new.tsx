@@ -8,10 +8,15 @@ import {
   ItemDescription,
   ItemTitle,
 } from '@workspace/ui/components/item'
+import { ExternalLinkIcon } from 'lucide-react'
 
 import { CHROME_WEB_STORE_URL } from '@/lib/brand'
-import { formatChangelogDate, getChangelog } from '@/lib/changelog'
-import { isChangelogEntryCurrent } from '@/lib/version'
+import {
+  formatChangelogDate,
+  getChangelog,
+  isExternalChangelogUrl,
+} from '@/lib/changelog'
+import { getCurrentChangelogVersion } from '@/lib/version'
 
 /**
  * The What's new screen: a changelog timeline (newest first, installed
@@ -23,6 +28,10 @@ import { isChangelogEntryCurrent } from '@/lib/version'
 export function WhatsNewRoute() {
   const installedVersion = browser.runtime.getManifest().version
   const changelog = getChangelog()
+  const currentVersion = getCurrentChangelogVersion(
+    changelog.map((entry) => entry.version),
+    installedVersion,
+  )
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
@@ -45,7 +54,7 @@ export function WhatsNewRoute() {
                   <h2 className="font-heading text-base font-semibold">
                     {version}
                   </h2>
-                  {isChangelogEntryCurrent(version, installedVersion) && (
+                  {version === currentVersion && (
                     <Badge>{i18n.t('whatsNew_current')}</Badge>
                   )}
                   <span className="text-sm text-muted-foreground">
@@ -61,9 +70,19 @@ export function WhatsNewRoute() {
                           {' '}
                           <a
                             href={linkUrl}
-                            className="text-foreground underline hover:no-underline"
+                            {...(isExternalChangelogUrl(linkUrl) && {
+                              target: '_blank',
+                              rel: 'noopener noreferrer',
+                            })}
+                            className="inline-flex items-center gap-1 text-foreground underline hover:no-underline"
                           >
                             {i18n.t(linkKey)}
+                            {isExternalChangelogUrl(linkUrl) && (
+                              <ExternalLinkIcon
+                                aria-hidden="true"
+                                className="size-3"
+                              />
+                            )}
                           </a>
                         </>
                       )}
