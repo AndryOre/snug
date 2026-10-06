@@ -169,7 +169,7 @@ function SiteLinkButton(properties: SiteLinkButtonProperties) {
       render={<a href={href} target="_blank" rel="noopener noreferrer" />}
     >
       <Icon />
-      <span>{label}</span>
+      <span className="min-w-0 truncate">{label}</span>
       <ExternalLinkIcon
         aria-hidden="true"
         className="ml-auto size-3 text-muted-foreground group-data-[collapsible=icon]:hidden"
