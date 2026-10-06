@@ -111,6 +111,11 @@ run, retry.
 **Failure notification** The system notification Snug shows when an Auto-export
 run fails; successful runs never notify. _Avoid_: alert, error toast, warning.
 
+**Review prompt** A one-time, dismissible invitation in the popup to leave an
+honest review on the Chrome Web Store, offered only after the user's first
+successful export or Auto-export run. Once acted on or dismissed, it never
+returns. _Avoid_: rating prompt, review nag, review request, feedback prompt.
+
 **Landing page** The marketing site at snug.andryore.dev: a static, multilingual
 page whose one job is to send visitors to the Chrome Web Store listing. It is
 separate from the App and the popup, which live inside the extension. _Avoid_:

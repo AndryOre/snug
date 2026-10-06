@@ -8,6 +8,7 @@ import { formatFilenameTemplate } from '@/lib/filename-template'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
 import { sanitizePathSegment } from '@/lib/path-segment'
 import { renderExport } from '@/lib/render-export'
+import { markReviewPromptEligible } from '@/lib/review-prompt'
 import {
   autoExportConfigStore,
   autoExportLastRunStore,
@@ -511,6 +512,7 @@ export async function runAutoExport(
 
     await Promise.all(downloads)
     await autoExportLastRunStore.setValue({ at: Date.now(), ok: true, trigger })
+    await markReviewPromptEligible(Date.now())
     await clearFailureBadge()
     await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
   } catch (error) {

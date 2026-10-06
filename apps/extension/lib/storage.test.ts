@@ -8,6 +8,7 @@ import {
   hideOtherBookmarksStore,
   lastExportFormatStore,
   lastSeenVersionStore,
+  reviewPromptStore,
   showBookmarkIconStore,
   themeStore,
 } from './storage'
@@ -23,6 +24,11 @@ describe('storage items', () => {
     ['hideOtherBookmarks', hideOtherBookmarksStore, true],
     ['lastExportFormat', lastExportFormatStore, 'html'],
     ['lastSeenVersion', lastSeenVersionStore, null],
+    [
+      'reviewPrompt',
+      reviewPromptStore,
+      { eligibleAt: null, dismissedAt: null },
+    ],
     ['defaultImportMode', defaultImportModeStore, 'restore-merge'],
     [
       'exportFilenameTemplate',

@@ -12,6 +12,7 @@ import {
   exportFilenameTemplateStore,
   hideOtherBookmarksStore,
   includeDateGroupModifiedStore,
+  reviewPromptStore,
 } from '@/lib/storage'
 import {
   resetFakeBookmarks,
@@ -541,6 +542,15 @@ describe('readAutoExportLastRun', () => {
   })
 })
 
+/**
+ * Reads the Review prompt's `eligibleAt` from storage.
+ * @returns The recorded timestamp, or `null` when never eligible.
+ */
+async function reviewEligibleAt(): Promise<number | null> {
+  const state = await reviewPromptStore.getValue()
+  return state.eligibleAt
+}
+
 describe('runAutoExport', () => {
   it('no-ops when auto-export is disabled', async () => {
     await autoExportConfigStore.setValue(baseConfig({ enabled: false }))
@@ -550,6 +560,7 @@ describe('runAutoExport', () => {
 
     expect(downloadSpy).not.toHaveBeenCalled()
     expect(await autoExportLastRunStore.getValue()).toBeNull()
+    expect(await reviewEligibleAt()).toBeNull()
   })
 
   it('no-ops when no format is selected', async () => {
@@ -560,6 +571,7 @@ describe('runAutoExport', () => {
 
     expect(downloadSpy).not.toHaveBeenCalled()
     expect(await autoExportLastRunStore.getValue()).toBeNull()
+    expect(await reviewEligibleAt()).toBeNull()
   })
 
   it('downloads one file per selected format with the correct filename, MIME, saveAs and conflictAction', async () => {
@@ -700,6 +712,30 @@ describe('runAutoExport', () => {
       trigger: 'catch-up',
     })
     expect(setBadgeText).toHaveBeenCalledWith({ text: '' })
+  })
+
+  it.each(['scheduled', 'catch-up', 'manual'] as const)(
+    'marks the Review prompt eligible after a successful %s run',
+    async (trigger) => {
+      await autoExportConfigStore.setValue(baseConfig({ formats: ['html'] }))
+      const { mock: downloadSpy, completeAll } = mockDownload()
+
+      await runAutoExportAndSettle(downloadSpy, completeAll, 1, trigger)
+
+      expect(await reviewEligibleAt()).not.toBeNull()
+    },
+  )
+
+  it('does not mark the Review prompt eligible after a failed run', async () => {
+    await autoExportConfigStore.setValue(baseConfig({ formats: ['html'] }))
+    mockDownload(async () => {
+      throw new Error('disk full')
+    })
+    mockActionBadge()
+
+    await expect(runAutoExport('scheduled')).rejects.toThrow('disk full')
+
+    expect(await reviewEligibleAt()).toBeNull()
   })
 
   it('records a failed run with its error and sets the failure badge for a scheduled run', async () => {
