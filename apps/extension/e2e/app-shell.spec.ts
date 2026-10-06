@@ -169,3 +169,22 @@ test('does not move focus on search changes inside the same route', async ({
   await expect(page).toHaveURL(/#\/export\?q=abc$/)
   await expect(heading).not.toBeFocused()
 })
+
+test('sidebar footer links open the landing site in a new tab', async ({
+  openExtensionPage,
+}) => {
+  const page = await openExtensionPage('app.html')
+
+  const website = page.getByRole('link', { name: en.shell_siteLink.message })
+  const privacy = page.getByRole('link', { name: en.shell_privacyLink.message })
+
+  await expect(website).toHaveAttribute('href', 'https://snug.andryore.dev/')
+  await expect(privacy).toHaveAttribute(
+    'href',
+    'https://snug.andryore.dev/privacy/',
+  )
+  for (const link of [website, privacy]) {
+    await expect(link).toHaveAttribute('target', '_blank')
+    await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+  }
+})

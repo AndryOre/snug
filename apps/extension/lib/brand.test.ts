@@ -1,10 +1,15 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
+
+import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 
 import {
   CHROME_WEB_STORE_EXTENSION_ID,
   CHROME_WEB_STORE_URL,
+  getSiteUrl,
   GITHUB_URL,
   PRODUCT_NAME,
+  SITE_PRIVACY_URL,
+  SITE_URL,
   TWITTER_URL,
 } from './brand'
 
@@ -50,5 +55,42 @@ describe('GITHUB_URL', () => {
 describe('TWITTER_URL', () => {
   it('points at the project X profile', () => {
     expect(TWITTER_URL).toBe('https://x.com/andryore')
+  })
+})
+
+const SITE_LOCALE_PATHS: Record<string, string> = {
+  en: '/',
+  es: '/es/',
+  de: '/de/',
+  fr: '/fr/',
+  it: '/it/',
+  ja: '/ja/',
+  ko: '/ko/',
+  pt_BR: '/pt-br/',
+  ru: '/ru/',
+  zh_CN: '/zh-cn/',
+}
+
+describe('getSiteUrl', () => {
+  beforeEach(() => {
+    resetFakeI18n()
+  })
+
+  it('is the site root for English', () => {
+    expect(getSiteUrl()).toBe(SITE_URL)
+  })
+
+  it.each(Object.entries(SITE_LOCALE_PATHS))(
+    'appends the %s locale path',
+    (locale, path) => {
+      resetFakeI18n(locale)
+      expect(getSiteUrl()).toBe(`https://snug.andryore.dev${path}`)
+    },
+  )
+})
+
+describe('SITE_PRIVACY_URL', () => {
+  it('points at the English privacy page', () => {
+    expect(SITE_PRIVACY_URL).toBe('https://snug.andryore.dev/privacy/')
   })
 })
