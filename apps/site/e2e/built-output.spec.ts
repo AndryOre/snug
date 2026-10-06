@@ -308,6 +308,16 @@ test.describe('site stylesheet', () => {
     }
   })
 
+  test('keeps Cyrillic out of the Space Grotesk fallback face', () => {
+    const face = stylesheet.match(
+      /@font-face\{[^}]*font-family:"?Space Grotesk Fallback"?[^}]*\}/,
+    )?.[0]
+    expect(face).toBeDefined()
+    const range = face!.match(/unicode-range:([^;}]+)/)?.[1]
+    expect(range).toBeDefined()
+    expect(range).not.toMatch(/U\+04/i)
+  })
+
   test('ships only the latin subset of Geist Mono', () => {
     expect(stylesheet).toContain('geist-mono-latin-wght-normal')
     expect(stylesheet).not.toContain('geist-mono-latin-ext')
