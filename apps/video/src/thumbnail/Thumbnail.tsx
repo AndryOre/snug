@@ -119,3 +119,94 @@ export const Thumbnail = ({ locale }: SceneProps) => {
     </FontGate>
   )
 }
+
+const POSTER_HOOK_SIZE = 60
+const POSTER_CJK_HOOK_SIZE = 58
+const POSTER_WINDOW_SCALE = 0.8
+const POSTER_WINDOW_LEFT = 32
+const POSTER_WINDOW_TOP = 210
+const CLEAR_ZONE_RADIUS = 192
+const CLEAR_ZONE_FEATHER = 28
+const CLEAR_ZONE_MASK = `radial-gradient(circle at 50% ${THUMBNAIL_SIZE.height / 2 - POSTER_WINDOW_TOP}px, transparent ${CLEAR_ZONE_RADIUS}px, #000 ${CLEAR_ZONE_RADIUS + CLEAR_ZONE_FEATHER}px)`
+
+/**
+ * 1280x720 landing-page video poster. The centre circle (about 30% of the
+ * width) is kept free of text and art for the click-to-load play button: the
+ * wordmark and hook run along the top and the Snug window is masked around the
+ * clear zone.
+ */
+export const LandingPoster = ({ locale }: SceneProps) => {
+  const fonts = fontStackFor(locale)
+  return (
+    <FontGate locale={locale}>
+      <AbsoluteFill style={{ backgroundColor: theme.colors.ground }}>
+        <AbsoluteFill
+          style={{
+            background:
+              'radial-gradient(ellipse 620px 420px at 86% 62%, rgba(255,162,48,0.3), rgba(255,162,48,0.08) 55%, transparent 80%)',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: POSTER_WINDOW_LEFT,
+            top: POSTER_WINDOW_TOP,
+            width: THUMBNAIL_SIZE.width - POSTER_WINDOW_LEFT * 2,
+            height: THUMBNAIL_SIZE.height - POSTER_WINDOW_TOP,
+            overflow: 'hidden',
+            maskImage: CLEAR_ZONE_MASK,
+          }}
+        >
+          <div
+            style={{
+              transform: `scale(${POSTER_WINDOW_SCALE})`,
+              transformOrigin: 'top left',
+            }}
+          >
+            <AppWindow locale={locale} active="export" />
+          </div>
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            left: PADDING_X,
+            top: 36,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+          }}
+        >
+          <BlobMark size={48} />
+          <span
+            style={{
+              fontFamily: fonts.display,
+              fontWeight: 700,
+              fontSize: 40,
+              color: theme.colors.text,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            {WORDMARK_TEXT}
+          </span>
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            left: PADDING_X,
+            top: 108,
+            right: PADDING_X,
+            fontFamily: fonts.display,
+            fontWeight: 700,
+            fontSize: isCjk(locale) ? POSTER_CJK_HOOK_SIZE : POSTER_HOOK_SIZE,
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
+            color: theme.colors.text,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {VIDEO_COPY[locale].hook}
+        </div>
+      </AbsoluteFill>
+    </FontGate>
+  )
+}

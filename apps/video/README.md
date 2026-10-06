@@ -61,7 +61,10 @@ Renders the `Thumbnail` still (1280x720, `locale` prop, hook from `VIDEO_COPY`)
 for all 10 locales through `renderStill` into
 `docs/brand/youtube/thumbnails/<locale>.png`, failing if any is not 1280x720 or
 exceeds 2 MB. Text stays out of the bottom-right 20%, where YouTube overlays the
-duration badge. Set `REMOTION_BROWSER_EXECUTABLE` as in Setup if needed.
+duration badge. The same command also renders the `LandingPoster` still (centre
+circle kept clear for the play button) into
+`apps/site/src/assets/video-posters/<locale>.png`. Set
+`REMOTION_BROWSER_EXECUTABLE` as in Setup if needed.
 
 ## Layout
 
