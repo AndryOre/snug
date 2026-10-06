@@ -90,3 +90,25 @@ glow), a Space Grotesk 600 headline at 60 px, a Geist 26 px subtitle in
 most 1040 px wide, with a 16 px radius, a 1 px border and a soft shadow. The
 popup slide centers the popup at about 520 px tall instead, and slide 5 swaps
 the card for the store icon over four icon-and-text rows.
+
+## Landing variant
+
+The landing page's Real interface section uses a second set of captures: the
+real app window only, with no caption, subtitle or aurora ground, in dark and
+light. It is selected with an env flag and never touches `docs/store/assets/`:
+
+```sh
+STORE_SCREENSHOT_VARIANT=landing bun run store:screenshots
+STORE_SCREENSHOT_VARIANT=landing STORE_SCREENSHOT_THEME=light bun run store:screenshots
+```
+
+The first command writes the dark set to
+`apps/site/src/assets/screenshots/<locale>/`, the second the light set to
+`apps/site/src/assets/screenshots/<locale>/light/`. Each run produces
+`01-export.png` to `04-popup.png` for the 10 locales (80 PNGs across both
+themes). Every file is 1400x1050 (a 700x525 CSS viewport at a device scale
+factor of 2), so the app's 14 px body text renders at 11 px or more at the
+landing's 552 px display width. The popup shot centers the popup frame on the
+app background. The export shot hides the truncated selection counter in the
+footer bar. The light theme is only generated for this variant. The page keeps
+its figcaption under each image as the only title.

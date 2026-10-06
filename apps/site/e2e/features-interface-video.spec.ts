@@ -52,8 +52,8 @@ for (const path of PATHS) {
     for (let index = 0; index < 8; index++) {
       const image = images.nth(index)
       await expect(image).toHaveAttribute('loading', 'lazy')
-      await expect(image).toHaveAttribute('width', '1280')
-      await expect(image).toHaveAttribute('height', '800')
+      await expect(image).toHaveAttribute('width', '1400')
+      await expect(image).toHaveAttribute('height', '1050')
       const alt = await image.getAttribute('alt')
       expect(alt?.length).toBeGreaterThan(10)
       const caption = await figures
