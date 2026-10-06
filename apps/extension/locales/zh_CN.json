@@ -1222,5 +1222,21 @@
   },
   "changelog_2_0_2_1_link": {
     "message": "访问 snug.andryore.dev"
+  },
+  "reviewPrompt_title": {
+    "message": "Snug 好用吗？",
+    "description": "Popup Review prompt card title (also its accessible name)"
+  },
+  "reviewPrompt_description": {
+    "message": "在 Chrome 应用商店留下真实评价，能帮助更多人发现它。",
+    "description": "Popup Review prompt card description"
+  },
+  "reviewPrompt_leaveReview": {
+    "message": "撰写评价",
+    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+  },
+  "reviewPrompt_notNow": {
+    "message": "以后再说",
+    "description": "Popup Review prompt button that dismisses the card"
   }
 }

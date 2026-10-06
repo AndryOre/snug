@@ -17,6 +17,12 @@ export const CHROME_WEB_STORE_EXTENSION_ID = 'gdhpeilfkeeajillmcncaelnppiakjhn'
 export const CHROME_WEB_STORE_URL = `https://chromewebstore.google.com/detail/${CHROME_WEB_STORE_EXTENSION_ID}`
 
 /**
+ * The Chrome Web Store reviews tab for the listing. Opened by the popup
+ * Review prompt; carries no UTM or tracking parameters.
+ */
+export const CHROME_WEB_STORE_REVIEWS_URL = `${CHROME_WEB_STORE_URL}/reviews`
+
+/**
  * The product name. Never translated, so every locale's `extensionName`
  * message must equal it.
  */

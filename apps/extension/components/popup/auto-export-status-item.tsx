@@ -25,7 +25,11 @@ import {
 import type { AutoExportLastRun } from '@/lib/types'
 import { useStorageItem } from '@/lib/use-storage-item'
 
-function useAutoExportLastRun(): AutoExportLastRun | null {
+/**
+ * Reactively reads the last Auto-export run, migrating legacy stored shapes.
+ * @returns The last run, or `null` when none has run.
+ */
+export function useAutoExportLastRun(): AutoExportLastRun | null {
   const [lastRun, setLastRun] = useState<AutoExportLastRun | null>(null)
 
   useEffect(() => {
