@@ -12,7 +12,7 @@ export const STORE_FACTS = {
   ratingCount: 20,
   userCount: 5000,
   license: 'https://opensource.org/license/mit',
-  promoVideoUploadDate: '2026-10-05',
+  promoVideoUploadDate: '2026-10-04',
   sourceUrl: 'https://github.com/AndryOre/snug',
   author: { name: 'Andry Orellana', url: 'https://github.com/AndryOre' },
 } as const
