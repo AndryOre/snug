@@ -20,6 +20,12 @@ import { chromium } from 'playwright'
  * installed on the host (Noto Sans, Liberation Sans, Noto Sans CJK, WenQuanYi);
  * Latin text uses the embedded Geist.
  *
+ * The launch assets (`docs/launch/assets/`) are the Product Hunt thumbnail
+ * (240x240), five Product Hunt gallery images (1270x760: the EN store
+ * screenshots, uncropped, on the brand background) and the X header (1500x500,
+ * lockup checked to sit inside a 1200x300 centered safe area). Each is checked
+ * for exact dimensions and a 3 MB budget; the script throws on any miss.
+ *
  * Icons are drawn at 75% of a transparent canvas: the SVG's fixed size is forced
  * to fill its container, sized so the painted bookmark spans 96 of 128 px.
  *
@@ -44,6 +50,12 @@ const NON_LATIN_FONT_FALLBACKS =
   "'Noto Sans','Liberation Sans','Noto Sans CJK JP','Noto Sans CJK KR','Noto Sans CJK SC','Source Han Sans','WenQuanYi Zen Hei'"
 const MB = 1024 * 1024
 const YOUTUBE_SAFE_AREA = { width: 1546, height: 423 }
+const LAUNCH_MAX_BYTES = 3 * MB
+const PRODUCT_HUNT_GALLERY_SIZE = { width: 1270, height: 760 }
+const PRODUCT_HUNT_GALLERY_SHOT_HEIGHT = 664
+const PRODUCT_HUNT_GALLERY_COUNT = 5
+const X_HEADER_SIZE = { width: 1500, height: 500 }
+const X_SAFE_AREA = { width: 1200, height: 300 }
 const AVATAR_ART_DIAMETER_RATIO = 0.7
 const BANNER_TAGLINE =
   'Export, import, and back up your bookmarks &mdash; all on your device.'
@@ -299,6 +311,117 @@ async function renderYoutubeWatermark(browser, outPath) {
   console.log(path.relative(repoRoot, outPath))
 }
 
+async function renderProductHuntThumbnail(browser, outPath) {
+  const size = 240
+  const page = await browser.newPage({
+    viewport: { width: size, height: size },
+  })
+  const markSize = Math.round(
+    (size * AVATAR_ART_DIAMETER_RATIO) / MARK_ART_HEIGHT_RATIO,
+  )
+  await page.setContent(`
+    <style>svg{display:block;width:100%;height:100%}</style>
+    <body style="margin:0;width:${size}px;height:${size}px;display:grid;place-items:center;background:radial-gradient(50% 50% at 50% 50%, rgba(255,162,48,0.38), transparent 75%), ${GROUND}">
+      <div style="width:${markSize}px;height:${markSize}px">${markSvg}</div>
+    </body>`)
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath })
+  await page.close()
+  await assertPngSpec(outPath, {
+    width: size,
+    height: size,
+    maxBytes: LAUNCH_MAX_BYTES,
+  })
+  console.log(path.relative(repoRoot, outPath))
+}
+
+async function renderProductHuntGallery(browser, screenshotPath, outPath) {
+  const { width, height } = PRODUCT_HUNT_GALLERY_SIZE
+  const screenshot = await readFile(screenshotPath)
+  const dataUri = `data:image/png;base64,${screenshot.toString('base64')}`
+  const page = await browser.newPage({ viewport: { width, height } })
+  await page.setContent(`
+    <body style="margin:0;width:${width}px;height:${height}px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(60% 70% at 50% 50%, rgba(255,162,48,0.22), transparent 70%), ${auroraGlow}">
+      <img id="shot" src="${dataUri}" style="display:block;height:${PRODUCT_HUNT_GALLERY_SHOT_HEIGHT}px;width:auto;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,0.55);border:1px solid rgba(255,162,48,0.25)">
+    </body>`)
+  await page.waitForFunction(
+    'document.getElementById("shot").complete && document.getElementById("shot").naturalWidth > 0',
+  )
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath })
+  await page.close()
+  await assertPngSpec(outPath, {
+    width,
+    height,
+    maxBytes: LAUNCH_MAX_BYTES,
+  })
+  console.log(path.relative(repoRoot, outPath))
+}
+
+async function renderXHeader(browser, outPath) {
+  const { width, height } = X_HEADER_SIZE
+  const page = await browser.newPage({ viewport: { width, height } })
+  await page.setContent(`
+    <style>svg{display:block;width:100%;height:100%}</style>
+    <body style="margin:0;width:${width}px;height:${height}px;position:relative;overflow:hidden;background:radial-gradient(55% 70% at 50% 50%, rgba(255,162,48,0.24), transparent 70%), ${auroraGlow}">
+      <div style="position:absolute;inset:0;display:grid;place-items:center">
+        <div id="lockup" style="width:420px;height:132px">${lockupSvg}</div>
+      </div>
+    </body>`)
+  await page.waitForFunction('document.fonts.status === "loaded"')
+  const box = await page.locator('#lockup').boundingBox()
+  const safeLeft = (width - X_SAFE_AREA.width) / 2
+  const safeTop = (height - X_SAFE_AREA.height) / 2
+  if (
+    box.x < safeLeft ||
+    box.x + box.width > safeLeft + X_SAFE_AREA.width ||
+    box.y < safeTop ||
+    box.y + box.height > safeTop + X_SAFE_AREA.height
+  ) {
+    throw new Error(
+      `X header lockup leaves the safe area: ${JSON.stringify(box)}`,
+    )
+  }
+  await mkdir(path.dirname(outPath), { recursive: true })
+  await page.screenshot({ path: outPath })
+  await page.close()
+  await assertPngSpec(outPath, { width, height, maxBytes: LAUNCH_MAX_BYTES })
+  console.log(path.relative(repoRoot, outPath))
+}
+
+async function renderLaunchAssets(browser) {
+  const launchRoot = path.join(repoRoot, 'docs/launch/assets')
+  await renderProductHuntThumbnail(
+    browser,
+    path.join(launchRoot, 'producthunt-thumbnail-240.png'),
+  )
+  const screenshotsRoot = path.join(
+    repoRoot,
+    'docs/store/assets/screenshots/en',
+  )
+  const entries = await readdir(screenshotsRoot)
+  const shots = entries
+    .filter((name) => name.endsWith('.png'))
+    .toSorted((first, second) => first.localeCompare(second))
+  if (shots.length !== PRODUCT_HUNT_GALLERY_COUNT) {
+    throw new Error(
+      `Expected ${PRODUCT_HUNT_GALLERY_COUNT} EN store screenshots, found ${shots.length}`,
+    )
+  }
+  for (const [index, shot] of shots.entries()) {
+    const { width, height } = PRODUCT_HUNT_GALLERY_SIZE
+    await renderProductHuntGallery(
+      browser,
+      path.join(screenshotsRoot, shot),
+      path.join(
+        launchRoot,
+        `producthunt-gallery-${index + 1}-${width}x${height}.png`,
+      ),
+    )
+  }
+  await renderXHeader(browser, path.join(launchRoot, 'x-header-1500x500.png'))
+}
+
 function escapeHtml(text) {
   return text
     .replaceAll('&', '&amp;')
@@ -393,6 +516,8 @@ try {
     browser,
     path.join(youtubeRoot, 'watermark-300.png'),
   )
+
+  await renderLaunchAssets(browser)
 } finally {
   await browser.close()
 }
