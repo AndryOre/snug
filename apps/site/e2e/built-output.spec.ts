@@ -12,7 +12,9 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../src/i18n/locales'
+import { REVIEWS } from '../src/i18n/proof'
 import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
+import { STORE_FACTS } from '../src/seo/store-facts'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
@@ -93,6 +95,9 @@ test.describe('built pages', () => {
       expect(
         metaContent(html, 'property', 'og:image:alt').length,
       ).toBeGreaterThan(20)
+      expect(metaContent(html, 'name', 'twitter:image:alt')).toBe(
+        metaContent(html, 'property', 'og:image:alt'),
+      )
       expect(html).toContain('<link rel="icon" href="/favicon.svg"')
       expect(html).toContain('<link rel="icon" href="/favicon.ico"')
       expect(html).toContain(
@@ -117,13 +122,31 @@ test.describe('built pages', () => {
       }
       const app = nodeOf('SoftwareApplication')
       expect(nodeOf('WebSite')).toMatchObject({
+        '@id': `${SITE_ORIGIN}/#website`,
+        url: `${SITE_ORIGIN}/`,
+      })
+      expect(nodeOf('WebPage')).toMatchObject({
         url: canonical,
         inLanguage: languageTag(locale),
+        isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
       })
-      expect(app.url).toBe(canonical)
+      expect(app['@id']).toBe(`${SITE_ORIGIN}/#software`)
+      expect(app.sameAs).toEqual([STORE_FACTS.storeUrl, STORE_FACTS.sourceUrl])
+      expect(nodeOf('VideoObject')).toMatchObject({
+        name: expect.any(String),
+        description: expect.any(String),
+        thumbnailUrl: expect.stringMatching(
+          /^https:\/\/i\.ytimg\.com\/vi\/[\w-]+\//,
+        ),
+        uploadDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+        embedUrl: expect.stringMatching(
+          /^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]+$/,
+        ),
+      })
+      expect(JSON.stringify(graph)).not.toContain('/install')
       expect(app.isAccessibleForFree).toBe(true)
       expect(app.author).toEqual({ '@id': nodeOf('Person')['@id'] })
-      expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
+      expect(app.installUrl).toBe(STORE_FACTS.storeUrl)
       expect(app.featureList).toHaveLength(6)
       expect(app).not.toHaveProperty('aggregateRating')
       expect(app).toHaveProperty('interactionStatistic')
@@ -176,8 +199,21 @@ test.describe('root files', () => {
     for (const locale of LOCALES) {
       expect(llms).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }
-    expect(readBuilt('llms-full.txt')).toMatch(/^# Snug/)
-    expect(readBuilt('sitemap.xml')).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}</)
+    const llmsFull = readBuilt('llms-full.txt')
+    expect(llmsFull).toMatch(/^# Snug/)
+    for (const file of [llms, llmsFull]) {
+      expect(file).toContain(STORE_FACTS.storeUrl)
+      expect(file).not.toMatch(/snug\.andryore\.dev\/(install|reviews)/)
+    }
+    expect(llmsFull).toContain(REVIEWS[0]!.quote)
+    expect(llmsFull).toMatch(/https:\/\/www\.youtube\.com\/watch\?v=[\w-]+/)
+    expect(llmsFull.match(/^## Move your bookmarks\. /gm)).toHaveLength(1)
+    const lastmods = readBuilt('sitemap.xml')
+      .matchAll(/<lastmod>([^<]+)</g)
+      .map((match) => match[1])
+      .toArray()
+    expect(lastmods.length).toBeGreaterThan(0)
+    for (const stamp of lastmods) expect(stamp).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(readBuilt('404.html')).toContain(
       '<meta name="robots" content="noindex"',
     )

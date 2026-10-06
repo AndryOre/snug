@@ -1,3 +1,4 @@
+import { youtubeWatchUrl } from '../i18n/landing'
 import {
   languageTag,
   type Locale,
@@ -8,44 +9,82 @@ import {
 import { STORE_FACTS } from './store-facts'
 
 /**
- * One schema.org `@graph` for a locale's page: the `WebSite` (so Google can
- * pick the site name), the `SoftwareApplication` and its author `Person`,
- * linked by `@id`. Carries no `aggregateRating`, `review` or `FAQPage`.
+ * Locale-specific page facts that feed the `WebPage` and `VideoObject` nodes.
+ */
+export interface StructuredDataPage {
+  title: string
+  videoId: string
+  videoDescription: string
+}
+
+/**
+ * One schema.org `@graph` for a locale's page. The `WebSite`,
+ * `SoftwareApplication` and author `Person` share one `@id` across every
+ * locale; the locale is expressed by the `WebPage` and `VideoObject` nodes.
+ * Carries no `aggregateRating`, `review` or `FAQPage`, and never points at
+ * `/install`.
  * @param locale - A supported locale code.
  * @param description - The locale's meta description.
  * @param featureList - The locale's feature titles.
+ * @param page - The locale's title and walkthrough video facts.
  * @returns A JSON-LD object ready to serialize.
  */
 export function buildStructuredData(
   locale: Locale,
   description: string,
   featureList: readonly string[],
+  page: StructuredDataPage,
 ) {
   const pageUrl = `${SITE_ORIGIN}${localePath(locale)}`
   const authorId = `${SITE_ORIGIN}/#author`
-  const installUrl = `${SITE_ORIGIN}/install`
+  const websiteId = `${SITE_ORIGIN}/#website`
+  const softwareId = `${SITE_ORIGIN}/#software`
+  const videoId = `${pageUrl}#video`
+  const language = languageTag(locale)
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebSite',
-        '@id': `${pageUrl}#website`,
+        '@id': websiteId,
         name: STORE_FACTS.name,
+        url: `${SITE_ORIGIN}/`,
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
         url: pageUrl,
-        inLanguage: languageTag(locale),
+        name: page.title,
+        description,
+        inLanguage: language,
+        isPartOf: { '@id': websiteId },
+        about: { '@id': softwareId },
+        video: { '@id': videoId },
+      },
+      {
+        '@type': 'VideoObject',
+        '@id': videoId,
+        name: page.title,
+        description: page.videoDescription,
+        thumbnailUrl: `https://i.ytimg.com/vi/${page.videoId}/maxresdefault.jpg`,
+        uploadDate: STORE_FACTS.promoVideoUploadDate,
+        embedUrl: `https://www.youtube-nocookie.com/embed/${page.videoId}`,
+        contentUrl: youtubeWatchUrl(page.videoId),
+        inLanguage: language,
       },
       {
         '@type': 'SoftwareApplication',
-        '@id': `${pageUrl}#software`,
+        '@id': softwareId,
         name: STORE_FACTS.name,
         description,
-        url: pageUrl,
-        inLanguage: languageTag(locale),
+        url: `${SITE_ORIGIN}/`,
+        inLanguage: language,
+        sameAs: [STORE_FACTS.storeUrl, STORE_FACTS.sourceUrl],
         applicationCategory: STORE_FACTS.category,
         operatingSystem: STORE_FACTS.operatingSystem,
         browserRequirements: STORE_FACTS.browserRequirements,
-        downloadUrl: installUrl,
-        installUrl,
+        downloadUrl: STORE_FACTS.storeUrl,
+        installUrl: STORE_FACTS.storeUrl,
         featureList,
         screenshot: `${SITE_ORIGIN}${ogImagePath(locale)}`,
         author: { '@id': authorId },

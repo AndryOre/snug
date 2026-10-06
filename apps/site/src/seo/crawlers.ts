@@ -1,5 +1,8 @@
 import type { SiteContent } from '../i18n/content'
+import { PROMO_VIDEO_IDS, youtubeWatchUrl } from '../i18n/landing'
 import { SITE_ORIGIN } from '../i18n/locales'
+import { REVIEWS } from '../i18n/proof'
+import { STORE_FACTS } from './store-facts'
 
 const SEARCH_AND_ANSWER_CRAWLERS = [
   'Googlebot',
@@ -79,14 +82,14 @@ ${localeLines}
 ## Pages
 
 - [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page as Markdown
-- [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store listing
+- [Chrome Web Store listing](${STORE_FACTS.storeUrl}): install Snug
 - [Privacy policy](${SITE_ORIGIN}/privacy/): what Snug stores and what it never sends
-- [Source code](https://github.com/AndryOre/snug): MIT-licensed repository
+- [Source code](${STORE_FACTS.sourceUrl}): MIT-licensed repository
 - [Sitemap](${SITE_ORIGIN}/sitemap.xml): all ten language versions
 
 ## Optional
 
-- [Chrome Web Store reviews](${SITE_ORIGIN}/reviews): what users say about Snug
+- [Chrome Web Store reviews](${STORE_FACTS.storeReviewsUrl}): what users say about Snug
 `
 }
 
@@ -107,11 +110,13 @@ export function buildLlmsFullTxt(content: SiteContent): string {
   const faqItems = Object.values(content.faq.items).map(
     ({ question, answer }) => `### ${question}\n\n${answer}`,
   )
+  const reviewQuotes = REVIEWS.map(
+    ({ quote, author, date }) => `> ${quote}\n>\n> ${author}, ${date}`,
+  )
   const sections = [
     `# Snug\n\n> ${content.meta.description}`,
     section(
-      content.hero.headlineLead,
-      content.hero.headlineAccent,
+      `${content.hero.headlineLead} ${content.hero.headlineAccent}`,
       content.hero.subheadline,
       content.hero.note,
     ),
@@ -126,11 +131,17 @@ export function buildLlmsFullTxt(content: SiteContent): string {
       content.interface.heading,
       ...Object.values(content.interface.alts),
     ),
-    section(content.video.heading, content.video.caption),
+    section(
+      content.video.heading,
+      content.video.caption,
+      `[Watch the walkthrough on YouTube](${youtubeWatchUrl(PROMO_VIDEO_IDS.en)})`,
+    ),
     section(
       content.proof.heading,
       content.proof.numbers,
       content.proof.renameNote,
+      ...reviewQuotes,
+      `[${content.proof.link}](${STORE_FACTS.storeReviewsUrl})`,
     ),
     section(content.faq.heading, ...faqItems),
     section(content.final.heading, content.final.line),
@@ -139,19 +150,29 @@ export function buildLlmsFullTxt(content: SiteContent): string {
 }
 
 /**
+ * One sitemap URL; `lastmod` is omitted when no real change date is known.
+ */
+export interface SitemapEntry {
+  loc: string
+  lastmod?: string
+}
+
+function lastmodLine(lastmod: string | undefined): string {
+  return lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ''
+}
+
+/**
  * The XML sitemap listing every locale page with `xhtml:link` alternates.
- * @param entries - Absolute page URLs.
+ * @param entries - Locale pages with their content change dates.
  * @param alternates - The hreflang alternates shared by every locale page.
- * @param standaloneEntries - Absolute URLs of pages with no translations,
- * listed without alternates.
- * @param lastmod - Build date as `YYYY-MM-DD`, stamped on every URL.
+ * @param standaloneEntries - Pages with no translations, listed without
+ * alternates.
  * @returns A complete `sitemap.xml` document.
  */
 export function buildSitemapXml(
-  entries: readonly string[],
+  entries: readonly SitemapEntry[],
   alternates: readonly { hreflang: string; href: string }[],
-  standaloneEntries: readonly string[],
-  lastmod: string,
+  standaloneEntries: readonly SitemapEntry[],
 ): string {
   const links = alternates
     .map(
@@ -159,12 +180,15 @@ export function buildSitemapXml(
         `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${href}"/>`,
     )
     .join('\n')
-  const stamp = `    <lastmod>${lastmod}</lastmod>\n`
   const urls = entries
-    .map((loc) => `  <url>\n    <loc>${loc}</loc>\n${stamp}${links}\n  </url>`)
+    .map(
+      ({ loc, lastmod }) =>
+        `  <url>\n    <loc>${loc}</loc>\n${lastmodLine(lastmod)}${links}\n  </url>`,
+    )
     .join('\n')
   const standaloneUrls = standaloneEntries.map(
-    (loc) => `  <url>\n    <loc>${loc}</loc>\n${stamp}  </url>`,
+    ({ loc, lastmod }) =>
+      `  <url>\n    <loc>${loc}</loc>\n${lastmodLine(lastmod)}  </url>`,
   )
   const allUrls = [urls, ...standaloneUrls].join('\n')
   return `<?xml version="1.0" encoding="UTF-8"?>
