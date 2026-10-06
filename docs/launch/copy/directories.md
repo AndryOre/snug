@@ -13,19 +13,20 @@ Rules for every variant:
 - Link to the Landing page with a Campaign tag:
   `https://snug.andryore.dev/?c=<tag>`, or the Install redirect
   `https://snug.andryore.dev/install?c=<tag>`. Tags match
-  `^[A-Za-z0-9_-]{1,32}$`. Each section lists its suggested tag.
+  `^[A-Za-z0-9_-]{1,32}$`. Every directory has its own tag in `directories.csv`
+  (the `Campaign Tag` column); use that one, never a shared tag per variant.
 - Character counts are computed with `[...text].length` and include spaces. The
   long description target is about 500 characters.
 - Never submit, save or type anything on an external platform from this file
   without explicit human approval.
 
-| Variant        | Use for                               | Suggested tag      |
-| -------------- | ------------------------------------- | ------------------ |
-| `extension`    | Chrome extension and general listings | `dir-extension`    |
-| `alternatives` | AlternativeTo, SaaSHub and similar    | `dir-alternatives` |
-| `open-source`  | GitHub lists, developer directories   | `dir-open-source`  |
-| `privacy`      | Privacy and security directories      | `dir-privacy`      |
-| `es`           | Spanish-language directories          | `dir-es`           |
+| Variant        | Use for                               |
+| -------------- | ------------------------------------- |
+| `extension`    | Chrome extension and general listings |
+| `alternatives` | AlternativeTo, SaaSHub and similar    |
+| `open-source`  | GitHub lists, developer directories   |
+| `privacy`      | Privacy and security directories      |
+| `es`           | Spanish-language directories          |
 
 ## extension
 
@@ -37,7 +38,7 @@ listings). Lead with the outcome: move and back up bookmarks intact.
 - **Short description** (153/160): Snug moves your bookmarks between browsers as
   you left them. Six export formats, import with preview, scheduled backups.
   Formerly Bookmark Import/Export.
-- **Campaign tag:** `dir-extension`
+- **Campaign tag:** the directory's own tag from `directories.csv`
 
 **Long description** (495 characters)
 
@@ -83,7 +84,7 @@ beyond HTML export.
 - **Short description** (159/160): Snug is the bookmark export and import
   extension that works beyond HTML: six formats, folder selection, import
   preview and undo. Open source, no network calls.
-- **Campaign tag:** `dir-alternatives`
+- **Campaign tag:** the directory's own tag from `directories.csv`
 
 **Long description** (542 characters)
 
@@ -133,7 +134,7 @@ supply-chain signals.
 - **Short description** (147/160): Snug is an open source Chrome MV3 extension
   that reads and writes the bookmarks tree on-device. MIT licensed, CodeQL,
   OpenSSF Scorecard, pinned CI.
-- **Campaign tag:** `dir-open-source`
+- **Campaign tag:** the directory's own tag from `directories.csv`
 
 **Long description** (502 characters)
 
@@ -176,7 +177,7 @@ nothing to send it to.
 - **Short description** (137/160): Snug exports, imports and backs up your
   bookmarks with no account, no ads, no data collection and no network calls.
   The source is public.
-- **Campaign tag:** `dir-privacy`
+- **Campaign tag:** the directory's own tag from `directories.csv`
 
 **Long description** (548 characters)
 
@@ -222,7 +223,7 @@ The product name stays "Snug".
 - **Short description** (151/160): Snug lleva tus marcadores de un navegador a
   otro tal como los dejaste. Seis formatos, vista previa y copias programadas.
   Antes, Bookmark Import/Export.
-- **Campaign tag:** `dir-es`
+- **Campaign tag:** the directory's own tag from `directories.csv`
 
 **Long description** (531 characters)
 
