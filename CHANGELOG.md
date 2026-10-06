@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - The popup now shows a one-time, dismissible Review prompt after your first
   successful export.
 - The privacy policy now describes the prompt's local-only state.
+- Refined the popup's look: clearer card borders, a more visible keyboard focus
+  ring in light mode and smoother button and menu transitions.
 
 ## [2.0.2] - 2026-10-06
 
