@@ -375,13 +375,21 @@ test('HSTS includes subdomains and is not preload', async ({ request }) => {
   )
 })
 
-test('the container does not compress responses itself', async ({
+test('the container gzips text and leaves binaries alone', async ({
   request,
 }) => {
   for (const path of ['/', '/llms.txt', '/sitemap.xml']) {
     const response = await request.get(path, {
-      headers: { 'accept-encoding': 'gzip, br' },
+      headers: { 'accept-encoding': 'gzip' },
     })
-    expect(response.headers()['content-encoding']).toBeUndefined()
+    expect(response.headers()['content-encoding']).toBe('gzip')
   }
+  const page = await request.get('/')
+  const html = await page.text()
+  const font = html.match(/\/_astro\/[^"']+\.woff2/)?.[0]
+  expect(font).toBeDefined()
+  const response = await request.get(font!, {
+    headers: { 'accept-encoding': 'gzip' },
+  })
+  expect(response.headers()['content-encoding']).toBeUndefined()
 })

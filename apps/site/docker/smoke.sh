@@ -86,9 +86,9 @@ header_of() { curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, br' "$2" | tr
 
 for file in llms.txt llms-full.txt robots.txt sitemap.xml; do
   grep -qi 'charset=utf-8' <<<"$(header_of content-type "$base/$file")" || fail "$file lacks charset=utf-8"
-  [ -z "$(header_of content-encoding "$base/$file")" ] || fail "$file is compressed by the container"
+  [ "$(header_of content-encoding "$base/$file")" = gzip ] || fail "$file is not gzipped"
 done
-[ -z "$(header_of content-encoding "$base/")" ] || fail "/ is compressed by the container"
+[ "$(header_of content-encoding "$base/")" = gzip ] || fail "/ is not gzipped"
 grep -q '^application/manifest+json' <<<"$(header_of content-type "$base/manifest.webmanifest")" || fail "manifest type"
 for pair in "/index.html:/" "/es/index.html:/es/"; do
   [ "$(status "$base${pair%%:*}")" = 301 ] || fail "${pair%%:*} is not 301"

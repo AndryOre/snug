@@ -144,7 +144,11 @@ export function buildLlmsFullTxt(content: SiteContent): string {
       `[${content.proof.link}](${SITE_ORIGIN}/reviews)`,
     ),
     section(content.faq.heading, ...faqItems),
-    section(content.final.heading, content.final.line),
+    section(
+      content.final.heading,
+      content.final.line,
+      `[${content.final.button}](${SITE_ORIGIN}/install)`,
+    ),
   ]
   return `${sections.join('\n\n')}\n`
 }
