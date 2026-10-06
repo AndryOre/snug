@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.0.2] - 2026-10-06
+
+- The App sidebar now links to the Snug website and the privacy policy.
+- The extension's homepage in the manifest now points to the website.
+- Added a What's new entry announcing the website.
+
 ## [2.0.1] - 2026-10-04
 
 - Rewrote the store descriptions in all 10 languages to read as plain sentences.

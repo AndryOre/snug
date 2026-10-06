@@ -2,7 +2,7 @@
   "name": "@snug/extension",
   "description": "Export, import, and schedule automatic exports of your bookmarks — six formats, duplicate cleanup, and undo, all on your device, no account, no cloud.",
   "private": true,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "scripts": {
     "dev": "wxt",

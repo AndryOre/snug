@@ -1222,5 +1222,11 @@
   "shell_privacyLink": {
     "message": "Datenschutz",
     "description": "App sidebar footer link to the privacy policy"
+  },
+  "changelog_2_0_2_1": {
+    "message": "Snug hat jetzt eine Website."
+  },
+  "changelog_2_0_2_1_link": {
+    "message": "snug.andryore.dev besuchen"
   }
 }

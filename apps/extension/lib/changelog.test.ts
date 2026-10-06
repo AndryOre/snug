@@ -1,11 +1,19 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
+import { resetFakeI18n } from '@/lib/testing/fake-i18n'
+
 import { APP_ROUTES, getAppUrl } from './app-url'
-import { formatChangelogDate, getChangelog } from './changelog'
+import { getSiteUrl } from './brand'
+import {
+  formatChangelogDate,
+  getChangelog,
+  isExternalChangelogUrl,
+} from './changelog'
 
 beforeEach(() => {
   fakeBrowser.reset()
+  resetFakeI18n()
 })
 
 function compareVersions(a: string, b: string) {
@@ -23,7 +31,7 @@ describe('getChangelog', () => {
     const entries = getChangelog()
 
     const versions = entries.map((entry) => entry.version)
-    expect(versions[0]).toBe('2.0.0')
+    expect(versions[0]).toBe('2.0.2')
     expect(versions.at(-1)).toBe('0.1.0')
     expect(versions).toEqual(
       versions.toSorted((a, b) => compareVersions(a, b)).toReversed(),
@@ -100,5 +108,33 @@ describe('changelog dates', () => {
 
   it('does not shift the day with the process timezone', () => {
     expect(formatChangelogDate('2025-02-13', 'en')).toBe('February 13, 2025')
+  })
+})
+
+describe('2.0.2 entry', () => {
+  it('announces the website with a link to the localized site URL', () => {
+    const entry = getChangelog().find((item) => item.version === '2.0.2')
+
+    expect(entry?.isoDate).toBe('2026-10-06')
+    expect(entry?.items).toEqual([
+      {
+        textKey: 'changelog_2_0_2_1',
+        linkKey: 'changelog_2_0_2_1_link',
+        linkUrl: getSiteUrl(),
+      },
+    ])
+  })
+})
+
+describe('isExternalChangelogUrl', () => {
+  it('treats http and https URLs as external', () => {
+    expect(isExternalChangelogUrl('https://snug.andryore.dev/')).toBe(true)
+    // eslint-disable-next-line unicorn/prefer-https -- asserting that plain http is also external
+    expect(isExternalChangelogUrl('http://example.com')).toBe(true)
+  })
+
+  it('treats App route URLs as internal', () => {
+    expect(isExternalChangelogUrl(getAppUrl(APP_ROUTES.export))).toBe(false)
+    expect(isExternalChangelogUrl('#/export')).toBe(false)
   })
 })
