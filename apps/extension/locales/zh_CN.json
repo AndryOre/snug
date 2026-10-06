@@ -1223,6 +1223,9 @@
   "changelog_2_0_2_1_link": {
     "message": "访问 snug.andryore.dev"
   },
+  "changelog_2_0_3_1": {
+    "message": "完成首次导出后，Snug 会询问一次您是否愿意留下评价。关闭后将不再显示。"
+  },
   "reviewPrompt_title": {
     "message": "Snug 好用吗？",
     "description": "Popup Review prompt card title (also its accessible name)"

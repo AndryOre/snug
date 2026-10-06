@@ -1223,6 +1223,9 @@
   "changelog_2_0_2_1_link": {
     "message": "snug.andryore.dev 방문하기"
   },
+  "changelog_2_0_3_1": {
+    "message": "첫 내보내기 후에 Snug가 리뷰를 남겨 주실 수 있는지 한 번만 묻습니다. 닫으면 다시는 나타나지 않습니다."
+  },
   "reviewPrompt_title": {
     "message": "Snug가 잘 작동하나요?",
     "description": "Popup Review prompt card title (also its accessible name)"

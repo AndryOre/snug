@@ -31,7 +31,7 @@ describe('getChangelog', () => {
     const entries = getChangelog()
 
     const versions = entries.map((entry) => entry.version)
-    expect(versions[0]).toBe('2.0.2')
+    expect(versions[0]).toBe('2.0.3')
     expect(versions.at(-1)).toBe('0.1.0')
     expect(versions).toEqual(
       versions.toSorted((a, b) => compareVersions(a, b)).toReversed(),
@@ -108,6 +108,15 @@ describe('changelog dates', () => {
 
   it('does not shift the day with the process timezone', () => {
     expect(formatChangelogDate('2025-02-13', 'en')).toBe('February 13, 2025')
+  })
+})
+
+describe('2.0.3 entry', () => {
+  it('announces the Review prompt without a link', () => {
+    const entry = getChangelog().find((item) => item.version === '2.0.3')
+
+    expect(entry?.isoDate).toBe('2026-10-06')
+    expect(entry?.items).toEqual([{ textKey: 'changelog_2_0_3_1' }])
   })
 })
 

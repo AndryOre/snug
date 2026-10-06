@@ -1223,6 +1223,9 @@
   "changelog_2_0_2_1_link": {
     "message": "snug.andryore.dev を開く"
   },
+  "changelog_2_0_3_1": {
+    "message": "最初のエクスポートのあと、Snug はレビューを書いてもらえるか一度だけたずねます。閉じれば、二度と表示されません。"
+  },
   "reviewPrompt_title": {
     "message": "Snug は役に立っていますか？",
     "description": "Popup Review prompt card title (also its accessible name)"

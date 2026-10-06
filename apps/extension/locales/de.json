@@ -1229,6 +1229,9 @@
   "changelog_2_0_2_1_link": {
     "message": "snug.andryore.dev besuchen"
   },
+  "changelog_2_0_3_1": {
+    "message": "Nach deinem ersten Export fragt Snug einmalig, ob du eine Bewertung hinterlassen möchtest. Schließt du die Karte, erscheint sie nie wieder."
+  },
   "reviewPrompt_title": {
     "message": "Funktioniert Snug für dich?",
     "description": "Popup Review prompt card title (also its accessible name)"

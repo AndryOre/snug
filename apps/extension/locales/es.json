@@ -1236,6 +1236,9 @@
   "changelog_2_0_2_1_link": {
     "message": "Visita snug.andryore.dev"
   },
+  "changelog_2_0_3_1": {
+    "message": "Después de tu primera exportación, Snug te pregunta una sola vez si quieres dejar una reseña. Si la descartas, no vuelve a aparecer."
+  },
   "reviewPrompt_title": {
     "message": "¿Snug te funciona bien?",
     "description": "Popup Review prompt card title (also its accessible name)"
