@@ -42,3 +42,26 @@ export const REVIEWS: readonly Review[] = [
  * server answers with a 302 to the store listing's reviews tab.
  */
 export const STORE_REVIEWS_URL = '/reviews?c=proof'
+
+/**
+ * The day the store figures were read, as an ISO date.
+ */
+const RATINGS_DATE = '2026-10-05'
+
+/**
+ * Fills the `{date}` placeholder of the ratings sentence with the read date,
+ * formatted for the page locale.
+ * @param template - The locale's `proof.numbers` copy.
+ * @param languageTag - BCP 47 tag of the page locale.
+ * @returns The sentence with a locale-formatted date.
+ */
+export function formatRatingsSentence(
+  template: string,
+  languageTag: string,
+): string {
+  const date = new Intl.DateTimeFormat(languageTag, {
+    dateStyle: 'medium',
+    timeZone: 'UTC',
+  }).format(new Date(`${RATINGS_DATE}T00:00:00Z`))
+  return template.replace('{date}', () => date)
+}

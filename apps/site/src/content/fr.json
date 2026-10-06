@@ -19,6 +19,8 @@
       "from": "Votre navigateur",
       "file": "Un fichier",
       "to": "Un autre navigateur",
+      "folderResearch": "Recherche",
+      "folderJobSearch": "Recherche d'emploi",
       "network": "Appels réseau : aucun",
       "description": "Vos favoris quittent votre navigateur sous la forme d'un seul fichier bookmarks.html, disponible en six formats, et s'ouvrent dans un autre navigateur. Tout reste sur votre appareil."
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "Ce qu'en disent les utilisateurs",
-    "numbers": "5 000 utilisateurs. 4,8 étoiles sur 20 notes dans le Chrome Web Store (2026-10-05).",
+    "numbers": "5 000 utilisateurs. 4,8 étoiles sur 20 notes dans le Chrome Web Store ({date}).",
     "renameNote": "Ce sont des avis publics du Chrome Web Store, en anglais, tels que publiés. La plupart ont été écrits avant le changement de nom de Snug, quand la fiche s'appelait « Bookmark Import/Export » ; ils décrivent donc l'export et l'import, pas l'interface actuelle.",
     "reviewsLead": "Quatre avis, dans leur version originale en anglais :",
     "link": "Lire tous les avis dans le Chrome Web Store"

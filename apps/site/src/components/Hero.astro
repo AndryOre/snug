@@ -61,7 +61,7 @@ const { journey } = hero
             <CardTitle className="break-words">{journey.from}</CardTitle>
           </CardHeader>
           <CardContent>
-            <FolderTree />
+            <FolderTree locale={Astro.props.locale} />
           </CardContent>
         </Card>
         <ArrowRight className="size-6 shrink-0 rotate-90 self-center text-primary-text md:rotate-0" />
@@ -99,7 +99,7 @@ const { journey } = hero
             <CardTitle className="break-words">{journey.to}</CardTitle>
           </CardHeader>
           <CardContent>
-            <FolderTree />
+            <FolderTree locale={Astro.props.locale} />
           </CardContent>
         </Card>
       </div>

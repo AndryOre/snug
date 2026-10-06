@@ -26,9 +26,7 @@ for (const path of PATHS) {
         proof.locator('figcaption', { hasText: caption }),
       ).toHaveCount(1)
     }
-    await expect(proof.locator('[data-proof="numbers"]')).toContainText(
-      '2026-10-05',
-    )
+    await expect(proof.locator('[data-proof="numbers"]')).toContainText('2026')
     await expect(proof.locator('[data-proof="rename-note"]')).toContainText(
       'Bookmark Import/Export',
     )
@@ -52,7 +50,7 @@ for (const path of PATHS) {
 test('English figures match the content document', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('[data-proof="numbers"]')).toHaveText(
-    '5,000 users. 4.8 stars from 20 ratings on the Chrome Web Store (2026-10-05).',
+    '5,000 users. 4.8 stars from 20 ratings on the Chrome Web Store (Oct 5, 2026).',
   )
 })
 

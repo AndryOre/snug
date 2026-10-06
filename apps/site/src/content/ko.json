@@ -19,6 +19,8 @@
       "from": "내 브라우저",
       "file": "파일 하나",
       "to": "다른 브라우저",
+      "folderResearch": "리서치",
+      "folderJobSearch": "구직",
       "network": "네트워크 호출: 없음",
       "description": "북마크는 여섯 가지 형식으로 제공되는 bookmarks.html 파일 하나로 브라우저에서 내보내져 다른 브라우저에서 열립니다. 모든 과정이 내 기기 안에서만 이루어집니다."
     }
@@ -102,7 +104,7 @@
   },
   "proof": {
     "heading": "사용자 후기",
-    "numbers": "사용자 5,000명. Chrome 웹 스토어 평점 4.8점(20개 평가, 2026-10-05).",
+    "numbers": "사용자 5,000명. Chrome 웹 스토어 평점 4.8점(20개 평가, {date}).",
     "renameNote": "Chrome 웹 스토어에 공개된 후기를 게시된 영어 그대로 실었어요. 대부분 Snug 이름이 바뀌기 전, 등록 이름이 “Bookmark Import/Export”였을 때 작성되어서 현재 인터페이스가 아니라 내보내기와 가져오기를 이야기해요.",
     "reviewsLead": "후기 4개를 영어 원문 그대로 실었어요:",
     "link": "Chrome 웹 스토어에서 후기 모두 읽기"
