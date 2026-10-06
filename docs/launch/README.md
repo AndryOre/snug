@@ -48,15 +48,17 @@ Web Store listing.
 
 ## Directory batches
 
-| Batch | When         | Directories (Campaign tag)                                                                                                                                                                                                                                   |
-| ----- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1     | Week 1       | ExtensionLaunch (`extensionlaunch`), Web Store Extensions (`webstoreext`), Uneed (`uneed`), LibHunt (`libhunt`), SaaSHub (`saashub`), Sube.dev (`sube`), Prouct (`prouct`)                                                                                   |
-| 2     | Weeks 2 to 3 | AlternativeTo (`alternativeto`), OpenAlternative (`openalternative`), DevHunt (`devhunt`), Peerlist Launchpad (`peerlist`), Indie Hackers Products (`indiehackers`), PeerPush (`peerpush`), Twelve Tools (`twelvetools`), Alternativas.io (`alternativasio`) |
-| 3     | Weeks 2 to 3 | awesome-privacy (`awesomeprivacy`), lofi.so Local-First Web (`lofi`), SourceForge (`sourceforge`), Fazier (`fazier`), TinyLaunch (`tinylaunch`)                                                                                                              |
+| Batch | When     | Directories (Campaign tag)                                                                                                                                                                                                                                   |
+| ----- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1     | Week 1   | ExtensionLaunch (`extensionlaunch`), Web Store Extensions (`webstoreext`), Uneed (`uneed`), LibHunt (`libhunt`), SaaSHub (`saashub`), Sube.dev (`sube`), Prouct (`prouct`)                                                                                   |
+| 2     | Before D | AlternativeTo (`alternativeto`), OpenAlternative (`openalternative`), DevHunt (`devhunt`), Peerlist Launchpad (`peerlist`), Indie Hackers Products (`indiehackers`), PeerPush (`peerpush`), Twelve Tools (`twelvetools`), Alternativas.io (`alternativasio`) |
+| 3     | Before D | awesome-privacy (`awesomeprivacy`), lofi.so Local-First Web (`lofi`), SourceForge (`sourceforge`), Fazier (`fazier`), TinyLaunch (`tinylaunch`)                                                                                                              |
 
 Read the row's `Notes` column before submitting. Twelve Tools and Fazier ask for
-a backlink on the Landing page or footer for the free tier: decide before
-submitting, and do not change the Landing page for it.
+a backlink on the Landing page or footer for the free tier: both are `Skipped`,
+and the Landing page does not change for them. Directories that schedule a
+launch date (DevHunt, Peerlist, PeerPush, TinyLaunch) are submitted now for the
+nearest free date, not on 2026-10-11.
 
 ## Timeline
 
@@ -64,15 +66,15 @@ Day D is a Sunday, the least crowded Product Hunt day: over eight weeks the
 Product Hunt API showed an average of 515 launches on Sundays, against 660 on
 Saturdays and 1126 on Tuesdays. D = **2026-10-11**.
 
-| When         | What                                                                               |
-| ------------ | ---------------------------------------------------------------------------------- |
-| Before D     | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
-| Week 1       | Batch 1 directories, submitted before D                                            |
-| Weeks 2 to 3 | Batch 2 and Batch 3 directories                                                    |
-| Day D        | Product Hunt, X thread, YouTube community post and description refresh             |
-| D+2 to D+7   | Show HN, then the three Reddit posts, one per day                                  |
-| D+8 to D+29  | Finish any directory still in `Draft`; answer comments                             |
-| Day 30       | Wrap-up with the template below                                                    |
+| When        | What                                                                               |
+| ----------- | ---------------------------------------------------------------------------------- |
+| Before D    | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
+| Week 1      | Batch 1 directories, submitted before D                                            |
+| Before D    | Batch 2 and Batch 3 directories, submitted or scheduled                            |
+| Day D       | Product Hunt, X thread, YouTube community post and description refresh             |
+| D+2 to D+7  | Show HN, then the three Reddit posts, one per day                                  |
+| D+8 to D+29 | Finish any directory still in `Draft`; answer comments                             |
+| Day 30      | Wrap-up with the template below                                                    |
 
 ## Runbook: who does what
 
