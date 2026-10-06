@@ -125,3 +125,12 @@ website, homepage, marketing site, promo page.
 visitor to the Chrome Web Store listing with attribution tags so install clicks
 can be counted without cookies or scripts. _Avoid_: download link, store link,
 CTA link.
+
+**Campaign tag** The identifier of one external channel (a directory, a
+community, or a post), carried as `c=` on links to the Landing page and the
+Install redirect so visits and installs from that channel can be counted without
+cookies or scripts. _Avoid_: UTM tag, ref, source code.
+
+**Launch kit** The versioned set of launch material for Snug's relaunch: the
+plan, the directory tracker, positioning and community copy, the press kit, and
+launch-sized assets. _Avoid_: marketing pack, launch docs, PR kit.
