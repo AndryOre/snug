@@ -375,6 +375,20 @@ test('HSTS includes subdomains and is not preload', async ({ request }) => {
   )
 })
 
+test('the served sitemap stamps every url with a valid lastmod', async ({
+  request,
+}) => {
+  const response = await request.get('/sitemap.xml')
+  const xml = await response.text()
+  const urls = xml.match(/<url>[\s\S]*?<\/url>/g) ?? []
+  expect(urls.length).toBeGreaterThan(LOCALES.length)
+  for (const url of urls) {
+    const lastmod = url.match(/<lastmod>([^<]*)<\/lastmod>/)?.[1]
+    expect(lastmod, url).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+    expect(Number.isNaN(Date.parse(`${lastmod}T00:00:00Z`)), url).toBe(false)
+  }
+})
+
 test('the container gzips text and leaves binaries alone', async ({
   request,
 }) => {

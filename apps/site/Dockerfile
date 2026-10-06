@@ -1,4 +1,7 @@
 # Build context is the repo root: docker build -f apps/site/Dockerfile .
+# The context has no .git, so sitemap lastmod dates come in as a build argument:
+#   --build-arg LAST_MODIFIED_DATES="$(bash apps/site/docker/last-modified.sh)"
+# Without it the sitemap omits lastmod.
 FROM oven/bun:1.4.2-alpine AS build
 WORKDIR /repo
 
@@ -10,6 +13,7 @@ RUN bun install --frozen-lockfile --filter @snug/site --ignore-scripts
 COPY packages/ui packages/ui
 COPY apps/site apps/site
 COPY PRIVACY_POLICY.md PRIVACY_POLICY.md
+ARG LAST_MODIFIED_DATES=""
 RUN bun run --cwd apps/site build
 RUN bun run --cwd apps/site src/scripts/render-security-headers.ts dist docker/security-headers.conf dist-security-headers.conf
 
