@@ -162,8 +162,8 @@ Copy this into a new file under `docs/launch/` when day 30 arrives.
 ```md
 # Launch wrap-up: Snug 2.0, D to D+30
 
-- D: ____-**-**
-- Period read: ____-**-** to ____-**-**
+- D: YYYY-MM-DD
+- Period read: YYYY-MM-DD to YYYY-MM-DD
 - Sources: nginx access log, CWS dashboard (UTM report by campaign)
 
 ## Totals vs baseline
