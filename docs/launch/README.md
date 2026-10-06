@@ -60,13 +60,14 @@ submitting, and do not change the Landing page for it.
 
 ## Timeline
 
-Day D is a Tuesday, Wednesday or Thursday, about three weeks after the kit is
-ready. Andry fills it in: **D = `____-__-__`**.
+Day D is a Sunday, the least crowded Product Hunt day: over eight weeks the
+Product Hunt API showed an average of 515 launches on Sundays, against 660 on
+Saturdays and 1126 on Tuesdays. D = **2026-10-11**.
 
 | When         | What                                                                               |
 | ------------ | ---------------------------------------------------------------------------------- |
-| Week -1      | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
-| Week 1       | Batch 1 directories                                                                |
+| Before D     | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
+| Week 1       | Batch 1 directories, starting the day after D                                      |
 | Weeks 2 to 3 | Batch 2 and Batch 3 directories                                                    |
 | Day D        | Product Hunt, X thread, YouTube community post and description refresh             |
 | D+2 to D+7   | Show HN, then the three Reddit posts, one per day                                  |
@@ -113,15 +114,17 @@ Work the remaining directory rows. When a listing goes live, set `Status` and
 
 ## Pre-launch checklist
 
-- [ ] `apps/site/src/seo/store-facts.ts` matches the live Chrome Web Store
+- [x] `apps/site/src/seo/store-facts.ts` matches the live Chrome Web Store
       listing: rating, rating count, user count, promo video upload date.
-- [ ] The listing is on 2.x (Snug, not Bookmark Import/Export 1.x).
+      Checked 2026-10-06: 4.8, 20 ratings, 5,000 users.
+- [x] The listing is on 2.x (Snug, not Bookmark Import/Export 1.x). 2.0.3 on
+      2026-10-06.
 - [ ] The accounts needed are logged in to the cws-dash Chrome.
 - [ ] Facts quoted in the copy match [`../store/README.md`](../store/README.md)
       and [`.agents/product-marketing.md`](../../.agents/product-marketing.md).
 - [ ] Every `Website URL` and `Install URL` in `directories.csv` opens and
       redirects correctly.
-- [ ] Day D is set above.
+- [x] Day D is set above.
 
 ## Metrics
 
