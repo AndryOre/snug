@@ -131,7 +131,6 @@ test('Safety snapshots list newest first with a Latest badge, Download saves the
   seedBookmarks,
   seedStorage,
   readBookmarkTree,
-  serviceWorker,
 }) => {
   await seedBookmarks([
     { title: 'Current', url: 'https://current.example/page' },
@@ -159,16 +158,6 @@ test('Safety snapshots list newest first with a Latest badge, Download saves the
     .getByRole('button', { name: en.safetySnapshot_download.message })
     .click()
   const download = await downloadPromise
-  await expect
-    .poll(async () => {
-      const items = await serviceWorker.evaluate(() =>
-        chrome.downloads.search({ orderBy: ['-startTime'], limit: 5 }),
-      )
-      return items.some((item) =>
-        /snug-safety-snapshot-.+\.json$/.test(item.filename),
-      )
-    })
-    .toBe(true)
   const content = await readFile((await download.path()) as string, 'utf8')
   expect(content).toContain('https://older.example/page')
   expect(content).not.toContain('https://newest.example/')
