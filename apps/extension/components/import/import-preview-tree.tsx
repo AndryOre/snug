@@ -13,7 +13,8 @@ import {
   ChevronsUpDownIcon,
   SearchIcon,
 } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useImperativeHandle, useRef, useState } from 'react'
+import type { Ref } from 'react'
 
 import { BookmarkTreeView } from '@/components/export/bookmark-tree-view'
 import { ExportTreeEmpty } from '@/components/export/export-tree-states'
@@ -30,23 +31,52 @@ function renderDuplicateBadge(node: BookmarkNode) {
   ) : null
 }
 
+/**
+ * What a parent can read from {@link ImportPreviewTree}.
+ */
+export interface ImportPreviewTreeHandle {
+  getCheckedIds: () => string[]
+}
+
 interface ImportPreviewTreeProperties {
   nodes: BookmarkNode[]
+  /**
+   * Shows checkboxes (all new bookmarks checked by default); read-only when
+   * `false`.
+   */
+  isSelectable: boolean
+  /**
+   * Handle to read the checked ids on submit.
+   */
+  ref: Ref<ImportPreviewTreeHandle>
+  onSelectionChange: (count: number) => void
 }
 
 /**
- * The read-only tree of the Import preview: a search field with a "/" hint
+ * The tree of the Import preview, read-only or with checkboxes (Import
+ * selection): a search field with a "/" hint
  * and Expand all / Collapse all over {@link BookmarkTreeView}, virtualized and
  * capped at 420px with its own scroll. Disabled nodes (skipped duplicates)
  * show a "Duplicate · skipped" badge. Folders start expanded; remount it
  * (change its `key`) to reset the search and expansion for a new file.
  * @param root0 This component's properties.
  * @param root0.nodes The tree to show.
+ * @param root0.isSelectable Whether the tree has checkboxes.
+ * @param root0.ref Handle exposing the checked ids.
+ * @param root0.onSelectionChange Called with the checked bookmark count.
  * @returns The toolbar and the tree.
  */
-export function ImportPreviewTree({ nodes }: ImportPreviewTreeProperties) {
+export function ImportPreviewTree({
+  nodes,
+  isSelectable,
+  ref,
+  onSelectionChange,
+}: ImportPreviewTreeProperties) {
   const [searchTerm, setSearchTerm] = useState('')
   const treeReference = useRef<BookmarkTreeViewHandle>(null)
+  useImperativeHandle(ref, () => ({
+    getCheckedIds: () => treeReference.current?.getCheckedIds() ?? [],
+  }))
   const searchInputReference = useRef<HTMLInputElement>(null)
   useSlashToFocus(searchInputReference)
 
@@ -97,10 +127,11 @@ export function ImportPreviewTree({ nodes }: ImportPreviewTreeProperties) {
           nodes={nodes}
           searchTerm={searchTerm}
           ariaLabel={i18n.t('import_treeLabel')}
-          isSelectable={false}
+          isSelectable={isSelectable}
+          isCheckedByDefault
           renderBadge={renderDuplicateBadge}
           autoExpandToken={EXPAND_ALL_ON_MOUNT_TOKEN}
-          onSelectionChange={ignoreCount}
+          onSelectionChange={onSelectionChange}
           onTotalChange={ignoreCount}
           className="max-h-105"
           emptyState={

@@ -57,6 +57,7 @@ export const BookmarkTreeView = forwardRef<
     searchTerm,
     ariaLabel,
     isSelectable = true,
+    isCheckedByDefault = false,
     renderBadge,
     autoExpandToken,
     onSelectionChange,
@@ -72,9 +73,17 @@ export const BookmarkTreeView = forwardRef<
    * Folder checked/indeterminate state is never stored here — it's derived
    * from descendant bookmarks at render time by `determineCheckedState`.
    */
-  const [checkedState, setCheckedState] = useState<Map<string, boolean>>(
+  const [explicitChecked, setCheckedState] = useState<Map<string, boolean>>(
     new Map(),
   )
+  const checkedState = useMemo(() => {
+    if (!isCheckedByDefault) return explicitChecked
+    const effective = new Map<string, boolean>()
+    for (const id of collectSelectableIds(nodes)) {
+      effective.set(id, explicitChecked.get(id) ?? true)
+    }
+    return effective
+  }, [explicitChecked, isCheckedByDefault, nodes])
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set())
   const [focusedId, setFocusedId] = useState<string | undefined>()
   const treeReference = useRef<HTMLDivElement>(null)
@@ -107,19 +116,21 @@ export const BookmarkTreeView = forwardRef<
       })
     },
     deselectAll: () => {
-      if (!isSearching) {
-        setCheckedState(new Map())
-        return
-      }
-      const visibleBookmarkIds = collectSelectableIds(visibleNodes)
+      const targetIds = collectSelectableIds(isSearching ? visibleNodes : nodes)
       setCheckedState((previous) => {
         const next = new Map(previous)
-        for (const id of visibleBookmarkIds) next.delete(id)
+        for (const id of targetIds) {
+          if (isCheckedByDefault) next.set(id, false)
+          else next.delete(id)
+        }
         return next
       })
     },
     clearSelection: () => {
-      setCheckedState(new Map())
+      const targetIds = collectSelectableIds(nodes)
+      setCheckedState(
+        new Map(isCheckedByDefault ? targetIds.map((id) => [id, false]) : []),
+      )
     },
     areAllVisibleSelected: () => {
       const visibleBookmarkIds = collectSelectableIds(visibleNodes)

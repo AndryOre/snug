@@ -1107,6 +1107,10 @@
     "message": "Nada novo para importar",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "Selecione favoritos para importar",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "Lendo o arquivo…",
     "description": "Disabled import button label while the file is being read"

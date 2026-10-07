@@ -258,3 +258,17 @@ export function pruneFilesToChecked<F extends { tree: ParsedBookmark[] }>(
     tree: prune(file.tree, fileId(fileIndex)),
   }))
 }
+
+/**
+ * Lists the path ids of the duplicate bookmarks of a plan's display tree.
+ * They are never selectable, yet the import still has to see them so it can
+ * skip and count them.
+ * @param nodes The plan's display tree.
+ * @returns The ids of the duplicate bookmarks, in tree order.
+ */
+export function collectDuplicateIds(nodes: readonly PlanNode[]): string[] {
+  return nodes.flatMap((node) => {
+    if (node.kind === 'folder') return collectDuplicateIds(node.children)
+    return node.state.status === 'duplicate' ? [node.id] : []
+  })
+}

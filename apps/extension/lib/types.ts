@@ -273,6 +273,11 @@ export interface BookmarkTreeViewProperties {
    */
   isSelectable?: boolean
   /**
+   * Starts every enabled bookmark checked, including ones that appear later
+   * (a disabled node that becomes enabled). Defaults to `false`.
+   */
+  isCheckedByDefault?: boolean
+  /**
    * Rendered at the end of a row, after the folder count.
    */
   renderBadge?: (node: BookmarkNode) => ReactNode

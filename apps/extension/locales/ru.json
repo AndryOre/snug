@@ -1085,6 +1085,10 @@
     "message": "Нет новых закладок для импорта",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "Выберите закладки для импорта",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "Чтение файла…",
     "description": "Disabled import button label while the file is being read"

@@ -1097,6 +1097,10 @@
     "message": "Nothing new to import",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "Select bookmarks to import",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "Reading file…",
     "description": "Disabled import button label while the file is being read"
