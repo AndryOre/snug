@@ -1374,5 +1374,22 @@
   "safetySnapshot_download": {
     "message": "다운로드",
     "description": "Button that saves a snapshot to Downloads"
+  },
+  "import_addFiles": {
+    "message": "파일 추가",
+    "description": "Button that adds more files to the Import file list"
+  },
+  "import_removeFile": {
+    "message": "$NAME$ 제거",
+    "description": "Accessible name of the button that removes a file from the Import file list; $NAME$ is the file name",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "import_skippedFilesTitle": {
+    "message": "가져오지 않은 파일",
+    "description": "Heading above the files an Import batch left out, each with its reason"
   }
 }

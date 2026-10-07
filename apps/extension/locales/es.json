@@ -60,7 +60,7 @@
     "description": "Incluir fechas de uso"
   },
   "dropFileHere": {
-    "message": "Suelta tu archivo de marcadores aquí",
+    "message": "Suelta tus archivos de marcadores aquí",
     "description": "Texto del área de soltar archivo"
   },
   "orClickToSelect": {
@@ -1390,5 +1390,22 @@
   "safetySnapshot_download": {
     "message": "Descargar",
     "description": "Button that saves a snapshot to Downloads"
+  },
+  "import_addFiles": {
+    "message": "Añadir archivos",
+    "description": "Button that adds more files to the Import file list"
+  },
+  "import_removeFile": {
+    "message": "Quitar $NAME$",
+    "description": "Accessible name of the button that removes a file from the Import file list; $NAME$ is the file name",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "import_skippedFilesTitle": {
+    "message": "Archivos no importados",
+    "description": "Heading above the files an Import batch left out, each with its reason"
   }
 }

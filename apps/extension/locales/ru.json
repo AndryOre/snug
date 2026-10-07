@@ -60,7 +60,7 @@
     "description": "Include last used dates"
   },
   "dropFileHere": {
-    "message": "Перетащите сюда файл с закладками",
+    "message": "Перетащите сюда файлы с закладками",
     "description": "File drop zone prompt"
   },
   "orClickToSelect": {
@@ -1374,5 +1374,22 @@
   "safetySnapshot_download": {
     "message": "Скачать",
     "description": "Button that saves a snapshot to Downloads"
+  },
+  "import_addFiles": {
+    "message": "Добавить файлы",
+    "description": "Button that adds more files to the Import file list"
+  },
+  "import_removeFile": {
+    "message": "Удалить $NAME$",
+    "description": "Accessible name of the button that removes a file from the Import file list; $NAME$ is the file name",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "import_skippedFilesTitle": {
+    "message": "Файлы не импортированы",
+    "description": "Heading above the files an Import batch left out, each with its reason"
   }
 }

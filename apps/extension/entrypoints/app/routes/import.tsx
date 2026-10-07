@@ -28,6 +28,7 @@ import type { SubmitEvent } from 'react'
 
 import { ImportAllDuplicates } from '@/components/import/import-all-duplicates'
 import { ImportFileStep } from '@/components/import/import-file-step'
+import type { ImportFileRow } from '@/components/import/import-file-step'
 import { ImportModeStep } from '@/components/import/import-mode-step'
 import { ImportPreviewSkeleton } from '@/components/import/import-preview-skeleton'
 import { ImportPreviewStep } from '@/components/import/import-preview-step'
@@ -50,14 +51,13 @@ import { toPreviewNodes } from '@/lib/import-preview-tree'
 import { parseImportFile } from '@/lib/importers/parse-import'
 import type { ParsedImportFile } from '@/lib/importers/parse-import'
 import { resolveImportRootTitles } from '@/lib/importers/resolve-roots'
-import { createLatestOnly } from '@/lib/latest-only'
 import { runImport } from '@/lib/run-import'
 import type { RunImportResult } from '@/lib/run-import'
-import { runImportBatch } from '@/lib/run-import-batch'
+import { runImportBatch, stripFileExtension } from '@/lib/run-import-batch'
 import { restoreSafetySnapshot } from '@/lib/safety-snapshot'
 import type { SafetySnapshot } from '@/lib/safety-snapshot'
 import { defaultImportModeStore, skipDuplicatesStore } from '@/lib/storage'
-import type { ImportMode, ImportPreview } from '@/lib/types'
+import type { BookmarkFormat, ImportMode, ImportPreview } from '@/lib/types'
 import { useOperationProgress } from '@/lib/use-operation-progress'
 import { useStorageItem } from '@/lib/use-storage-item'
 
@@ -88,19 +88,94 @@ interface ChosenFile {
   text: string
   preview: ImportPreview
   parsed: ParsedImportFile
-  liveTree: Browser.bookmarks.BookmarkTreeNode[]
 }
 
-async function analyzeFile(file: File) {
-  const text = await file.text()
-  const liveTree = await browser.bookmarks.getTree()
-  const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
-  const preview = getImportPreview(text, file.type, file.name, liveRootTitles)
-  if (preview.format === 'unknown') {
-    throw new Error(i18n.t('unsupportedFileFormat'))
+interface RejectedFile {
+  id: string
+  file: File
+  message: string
+}
+
+type FileEntry =
+  ({ kind: 'valid' } & ChosenFile) | ({ kind: 'invalid' } & RejectedFile)
+
+const FORMAT_LABELS: Record<BookmarkFormat, string> = {
+  json: 'JSON',
+  html: 'HTML',
+  csv: 'CSV',
+  chrome: 'Chrome',
+  xbel: 'XBEL',
+  safari: 'Safari',
+  unknown: '',
+}
+
+async function analyzeFile(
+  file: File,
+  liveTree: Browser.bookmarks.BookmarkTreeNode[],
+): Promise<FileEntry> {
+  const id = crypto.randomUUID()
+  try {
+    const text = await file.text()
+    const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
+    const preview = getImportPreview(text, file.type, file.name, liveRootTitles)
+    if (preview.format === 'unknown') {
+      throw new Error(i18n.t('unsupportedFileFormat'))
+    }
+    const parsed = parseImportFile(text, file.type, file.name, liveRootTitles)
+    return { kind: 'valid', id, file, text, preview, parsed }
+  } catch (error) {
+    return { kind: 'invalid', id, file, message: (error as Error).message }
   }
-  const parsed = parseImportFile(text, file.type, file.name, liveRootTitles)
-  return { id: crypto.randomUUID(), text, preview, parsed, liveTree }
+}
+
+function describeFileRow(entry: FileEntry): ImportFileRow {
+  if (entry.kind === 'invalid') {
+    return {
+      id: entry.id,
+      name: entry.file.name,
+      description: entry.message,
+      isInvalid: true,
+    }
+  }
+  const { totalCount } = entry.preview
+  return {
+    id: entry.id,
+    name: entry.file.name,
+    description: `${FORMAT_LABELS[entry.preview.format]} · ${i18n.t(
+      'importPreviewCount',
+      totalCount,
+      [formatCount(totalCount)],
+    )}`,
+    isInvalid: false,
+  }
+}
+
+function describeLeftOutFile(rejected: RejectedFile): string {
+  return `${rejected.file.name}: ${rejected.message}`
+}
+
+function combinePreviews(previews: ImportPreview[]): ImportPreview | null {
+  const [first] = previews
+  if (!first) return null
+  if (previews.length === 1) return first
+  const combined: ImportPreview = {
+    format: first.format,
+    bookmarksBarCount: 0,
+    otherBookmarksCount: 0,
+    mobileBookmarksCount: 0,
+    clearsMobileRoot: false,
+    totalCount: 0,
+    hasLocationData: false,
+  }
+  for (const preview of previews) {
+    combined.bookmarksBarCount += preview.bookmarksBarCount
+    combined.otherBookmarksCount += preview.otherBookmarksCount
+    combined.mobileBookmarksCount += preview.mobileBookmarksCount
+    combined.totalCount += preview.totalCount
+    combined.clearsMobileRoot ||= preview.clearsMobileRoot
+    combined.hasLocationData ||= preview.hasLocationData
+  }
+  return combined
 }
 
 /**
@@ -113,16 +188,16 @@ async function analyzeFile(file: File) {
  * @returns The rendered stepped import flow.
  */
 export function ImportRoute() {
-  const [chosen, setChosen] = useState<ChosenFile | null>(null)
+  const [entries, setEntries] = useState<FileEntry[]>([])
+  const [liveTree, setLiveTree] = useState<
+    Browser.bookmarks.BookmarkTreeNode[]
+  >([])
   const [storedMode, setStoredMode] = useStorageItem(defaultImportModeStore)
   const [skipDuplicates, setSkipDuplicates] =
     useStorageItem(skipDuplicatesStore)
   const [status, setStatus] = useState<ImportStatus>('idle')
-  const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [analysisError, setAnalysisError] = useState<{
-    file: File
-    message: string
-  } | null>(null)
+  const [analyzingCount, setAnalyzingCount] = useState(0)
+  const [leftOutFiles, setLeftOutFiles] = useState<RejectedFile[]>([])
   const [errorMessage, setErrorMessage] = useState('')
   const [wasRestored, setWasRestored] = useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
@@ -133,26 +208,49 @@ export function ImportRoute() {
   const selectionReference = useRef<ImportPreviewTreeHandle>(null)
   const progress = useOperationProgress()
 
-  const preview = chosen?.preview ?? null
-  const isSupported = preview !== null && preview.format !== 'unknown'
+  const validFiles = useMemo(
+    () =>
+      entries.filter((entry): entry is { kind: 'valid' } & ChosenFile => {
+        return entry.kind === 'valid'
+      }),
+    [entries],
+  )
+  const fileRows = useMemo(
+    () => entries.map((entry) => describeFileRow(entry)),
+    [entries],
+  )
+  const preview = useMemo(
+    () => combinePreviews(validFiles.map((entry) => entry.preview)),
+    [validFiles],
+  )
+  const selectionKey = validFiles.map((entry) => entry.id).join(',')
+  const isSupported = preview !== null
   const hasLocationData = preview?.hasLocationData ?? false
-  const effectiveMode: ImportMode = hasLocationData ? storedMode : 'folder'
+  const isBatch = validFiles.length >= 2
+  const effectiveMode: ImportMode =
+    !hasLocationData || (isBatch && storedMode === 'restore-replace')
+      ? 'folder'
+      : storedMode
   const isImporting = status === 'importing'
+  const isAnalyzing = analyzingCount > 0
   const isBusy = isImporting || isAnalyzing
   const isReplace = effectiveMode === 'restore-replace'
   const isSkippingDuplicates = skipDuplicates && !isReplace
 
   const plan = useMemo(
     () =>
-      chosen
+      validFiles.length > 0
         ? buildImportPlan({
-            files: [{ name: chosen.file.name, file: chosen.parsed }],
-            liveTree: chosen.liveTree,
+            files: validFiles.map((entry) => ({
+              name: stripFileExtension(entry.file.name),
+              file: entry.parsed,
+            })),
+            liveTree,
             mode: effectiveMode,
             skipDuplicates: true,
           })
         : null,
-    [chosen, effectiveMode],
+    [validFiles, liveTree, effectiveMode],
   )
   const previewNodes = useMemo(
     () => (plan ? toPreviewNodes(plan.tree, isSkippingDuplicates) : []),
@@ -173,32 +271,38 @@ export function ImportRoute() {
   const isSelectionEmpty =
     !isReplace && !isEmpty && !isAllDuplicates && importCount === 0
 
-  const analyzeLatestFile = useRef(createLatestOnly(analyzeFile)).current
-
   const importStartedReference = useRef(false)
 
-  const handleFile = async (file: File) => {
+  const handleFiles = async (files: File[]) => {
     if (importStartedReference.current) return
-    setIsAnalyzing(true)
+    setAnalyzingCount((count) => count + 1)
     try {
-      const outcome = await analyzeLatestFile(file)
-      if (!outcome.isCurrent || importStartedReference.current) return
-      setChosen({ file, ...outcome.value })
-      setAnalysisError(null)
+      const freshTree = await browser.bookmarks.getTree()
+      const analyzed = await Promise.all(
+        files.map((file) => analyzeFile(file, freshTree)),
+      )
+      if (importStartedReference.current) return
+      setLiveTree(freshTree)
+      setEntries((current) => [...current, ...analyzed])
       setStatus('idle')
       setErrorMessage('')
     } catch (error) {
-      setChosen(null)
-      setAnalysisError({ file, message: (error as Error).message })
-      setStatus('idle')
-      setErrorMessage('')
+      setStatus('error')
+      setErrorMessage((error as Error).message)
     } finally {
-      setIsAnalyzing(false)
+      setAnalyzingCount((count) => count - 1)
     }
   }
 
+  const handleRemoveFile = (id: string) => {
+    if (importStartedReference.current) return
+    setEntries((current) => current.filter((entry) => entry.id !== id))
+    setStatus('idle')
+    setErrorMessage('')
+  }
+
   const executeImport = async () => {
-    if (!chosen || isAnalyzing) return
+    if (isAnalyzing || validFiles.length === 0) return
 
     importStartedReference.current = true
     setStatus('importing')
@@ -221,27 +325,31 @@ export function ImportRoute() {
           ? collectDuplicateIds(plan?.tree ?? [], selectedIds)
           : []),
       ])
-      const [prunedFile] = pruneFilesToChecked([chosen.parsed], checkedIds)
-      const result: RunImportResult = isReplace
-        ? await runImport(
-            chosen.text,
-            chosen.file.type,
-            effectiveMode,
-            chosen.file.name,
-            options,
-          )
-        : await runImportBatch(
-            [
-              {
-                text: chosen.text,
-                mimeType: chosen.file.type,
-                fileName: chosen.file.name,
-                prunedTree: prunedFile?.tree ?? [],
-              },
-            ],
-            effectiveMode,
-            options,
-          )
+      const prunedFiles = pruneFilesToChecked(
+        validFiles.map((entry) => entry.parsed),
+        checkedIds,
+      )
+      const [onlyFile] = validFiles
+      const result: RunImportResult =
+        isReplace && onlyFile
+          ? await runImport(
+              onlyFile.text,
+              onlyFile.file.type,
+              effectiveMode,
+              onlyFile.file.name,
+              options,
+            )
+          : await runImportBatch(
+              validFiles.map((entry, index) => ({
+                text: entry.text,
+                mimeType: entry.file.type,
+                fileName: entry.file.name,
+                prunedTree: prunedFiles[index]?.tree ?? [],
+              })),
+              effectiveMode,
+              options,
+            )
+      setLeftOutFiles(entries.filter((entry) => entry.kind === 'invalid'))
       setUndoSnapshot(result.snapshot ?? null)
       setSkippedCount(result.skippedInvalidUrl)
       setSkippedDuplicatesCount(result.skippedDuplicates)
@@ -293,8 +401,8 @@ export function ImportRoute() {
 
   const handleReset = () => {
     setUndoSnapshot(null)
-    setChosen(null)
-    setAnalysisError(null)
+    setEntries([])
+    setLeftOutFiles([])
     setStatus('idle')
     setErrorMessage('')
   }
@@ -343,6 +451,17 @@ export function ImportRoute() {
             </AlertDescription>
           )}
         </Alert>
+        {leftOutFiles.length > 0 && (
+          <Alert>
+            <InfoIcon />
+            <AlertTitle>{i18n.t('import_skippedFilesTitle')}</AlertTitle>
+            {leftOutFiles.map((leftOut) => (
+              <AlertDescription key={leftOut.id}>
+                {describeLeftOutFile(leftOut)}
+              </AlertDescription>
+            ))}
+          </Alert>
+        )}
         {errorMessage && (
           <Alert variant="destructive">
             <CircleAlertIcon />
@@ -383,8 +502,9 @@ export function ImportRoute() {
         isComplete={isSupported}
       >
         <ImportFileStep
-          file={chosen?.file ?? analysisError?.file ?? null}
-          onFile={(file) => void handleFile(file)}
+          rows={fileRows}
+          onFiles={(files) => void handleFiles(files)}
+          onRemove={handleRemoveFile}
           disabled={isBusy}
         />
       </ImportStep>
@@ -403,14 +523,6 @@ export function ImportRoute() {
             {i18n.t('import_reading')}
           </Button>
         </>
-      )}
-
-      {!isAnalyzing && analysisError && (
-        <Alert variant="destructive" tabIndex={-1} ref={focusOnMount}>
-          <CircleAlertIcon />
-          <AlertTitle>{i18n.t('import_unreadableTitle')}</AlertTitle>
-          <AlertDescription>{analysisError.message}</AlertDescription>
-        </Alert>
       )}
 
       {!isAnalyzing && isSupported && preview && plan && (
@@ -439,7 +551,7 @@ export function ImportRoute() {
               ) : (
                 !isEmpty && (
                   <ImportPreviewTree
-                    key={chosen?.id}
+                    key={selectionKey}
                     nodes={previewNodes}
                     isSelectable={!isReplace}
                     ref={selectionReference}
@@ -465,6 +577,7 @@ export function ImportRoute() {
               value={effectiveMode}
               onChange={(mode) => void setStoredMode(mode)}
               hasLocationData={hasLocationData}
+              isReplaceDisabled={isBatch}
               disabled={isImporting}
             />
           </ImportStep>

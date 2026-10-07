@@ -25,6 +25,7 @@ interface ImportModeStepProperties {
   value: ImportMode
   onChange: (mode: ImportMode) => void
   hasLocationData: boolean
+  isReplaceDisabled?: boolean
   disabled: boolean
 }
 
@@ -57,6 +58,8 @@ function getModeOptions(): ModeOption[] {
  * @param root0.value The selected mode.
  * @param root0.onChange Called with the newly selected mode.
  * @param root0.hasLocationData Whether the restore modes are available.
+ * @param root0.isReplaceDisabled Whether "Restore - replace" is unavailable
+ * because two or more files are chosen.
  * @param root0.disabled Whether the whole group is disabled (import in flight).
  * @returns The mode choice cards.
  */
@@ -64,6 +67,7 @@ export function ImportModeStep({
   value,
   onChange,
   hasLocationData,
+  isReplaceDisabled = false,
   disabled,
 }: ImportModeStepProperties) {
   return (
@@ -75,7 +79,11 @@ export function ImportModeStep({
         onValueChange={(next) => onChange(next as ImportMode)}
       >
         {getModeOptions().map((option) => {
-          const isUnavailable = !hasLocationData && option.value !== 'folder'
+          const isRestoreUnavailable =
+            !hasLocationData && option.value !== 'folder'
+          const isBatchBlocked =
+            isReplaceDisabled && option.value === 'restore-replace'
+          const isUnavailable = isRestoreUnavailable || isBatchBlocked
           const id = `import-mode-${option.value}`
 
           return (
@@ -88,7 +96,11 @@ export function ImportModeStep({
                   <FieldTitle>{option.label}</FieldTitle>
                   <FieldDescription>
                     {isUnavailable
-                      ? i18n.t('import_restoreUnavailable')
+                      ? i18n.t(
+                          isRestoreUnavailable
+                            ? 'import_restoreUnavailable'
+                            : 'importBatchReplaceNeedsOneFile',
+                        )
                       : option.description}
                   </FieldDescription>
                 </FieldContent>

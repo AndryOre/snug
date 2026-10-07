@@ -51,6 +51,66 @@ async function expectSuccess(page: Page): Promise<void> {
   ).toBeVisible()
 }
 
+interface UploadedFile {
+  name: string
+  mimeType: string
+  buffer: Buffer
+}
+
+const NOTES_FILE: UploadedFile = {
+  name: 'notes.html',
+  mimeType: 'text/plain',
+  buffer: Buffer.from('this is not a bookmarks file'),
+}
+
+function jsonBackup(urls: string[]): Buffer {
+  return Buffer.from(
+    JSON.stringify([
+      {
+        id: '2',
+        title: 'Other bookmarks',
+        dateAdded: 0,
+        children: urls.map((url, index) => ({
+          title: `Item ${index}`,
+          url,
+          dateAdded: 0,
+        })),
+      },
+    ]),
+  )
+}
+
+function urlsFor(prefix: string): string[] {
+  return Array.from(
+    { length: 2500 },
+    (_, index) => `https://${prefix}.example/${index}`,
+  )
+}
+
+async function chooseFiles(page: Page, files: UploadedFile[]): Promise<void> {
+  await page.getByLabel(en.import_fileInputLabel.message).setInputFiles(files)
+}
+
+async function htmlFixture(): Promise<UploadedFile> {
+  return {
+    name: 'bookmarks.html',
+    mimeType: 'text/html',
+    buffer: await readFile(path.join(FIXTURES_DIRECTORY, 'bookmarks.html')),
+  }
+}
+
+interface TitledNode {
+  title?: string
+  children?: TitledNode[]
+}
+
+function collectTitles(nodes: TitledNode[]): string[] {
+  return nodes.flatMap((node) => [
+    node.title ?? '',
+    ...collectTitles(node.children ?? []),
+  ])
+}
+
 test.describe('Import page', () => {
   test('shows the empty drop zone first', async ({ openExtensionPage }) => {
     const page = await openImportPage(openExtensionPage)
@@ -687,13 +747,137 @@ test.describe('Import page', () => {
       buffer: Buffer.from('this is not a bookmarks file'),
     })
 
-    await expect(
-      page.getByText(en.import_unreadableTitle.message),
-    ).toBeVisible()
+    await expect(page.getByText('notes.html')).toBeVisible()
     await expect(page.getByText(en.unsupportedFileFormat.message)).toBeVisible()
     await expect(page.getByRole('button', { name: /^Import \d+/ })).toHaveCount(
       0,
     )
+  })
+
+  test.describe('Import batch', () => {
+    test('imports the valid files in one run and lists the invalid one with its reason', async ({
+      openExtensionPage,
+      readBookmarkTree,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [
+        await htmlFixture(),
+        {
+          name: 'second.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup([
+            'https://html-bar-a.example/page',
+            'https://second-only.example/page',
+          ]),
+        },
+        NOTES_FILE,
+      ])
+
+      await expect(page.getByText('notes.html')).toBeVisible()
+      await expect(
+        page.getByText(en.unsupportedFileFormat.message),
+      ).toBeVisible()
+      await selectMode(page, 'Create folder')
+      await submitImport(page, 4)
+
+      await expectSuccess(page)
+      await expect(page.getByText('1 skipped as a duplicate')).toBeVisible()
+      await expect(
+        page.getByText(en.import_skippedFilesTitle.message),
+      ).toBeVisible()
+      await expect(
+        page.getByText(`notes.html: ${en.unsupportedFileFormat.message}`),
+      ).toBeVisible()
+
+      const [root] = await readBookmarkTree()
+      const serialized = JSON.stringify(root)
+      expect(serialized.match(/html-bar-a\.example/g)).toHaveLength(1)
+      expect(serialized).toContain('second-only.example')
+      const titles = collectTitles(root?.children ?? [])
+      expect(titles).toContain('bookmarks')
+      expect(titles).toContain('second')
+    })
+
+    test('removing a row drops that file from the plan', async ({
+      openExtensionPage,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [await htmlFixture(), NOTES_FILE])
+
+      await page
+        .getByRole('button', {
+          name: en.import_removeFile.message.replace('$NAME$', 'notes.html'),
+        })
+        .click()
+
+      await expect(page.getByText('notes.html')).toHaveCount(0)
+      await expect(
+        page.getByRole('button', { name: en.import_addFiles.message }),
+      ).toBeVisible()
+    })
+
+    test('Restore - replace is disabled for two or more files', async ({
+      openExtensionPage,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [
+        await htmlFixture(),
+        {
+          name: 'second.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup(['https://second-only.example/page']),
+        },
+      ])
+
+      await expect(
+        page.getByRole('radio', { name: /^Restore — replace/ }),
+      ).toBeDisabled()
+      await expect(
+        page.getByText(en.importBatchReplaceNeedsOneFile.message),
+      ).toBeVisible()
+    })
+
+    test('canceling a long batch leaves the bookmarks as they were', async ({
+      openExtensionPage,
+      seedBookmarks,
+      readBookmarkTree,
+    }) => {
+      await seedBookmarks([
+        { title: 'Existing', url: 'https://existing-other.example/page' },
+      ])
+      const urlsOf = async () =>
+        JSON.stringify(await readBookmarkTree()).match(/"url":"[^"]+"/g)
+      const before = await urlsOf()
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [
+        {
+          name: 'one.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup(urlsFor('batch-one')),
+        },
+        {
+          name: 'two.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup(urlsFor('batch-two')),
+        },
+      ])
+      await selectMode(page, 'Create folder')
+      await submitImport(page, 5000)
+
+      await expect(
+        page.getByRole('progressbar', {
+          name: en.progress_importTitle.message,
+        }),
+      ).toBeVisible()
+      await page
+        .getByRole('button', { name: en.progress_cancelImport.message })
+        .click()
+
+      await expect(
+        page.getByText(en.progress_importCanceledTitle.message),
+      ).toBeVisible()
+      expect(await urlsOf()).toEqual(before)
+    })
   })
   test('previews a 10,000 bookmark upload quickly and keeps the tree virtualized and scrollable', async ({
     openExtensionPage,
