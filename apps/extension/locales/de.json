@@ -955,27 +955,23 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Sicherheits-Snapshot",
+    "message": "Sicherheits-Snapshots",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Wird vor jedem Ersetzen automatisch erstellt. Nur der neueste wird aufbewahrt.",
+    "message": "Snug behält die neuesten 5. Jeder wird auch in Ihren Downloads gespeichert.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "Dieselbe Kopie wird als Datei in Ihrem Download-Ordner gespeichert.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Snapshot wiederherstellen",
+    "message": "Wiederherstellen",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
-    "message": "Noch kein Snapshot",
+    "message": "Noch keine Snapshots",
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Beim ersten Ersetzen Ihrer Lesezeichen wird automatisch einer erstellt.",
+    "message": "Snug speichert automatisch einen vor Ihrem nächsten Wiederherstellen – ersetzen, oder Sie erstellen jetzt einen.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1247,5 +1243,33 @@
   "reviewPrompt_notNow": {
     "message": "Jetzt nicht",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Jetzt Snapshot erstellen",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Snapshot wird erstellt…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Snapshot konnte nicht erstellt werden",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Snapshot konnte nicht heruntergeladen werden",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome hat den Download blockiert. Prüfen Sie Ihre Download-Einstellungen und versuchen Sie es erneut.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Neueste",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Herunterladen",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

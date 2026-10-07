@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises'
+
 import en from '../locales/en.json' with { type: 'json' }
 import { expect, test } from './fixtures'
 
@@ -96,7 +98,19 @@ test('default import mode persists and is shown in the popup', async ({
   ).toContainText(en.importModeFolder.message)
 })
 
-test('Safety snapshot card shows an empty state when no snapshot exists', async ({
+function snapshotRoots(url: string) {
+  return [
+    { id: '1', title: 'Bookmarks bar', dateAdded: 0, children: [] },
+    {
+      id: '2',
+      title: 'Other bookmarks',
+      dateAdded: 0,
+      children: [{ title: 'Snapshot', url, dateAdded: 0 }],
+    },
+  ]
+}
+
+test('Safety snapshots card shows an empty state when none exist', async ({
   openExtensionPage,
 }) => {
   const page = await openExtensionPage('app.html#/settings')
@@ -105,11 +119,14 @@ test('Safety snapshot card shows an empty state when no snapshot exists', async 
     page.getByText(en.safetySnapshot_emptyTitle.message),
   ).toBeVisible()
   await expect(
+    page.getByRole('button', { name: en.safetySnapshot_take.message }),
+  ).toBeVisible()
+  await expect(
     page.getByRole('button', { name: en.safetySnapshot_restore.message }),
   ).toHaveCount(0)
 })
 
-test('Restore snapshot asks for confirmation and restores the snapshot', async ({
+test('Safety snapshots list newest first with a Latest badge, Download saves the chosen one and Restore keeps the others', async ({
   openExtensionPage,
   seedBookmarks,
   seedStorage,
@@ -119,29 +136,37 @@ test('Restore snapshot asks for confirmation and restores the snapshot', async (
     { title: 'Current', url: 'https://current.example/page' },
   ])
   await seedStorage({
-    safetySnapshot: {
-      takenAt: Date.now(),
-      roots: [
-        { id: '1', title: 'Bookmarks bar', dateAdded: 0, children: [] },
-        {
-          id: '2',
-          title: 'Other bookmarks',
-          dateAdded: 0,
-          children: [
-            {
-              title: 'Snapshot',
-              url: 'https://snapshot.example/page',
-              dateAdded: 0,
-            },
-          ],
-        },
-      ],
-    },
+    safetySnapshot: [
+      { takenAt: Date.now(), roots: snapshotRoots('https://newest.example/') },
+      {
+        takenAt: Date.now() - 86_400_000,
+        roots: snapshotRoots('https://older.example/page'),
+      },
+    ],
+    safetySnapshot$: { v: 2 },
   })
   const page = await openExtensionPage('app.html#/settings')
+  const rows = page.getByTestId('safety-snapshot-row')
 
-  await expect(page.getByText('1 bookmark', { exact: true })).toBeVisible()
-  await page
+  await expect(rows).toHaveCount(2)
+  await expect(rows.nth(0)).toContainText(en.safetySnapshot_latest.message)
+  await expect(rows.nth(1)).not.toContainText(en.safetySnapshot_latest.message)
+
+  const downloadPromise = page.waitForEvent('download')
+  await rows
+    .nth(1)
+    .getByRole('button', { name: en.safetySnapshot_download.message })
+    .click()
+  const download = await downloadPromise
+  expect(download.suggestedFilename()).toMatch(
+    /^snug-safety-snapshot-.+\.json$/,
+  )
+  const content = await readFile((await download.path()) as string, 'utf8')
+  expect(content).toContain('https://older.example/page')
+  expect(content).not.toContain('https://newest.example/')
+
+  await rows
+    .nth(1)
     .getByRole('button', { name: en.safetySnapshot_restore.message })
     .click()
   await expect(
@@ -157,6 +182,29 @@ test('Restore snapshot asks for confirmation and restores the snapshot', async (
   const [root] = await readBookmarkTree()
   const otherBookmarks = root?.children?.find((n) => n.id === '2')
   expect(otherBookmarks?.children?.map((n) => n.url)).toEqual([
-    'https://snapshot.example/page',
+    'https://older.example/page',
   ])
+  await expect(rows).toHaveCount(3)
+  await expect(rows.nth(0)).toContainText(en.safetySnapshot_latest.message)
+})
+
+test('Take a snapshot now saves the file and adds a row', async ({
+  openExtensionPage,
+  seedBookmarks,
+}) => {
+  await seedBookmarks([
+    { title: 'Current', url: 'https://current.example/page' },
+  ])
+  const page = await openExtensionPage('app.html#/settings')
+
+  const downloadPromise = page.waitForEvent('download')
+  await page
+    .getByRole('button', { name: en.safetySnapshot_take.message })
+    .click()
+  await downloadPromise
+
+  await expect(page.getByTestId('safety-snapshot-row')).toHaveCount(1)
+  await expect(
+    page.getByText(en.safetySnapshot_emptyTitle.message),
+  ).toHaveCount(0)
 })

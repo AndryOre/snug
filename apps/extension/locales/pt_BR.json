@@ -969,19 +969,15 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Instantâneo de segurança",
+    "message": "Instantâneos de segurança",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Criado automaticamente antes de cada substituição. Apenas o mais recente é mantido.",
+    "message": "O Snug mantém os últimos 5. Cada um também é salvo em Downloads.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "A mesma cópia é salva como arquivo na sua pasta Downloads.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Restaurar instantâneo",
+    "message": "Restaurar",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
@@ -989,7 +985,7 @@
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Um é criado automaticamente na primeira vez que você substituir seus favoritos.",
+    "message": "O Snug salva um automaticamente antes do seu próximo Restaurar — substituir, ou você pode criar um agora.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1265,5 +1261,33 @@
   "reviewPrompt_notNow": {
     "message": "Agora não",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Criar um instantâneo agora",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Criando instantâneo…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Não foi possível criar o instantâneo",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Não foi possível baixar o instantâneo",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "O Chrome bloqueou o download. Verifique as configurações de download e tente novamente.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Mais recente",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Baixar",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }
