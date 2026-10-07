@@ -1085,6 +1085,10 @@
     "message": "没有可导入的新书签",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "请选择要导入的书签",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "正在读取文件…",
     "description": "Disabled import button label while the file is being read"

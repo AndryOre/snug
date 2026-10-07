@@ -1085,6 +1085,10 @@
     "message": "読み込む新しいブックマークはありません",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "インポートするブックマークを選択してください",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "ファイルを読み込み中…",
     "description": "Disabled import button label while the file is being read"

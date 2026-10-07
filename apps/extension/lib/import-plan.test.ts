@@ -14,6 +14,7 @@ import { countBookmarks } from './count-bookmarks'
 import { normalizeUrl } from './duplicates'
 import {
   buildImportPlan,
+  collectDuplicateIds,
   type PlanBookmark,
   type PlanNode,
   pruneFilesToChecked,
@@ -313,5 +314,48 @@ describe('pruneFilesToChecked', () => {
     const [pruned] = pruneFilesToChecked([file], new Set(['f0/0/2']))
     expect(pruned?.tree[0]?.children?.map((node) => node.title)).toEqual(['B'])
     expect(file).toEqual(snapshot)
+  })
+})
+
+describe('collectDuplicateIds', () => {
+  it('lists the path ids of the duplicate bookmarks only', async () => {
+    const file = parseImportFile(plainJson, 'application/json', 'b.json')
+    const [first] = leaves(
+      buildImportPlan({
+        files: [{ file }],
+        liveTree: await browser.bookmarks.getTree(),
+        mode: 'restore-merge',
+        skipDuplicates: false,
+      }).tree,
+    )
+    if (!first) throw new Error('fixture has no bookmarks')
+    await browser.bookmarks.create({ title: 'Seen', url: first.url })
+
+    const plan = buildImportPlan({
+      files: [{ file }],
+      liveTree: await browser.bookmarks.getTree(),
+      mode: 'restore-merge',
+      skipDuplicates: true,
+    })
+    expect(collectDuplicateIds(plan.tree, new Set())).toEqual([first.id])
+  })
+
+  it('lists an in-file duplicate only while its first copy is checked', () => {
+    const file = barFile(
+      mark('A', 'https://a.example/'),
+      mark('A again', 'https://a.example/'),
+    )
+    const plan = buildImportPlan({
+      files: [{ file }],
+      liveTree: [],
+      mode: 'restore-merge',
+      skipDuplicates: true,
+    })
+    const [first, second] = leaves(plan.tree)
+    if (!first || !second) throw new Error('fixture has no bookmarks')
+    expect(collectDuplicateIds(plan.tree, new Set([first.id]))).toEqual([
+      second.id,
+    ])
+    expect(collectDuplicateIds(plan.tree, new Set())).toEqual([])
   })
 })

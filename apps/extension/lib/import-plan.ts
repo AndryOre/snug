@@ -258,3 +258,40 @@ export function pruneFilesToChecked<F extends { tree: ParsedBookmark[] }>(
     tree: prune(file.tree, fileId(fileIndex)),
   }))
 }
+
+/**
+ * Lists the path ids of the duplicate bookmarks the import still has to see
+ * so it can skip and count them. A duplicate of a bookmark already in the
+ * browser is always listed. A duplicate of an earlier bookmark of the batch is
+ * listed only while that earlier copy is checked, so unchecking it never
+ * imports the later copy in its place.
+ * @param nodes The plan's display tree.
+ * @param checkedIds The path ids the user left checked.
+ * @returns The ids of the duplicate bookmarks, in tree order.
+ */
+export function collectDuplicateIds(
+  nodes: readonly PlanNode[],
+  checkedIds: ReadonlySet<string>,
+): string[] {
+  const checkedUrls = new Set<string>()
+  const collectCheckedUrls = (level: readonly PlanNode[]): void => {
+    for (const node of level) {
+      if (node.kind === 'folder') collectCheckedUrls(node.children)
+      else if (node.state.status === 'new' && checkedIds.has(node.id)) {
+        checkedUrls.add(normalizeUrl(node.url))
+      }
+    }
+  }
+  collectCheckedUrls(nodes)
+
+  const collect = (level: readonly PlanNode[]): string[] =>
+    level.flatMap((node) => {
+      if (node.kind === 'folder') return collect(node.children)
+      if (node.state.status !== 'duplicate') return []
+      const isListed =
+        node.state.reason === 'existing' ||
+        checkedUrls.has(normalizeUrl(node.url))
+      return isListed ? [node.id] : []
+    })
+  return collect(nodes)
+}

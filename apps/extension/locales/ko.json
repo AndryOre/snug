@@ -1085,6 +1085,10 @@
     "message": "가져올 새 북마크가 없습니다",
     "description": "Disabled import button label when nothing new would be created"
   },
+  "import_selectBookmarks": {
+    "message": "가져올 북마크를 선택하세요",
+    "description": "Disabled import button label when no bookmark is checked"
+  },
   "import_reading": {
     "message": "파일을 읽는 중…",
     "description": "Disabled import button label while the file is being read"

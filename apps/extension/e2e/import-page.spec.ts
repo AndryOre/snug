@@ -35,6 +35,16 @@ async function submitImport(page: Page, count: number): Promise<void> {
     .click()
 }
 
+function previewTree(page: Page) {
+  return page.getByRole('tree', { name: en.import_treeLabel.message })
+}
+
+async function toggleRow(page: Page, name: string): Promise<void> {
+  const row = previewTree(page).getByRole('treeitem', { name, exact: true })
+  await row.focus()
+  await row.press(' ')
+}
+
 async function expectSuccess(page: Page): Promise<void> {
   await expect(
     page.getByText(en.bookmarksImportedSuccessfully.message),
@@ -432,6 +442,83 @@ test.describe('Import page', () => {
       await expect(page.getByRole('switch', { name: SWITCH_NAME })).toHaveCount(
         0,
       )
+    })
+  })
+
+  test.describe('Import selection', () => {
+    test('HTML: unchecking a folder imports only the rest, and the count follows live', async ({
+      openExtensionPage,
+      readBookmarkTree,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFile(page, 'bookmarks.html')
+      await selectMode(page, 'Create folder')
+      await expect(
+        previewTree(page).getByRole('treeitem', { name: 'HTML Bar A' }),
+      ).toHaveAttribute('aria-checked', 'true')
+
+      await toggleRow(page, 'Bookmarks bar')
+      await expect(
+        page.getByRole('button', { name: 'Import 1 bookmark' }),
+      ).toBeVisible()
+      await expect(page.getByText(/^1 new/)).toBeVisible()
+
+      await page.getByRole('button', { name: 'Import 1 bookmark' }).click()
+      await expectSuccess(page)
+
+      const [root] = await readBookmarkTree()
+      const otherBookmarks = root?.children?.find((n) => n.id === '2')
+      const importedFolder = otherBookmarks?.children?.find(
+        (n) => n.title === 'Imported bookmarks',
+      )
+      const urls = JSON.stringify(importedFolder)
+      expect(urls).toContain('https://html-other-a.example/page')
+      expect(urls).not.toContain('html-bar-a.example')
+      expect(urls).not.toContain('html-bar-b.example')
+    })
+
+    test('CSV: unchecking a folder imports only the rest', async ({
+      openExtensionPage,
+      readBookmarkTree,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFile(page, 'bookmarks.csv')
+      await toggleRow(page, 'Docs')
+      await page.getByRole('button', { name: 'Import 1 bookmark' }).click()
+      await expectSuccess(page)
+
+      const [root] = await readBookmarkTree()
+      const otherBookmarks = root?.children?.find((n) => n.id === '2')
+      const urls = JSON.stringify(otherBookmarks)
+      expect(urls).toContain('https://csv-root-a.example/page')
+      expect(urls).not.toContain('csv-docs-a.example')
+    })
+
+    test('an empty selection disables the button with its reason', async ({
+      openExtensionPage,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFile(page, 'bookmarks.csv')
+      await toggleRow(page, 'Docs')
+      await toggleRow(page, 'CSV Root A')
+      await expect(
+        page.getByRole('button', { name: en.import_selectBookmarks.message }),
+      ).toBeDisabled()
+    })
+
+    test('Restore - replace keeps the tree read-only', async ({
+      openExtensionPage,
+    }) => {
+      const page = await openImportPage(openExtensionPage)
+      await chooseFile(page, 'bookmarks.html')
+      await selectMode(page, 'Restore — replace')
+      await expect(previewTree(page)).not.toHaveAttribute(
+        'aria-multiselectable',
+        'true',
+      )
+      await expect(
+        page.getByText(en.import_replaceNoteTitle.message),
+      ).toBeVisible()
     })
   })
 

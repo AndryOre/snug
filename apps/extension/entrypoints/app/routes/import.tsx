@@ -32,6 +32,7 @@ import { ImportModeStep } from '@/components/import/import-mode-step'
 import { ImportPreviewSkeleton } from '@/components/import/import-preview-skeleton'
 import { ImportPreviewStep } from '@/components/import/import-preview-step'
 import { ImportPreviewTree } from '@/components/import/import-preview-tree'
+import type { ImportPreviewTreeHandle } from '@/components/import/import-preview-tree'
 import { ImportReplaceDeletions } from '@/components/import/import-replace-deletions'
 import { ImportSkipDuplicates } from '@/components/import/import-skip-duplicates'
 import { ImportStep } from '@/components/import/import-step'
@@ -39,7 +40,11 @@ import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
 import { OperationProgressCard } from '@/components/operation-progress-card'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError, wasImportRestored } from '@/lib/import-control'
-import { buildImportPlan } from '@/lib/import-plan'
+import {
+  buildImportPlan,
+  collectDuplicateIds,
+  pruneFilesToChecked,
+} from '@/lib/import-plan'
 import { getImportPreview } from '@/lib/import-preview'
 import { toPreviewNodes } from '@/lib/import-preview-tree'
 import { parseImportFile } from '@/lib/importers/parse-import'
@@ -47,6 +52,8 @@ import type { ParsedImportFile } from '@/lib/importers/parse-import'
 import { resolveImportRootTitles } from '@/lib/importers/resolve-roots'
 import { createLatestOnly } from '@/lib/latest-only'
 import { runImport } from '@/lib/run-import'
+import type { RunImportResult } from '@/lib/run-import'
+import { runImportBatch } from '@/lib/run-import-batch'
 import { restoreSafetySnapshot } from '@/lib/safety-snapshot'
 import type { SafetySnapshot } from '@/lib/safety-snapshot'
 import { defaultImportModeStore, skipDuplicatesStore } from '@/lib/storage'
@@ -122,6 +129,8 @@ export function ImportRoute() {
   const [undoSnapshot, setUndoSnapshot] = useState<SafetySnapshot | null>(null)
   const [skippedCount, setSkippedCount] = useState(0)
   const [skippedDuplicatesCount, setSkippedDuplicatesCount] = useState(0)
+  const [selectedCount, setSelectedCount] = useState<number | null>(null)
+  const selectionReference = useRef<ImportPreviewTreeHandle>(null)
   const progress = useOperationProgress()
 
   const preview = chosen?.preview ?? null
@@ -151,12 +160,18 @@ export function ImportRoute() {
   )
   const newCount = plan?.counts.new ?? 0
   const duplicateCount = plan?.counts.duplicate ?? 0
-  const importCount = isSkippingDuplicates
+  const fullImportCount = isSkippingDuplicates
     ? newCount
     : newCount + duplicateCount
+  const importCount = isReplace
+    ? fullImportCount
+    : Math.min(selectedCount ?? fullImportCount, fullImportCount)
+  const previewNewCount = isReplace ? newCount : importCount
   const isEmpty = isSupported && newCount + duplicateCount === 0
   const isAllDuplicates =
     isSkippingDuplicates && newCount === 0 && duplicateCount > 0
+  const isSelectionEmpty =
+    !isReplace && !isEmpty && !isAllDuplicates && importCount === 0
 
   const analyzeLatestFile = useRef(createLatestOnly(analyzeFile)).current
 
@@ -194,17 +209,39 @@ export function ImportRoute() {
     const signal = progress.begin()
 
     try {
-      const result = await runImport(
-        chosen.text,
-        chosen.file.type,
-        effectiveMode,
-        chosen.file.name,
-        {
-          skipDuplicates: isSkippingDuplicates,
-          signal,
-          onProgress: progress.report,
-        },
-      )
+      const options = {
+        skipDuplicates: isSkippingDuplicates,
+        signal,
+        onProgress: progress.report,
+      }
+      const selectedIds = new Set(selectionReference.current?.getCheckedIds())
+      const checkedIds = new Set([
+        ...selectedIds,
+        ...(isSkippingDuplicates
+          ? collectDuplicateIds(plan?.tree ?? [], selectedIds)
+          : []),
+      ])
+      const [prunedFile] = pruneFilesToChecked([chosen.parsed], checkedIds)
+      const result: RunImportResult = isReplace
+        ? await runImport(
+            chosen.text,
+            chosen.file.type,
+            effectiveMode,
+            chosen.file.name,
+            options,
+          )
+        : await runImportBatch(
+            [
+              {
+                text: chosen.text,
+                mimeType: chosen.file.type,
+                fileName: chosen.file.name,
+                prunedTree: prunedFile?.tree ?? [],
+              },
+            ],
+            effectiveMode,
+            options,
+          )
       setUndoSnapshot(result.snapshot ?? null)
       setSkippedCount(result.skippedInvalidUrl)
       setSkippedDuplicatesCount(result.skippedDuplicates)
@@ -382,8 +419,8 @@ export function ImportRoute() {
             <div className="flex flex-col gap-3">
               <ImportPreviewStep
                 preview={preview}
-                newCount={newCount}
-                duplicateCount={duplicateCount}
+                newCount={previewNewCount}
+                duplicateCount={isSkippingDuplicates ? duplicateCount : 0}
                 showDuplicates={isSkippingDuplicates}
               />
               {isReplace && (
@@ -401,7 +438,13 @@ export function ImportRoute() {
                 />
               ) : (
                 !isEmpty && (
-                  <ImportPreviewTree key={chosen?.id} nodes={previewNodes} />
+                  <ImportPreviewTree
+                    key={chosen?.id}
+                    nodes={previewNodes}
+                    isSelectable={!isReplace}
+                    ref={selectionReference}
+                    onSelectionChange={setSelectedCount}
+                  />
                 )
               )}
               {isReplace && (
@@ -444,7 +487,11 @@ export function ImportRoute() {
             {isImporting && i18n.t('import_importing')}
             {!isImporting && isAllDuplicates && i18n.t('import_nothingNew')}
             {!isImporting &&
+              isSelectionEmpty &&
+              i18n.t('import_selectBookmarks')}
+            {!isImporting &&
               !isAllDuplicates &&
+              !isSelectionEmpty &&
               i18n.t('import_submit', importCount, [formatCount(importCount)])}
           </Button>
           {progress.state.isCardVisible && (
