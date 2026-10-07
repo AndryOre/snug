@@ -1,5 +1,8 @@
 import { countBookmarks } from '@/lib/count-bookmarks'
-import { resolveImportRoots } from '@/lib/importers/resolve-roots'
+import {
+  resolveImportRoots,
+  type RootChildNode,
+} from '@/lib/importers/resolve-roots'
 import type { ImportPreview } from '@/lib/types'
 
 /**
@@ -9,6 +12,33 @@ import type { ImportPreview } from '@/lib/types'
 export interface ReplaceDiff {
   removedCount: number
   addedCount: number
+}
+
+/**
+ * Picks the live roots a Restore-replace clears. The bookmarks bar and Other
+ * bookmarks are always cleared; the Mobile root only when the file carries
+ * Mobile bookmarks; every live root of a split type too. The one place this
+ * rule lives, shared by the replace diff and the import plan.
+ * @param rootChildren `browser.bookmarks.getTree()`'s root node's `children`.
+ * @param clearing Whether the file clears Mobile and which root types it
+ * carries as both a local and an account set.
+ * @returns The live root nodes the replace empties.
+ */
+export function selectClearedRoots<T extends RootChildNode>(
+  rootChildren: T[],
+  clearing: Pick<ImportPreview, 'clearsMobileRoot' | 'splitRootTypes'>,
+): T[] {
+  const { bookmarksBarId, otherBookmarksId, mobileId } =
+    resolveImportRoots(rootChildren)
+  const clearedIds = new Set([bookmarksBarId, otherBookmarksId])
+  if (clearing.clearsMobileRoot) clearedIds.add(mobileId)
+
+  const splitRootTypes = new Set<string>(clearing.splitRootTypes)
+  if (!clearing.clearsMobileRoot) splitRootTypes.delete('mobile')
+  for (const node of rootChildren) {
+    if (splitRootTypes.has(node.folderType ?? '')) clearedIds.add(node.id)
+  }
+  return rootChildren.filter((node) => clearedIds.has(node.id))
 }
 
 /**
@@ -24,19 +54,7 @@ export async function getReplaceDiff(
   preview: ImportPreview,
 ): Promise<ReplaceDiff> {
   const [treeRoot] = await browser.bookmarks.getTree()
-  const rootChildren = treeRoot?.children ?? []
-  const { bookmarksBarId, otherBookmarksId, mobileId } =
-    resolveImportRoots(rootChildren)
-  const clearedIds = new Set([bookmarksBarId, otherBookmarksId])
-  if (preview.clearsMobileRoot) clearedIds.add(mobileId)
-
-  const splitRootTypes = new Set<string>(preview.splitRootTypes)
-  if (!preview.clearsMobileRoot) splitRootTypes.delete('mobile')
-  for (const node of rootChildren) {
-    if (splitRootTypes.has(node.folderType ?? '')) clearedIds.add(node.id)
-  }
-
-  const clearedRoots = rootChildren.filter((node) => clearedIds.has(node.id))
+  const clearedRoots = selectClearedRoots(treeRoot?.children ?? [], preview)
   return {
     removedCount: countBookmarks(clearedRoots),
     addedCount: preview.totalCount,
