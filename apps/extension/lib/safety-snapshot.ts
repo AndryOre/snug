@@ -7,6 +7,7 @@ import { withImportLock } from '@/lib/import-lock'
 import { importFromJSON } from '@/lib/importers/import-json'
 import { resolveImportRoots } from '@/lib/importers/resolve-roots'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
+import { ROOT_FOLDER_IDS } from '@/lib/root-folders'
 import type { ParsedBookmark } from '@/lib/types'
 
 /**
@@ -128,9 +129,16 @@ export async function captureSafetySnapshot(): Promise<SafetySnapshot> {
   return {
     takenAt,
     roots: [
-      { ...toParsedBookmark(barNode), id: '1' },
-      { ...toParsedBookmark(otherNode), id: '2' },
-      ...(mobileNode ? [{ ...toParsedBookmark(mobileNode), id: '3' }] : []),
+      { ...toParsedBookmark(barNode), id: ROOT_FOLDER_IDS.bookmarksBar },
+      { ...toParsedBookmark(otherNode), id: ROOT_FOLDER_IDS.otherBookmarks },
+      ...(mobileNode
+        ? [
+            {
+              ...toParsedBookmark(mobileNode),
+              id: ROOT_FOLDER_IDS.mobileBookmarks,
+            },
+          ]
+        : []),
     ],
   }
 }

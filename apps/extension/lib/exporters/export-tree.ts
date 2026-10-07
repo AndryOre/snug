@@ -1,8 +1,11 @@
 import { countBookmarks } from '@/lib/count-bookmarks'
 import { createExportTicker, type ExportControl } from '@/lib/export-control'
+import {
+  isBookmarksBar,
+  isOtherBookmarks,
+  ROOT_FOLDER_IDS,
+} from '@/lib/root-folders'
 import type { ExtendedBookmarkTreeNode } from '@/lib/types'
-
-import { isBookmarksBar, isOtherBookmarks } from './root-folders'
 
 /**
  * Options for the structural exporters (Markdown, OPML, XBEL), which keep the
@@ -75,7 +78,7 @@ export async function buildExportTree(
         const isHidden =
           (isOtherBookmarks(node) && options.hideOtherBookmarks) ||
           (options.hideParentFolder &&
-            node.id !== '0' &&
+            node.id !== ROOT_FOLDER_IDS.virtualRoot &&
             !isBookmarksBar(node) &&
             !isOtherBookmarks(node))
         if (isHidden) {

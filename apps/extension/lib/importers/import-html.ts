@@ -4,6 +4,7 @@ import { importParsedTree } from '@/lib/importers/import-json'
 import { loadLiveRootTitles } from '@/lib/importers/resolve-roots'
 import type { ResolvedImportRootTitles } from '@/lib/importers/resolve-roots'
 import { isAllowedBookmarkUrl } from '@/lib/importers/url-validation'
+import { secondsToMilliseconds } from '@/lib/timestamps'
 import type {
   ImportMode,
   ImportOptions,
@@ -258,7 +259,7 @@ function parseBookmarkElement(a: HTMLAnchorElement): ParsedBookmark {
     title: a.textContent?.trim() ?? '',
     url,
     dateAdded: dateAddedAttribute
-      ? parseInt(dateAddedAttribute) * 1000
+      ? secondsToMilliseconds(parseInt(dateAddedAttribute))
       : Date.now(),
   }
 }
@@ -306,10 +307,10 @@ function parseFolderElement(
   const folder: ParsedBookmark = {
     title: h3.textContent?.trim() ?? '',
     dateAdded: dateAddedAttribute
-      ? parseInt(dateAddedAttribute) * 1000
+      ? secondsToMilliseconds(parseInt(dateAddedAttribute))
       : Date.now(),
     dateGroupModified: lastModifiedAttribute
-      ? parseInt(lastModifiedAttribute) * 1000
+      ? secondsToMilliseconds(parseInt(lastModifiedAttribute))
       : Date.now(),
     children: [],
   }
