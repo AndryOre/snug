@@ -112,19 +112,20 @@ run, retry.
 run fails; successful runs never notify. _Avoid_: alert, error toast, warning.
 
 **Review prompt** A one-time, dismissible invitation in the popup to leave an
-honest review on the Chrome Web Store, offered only after the user's first
-successful export or Auto-export run. Once acted on or dismissed, it never
-returns. _Avoid_: rating prompt, review nag, review request, feedback prompt.
+honest review on the store listing for the browser in use, offered only after
+the user's first successful export or Auto-export run. Once acted on or
+dismissed, it never returns. _Avoid_: rating prompt, review nag, review request,
+feedback prompt.
 
 **Landing page** The marketing site at snug.andryore.dev: a static, multilingual
-page whose one job is to send visitors to the Chrome Web Store listing. It is
-separate from the App and the popup, which live inside the extension. _Avoid_:
-website, homepage, marketing site, promo page.
+page whose one job is to send visitors to the store listing for the browser in
+use. It is separate from the App and the popup, which live inside the extension.
+_Avoid_: website, homepage, marketing site, promo page.
 
 **Install redirect** The landing page's `/install` route, which sends the
-visitor to the Chrome Web Store listing with attribution tags so install clicks
-can be counted without cookies or scripts. _Avoid_: download link, store link,
-CTA link.
+visitor to the store listing for the browser in use with attribution tags so
+install clicks can be counted without cookies or scripts. _Avoid_: download
+link, store link, CTA link.
 
 **Campaign tag** The identifier of one external channel (a directory, a
 community, or a post), carried as `c=` on links to the Landing page and the
