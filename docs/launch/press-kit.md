@@ -31,22 +31,22 @@ never leave the browser.
 
 ## Fact sheet
 
-| Item           | Detail                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------ |
-| Name           | Snug, formerly Bookmark Import/Export (renamed in 2.0)                                                 |
-| What it is     | Free Chrome extension to export, import and back up bookmarks                                          |
-| Licence        | Open source (MIT)                                                                                      |
-| Data           | On your device. No account, no ads, no data collection, zero network calls                             |
-| Formats        | HTML, JSON, CSV, Markdown, OPML, XBEL. Markdown and OPML are export-only                               |
-| Import         | One file at a time, with a preview; merge, replace or new folder; Safety snapshot and undo for replace |
-| Backups        | Scheduled Auto-export to Downloads, with Retention and a failure notification                          |
-| Cleanup        | Duplicates page and Skip duplicates on import                                                          |
-| Browsers       | Chrome and other Chromium browsers (Chrome 119 or later, Edge, Brave, Opera)                           |
-| Languages      | 10                                                                                                     |
-| Public listing | 5,000 users, 4.8 stars over 20 ratings (read 2026-10-05; re-check before quoting)                      |
-| Source         | 21 GitHub stars (read 2026-10-05)                                                                      |
-| Author         | Andry Orellana                                                                                         |
-| Not included   | Cloud, sync, accounts, a bookmark manager                                                              |
+| Item           | Detail                                                                                                                           |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Name           | Snug, formerly Bookmark Import/Export (renamed in 2.0)                                                                           |
+| What it is     | Free Chrome extension to export, import and back up bookmarks                                                                    |
+| Licence        | Open source (MIT)                                                                                                                |
+| Data           | On your device. No account, no ads, no data collection, zero network calls                                                       |
+| Formats        | HTML, JSON, CSV, Markdown, OPML, XBEL. Markdown and OPML are export-only                                                         |
+| Import         | Several files at once, with an itemized preview; merge, replace or new folder; latest five Safety snapshots and undo for replace |
+| Backups        | Scheduled Auto-export to Downloads, with Retention and a failure notification                                                    |
+| Cleanup        | Duplicates page and Skip duplicates on import                                                                                    |
+| Browsers       | Chrome and other Chromium browsers (Chrome 119 or later, Edge, Brave, Opera)                                                     |
+| Languages      | 10                                                                                                                               |
+| Public listing | 5,000 users, 4.8 stars over 20 ratings (read 2026-10-05; re-check before quoting)                                                |
+| Source         | 21 GitHub stars (read 2026-10-05)                                                                                                |
+| Author         | Andry Orellana                                                                                                                   |
+| Not included   | Cloud, sync, accounts, a bookmark manager                                                                                        |
 
 ## Links
 
