@@ -112,8 +112,21 @@
     "n": "$1 segnalibri"
   },
   "replaceConfirmDescription": {
-    "message": "La barra dei preferiti e Altri segnalibri attuali vengono svuotati prima dell'importazione. Prima viene salvata un'istantanea di sicurezza, così puoi annullare l'importazione.",
-    "description": "Body of the replace confirmation dialog"
+    "1": "La barra dei preferiti e Altri segnalibri verranno svuotati prima di aggiungere il segnalibro importato ($1).",
+    "n": "La barra dei preferiti e Altri segnalibri verranno svuotati prima di aggiungere i $1 segnalibri importati."
+  },
+  "replaceSnapshotNote": {
+    "message": "Prima di sostituire, Snug salva un'istantanea di sicurezza nei tuoi Download ($FILE$) e la conserva nelle Impostazioni, dove puoi ripristinarla.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Istantanee di sicurezza",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Annulla",

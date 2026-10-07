@@ -71,11 +71,12 @@ data to external servers.
   content, no personal information and no identifier, and are never transmitted
   anywhere. The card is only a link: opening the store page is your choice, and
   Snug itself makes no network request for it.
-- Before every "Restore — replace" import, Snug saves a safety snapshot of your
-  bookmarks bar and other bookmarks so the import can be undone. This stores
-  your bookmark content (titles, addresses and folder structure) locally in the
-  browser's local storage, keeping only the latest snapshot, and also saves it
-  as a file in your Downloads folder. It never leaves your device.
+- Before every "Restore — replace" import, and whenever you choose to take one
+  in Settings, Snug saves a safety snapshot of your bookmarks bar and other
+  bookmarks so the import can be undone. This stores your bookmark content
+  (titles, addresses and folder structure) locally in the browser's local
+  storage, keeping the latest five snapshots, and also saves each one as a file
+  in your Downloads folder. It never leaves your device.
 
 ## Permissions
 
@@ -90,7 +91,7 @@ purpose described:
 | `alarms`           | Schedule and trigger automatic bookmark exports at the configured interval.                                                                   |
 | `downloads`        | Save automatic exports and safety snapshot files to your device, and delete Snug's own old automatic export files (Retention).                |
 | `notifications`    | Show a notification on your device when an automatic export fails. You can turn it off.                                                       |
-| `unlimitedStorage` | Keep the latest safety snapshot of your bookmarks on your device, which can be large for big libraries.                                       |
+| `unlimitedStorage` | Keep the latest five safety snapshots of your bookmarks on your device, which can be large for big libraries.                                 |
 | `offscreen`        | Create a short-lived hidden document so an automatic export can be turned into a downloadable file. It has no UI and loads no remote content. |
 
 ## Third-Party Services

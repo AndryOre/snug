@@ -111,8 +111,20 @@
     "n": "$1件のブックマーク"
   },
   "replaceConfirmDescription": {
-    "message": "インポート前に、現在のブックマークバーとその他のブックマークが空になります。安全スナップショットが先に保存されるため、インポートを元に戻せます。",
-    "description": "Body of the replace confirmation dialog"
+    "n": "インポートした $1 件のブックマークを追加する前に、ブックマークバーとその他のブックマークが空になります。"
+  },
+  "replaceSnapshotNote": {
+    "message": "置き換える前に、Snug は安全スナップショットをダウンロードフォルダ（$FILE$）に保存し、設定にも保管します。設定から復元できます。",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "安全スナップショット",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "キャンセル",

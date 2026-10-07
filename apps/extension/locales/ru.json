@@ -111,8 +111,20 @@
     "n": "Закладок: $1"
   },
   "replaceConfirmDescription": {
-    "message": "Текущие панель закладок и «Другие закладки» очищаются перед импортом. Сначала сохраняется страховой снимок, чтобы вы могли отменить импорт.",
-    "description": "Body of the replace confirmation dialog"
+    "n": "Панель закладок и «Другие закладки» будут очищены до добавления импортированных закладок ($1)."
+  },
+  "replaceSnapshotNote": {
+    "message": "Перед заменой Snug сохраняет страховой снимок в папку «Загрузки» ($FILE$) и хранит его в настройках, откуда его можно восстановить.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Страховые снимки",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Отмена",
