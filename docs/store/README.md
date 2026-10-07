@@ -83,7 +83,7 @@ Export, import and back up your bookmarks in common formats, from Chrome or Safa
 ```
 
 Detailed description, from the English listing (copy.md section 1 holds the
-original short form; 1413 chars):
+original short form; 1453 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
@@ -120,7 +120,7 @@ Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o S
 The locale file is the source of truth for the Spanish summary. The earlier
 134-character `copy.md` variant was over the limit and is retired.
 
-Detailed description (1651 chars):
+Detailed description (1650 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.

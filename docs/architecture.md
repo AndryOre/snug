@@ -130,11 +130,12 @@ relative to `apps/extension/` unless it starts with `packages/`.
   (CSV into its reused folder, every other format through the shared tree
   writer), with the progress callback and abort signal (`import-control.ts`).
 - **`run-import-batch.ts`** — the Import batch entry (`runImportBatch`), used by
-  the popup and the Import page for one or more files. It takes the import lock
-  once, shares one `ImportWriter` and rollback scope across all files, and
-  carries one existing-URL set from file to file. Folder mode with two or more
-  files writes one folder per file, named after it; Restore-replace with two or
-  more files throws `ImportBatchReplaceError`. See Invariants.
+  the Import page for one or more files and by the popup for two or more. It
+  takes the import lock once, shares one `ImportWriter` and rollback scope
+  across all files, and carries one existing-URL set from file to file. Folder
+  mode with two or more files writes one folder per file, named after it;
+  Restore-replace with two or more files throws `ImportBatchReplaceError`. See
+  Invariants.
 - **`import-plan.ts`** — the pure Import plan: `buildImportPlan` turns the
   parsed files into a display tree (bookmarks tagged new or duplicate, one
   top-level node per file), the list of bookmarks a Restore-replace will remove,
@@ -276,10 +277,11 @@ and writes each file with `importTree` directly to `chrome.bookmarks`. One
 `ImportWriter` journals every node created across the whole batch and reports
 progress per batch; aborting the signal, or a failure in any file, removes those
 nodes again (and, if a Restore-replace had already cleared the roots, restores
-the Safety snapshot) and throws `ImportCanceledError`. After a replace, the
-Import result offers Undo import, which restores the snapshot. The popup's Quick
-import runs the same `runImportBatch`; a Restore-replace or a large import opens
-the Import page instead.
+the Safety snapshot); an abort throws `ImportCanceledError`, a failure rethrows
+its original error. After a replace, the Import result offers Undo import, which
+restores the snapshot. The popup's Quick import of two or more files runs the
+same `runImportBatch` (a single file goes through `planPopupImport` and
+`runImport`); a Restore-replace or a large import opens the Import page instead.
 
 **Export** (popup and Export page): the Export page's bookmark tree produces a
 selection (or the popup exports the whole tree by passing
