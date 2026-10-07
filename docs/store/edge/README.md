@@ -340,16 +340,16 @@ Snug reads the bookmarks tree to export it and to scan for duplicates, and creat
 Snug reads each bookmark's cached site icon from the browser's own favicon cache to show it next to the bookmark in the folder picker and, when the user turns the option on, to embed it in exported files. Icons come from the browser cache, so no request is made to the bookmarked sites.
 ```
 
-`storage` (506 chars):
+`storage` (205 chars):
 
 ```text
-Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import it also keeps the latest five safety snapshots of the bookmarks bar and other bookmarks, so an import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
+Snug keeps the user's settings and the backup schedule on the device. It also keeps the latest five safety snapshots of the bookmarks, so a replace import can be undone. Nothing is synced or sent anywhere.
 ```
 
-`unlimitedStorage` (346 chars):
+`unlimitedStorage` (298 chars):
 
 ```text
-Before a "Restore — replace" import, Snug saves a safety snapshot of the user's bookmarks bar and other bookmarks in extension storage, so the import can be undone. The user can also take one from Settings. A large bookmark library can exceed the default storage quota, so this permission lifts it. Only the latest five snapshots are kept, they stay on the device, and nothing is sent anywhere.
+Before a replace import, Snug saves a safety snapshot of the user's bookmarks in extension storage so the import can be undone. A large library can exceed the default quota, so this permission lifts it. Only the latest five snapshots are kept, they stay on the device, and nothing is sent anywhere.
 ```
 
 `alarms` (267 chars):
@@ -358,10 +358,10 @@ Before a "Restore — replace" import, Snug saves a safety snapshot of the user'
 Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder. There is no alarm unless the user turns scheduled backups on.
 ```
 
-`downloads` (373 chars):
+`downloads` (278 chars):
 
 ```text
-Snug uses the downloads API to save scheduled backups and "Export now" runs to the user's Downloads folder, in a configurable subfolder. When the user turns on Retention, it also removes the oldest backup files that Snug itself saved, and nothing else, so only the latest ones remain. It only downloads files that Snug generated on the device from the user's own bookmarks.
+Snug saves scheduled backups and manual Export now runs to the user's Downloads folder, in a configurable subfolder. With Retention on, it removes only the oldest backup files that Snug itself saved. It only downloads files generated on the device from the user's own bookmarks.
 ```
 
 `offscreen` (307 chars):
@@ -375,6 +375,12 @@ Snug creates a short-lived offscreen document to turn an exported bookmark file 
 ```text
 Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed. The user can turn this notification off in the Auto-export settings and the extension keeps working.
 ```
+
+Partner Center sits behind a web application firewall that answers `403` to some
+long justifications with double quotes or an em dash, while the page still says
+"Draft saved". The `storage`, `unlimitedStorage` and `downloads` texts above are
+the shortened versions that were accepted. After each save, confirm the `PUT`
+returned `200` in the browser's network tab.
 
 ### Other privacy fields
 

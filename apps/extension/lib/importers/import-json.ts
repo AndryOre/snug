@@ -77,14 +77,25 @@ export async function importParsedTree(
       options.trusted ?? false,
     )
   } catch (error) {
-    if (error instanceof ImportCanceledError) throw error
-    if (error instanceof Error && error.message.startsWith('PROCESS_ERROR')) {
-      throw new Error(i18n.t('importFromJSONProcessError'))
-    }
-    throw new Error(
-      i18n.t('importFromJSONImportError', [(error as Error).message]),
-    )
+    throw toImportError(error)
   }
+}
+
+/**
+ * Maps a failure of the tree writer to the localized error shown to the user;
+ * a cancel passes through unchanged.
+ * @param error Whatever the writer threw.
+ * @returns The error to rethrow.
+ */
+export function toImportError(error: unknown): unknown {
+  if (error instanceof ImportCanceledError) return error
+  const isProcessError =
+    error instanceof Error && error.message.startsWith('PROCESS_ERROR')
+  return new Error(
+    isProcessError
+      ? i18n.t('importFromJSONProcessError')
+      : i18n.t('importFromJSONImportError', [(error as Error).message]),
+  )
 }
 
 /**
@@ -314,132 +325,187 @@ async function processBookmarks(
     throw new Error('PROCESS_ERROR:' + i18n.t('importFromJSONProcessError'))
   }
 
-  await withImportRollback(writer, async () => {
-    if (mode === 'folder') {
-      const importedFolder = await writer.create({
-        title: i18n.t('importedBookmarks'),
-      })
-
-      for (const bookmark of parsed) {
-        if (
-          bookmark.isBookmarksBar &&
-          bookmark.children &&
-          bookmark.children.length > 0
-        ) {
-          const importedBar = await writer.create({
-            parentId: importedFolder.id,
-            title: i18n.t('bookmarksBar'),
-          })
-          await createBookmarks(
-            bookmark.children,
-            importedBar.id,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (bookmark.isOtherBookmarks && bookmark.children) {
-          await createBookmarks(
-            bookmark.children,
-            importedFolder.id,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (
-          bookmark.isMobileBookmarks &&
-          bookmark.children &&
-          bookmark.children.length > 0
-        ) {
-          const importedMobile = await writer.create({
-            parentId: importedFolder.id,
-            title: i18n.t('mobileBookmarks'),
-          })
-          await createBookmarks(
-            bookmark.children,
-            importedMobile.id,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (isAllowedBookmarkUrl(bookmark.url)) {
-          await writer.create({
-            parentId: importedFolder.id,
-            title: bookmark.title,
-            url: bookmark.url,
-          })
-        } else if (!bookmark.children) {
-          result.skippedInvalidUrl++
-        }
-      }
-    } else {
-      const hasMobileContent = parsed.some(
-        (bookmark) =>
-          bookmark.isMobileBookmarks &&
-          bookmark.children &&
-          (isTrusted || shouldClearMobileRoot(bookmark)),
-      )
-
-      const splitTargets = resolveSplitRootTargets(parsed, root?.children ?? [])
-
-      if (mode === 'restore-replace') {
-        writer.markClearingExisting()
-        const clearedIds = new Set([bookmarksBarId, otherBookmarksId])
-        if (hasMobileContent && mobileId) clearedIds.add(mobileId)
-        for (const [node, targetId] of splitTargets) {
-          if (
-            isTrusted ||
-            !node.isMobileBookmarks ||
-            shouldClearMobileRoot(node)
-          ) {
-            clearedIds.add(targetId)
-          }
-        }
-        for (const clearedId of clearedIds) {
-          await removeAllChildren(clearedId, root)
-        }
-      }
-
-      for (const bookmark of parsed) {
-        if (bookmark.isBookmarksBar && bookmark.children) {
-          await createBookmarks(
-            bookmark.children,
-            splitTargets.get(bookmark) ?? bookmarksBarId,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (bookmark.isOtherBookmarks && bookmark.children) {
-          await createBookmarks(
-            bookmark.children,
-            splitTargets.get(bookmark) ?? otherBookmarksId,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (bookmark.isMobileBookmarks && bookmark.children) {
-          await writeMobileBookmarks(
-            bookmark.children,
-            splitTargets.get(bookmark) ?? mobileId,
-            otherBookmarksId,
-            result,
-            writer,
-            isTrusted,
-          )
-        } else if (isAllowedBookmarkUrl(bookmark.url)) {
-          await writer.create({
-            parentId: otherBookmarksId,
-            title: bookmark.title,
-            url: bookmark.url,
-          })
-        } else if (!bookmark.children) {
-          result.skippedInvalidUrl++
-        }
-      }
-    }
-  })
+  await withImportRollback(writer, () =>
+    writeParsedTree({
+      parsed,
+      mode,
+      liveRoot: root,
+      bookmarksBarId,
+      otherBookmarksId,
+      mobileId,
+      result,
+      writer,
+      isTrusted,
+    }),
+  )
   writer.finish()
 
   return result
+}
+
+/**
+ * Everything {@link writeParsedTree} needs to write one tree.
+ */
+export interface WriteParsedTreeRequest {
+  parsed: ParsedBookmark[]
+  mode: ImportMode
+  liveRoot: Browser.bookmarks.BookmarkTreeNode | undefined
+  bookmarksBarId: string
+  otherBookmarksId: string
+  mobileId: string | undefined
+  result: ImportResult
+  writer: ImportWriter
+  isTrusted: boolean
+  /**
+   * Title of the folder Folder mode writes into; defaults to "Imported
+   * bookmarks".
+   */
+  folderTitle?: string
+}
+
+/**
+ * Writes one preprocessed tree through an existing writer, so several trees
+ * can share one progress total and one rollback scope. Does not roll back or
+ * finish the writer; the caller owns both.
+ * @param request The tree, target roots and shared writer.
+ * @returns Resolves once the tree is written.
+ */
+export async function writeParsedTree(
+  request: WriteParsedTreeRequest,
+): Promise<void> {
+  const {
+    parsed,
+    mode,
+    liveRoot: root,
+    bookmarksBarId,
+    otherBookmarksId,
+    mobileId,
+    result,
+    writer,
+    isTrusted,
+  } = request
+  const folderTitle = request.folderTitle ?? i18n.t('importedBookmarks')
+  if (mode === 'folder') {
+    const importedFolder = await writer.create({
+      title: folderTitle,
+    })
+
+    for (const bookmark of parsed) {
+      if (
+        bookmark.isBookmarksBar &&
+        bookmark.children &&
+        bookmark.children.length > 0
+      ) {
+        const importedBar = await writer.create({
+          parentId: importedFolder.id,
+          title: i18n.t('bookmarksBar'),
+        })
+        await createBookmarks(
+          bookmark.children,
+          importedBar.id,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (bookmark.isOtherBookmarks && bookmark.children) {
+        await createBookmarks(
+          bookmark.children,
+          importedFolder.id,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (
+        bookmark.isMobileBookmarks &&
+        bookmark.children &&
+        bookmark.children.length > 0
+      ) {
+        const importedMobile = await writer.create({
+          parentId: importedFolder.id,
+          title: i18n.t('mobileBookmarks'),
+        })
+        await createBookmarks(
+          bookmark.children,
+          importedMobile.id,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (isAllowedBookmarkUrl(bookmark.url)) {
+        await writer.create({
+          parentId: importedFolder.id,
+          title: bookmark.title,
+          url: bookmark.url,
+        })
+      } else if (!bookmark.children) {
+        result.skippedInvalidUrl++
+      }
+    }
+  } else {
+    const hasMobileContent = parsed.some(
+      (bookmark) =>
+        bookmark.isMobileBookmarks &&
+        bookmark.children &&
+        (isTrusted || shouldClearMobileRoot(bookmark)),
+    )
+
+    const splitTargets = resolveSplitRootTargets(parsed, root?.children ?? [])
+
+    if (mode === 'restore-replace') {
+      writer.markClearingExisting()
+      const clearedIds = new Set([bookmarksBarId, otherBookmarksId])
+      if (hasMobileContent && mobileId) clearedIds.add(mobileId)
+      for (const [node, targetId] of splitTargets) {
+        if (
+          isTrusted ||
+          !node.isMobileBookmarks ||
+          shouldClearMobileRoot(node)
+        ) {
+          clearedIds.add(targetId)
+        }
+      }
+      for (const clearedId of clearedIds) {
+        await removeAllChildren(clearedId, root)
+      }
+    }
+
+    for (const bookmark of parsed) {
+      if (bookmark.isBookmarksBar && bookmark.children) {
+        await createBookmarks(
+          bookmark.children,
+          splitTargets.get(bookmark) ?? bookmarksBarId,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (bookmark.isOtherBookmarks && bookmark.children) {
+        await createBookmarks(
+          bookmark.children,
+          splitTargets.get(bookmark) ?? otherBookmarksId,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (bookmark.isMobileBookmarks && bookmark.children) {
+        await writeMobileBookmarks(
+          bookmark.children,
+          splitTargets.get(bookmark) ?? mobileId,
+          otherBookmarksId,
+          result,
+          writer,
+          isTrusted,
+        )
+      } else if (isAllowedBookmarkUrl(bookmark.url)) {
+        await writer.create({
+          parentId: otherBookmarksId,
+          title: bookmark.title,
+          url: bookmark.url,
+        })
+      } else if (!bookmark.children) {
+        result.skippedInvalidUrl++
+      }
+    }
+  }
 }
 
 /**

@@ -142,6 +142,10 @@
     "message": "Es läuft bereits ein anderer Import. Warte, bis er abgeschlossen ist, und versuche es erneut.",
     "description": "Error shown when an import is started while another extension page is already importing"
   },
+  "importBatchReplaceNeedsOneFile": {
+    "message": "Wiederherstellen – Ersetzen benötigt eine einzelne Datei.",
+    "description": "Error shown when a batch of two or more files is submitted in Restore-replace mode"
+  },
   "bookmarksImportedSuccessfully": {
     "message": "Lesezeichen erfolgreich importiert!",
     "description": "Bookmarks imported successfully"

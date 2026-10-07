@@ -53,7 +53,7 @@ export async function importCsvTree(
     countImportableBookmarks(nodes),
     skippedDuplicates,
   )
-  await withImportRollback(writer, () => createBookmarks(nodes, writer))
+  await withImportRollback(writer, () => writeCsvTree(nodes, writer))
   writer.finish()
   return { skippedInvalidUrl: 0, skippedDuplicates }
 }
@@ -156,11 +156,12 @@ function processCSVData(rows: Record<string, string>[]): {
  * is looked up by its localized title via `browser.bookmarks.search()` so
  * that a folder created under one locale is still found (and reused
  * rather than duplicated) after the browser's locale changes.
+ * Does not roll back or finish the writer; the caller owns both.
  * @param tree The folder tree to create.
  * @param writer The writer that creates and journals the nodes.
  * @returns Resolves once the whole tree has been created.
  */
-async function createBookmarks(
+export async function writeCsvTree(
   tree: ParsedBookmark[],
   writer: ImportWriter,
 ): Promise<void> {
