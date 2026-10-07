@@ -337,6 +337,25 @@ describe('collectDuplicateIds', () => {
       mode: 'restore-merge',
       skipDuplicates: true,
     })
-    expect(collectDuplicateIds(plan.tree)).toEqual([first.id])
+    expect(collectDuplicateIds(plan.tree, new Set())).toEqual([first.id])
+  })
+
+  it('lists an in-file duplicate only while its first copy is checked', () => {
+    const file = barFile(
+      mark('A', 'https://a.example/'),
+      mark('A again', 'https://a.example/'),
+    )
+    const plan = buildImportPlan({
+      files: [{ file }],
+      liveTree: [],
+      mode: 'restore-merge',
+      skipDuplicates: true,
+    })
+    const [first, second] = leaves(plan.tree)
+    if (!first || !second) throw new Error('fixture has no bookmarks')
+    expect(collectDuplicateIds(plan.tree, new Set([first.id]))).toEqual([
+      second.id,
+    ])
+    expect(collectDuplicateIds(plan.tree, new Set())).toEqual([])
   })
 })

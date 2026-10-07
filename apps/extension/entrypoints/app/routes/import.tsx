@@ -214,9 +214,12 @@ export function ImportRoute() {
         signal,
         onProgress: progress.report,
       }
+      const selectedIds = new Set(selectionReference.current?.getCheckedIds())
       const checkedIds = new Set([
-        ...(selectionReference.current?.getCheckedIds() ?? []),
-        ...(isSkippingDuplicates ? collectDuplicateIds(plan?.tree ?? []) : []),
+        ...selectedIds,
+        ...(isSkippingDuplicates
+          ? collectDuplicateIds(plan?.tree ?? [], selectedIds)
+          : []),
       ])
       const [prunedFile] = pruneFilesToChecked([chosen.parsed], checkedIds)
       const result: RunImportResult = isReplace
