@@ -7,6 +7,10 @@
     "message": "Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o Safari, con horario. Todo local.",
     "description": "Descripción de la extensión"
   },
+  "extensionDescriptionEdge": {
+    "message": "Exporta, importa y respalda tus marcadores en formatos comunes, con programación. Todo se queda en local.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Exporta, importa y respalda tus marcadores — todo en tu dispositivo.",
     "description": "Subtítulo de la página de bienvenida"
@@ -900,7 +904,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: exporta, importa y respalda marcadores",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "La descarga $ID$ se interrumpió.",
@@ -1244,12 +1248,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Una reseña sincera en Chrome Web Store ayuda a otras personas a encontrarlo.",
+    "message": "Una reseña sincera en la tienda ayuda a otras personas a encontrarlo.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Dejar una reseña",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Ahora no",

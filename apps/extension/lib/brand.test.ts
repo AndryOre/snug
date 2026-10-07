@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 
@@ -6,7 +6,11 @@ import {
   CHROME_WEB_STORE_EXTENSION_ID,
   CHROME_WEB_STORE_REVIEWS_URL,
   CHROME_WEB_STORE_URL,
+  EDGE_ADD_ONS_EXTENSION_ID,
+  EDGE_ADD_ONS_URL,
   getSiteUrl,
+  getStoreListingUrl,
+  getStoreReviewsUrl,
   GITHUB_URL,
   PRODUCT_NAME,
   SITE_PRIVACY_URL,
@@ -52,6 +56,36 @@ describe('CHROME_WEB_STORE_REVIEWS_URL', () => {
     expect(CHROME_WEB_STORE_REVIEWS_URL).toBe(
       `https://chromewebstore.google.com/detail/${CHROME_WEB_STORE_EXTENSION_ID}/reviews`,
     )
+  })
+})
+
+describe('EDGE_ADD_ONS_URL', () => {
+  it('is the Edge Add-ons detail URL for the extension ID', () => {
+    expect(EDGE_ADD_ONS_EXTENSION_ID).toBe('efknehclgcncocgochoibgiiagklcnho')
+    expect(EDGE_ADD_ONS_URL).toBe(
+      'https://microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho',
+    )
+  })
+})
+
+describe('store URL helpers', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
+
+  it.each(['chrome', 'firefox'])(
+    'return the Chrome Web Store URLs on %s',
+    (browser) => {
+      vi.stubEnv('BROWSER', browser)
+      expect(getStoreListingUrl()).toBe(CHROME_WEB_STORE_URL)
+      expect(getStoreReviewsUrl()).toBe(CHROME_WEB_STORE_REVIEWS_URL)
+    },
+  )
+
+  it('return the Edge Add-ons listing for both on edge', () => {
+    vi.stubEnv('BROWSER', 'edge')
+    expect(getStoreListingUrl()).toBe(EDGE_ADD_ONS_URL)
+    expect(getStoreReviewsUrl()).toBe(EDGE_ADD_ONS_URL)
   })
 })
 

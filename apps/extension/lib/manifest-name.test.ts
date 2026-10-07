@@ -52,11 +52,23 @@ function listingTitle(markdown: string): string | undefined {
   return /^## Title\s+(.+)$/m.exec(markdown)?.[1]
 }
 
-const manifest = wxtConfig.manifest as Record<string, unknown> & {
-  permissions: string[]
-}
+type TestManifest = Record<string, unknown> & { permissions: string[] }
+type ManifestFactory = (environment: { browser: string }) => TestManifest
+
+const buildManifest = wxtConfig.manifest as ManifestFactory
+const manifest = buildManifest({ browser: 'chrome' })
 
 describe('manifest', () => {
+  it('uses the full description on the default build', () => {
+    expect(manifest.description).toBe('__MSG_extensionDescription__')
+  })
+
+  it('uses the browser-neutral description on the Edge build', () => {
+    expect(buildManifest({ browser: 'edge' }).description).toBe(
+      '__MSG_extensionDescriptionEdge__',
+    )
+  })
+
   it('has no tabs permission', () => {
     expect(manifest.permissions).not.toContain('tabs')
   })

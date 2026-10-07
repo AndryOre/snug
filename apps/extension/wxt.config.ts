@@ -37,9 +37,12 @@ export default defineConfig({
       enabled: 9,
     },
   },
-  manifest: {
+  manifest: ({ browser }) => ({
     name: '__MSG_extensionManifestName__',
-    description: '__MSG_extensionDescription__',
+    description:
+      browser === 'edge'
+        ? '__MSG_extensionDescriptionEdge__'
+        : '__MSG_extensionDescription__',
     default_locale: 'en',
     minimum_chrome_version: '119',
     homepage_url: SITE_URL,
@@ -54,7 +57,7 @@ export default defineConfig({
       'unlimitedStorage',
       'notifications',
     ],
-  },
+  }),
   vite: () => ({
     plugins: [tailwindcss()],
   }),
