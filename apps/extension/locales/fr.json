@@ -113,8 +113,22 @@
     "n": "$1 favoris"
   },
   "replaceConfirmDescription": {
-    "message": "Votre barre de favoris et Autres favoris actuels sont vidés avant l'importation. Un instantané de sécurité est enregistré d'abord, pour que vous puissiez annuler l'importation.",
-    "description": "Body of the replace confirmation dialog"
+    "0": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout des $1 favoris importés.",
+    "1": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout du favori importé ($1).",
+    "n": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout des $1 favoris importés."
+  },
+  "replaceSnapshotNote": {
+    "message": "Avant de remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements ($FILE$) et le conserve dans les Paramètres, où vous pouvez le restaurer.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Instantanés de sécurité",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Annuler",

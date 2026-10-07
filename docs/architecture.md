@@ -130,7 +130,7 @@ relative to `apps/extension/` unless it starts with `packages/`.
   normalization to drop bookmarks that already exist (never in Restore-replace),
   and `import-duplicates.ts` summarizes the effect for the Import page.
 - **`safety-snapshot.ts`** — captures the two roots, saves them as a JSON file
-  through the offscreen download and keeps the latest one in
+  through the offscreen download and keeps the latest five in
   `local:safetySnapshot`. See Invariants.
 - **`replace-diff.ts`** — the removed/added counts the Import page shows before
   a Restore-replace.
@@ -331,13 +331,14 @@ be hourly, 12 hours, daily, 3 days or weekly (`7d`, on `dayOfWeek`).
   `chrome.bookmarks.removeTree` on every existing bookmarks-bar and
   other-bookmarks child before writing the imported tree in their place. A
   Safety snapshot is taken first (`lib/safety-snapshot.ts`), and the Import
-  result's Undo import and the Settings Safety snapshot card restore it. The
-  snapshot is written as a file first and only then stored, so a failed download
-  leaves the previous one intact; if it fails, nothing is deleted. There is no
-  undo for anything else: deleting duplicates and retention deletes are final.
-- Only the latest Safety snapshot is kept, in `local:safetySnapshot` (hence the
-  `unlimitedStorage` permission). Retention only ever touches downloads whose
-  recorded id still belongs to this extension.
+  result's Undo import and the Settings Safety snapshot card restore it, and the
+  card can also take one on demand. The snapshot is written as a file first and
+  only then stored, so a failed download leaves the stored ones intact; if it
+  fails, nothing is deleted. There is no undo for anything else: deleting
+  duplicates and retention deletes are final.
+- Only the latest five Safety snapshots are kept, in `local:safetySnapshot`
+  (hence the `unlimitedStorage` permission). Retention only ever touches
+  downloads whose recorded id still belongs to this extension.
 - All persisted settings go through `storage.defineItem` with a
   `local:`-prefixed key (`lib/storage.ts`) — there is no `sync:`-scoped storage
   anywhere in this codebase.

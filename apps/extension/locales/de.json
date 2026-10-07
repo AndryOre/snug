@@ -111,8 +111,20 @@
     "n": "$1 Lesezeichen"
   },
   "replaceConfirmDescription": {
-    "message": "Ihre aktuelle Lesezeichenleiste und Andere Lesezeichen werden vor dem Import geleert. Zuerst wird ein Sicherheits-Snapshot gespeichert, damit Sie den Import rückgängig machen können.",
-    "description": "Body of the replace confirmation dialog"
+    "n": "Ihre Lesezeichenleiste und Andere Lesezeichen werden geleert, bevor die importierten Lesezeichen ($1) hinzugefügt werden."
+  },
+  "replaceSnapshotNote": {
+    "message": "Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot in Ihren Downloads ($FILE$) und bewahrt ihn in den Einstellungen auf, wo Sie ihn wiederherstellen können.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Sicherheits-Snapshots",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Abbrechen",

@@ -112,8 +112,21 @@
     "n": "$1 bookmarks"
   },
   "replaceConfirmDescription": {
-    "message": "Your current Bookmarks Bar and Other Bookmarks are cleared before importing. A Safety snapshot is saved first, so you can undo the import.",
-    "description": "Body of the replace confirmation dialog"
+    "1": "Your Bookmarks Bar and Other Bookmarks will be cleared before the $1 imported bookmark is added.",
+    "n": "Your Bookmarks Bar and Other Bookmarks will be cleared before the $1 imported bookmarks are added."
+  },
+  "replaceSnapshotNote": {
+    "message": "Before replacing, Snug saves a Safety snapshot to your Downloads ($FILE$) and keeps it in Settings, where you can restore it.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Safety snapshots",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Cancel",

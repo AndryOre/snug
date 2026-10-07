@@ -113,8 +113,22 @@
     "n": "$1 favoritos"
   },
   "replaceConfirmDescription": {
-    "message": "Sua barra de favoritos e Outros favoritos atuais são esvaziados antes de importar. Primeiro é salvo um instantâneo de segurança, para você poder desfazer a importação.",
-    "description": "Body of the replace confirmation dialog"
+    "0": "Sua barra de favoritos e Outros favoritos serão esvaziados antes de adicionar os $1 favoritos importados.",
+    "1": "Sua barra de favoritos e Outros favoritos serão esvaziados antes de adicionar o favorito importado ($1).",
+    "n": "Sua barra de favoritos e Outros favoritos serão esvaziados antes de adicionar os $1 favoritos importados."
+  },
+  "replaceSnapshotNote": {
+    "message": "Antes de substituir, o Snug salva um instantâneo de segurança em Downloads ($FILE$) e o mantém em Configurações, onde você pode restaurá-lo.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Instantâneos de segurança",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Cancelar",

@@ -111,8 +111,20 @@
     "n": "$1 个书签"
   },
   "replaceConfirmDescription": {
-    "message": "导入前会先清空当前的书签栏和其他书签。会先保存安全快照，以便你撤销导入。",
-    "description": "Body of the replace confirmation dialog"
+    "n": "在添加导入的 $1 个书签之前，会先清空书签栏和其他书签。"
+  },
+  "replaceSnapshotNote": {
+    "message": "替换前，Snug 会将安全快照保存到“下载”文件夹（$FILE$），并保留在设置中，你可以从那里恢复。",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "安全快照",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "取消",

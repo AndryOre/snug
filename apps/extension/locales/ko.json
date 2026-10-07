@@ -111,8 +111,20 @@
     "n": "북마크 $1개"
   },
   "replaceConfirmDescription": {
-    "message": "가져오기 전에 현재 북마크바와 기타 북마크가 비워집니다. 안전 스냅샷이 먼저 저장되므로 가져오기를 되돌릴 수 있습니다.",
-    "description": "Body of the replace confirmation dialog"
+    "n": "가져온 북마크 $1개를 추가하기 전에 북마크바와 기타 북마크가 비워집니다."
+  },
+  "replaceSnapshotNote": {
+    "message": "바꾸기 전에 Snug가 안전 스냅샷을 다운로드 폴더($FILE$)에 저장하고 설정에도 보관합니다. 설정에서 복원할 수 있습니다.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "안전 스냅샷",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "취소",

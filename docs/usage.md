@@ -122,17 +122,20 @@ content. It reads:
 ### The Safety snapshot and Undo
 
 Before every Restore — replace, Snug saves a **Safety snapshot** of your
-Bookmarks Bar and Other Bookmarks: a JSON file in your Downloads folder, plus
-one copy kept inside the extension. If the snapshot can't be saved, nothing is
-deleted.
+Bookmarks Bar and Other Bookmarks: a JSON file in your Downloads folder
+(`snug-safety-snapshot-<date>.json`), plus one copy kept inside the extension.
+The replace confirmation tells you this and links to Settings. If the snapshot
+can't be saved, nothing is deleted.
 
 - After a replace, **Undo import** on the result restores the snapshot.
-- In **Settings**, **Restore snapshot** restores the latest snapshot at any
-  time, after confirming.
+- In **Settings**, the Safety snapshot card lists the latest five snapshots. You
+  can restore or download any of them, after confirming, and take a new one at
+  any time.
 
-Only the latest snapshot is kept, so a newer replace overwrites the older one.
-Restoring a snapshot is itself a replace, so Snug saves a new snapshot of your
-current bookmarks first.
+Snug keeps the latest five snapshots, so a sixth replaces the oldest. Restoring
+a snapshot is itself a replace, so Snug saves a new snapshot of your current
+bookmarks first. Everything stays on your device and Snug makes no network
+requests.
 
 ## Finding duplicates
 
