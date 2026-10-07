@@ -1,4 +1,8 @@
+import { i18n } from '#i18n'
+
+import { detectFormat } from '@/lib/detect-format'
 import { parseChromeBookmarks } from '@/lib/importers/import-chrome'
+import { parseCSVTree } from '@/lib/importers/import-csv'
 import { parseHTMLWithLocation } from '@/lib/importers/import-html'
 import {
   normalizeJsonRoot,
@@ -87,6 +91,64 @@ export function parseLocationAwareImport(
     }
     default: {
       return undefined
+    }
+  }
+}
+
+/**
+ * A parsed import file of any supported format. Discriminated on `format`: CSV
+ * never carries location data and is the only format that can skip rows while
+ * parsing.
+ */
+export type ParsedImportFile =
+  | {
+      format: 'csv'
+      tree: ParsedBookmark[]
+      hasLocationData: false
+      skippedInvalidUrl: number
+    }
+  | {
+      format: Exclude<BookmarkFormat, 'csv' | 'unknown'>
+      tree: ParsedBookmark[]
+      hasLocationData: boolean
+      skippedInvalidUrl: 0
+    }
+
+/**
+ * Parses the raw content of an import file of any of the seven formats into a
+ * tree, without writing anything. The one entry the import, the preview and
+ * the duplicate summary all go through.
+ * @param text The raw file content.
+ * @param mimeType The file's MIME type, used to help detect its format.
+ * @param fileName The file's name, a fallback hint when the MIME type fails.
+ * @param liveRootTitles The current browser's own root titles, if available.
+ * @returns The tree, detected format, location-data flag and the count of rows
+ *   skipped as unusable while parsing.
+ * @throws {Error} When the format is unsupported or the content is malformed.
+ */
+export function parseImportFile(
+  text: string,
+  mimeType: string,
+  fileName?: string,
+  liveRootTitles?: ResolvedImportRootTitles,
+): ParsedImportFile {
+  const format = detectFormat(text, mimeType, fileName)
+  switch (format) {
+    case 'csv': {
+      const { tree, skippedInvalidUrl } = parseCSVTree(text)
+      return { format, tree, hasLocationData: false, skippedInvalidUrl }
+    }
+    case 'unknown': {
+      throw new Error(i18n.t('unsupportedFileFormat'))
+    }
+    default: {
+      const parsed = parseLocationAwareImport(text, format, liveRootTitles)
+      return {
+        format,
+        tree: parsed?.tree ?? [],
+        hasLocationData: parsed?.hasLocationData ?? false,
+        skippedInvalidUrl: 0,
+      }
     }
   }
 }

@@ -23,10 +23,27 @@ export async function importFromCSV(
   csv: string,
   options: ImportOptions = {},
 ): Promise<ImportResult> {
-  const { tree: parsedTree, skippedInvalidUrl } = parseCSVTree(csv)
+  const { tree, skippedInvalidUrl } = parseCSVTree(csv)
+  const written = await importCsvTree(tree, options)
+  return { ...written, skippedInvalidUrl }
+}
+
+/**
+ * Writes an already-parsed CSV folder tree under the reused, localized
+ * "Imported bookmarks" folder, applying Skip duplicates against the live tree.
+ * Folders merge by title with existing ones; it has no `ImportMode`.
+ * @param tree The folder tree from {@link parseCSVTree}.
+ * @param options Import options such as Skip duplicates.
+ * @returns The import result; `skippedInvalidUrl` is 0 because rows are only
+ *   skipped while parsing.
+ */
+export async function importCsvTree(
+  tree: ParsedBookmark[],
+  options: ImportOptions = {},
+): Promise<ImportResult> {
   const liveTree = await browser.bookmarks.getTree()
   const { nodes, skippedDuplicates } = applySkipDuplicates(
-    parsedTree,
+    tree,
     liveTree,
     'folder',
     options.skipDuplicates ?? false,
@@ -38,7 +55,7 @@ export async function importFromCSV(
   )
   await withImportRollback(writer, () => createBookmarks(nodes, writer))
   writer.finish()
-  return { skippedInvalidUrl, skippedDuplicates }
+  return { skippedInvalidUrl: 0, skippedDuplicates }
 }
 
 /**

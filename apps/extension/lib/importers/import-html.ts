@@ -1,21 +1,9 @@
 import { i18n } from '#i18n'
-import type { Browser } from '@wxt-dev/browser'
 
-import { countBookmarks } from '@/lib/count-bookmarks'
-import {
-  ImportCanceledError,
-  type ImportControl,
-  ImportWriter,
-  withImportRollback,
-} from '@/lib/import-control'
-import { shouldClearMobileRoot } from '@/lib/importers/mobile-root'
-import {
-  resolveImportRoots,
-  resolveImportRootTitles,
-} from '@/lib/importers/resolve-roots'
+import { importParsedTree } from '@/lib/importers/import-json'
+import { loadLiveRootTitles } from '@/lib/importers/resolve-roots'
 import type { ResolvedImportRootTitles } from '@/lib/importers/resolve-roots'
 import { isAllowedBookmarkUrl } from '@/lib/importers/url-validation'
-import { applySkipDuplicates } from '@/lib/skip-duplicates'
 import type {
   ImportMode,
   ImportOptions,
@@ -24,25 +12,10 @@ import type {
 } from '@/lib/types'
 
 /**
- * Imports bookmarks from a Netscape-format bookmarks HTML export.
- *
- * `mode` controls where the parsed tree is written:
- * - `'folder'`: creates a new "Imported bookmarks" folder (with its own
- *   "Bookmarks bar" sub-folder) and writes everything under it, leaving
- *   the existing bookmarks bar and "Other bookmarks" untouched.
- * - `'restore-merge'`: writes directly into the existing bookmarks bar and
- *   "Other bookmarks" roots, merging with what's already there.
- * - `'restore-replace'`: destructive — first removes every existing child
- *   of the bookmarks bar and "Other bookmarks" roots, then writes the
- *   parsed tree into them. Existing bookmarks not present in `html` are
- *   permanently lost.
- *
- * Errors thrown by the parse step are re-wrapped as a load error. Errors
- * from the create step are re-wrapped as a create error, unless they
- * already carry the `PROCESS_ERROR` prefix (see `processBookmarks`), in
- * which case they're rethrown as-is so the caller can distinguish a
- * structural failure (e.g. the browser's roots not being present) from an
- * arbitrary `browser.bookmarks.create()` failure.
+ * Imports bookmarks from a Netscape-format bookmarks HTML export: parses it
+ * and writes the tree through the shared JSON tree writer, so `mode` behaves
+ * as in `importParsedTree` (`'folder'`, `'restore-merge'`, `'restore-replace'`).
+ * A parse failure is re-wrapped as a load error.
  * @param html The Netscape-format bookmarks HTML to import.
  * @param mode Where the parsed tree is written.
  * @param options Import options such as Skip duplicates.
@@ -54,36 +27,15 @@ export async function importFromHTML(
   mode: ImportMode = 'folder',
   options: ImportOptions = {},
 ): Promise<ImportResult> {
-  const tree = await browser.bookmarks.getTree()
-  const liveRootTitles = resolveImportRootTitles(tree[0]?.children ?? [])
-
   let parsed: ParsedBookmark[]
-
   try {
-    parsed = parseHTML(html, liveRootTitles)
+    parsed = parseHTML(html, await loadLiveRootTitles())
   } catch (error) {
     throw new Error(
       i18n.t('importFromHTMLLoadError', [(error as Error).message]),
     )
   }
-
-  try {
-    return await processBookmarks(
-      parsed,
-      mode,
-      tree,
-      options.skipDuplicates ?? false,
-      options,
-    )
-  } catch (error) {
-    if (error instanceof ImportCanceledError) throw error
-    if (error instanceof Error && error.message.startsWith('PROCESS_ERROR')) {
-      throw error
-    }
-    throw new Error(
-      i18n.t('importFromHTMLCreateError', [(error as Error).message]),
-    )
-  }
+  return importParsedTree(parsed, mode, options)
 }
 
 /**
@@ -394,220 +346,4 @@ function parseFolderElement(
   }
 
   return folder
-}
-
-/**
- * Writes the parsed tree into the browser according to `mode` (see
- * `importFromHTML` for what each mode does).
- *
- * Errors thrown here are prefixed with `'PROCESS_ERROR:'` to signal to
- * `importFromHTML` that they represent a structural failure (missing
- * bookmarks bar / "Other bookmarks" roots) rather than an arbitrary
- * `browser.bookmarks` API failure, so the caller can rethrow them as-is
- * instead of wrapping them in a generic create-error message.
- * @param allParsed The parsed bookmark tree to write.
- * @param mode Where and how the tree is written.
- * @param tree The tree snapshot `importFromHTML` already fetched (to resolve
- *   the live root titles for `parseHTML`) — reused here instead of
- *   re-fetching.
- * @param shouldSkipDuplicates Whether to leave out bookmarks that already exist.
- * @param control Progress callback and abort signal.
- * @returns The import result with the skipped-bookmark counts.
- */
-async function processBookmarks(
-  allParsed: ParsedBookmark[],
-  mode: ImportMode,
-  tree: Browser.bookmarks.BookmarkTreeNode[],
-  shouldSkipDuplicates: boolean,
-  control: ImportControl,
-): Promise<ImportResult> {
-  const { nodes: parsed, skippedDuplicates } = applySkipDuplicates(
-    allParsed,
-    tree,
-    mode,
-    shouldSkipDuplicates,
-  )
-  const result: ImportResult = { skippedInvalidUrl: 0, skippedDuplicates }
-  const writer = new ImportWriter(
-    control,
-    countBookmarks(parsed),
-    skippedDuplicates,
-  )
-  const root = tree[0]
-  const { bookmarksBarId, otherBookmarksId, mobileId } = resolveImportRoots(
-    root?.children ?? [],
-  )
-
-  if (!bookmarksBarId || !otherBookmarksId) {
-    throw new Error('PROCESS_ERROR:' + i18n.t('importFromHTMLProcessError'))
-  }
-
-  await withImportRollback(writer, async () => {
-    if (mode === 'folder') {
-      const importedFolder = await writer.create({
-        title: i18n.t('importedBookmarks'),
-      })
-
-      for (const bookmark of parsed) {
-        if (
-          bookmark.isBookmarksBar &&
-          bookmark.children &&
-          bookmark.children.length > 0
-        ) {
-          const importedBookmarksBar = await writer.create({
-            parentId: importedFolder.id,
-            title: i18n.t('bookmarksBar'),
-          })
-          await createBookmarks(
-            bookmark.children,
-            importedBookmarksBar.id,
-            result,
-            writer,
-          )
-        } else if (bookmark.isOtherBookmarks) {
-          await createBookmarks(
-            bookmark.children ?? [],
-            importedFolder.id,
-            result,
-            writer,
-          )
-        } else if (
-          bookmark.isMobileBookmarks &&
-          bookmark.children &&
-          bookmark.children.length > 0
-        ) {
-          const importedMobile = await writer.create({
-            parentId: importedFolder.id,
-            title: i18n.t('mobileBookmarks'),
-          })
-          await createBookmarks(
-            bookmark.children,
-            importedMobile.id,
-            result,
-            writer,
-          )
-        }
-      }
-    } else {
-      const hasMobileContent = parsed.some(
-        (bookmark) =>
-          bookmark.isMobileBookmarks &&
-          bookmark.children &&
-          shouldClearMobileRoot(bookmark),
-      )
-
-      if (mode === 'restore-replace') {
-        writer.markClearingExisting()
-        await removeAllChildren(bookmarksBarId, root)
-        await removeAllChildren(otherBookmarksId, root)
-        if (hasMobileContent && mobileId) {
-          await removeAllChildren(mobileId, root)
-        }
-      }
-
-      for (const bookmark of parsed) {
-        if (bookmark.isBookmarksBar) {
-          await createBookmarks(
-            bookmark.children ?? [],
-            bookmarksBarId,
-            result,
-            writer,
-          )
-        } else if (bookmark.isOtherBookmarks) {
-          await createBookmarks(
-            bookmark.children ?? [],
-            otherBookmarksId,
-            result,
-            writer,
-          )
-        } else if (bookmark.isMobileBookmarks) {
-          await writeMobileBookmarks(
-            bookmark.children ?? [],
-            mobileId,
-            otherBookmarksId,
-            result,
-            writer,
-          )
-        }
-      }
-    }
-  })
-  writer.finish()
-
-  return result
-}
-
-/**
- * Removes every existing child of the root node identified by `rootId`, as
- * found in `treeRoot` (the tree snapshot `processBookmarks` already fetched
- * — this never re-fetches). Used by `restore-replace` mode to clear a root
- * before writing the imported tree into it.
- * @param rootId The id of the root whose children should be removed.
- * @param treeRoot The tree root node (`browser.bookmarks.getTree()`'s
- *   `tree[0]`) to look up `rootId`'s current children in.
- * @returns Resolves once every child has been removed.
- */
-async function removeAllChildren(
-  rootId: string,
-  treeRoot: Browser.bookmarks.BookmarkTreeNode | undefined,
-): Promise<void> {
-  const rootNode = treeRoot?.children?.find((node) => node.id === rootId)
-  const children = rootNode?.children ?? []
-  for (const child of children) {
-    await browser.bookmarks.removeTree(child.id)
-  }
-}
-
-/**
- * Writes Mobile bookmarks content into the Mobile root when one was
- * resolved, otherwise into "Other bookmarks" (e.g. the current browser has
- * no Mobile root). Does not retry into "Other bookmarks" on a failed Mobile
- * write — `createBookmarks` creates nodes one at a time, so a partial
- * failure there would otherwise leave a duplicated subset of the content in
- * both roots.
- * @param nodes The Mobile bookmarks content to write.
- * @param mobileId The resolved Mobile root id, if any.
- * @param otherBookmarksId The "Other bookmarks" root id to fall back to.
- * @param result The running import result, updated with skipped bookmarks.
- * @param writer The writer that creates and journals the nodes.
- * @returns Resolves once the content has been written.
- */
-async function writeMobileBookmarks(
-  nodes: ParsedBookmark[],
-  mobileId: string | undefined,
-  otherBookmarksId: string,
-  result: ImportResult,
-  writer: ImportWriter,
-): Promise<void> {
-  await createBookmarks(nodes, mobileId ?? otherBookmarksId, result, writer)
-}
-
-/**
- * Recursively creates the tree under `parentId`. A node with a `children`
- * array is a folder and is created even when that array is empty. A node
- * with neither a usable `url` nor `children` is a bookmark whose address is
- * missing or not supported; it is skipped and counted in
- * `result.skippedInvalidUrl`.
- * @param nodes The nodes to create.
- * @param parentId The id of the folder to create them under.
- * @param result The running import result, updated with skipped bookmarks.
- * @param writer The writer that creates and journals the nodes.
- * @returns Resolves once every node has been created.
- */
-async function createBookmarks(
-  nodes: ParsedBookmark[],
-  parentId: string,
-  result: ImportResult,
-  writer: ImportWriter,
-): Promise<void> {
-  for (const node of nodes) {
-    if (node.url) {
-      await writer.create({ parentId, title: node.title, url: node.url })
-    } else if (node.children) {
-      const folder = await writer.create({ parentId, title: node.title })
-      await createBookmarks(node.children, folder.id, result, writer)
-    } else {
-      result.skippedInvalidUrl++
-    }
-  }
 }

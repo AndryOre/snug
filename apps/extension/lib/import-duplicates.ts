@@ -1,13 +1,7 @@
 import { countImportableBookmarks } from './count-bookmarks'
-import { detectFormat } from './detect-format'
-import { parseCSVTree } from './importers/import-csv'
-import { parseLocationAwareImport } from './importers/parse-import'
-import {
-  type ResolvedImportRootTitles,
-  resolveImportRootTitles,
-} from './importers/resolve-roots'
+import { parseImportFile } from './importers/parse-import'
+import { resolveImportRootTitles } from './importers/resolve-roots'
 import { collectExistingUrls, dropDuplicateBookmarks } from './skip-duplicates'
-import type { ParsedBookmark } from './types'
 
 /**
  * What Skip duplicates would do to an import file.
@@ -15,18 +9,6 @@ import type { ParsedBookmark } from './types'
 export interface ImportDuplicateSummary {
   skippedDuplicates: number
   importableCount: number
-}
-
-function parseImportTree(
-  text: string,
-  mimeType: string,
-  fileName?: string,
-  liveRootTitles?: ResolvedImportRootTitles,
-): ParsedBookmark[] {
-  const format = detectFormat(text, mimeType, fileName)
-  const parsed = parseLocationAwareImport(text, format, liveRootTitles)
-  if (parsed) return parsed.tree
-  return format === 'csv' ? parseCSVTree(text).tree : []
 }
 
 /**
@@ -46,7 +28,7 @@ export async function summarizeImportDuplicates(
 ): Promise<ImportDuplicateSummary> {
   try {
     const liveTree = await browser.bookmarks.getTree()
-    const tree = parseImportTree(
+    const { tree } = parseImportFile(
       text,
       mimeType,
       fileName,

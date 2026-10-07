@@ -1,15 +1,11 @@
-import { i18n } from '#i18n'
-
-import { detectFormat } from './detect-format'
 import { ImportCanceledError, markImportRestored } from './import-control'
 import { withImportLock } from './import-lock'
-import { parseChromeBookmarks } from './importers/import-chrome'
-import { importFromCSV } from './importers/import-csv'
-import { importFromHTML } from './importers/import-html'
+import { importCsvTree } from './importers/import-csv'
 import { importParsedTree } from './importers/import-json'
-import { parseSafari } from './importers/import-safari'
-import { parseXBEL } from './importers/import-xbel'
-import { parseLocationAwareImport } from './importers/parse-import'
+import {
+  type ParsedImportFile,
+  parseImportFile,
+} from './importers/parse-import'
 import { loadLiveRootTitles } from './importers/resolve-roots'
 import {
   hasRewrittenRootsFully,
@@ -117,49 +113,47 @@ async function importWithSnapshot(
   options: ImportOptions,
   onSnapshot: (snapshot: SafetySnapshot) => void,
 ): Promise<ImportResult> {
-  const format = detectFormat(text, mimeType, fileName)
-  const snapshotBeforeReplace = async (): Promise<void> => {
-    if (mode !== 'restore-replace') return
+  const parsed = parseImportFile(
+    text,
+    mimeType,
+    fileName,
+    await loadLiveRootTitles(),
+  )
+  const effectiveMode = resolveEffectiveMode(parsed, mode)
+  if (effectiveMode === 'restore-replace') {
     if (options.signal?.aborted) throw new ImportCanceledError(false)
     onSnapshot(await takeSafetySnapshot())
   }
+  return importTree(parsed, effectiveMode, options)
+}
 
-  switch (format) {
-    case 'html': {
-      await snapshotBeforeReplace()
-      return importFromHTML(text, mode, options)
-    }
-    case 'json': {
-      const parsed = parseLocationAwareImport(text, 'json')
-      await snapshotBeforeReplace()
-      return importParsedTree(parsed?.tree ?? [], mode, options)
-    }
-    case 'chrome': {
-      const tree = parseChromeBookmarks(text)
-      await snapshotBeforeReplace()
-      return importParsedTree(tree, mode, options)
-    }
-    case 'xbel': {
-      const { tree, hasLocationData } = parseXBEL(
-        text,
-        await loadLiveRootTitles(),
-      )
-      const effectiveMode = hasLocationData ? mode : 'folder'
-      if (effectiveMode !== mode)
-        return importParsedTree(tree, 'folder', options)
-      await snapshotBeforeReplace()
-      return importParsedTree(tree, mode, options)
-    }
-    case 'safari': {
-      const tree = parseSafari(text, await loadLiveRootTitles())
-      await snapshotBeforeReplace()
-      return importParsedTree(tree, mode, options)
-    }
-    case 'csv': {
-      return importFromCSV(text, options)
-    }
-    default: {
-      throw new Error(i18n.t('unsupportedFileFormat'))
-    }
+function resolveEffectiveMode(
+  parsed: ParsedImportFile,
+  mode: ImportMode,
+): ImportMode {
+  const isFolderOnly =
+    parsed.format === 'csv' ||
+    (parsed.format === 'xbel' && !parsed.hasLocationData)
+  return isFolderOnly ? 'folder' : mode
+}
+
+/**
+ * Writes a parsed import file into the browser's bookmark tree. The one writer
+ * for all seven formats: CSV goes under its reused "Imported bookmarks"
+ * folder, every other format through the shared tree writer.
+ * @param parsed The result of {@link parseImportFile}.
+ * @param mode How the bookmarks are written; ignored for CSV.
+ * @param options Import options such as Skip duplicates, cancel and progress.
+ * @returns The import result, including rows skipped while parsing.
+ */
+export async function importTree(
+  parsed: ParsedImportFile,
+  mode: ImportMode,
+  options: ImportOptions = {},
+): Promise<ImportResult> {
+  if (parsed.format === 'csv') {
+    const written = await importCsvTree(parsed.tree, options)
+    return { ...written, skippedInvalidUrl: parsed.skippedInvalidUrl }
   }
+  return importParsedTree(parsed.tree, mode, options)
 }
