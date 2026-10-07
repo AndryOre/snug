@@ -60,11 +60,11 @@
       },
       "preview": {
         "title": "Aperçu avant l'import",
-        "body": "Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier « Bookmarks » de profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture. Snug détecte le format et affiche un aperçu. Vous fusionnez ensuite, remplacez, ou ajoutez tout dans un nouveau dossier."
+        "body": "Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier « Bookmarks » de profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture, même plusieurs fichiers à la fois. Snug détecte le format et affiche un aperçu de ce qui sera ajouté, ignoré et supprimé. Vous fusionnez ensuite, remplacez, ou ajoutez tout dans un nouveau dossier. En fusion ou dans un nouveau dossier, vous pouvez d'abord décocher n'importe quel dossier ou favori."
       },
       "undo": {
         "title": "Annulez un remplacement",
-        "body": "Avant de remplacer, Snug enregistre un instantané de sécurité. Si le résultat ne vous convient pas, restaurez-le."
+        "body": "Avant de remplacer, Snug enregistre un instantané de sécurité. Il conserve les cinq derniers, et vous pouvez restaurer l'un d'eux depuis les Paramètres."
       },
       "duplicates": {
         "title": "Nettoyez les doublons",
@@ -90,7 +90,7 @@
     },
     "alts": {
       "export": "Page d'export de Snug : une arborescence de dossiers de favoris, un sélecteur de format et le bouton Exporter",
-      "import": "Aperçu d'import de Snug : une liste de favoris à ajouter, modifier ou ignorer, avec les options fusionner, remplacer et nouveau",
+      "import": "Aperçu d'import de Snug : une liste de favoris à ajouter, ignorer ou supprimer, avec les options fusionner, remplacer et nouveau",
       "autoExport": "Réglages de l'export automatique de Snug : une planification quotidienne, trois formats et l'heure de la prochaine exécution",
       "popup": "Fenêtre contextuelle de Snug dans la barre d'outils avec un seul bouton pour exporter tous les favoris"
     }
@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Puis-je importer plusieurs fichiers à la fois ?",
-        "answer": "Non. Snug importe un fichier à la fois. Pour en importer plusieurs, importez-les l'un après l'autre."
+        "answer": "Oui. Choisissez ou déposez plusieurs fichiers sur la page Importer et Snug les importe d'un seul coup."
       },
       "permissions": {
         "question": "Pourquoi a-t-il besoin d'accéder à tous mes favoris ?",

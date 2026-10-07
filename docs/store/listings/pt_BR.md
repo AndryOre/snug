@@ -17,13 +17,15 @@ nada é enviado a lugar nenhum e você não precisa de conta.
 Exporte toda a árvore de favoritos ou só a pasta que escolher, em formatos
 comuns como HTML ou JSON. Importe arquivos de outros gerenciadores de favoritos,
 o arquivo Bookmarks de um perfil do Chrome ou os favoritos do Safari, com uma
-prévia primeiro. Depois decida: mesclar com os favoritos atuais, substituí-los
-por completo ou colocar tudo em uma pasta nova — a escolha é sempre sua.
+prévia primeiro do que será adicionado, ignorado e excluído. Você pode escolher
+ou soltar vários arquivos de uma vez. Depois decida: mesclar com os favoritos
+atuais, substituí-los por completo ou colocar tudo em uma pasta nova — a escolha
+é sempre sua.
 
 Antes de qualquer substituição, o Snug salva um instantâneo de segurança dos
-seus favoritos, para você poder desfazer. Uma página Duplicados encontra
-favoritos repetidos e exclui só os que você escolher, e a importação pode
-ignorar duplicados.
+seus favoritos, para você poder desfazer. Os cinco mais recentes ficam no seu
+dispositivo. Uma página Duplicados encontra favoritos repetidos e exclui só os
+que você escolher, e a importação pode ignorar duplicados.
 
 Configure um agendamento uma única vez — por hora, diário, semanal e mais — e o
 Snug salva seus favoritos direto na pasta Downloads, nos formatos que você

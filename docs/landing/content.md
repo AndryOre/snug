@@ -358,12 +358,14 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      them apart later.
 2. **Preview before you import**
    - Import HTML, JSON, CSV or XBEL files, a Chrome profile `Bookmarks` file, or
-     a Safari export with Favorites and Reading List. Snug detects the format
-     and shows a preview. Then you merge, replace, or add everything to a new
-     folder.
+     a Safari export with Favorites and Reading List, several files at once if
+     you like. Snug detects the format and previews what will be added, skipped
+     and deleted. Then you merge, replace, or add everything to a new folder.
+     When you merge or add to a new folder, you can uncheck any folder or
+     bookmark first.
 3. **Undo a replace**
-   - Replace saves a Safety snapshot first. If the result is not what you
-     wanted, restore it.
+   - Replace saves a Safety snapshot first. Snug keeps the latest five, and you
+     can restore any of them from Settings.
 4. **Clean up duplicates**
    - A Duplicates page finds repeated bookmarks. On import, Skip duplicates
      leaves out URLs you already have.
@@ -386,11 +388,13 @@ Four themes from Context: Proof Points, Value themes. One idea each.
 2. **Vista previa antes de importar**
    - Importa archivos HTML, JSON, CSV o XBEL, un archivo `Bookmarks` de un
      perfil de Chrome, o una exportación de Safari con Favoritos y Lista de
-     lectura. Snug detecta el formato y te muestra una vista previa. Después
-     combinas, reemplazas o añades todo a una carpeta nueva.
+     lectura, incluso varios archivos a la vez. Snug detecta el formato y te
+     muestra una vista previa de lo que se añadirá, omitirá y eliminará. Después
+     combinas, reemplazas o añades todo a una carpeta nueva. Al combinar o usar
+     una carpeta nueva, puedes desmarcar antes cualquier carpeta o marcador.
 3. **Deshaz un reemplazo**
-   - Antes de reemplazar, Snug guarda una instantánea de seguridad. Si el
-     resultado no es el que querías, la restauras.
+   - Antes de reemplazar, Snug guarda una instantánea de seguridad. Conserva las
+     cinco más recientes y puedes restaurar cualquiera desde Ajustes.
 4. **Limpia duplicados**
    - Una página de Duplicados encuentra marcadores repetidos. Al importar,
      Omitir duplicados deja fuera las URL que ya tienes.
@@ -412,12 +416,16 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      damit du sie später unterscheiden kannst.
 2. **Vorschau vor dem Import**
    - Importiere HTML-, JSON-, CSV- oder XBEL-Dateien, eine `Bookmarks`-Datei
-     eines Chrome-Profils oder einen Safari-Export mit Favoriten und Leseliste.
-     Snug erkennt das Format und zeigt eine Vorschau. Dann führst du zusammen,
-     ersetzt oder legst alles in einem neuen Ordner ab.
+     eines Chrome-Profils oder einen Safari-Export mit Favoriten und Leseliste,
+     auf Wunsch mehrere Dateien auf einmal. Snug erkennt das Format und zeigt in
+     einer Vorschau, was hinzugefügt, übersprungen und gelöscht wird. Dann
+     führst du zusammen, ersetzt oder legst alles in einem neuen Ordner ab. Beim
+     Zusammenführen oder in einem neuen Ordner kannst du vorher Ordner und
+     Lesezeichen abwählen.
 3. **Ersetzen rückgängig machen**
-   - Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot. Entspricht das
-     Ergebnis nicht deinen Vorstellungen, stellst du ihn wieder her.
+   - Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot. Die letzten
+     fünf bleiben erhalten, und du kannst sie in den Einstellungen
+     wiederherstellen.
 4. **Duplikate bereinigen**
    - Eine Seite Duplikate findet doppelte Lesezeichen. Beim Import lässt
      Duplikate überspringen die URLs aus, die du schon hast.
@@ -441,12 +449,16 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      fichier peuvent inclure la date, pour les distinguer plus tard.
 2. **Aperçu avant l'import**
    - Importez des fichiers HTML, JSON, CSV ou XBEL, un fichier `Bookmarks` de
-     profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture.
-     Snug détecte le format et affiche un aperçu. Vous fusionnez ensuite,
-     remplacez, ou ajoutez tout dans un nouveau dossier.
+     profil Chrome, ou un export Safari avec les Favoris et la Liste de lecture,
+     même plusieurs fichiers à la fois. Snug détecte le format et affiche un
+     aperçu de ce qui sera ajouté, ignoré et supprimé. Vous fusionnez ensuite,
+     remplacez, ou ajoutez tout dans un nouveau dossier. En fusion ou dans un
+     nouveau dossier, vous pouvez d'abord décocher n'importe quel dossier ou
+     favori.
 3. **Annulez un remplacement**
-   - Avant de remplacer, Snug enregistre un instantané de sécurité. Si le
-     résultat ne vous convient pas, restaurez-le.
+   - Avant de remplacer, Snug enregistre un instantané de sécurité. Il conserve
+     les cinq derniers, et vous pouvez restaurer l'un d'eux depuis les
+     Paramètres.
 4. **Nettoyez les doublons**
    - Une page Doublons repère les favoris en double. À l'import, Ignorer les
      doublons laisse de côté les URL que vous avez déjà.
@@ -469,12 +481,14 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      li distingui più avanti.
 2. **Anteprima prima di importare**
    - Importa file HTML, JSON, CSV o XBEL, un file `Bookmarks` di un profilo
-     Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura.
-     Snug rileva il formato e mostra un'anteprima. Poi unisci, sostituisci o
-     aggiungi tutto a una nuova cartella.
+     Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura,
+     anche più file insieme. Snug rileva il formato e mostra un'anteprima di ciò
+     che verrà aggiunto, saltato ed eliminato. Poi unisci, sostituisci o
+     aggiungi tutto a una nuova cartella. Quando unisci o usi una nuova
+     cartella, puoi prima deselezionare qualsiasi cartella o segnalibro.
 3. **Annulla una sostituzione**
-   - Prima di sostituire, Snug salva un'istantanea di sicurezza. Se il risultato
-     non è quello che volevi, ripristinala.
+   - Prima di sostituire, Snug salva un'istantanea di sicurezza. Conserva le
+     ultime cinque e puoi ripristinarne una qualsiasi dalle Impostazioni.
 4. **Elimina i duplicati**
    - Una pagina Duplicati trova i segnalibri ripetuti. In importazione, Salta i
      duplicati lascia fuori gli URL che hai già.
@@ -493,10 +507,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
 1. **選んだものを書き出す**
    - ツリー全体、または選んだフォルダーだけを、HTML、JSON、CSV、Markdown、OPML、XBEL で書き出せます。ファイル名に日付を含められるので、あとで見分けられます。
 2. **読み込む前にプレビュー**
-   - HTML、JSON、CSV、XBEL のファイル、Chrome プロファイルの `Bookmarks`
-     ファイル、お気に入りとリーディングリストを含む Safari の書き出しファイルを読み込めます。Snug が形式を検出してプレビューを表示します。そのあと、統合する、置き換える、すべてを新しいフォルダーに追加する、のいずれかを選びます。
+   -      HTML、JSON、CSV、XBEL のファイル、Chrome プロファイルの`Bookmarks`ファイル、お気に入りとリーディングリストを含む Safari の書き出しファイルを、複数まとめて読み込むこともできます。Snug が形式を検出し、追加、スキップ、削除される内容をプレビューで表示します。そのあと、統合する、置き換える、すべてを新しいフォルダーに追加する、のいずれかを選びます。統合するときや新しいフォルダーに追加するときは、先に不要なフォルダーやブックマークのチェックを外せます。
 3. **置き換えを元に戻す**
-   - 置き換える前に、Snug は安全スナップショットを保存します。結果が思っていたものと違ったら、復元できます。
+   -      置き換える前に、Snug は安全スナップショットを保存します。最新の 5 件が保持され、どれでも設定から復元できます。
 4. **重複を整理する**
    - 「重複」ページで、重複したブックマークを見つけられます。読み込み時は「重複をスキップ」で、すでにある URL を除外します。
 5. **スケジュールでバックアップ**
@@ -513,12 +526,14 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      내보내요. 파일 이름에 날짜를 넣을 수 있어서 나중에 구분하기 쉬워요.
 2. **가져오기 전에 미리보기**
    - HTML, JSON, CSV, XBEL 파일, Chrome 프로필의 `Bookmarks` 파일, 즐겨찾기와
-     읽기 목록이 들어 있는 Safari 내보내기 파일을 가져와요. Snug가 형식을
-     감지해서 미리보기를 보여 줘요. 그런 다음 병합하거나, 교체하거나, 모두 새
-     폴더에 추가해요.
+     읽기 목록이 들어 있는 Safari 내보내기 파일을 가져와요. 여러 파일을 한꺼번에
+     가져올 수도 있어요. Snug가 형식을 감지해서 추가, 건너뜀, 삭제될 항목을
+     미리보기로 보여 줘요. 그런 다음 병합하거나, 교체하거나, 모두 새 폴더에
+     추가해요. 병합하거나 새 폴더에 추가할 때는 원하지 않는 폴더나 북마크를 먼저
+     선택 해제할 수 있어요.
 3. **교체 되돌리기**
-   - 교체하기 전에 Snug가 안전 스냅샷을 저장해요. 결과가 마음에 들지 않으면
-     복원하세요.
+   - 교체하기 전에 Snug가 안전 스냅샷을 저장해요. 최근 5개를 보관하고, 설정에서
+     원하는 것을 복원할 수 있어요.
 4. **중복 정리하기**
    - 중복 페이지에서 반복된 북마크를 찾아요. 가져올 때 중복 건너뛰기를 켜면 이미
      있는 URL은 제외해요.
@@ -539,12 +554,14 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      distingui-los depois.
 2. **Pré-visualização antes de importar**
    - Importe arquivos HTML, JSON, CSV ou XBEL, um arquivo `Bookmarks` de perfil
-     do Chrome ou uma exportação do Safari com Favoritos e Lista de Leitura. O
-     Snug detecta o formato e mostra uma pré-visualização. Depois você mescla,
-     substitui ou adiciona tudo a uma pasta nova.
+     do Chrome ou uma exportação do Safari com Favoritos e Lista de Leitura, até
+     vários arquivos de uma vez. O Snug detecta o formato e mostra uma
+     pré-visualização do que será adicionado, ignorado e excluído. Depois você
+     mescla, substitui ou adiciona tudo a uma pasta nova. Ao mesclar ou usar uma
+     pasta nova, você pode desmarcar antes qualquer pasta ou favorito.
 3. **Desfaça uma substituição**
-   - Antes de substituir, o Snug salva um instantâneo de segurança. Se o
-     resultado não for o que você queria, restaure-o.
+   - Antes de substituir, o Snug salva um instantâneo de segurança. Ele guarda
+     os cinco mais recentes, e você pode restaurar qualquer um em Configurações.
 4. **Limpe duplicados**
    - Uma página Duplicados encontra favoritos repetidos. Na importação, Ignorar
      duplicados deixa de fora as URLs que você já tem.
@@ -566,12 +583,14 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      различать.
 2. **Предпросмотр перед импортом**
    - Импортируйте файлы HTML, JSON, CSV или XBEL, файл `Bookmarks` профиля
-     Chrome или экспорт Safari с Избранным и Списком для чтения. Snug определяет
-     формат и показывает предпросмотр. Затем вы объединяете, заменяете или
-     добавляете всё в новую папку.
+     Chrome или экспорт Safari с Избранным и Списком для чтения, в том числе
+     сразу несколько файлов. Snug определяет формат и показывает предпросмотр
+     того, что будет добавлено, пропущено и удалено. Затем вы объединяете,
+     заменяете или добавляете всё в новую папку. При объединении или добавлении
+     в новую папку можно заранее снять отметку с любой папки или закладки.
 3. **Отмените замену**
-   - Перед заменой Snug сохраняет страховой снимок. Если результат вас не
-     устроил, восстановите его.
+   - Перед заменой Snug сохраняет страховой снимок. Хранятся пять последних, и
+     любой из них можно восстановить в Настройках.
 4. **Уберите дубликаты**
    - Страница «Дубликаты» находит повторяющиеся закладки. При импорте
      «Пропускать дубликаты» не добавляет URL, которые у вас уже есть.
@@ -590,10 +609,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
 1. **导出你选择的内容**
    - 导出整个书签树或你选中的文件夹，格式可选 HTML、JSON、CSV、Markdown、OPML 或 XBEL。文件名可包含日期，方便日后区分。
 2. **导入前先预览**
-   - 可导入 HTML、JSON、CSV 或 XBEL 文件、Chrome 配置文件的 `Bookmarks`
-     文件，或包含个人收藏和阅读列表的 Safari 导出文件。Snug 会检测格式并显示预览。然后你可以合并、替换，或把全部内容添加到一个新文件夹。
+   -      可导入 HTML、JSON、CSV 或 XBEL 文件、Chrome 配置文件的 `Bookmarks` 文件，或包含个人收藏和阅读列表的 Safari 导出文件，也可以一次导入多个文件。Snug 会检测格式，并预览将添加、跳过和删除的内容。然后你可以合并、替换，或把全部内容添加到一个新文件夹。合并或添加到新文件夹时，可以先取消勾选不需要的文件夹或书签。
 3. **撤销替换**
-   - 替换前，Snug 会先保存安全快照。如果结果不是你想要的，可以恢复。
+   -      替换前，Snug 会先保存安全快照。系统保留最近的五份，你可以在设置中恢复其中任意一份。
 4. **清理重复项**
    - “重复项”页面可找出重复的书签。导入时，“跳过重复项”会略过你已有的 URL。
 5. **定时备份**
@@ -973,8 +991,8 @@ public so you can check.
 cloud. To move bookmarks to another browser or computer, export a file and
 import it there.
 
-**Can I import several files at once?** No. Snug imports one file at a time. To
-bring in more than one, import them one after another.
+**Can I import several files at once?** Yes. Pick or drop several files on the
+Import page and Snug imports them in one go.
 
 **Why does it need access to all my bookmarks?** Reading and writing them is the
 only way an extension can export and import them. Snug makes no network calls,
@@ -1012,8 +1030,8 @@ fuente es público para que lo verifiques.
 sincronización ni nube. Para pasar tus marcadores a otro navegador o equipo,
 exporta un archivo e impórtalo allí.
 
-**¿Puedo importar varios archivos a la vez?** No. Snug importa un archivo a la
-vez. Si tienes varios, impórtalos uno después del otro.
+**¿Puedo importar varios archivos a la vez?** Sí. Elige o suelta varios archivos
+en la página Importar y Snug los importa de una sola vez.
 
 **¿Por qué necesita acceso a todos mis marcadores?** Leerlos y escribirlos es la
 única forma en que una extensión puede exportarlos e importarlos. Snug no hace
@@ -1054,9 +1072,9 @@ Synchronisierung noch Cloud. Um Lesezeichen in einen anderen Browser oder auf
 einen anderen Computer zu übertragen, exportiere eine Datei und importiere sie
 dort.
 
-**Kann ich mehrere Dateien gleichzeitig importieren?** Nein. Snug importiert
-eine Datei nach der anderen. Um mehrere zu übernehmen, importiere sie
-nacheinander.
+**Kann ich mehrere Dateien gleichzeitig importieren?** Ja. Wähle auf der
+Importseite mehrere Dateien aus oder ziehe sie dorthin, und Snug importiert sie
+in einem Durchgang.
 
 **Warum braucht es Zugriff auf alle meine Lesezeichen?** Sie zu lesen und zu
 schreiben ist die einzige Möglichkeit, wie eine Erweiterung sie exportieren und
@@ -1097,8 +1115,8 @@ le code source est public pour que vous puissiez vérifier.
 synchronisation ni cloud. Pour transférer vos favoris vers un autre navigateur
 ou ordinateur, exportez un fichier et importez-le là-bas.
 
-**Puis-je importer plusieurs fichiers à la fois ?** Non. Snug importe un fichier
-à la fois. Pour en importer plusieurs, importez-les l'un après l'autre.
+**Puis-je importer plusieurs fichiers à la fois ?** Oui. Choisissez ou déposez
+plusieurs fichiers sur la page Importer et Snug les importe d'un seul coup.
 
 **Pourquoi a-t-il besoin d'accéder à tous mes favoris ?** Les lire et les écrire
 est le seul moyen pour une extension de les exporter et de les importer. Snug ne
@@ -1138,8 +1156,8 @@ dispositivo, e il codice sorgente è pubblico così puoi verificare.
 sincronizzazione né cloud. Per spostare i segnalibri su un altro browser o
 computer, esporta un file e importalo lì.
 
-**Posso importare più file alla volta?** No. Snug importa un file alla volta.
-Per portarne dentro più di uno, importali uno dopo l'altro.
+**Posso importare più file alla volta?** Sì. Scegli o trascina più file nella
+pagina Importa e Snug li importa in un colpo solo.
 
 **Perché ha bisogno di accedere a tutti i miei segnalibri?** Leggerli e
 scriverli è l'unico modo in cui un'estensione può esportarli e importarli. Snug
@@ -1179,7 +1197,7 @@ GitHub.
 いいえ。Snug には同期もクラウドもありません。別のブラウザーやパソコンに移すには、ファイルを書き出して、移した先で読み込みます。
 
 **複数のファイルを一度に読み込めますか？**
-いいえ。Snug が読み込めるのは一度に 1 ファイルです。複数ある場合は、1 つずつ順に読み込みます。
+はい。読み込みページで複数のファイルを選ぶかドロップすると、Snug がまとめて読み込みます。
 
 **なぜすべてのブックマークへのアクセスが必要ですか？**
 ブックマークを読み書きすることが、拡張機能が書き出しと読み込みを行う唯一の方法だからです。Snug はネットワーク通信を行わないので、読み取った内容が端末の外に出ることはありません。
@@ -1216,8 +1234,8 @@ Practices のバッジがあり、CI はバージョンを固定して実行さ�
 없어요. 북마크를 다른 브라우저나 컴퓨터로 옮기려면 파일로 내보내서 그쪽에서
 가져오세요.
 
-**파일을 여러 개 한꺼번에 가져올 수 있나요?** 아니요. Snug는 한 번에 파일 하나만
-가져와요. 여러 개를 가져오려면 하나씩 차례로 가져오세요.
+**파일을 여러 개 한꺼번에 가져올 수 있나요?** 네. 가져오기 페이지에서 파일을
+여러 개 고르거나 끌어다 놓으면 Snug가 한 번에 가져와요.
 
 **왜 모든 북마크에 접근해야 하나요?** 북마크를 읽고 쓰는 것이 확장 프로그램이
 북마크를 내보내고 가져올 수 있는 유일한 방법이에요. Snug는 네트워크 호출을 하지
@@ -1255,8 +1273,8 @@ código-fonte é público para você conferir.
 sincronização nem nuvem. Para levar favoritos a outro navegador ou computador,
 exporte um arquivo e importe lá.
 
-**Posso importar vários arquivos de uma vez?** Não. O Snug importa um arquivo
-por vez. Para trazer mais de um, importe um depois do outro.
+**Posso importar vários arquivos de uma vez?** Sim. Escolha ou solte vários
+arquivos na página Importar e o Snug os importa de uma só vez.
 
 **Por que ele precisa de acesso a todos os meus favoritos?** Lê-los e gravá-los
 é a única forma de uma extensão exportá-los e importá-los. O Snug não faz
@@ -1296,8 +1314,8 @@ GitHub.
 синхронизации, ни облака. Чтобы перенести закладки в другой браузер или на
 другой компьютер, экспортируйте файл и импортируйте его там.
 
-**Можно ли импортировать несколько файлов сразу?** Нет. Snug импортирует по
-одному файлу за раз. Чтобы добавить несколько, импортируйте их друг за другом.
+**Можно ли импортировать несколько файлов сразу?** Да. Выберите или перетащите
+несколько файлов на страницу «Импорт», и Snug импортирует их за один раз.
 
 **Зачем ему доступ ко всем моим закладкам?** Чтобы экспортировать и
 импортировать закладки, расширению нужно их читать и записывать, другого способа
@@ -1336,7 +1354,7 @@ Practices, а CI работает с закреплёнными версиями
 不会。Snug 没有同步功能，也没有云端。要把书签转移到另一个浏览器或电脑，请导出文件，然后在那边导入。
 
 **可以一次导入多个文件吗？**
-不可以。Snug 一次导入一个文件。要导入多个，请逐个依次导入。
+可以。在导入页面选择或拖入多个文件，Snug 会一次性全部导入。
 
 **为什么它需要访问我的所有书签？**
 读写书签是扩展程序导出和导入书签的唯一方式。Snug 不发起网络请求，因此它读取的内容不可能离开你的设备。
@@ -1361,8 +1379,8 @@ Practices 徽章，CI 使用固定版本运行。请到 GitHub 上自行判断�
 **Snug 收费吗？** 不收费。它是免费的。
 
 Sources: Context: Objections table (all five objections), Anti-persona,
-Differentiation; Product: Capabilities and Constraints ("Imports one file at a
-time. No sync, no cloud, no account, no pricing").
+Differentiation; Product: Capabilities and Constraints ("No sync, no cloud, no
+account, no pricing").
 
 ---
 

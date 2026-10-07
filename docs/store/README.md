@@ -83,12 +83,12 @@ Export, import and back up your bookmarks in common formats, from Chrome or Safa
 ```
 
 Detailed description, from the English listing (copy.md section 1 holds the
-original short form; 1333 chars):
+original short form; 1413 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
 
-Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers, a Chrome profile Bookmarks file, or Safari bookmarks, with a preview first. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
+Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers, a Chrome profile Bookmarks file, or Safari bookmarks, with a preview first of what will be added, skipped and deleted. Pick or drop several files at once. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
 
 Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. The latest five are kept on your device. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
@@ -120,14 +120,14 @@ Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o S
 The locale file is the source of truth for the Spanish summary. The earlier
 134-character `copy.md` variant was over the limit and is retired.
 
-Detailed description (1509 chars):
+Detailed description (1651 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.
 
-Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos comunes como HTML o JSON. Importa archivos de otros gestores de marcadores, el archivo Bookmarks de un perfil de Chrome o marcadores de Safari, con una vista previa primero. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
+Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos comunes como HTML o JSON. Importa archivos de otros gestores de marcadores, el archivo Bookmarks de un perfil de Chrome o marcadores de Safari, con una vista previa primero de lo que se añadirá, omitirá y eliminará. Puedes elegir o soltar varios archivos a la vez. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
 
-Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
+Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Se conservan las últimas cinco en tu dispositivo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
 
 Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores directo a tu carpeta de Descargas, en los formatos que elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
 

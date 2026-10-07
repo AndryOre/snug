@@ -60,11 +60,11 @@
       },
       "preview": {
         "title": "Preview before you import",
-        "body": "Import HTML, JSON, CSV or XBEL files, a Chrome profile “Bookmarks” file, or a Safari export with Favorites and Reading List. Snug detects the format and shows a preview. Then you merge, replace, or add everything to a new folder."
+        "body": "Import HTML, JSON, CSV or XBEL files, a Chrome profile “Bookmarks” file, or a Safari export with Favorites and Reading List, several files at once if you like. Snug detects the format and previews what will be added, skipped and deleted. Then you merge, replace, or add everything to a new folder. When you merge or add to a new folder, you can uncheck any folder or bookmark first."
       },
       "undo": {
         "title": "Undo a replace",
-        "body": "Replace saves a Safety snapshot first. If the result is not what you wanted, restore it."
+        "body": "Replace saves a Safety snapshot first. Snug keeps the latest five, and you can restore any of them from Settings."
       },
       "duplicates": {
         "title": "Clean up duplicates",
@@ -90,7 +90,7 @@
     },
     "alts": {
       "export": "Snug's export page: a bookmark folder tree, a format picker and the Export button",
-      "import": "Snug's import preview: a list of bookmarks to add, change or skip, with merge, replace and new options",
+      "import": "Snug's import preview: a list of bookmarks to add, skip or delete, with merge, replace and new options",
       "autoExport": "Snug's auto-export settings: a daily schedule, three formats and the next run time",
       "popup": "Snug's toolbar popup with a single button to export all bookmarks"
     }
@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Can I import several files at once?",
-        "answer": "No. Snug imports one file at a time. To bring in more than one, import them one after another."
+        "answer": "Yes. Pick or drop several files on the Import page and Snug imports them in one go."
       },
       "permissions": {
         "question": "Why does it need access to all my bookmarks?",
