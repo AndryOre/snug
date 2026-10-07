@@ -40,7 +40,8 @@ Markdown and OPML are export-only: Snug cannot import them back.
 A long export or import shows a progress card with a running count. Click
 **Cancel** to stop. A canceled export downloads no file. A canceled import
 removes the bookmarks it had already added, and a canceled Restore — replace
-puts your previous bookmarks back from the Safety snapshot.
+puts your previous bookmarks back from the Safety snapshot. Cancel on an Import
+batch puts your bookmarks back as they were before the batch started.
 
 ## Naming exported files
 
@@ -76,19 +77,27 @@ falls back to "Bookmarks".
 1. Quick import, from the popup:
    - Optionally change the default import mode (see **Settings** below) — it
      starts on **Restore — merge**.
-   - Click "Choose file…" and select a bookmarks file (see **Import sources**
-     below).
-   - The extension automatically detects the format and imports the bookmarks
+   - Click "Choose file…" and select one or more bookmarks files (see **Import
+     sources** below).
+   - The extension automatically detects each format and imports the bookmarks
      immediately using the default import mode. A CSV file — or any other file
      with no Bookmarks Bar/Other Bookmarks data — always imports into a new
      "Imported Bookmarks" folder instead, regardless of the default mode.
+   - Several files are imported together as one **Import batch** (see below). A
+     file Snug cannot read is left out, and the result tells you how many were
+     skipped.
    - If the default mode is **Restore — replace**, you're warned and asked to
      confirm before the import runs, since it deletes your current bookmarks (a
      Safety snapshot is saved first, so you can undo it); canceling imports
-     nothing.
+     nothing. Restore — replace, and very large imports, open the app's
+     **Import** page instead of running in the popup.
 2. Preview first, from the app's **Import** page:
-   - Drop or select a bookmarks file — a preview shows the bookmark counts
-     detected in the file before you import anything.
+   - Drop or select one or more bookmarks files. Each file gets a row with its
+     detected format and bookmark count, or the reason it cannot be read. You
+     can remove a file or use **Add files** to add more.
+   - An itemized preview shows the bookmarks tree as it would be imported.
+     Bookmarks Skip duplicates would leave out carry a `Duplicate · skipped`
+     badge, so you can judge the file before anything changes.
    - Choose an import mode (pre-selected from your default):
      - **Create folder**: adds every bookmark to a new "Imported Bookmarks"
        folder. Available for any file, including CSV (which has no folder
@@ -98,14 +107,37 @@ falls back to "Bookmarks".
        carry location data.
      - **Restore — replace**: clears your current Bookmarks Bar and Other
        Bookmarks first, then restores bookmarks to their original locations.
-       Only available for files that carry location data.
+       Only available for files that carry location data, and for one file at a
+       time.
    - Selecting "Restore — replace" shows how many bookmarks the replace will
-     remove and add, and requires confirming a warning dialog before the import
-     runs.
+     remove and add, lists the bookmarks that will be deleted, and requires
+     confirming a warning dialog before the import runs.
    - **Skip duplicates** (on by default) leaves out any bookmark whose URL
      already exists in your browser, and tells you how many it will skip. It
      applies to Create folder and Restore — merge, not to Restore — replace. The
      switch is shared with Quick import.
+
+### Import selection
+
+In Create folder and Restore — merge, the preview tree has checkboxes. Check
+single bookmarks, whole folders, or a mix, and Snug imports only the **Import
+selection**. Restore — replace has no selection: it always imports everything.
+
+### Import batch
+
+Several files imported at once run as one **Import batch**: one import mode, one
+preview and one progress. Snug checks for existing URLs once, so Skip duplicates
+also leaves out a bookmark that appears in two of the files.
+
+- In Create folder with two or more files, each file goes into its own folder
+  named after the file (without its extension). A single file keeps the
+  "Imported Bookmarks" folder, and CSV files always use it.
+- Restore — replace needs exactly one file. With two or more files it is
+  disabled, because the second file would erase the first.
+- A file that cannot be read is left out at preview time and listed in the
+  result.
+- Cancel, or a failure part-way through, puts your bookmarks back as they were
+  before the batch started.
 
 ### Import sources
 
@@ -123,17 +155,18 @@ content. It reads:
 
 Before every Restore — replace, Snug saves a **Safety snapshot** of your
 Bookmarks Bar and Other Bookmarks: a JSON file in your Downloads folder
-(`snug-safety-snapshot-<date>.json`), plus one copy kept inside the extension.
-The replace confirmation tells you this and links to Settings. If the snapshot
-can't be saved, nothing is deleted.
+(`snug-safety-snapshot-<date>.json`), plus a copy kept inside the extension. The
+replace confirmation tells you this and links to Settings. If the snapshot can't
+be saved, nothing is deleted.
 
 - After a replace, **Undo import** on the result restores the snapshot.
 - In **Settings**, the Safety snapshot card lists the latest five snapshots. You
   can restore or download any of them, after confirming, and take a new one at
   any time.
 
-Snug keeps the latest five snapshots, so a sixth replaces the oldest. Restoring
-a snapshot is itself a replace, so Snug saves a new snapshot of your current
+Snug keeps the latest five snapshots, so a sixth replaces the oldest, except
+that the newest snapshot holding any bookmarks is never dropped. Restoring a
+snapshot is itself a replace, so Snug saves a new snapshot of your current
 bookmarks first. Everything stays on your device and Snug makes no network
 requests.
 

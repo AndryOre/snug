@@ -54,14 +54,16 @@ bookmark tree, so trust is the main question they bring.
   XBEL.
 - Import HTML, JSON, CSV and XBEL files, a Chrome profile `Bookmarks` file, or a
   Safari export (Favorites and Reading List); the format is detected.
-- Import with a preview, then merge, replace, or add to a new folder. Replace
+- Import with an itemized preview, choose which bookmarks to import, then merge,
+  replace, or add to a new folder. Import several files at once as one batch;
+  Cancel restores the previous bookmarks. A replace needs one file. Replace
   saves a Safety snapshot first. Snug keeps the latest five on your device, and
   you can restore or download any of them, or take one at any time.
 - Duplicates page, and Skip duplicates on import.
 - Scheduled Auto-export to the Downloads folder, with Retention and an optional
   failure notification.
-- Imports one file at a time. No sync, no cloud, no account, no pricing, no
-  signup. Nothing may imply any of these.
+- No sync, no cloud, no account, no pricing, no signup. Nothing may imply any of
+  these.
 - Interface in 10 languages; follows the browser theme and language.
 - Current version 2.0.1. The Chrome Web Store Featured badge program is closed.
 
