@@ -13,6 +13,10 @@ const restoreMock = vi.hoisted(() => vi.fn())
 const takeMock = vi.hoisted(() => vi.fn())
 const downloadMock = vi.hoisted(() => vi.fn())
 
+vi.mock('@/lib/import-lock', () => ({
+  withImportLock: (task: () => Promise<unknown>) => task(),
+}))
+
 vi.mock('@/lib/safety-snapshot', () => ({
   safetySnapshotStore: {},
   restoreSafetySnapshot: restoreMock,

@@ -1,28 +1,24 @@
 import { i18n } from '#i18n'
 import { Link } from '@tanstack/react-router'
 import { Button, buttonVariants } from '@workspace/ui/components/button'
+import { useState } from 'react'
 
 import { APP_ROUTES } from '@/lib/app-url'
+import { snapshotFileName } from '@/lib/safety-snapshot'
 
 /**
- * Example of the file Snug saves before a replace. The real name carries the
- * full ISO timestamp of the moment the snapshot is taken.
- */
-const SNAPSHOT_FILE_NAME_EXAMPLE =
-  'snug-safety-snapshot-2026-10-07T09-12-00.json'
-
-/**
- * @param message The localized note with the example file name inlined.
+ * @param message The localized note with the file name inlined.
+ * @param fileName The file name inlined in `message`.
  * @returns The note split around the file name so the name can be styled.
  */
-function splitAroundFileName(message: string): [string, string] {
-  const index = message.indexOf(SNAPSHOT_FILE_NAME_EXAMPLE)
+function splitAroundFileName(
+  message: string,
+  fileName: string,
+): [string, string] {
+  const index = message.indexOf(fileName)
   return index === -1
     ? [message, '']
-    : [
-        message.slice(0, index),
-        message.slice(index + SNAPSHOT_FILE_NAME_EXAMPLE.length),
-      ]
+    : [message.slice(0, index), message.slice(index + fileName.length)]
 }
 
 /**
@@ -40,8 +36,10 @@ export function ReplaceSnapshotNote({
 }: {
   onOpenSettings?: () => void
 }) {
+  const [fileName] = useState(() => snapshotFileName(Date.now()))
   const [before, after] = splitAroundFileName(
-    i18n.t('replaceSnapshotNote', [SNAPSHOT_FILE_NAME_EXAMPLE]),
+    i18n.t('replaceSnapshotNote', [fileName]),
+    fileName,
   )
   const linkLabel = i18n.t('replaceSnapshotSettingsLink')
 
@@ -49,9 +47,7 @@ export function ReplaceSnapshotNote({
     <div className="flex flex-col items-start gap-1">
       <p>
         {before}
-        <span className="font-mono text-xs break-all">
-          {SNAPSHOT_FILE_NAME_EXAMPLE}
-        </span>
+        <span className="font-mono text-xs break-all">{fileName}</span>
         {after}
       </p>
       {onOpenSettings ? (

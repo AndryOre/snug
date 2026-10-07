@@ -50,6 +50,7 @@ import { useRef, useState } from 'react'
 import { countBookmarks } from '@/lib/count-bookmarks'
 import { formatCount } from '@/lib/format-count'
 import { formatSnapshotDate } from '@/lib/format-snapshot-date'
+import { withImportLock } from '@/lib/import-lock'
 import {
   downloadSafetySnapshot,
   restoreSafetySnapshot,
@@ -109,7 +110,9 @@ export function SafetySnapshotCard() {
   }
 
   const handleTake = () =>
-    runExclusive('taking', 'take-error', 'idle', takeSafetySnapshot)
+    runExclusive('taking', 'take-error', 'idle', () =>
+      withImportLock(takeSafetySnapshot),
+    )
 
   const handleDownload = (snapshot: SafetySnapshot) =>
     runExclusive('idle', 'download-error', 'idle', () =>

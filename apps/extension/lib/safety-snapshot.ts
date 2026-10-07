@@ -144,7 +144,11 @@ function hasSeveralSets(rootChildren: { folderType?: string }[]): boolean {
   )
 }
 
-function snapshotFileName(takenAt: number): string {
+/**
+ * @param takenAt Epoch milliseconds the snapshot was taken.
+ * @returns The name of the JSON file saved to Downloads for that moment.
+ */
+export function snapshotFileName(takenAt: number): string {
   const stamp = new Date(takenAt).toISOString().replaceAll(/[:.]/g, '-')
   return `snug-safety-snapshot-${stamp}.json`
 }
