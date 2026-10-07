@@ -9,6 +9,11 @@ rename announcement.
 Nothing here has been posted. Posting is manual, by the maker, from their own
 account.
 
+The "imports one file at a time" limit is lifted: Snug imports several files at
+once as an Import batch. Copy below was updated to match. If any post was
+published before that change, it stays as historical text and is not edited; all
+future copy must not state the limit.
+
 ## Rules for this copy
 
 - Proof points come only from
@@ -39,7 +44,7 @@ account.
 | Scheduled Auto-export to Downloads with Retention and a failure notification                 | product-marketing.md     |
 | Works in Chrome and other Chromium browsers; 10 languages                                    | product-marketing.md     |
 | 5,000 users and 4.8 stars over 20 ratings on the public listing (read 2026-10-05)            | product-marketing.md     |
-| Imports one file at a time; no sync, no cloud                                                | product-marketing.md     |
+| Imports several files at once as one Import batch; no sync, no cloud                         | product-marketing.md     |
 
 Re-check the user and rating numbers on the live listing on launch day. They
 move.
@@ -115,7 +120,7 @@ It also finds duplicates, and Auto-export writes scheduled backups to your Downl
 
 Everything runs on your device. Snug makes no network calls, needs no account, and the source is public under the MIT license. It works in Chrome and other Chromium browsers, in 10 languages.
 
-What it does not do: it imports one file at a time, and it is not a sync service or a bookmark manager.
+What it does not do: it is not a sync service or a bookmark manager.
 
 Install: https://snug.andryore.dev/install?c=producthunt
 More details: https://snug.andryore.dev/?c=producthunt
@@ -160,7 +165,7 @@ What it does: export the whole bookmark tree or selected folders as HTML, JSON, 
 
 Everything reads and writes the browser's own bookmarks tree on the device. The extension makes no network calls and has no account, so the privacy claim can be checked in the source instead of taken from a policy. MIT licensed: https://github.com/AndryOre/snug
 
-Limits: it imports one file at a time, Markdown and OPML are export-only, and there is no sync. Auto-export writes to Downloads, because the downloads API can only write inside that folder.
+Limits: Markdown and OPML are export-only, and there is no sync. Auto-export writes to Downloads, because the downloads API can only write inside that folder.
 
 Install: https://snug.andryore.dev/install?c=hn
 
@@ -214,7 +219,7 @@ What it does:
 
 It runs on your device, makes no network calls and needs no account. It is open source (MIT): https://github.com/AndryOre/snug
 
-Limits: it imports one file at a time, Markdown and OPML are export-only, and it does not sync anything.
+Limits: Markdown and OPML are export-only, and it does not sync anything.
 
 Chrome Web Store: https://snug.andryore.dev/install?c=reddit-chrome_extensions
 Details: https://snug.andryore.dev/?c=reddit-chrome_extensions
@@ -252,7 +257,7 @@ It exports bookmarks (whole tree or chosen folders) as HTML, JSON, CSV, Markdown
 
 Everything reads and writes the browser's own bookmarks tree. The extension has no account, no server and no network calls, which is why I kept it open: that claim can be checked in the code. The repository runs CodeQL and OpenSSF Scorecard.
 
-It works in Chrome and other Chromium browsers. It imports one file at a time and does not sync.
+It works in Chrome and other Chromium browsers. It imports several files at once and does not sync.
 
 Chrome Web Store: https://snug.andryore.dev/install?c=reddit-opensource
 Project page: https://snug.andryore.dev/?c=reddit-opensource
@@ -283,7 +288,7 @@ I built Snug, a free Chrome extension for moving and backing up bookmarks.
 
 It exports the whole tree or chosen folders in six formats, previews every import, and lets you undo a replace from a Safety snapshot. Auto-export saves scheduled backups to your Downloads folder. Everything stays on your device: no account, no network calls, open source under MIT.
 
-It imports one file at a time and does not sync. That was a choice about scope, and I am still deciding what to add next.
+It does not sync. That was a choice about scope, and I am still deciding what to add next.
 
 Chrome Web Store: https://snug.andryore.dev/install?c=reddit-sideproject
 Project page: https://snug.andryore.dev/?c=reddit-sideproject

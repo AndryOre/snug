@@ -30,8 +30,13 @@ bookmarks tree, locally — no account, no cloud, no server to trust. See the
 - Import HTML, JSON, CSV, and XBEL files, a Chrome profile `Bookmarks` file, or
   a Safari export (Favorites and Reading List). The format is detected for you.
 - Export your whole tree or only the folders you pick.
-- Import with a preview first, then merge, replace, or add everything to a new
-  folder. A replace shows how many bookmarks it removes and adds.
+- Import with an itemized preview first, then merge, replace, or add everything
+  to a new folder. A replace shows how many bookmarks it removes and adds.
+- Choose which bookmarks to import: check single bookmarks or whole folders in
+  the preview (not for a replace).
+- Import several files at once as one batch, from the popup or the Import page.
+  Each file gets its own folder, and Cancel puts your bookmarks back as they
+  were.
 - Undo a replace: Snug saves a Safety snapshot first, keeps the latest five on
   your device, and lets you restore or download any of them from Settings. You
   can also take one at any time.

@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v1 **Last updated:** 2026-10-05
+**Document version:** v2 **Last updated:** 2026-10-08
 
 Snug is free, consumer-facing, and has no pricing, signup, trial, demo or sales
 motion. Marketing skills must not suggest any of those. The only conversion is
@@ -113,7 +113,8 @@ profile folder by hand.
 
 - Zero network calls, no account, verifiable in the open source code.
 - Six export formats and four import sources, with format auto-detection.
-- Import preview plus merge / replace / new folder, and undo for replace.
+- Itemized import preview with Import selection, merge / replace / new folder,
+  several files at once as an Import batch, and undo for replace.
 - Scheduled Auto-export with retention and failure notification.
 - Duplicates page and Skip duplicates on import.
 - 10 languages; follows the browser theme and language.
@@ -131,13 +132,13 @@ the Snug rename.
 
 ## Objections
 
-| Objection                                      | Response                                                                                                                   |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| "Why does it need access to all my bookmarks?" | It is the only way to read and write them. It makes no network calls; the source is public.                                |
-| "Is a solo-dev extension safe?"                | Public source, CodeQL, OpenSSF Scorecard and Best Practices (links below), pinned CI.                                      |
-| "My browser already exports HTML."             | Built-in export has no folder selection, preview, undo, schedule, dedupe or extra formats.                                 |
-| "Will it overwrite my current bookmarks?"      | Never silently: preview first, and replace saves a Safety snapshot you can restore.                                        |
-| "Can I import several files at once?"          | Not today: Snug imports one file at a time. One review (1 star, 2026-03) asked for it. Do not imply otherwise on the page. |
+| Objection                                      | Response                                                                                                                                         |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| "Why does it need access to all my bookmarks?" | It is the only way to read and write them. It makes no network calls; the source is public.                                                      |
+| "Is a solo-dev extension safe?"                | Public source, CodeQL, OpenSSF Scorecard and Best Practices (links below), pinned CI.                                                            |
+| "My browser already exports HTML."             | Built-in export has no folder selection, preview, undo, schedule, dedupe or extra formats.                                                       |
+| "Will it overwrite my current bookmarks?"      | Never silently: preview first, and replace saves a Safety snapshot you can restore.                                                              |
+| "Can I import several files at once?"          | Yes: pick several files and Snug imports them as one batch, each in its own folder, and Cancel puts your bookmarks back. Replace needs one file. |
 
 **Trust links:**
 
@@ -192,12 +193,14 @@ emoji in copy.
 
 **Glossary:**
 
-| Term            | Meaning                                                     |
-| --------------- | ----------------------------------------------------------- |
-| Auto-export     | Scheduled export to the Downloads folder                    |
-| Safety snapshot | Automatic copy saved before a replace so it can be restored |
-| Retention       | Keep only the newest N exported files                       |
-| Skip duplicates | Import option that leaves out URLs already present          |
+| Term             | Meaning                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Auto-export      | Scheduled export to the Downloads folder                                                                            |
+| Safety snapshot  | Automatic copy saved before a replace so it can be restored; the latest five are kept, and you can take one anytime |
+| Import selection | The bookmarks and folders you check in the preview to import only those                                             |
+| Import batch     | Several files imported together as one operation; Cancel restores the previous bookmarks                            |
+| Retention        | Keep only the newest N exported files                                                                               |
+| Skip duplicates  | Import option that leaves out URLs already present                                                                  |
 
 ## Brand Voice
 
@@ -264,6 +267,9 @@ page views, 5.07K impressions, about 24% uninstalls vs installs. Source:
 
 _Newest first. One line per revision: what changed and why._
 
+- v2 (2026-10-08) — Import limit lifted: several files per Import batch, Import
+  selection and five Safety snapshots now shipped. Updated differentiators and
+  the "several files" FAQ row.
 - v1 (2026-10-05) — Initial context, auto-drafted from README, `docs/brand/*`
   and `docs/store/*` ahead of the landing page at snug.andryore.dev. Free,
   no-signup framing set explicitly. Filled with live Chrome Web Store reviews,

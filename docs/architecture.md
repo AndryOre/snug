@@ -63,9 +63,9 @@ relative to `apps/extension/` unless it starts with `packages/`.
   comparing the alarm's fire time to the stored next-run time). Has no DOM and
   renders nothing.
 - **`popup/`** — the toolbar popup: one compact screen with an export section
-  (format + "Export all"), an import section (Quick import with the default
-  mode), an auto-export status row and a footer that opens the App. It shares no
-  React tree with the App.
+  (format + "Export all"), an import section (Quick import of one or more files
+  with the default mode), an auto-export status row and a footer that opens the
+  App. It shares no React tree with the App.
 - **`app/`** — the single full-page App (`app.html`, also the manifest's
   `options_ui` page, opened in a tab). A hash-routed shell built on TanStack
   Router (`router.tsx`, hash history, see
@@ -97,11 +97,14 @@ relative to `apps/extension/` unless it starts with `packages/`.
   and `import-safari.ts`) — each turns one file format into `chrome.bookmarks`
   API calls. The XBEL, Chrome profile and Safari parsers produce the same
   `ParsedBookmark` tree as HTML and JSON, and `parse-import.ts`
-  (`parseLocationAwareImport`) picks the parser for a detected format. Chrome
-  `Bookmarks` timestamps (WebKit epoch microseconds) are converted to Unix
-  milliseconds on the way in. The location-aware formats understand the three
-  `ImportMode`s (folder / restore-merge / restore-replace). Both also share
-  `lib/importers/resolve-roots.ts`'s `resolveImportRoots` to locate the
+  (`parseLocationAwareImport`) picks the parser for a detected format. On top of
+  it, `parseImportFile` is the one parse-to-tree entry for all seven formats: it
+  returns `{ format, tree, hasLocationData, skippedInvalidUrl }`, and the
+  import, the preview, the duplicate summary and the popup plan all go through
+  it. Chrome `Bookmarks` timestamps (WebKit epoch microseconds) are converted to
+  Unix milliseconds on the way in. The location-aware formats understand the
+  three `ImportMode`s (folder / restore-merge / restore-replace). Both also
+  share `lib/importers/resolve-roots.ts`'s `resolveImportRoots` to locate the
   bookmarks-bar/Other/Mobile roots to write into — see Invariants. CSV is flat
   rows with an optional `folder` path column and only ever imports into a single
   deduplicated folder — it has no mode selector because it has no bar/other
@@ -121,22 +124,37 @@ relative to `apps/extension/` unless it starts with `packages/`.
   well-formed XML with an `xbel` root, CSV has `title`/`url`-ish headers). It
   also refines JSON into a Chrome profile file and HTML into a Safari export.
   Returns `'unknown'` on no match.
-- **`run-import.ts`** — the import entry point shared by Quick import and the
-  Import page: detects the format, applies Skip duplicates, takes the Safety
-  snapshot before a Restore-replace, and runs the importer with the progress
-  callback and abort signal (`import-control.ts`).
+- **`run-import.ts`** — the single-file import entry: parses with
+  `parseImportFile`, applies Skip duplicates, takes the Safety snapshot before a
+  Restore-replace, and writes with `importTree`, the one "import a tree" entry
+  (CSV into its reused folder, every other format through the shared tree
+  writer), with the progress callback and abort signal (`import-control.ts`).
+- **`run-import-batch.ts`** — the Import batch entry (`runImportBatch`), used by
+  the popup and the Import page for one or more files. It takes the import lock
+  once, shares one `ImportWriter` and rollback scope across all files, and
+  carries one existing-URL set from file to file. Folder mode with two or more
+  files writes one folder per file, named after it; Restore-replace with two or
+  more files throws `ImportBatchReplaceError`. See Invariants.
+- **`import-plan.ts`** — the pure Import plan: `buildImportPlan` turns the
+  parsed files into a display tree (bookmarks tagged new or duplicate, one
+  top-level node per file), the list of bookmarks a Restore-replace will remove,
+  and the counts; `pruneFilesToChecked` prunes the parsed files to the checked
+  ids for an Import selection. It never touches `chrome.bookmarks`.
 - **`duplicates.ts`** — URL normalization and `findDuplicateGroups` for the
   Duplicates page, oldest copy first. `skip-duplicates.ts` reuses the same
   normalization to drop bookmarks that already exist (never in Restore-replace),
   and `import-duplicates.ts` summarizes the effect for the Import page.
 - **`safety-snapshot.ts`** — captures the two roots, saves them as a JSON file
-  through the offscreen download and keeps the latest five in
-  `local:safetySnapshot`. See Invariants.
-- **`replace-diff.ts`** — the removed/added counts the Import page shows before
-  a Restore-replace.
-- **`import-preview.ts`** — runs a file through the same parsing the real
-  importer would use, without touching `chrome.bookmarks`, to produce counts and
-  an `hasLocationData` flag for the Import page's preview.
+  through the offscreen download and keeps a list of snapshots, newest first and
+  capped at five, in `local:safetySnapshot` (a WXT version 2 migration turned
+  the old single item into a list). It restores or downloads a snapshot by
+  `takenAt` and offers `takeSafetySnapshot` for the manual "take now". See
+  Invariants and [ADR 0016](adr/0016-keep-five-safety-snapshots.md).
+- **`replace-diff.ts`** — which existing roots a Restore-replace clears, used by
+  the import plan for its removed list and counts.
+- **`import-preview.ts`** — runs a file through `parseImportFile`, the same
+  parsing the real importer uses, without touching `chrome.bookmarks`, to
+  produce counts and a `hasLocationData` flag for the Import page's file rows.
 - **`filename-template.ts`** — expands `%yyyy`/`%mm`/`%dd`/`%hh`/`%min`/ `%sec`
   placeholders against a `Date` and sanitizes the result for filesystem-unsafe
   characters. Shared by every export path (popup, Export page, auto-export) so
@@ -170,17 +188,22 @@ relative to `apps/extension/` unless it starts with `packages/`.
 
 ### Components (`components/`)
 
-- **`components/export/`** — the Export page's pieces: `bookmark-tree.tsx` (the
-  WAI-ARIA tree, exposing a `BookmarkTreeHandle` for select-all/deselect-all/
-  refresh/get-selected), `export-toolbar.tsx`, `export-bar.tsx` and
-  `export-tree-states.tsx` (loading/no-bookmarks/load-error/no-results).
+- **`components/export/`** — the Export page's pieces: `bookmark-tree-view.tsx`
+  (the reusable, data-source-agnostic WAI-ARIA tree core, exposing a
+  `BookmarkTreeViewHandle`, also used by the Import preview),
+  `bookmark-tree.tsx` (the Export live-tree wrapper: loads the browser's
+  bookmarks into the core and exposes a `BookmarkTreeHandle` for
+  select-all/deselect-all/refresh/ get-selected), `export-toolbar.tsx`,
+  `export-bar.tsx` and `export-tree-states.tsx`
+  (loading/no-bookmarks/load-error/no-results).
 - **`components/import/`** — the Import page's steps: `import-file-step.tsx`,
   `import-mode-step.tsx`, `import-preview-step.tsx` (the per-root summary),
-  `import-preview-tree.tsx` (the read-only itemized tree with
-  `Duplicate · skipped` badges), `import-replace-deletions.tsx` (the
-  collapsible, virtualized `Will be deleted (N)` list) and the `import-step.tsx`
-  wrapper. The route builds one `ImportPlan` per chosen file and feeds it to all
-  of them.
+  `import-preview-tree.tsx` (the itemized tree built on the tree core, with
+  `Duplicate · skipped` badges and checkboxes for the Import selection),
+  `import-replace-deletions.tsx` (the collapsible, virtualized
+  `Will be deleted (N)` list) and the `import-step.tsx` wrapper. The route
+  builds one `ImportPlan` over all chosen files (one top-level node per file)
+  and feeds it to all of them.
 - **`components/duplicates/`** — the Duplicates page's group card.
 - **`components/popup/`** — the popup's `export-section.tsx`,
   `import-section.tsx`, `auto-export-status-item.tsx` and `footer.tsx`.
@@ -237,20 +260,26 @@ navigate through the hash router, and the shell scrolls its content area back to
 the top on each navigation. The manifest's options page opens `app.html` with no
 hash, so the router's index route redirects it to `#/export`.
 
-**Import** (Import page): a dropped file is read as text, then
-`getImportPreview` (detect format → attempt the real parse without writing
-anything) produces counts and a location-data flag for the preview panel. The
-user picks an `ImportMode`; `restore-replace` is gated behind a confirmation
-dialog because it deletes existing bookmarks first. For a `restore-replace`,
-`getReplaceDiff` also shows how many bookmarks will be removed and added. On
-confirm, `runImport` detects the format again, drops bookmarks that already
-exist when Skip duplicates is on (not for `restore-replace`), takes the Safety
-snapshot first for `restore-replace`, and the matching importer writes directly
-to `chrome.bookmarks`. An `ImportWriter` journals every node it creates and
-reports progress per batch; aborting the signal removes those nodes again (and,
-if a Restore-replace had already cleared the roots, restores the Safety
-snapshot) and throws `ImportCanceledError`. After a replace, the Import result
-offers Undo import, which restores the snapshot.
+**Import** (Import page): dropped or picked files are read as text, then
+`parseImportFile` (detect format → parse without writing anything) gives each
+file its tree, and `getImportPreview` its count and location-data flag for the
+file rows; a file that cannot be read is left out. `buildImportPlan` combines
+the files into one display tree with new/duplicate tags. The user picks an
+`ImportMode`; `restore-replace` is disabled for two or more files and gated
+behind a confirmation dialog because it deletes existing bookmarks first, and
+the plan's removed list shows what will go. Otherwise the user can check an
+Import selection, and `pruneFilesToChecked` prunes each file's tree to it. On
+confirm, `runImportBatch` takes the import lock once, drops bookmarks that
+already exist (or appeared in an earlier file) when Skip duplicates is on (not
+for `restore-replace`), takes the Safety snapshot first for `restore-replace`,
+and writes each file with `importTree` directly to `chrome.bookmarks`. One
+`ImportWriter` journals every node created across the whole batch and reports
+progress per batch; aborting the signal, or a failure in any file, removes those
+nodes again (and, if a Restore-replace had already cleared the roots, restores
+the Safety snapshot) and throws `ImportCanceledError`. After a replace, the
+Import result offers Undo import, which restores the snapshot. The popup's Quick
+import runs the same `runImportBatch`; a Restore-replace or a large import opens
+the Import page instead.
 
 **Export** (popup and Export page): the Export page's bookmark tree produces a
 selection (or the popup exports the whole tree by passing
@@ -340,8 +369,16 @@ be hourly, 12 hours, daily, 3 days or weekly (`7d`, on `dayOfWeek`).
   only then stored, so a failed download leaves the stored ones intact; if it
   fails, nothing is deleted. There is no undo for anything else: deleting
   duplicates and retention deletes are final.
-- Only the latest five Safety snapshots are kept, in `local:safetySnapshot`
-  (hence the `unlimitedStorage` permission). Retention only ever touches
+- Only the latest five Safety snapshots are kept, newest first, in
+  `local:safetySnapshot` (hence the `unlimitedStorage` permission). The newest
+  snapshot that holds any bookmarks is never evicted, so empty captures cannot
+  push out the last useful one. Restoring or downloading targets a snapshot by
+  `takenAt`, and restoring takes a fresh snapshot of the current bookmarks
+  first. Snapshots stay local and need no extra permission.
+- An Import batch is all-or-nothing: it holds the import lock for the whole
+  batch and uses one writer and one rollback scope, so a cancel or a failure in
+  any file leaves the bookmarks as they were before the batch started. A batch
+  of two or more files never runs Restore-replace. Retention only ever touches
   downloads whose recorded id still belongs to this extension.
 - All persisted settings go through `storage.defineItem` with a
   `local:`-prefixed key (`lib/storage.ts`) — there is no `sync:`-scoped storage
