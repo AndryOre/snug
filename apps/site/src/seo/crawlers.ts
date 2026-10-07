@@ -82,7 +82,8 @@ ${localeLines}
 ## Pages
 
 - [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page as Markdown
-- [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store listing
+- [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store or Microsoft Edge Add-ons listing
+- [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho): the Edge listing
 - [Privacy policy](${SITE_ORIGIN}/privacy/): what Snug stores and what it never sends
 - [Source code](${STORE_FACTS.sourceUrl}): MIT-licensed repository
 - [Sitemap](${SITE_ORIGIN}/sitemap.xml): all ten language versions

@@ -6,11 +6,16 @@ import { wasImportRestored } from './import-control'
 import { ImportLockHeldError, withImportLock } from './import-lock'
 import { downloadViaOffscreenDocument } from './offscreen-download'
 import {
+  addSnapshotToList,
   captureSafetySnapshot,
+  MAX_SAFETY_SNAPSHOTS,
   readLatestSafetySnapshot,
+  readSafetySnapshots,
   restoreSafetySnapshot,
+  safetySnapshotStore,
   takeSafetySnapshot,
 } from './safety-snapshot'
+import type { SafetySnapshot } from './safety-snapshot'
 import {
   getFakeBookmarksRoot,
   resetFakeBookmarks,
@@ -88,14 +93,15 @@ describe('takeSafetySnapshot', () => {
     expect(await readLatestSafetySnapshot()).toEqual(snapshot)
   })
 
-  it('keeps only the latest snapshot', async () => {
+  it('prepends each capture so the newest comes first', async () => {
     seedSample()
-    await takeSafetySnapshot()
+    const first = await takeSafetySnapshot()
     seedFakeBookmarksTree([bookmark('Only', 'https://only.example/')])
 
     const second = await takeSafetySnapshot()
 
     expect(await readLatestSafetySnapshot()).toEqual(second)
+    expect(await readSafetySnapshots()).toEqual([second, first])
     expect(second.roots[0]?.children).toHaveLength(1)
   })
 
@@ -110,7 +116,86 @@ describe('takeSafetySnapshot', () => {
   })
 })
 
+function snapshotWith(takenAt: number, bookmarkCount: number): SafetySnapshot {
+  return {
+    takenAt,
+    roots: [
+      {
+        id: '1',
+        title: 'Bookmarks bar',
+        dateAdded: 0,
+        children: Array.from({ length: bookmarkCount }, (_, index) => ({
+          title: `b${index}`,
+          url: `https://b${index}.example/`,
+          dateAdded: 0,
+        })),
+      },
+    ],
+  }
+}
+
+describe('addSnapshotToList', () => {
+  it('prepends and keeps at most five, dropping the oldest', () => {
+    let list: SafetySnapshot[] = []
+    for (let takenAt = 1; takenAt <= 6; takenAt++) {
+      list = addSnapshotToList(list, snapshotWith(takenAt, 1))
+    }
+
+    expect(MAX_SAFETY_SNAPSHOTS).toBe(5)
+    expect(list.map((entry) => entry.takenAt)).toEqual([6, 5, 4, 3, 2])
+  })
+
+  it('never evicts the newest non-empty snapshot for an empty capture', () => {
+    let list = [snapshotWith(1, 3)]
+    for (let takenAt = 2; takenAt <= 7; takenAt++) {
+      list = addSnapshotToList(list, snapshotWith(takenAt, 0))
+    }
+
+    expect(list).toHaveLength(MAX_SAFETY_SNAPSHOTS)
+    expect(list.map((entry) => entry.takenAt)).toEqual([7, 6, 5, 4, 1])
+  })
+
+  it('drops older non-empty snapshots once a newer non-empty one exists', () => {
+    let list = [snapshotWith(2, 2), snapshotWith(1, 3)]
+    list = addSnapshotToList(list, snapshotWith(3, 0))
+    list = addSnapshotToList(list, snapshotWith(4, 0))
+    list = addSnapshotToList(list, snapshotWith(5, 0))
+    list = addSnapshotToList(list, snapshotWith(6, 0))
+
+    expect(list.map((entry) => entry.takenAt)).toEqual([6, 5, 4, 3, 2])
+  })
+})
+
+describe('safetySnapshotStore migration', () => {
+  it('migrates a single stored snapshot to a one-item list', async () => {
+    const legacy = snapshotWith(10, 2)
+    await fakeBrowser.storage.local.set({ safetySnapshot: legacy })
+
+    await safetySnapshotStore.migrate()
+
+    expect(await safetySnapshotStore.getValue()).toEqual([legacy])
+  })
+
+  it('migrates a missing snapshot to an empty list', async () => {
+    expect(await safetySnapshotStore.getValue()).toEqual([])
+  })
+})
+
 describe('restoreSafetySnapshot', () => {
+  it('adds the pre-restore snapshot to the list and keeps the others', async () => {
+    seedSample()
+    const older = await takeSafetySnapshot()
+    seedFakeBookmarksTree([bookmark('Now', 'https://now.example/')])
+    const newer = await takeSafetySnapshot()
+
+    await restoreSafetySnapshot(older)
+
+    const stored = await readSafetySnapshots()
+    expect(stored).toHaveLength(3)
+    expect(stored.slice(1)).toEqual([newer, older])
+    expect(stored[0]?.roots[0]?.children?.[0]?.title).toBe('Now')
+  })
+
   it('round-trips nested folders and order after the roots were wiped', async () => {
     seedSample()
     const barBefore = rootOutline('1')

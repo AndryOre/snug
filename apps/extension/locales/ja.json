@@ -7,6 +7,10 @@
     "message": "ブックマークを一般的な形式で書き出し、ChromeやSafariから読み込み、自動バックアップ。すべて端末内。",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "ブックマークを一般的な形式でエクスポート・インポートし、スケジュールでバックアップ。すべてローカルに保存されます。",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "ブックマークの書き出し、読み込み、バックアップを、すべて端末内で。",
     "description": "Welcome page subtitle"
@@ -111,8 +115,20 @@
     "n": "$1件のブックマーク"
   },
   "replaceConfirmDescription": {
-    "message": "インポート前に、現在のブックマークバーとその他のブックマークが空になります。安全スナップショットが先に保存されるため、インポートを元に戻せます。",
-    "description": "Body of the replace confirmation dialog"
+    "n": "インポートした $1 件のブックマークを追加する前に、ブックマークバーとその他のブックマークが空になります。"
+  },
+  "replaceSnapshotNote": {
+    "message": "置き換える前に、Snug は安全スナップショットをダウンロードフォルダ（$FILE$）に保存し、設定にも保管します。設定から復元できます。",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "安全スナップショット",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "キャンセル",
@@ -894,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: ブックマークの書き出し・読み込み・バックアップ",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "ダウンロード $ID$ が中断されました。",
@@ -959,15 +975,11 @@
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "置き換えの前に自動で作成されます。最新の1件のみ保持されます。",
+    "message": "Snugは最新の5件を保持します。それぞれダウンロードフォルダにも保存されます。",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "同じコピーがダウンロードフォルダにファイルとして保存されます。",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "スナップショットを復元",
+    "message": "復元",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
@@ -975,7 +987,7 @@
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "ブックマークを初めて置き換えるときに自動で作成されます。",
+    "message": "次の「復元 — 置き換え」の前にSnugが自動で保存します。今すぐ作成することもできます。",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1231,15 +1243,43 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Chrome ウェブストアでの率直なレビューは、ほかの人が Snug を見つける助けになります。",
+    "message": "ストアでの率直なレビューは、他の人が見つける助けになります。",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "レビューを書く",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "今はしない",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "今すぐスナップショットを作成",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "スナップショットを作成中…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "スナップショットを作成できませんでした",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "スナップショットをダウンロードできませんでした",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chromeがダウンロードをブロックしました。ダウンロード設定を確認して、もう一度お試しください。",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "最新",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "ダウンロード",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

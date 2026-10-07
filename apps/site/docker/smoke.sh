@@ -8,6 +8,9 @@ image="snug-site-smoke"
 name="snug-site-smoke-$$"
 store="https://chromewebstore.google.com/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn"
 
+edge_store="https://microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho"
+edge_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"
+
 docker build -f "$root/apps/site/Dockerfile" \
   --build-arg LAST_MODIFIED_DATES="$(bash "$root/apps/site/docker/last-modified.sh")" \
   -t "$image" "$root"
@@ -24,6 +27,7 @@ done
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
 location() { curl -s -o /dev/null -D - "$1" | tr -d '\r' | awk 'tolower($1)=="location:"{print $2}'; }
+edge_location() { curl -s -o /dev/null -D - -A "$edge_agent" "$1" | tr -d '\r' | awk 'tolower($1)=="location:"{print $2}'; }
 status() { curl -s -o /dev/null -w '%{http_code}' "$1"; }
 
 [ "$(status "$base/install")" = 302 ] || fail "/install is not 302"
@@ -34,6 +38,8 @@ case "$(location "$base/install?c=a%26b")" in *campaign=direct) ;; *) fail "unsa
 [ "$(location "$base/install/")" = "$(location "$base/install")" ] || fail "/install/ differs from /install"
 [ "$(status "$base/reviews")" = 302 ] || fail "/reviews is not 302"
 [ "$(location "$base/reviews?c=proof")" = "$store/reviews?utm_source=landing&utm_medium=web&utm_campaign=proof" ] || fail "/reviews campaign"
+[ "$(edge_location "$base/install?c=hero")" = "$edge_store?utm_source=landing&utm_medium=web&utm_campaign=hero" ] || fail "Edge /install"
+[ "$(edge_location "$base/reviews?c=proof")" = "$edge_store?utm_source=landing&utm_medium=web&utm_campaign=proof" ] || fail "Edge /reviews"
 for alias in pt-BR pt_BR; do
   [ "$(status "$base/$alias/")" = 301 ] || fail "/$alias/ is not 301"
   [ "$(location "$base/$alias/")" = "/pt-br/" ] || fail "/$alias/ does not redirect to /pt-br/"

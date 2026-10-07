@@ -1,0 +1,1092 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`import pipeline equivalence > chrome > creates the same tree in folder mode > chrome folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "Chrome Bar A",
+                  "url": "https://chrome-bar-a.example/page",
+                },
+                {
+                  "children": [
+                    {
+                      "title": "Chrome Nested A",
+                      "url": "https://chrome-nested-a.example/page",
+                    },
+                  ],
+                  "title": "Chrome Folder",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+            {
+              "title": "Chrome Other A",
+              "url": "https://chrome-other-a.example/page",
+            },
+            {
+              "children": [
+                {
+                  "title": "Chrome Mobile A",
+                  "url": "https://chrome-mobile-a.example/page",
+                },
+              ],
+              "title": "Mobile bookmarks",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > chrome > creates the same tree in restore-merge mode > chrome restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "Chrome Bar A",
+          "url": "https://chrome-bar-a.example/page",
+        },
+        {
+          "children": [
+            {
+              "title": "Chrome Nested A",
+              "url": "https://chrome-nested-a.example/page",
+            },
+          ],
+          "title": "Chrome Folder",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "Chrome Other A",
+          "url": "https://chrome-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [
+        {
+          "title": "Chrome Mobile A",
+          "url": "https://chrome-mobile-a.example/page",
+        },
+      ],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > chrome > creates the same tree in restore-replace mode > chrome restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Chrome Bar A",
+          "url": "https://chrome-bar-a.example/page",
+        },
+        {
+          "children": [
+            {
+              "title": "Chrome Nested A",
+              "url": "https://chrome-nested-a.example/page",
+            },
+          ],
+          "title": "Chrome Folder",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "Chrome Other A",
+          "url": "https://chrome-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [
+        {
+          "title": "Chrome Mobile A",
+          "url": "https://chrome-mobile-a.example/page",
+        },
+      ],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv > creates the same tree in folder mode > csv folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "CSV Root A",
+              "url": "https://csv-root-a.example/page",
+            },
+            {
+              "children": [
+                {
+                  "title": "CSV Docs A",
+                  "url": "https://csv-docs-a.example/page",
+                },
+                {
+                  "title": "CSV Docs B",
+                  "url": "https://csv-docs-b.example/page",
+                },
+              ],
+              "title": "Docs",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv > creates the same tree in restore-merge mode > csv restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "CSV Root A",
+              "url": "https://csv-root-a.example/page",
+            },
+            {
+              "children": [
+                {
+                  "title": "CSV Docs A",
+                  "url": "https://csv-docs-a.example/page",
+                },
+                {
+                  "title": "CSV Docs B",
+                  "url": "https://csv-docs-b.example/page",
+                },
+              ],
+              "title": "Docs",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv > creates the same tree in restore-replace mode > csv restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "CSV Root A",
+              "url": "https://csv-root-a.example/page",
+            },
+            {
+              "children": [
+                {
+                  "title": "CSV Docs A",
+                  "url": "https://csv-docs-a.example/page",
+                },
+                {
+                  "title": "CSV Docs B",
+                  "url": "https://csv-docs-b.example/page",
+                },
+              ],
+              "title": "Docs",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv skipped > creates the same tree in folder mode > csv skipped folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "Good",
+              "url": "https://good.example",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv skipped > creates the same tree in restore-merge mode > csv skipped restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "Good",
+              "url": "https://good.example",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > csv skipped > creates the same tree in restore-replace mode > csv skipped restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "Good",
+              "url": "https://good.example",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > html > creates the same tree in folder mode > html folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "HTML Bar A",
+                  "url": "https://html-bar-a.example/page",
+                },
+                {
+                  "title": "HTML Bar B",
+                  "url": "https://html-bar-b.example/page",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+            {
+              "title": "HTML Other A",
+              "url": "https://html-other-a.example/page",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > html > creates the same tree in restore-merge mode > html restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "HTML Bar A",
+          "url": "https://html-bar-a.example/page",
+        },
+        {
+          "title": "HTML Bar B",
+          "url": "https://html-bar-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "HTML Other A",
+          "url": "https://html-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > html > creates the same tree in restore-replace mode > html restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "HTML Bar A",
+          "url": "https://html-bar-a.example/page",
+        },
+        {
+          "title": "HTML Bar B",
+          "url": "https://html-bar-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "HTML Other A",
+          "url": "https://html-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json > creates the same tree in folder mode > json folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "JSON Bar A",
+                  "url": "https://json-bar-a.example/page",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+            {
+              "title": "JSON Other A",
+              "url": "https://json-other-a.example/page",
+            },
+            {
+              "title": "JSON Other B",
+              "url": "https://json-other-b.example/page",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json > creates the same tree in restore-merge mode > json restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "JSON Bar A",
+          "url": "https://json-bar-a.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "JSON Other A",
+          "url": "https://json-other-a.example/page",
+        },
+        {
+          "title": "JSON Other B",
+          "url": "https://json-other-b.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json > creates the same tree in restore-replace mode > json restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "JSON Bar A",
+          "url": "https://json-bar-a.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "JSON Other A",
+          "url": "https://json-other-a.example/page",
+        },
+        {
+          "title": "JSON Other B",
+          "url": "https://json-other-b.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json single root > creates the same tree in folder mode > json single root folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "Single Root A",
+                  "url": "https://single-root-a.example/page",
+                },
+                {
+                  "title": "Single Root B",
+                  "url": "https://single-root-b.example/page",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json single root > creates the same tree in restore-merge mode > json single root restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "Single Root A",
+          "url": "https://single-root-a.example/page",
+        },
+        {
+          "title": "Single Root B",
+          "url": "https://single-root-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > json single root > creates the same tree in restore-replace mode > json single root restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 0,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Single Root A",
+          "url": "https://single-root-a.example/page",
+        },
+        {
+          "title": "Single Root B",
+          "url": "https://single-root-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > safari > creates the same tree in folder mode > safari folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "Safari Fav A",
+                  "url": "https://safari-fav-a.example/page",
+                },
+                {
+                  "title": "Safari Fav B",
+                  "url": "https://safari-fav-b.example/page",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+            {
+              "children": [
+                {
+                  "title": "Safari Reading A",
+                  "url": "https://safari-reading-a.example/page",
+                },
+              ],
+              "title": "Reading List",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > safari > creates the same tree in restore-merge mode > safari restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "Safari Fav A",
+          "url": "https://safari-fav-a.example/page",
+        },
+        {
+          "title": "Safari Fav B",
+          "url": "https://safari-fav-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "Safari Reading A",
+              "url": "https://safari-reading-a.example/page",
+            },
+          ],
+          "title": "Reading List",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > safari > creates the same tree in restore-replace mode > safari restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Safari Fav A",
+          "url": "https://safari-fav-a.example/page",
+        },
+        {
+          "title": "Safari Fav B",
+          "url": "https://safari-fav-b.example/page",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "title": "Safari Reading A",
+              "url": "https://safari-reading-a.example/page",
+            },
+          ],
+          "title": "Reading List",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > xbel > creates the same tree in folder mode > xbel folder 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "title": "XBEL Bar A",
+                  "url": "https://xbel-bar-a.example/page",
+                },
+                {
+                  "children": [
+                    {
+                      "title": "XBEL Nested A",
+                      "url": "https://xbel-nested-a.example/page",
+                    },
+                  ],
+                  "title": "XBEL Folder",
+                },
+              ],
+              "title": "Bookmarks bar",
+            },
+            {
+              "title": "XBEL Other A",
+              "url": "https://xbel-other-a.example/page",
+            },
+          ],
+          "title": "Imported bookmarks",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > xbel > creates the same tree in restore-merge mode > xbel restore-merge 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "Kept",
+          "url": "https://kept.example/",
+        },
+        {
+          "title": "XBEL Bar A",
+          "url": "https://xbel-bar-a.example/page",
+        },
+        {
+          "children": [
+            {
+              "title": "XBEL Nested A",
+              "url": "https://xbel-nested-a.example/page",
+            },
+          ],
+          "title": "XBEL Folder",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "XBEL Other A",
+          "url": "https://xbel-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;
+
+exports[`import pipeline equivalence > xbel > creates the same tree in restore-replace mode > xbel restore-replace 1`] = `
+{
+  "result": {
+    "skippedDuplicates": 0,
+    "skippedInvalidUrl": 1,
+  },
+  "tree": [
+    {
+      "children": [
+        {
+          "title": "XBEL Bar A",
+          "url": "https://xbel-bar-a.example/page",
+        },
+        {
+          "children": [
+            {
+              "title": "XBEL Nested A",
+              "url": "https://xbel-nested-a.example/page",
+            },
+          ],
+          "title": "XBEL Folder",
+        },
+      ],
+      "title": "Bookmarks bar",
+    },
+    {
+      "children": [
+        {
+          "title": "XBEL Other A",
+          "url": "https://xbel-other-a.example/page",
+        },
+      ],
+      "title": "Other bookmarks",
+    },
+    {
+      "children": [],
+      "title": "Mobile bookmarks",
+    },
+  ],
+}
+`;

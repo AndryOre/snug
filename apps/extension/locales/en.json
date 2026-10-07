@@ -7,6 +7,10 @@
     "message": "Export, import and back up your bookmarks in common formats, from Chrome or Safari, on a schedule. Everything stays local.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Export, import and back up your bookmarks in common formats, on a schedule. Everything stays local.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Export, import, and back up your bookmarks — entirely on your device.",
     "description": "Welcome page subtitle"
@@ -112,8 +116,21 @@
     "n": "$1 bookmarks"
   },
   "replaceConfirmDescription": {
-    "message": "Your current Bookmarks Bar and Other Bookmarks are cleared before importing. A Safety snapshot is saved first, so you can undo the import.",
-    "description": "Body of the replace confirmation dialog"
+    "1": "Your Bookmarks Bar and Other Bookmarks will be cleared before the $1 imported bookmark is added.",
+    "n": "Your Bookmarks Bar and Other Bookmarks will be cleared before the $1 imported bookmarks are added."
+  },
+  "replaceSnapshotNote": {
+    "message": "Before replacing, Snug saves a Safety snapshot to your Downloads ($FILE$) and keeps it in Settings, where you can restore it.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Safety snapshots",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Cancel",
@@ -899,7 +916,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: Bookmark Export, Import & Backup",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Download $ID$ was interrupted.",
@@ -961,27 +978,23 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Safety snapshot",
+    "message": "Safety snapshots",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Taken automatically before every replace. Only the latest one is kept.",
+    "message": "Snug keeps the latest 5. Each one is also saved to your Downloads.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "The same copy is saved as a file in your Downloads folder.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Restore snapshot",
+    "message": "Restore",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
-    "message": "No snapshot yet",
+    "message": "No snapshots yet",
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "One is taken automatically the first time you replace your bookmarks.",
+    "message": "Snug saves one automatically before your next Restore – replace, or you can take one now.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1243,15 +1256,43 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "An honest review on the Chrome Web Store helps other people find it.",
+    "message": "An honest review on the store helps other people find it.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Leave a review",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Not now",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Take a snapshot now",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Taking snapshot…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Could not take a snapshot",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Could not download the snapshot",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome blocked the download. Check your download settings and try again.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Latest",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Download",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

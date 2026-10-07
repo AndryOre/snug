@@ -30,6 +30,7 @@ import { ImportPreviewStep } from '@/components/import/import-preview-step'
 import { ImportReplaceDiffAlert } from '@/components/import/import-replace-diff-alert'
 import { ImportSkipDuplicates } from '@/components/import/import-skip-duplicates'
 import { ImportStep } from '@/components/import/import-step'
+import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
 import { OperationProgressCard } from '@/components/operation-progress-card'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError, wasImportRestored } from '@/lib/import-control'
@@ -61,7 +62,12 @@ function focusOnMount(element: HTMLElement | null) {
 }
 
 function openBookmarkManager() {
-  void browser.tabs.create({ url: 'chrome://bookmarks' })
+  void browser.tabs.create({
+    url:
+      import.meta.env.BROWSER === 'edge'
+        ? 'edge://favorites'
+        : 'chrome://bookmarks',
+  })
 }
 
 interface ChosenFile {
@@ -409,8 +415,13 @@ export function ImportRoute() {
           <AlertDialogHeader>
             <AlertDialogTitle>{i18n.t('import_replaceTitle')}</AlertDialogTitle>
             <AlertDialogDescription>
-              {i18n.t('replaceConfirmDescription')}
+              {i18n.t('replaceConfirmDescription', importCount, [
+                formatCount(importCount),
+              ])}
             </AlertDialogDescription>
+            <div className="text-sm text-muted-foreground">
+              <ReplaceSnapshotNote />
+            </div>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>{i18n.t('cancel')}</AlertDialogCancel>

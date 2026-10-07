@@ -56,8 +56,20 @@ import.
 
 **Import preview** A summary shown before committing an import: how many
 bookmarks were found, split by root folder, and whether the file carries
-location data at all. Lets the user judge a file before it changes anything.
-_Avoid_: import summary, pre-import check, dry run.
+location data at all. It also lists the bookmarks that will be created, the
+duplicates Skip duplicates will leave out and, for a Restore-replace, the
+existing bookmarks that will be deleted. Lets the user judge a file before it
+changes anything. _Avoid_: import summary, pre-import check, dry run.
+
+**Import selection** The subset of bookmarks a user has checked in the Import
+page's tree before importing, mixing single bookmarks and whole folders. Not
+offered for Restore-replace, which always imports everything. _Avoid_: partial
+import, import filter, selective import.
+
+**Import batch** Several files imported together as one operation, with one
+import mode, one Import preview and one progress. Cancelling or failing leaves
+the bookmarks as they were before the batch started; a file that cannot be read
+is left out at preview time. _Avoid_: bulk import, multi-import.
 
 **Export selection** The subset of bookmarks a user has explicitly checked in
 the Export page's bookmark tree, as opposed to exporting the entire bookmark
@@ -72,8 +84,10 @@ and the Auto-export page. _Avoid_: export settings, export preferences.
 
 **Safety snapshot** A copy of the bookmarks bar and other-bookmarks roots that
 Snug takes automatically before every Restore-replace, kept both as a file in
-the user's downloads and inside the extension so the import can be undone. Only
-the latest one is kept. _Avoid_: backup, restore point, undo file.
+the user's downloads and inside the extension so the import can be undone. The
+latest five are kept, and the newest one that holds any bookmarks is never
+dropped. The user can also take one at any time. _Avoid_: backup, restore point,
+undo file.
 
 **Duplicate** Two or more bookmarks whose URLs are the same once normalized:
 scheme and host lowercased, `http` treated as `https`, a leading `www.`, a
@@ -112,19 +126,20 @@ run, retry.
 run fails; successful runs never notify. _Avoid_: alert, error toast, warning.
 
 **Review prompt** A one-time, dismissible invitation in the popup to leave an
-honest review on the Chrome Web Store, offered only after the user's first
-successful export or Auto-export run. Once acted on or dismissed, it never
-returns. _Avoid_: rating prompt, review nag, review request, feedback prompt.
+honest review on the store listing for the browser in use, offered only after
+the user's first successful export or Auto-export run. Once acted on or
+dismissed, it never returns. _Avoid_: rating prompt, review nag, review request,
+feedback prompt.
 
 **Landing page** The marketing site at snug.andryore.dev: a static, multilingual
-page whose one job is to send visitors to the Chrome Web Store listing. It is
-separate from the App and the popup, which live inside the extension. _Avoid_:
-website, homepage, marketing site, promo page.
+page whose one job is to send visitors to the store listing for the browser in
+use. It is separate from the App and the popup, which live inside the extension.
+_Avoid_: website, homepage, marketing site, promo page.
 
 **Install redirect** The landing page's `/install` route, which sends the
-visitor to the Chrome Web Store listing with attribution tags so install clicks
-can be counted without cookies or scripts. _Avoid_: download link, store link,
-CTA link.
+visitor to the store listing for the browser in use with attribution tags so
+install clicks can be counted without cookies or scripts. _Avoid_: download
+link, store link, CTA link.
 
 **Campaign tag** The identifier of one external channel (a directory, a
 community, or a post), carried as `c=` on links to the Landing page and the

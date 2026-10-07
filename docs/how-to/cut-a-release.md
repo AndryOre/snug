@@ -24,13 +24,14 @@
 5. Run `bun run zip` (the root `zip` script, which runs `wxt zip` in
    `apps/extension`) to produce the distributable extension archive and the
    sources archive for the new version, both in `apps/extension/.output/`:
-   `snug-X.Y.Z-chrome.zip` and `snug-X.Y.Z-sources.zip`. The sources zip is
-   rooted at the repo root and limited to an allowlist (`package.json`,
-   `bun.lock`, `bunfig.toml`, `tsconfig.base.json`, `turbo.json`,
-   `apps/extension/**`, `apps/video/package.json`, `packages/**`), set by
-   `zip.includeSources` in `apps/extension/wxt.config.ts`. A reviewer rebuilds
-   it with `bun install --frozen-lockfile && bun run build`. If a root file the
-   build needs is added later, add it to that allowlist.
+   `snug-X.Y.Z-chrome.zip`, `snug-X.Y.Z-edge.zip` (built with
+   `wxt zip -b edge`), and `snug-X.Y.Z-sources.zip`. The sources zip is rooted
+   at the repo root and limited to an allowlist (`package.json`, `bun.lock`,
+   `bunfig.toml`, `tsconfig.base.json`, `turbo.json`, `apps/extension/**`,
+   `apps/video/package.json`, `packages/**`), set by `zip.includeSources` in
+   `apps/extension/wxt.config.ts`. A reviewer rebuilds it with
+   `bun install --frozen-lockfile && bun run build`. If a root file the build
+   needs is added later, add it to that allowlist.
 
 6. After the release PR merges, tag the merge commit with a **signed** tag and
    push it: `git tag -s vX.Y.Z <merge-commit-sha> && git push origin vX.Y.Z`.
@@ -68,3 +69,26 @@
    Store Developer Dashboard. Work through the
    [pre-publish checklist](../store/README.md#pre-publish-checklist) before
    pushing the tag.
+
+8. In parallel with the Chrome Web Store job, a third job,
+   `publish-edge-add-ons`, submits the Edge zip (`snug-X.Y.Z-edge.zip`) to
+   Microsoft Edge Add-ons via `wxt submit`, using the Edge Add-ons API v1.1 with
+   API key authentication. It depends only on the `release` job, never on
+   `publish-chrome-web-store`, so one store failing does not block the other.
+   This job runs in the `edge-add-ons` GitHub Environment, which must hold these
+   secrets:
+
+   - `EDGE_PRODUCT_ID` — the Product ID (a GUID) shown on the extension's
+     Partner Center overview page. It is not the short Store ID
+     (`0RDCK9J6Z4VS`).
+   - `EDGE_CLIENT_ID` — the client ID shown on the Partner Center Publish API
+     page.
+   - `EDGE_API_KEY` — the API key generated on the same page.
+
+   A guard step fails the job with a message naming any missing secret before
+   `wxt submit` runs. **The Edge API key expires every 72 days**: rotate it in
+   Partner Center (Publish API, create a new key) and update `EDGE_API_KEY` in
+   the `edge-add-ons` environment before then. Microsoft emails reminders ahead
+   of expiry. Listing metadata is not covered by the Edge API and stays Partner
+   Center-managed. See [ADR 0015](../adr/0015-edge-add-ons-publishing.md) for
+   the rationale.

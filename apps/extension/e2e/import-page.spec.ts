@@ -150,9 +150,16 @@ test.describe('Import page', () => {
     await selectMode(page, 'Restore — replace')
     await submitImport(page, 3)
 
+    const dialog = page.getByRole('alertdialog', {
+      name: en.import_replaceTitle.message,
+    })
+    await expect(dialog).toBeVisible()
+    await expect(dialog).toContainText(/snug-safety-snapshot-.+\.json/)
     await expect(
-      page.getByRole('alertdialog', { name: en.import_replaceTitle.message }),
-    ).toBeVisible()
+      dialog.getByRole('link', {
+        name: en.replaceSnapshotSettingsLink.message,
+      }),
+    ).toHaveAttribute('href', /#\/settings$/)
     await page
       .getByRole('button', { name: en.import_replaceConfirm.message })
       .click()

@@ -6,29 +6,43 @@ import { createDomHarness } from '@/lib/testing/dom-harness'
 import type { DomHarness } from '@/lib/testing/dom-harness'
 import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 
+import en from '../locales/en.json' with { type: 'json' }
 import { SafetySnapshotCard } from './safety-snapshot-card'
 
 const restoreMock = vi.hoisted(() => vi.fn())
+const takeMock = vi.hoisted(() => vi.fn())
+const downloadMock = vi.hoisted(() => vi.fn())
+
+vi.mock('@/lib/import-lock', () => ({
+  withImportLock: (task: () => Promise<unknown>) => task(),
+}))
 
 vi.mock('@/lib/safety-snapshot', () => ({
   safetySnapshotStore: {},
   restoreSafetySnapshot: restoreMock,
+  takeSafetySnapshot: takeMock,
+  downloadSafetySnapshot: downloadMock,
 }))
 
+function snapshotAt(takenAt: number, url: string) {
+  return {
+    takenAt,
+    roots: [
+      {
+        id: '1',
+        title: 'Bookmarks bar',
+        dateAdded: 0,
+        children: [{ title: 'A', url, dateAdded: 0 }],
+      },
+    ],
+  }
+}
+
+const NEWEST = snapshotAt(2, 'https://new.example/')
+const OLDER = snapshotAt(1, 'https://old.example/')
+
 vi.mock('@/lib/use-storage-item', () => ({
-  useStorageItem: () => [
-    {
-      takenAt: 1,
-      roots: [
-        {
-          id: '1',
-          title: 'Bookmarks bar',
-          dateAdded: 0,
-          children: [{ title: 'A', url: 'https://a.example/', dateAdded: 0 }],
-        },
-      ],
-    },
-  ],
+  useStorageItem: () => [[NEWEST, OLDER]],
 }))
 
 const mountedHarnesses: DomHarness[] = []
@@ -41,6 +55,8 @@ afterEach(() => {
   for (const harness of mountedHarnesses.splice(0)) harness.unmount()
   document.body.replaceChildren()
   restoreMock.mockReset()
+  takeMock.mockReset()
+  downloadMock.mockReset()
   vi.unstubAllGlobals()
 })
 
@@ -53,18 +69,81 @@ function confirmButton(): HTMLButtonElement {
   return button
 }
 
-async function openConfirmDialog(): Promise<void> {
+function rowButton(rowIndex: number, label: string): HTMLButtonElement {
+  const row = document.body.querySelectorAll<HTMLElement>(
+    '[data-testid="safety-snapshot-row"]',
+  )[rowIndex]
+  const button = [...(row?.querySelectorAll('button') ?? [])].find(
+    (candidate) => candidate.textContent?.trim() === label,
+  )
+  if (!button) throw new Error(`${label} button missing in row ${rowIndex}`)
+  return button
+}
+
+async function mountCard(): Promise<void> {
   const harness = createDomHarness()
   mountedHarnesses.push(harness)
   await harness.render(createElement(SafetySnapshotCard))
-  const trigger = harness.container.querySelector<HTMLButtonElement>('button')
-  if (!trigger) throw new Error('trigger missing')
+}
+
+async function openConfirmDialog(rowIndex = 1): Promise<void> {
+  await mountCard()
   await act(async () => {
-    trigger.click()
+    rowButton(rowIndex, en.safetySnapshot_restore.message).click()
   })
 }
 
 describe('SafetySnapshotCard', () => {
+  it('marks only the newest row as Latest', async () => {
+    await mountCard()
+
+    const rows = document.body.querySelectorAll(
+      '[data-testid="safety-snapshot-row"]',
+    )
+    expect(rows).toHaveLength(2)
+    expect(rows[0]?.textContent).toContain(en.safetySnapshot_latest.message)
+    expect(rows[1]?.textContent).not.toContain(en.safetySnapshot_latest.message)
+  })
+
+  it('restores the chosen snapshot, not the newest', async () => {
+    restoreMock.mockResolvedValue(undefined)
+    await openConfirmDialog(1)
+
+    await act(async () => {
+      confirmButton().click()
+    })
+
+    expect(restoreMock).toHaveBeenCalledExactlyOnceWith(OLDER)
+  })
+
+  it('downloads the chosen snapshot', async () => {
+    downloadMock.mockResolvedValue(undefined)
+    await mountCard()
+
+    await act(async () => {
+      rowButton(1, en.safetySnapshot_download.message).click()
+    })
+
+    expect(downloadMock).toHaveBeenCalledExactlyOnceWith(OLDER)
+  })
+
+  it('shows the inline error when taking a snapshot fails', async () => {
+    takeMock.mockRejectedValue(new Error('blocked'))
+    await mountCard()
+
+    await act(async () => {
+      document.body.querySelectorAll('button').forEach((button) => {
+        if (button.textContent === en.safetySnapshot_take.message) {
+          button.click()
+        }
+      })
+    })
+
+    expect(document.body.textContent).toContain(
+      en.safetySnapshot_takeFailedTitle.message,
+    )
+  })
+
   it('starts exactly one restore on a fast double click', async () => {
     restoreMock.mockImplementation(() => new Promise(() => {}))
     await openConfirmDialog()
@@ -87,13 +166,7 @@ describe('SafetySnapshotCard', () => {
       confirmButton().click()
     })
     await act(async () => {
-      document.body
-        .querySelectorAll<HTMLButtonElement>('button')
-        .forEach((button) => {
-          if (!button.closest('[role="alertdialog"]') && !button.disabled) {
-            button.click()
-          }
-        })
+      rowButton(1, en.safetySnapshot_restore.message).click()
     })
     await act(async () => {
       confirmButton().click()

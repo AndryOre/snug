@@ -1,26 +1,15 @@
-import { createContext, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { themeStore } from '@/lib/storage'
 import {
   applyResolvedTheme,
   readCachedTheme,
-  type Theme,
   writeCachedTheme,
 } from '@/lib/theme-cache'
 import { useStorageItem } from '@/lib/use-storage-item'
 
-interface ThemeProviderContextValue {
-  theme: Theme
-  setTheme: (theme: Theme) => Promise<void>
-}
-
-const ThemeProviderContext = createContext<
-  ThemeProviderContextValue | undefined
->(undefined)
-
 interface ThemeProviderProperties {
   children: React.ReactNode
-  defaultTheme?: Theme
 }
 
 /**
@@ -29,14 +18,11 @@ interface ThemeProviderProperties {
  * `"system"`. The first render starts from the synchronous theme cache so the
  * saved theme is not replaced by the default while the async read resolves.
  * @param root0 This component's properties.
- * @param root0.children The subtree to provide the theme context to.
- * @returns The theme context provider wrapping `children`.
+ * @param root0.children The subtree rendered under the applied theme.
+ * @returns The `children`, rendered as-is.
  */
 export function ThemeProvider({ children }: ThemeProviderProperties) {
-  const [theme, setThemeInStorage] = useStorageItem(
-    themeStore,
-    readCachedTheme(),
-  )
+  const [theme] = useStorageItem(themeStore, readCachedTheme())
 
   useEffect(() => {
     writeCachedTheme(theme)
@@ -64,13 +50,5 @@ export function ThemeProvider({ children }: ThemeProviderProperties) {
     applyResolvedTheme(theme)
   }, [theme])
 
-  const setTheme = async (newTheme: Theme) => {
-    await setThemeInStorage(newTheme)
-  }
-
-  return (
-    <ThemeProviderContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeProviderContext.Provider>
-  )
+  return children
 }

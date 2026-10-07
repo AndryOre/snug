@@ -7,6 +7,10 @@
     "message": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Exportiere, importiere und sichere deine Lesezeichen in gängigen Formaten, nach Zeitplan. Alles bleibt lokal.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Lesezeichen exportieren, importieren und sichern – komplett auf deinem Gerät.",
     "description": "Welcome page subtitle"
@@ -111,8 +115,20 @@
     "n": "$1 Lesezeichen"
   },
   "replaceConfirmDescription": {
-    "message": "Ihre aktuelle Lesezeichenleiste und Andere Lesezeichen werden vor dem Import geleert. Zuerst wird ein Sicherheits-Snapshot gespeichert, damit Sie den Import rückgängig machen können.",
-    "description": "Body of the replace confirmation dialog"
+    "n": "Ihre Lesezeichenleiste und Andere Lesezeichen werden geleert, bevor die importierten Lesezeichen ($1) hinzugefügt werden."
+  },
+  "replaceSnapshotNote": {
+    "message": "Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot in Ihren Downloads ($FILE$) und bewahrt ihn in den Einstellungen auf, wo Sie ihn wiederherstellen können.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Sicherheits-Snapshots",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Abbrechen",
@@ -894,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug – Lesezeichen exportieren, importieren und sichern",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Download $ID$ wurde unterbrochen.",
@@ -955,27 +971,23 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Sicherheits-Snapshot",
+    "message": "Sicherheits-Snapshots",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Wird vor jedem Ersetzen automatisch erstellt. Nur der neueste wird aufbewahrt.",
+    "message": "Snug behält die neuesten 5. Jeder wird auch in Ihren Downloads gespeichert.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "Dieselbe Kopie wird als Datei in Ihrem Download-Ordner gespeichert.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Snapshot wiederherstellen",
+    "message": "Wiederherstellen",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
-    "message": "Noch kein Snapshot",
+    "message": "Noch keine Snapshots",
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Beim ersten Ersetzen Ihrer Lesezeichen wird automatisch einer erstellt.",
+    "message": "Snug speichert automatisch einen vor Ihrem nächsten Wiederherstellen – ersetzen, oder Sie erstellen jetzt einen.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1237,15 +1249,43 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Eine ehrliche Bewertung im Chrome Web Store hilft anderen, es zu finden.",
+    "message": "Eine ehrliche Bewertung im Store hilft anderen, es zu finden.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Bewertung abgeben",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Jetzt nicht",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Jetzt Snapshot erstellen",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Snapshot wird erstellt…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Snapshot konnte nicht erstellt werden",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Snapshot konnte nicht heruntergeladen werden",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome hat den Download blockiert. Prüfen Sie Ihre Download-Einstellungen und versuchen Sie es erneut.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Neueste",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Herunterladen",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

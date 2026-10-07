@@ -14,6 +14,7 @@ import {
   resolveSplitRootTargets,
 } from '@/lib/importers/resolve-roots'
 import { isAllowedBookmarkUrl } from '@/lib/importers/url-validation'
+import { ROOT_FOLDER_IDS } from '@/lib/root-folders'
 import { applySkipDuplicates } from '@/lib/skip-duplicates'
 import type {
   ImportMode,
@@ -110,15 +111,21 @@ interface PreprocessLevelResult {
 }
 
 const ROOT_ID_BY_FOLDER_TYPE: Readonly<Record<string, string>> = {
-  'bookmarks-bar': '1',
-  other: '2',
-  mobile: '3',
+  'bookmarks-bar': ROOT_FOLDER_IDS.bookmarksBar,
+  other: ROOT_FOLDER_IDS.otherBookmarks,
+  mobile: ROOT_FOLDER_IDS.mobileBookmarks,
 }
+
+const ROOT_IDS: ReadonlySet<string> = new Set([
+  ROOT_FOLDER_IDS.bookmarksBar,
+  ROOT_FOLDER_IDS.otherBookmarks,
+  ROOT_FOLDER_IDS.mobileBookmarks,
+])
 
 function resolveRootId(bookmark: ParsedBookmark): string | undefined {
   return (
     ROOT_ID_BY_FOLDER_TYPE[bookmark.folderType ?? ''] ??
-    (['1', '2', '3'].includes(bookmark.id ?? '') ? bookmark.id : undefined)
+    (ROOT_IDS.has(bookmark.id ?? '') ? bookmark.id : undefined)
   )
 }
 
@@ -135,7 +142,7 @@ function resolveRootId(bookmark: ParsedBookmark): string | undefined {
  */
 function isVirtualRoot(bookmark: ParsedBookmark): boolean {
   return (
-    bookmark.id === '0' ||
+    bookmark.id === ROOT_FOLDER_IDS.virtualRoot ||
     (bookmark.children ?? []).some(
       (child) => resolveRootId(child) !== undefined,
     )
@@ -171,24 +178,24 @@ function preprocessLevel(level: ParsedBookmark[]): PreprocessLevelResult {
 
   for (const bookmark of level) {
     switch (resolveRootId(bookmark)) {
-      case '1': {
+      case ROOT_FOLDER_IDS.bookmarksBar: {
         bookmark.isBookmarksBar = true
         result.unshift(bookmark)
         continue
       }
-      case '2': {
+      case ROOT_FOLDER_IDS.otherBookmarks: {
         bookmark.isOtherBookmarks = true
         result.push(bookmark)
         continue
       }
-      case '3': {
+      case ROOT_FOLDER_IDS.mobileBookmarks: {
         bookmark.isMobileBookmarks = true
         result.push(bookmark)
         continue
       }
     }
 
-    if (bookmark.parentId === '2') {
+    if (bookmark.parentId === ROOT_FOLDER_IDS.otherBookmarks) {
       orphans.push(bookmark)
     } else if (bookmark.children && isVirtualRoot(bookmark)) {
       virtualRootChildren = bookmark.children as ParsedBookmark[]
@@ -250,7 +257,7 @@ export function preprocessBookmarks(
       existingOther.children = [...(existingOther.children ?? []), ...orphans]
     } else if (orphans.length > 0) {
       result.push({
-        id: '2',
+        id: ROOT_FOLDER_IDS.otherBookmarks,
         isOtherBookmarks: true,
         title: i18n.t('otherBookmarks'),
         dateAdded: Date.now(),

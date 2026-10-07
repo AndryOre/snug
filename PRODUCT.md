@@ -55,7 +55,8 @@ bookmark tree, so trust is the main question they bring.
 - Import HTML, JSON, CSV and XBEL files, a Chrome profile `Bookmarks` file, or a
   Safari export (Favorites and Reading List); the format is detected.
 - Import with a preview, then merge, replace, or add to a new folder. Replace
-  saves a Safety snapshot that can be restored.
+  saves a Safety snapshot first. Snug keeps the latest five on your device, and
+  you can restore or download any of them, or take one at any time.
 - Duplicates page, and Skip duplicates on import.
 - Scheduled Auto-export to the Downloads folder, with Retention and an optional
   failure notification.

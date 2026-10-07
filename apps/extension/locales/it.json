@@ -7,6 +7,10 @@
     "message": "Esporta, importa e fai il backup dei segnalibri in formati comuni, da Chrome o Safari. Tutto in locale.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Esporta, importa e salva i tuoi segnalibri nei formati comuni, con pianificazione. Tutto resta in locale.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Esporta, importa e fai il backup dei tuoi segnalibri — interamente sul tuo dispositivo.",
     "description": "Welcome page subtitle"
@@ -112,8 +116,21 @@
     "n": "$1 segnalibri"
   },
   "replaceConfirmDescription": {
-    "message": "La barra dei preferiti e Altri segnalibri attuali vengono svuotati prima dell'importazione. Prima viene salvata un'istantanea di sicurezza, così puoi annullare l'importazione.",
-    "description": "Body of the replace confirmation dialog"
+    "1": "La barra dei preferiti e Altri segnalibri verranno svuotati prima di aggiungere il segnalibro importato ($1).",
+    "n": "La barra dei preferiti e Altri segnalibri verranno svuotati prima di aggiungere i $1 segnalibri importati."
+  },
+  "replaceSnapshotNote": {
+    "message": "Prima di sostituire, Snug salva un'istantanea di sicurezza nei tuoi Download ($FILE$) e la conserva nelle Impostazioni, dove puoi ripristinarla.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Istantanee di sicurezza",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Annulla",
@@ -900,7 +917,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: esporta e fai il backup dei segnalibri, in locale",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Il download $ID$ è stato interrotto.",
@@ -962,19 +979,15 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Istantanea di sicurezza",
+    "message": "Istantanee di sicurezza",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Creata automaticamente prima di ogni sostituzione. Viene conservata solo la più recente.",
+    "message": "Snug conserva le ultime 5. Ognuna viene salvata anche nei Download.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "La stessa copia è salvata come file nella cartella Download.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Ripristina istantanea",
+    "message": "Ripristina",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
@@ -982,7 +995,7 @@
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Ne viene creata una automaticamente la prima volta che sostituisci i segnalibri.",
+    "message": "Snug ne salva una automaticamente prima del prossimo Ripristina — sostituisci, oppure puoi crearne una ora.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1244,15 +1257,43 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Una recensione sincera sul Chrome Web Store aiuta altre persone a trovarlo.",
+    "message": "Una recensione sincera sullo store aiuta altre persone a trovarlo.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Lascia una recensione",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Non ora",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Crea un'istantanea ora",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Creazione dell'istantanea…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Impossibile creare l'istantanea",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Impossibile scaricare l'istantanea",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome ha bloccato il download. Controlla le impostazioni dei download e riprova.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Ultima",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Scarica",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

@@ -1,19 +1,20 @@
 import { i18n } from '#i18n'
 import { storage } from '#imports'
 
+import { countBookmarks } from '@/lib/count-bookmarks'
 import { markImportRestored } from '@/lib/import-control'
 import { withImportLock } from '@/lib/import-lock'
 import { importFromJSON } from '@/lib/importers/import-json'
 import { resolveImportRoots } from '@/lib/importers/resolve-roots'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
+import { ROOT_FOLDER_IDS } from '@/lib/root-folders'
 import type { ParsedBookmark } from '@/lib/types'
 
 /**
- * The single latest Safety snapshot: the bookmarks-bar, other-bookmarks and,
- * when the browser has one, Mobile roots as taken right before a
- * Restore-replace. `roots` is a valid Snug JSON export (roots carry the fixed
- * ids `'1'`, `'2'` and `'3'`), so the downloaded file can be imported again
- * as-is.
+ * One Safety snapshot: the bookmarks-bar, other-bookmarks and, when the
+ * browser has one, Mobile roots as taken right before a Restore-replace (or on
+ * demand). `roots` is a valid Snug JSON export (roots carry the fixed ids
+ * `'1'`, `'2'` and `'3'`), so the downloaded file can be imported again as-is.
  */
 export interface SafetySnapshot {
   takenAt: number
@@ -21,13 +22,51 @@ export interface SafetySnapshot {
 }
 
 /**
- * Storage key of the latest Safety snapshot in `chrome.storage.local`. Only
- * one is ever kept: saving a new one overwrites it.
+ * How many Safety snapshots are kept.
  */
-export const safetySnapshotStore = storage.defineItem<SafetySnapshot | null>(
+export const MAX_SAFETY_SNAPSHOTS = 5
+
+/**
+ * Storage key of the Safety snapshots in `chrome.storage.local`, newest
+ * first. Version 1 held a single snapshot (or `null`); it migrates to a list
+ * of zero or one.
+ */
+export const safetySnapshotStore = storage.defineItem<SafetySnapshot[]>(
   'local:safetySnapshot',
-  { fallback: null },
+  {
+    fallback: [],
+    version: 2,
+    migrations: {
+      2: (stored: SafetySnapshot | null): SafetySnapshot[] =>
+        stored ? [stored] : [],
+    },
+  },
 )
+
+/**
+ * Prepends a snapshot and enforces the retention cap: at most
+ * {@link MAX_SAFETY_SNAPSHOTS}, dropping the oldest, except that the newest
+ * snapshot holding any bookmarks is never dropped, so empty captures cannot
+ * push out the last useful one.
+ * @param snapshots The stored list, newest first.
+ * @param snapshot The new capture.
+ * @returns The new list, newest first.
+ */
+export function addSnapshotToList(
+  snapshots: SafetySnapshot[],
+  snapshot: SafetySnapshot,
+): SafetySnapshot[] {
+  const next = [snapshot, ...snapshots]
+  const protectedIndex = next.findIndex(
+    (entry) => countBookmarks(entry.roots) > 0,
+  )
+  while (next.length > MAX_SAFETY_SNAPSHOTS) {
+    let dropIndex = next.length - 1
+    if (dropIndex === protectedIndex) dropIndex -= 1
+    next.splice(dropIndex, 1)
+  }
+  return next
+}
 
 interface LiveNode {
   title: string
@@ -90,9 +129,16 @@ export async function captureSafetySnapshot(): Promise<SafetySnapshot> {
   return {
     takenAt,
     roots: [
-      { ...toParsedBookmark(barNode), id: '1' },
-      { ...toParsedBookmark(otherNode), id: '2' },
-      ...(mobileNode ? [{ ...toParsedBookmark(mobileNode), id: '3' }] : []),
+      { ...toParsedBookmark(barNode), id: ROOT_FOLDER_IDS.bookmarksBar },
+      { ...toParsedBookmark(otherNode), id: ROOT_FOLDER_IDS.otherBookmarks },
+      ...(mobileNode
+        ? [
+            {
+              ...toParsedBookmark(mobileNode),
+              id: ROOT_FOLDER_IDS.mobileBookmarks,
+            },
+          ]
+        : []),
     ],
   }
 }
@@ -106,28 +152,45 @@ function hasSeveralSets(rootChildren: { folderType?: string }[]): boolean {
   )
 }
 
-function snapshotFileName(takenAt: number): string {
+/**
+ * @param takenAt Epoch milliseconds the snapshot was taken.
+ * @returns The name of the JSON file saved to Downloads for that moment.
+ */
+export function snapshotFileName(takenAt: number): string {
   const stamp = new Date(takenAt).toISOString().replaceAll(/[:.]/g, '-')
   return `snug-safety-snapshot-${stamp}.json`
 }
 
 /**
- * Takes a Safety snapshot: captures the two roots, saves them as a JSON file
- * in Downloads, then stores them as the latest snapshot in
- * `chrome.storage.local`, overwriting the previous one. The file goes first so
- * a failed download leaves the previous stored snapshot untouched.
+ * Saves a snapshot's roots as a JSON file in Downloads.
+ * @param snapshot The snapshot to save.
+ * @returns Resolves once the download was handed to the browser.
+ */
+export async function downloadSafetySnapshot(
+  snapshot: SafetySnapshot,
+): Promise<void> {
+  await downloadViaOffscreenDocument(
+    JSON.stringify(snapshot.roots, null, 2),
+    'application/json',
+    snapshotFileName(snapshot.takenAt),
+  )
+}
+
+/**
+ * Takes a Safety snapshot: captures the roots, saves them as a JSON file in
+ * Downloads, then adds them to the stored list in `chrome.storage.local`
+ * (see {@link addSnapshotToList} for retention). The file goes first so a
+ * failed download leaves the stored list untouched.
  * @returns The snapshot that was saved.
  * @throws {Error} With a localized message when the snapshot cannot be saved.
  */
 export async function takeSafetySnapshot(): Promise<SafetySnapshot> {
   try {
     const snapshot = await captureSafetySnapshot()
-    await downloadViaOffscreenDocument(
-      JSON.stringify(snapshot.roots, null, 2),
-      'application/json',
-      snapshotFileName(snapshot.takenAt),
+    await downloadSafetySnapshot(snapshot)
+    await safetySnapshotStore.setValue(
+      addSnapshotToList(await safetySnapshotStore.getValue(), snapshot),
     )
-    await safetySnapshotStore.setValue(snapshot)
     return snapshot
   } catch (error) {
     throw new Error(
@@ -138,11 +201,20 @@ export async function takeSafetySnapshot(): Promise<SafetySnapshot> {
 }
 
 /**
- * Reads the latest stored Safety snapshot.
+ * Reads the stored Safety snapshots.
+ * @returns The snapshots, newest first; empty when none has been taken yet.
+ */
+export function readSafetySnapshots(): Promise<SafetySnapshot[]> {
+  return safetySnapshotStore.getValue()
+}
+
+/**
+ * Reads the newest stored Safety snapshot.
  * @returns The snapshot, or `null` when none has been taken yet.
  */
-export function readLatestSafetySnapshot(): Promise<SafetySnapshot | null> {
-  return safetySnapshotStore.getValue()
+export async function readLatestSafetySnapshot(): Promise<SafetySnapshot | null> {
+  const [latest] = await readSafetySnapshots()
+  return latest ?? null
 }
 
 /**
