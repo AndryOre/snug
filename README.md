@@ -32,8 +32,9 @@ bookmarks tree, locally — no account, no cloud, no server to trust. See the
 - Export your whole tree or only the folders you pick.
 - Import with a preview first, then merge, replace, or add everything to a new
   folder. A replace shows how many bookmarks it removes and adds.
-- Undo a replace: Snug saves a Safety snapshot first, and you can restore it
-  from the import result or from Settings.
+- Undo a replace: Snug saves a Safety snapshot first, keeps the latest five on
+  your device, and lets you restore or download any of them from Settings. You
+  can also take one at any time.
 - Duplicates page to find bookmarks that share a URL and delete the extra
   copies, and Skip duplicates to leave them out of an import.
 - Scheduled Auto-export (hourly, every 12 hours, daily, every 3 days, or weekly

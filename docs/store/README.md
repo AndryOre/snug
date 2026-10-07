@@ -90,7 +90,7 @@ Snug moves your bookmarks between browsers, exactly as you left them — nothing
 
 Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers, a Chrome profile Bookmarks file, or Safari bookmarks, with a preview first. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
 
-Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
+Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. The latest five are kept on your device. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
 Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks straight to your Downloads folder on its own, in the formats you pick. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
 
@@ -265,7 +265,7 @@ resolves base64 data (`getFaviconBase64`); it is used by
 `storage` (506 chars):
 
 ```text
-Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import it also keeps one safety snapshot of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
+Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import, or when the user asks for one in Settings, it also keeps the latest five safety snapshots of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
 ```
 
 Code: `lib/storage.ts` defines every setting with `storage.defineItem` under a
@@ -277,7 +277,7 @@ null); it adds no permission, network call or data category.
 `unlimitedStorage`:
 
 ```text
-Before a "Restore — replace" import, Snug saves one safety snapshot of the user's bookmarks bar and other bookmarks in extension storage, so the import can be undone. A large bookmark library can exceed the default storage quota, so this permission lifts it. Only the latest snapshot is kept, it stays on the device, and nothing is sent anywhere.
+Before a "Restore — replace" import, Snug saves a safety snapshot of the user's bookmarks bar and other bookmarks in extension storage, so the import can be undone. The user can also take one from Settings. A large bookmark library can exceed the default storage quota, so this permission lifts it. Only the latest five snapshots are kept, they stay on the device, and nothing is sent anywhere.
 ```
 
 Code: `lib/safety-snapshot.ts` saves the snapshot with

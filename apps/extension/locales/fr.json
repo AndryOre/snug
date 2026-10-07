@@ -117,8 +117,22 @@
     "n": "$1 favoris"
   },
   "replaceConfirmDescription": {
-    "message": "Votre barre de favoris et Autres favoris actuels sont vidés avant l'importation. Un instantané de sécurité est enregistré d'abord, pour que vous puissiez annuler l'importation.",
-    "description": "Body of the replace confirmation dialog"
+    "0": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout des $1 favoris importés.",
+    "1": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout du favori importé ($1).",
+    "n": "Votre barre de favoris et Autres favoris seront vidés avant l'ajout des $1 favoris importés."
+  },
+  "replaceSnapshotNote": {
+    "message": "Avant de remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements ($FILE$) et le conserve dans les Paramètres, où vous pouvez le restaurer.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Instantanés de sécurité",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Annuler",
@@ -973,19 +987,15 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Instantané de sécurité",
+    "message": "Instantanés de sécurité",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Créé automatiquement avant chaque remplacement. Seul le plus récent est conservé.",
+    "message": "Snug conserve les 5 derniers. Chacun est aussi enregistré dans vos Téléchargements.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "La même copie est enregistrée sous forme de fichier dans votre dossier Téléchargements.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Restaurer l'instantané",
+    "message": "Restaurer",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
@@ -993,7 +1003,7 @@
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Un instantané est créé automatiquement la première fois que vous remplacez vos favoris.",
+    "message": "Snug en enregistre un automatiquement avant votre prochain Restaurer — remplacer, ou vous pouvez en créer un maintenant.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1269,5 +1279,33 @@
   "reviewPrompt_notNow": {
     "message": "Pas maintenant",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Créer un instantané maintenant",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Création de l'instantané…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Impossible de créer l'instantané",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Impossible de télécharger l'instantané",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome a bloqué le téléchargement. Vérifiez vos paramètres de téléchargement et réessayez.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Dernier",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Télécharger",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

@@ -19,6 +19,7 @@ import { toast } from '@workspace/ui/components/toast'
 import { TriangleAlertIcon, UploadIcon } from 'lucide-react'
 import { useId, useRef, useState } from 'react'
 
+import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
 import { OperationProgressCard } from '@/components/operation-progress-card'
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { formatCount } from '@/lib/format-count'
@@ -200,6 +201,15 @@ export function ImportSection() {
           <AlertTitle>{i18n.t('popup_replaceAlertTitle')}</AlertTitle>
           <AlertDescription>
             {i18n.t('importModeRestoreReplaceWarning')}
+          </AlertDescription>
+          <AlertDescription className="mt-2">
+            <ReplaceSnapshotNote
+              onOpenSettings={() =>
+                void browser.tabs.create({
+                  url: getAppUrl(APP_ROUTES.settings),
+                })
+              }
+            />
           </AlertDescription>
         </Alert>
       )}

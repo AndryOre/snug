@@ -2,7 +2,8 @@
 
 ## Status
 
-Accepted
+Accepted. Amended by [ADR 0015](0015-keep-five-safety-snapshots.md): the latest
+five snapshots are kept, not only one.
 
 ## Context
 

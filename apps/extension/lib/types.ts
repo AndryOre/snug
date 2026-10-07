@@ -16,6 +16,12 @@ export interface BookmarkNode {
   url?: string
   children?: BookmarkNode[]
   parentId?: string
+  /**
+   * Marks a node that cannot be selected (for example a skipped duplicate in
+   * an import preview). Disabled nodes render without a checkbox and are
+   * ignored by select-all and by the checked ids.
+   */
+  isDisabled?: boolean
 }
 
 /**
@@ -221,4 +227,71 @@ export interface BookmarkTreeProperties {
    * a callback that retries the load.
    */
   errorState?: (retry: () => void) => ReactNode
+}
+
+/**
+ * Imperative API of the node-driven tree core. Selection lives inside the
+ * core, so a parent drives it through this handle.
+ */
+export interface BookmarkTreeViewHandle {
+  /**
+   * Adds every currently visible, enabled bookmark to the selection.
+   */
+  selectAll: () => void
+  /**
+   * Clears the selection. While a search is active, only the visible
+   * bookmarks are cleared so selections outside the search survive.
+   */
+  deselectAll: () => void
+  /**
+   * Clears the whole selection, ignoring any active search.
+   */
+  clearSelection: () => void
+  /**
+   * Whether every currently visible, enabled bookmark is selected.
+   */
+  areAllVisibleSelected: () => boolean
+  expandAll: () => void
+  collapseAll: () => void
+  /**
+   * Ids of the checked, enabled bookmarks. Always empty when the tree is
+   * read-only.
+   */
+  getCheckedIds: () => string[]
+}
+
+export interface BookmarkTreeViewProperties {
+  nodes: BookmarkNode[]
+  searchTerm: string
+  /**
+   * Accessible name of the tree.
+   */
+  ariaLabel: string
+  /**
+   * Shows checkboxes and enables selection. Defaults to `true`; when `false`
+   * the tree is read-only.
+   */
+  isSelectable?: boolean
+  /**
+   * Rendered at the end of a row, after the folder count.
+   */
+  renderBadge?: (node: BookmarkNode) => ReactNode
+  /**
+   * Expands every folder whenever this value changes to one not yet applied.
+   */
+  autoExpandToken?: number
+  onSelectionChange: (count: number) => void
+  onTotalChange: (count: number) => void
+  /**
+   * Extra classes merged onto the tree's scroll container.
+   */
+  className?: string
+  /**
+   * Rendered instead of the tree (keeping its state alive) while set.
+   */
+  placeholder?: ReactNode
+  /**
+   * Rendered instead of the tree when an active search matches nothing.
+   */
+  emptyState?: ReactNode
 }

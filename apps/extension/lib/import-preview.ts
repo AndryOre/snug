@@ -1,8 +1,7 @@
 import { countImportableBookmarks } from './count-bookmarks'
 import { detectFormat } from './detect-format'
-import { parseCSVTree } from './importers/import-csv'
 import { shouldClearMobileRoot } from './importers/mobile-root'
-import { parseLocationAwareImport } from './importers/parse-import'
+import { parseImportFile } from './importers/parse-import'
 import {
   findSplitRootTypes,
   type ResolvedImportRootTitles,
@@ -29,11 +28,10 @@ export function getImportPreview(
   fileName?: string,
   liveRootTitles?: ResolvedImportRootTitles,
 ): ImportPreview {
-  const format = detectFormat(text, mimeType, fileName)
-
   try {
-    const parsed = parseLocationAwareImport(text, format, liveRootTitles)
-    if (parsed) {
+    const parsed = parseImportFile(text, mimeType, fileName, liveRootTitles)
+    const { format } = parsed
+    if (parsed.format !== 'csv') {
       const countRootChildren = (
         isRoot: (node: ParsedBookmark) => boolean | undefined,
       ) => {
@@ -64,22 +62,20 @@ export function getImportPreview(
       }
     }
 
-    if (format === 'csv') {
-      const count = countImportableBookmarks(parseCSVTree(text).tree)
-      return {
-        format,
-        bookmarksBarCount: 0,
-        otherBookmarksCount: 0,
-        mobileBookmarksCount: 0,
-        clearsMobileRoot: false,
-        totalCount: count,
-        hasLocationData: false,
-      }
+    const count = countImportableBookmarks(parsed.tree)
+    return {
+      format,
+      bookmarksBarCount: 0,
+      otherBookmarksCount: 0,
+      mobileBookmarksCount: 0,
+      clearsMobileRoot: false,
+      totalCount: count,
+      hasLocationData: false,
     }
   } catch {}
 
   return {
-    format,
+    format: detectFormat(text, mimeType, fileName),
     bookmarksBarCount: 0,
     otherBookmarksCount: 0,
     mobileBookmarksCount: 0,

@@ -26,16 +26,16 @@ claim.
 **Manifest permissions**, as declared in `wxt.config.ts`, and why each one is
 needed:
 
-| Permission         | Why it's needed                                                                                                                                                                                            |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Core functionality: read the bookmark tree for export, and create/remove nodes in it for import.                                                                                                           |
-| `favicon`          | Reads a bookmark's favicon through Chrome's internal `_favicon` API, which serves the browser's own cached icon for a page. This never makes a network request to the bookmarked site.                     |
-| `storage`          | Persists settings (default import mode, auto-export config, last-run status) via `local:`-prefixed `storage.defineItem` keys — never `sync:`-scoped, so settings stay on-device.                           |
-| `alarms`           | Schedules auto-export runs (a single one-shot `chrome.alarms` alarm, recomputed after each run) without needing the service worker to stay alive between them.                                             |
-| `downloads`        | Saves auto-export files and the Safety snapshot file to the Downloads folder (`browser.downloads.download`), and lets Retention delete Snug's own old auto-export files (`downloads.removeFile`, `erase`). |
-| `notifications`    | Shows the Failure notification when an Auto-export run fails. Nothing else is ever notified, and the user can turn it off.                                                                                 |
-| `unlimitedStorage` | Lifts the `storage.local` quota so the latest Safety snapshot (a copy of the bookmarks bar and other bookmarks, taken before every Restore-replace) fits even for very large libraries. On-device only.    |
-| `offscreen`        | Creates a hidden, unlisted document so the service worker — which has no `document` or `Blob`/URL registry — can turn an in-memory export into a downloadable object URL during auto-export.               |
+| Permission         | Why it's needed                                                                                                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Core functionality: read the bookmark tree for export, and create/remove nodes in it for import.                                                                                                                          |
+| `favicon`          | Reads a bookmark's favicon through Chrome's internal `_favicon` API, which serves the browser's own cached icon for a page. This never makes a network request to the bookmarked site.                                    |
+| `storage`          | Persists settings (default import mode, auto-export config, last-run status) via `local:`-prefixed `storage.defineItem` keys — never `sync:`-scoped, so settings stay on-device.                                          |
+| `alarms`           | Schedules auto-export runs (a single one-shot `chrome.alarms` alarm, recomputed after each run) without needing the service worker to stay alive between them.                                                            |
+| `downloads`        | Saves auto-export files and the Safety snapshot file to the Downloads folder (`browser.downloads.download`), and lets Retention delete Snug's own old auto-export files (`downloads.removeFile`, `erase`).                |
+| `notifications`    | Shows the Failure notification when an Auto-export run fails. Nothing else is ever notified, and the user can turn it off.                                                                                                |
+| `unlimitedStorage` | Lifts the `storage.local` quota so the latest five Safety snapshots (copies of the bookmarks bar and other bookmarks, taken before every Restore-replace or on demand) fit even for very large libraries. On-device only. |
+| `offscreen`        | Creates a hidden, unlisted document so the service worker — which has no `document` or `Blob`/URL registry — can turn an in-memory export into a downloadable object URL during auto-export.                              |
 
 Manual exports from the popup and the Export page use an `<a download>` link and
 do not need `downloads`. No `host_permissions` are declared, and there is no
@@ -167,13 +167,14 @@ format they expected) or clearly didn't — and back out.
   validation, not on an extra allowlist/sanitization pass over titles or URLs. A
   future hostile input class not covered by "parse as inert data" is not
   automatically defended against.
-- **`restore-replace` is undoable only through the latest Safety snapshot.**
-  Before it deletes anything, the extension saves a snapshot (a file in
-  Downloads plus one copy in `storage.local`); the Import result's Undo import
-  and Settings' Restore snapshot restore it. Only the latest snapshot is kept,
-  so an older replace cannot be undone once a newer snapshot exists. The
-  snapshot holds the titles and URLs of the user's bookmarks, so it is as
-  sensitive as the bookmarks themselves; it never leaves the device.
+- **`restore-replace` is undoable only through the latest five Safety
+  snapshots.** Before it deletes anything, the extension saves a snapshot (a
+  file in Downloads plus one copy in `storage.local`); the Import result's Undo
+  import and Settings restore it. Settings keeps the latest five, each can be
+  downloaded or restored, and one can be taken at any time. A replace older than
+  the fifth newest snapshot cannot be undone. Snapshots hold the titles and URLs
+  of the user's bookmarks, so they are as sensitive as the bookmarks themselves;
+  they never leave the device and involve no network request.
 - **Duplicate deletion and Retention deletes are final.** Neither takes a
   snapshot or can be undone.
 - **Single maintainer, no backup reviewer.** There is no second maintainer to

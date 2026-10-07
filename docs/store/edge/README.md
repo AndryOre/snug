@@ -343,13 +343,13 @@ Snug reads each bookmark's cached site icon from the browser's own favicon cache
 `storage` (506 chars):
 
 ```text
-Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import it also keeps one safety snapshot of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
+Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import it also keeps the latest five safety snapshots of the bookmarks bar and other bookmarks, so an import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
 ```
 
 `unlimitedStorage` (346 chars):
 
 ```text
-Before a "Restore — replace" import, Snug saves one safety snapshot of the user's bookmarks bar and other bookmarks in extension storage, so the import can be undone. A large bookmark library can exceed the default storage quota, so this permission lifts it. Only the latest snapshot is kept, it stays on the device, and nothing is sent anywhere.
+Before a "Restore — replace" import, Snug saves a safety snapshot of the user's bookmarks bar and other bookmarks in extension storage, so the import can be undone. The user can also take one from Settings. A large bookmark library can exceed the default storage quota, so this permission lifts it. Only the latest five snapshots are kept, they stay on the device, and nothing is sent anywhere.
 ```
 
 `alarms` (267 chars):

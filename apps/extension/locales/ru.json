@@ -115,8 +115,20 @@
     "n": "Закладок: $1"
   },
   "replaceConfirmDescription": {
-    "message": "Текущие панель закладок и «Другие закладки» очищаются перед импортом. Сначала сохраняется страховой снимок, чтобы вы могли отменить импорт.",
-    "description": "Body of the replace confirmation dialog"
+    "n": "Панель закладок и «Другие закладки» будут очищены до добавления импортированных закладок ($1)."
+  },
+  "replaceSnapshotNote": {
+    "message": "Перед заменой Snug сохраняет страховой снимок в папку «Загрузки» ($FILE$) и хранит его в настройках, откуда его можно восстановить.",
+    "description": "Second paragraph of the replace warning; $FILE$ is an example snapshot file name",
+    "placeholders": {
+      "file": {
+        "content": "$1"
+      }
+    }
+  },
+  "replaceSnapshotSettingsLink": {
+    "message": "Страховые снимки",
+    "description": "Link to Settings under the replace warning"
   },
   "cancel": {
     "message": "Отмена",
@@ -959,27 +971,23 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Страховой снимок",
+    "message": "Страховые снимки",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Создаётся автоматически перед каждой заменой. Хранится только последний.",
+    "message": "Snug хранит последние 5. Каждый также сохраняется в папку «Загрузки».",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "Та же копия сохраняется файлом в папке «Загрузки».",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Восстановить снимок",
+    "message": "Восстановить",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
-    "message": "Снимка пока нет",
+    "message": "Снимков пока нет",
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Он создаётся автоматически при первой замене закладок.",
+    "message": "Snug автоматически сохранит снимок перед следующим «Восстановить — заменить», или вы можете сделать его сейчас.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1245,5 +1253,33 @@
   "reviewPrompt_notNow": {
     "message": "Не сейчас",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Сделать снимок сейчас",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Создание снимка…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Не удалось сделать снимок",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Не удалось скачать снимок",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome заблокировал загрузку. Проверьте настройки загрузок и повторите попытку.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Последний",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Скачать",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }
