@@ -17,14 +17,15 @@ avez laissés — rien n'est envoyé nulle part, aucun compte requis.
 Exportez toute l'arborescence de vos favoris ou seulement le dossier de votre
 choix, dans des formats courants comme HTML ou JSON. Importez des fichiers
 d'autres gestionnaires de favoris, le fichier Bookmarks d'un profil Chrome ou
-des favoris Safari, avec un aperçu d'abord. Puis choisissez : fusionner avec vos
-favoris existants, les remplacer entièrement, ou tout déposer dans un nouveau
-dossier — à chaque fois, c'est vous qui décidez.
+des favoris Safari, avec d'abord un aperçu de ce qui sera ajouté, ignoré et
+supprimé. Vous pouvez choisir ou déposer plusieurs fichiers d'un coup. Puis
+choisissez : fusionner avec vos favoris existants, les remplacer entièrement, ou
+tout déposer dans un nouveau dossier — à chaque fois, c'est vous qui décidez.
 
 Avant tout remplacement, Snug enregistre un instantané de sécurité de vos
-favoris pour que vous puissiez l'annuler. Une page Doublons repère les favoris
-en double et supprime uniquement ceux que vous choisissez, et l'import peut
-ignorer les doublons.
+favoris pour que vous puissiez l'annuler. Les cinq derniers restent sur votre
+appareil. Une page Doublons repère les favoris en double et supprime uniquement
+ceux que vous choisissez, et l'import peut ignorer les doublons.
 
 Configurez un horaire une seule fois — toutes les heures, chaque jour, chaque
 semaine, et plus — et Snug sauvegarde vos favoris directement dans votre dossier

@@ -60,11 +60,11 @@
       },
       "preview": {
         "title": "Anteprima prima di importare",
-        "body": "Importa file HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura. Snug rileva il formato e mostra un'anteprima. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella."
+        "body": "Importa file HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura, anche più file insieme. Snug rileva il formato e mostra un'anteprima di ciò che verrà aggiunto, saltato ed eliminato. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella. Quando unisci o usi una nuova cartella, puoi prima deselezionare qualsiasi cartella o segnalibro."
       },
       "undo": {
         "title": "Annulla una sostituzione",
-        "body": "Prima di sostituire, Snug salva un'istantanea di sicurezza. Se il risultato non è quello che volevi, ripristinala."
+        "body": "Prima di sostituire, Snug salva un'istantanea di sicurezza. Conserva le ultime cinque e puoi ripristinarne una qualsiasi dalle Impostazioni."
       },
       "duplicates": {
         "title": "Elimina i duplicati",
@@ -90,7 +90,7 @@
     },
     "alts": {
       "export": "Pagina di esportazione di Snug: un albero delle cartelle dei segnalibri, un selettore di formato e il pulsante Esporta",
-      "import": "Anteprima di importazione di Snug: un elenco di segnalibri da aggiungere, modificare o saltare, con le opzioni unisci, sostituisci e nuovo",
+      "import": "Anteprima di importazione di Snug: un elenco di segnalibri da aggiungere, saltare o eliminare, con le opzioni unisci, sostituisci e nuovo",
       "autoExport": "Impostazioni di esportazione automatica di Snug: una pianificazione giornaliera, tre formati e l'ora della prossima esecuzione",
       "popup": "Popup di Snug nella barra degli strumenti con un solo pulsante per esportare tutti i segnalibri"
     }
@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Posso importare più file alla volta?",
-        "answer": "No. Snug importa un file alla volta. Per portarne dentro più di uno, importali uno dopo l'altro."
+        "answer": "Sì. Scegli o trascina più file nella pagina Importa e Snug li importa in un colpo solo."
       },
       "permissions": {
         "question": "Perché ha bisogno di accedere a tutti i miei segnalibri?",

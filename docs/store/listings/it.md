@@ -17,13 +17,14 @@ niente viene inviato da nessuna parte e non serve alcun account.
 Esporta l'intera struttura dei segnalibri o solo la cartella che scegli, in
 formati comuni come HTML o JSON. Importa i file di altri gestori di segnalibri,
 il file Bookmarks di un profilo Chrome o i segnalibri di Safari, con prima
-un'anteprima. Poi decidi: unirli ai segnalibri esistenti, sostituirli del tutto
-o metterli in una nuova cartella — ogni volta scegli tu.
+un'anteprima di ciò che verrà aggiunto, saltato ed eliminato. Puoi scegliere o
+trascinare più file insieme. Poi decidi: unirli ai segnalibri esistenti,
+sostituirli del tutto o metterli in una nuova cartella — ogni volta scegli tu.
 
 Prima di ogni sostituzione, Snug salva un'istantanea di sicurezza dei tuoi
-segnalibri, così puoi annullarla. Una pagina Duplicati trova i segnalibri
-ripetuti ed elimina solo quelli che scegli, e l'importazione può saltare i
-duplicati.
+segnalibri, così puoi annullarla. Le ultime cinque restano sul tuo dispositivo.
+Una pagina Duplicati trova i segnalibri ripetuti ed elimina solo quelli che
+scegli, e l'importazione può saltare i duplicati.
 
 Imposta una pianificazione una sola volta — ogni ora, ogni giorno, ogni
 settimana e altro — e Snug salva i tuoi segnalibri direttamente nella cartella

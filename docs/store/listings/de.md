@@ -18,14 +18,16 @@ nicht.
 Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl, in
 gängigen Formaten wie HTML oder JSON. Importiere Dateien aus anderen
 Lesezeichen-Managern, die Bookmarks-Datei eines Chrome-Profils oder
-Safari-Lesezeichen, zuerst mit einer Vorschau. Dann entscheidest du: mit deinen
-vorhandenen Lesezeichen zusammenführen, sie komplett ersetzen oder alles in
-einem neuen Ordner ablegen – jedes Mal deine Entscheidung.
+Safari-Lesezeichen, zuerst mit einer Vorschau, die zeigt, was hinzugefügt,
+übersprungen und gelöscht wird. Du kannst mehrere Dateien auf einmal auswählen
+oder ablegen. Dann entscheidest du: mit deinen vorhandenen Lesezeichen
+zusammenführen, sie komplett ersetzen oder alles in einem neuen Ordner ablegen –
+jedes Mal deine Entscheidung.
 
 Vor jedem Ersetzen legt Snug eine Sicherheitskopie deiner Lesezeichen an, damit
-du es rückgängig machen kannst. Die Seite Duplikate findet doppelte Lesezeichen
-und löscht nur die, die du auswählst, und beim Import lassen sich Duplikate
-überspringen.
+du es rückgängig machen kannst. Die letzten fünf bleiben auf deinem Gerät. Die
+Seite Duplikate findet doppelte Lesezeichen und löscht nur die, die du
+auswählst, und beim Import lassen sich Duplikate überspringen.
 
 Richte einmal einen Zeitplan ein – stündlich, täglich, wöchentlich und mehr –,
 und Snug sichert deine Lesezeichen von selbst direkt in deinen Download-Ordner,

@@ -60,11 +60,11 @@
       },
       "preview": {
         "title": "Vorschau vor dem Import",
-        "body": "Importiere HTML-, JSON-, CSV- oder XBEL-Dateien, eine „Bookmarks“-Datei eines Chrome-Profils oder einen Safari-Export mit Favoriten und Leseliste. Snug erkennt das Format und zeigt eine Vorschau. Dann führst du zusammen, ersetzt oder legst alles in einem neuen Ordner ab."
+        "body": "Importiere HTML-, JSON-, CSV- oder XBEL-Dateien, eine „Bookmarks“-Datei eines Chrome-Profils oder einen Safari-Export mit Favoriten und Leseliste, auf Wunsch mehrere Dateien auf einmal. Snug erkennt das Format und zeigt in einer Vorschau, was hinzugefügt, übersprungen und gelöscht wird. Dann führst du zusammen, ersetzt oder legst alles in einem neuen Ordner ab. Beim Zusammenführen oder in einem neuen Ordner kannst du vorher Ordner und Lesezeichen abwählen."
       },
       "undo": {
         "title": "Ersetzen rückgängig machen",
-        "body": "Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot. Entspricht das Ergebnis nicht deinen Vorstellungen, stellst du ihn wieder her."
+        "body": "Vor dem Ersetzen speichert Snug einen Sicherheits-Snapshot. Die letzten fünf bleiben erhalten, und du kannst sie in den Einstellungen wiederherstellen."
       },
       "duplicates": {
         "title": "Duplikate bereinigen",
@@ -90,7 +90,7 @@
     },
     "alts": {
       "export": "Exportseite von Snug: ein Ordnerbaum der Lesezeichen, eine Formatauswahl und die Schaltfläche Exportieren",
-      "import": "Importvorschau von Snug: eine Liste von Lesezeichen zum Hinzufügen, Ändern oder Überspringen, mit den Optionen Zusammenführen, Ersetzen und Neu",
+      "import": "Importvorschau von Snug: eine Liste von Lesezeichen zum Hinzufügen, Überspringen oder Löschen, mit den Optionen Zusammenführen, Ersetzen und Neu",
       "autoExport": "Einstellungen für den automatischen Export in Snug: ein täglicher Zeitplan, drei Formate und der Zeitpunkt des nächsten Laufs",
       "popup": "Snug-Popup in der Symbolleiste mit einer einzigen Schaltfläche zum Exportieren aller Lesezeichen"
     }
@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Kann ich mehrere Dateien gleichzeitig importieren?",
-        "answer": "Nein. Snug importiert eine Datei nach der anderen. Um mehrere zu übernehmen, importiere sie nacheinander."
+        "answer": "Ja. Wähle auf der Importseite mehrere Dateien aus oder ziehe sie dorthin, und Snug importiert sie in einem Durchgang."
       },
       "permissions": {
         "question": "Warum braucht es Zugriff auf alle meine Lesezeichen?",
