@@ -1360,8 +1360,8 @@
     "description": "Error title when a snapshot cannot be downloaded"
   },
   "safetySnapshot_failedDescription": {
-    "message": "Chrome에서 다운로드를 차단했습니다. 다운로드 설정을 확인하고 다시 시도하세요.",
-    "description": "Error body when Chrome blocks the snapshot download"
+    "message": "브라우저에서 다운로드를 차단했습니다. 다운로드 설정을 확인하고 다시 시도하세요.",
+    "description": "Error body when the browser blocks the snapshot download"
   },
   "safetySnapshot_latest": {
     "message": "최신",
