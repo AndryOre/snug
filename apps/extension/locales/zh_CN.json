@@ -662,9 +662,26 @@
     "message": "导出失败",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
+  "popup_chooseFiles": {
     "message": "选择文件…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "$1 个文件 · $2 个书签"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "有 $1 个文件无法读取，已跳过"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "已导入 $1 个文件 · $2 个书签。"
+  },
+  "popup_openingImportTitle": {
+    "message": "正在打开导入页面",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "恢复 – 替换和较大的批量会在导入页面中打开。请在那里重新选择文件。",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "正在导入…",

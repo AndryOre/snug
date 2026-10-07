@@ -670,9 +670,28 @@
     "message": "Falha na exportação",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
-    "message": "Escolher arquivo…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+  "popup_chooseFiles": {
+    "message": "Escolher arquivos…",
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "$1 arquivos · $2 favoritos"
+  },
+  "popup_importSkippedFilesTitle": {
+    "1": "$1 arquivo não pôde ser lido e foi ignorado",
+    "n": "$1 arquivos não puderam ser lidos e foram ignorados"
+  },
+  "popup_importSkippedFilesResult": {
+    "1": "$1 arquivo importado · $2 favoritos.",
+    "n": "$1 arquivos importados · $2 favoritos."
+  },
+  "popup_openingImportTitle": {
+    "message": "Abrindo a página Importar",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "Restaurar – substituir e lotes grandes abrem a página Importar. Escolha os arquivos novamente lá.",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "Importando…",

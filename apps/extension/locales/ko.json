@@ -662,9 +662,26 @@
     "message": "내보내기에 실패했어요",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
+  "popup_chooseFiles": {
     "message": "파일 선택…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "파일 $1개 · 북마크 $2개"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "파일 $1개를 읽을 수 없어 건너뛰었습니다"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "파일 $1개 가져옴 · 북마크 $2개."
+  },
+  "popup_openingImportTitle": {
+    "message": "가져오기 페이지를 여는 중",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "복원 – 바꾸기와 큰 일괄 작업은 가져오기 페이지에서 열립니다. 그곳에서 파일을 다시 선택하세요.",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "가져오는 중…",

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
 import {
+  planPopupFileBatch,
   planPopupImport,
   planPopupImportBatch,
   POPUP_IMPORT_BOOKMARK_LIMIT,
@@ -196,5 +197,57 @@ describe('planPopupImportBatch', () => {
     expect(await planPopupImportBatch([request, request])).toEqual({
       kind: 'app',
     })
+  })
+})
+
+const BROKEN_JSON_REQUEST = {
+  ...csvRequest(1, 0),
+  text: '{not json',
+  fileName: 'broken.json',
+  mimeType: 'application/json',
+}
+
+describe('planPopupFileBatch', () => {
+  it('plans two small files as one Quick import with the summed count', async () => {
+    const result = await planPopupFileBatch([
+      csvRequest(3, 0),
+      csvRequest(2, 1000),
+    ])
+    expect(result.plan).toEqual({ kind: 'import', mode: 'folder' })
+    expect(result.readableRequests).toHaveLength(2)
+    expect(result.skippedFileCount).toBe(0)
+    expect(result.bookmarkCount).toBe(5)
+  })
+
+  it('skips unreadable files and plans the rest', async () => {
+    const empty = { ...csvRequest(1, 0), text: 'title,url', fileName: 'e.csv' }
+    const result = await planPopupFileBatch([
+      csvRequest(3, 0),
+      BROKEN_JSON_REQUEST,
+      empty,
+      csvRequest(2, 1000),
+    ])
+    expect(result.plan.kind).toBe('import')
+    expect(result.readableRequests.map((request) => request.fileName)).toEqual([
+      'file-0.csv',
+      'file-1000.csv',
+    ])
+    expect(result.skippedFileCount).toBe(2)
+    expect(result.bookmarkCount).toBe(5)
+  })
+
+  it('opens the App when the summed readable files pass the limit', async () => {
+    const half = POPUP_IMPORT_BOOKMARK_LIMIT / 2
+    const result = await planPopupFileBatch([
+      csvRequest(half, 0),
+      csvRequest(half + 1, 1000),
+    ])
+    expect(result.plan).toEqual({ kind: 'app' })
+  })
+
+  it('throws when no file is readable', async () => {
+    await expect(
+      planPopupFileBatch([BROKEN_JSON_REQUEST, BROKEN_JSON_REQUEST]),
+    ).rejects.toThrow()
   })
 })
