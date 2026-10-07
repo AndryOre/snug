@@ -1275,8 +1275,8 @@
     "description": "Error title when a snapshot cannot be downloaded"
   },
   "safetySnapshot_failedDescription": {
-    "message": "Chrome заблокировал загрузку. Проверьте настройки загрузок и повторите попытку.",
-    "description": "Error body when Chrome blocks the snapshot download"
+    "message": "Браузер заблокировал загрузку. Проверьте настройки загрузок и повторите попытку.",
+    "description": "Error body when the browser blocks the snapshot download"
   },
   "safetySnapshot_latest": {
     "message": "Последний",

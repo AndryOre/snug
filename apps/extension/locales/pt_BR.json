@@ -1301,8 +1301,8 @@
     "description": "Error title when a snapshot cannot be downloaded"
   },
   "safetySnapshot_failedDescription": {
-    "message": "O Chrome bloqueou o download. Verifique as configurações de download e tente novamente.",
-    "description": "Error body when Chrome blocks the snapshot download"
+    "message": "O navegador bloqueou o download. Verifique as configurações de download e tente novamente.",
+    "description": "Error body when the browser blocks the snapshot download"
   },
   "safetySnapshot_latest": {
     "message": "Mais recente",
