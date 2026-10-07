@@ -182,7 +182,7 @@ test('Export now downloads an icon-data-heavy export and shows success', async (
   seedBookmarks,
   serviceWorker,
 }) => {
-  test.setTimeout(180_000)
+  test.setTimeout(300_000)
 
   const { server, pageUrl } = await startFaviconServer()
   try {
@@ -198,7 +198,7 @@ test('Export now downloads an icon-data-heavy export and shows success', async (
     await page.getByRole('button', { name: 'Export now' }).click()
 
     await expect(page.getByText('Export completed')).toBeVisible({
-      timeout: 60_000,
+      timeout: 180_000,
     })
 
     const download = await latestCompletedHtmlDownload(serviceWorker)

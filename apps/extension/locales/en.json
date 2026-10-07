@@ -144,6 +144,10 @@
     "message": "Another import is already running. Wait for it to finish and try again.",
     "description": "Error shown when an import is started while another extension page is already importing"
   },
+  "importBatchReplaceNeedsOneFile": {
+    "message": "Restore – replace needs a single file.",
+    "description": "Error shown when a batch of two or more files is submitted in Restore-replace mode"
+  },
   "bookmarksImportedSuccessfully": {
     "message": "Bookmarks imported successfully!",
     "description": "Bookmarks imported successfully"

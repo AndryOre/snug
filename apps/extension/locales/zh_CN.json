@@ -142,6 +142,10 @@
     "message": "另一个导入正在进行中。请等待其完成后重试。",
     "description": "Error shown when an import is started while another extension page is already importing"
   },
+  "importBatchReplaceNeedsOneFile": {
+    "message": "恢复 – 替换只能使用单个文件。",
+    "description": "Error shown when a batch of two or more files is submitted in Restore-replace mode"
+  },
   "bookmarksImportedSuccessfully": {
     "message": "书签导入成功！",
     "description": "Bookmarks imported successfully"
