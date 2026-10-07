@@ -6,8 +6,8 @@ rename. Directories, Product Hunt, Show HN and Reddit have never listed the old
 name, so their copy does not mention it. The only conversion is installing from
 the Chrome Web Store.
 
-Nothing in the kit has been submitted or posted. Every submission needs a human
-confirmation first.
+Batches 1 to 3 were submitted on 2026-10-06 and 2026-10-07. The status of each
+row is in `directories.csv`. Every submission needs a human confirmation first.
 
 ## Kit index
 
@@ -125,7 +125,7 @@ Work the remaining directory rows. When a listing goes live, set `Status` and
 - [x] The accounts needed are logged in to the cws-dash Chrome.
 - [ ] Facts quoted in the copy match [`../store/README.md`](../store/README.md)
       and [`.agents/product-marketing.md`](../../.agents/product-marketing.md).
-- [ ] Every `Website URL` and `Install URL` in `directories.csv` opens and
+- [x] Every `Website URL` and `Install URL` in `directories.csv` opens and
       redirects correctly.
 - [x] Day D is set above.
 
