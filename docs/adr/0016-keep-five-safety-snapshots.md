@@ -1,4 +1,4 @@
-# 15. Keep the latest five Safety snapshots
+# 16. Keep the latest five Safety snapshots
 
 ## Status
 
