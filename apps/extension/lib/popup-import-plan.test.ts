@@ -3,6 +3,7 @@ import { fakeBrowser } from 'wxt/testing/fake-browser'
 
 import {
   planPopupImport,
+  planPopupImportBatch,
   POPUP_IMPORT_BOOKMARK_LIMIT,
 } from './popup-import-plan'
 import {
@@ -152,5 +153,48 @@ describe('planPopupImport', () => {
         skipDuplicates: true,
       }),
     ).rejects.toThrow('No bookmarks found')
+  })
+})
+
+function csvRequest(count: number, offset: number) {
+  const rows = Array.from(
+    { length: count },
+    (_, index) => `B ${index},https://batch-${offset + index}.example/page`,
+  )
+  return {
+    text: ['title,url', ...rows].join('\n'),
+    mimeType: 'text/csv',
+    fileName: `file-${offset}.csv`,
+    mode: 'folder' as const,
+    skipDuplicates: false,
+  }
+}
+
+describe('planPopupImportBatch', () => {
+  it('sums the files against the 200 rule', async () => {
+    const half = POPUP_IMPORT_BOOKMARK_LIMIT / 2
+    expect(
+      await planPopupImportBatch([csvRequest(half, 0), csvRequest(half, 1000)]),
+    ).toEqual({ kind: 'import', mode: 'folder' })
+    expect(
+      await planPopupImportBatch([
+        csvRequest(half, 0),
+        csvRequest(half + 1, 1000),
+      ]),
+    ).toEqual({ kind: 'app' })
+  })
+
+  it('counts a URL shared by two files once with Skip duplicates', async () => {
+    const same = { ...csvRequest(150, 0), skipDuplicates: true }
+    expect(
+      await planPopupImportBatch([same, { ...same, fileName: 'again.csv' }]),
+    ).toEqual({ kind: 'import', mode: 'folder' })
+  })
+
+  it('sends Restore-replace with two files to the App page', async () => {
+    const request = { ...csvRequest(1, 0), mode: 'restore-replace' as const }
+    expect(await planPopupImportBatch([request, request])).toEqual({
+      kind: 'app',
+    })
   })
 })
