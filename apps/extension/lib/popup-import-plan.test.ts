@@ -236,6 +236,14 @@ describe('planPopupFileBatch', () => {
     expect(result.bookmarkCount).toBe(5)
   })
 
+  it('skips a file whose read failed and came back as empty text', async () => {
+    const unreadable = { ...csvRequest(1, 0), text: '', fileName: 'gone.csv' }
+    const result = await planPopupFileBatch([unreadable, csvRequest(2, 1000)])
+    expect(result.plan.kind).toBe('import')
+    expect(result.skippedFileCount).toBe(1)
+    expect(result.bookmarkCount).toBe(2)
+  })
+
   it('opens the App when the summed readable files pass the limit', async () => {
     const half = POPUP_IMPORT_BOOKMARK_LIMIT / 2
     const result = await planPopupFileBatch([

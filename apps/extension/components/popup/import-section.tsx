@@ -60,6 +60,14 @@ interface BatchSummary {
   bookmarkCount: number
 }
 
+async function readFileTextOrEmpty(file: File): Promise<string> {
+  try {
+    return await file.text()
+  } catch {
+    return ''
+  }
+}
+
 function describeSkippedBookmarks(result: ImportResult): string[] {
   return [
     result.skippedDuplicates > 0
@@ -166,7 +174,7 @@ export function ImportSection() {
     const shouldSkipDuplicates = await skipDuplicatesStore.getValue()
     const requests = await Promise.all(
       files.map(async (file) => ({
-        text: await file.text(),
+        text: await readFileTextOrEmpty(file),
         mimeType: file.type,
         fileName: file.name,
         mode,
