@@ -1,7 +1,7 @@
 # Launch kit
 
 The plan and index for the Snug 2.0 launch. Snug was "Bookmark Import/Export"
-until the 2.0 rename. Only X and YouTube, the maker's own channels, announce the
+until the 2.0 rename. Only YouTube, the maker's own channel, announces the
 rename. Directories, Product Hunt, Show HN and Reddit have never listed the old
 name, so their copy does not mention it. The only conversion is installing from
 the Chrome Web Store.
@@ -30,13 +30,13 @@ A Campaign tag matches `^[A-Za-z0-9_-]{1,32}$` and is unique per channel.
 Landing page links use `https://snug.andryore.dev/?c=<tag>`. Install redirect
 links use `https://snug.andryore.dev/install?c=<tag>`. The tag comes from the
 `Campaign Tag` column of `directories.csv`. Reserved tags: `producthunt`, `hn`,
-`reddit-<sub>`, `x`, `youtube`, `github`.
+`reddit-<sub>`, `youtube`, `github`. The `x` tag is unused: the maker does not
+post on X.
 
 ## Channel map (ORB)
 
 | Type     | Channel                                                  | Campaign tag                                                          | Copy                                                                                                                                                                                                                         |
 | -------- | -------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Owned    | X                                                        | `x`                                                                   | [X](copy/community.md#x)                                                                                                                                                                                                     |
 | Owned    | YouTube                                                  | `youtube`                                                             | [YouTube](copy/community.md#youtube)                                                                                                                                                                                         |
 | Owned    | GitHub repository                                        | `github`                                                              | Plain repository link, no `c=` value on the repository itself                                                                                                                                                                |
 | Rented   | Product Hunt                                             | `producthunt`                                                         | [Product Hunt](copy/community.md#product-hunt)                                                                                                                                                                               |
@@ -72,7 +72,7 @@ Saturdays and 1126 on Tuesdays. D = **2026-10-11**.
 | Before D    | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
 | Week 1      | Batch 1 directories, submitted before D                                            |
 | Before D    | Batch 2 and Batch 3 directories, submitted or scheduled                            |
-| Day D       | Product Hunt, X thread, YouTube community post and description refresh             |
+| Day D       | Product Hunt, YouTube community post and description refresh                       |
 | D+2 to D+7  | Show HN, then the three Reddit posts, one per day                                  |
 | D+8 to D+29 | Finish any directory still in `Draft`; answer comments                             |
 | Day 30      | Wrap-up with the template below                                                    |
@@ -89,7 +89,6 @@ submitted or posted. Andry confirms or submits.
 | Product Hunt           | Fills the draft from [Product Hunt](copy/community.md#product-hunt)                 | Reviews and publishes; answers comments all day                                             |
 | Reddit                 | Fills each post from [Reddit](copy/community.md#reddit); checks the sub rules first | Confirms and submits                                                                        |
 | Show HN                | Nothing to fill                                                                     | Posts from [Show HN](copy/community.md#show-hn) and adds the first comment                  |
-| X                      | Nothing to fill                                                                     | Posts the [X](copy/community.md#x) thread                                                   |
 | YouTube                | Nothing to fill                                                                     | Posts the [YouTube](copy/community.md#youtube) community post and refreshes the description |
 
 ### Week 1
@@ -102,7 +101,7 @@ submitted or posted. Andry confirms or submits.
 
 1. Re-check the facts that move (see the pre-launch checklist).
 2. Claude has the Product Hunt draft ready; Andry publishes it.
-3. Andry posts X and YouTube.
+3. Andry posts on YouTube.
 4. Andry stays on Product Hunt comments through the day.
 
 ### D+2 to D+7
