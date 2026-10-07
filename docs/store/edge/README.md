@@ -1,7 +1,7 @@
 # Microsoft Edge Add-ons listing pack for Snug v2.0.0
 
 A field-by-field mirror of the Partner Center "Update" flow for the existing
-Edge product (product ID `0RDCK9J6Z4VS`, extension ID
+Edge product (Store ID `0RDCK9J6Z4VS`, extension ID
 `efknehclgcncocgochoibgiiagklcnho`). Every field is a plain-text block you can
 copy straight into Partner Center, with a character count next to each limited
 field. Nothing in this pack has been uploaded or submitted.
@@ -423,8 +423,8 @@ Snug makes no network requests and loads no remote code. All data stays on the d
    Bookmarks files". Re-capture or skip any slide that names another browser.
 4. **Logo.** `assets/edge-logo-300.png` is generated (300x300 PNG). Regenerate
    with `bun run brand:export` if the brand mark changes.
-5. **Partner Center, existing product `0RDCK9J6Z4VS`.** Do not create a new
-   product. Open the product, start an update.
+5. **Partner Center, existing product (Store ID `0RDCK9J6Z4VS`).** Do not create
+   a new product. Open the product, start an update.
 6. **Properties page.** Category Productivity, privacy policy URL, mature
    content off.
 7. **Availability page.** Free, public, all markets (confirm unchanged).

@@ -78,7 +78,9 @@
    This job runs in the `edge-add-ons` GitHub Environment, which must hold these
    secrets:
 
-   - `EDGE_PRODUCT_ID` — the product ID of the extension in Partner Center.
+   - `EDGE_PRODUCT_ID` — the Product ID (a GUID) shown on the extension's
+     Partner Center overview page. It is not the short Store ID
+     (`0RDCK9J6Z4VS`).
    - `EDGE_CLIENT_ID` — the client ID shown on the Partner Center Publish API
      page.
    - `EDGE_API_KEY` — the API key generated on the same page.
