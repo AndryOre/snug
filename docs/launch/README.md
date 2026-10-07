@@ -67,15 +67,15 @@ Day D is a Sunday, the least crowded Product Hunt day: over eight weeks the
 Product Hunt API showed an average of 515 launches on Sundays, against 660 on
 Saturdays and 1126 on Tuesdays. D = **2026-10-11**.
 
-| When        | What                                                                                |
-| ----------- | ----------------------------------------------------------------------------------- |
-| Before D    | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/`  |
-| Week 1      | Batch 1 directories, submitted before D                                             |
-| Before D    | Batch 2 and Batch 3 directories, submitted or scheduled                             |
-| Day D       | Product Hunt, YouTube community post and description refresh                        |
-| D+2 to D+7  | Show HN and Reddit, moved up: Reddit went out on 2026-10-07, Show HN is the maker's |
-| D+8 to D+29 | Finish any directory still in `Draft`; answer comments                              |
-| Day 30      | Wrap-up with the template below                                                     |
+| When        | What                                                                               |
+| ----------- | ---------------------------------------------------------------------------------- |
+| Before D    | Pre-launch checklist below. Gallery, thumbnail and header are already in `assets/` |
+| Week 1      | Batch 1 directories, submitted before D                                            |
+| Before D    | Batch 2 and Batch 3 directories, submitted or scheduled                            |
+| Day D       | Product Hunt, YouTube community post and description refresh                       |
+| D+2 to D+7  | Show HN and Reddit, moved up: both went out on 2026-10-07                          |
+| D+8 to D+29 | Finish any directory still in `Draft`; answer comments                             |
+| Day 30      | Wrap-up with the template below                                                    |
 
 ## Runbook: who does what
 
@@ -106,7 +106,9 @@ submitted or posted. Andry confirms or submits.
 
 ### D+2 to D+7
 
-1. Andry posts Show HN and adds the first comment.
+1. Show HN was posted on 2026-10-07 with the repository URL. HN killed the first
+   comment because the account has 1 karma. HN bans generated text, so write any
+   comment by hand.
 2. Reddit was moved ahead of day D and posted on 2026-10-07 at the maker's
    request. The account has almost no karma, so r/opensource removed its post
    and Reddit's spam filter removed the r/chrome_extensions one. Build karma
