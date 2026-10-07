@@ -17,6 +17,8 @@ Related files:
 
 - [`screenshots.md`](screenshots.md) — the global English screenshot set and the
   ten localized sets.
+- [`edge/`](edge/README.md) — the Microsoft Edge Add-ons listing pack for the
+  existing Edge product (Partner Center), with browser-neutral copy.
 - [`baseline-2026-09.md`](baseline-2026-09.md) — pre-rename analytics, for
   comparison after the rename.
 - [`assets/`](assets/) — promo tiles and screenshots.

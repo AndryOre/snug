@@ -483,6 +483,7 @@ try {
 
   const storeAssets = path.join(repoRoot, 'docs/store/assets')
   await renderIcon(browser, 128, path.join(storeAssets, 'store-icon-128.png'))
+  await renderIcon(browser, 300, path.join(storeAssets, 'edge-logo-300.png'))
   await renderSmallTile(
     browser,
     path.join(storeAssets, 'small-tile-440x280.png'),

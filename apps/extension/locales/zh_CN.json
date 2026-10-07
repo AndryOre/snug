@@ -7,6 +7,10 @@
     "message": "以常见格式导出书签，从 Chrome 或 Safari 导入，并定时备份。全程在本机完成。",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "以常见格式导出、导入并定时备份书签。所有数据都保留在本地。",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "导出、导入并备份你的书签——全程在你的设备上完成。",
     "description": "Welcome page subtitle"
@@ -894,7 +898,7 @@
   },
   "extensionManifestName": {
     "message": "Snug：书签导出、导入与备份",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "下载 $ID$ 已中断。",
@@ -1231,12 +1235,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "在 Chrome 应用商店留下真实评价，能帮助更多人发现它。",
+    "message": "在商店留下真实的评价，能帮助更多人发现它。",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "撰写评价",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "以后再说",

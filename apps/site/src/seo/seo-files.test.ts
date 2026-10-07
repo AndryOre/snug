@@ -275,6 +275,12 @@ describe('root file routes', () => {
     expect(text).toMatch(/^# Snug\n/)
     expect(text).toContain(`${SITE_ORIGIN}/install`)
     expect(text).not.toContain('chromewebstore.google.com')
+    expect(text).toContain(
+      'redirects to the Chrome Web Store or Microsoft Edge Add-ons listing',
+    )
+    expect(text).toContain(
+      'microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho',
+    )
     for (const locale of LOCALES) {
       expect(text).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }
