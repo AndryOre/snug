@@ -1,3 +1,5 @@
+import { i18n } from '#i18n'
+
 import { countBookmarks, countImportableBookmarks } from './count-bookmarks'
 import { ImportWriter, withImportRollback } from './import-control'
 import { withImportLock } from './import-lock'
@@ -8,6 +10,7 @@ import {
   loadLiveRootTitles,
   resolveImportRoots,
 } from './importers/resolve-roots'
+import { runImport } from './run-import'
 import { collectExistingUrls, dropDuplicateBookmarks } from './skip-duplicates'
 import type {
   ImportMode,
@@ -36,7 +39,7 @@ export interface ImportBatchFile {
  */
 export class ImportBatchReplaceError extends Error {
   constructor() {
-    super('Restore - replace cannot import more than one file')
+    super(i18n.t('importBatchReplaceNeedsOneFile'))
     this.name = 'ImportBatchReplaceError'
   }
 }
@@ -65,13 +68,16 @@ export function stripFileExtension(fileName: string): string {
  * duplicates carries across files in pick order, so a URL shared by two files
  * is created once. In Folder mode with two or more files every file gets its
  * own folder named after it, extension stripped; a single file keeps
- * "Imported bookmarks", and CSV always reuses that folder.
+ * "Imported bookmarks", and CSV always reuses that folder. A single-file
+ * Restore-replace is delegated to `runImport`, which owns the Safety snapshot,
+ * the abort check before deleting and the restore after a failure.
  * @param files The files, in pick order.
  * @param mode How the bookmarks are written; Restore-replace needs one file.
  * @param options Import options; `signal` cancels the whole batch and
  *   `onProgress` reports one total across all files.
  * @returns The summed import result.
- * @throws {ImportBatchReplaceError} For Restore-replace with 2+ files.
+ * @throws {ImportBatchReplaceError} For Restore-replace with anything but
+ *   exactly one file.
  * @throws {ImportLockHeldError} When another extension page is importing.
  * @throws {ImportCanceledError} After a cancel, once everything the batch
  *   created, in every file, is removed.
@@ -81,9 +87,19 @@ export function runImportBatch(
   mode: ImportMode,
   options: ImportOptions = {},
 ): Promise<ImportResult> {
-  return mode === 'restore-replace' && files.length > 1
-    ? Promise.reject(new ImportBatchReplaceError())
-    : withImportLock(() => importBatchUnlocked(files, mode, options))
+  if (mode !== 'restore-replace') {
+    return withImportLock(() => importBatchUnlocked(files, mode, options))
+  }
+  const [onlyFile] = files
+  return onlyFile && files.length === 1
+    ? runImport(
+        onlyFile.text,
+        onlyFile.mimeType,
+        mode,
+        onlyFile.fileName,
+        options,
+      )
+    : Promise.reject(new ImportBatchReplaceError())
 }
 
 async function importBatchUnlocked(

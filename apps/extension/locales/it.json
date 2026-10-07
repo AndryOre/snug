@@ -144,6 +144,10 @@
     "message": "È già in corso un'altra importazione. Attendi che termini e riprova.",
     "description": "Error shown when an import is started while another extension page is already importing"
   },
+  "importBatchReplaceNeedsOneFile": {
+    "message": "Ripristina – sostituisci richiede un solo file.",
+    "description": "Error shown when a batch of two or more files is submitted in Restore-replace mode"
+  },
   "bookmarksImportedSuccessfully": {
     "message": "Segnalibri importati correttamente!",
     "description": "Bookmarks imported successfully"

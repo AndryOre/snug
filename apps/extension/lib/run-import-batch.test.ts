@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import type { Browser } from '@wxt-dev/browser'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
 import { ImportCanceledError, type ImportProgress } from './import-control'
@@ -9,7 +9,12 @@ import {
   runImportBatch,
   stripFileExtension,
 } from './run-import-batch'
+import { readLatestSafetySnapshot } from './safety-snapshot'
 import { resetFakeBookmarks } from './testing/fake-bookmarks'
+
+vi.mock('./offscreen-download', () => ({
+  downloadViaOffscreenDocument: vi.fn().mockResolvedValue(1),
+}))
 
 function htmlFile(urls: string[]): string {
   const links = urls.map((url) => `<DT><A HREF="${url}">${url}</A>`).join('\n')
@@ -146,6 +151,25 @@ describe('runImportBatch', () => {
         'restore-replace',
       ),
     ).rejects.toBeInstanceOf(ImportBatchReplaceError)
+  })
+
+  it('takes a Safety snapshot before a single-file Restore-replace', async () => {
+    const [root] = await browser.bookmarks.getTree()
+    const bar = root?.children?.[0]
+    await browser.bookmarks.create({
+      parentId: bar?.id,
+      title: 'Old',
+      url: 'https://old.example/',
+    })
+
+    await runImportBatch(
+      [batchFile('a.html', ['https://new.example/'])],
+      'restore-replace',
+    )
+
+    const stored = await readLatestSafetySnapshot()
+    expect(stored?.roots[0]?.children?.[0]?.url).toBe('https://old.example/')
+    expect(await allUrls()).toEqual(['https://new.example/'])
   })
 
   it('writes a pruned tree instead of the parsed one', async () => {

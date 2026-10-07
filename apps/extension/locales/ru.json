@@ -142,6 +142,10 @@
     "message": "Другой импорт уже выполняется. Дождитесь его завершения и повторите попытку.",
     "description": "Error shown when an import is started while another extension page is already importing"
   },
+  "importBatchReplaceNeedsOneFile": {
+    "message": "Восстановление – замена требует один файл.",
+    "description": "Error shown when a batch of two or more files is submitted in Restore-replace mode"
+  },
   "bookmarksImportedSuccessfully": {
     "message": "Закладки импортированы!",
     "description": "Bookmarks imported successfully"
