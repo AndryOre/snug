@@ -237,3 +237,44 @@ test('a file whose bookmarks all exist creates no folder and says nothing was im
     otherBookmarks?.children?.some((n) => n.title === 'Imported bookmarks'),
   ).toBe(false)
 })
+
+test('several files quick import in one run and an unreadable one is skipped and reported', async ({
+  openExtensionPage,
+  readBookmarkTree,
+}) => {
+  const popup = await openExtensionPage('popup.html')
+  await popup.locator('input[type="file"]').setInputFiles([
+    {
+      name: 'bookmarks.csv',
+      mimeType: 'text/csv',
+      buffer: Buffer.from(
+        'title,url\nFirst A,https://first-a.example/page\nFirst B,https://first-b.example/page',
+      ),
+    },
+    {
+      name: 'broken.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from('{not json'),
+    },
+    {
+      name: 'second.csv',
+      mimeType: 'text/csv',
+      buffer: Buffer.from('title,url\nSecond A,https://second-a.example/page'),
+    },
+  ])
+
+  await expect(
+    popup.getByText("1 file couldn't be read and was skipped"),
+  ).toBeVisible()
+
+  const [root] = await readBookmarkTree()
+  const otherBookmarks = root?.children?.find((n) => n.id === '2')
+  const importedFolder = otherBookmarks?.children?.find(
+    (n) => n.title === 'Imported bookmarks',
+  )
+  expect(importedFolder?.children?.map((n) => n.url)).toEqual([
+    'https://first-a.example/page',
+    'https://first-b.example/page',
+    'https://second-a.example/page',
+  ])
+})
