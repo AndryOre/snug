@@ -9,9 +9,13 @@ import {
   type ExportTicker,
 } from '@/lib/export-control'
 import { getFaviconBase64 } from '@/lib/favicon'
+import {
+  isBookmarksBar,
+  isOtherBookmarks,
+  ROOT_FOLDER_IDS,
+} from '@/lib/root-folders'
+import { millisecondsToSeconds } from '@/lib/timestamps'
 import type { ExtendedBookmarkTreeNode } from '@/lib/types'
-
-import { isBookmarksBar, isOtherBookmarks } from './root-folders'
 
 interface ExportCSVOptions extends ExportControl {
   selectedBookmarks: ExtendedBookmarkTreeNode[] | null
@@ -116,13 +120,13 @@ async function flattenToRows(
 
       if (options.includeDateAdded) {
         row.dateAdded = node.dateAdded
-          ? Math.floor(node.dateAdded / 1000)
+          ? millisecondsToSeconds(node.dateAdded)
           : undefined
       }
 
       if (options.includeDateLastUsed) {
         row.dateLastUsed = node.dateLastUsed
-          ? Math.floor(node.dateLastUsed / 1000)
+          ? millisecondsToSeconds(node.dateLastUsed)
           : undefined
       }
 
@@ -163,7 +167,7 @@ function getFolderLabel(
   node: ExtendedBookmarkTreeNode,
   shouldHideParentFolder: boolean,
 ): string {
-  if (node.id === '0') return ''
+  if (node.id === ROOT_FOLDER_IDS.virtualRoot) return ''
   if (isBookmarksBar(node)) return escapeFolderSegment(i18n.t('bookmarksBar'))
   if (isOtherBookmarks(node))
     return escapeFolderSegment(i18n.t('otherBookmarks'))

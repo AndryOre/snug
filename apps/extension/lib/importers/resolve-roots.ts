@@ -1,5 +1,6 @@
 import type { Browser } from '@wxt-dev/browser'
 
+import { ROOT_FOLDER_IDS } from '@/lib/root-folders'
 import type { ParsedBookmark } from '@/lib/types'
 
 /**
@@ -156,9 +157,24 @@ export function resolveSplitRootTargets<T extends RootChildNode>(
 export function resolveImportRoots<T extends RootChildNode>(
   rootChildren: T[],
 ): ResolvedImportRoots {
-  const bookmarksBarNode = resolveRoot(rootChildren, 'bookmarks-bar', '1', 0)
-  const otherBookmarksNode = resolveRoot(rootChildren, 'other', '2', 1)
-  const mobileNode = resolveRoot(rootChildren, 'mobile', '3', 2)
+  const bookmarksBarNode = resolveRoot(
+    rootChildren,
+    'bookmarks-bar',
+    ROOT_FOLDER_IDS.bookmarksBar,
+    0,
+  )
+  const otherBookmarksNode = resolveRoot(
+    rootChildren,
+    'other',
+    ROOT_FOLDER_IDS.otherBookmarks,
+    1,
+  )
+  const mobileNode = resolveRoot(
+    rootChildren,
+    'mobile',
+    ROOT_FOLDER_IDS.mobileBookmarks,
+    2,
+  )
 
   return {
     bookmarksBarId: bookmarksBarNode?.id,
@@ -181,9 +197,24 @@ export function resolveImportRoots<T extends RootChildNode>(
 export function resolveImportRootTitles<T extends RootTitleNode>(
   rootChildren: T[],
 ): ResolvedImportRootTitles {
-  const bookmarksBarNode = resolveRoot(rootChildren, 'bookmarks-bar', '1', 0)
-  const otherBookmarksNode = resolveRoot(rootChildren, 'other', '2', 1)
-  const mobileNode = resolveRoot(rootChildren, 'mobile', '3', 2)
+  const bookmarksBarNode = resolveRoot(
+    rootChildren,
+    'bookmarks-bar',
+    ROOT_FOLDER_IDS.bookmarksBar,
+    0,
+  )
+  const otherBookmarksNode = resolveRoot(
+    rootChildren,
+    'other',
+    ROOT_FOLDER_IDS.otherBookmarks,
+    1,
+  )
+  const mobileNode = resolveRoot(
+    rootChildren,
+    'mobile',
+    ROOT_FOLDER_IDS.mobileBookmarks,
+    2,
+  )
 
   return {
     bookmarksBarTitle: bookmarksBarNode?.title,

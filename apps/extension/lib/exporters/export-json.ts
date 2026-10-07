@@ -5,9 +5,13 @@ import {
   type ExportTicker,
 } from '@/lib/export-control'
 import { getFaviconBase64 } from '@/lib/favicon'
+import {
+  isBookmarksBar,
+  isOtherBookmarks,
+  ROOT_FOLDER_IDS,
+} from '@/lib/root-folders'
+import { millisecondsToSeconds } from '@/lib/timestamps'
 import type { ExtendedBookmarkTreeNode } from '@/lib/types'
-
-import { isBookmarksBar, isOtherBookmarks } from './root-folders'
 
 interface ExportJSONOptions extends ExportControl {
   selectedBookmarks: ExtendedBookmarkTreeNode[] | null
@@ -23,8 +27,6 @@ type NodeOptions = Omit<
   ExportJSONOptions,
   'selectedBookmarks' | keyof ExportControl
 > & { ticker: ExportTicker }
-
-const toSeconds = (ms: number): number => Math.floor(ms / 1000)
 
 /**
  * Exports bookmarks as a single-element array wrapping an `id="0"` root node,
@@ -81,10 +83,10 @@ export async function exportToJSON(
   delete root.index
   delete root.dateLastUsed
   delete root.iconData
-  if (root.dateAdded) root.dateAdded = toSeconds(root.dateAdded)
+  if (root.dateAdded) root.dateAdded = millisecondsToSeconds(root.dateAdded)
   if (!includeDateAdded) delete root.dateAdded
   if (root.dateGroupModified)
-    root.dateGroupModified = toSeconds(root.dateGroupModified)
+    root.dateGroupModified = millisecondsToSeconds(root.dateGroupModified)
   if (!includeDateGroupModified) delete root.dateGroupModified
 
   return [root]
@@ -102,7 +104,7 @@ function isPreservedRoot(node: ExtendedBookmarkTreeNode): boolean {
   return (
     node.folderType === 'mobile' ||
     node.folderType === 'managed' ||
-    node.id === '3'
+    node.id === ROOT_FOLDER_IDS.mobileBookmarks
   )
 }
 
@@ -145,11 +147,11 @@ async function processNode(
     const processed: ExtendedBookmarkTreeNode = { ...node }
 
     if (processed.dateAdded)
-      processed.dateAdded = toSeconds(processed.dateAdded)
+      processed.dateAdded = millisecondsToSeconds(processed.dateAdded)
     if (!options.includeDateAdded) delete processed.dateAdded
 
     if (processed.dateLastUsed)
-      processed.dateLastUsed = toSeconds(processed.dateLastUsed)
+      processed.dateLastUsed = millisecondsToSeconds(processed.dateLastUsed)
     if (!options.includeDateLastUsed) delete processed.dateLastUsed
 
     if (options.includeIconData) {
@@ -165,7 +167,7 @@ async function processNode(
 
     if (
       options.hideParentFolder &&
-      node.id !== '0' &&
+      node.id !== ROOT_FOLDER_IDS.virtualRoot &&
       !isBookmarksBar(node) &&
       !isOtherBookmarks(node) &&
       !isPreservedRoot(node)
@@ -188,11 +190,12 @@ async function processNode(
     delete folder.dateLastUsed
     delete folder.iconData
 
-    if (folder.dateAdded) folder.dateAdded = toSeconds(folder.dateAdded)
+    if (folder.dateAdded)
+      folder.dateAdded = millisecondsToSeconds(folder.dateAdded)
     if (!options.includeDateAdded) delete folder.dateAdded
 
     if (folder.dateGroupModified)
-      folder.dateGroupModified = toSeconds(folder.dateGroupModified)
+      folder.dateGroupModified = millisecondsToSeconds(folder.dateGroupModified)
     if (!options.includeDateGroupModified) delete folder.dateGroupModified
 
     return [folder]
