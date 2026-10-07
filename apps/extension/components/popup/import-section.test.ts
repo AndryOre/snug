@@ -76,11 +76,26 @@ function chooseFileButton(harness: DomHarness): HTMLButtonElement {
   return button
 }
 
-async function pick(input: HTMLInputElement, file: File) {
-  Object.defineProperty(input, 'files', { value: [file], configurable: true })
+async function pick(input: HTMLInputElement, files: File | File[]) {
+  Object.defineProperty(input, 'files', {
+    value: Array.isArray(files) ? files : [files],
+    configurable: true,
+  })
   await act(async () => {
     input.dispatchEvent(new Event('change', { bubbles: true }))
   })
+}
+
+async function createdUrls(): Promise<string[]> {
+  const urls: string[] = []
+  const visit = (node: Browser.bookmarks.BookmarkTreeNode) => {
+    if (node.url) urls.push(node.url)
+    const children = node.children ?? []
+    for (const child of children) visit(child)
+  }
+  const roots = await browser.bookmarks.getTree()
+  for (const root of roots) visit(root)
+  return urls
 }
 
 async function settle() {
@@ -187,5 +202,54 @@ describe('popup ImportSection', () => {
         description: 'importAnotherRunning',
       }),
     )
+  })
+
+  it('quick imports two small files in one run', async () => {
+    const { input } = await mountSection()
+
+    await pick(input, [csvFile(2, 'first'), csvFile(3, 'second')])
+    await settle()
+
+    expect(runImportMock).not.toHaveBeenCalled()
+    expect(await createdUrls()).toContain('https://first-1.example/page')
+    expect(await createdUrls()).toContain('https://second-2.example/page')
+    expect(toastAddMock).toHaveBeenCalledTimes(1)
+    expect(toastAddMock.mock.calls[0]?.[0]).toMatchObject({
+      type: 'success',
+      title: 'popup_importSuccessTitle',
+    })
+  })
+
+  it('opens the App Import page for a batch over the limit', async () => {
+    const { input } = await mountSection()
+    const half = POPUP_IMPORT_BOOKMARK_LIMIT / 2
+
+    await pick(input, [csvFile(half, 'a'), csvFile(half + 1, 'b')])
+    await settle()
+
+    expect(fakeBrowser.tabs.create).toHaveBeenCalledWith({
+      url: getAppUrl(APP_ROUTES.import),
+    })
+    expect(toastAddMock.mock.calls[0]?.[0]).toMatchObject({
+      title: 'popup_openingImportTitle',
+    })
+    expect(await createdUrls()).not.toContain('https://a-1.example/page')
+  })
+
+  it('skips an unreadable file and reports it', async () => {
+    const { input } = await mountSection()
+    const invalid = new File(['{not json'], 'broken.json', {
+      type: 'application/json',
+    })
+
+    await pick(input, [csvFile(2, 'first'), invalid, csvFile(3, 'second')])
+    await settle()
+
+    expect(await createdUrls()).toContain('https://second-2.example/page')
+    expect(toastAddMock).toHaveBeenCalledTimes(1)
+    expect(toastAddMock.mock.calls[0]?.[0]).toMatchObject({
+      type: 'warning',
+      title: 'popup_importSkippedFilesTitle',
+    })
   })
 })

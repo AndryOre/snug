@@ -1,7 +1,7 @@
 import { i18n } from '#i18n'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { toast } from '@workspace/ui/components/toast'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { ExportOptionsPanel } from '@/components/export-options-panel'
 import { BookmarkTree } from '@/components/export/bookmark-tree'
@@ -22,34 +22,8 @@ import { markReviewPromptEligible } from '@/lib/review-prompt'
 import { lastExportFormatStore } from '@/lib/storage'
 import type { BookmarkTreeHandle, CheckedState } from '@/lib/types'
 import { useOperationProgress } from '@/lib/use-operation-progress'
+import { useSlashToFocus } from '@/lib/use-slash-to-focus'
 import { useStorageItem } from '@/lib/use-storage-item'
-
-function isTypingTarget(target: EventTarget | null): boolean {
-  return (
-    target instanceof HTMLElement &&
-    (target.isContentEditable ||
-      ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
-  )
-}
-
-/**
- * Focuses the given input when the user presses "/" outside any text field.
- * @param inputReference Ref to the input that should receive focus.
- */
-function useSlashToFocus(inputReference: React.RefObject<HTMLElement | null>) {
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const hasModifier = event.ctrlKey || event.metaKey || event.altKey
-      if (hasModifier || event.key !== '/' || isTypingTarget(event.target)) {
-        return
-      }
-      event.preventDefault()
-      inputReference.current?.focus()
-    }
-    globalThis.addEventListener('keydown', handleKeyDown)
-    return () => globalThis.removeEventListener('keydown', handleKeyDown)
-  }, [inputReference])
-}
 
 function getMasterState(selected: number, total: number): CheckedState {
   return (

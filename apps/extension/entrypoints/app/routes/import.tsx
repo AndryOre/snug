@@ -15,32 +15,37 @@ import {
 } from '@workspace/ui/components/alert-dialog'
 import { Button } from '@workspace/ui/components/button'
 import { Spinner } from '@workspace/ui/components/spinner'
+import type { Browser } from '@wxt-dev/browser'
 import {
   CircleAlertIcon,
   CircleCheckIcon,
   CircleSlashIcon,
+  InfoIcon,
   Undo2Icon,
 } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { SubmitEvent } from 'react'
 
+import { ImportAllDuplicates } from '@/components/import/import-all-duplicates'
 import { ImportFileStep } from '@/components/import/import-file-step'
 import { ImportModeStep } from '@/components/import/import-mode-step'
+import { ImportPreviewSkeleton } from '@/components/import/import-preview-skeleton'
 import { ImportPreviewStep } from '@/components/import/import-preview-step'
-import { ImportReplaceDiffAlert } from '@/components/import/import-replace-diff-alert'
+import { ImportPreviewTree } from '@/components/import/import-preview-tree'
+import { ImportReplaceDeletions } from '@/components/import/import-replace-deletions'
 import { ImportSkipDuplicates } from '@/components/import/import-skip-duplicates'
 import { ImportStep } from '@/components/import/import-step'
 import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
 import { OperationProgressCard } from '@/components/operation-progress-card'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError, wasImportRestored } from '@/lib/import-control'
-import { summarizeImportDuplicates } from '@/lib/import-duplicates'
-import type { ImportDuplicateSummary } from '@/lib/import-duplicates'
+import { buildImportPlan } from '@/lib/import-plan'
 import { getImportPreview } from '@/lib/import-preview'
-import { loadLiveRootTitles } from '@/lib/importers/resolve-roots'
+import { toPreviewNodes } from '@/lib/import-preview-tree'
+import { parseImportFile } from '@/lib/importers/parse-import'
+import type { ParsedImportFile } from '@/lib/importers/parse-import'
+import { resolveImportRootTitles } from '@/lib/importers/resolve-roots'
 import { createLatestOnly } from '@/lib/latest-only'
-import { getReplaceDiff } from '@/lib/replace-diff'
-import type { ReplaceDiff } from '@/lib/replace-diff'
 import { runImport } from '@/lib/run-import'
 import { restoreSafetySnapshot } from '@/lib/safety-snapshot'
 import type { SafetySnapshot } from '@/lib/safety-snapshot'
@@ -71,30 +76,24 @@ function openBookmarkManager() {
 }
 
 interface ChosenFile {
+  id: string
   file: File
   text: string
   preview: ImportPreview
-  replaceDiff: ReplaceDiff | null
-  duplicates: ImportDuplicateSummary
+  parsed: ParsedImportFile
+  liveTree: Browser.bookmarks.BookmarkTreeNode[]
 }
 
 async function analyzeFile(file: File) {
   const text = await file.text()
-  const parsed = getImportPreview(
-    text,
-    file.type,
-    file.name,
-    await loadLiveRootTitles(),
-  )
-  const replaceDiff =
-    parsed.format !== 'unknown' && parsed.hasLocationData
-      ? await getReplaceDiff(parsed)
-      : null
-  const duplicates =
-    parsed.format === 'unknown'
-      ? { skippedDuplicates: 0, importableCount: 0 }
-      : await summarizeImportDuplicates(text, file.type, file.name)
-  return { text, parsed, replaceDiff, duplicates }
+  const liveTree = await browser.bookmarks.getTree()
+  const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
+  const preview = getImportPreview(text, file.type, file.name, liveRootTitles)
+  if (preview.format === 'unknown') {
+    throw new Error(i18n.t('unsupportedFileFormat'))
+  }
+  const parsed = parseImportFile(text, file.type, file.name, liveRootTitles)
+  return { id: crypto.randomUUID(), text, preview, parsed, liveTree }
 }
 
 /**
@@ -113,6 +112,10 @@ export function ImportRoute() {
     useStorageItem(skipDuplicatesStore)
   const [status, setStatus] = useState<ImportStatus>('idle')
   const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [analysisError, setAnalysisError] = useState<{
+    file: File
+    message: string
+  } | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [wasRestored, setWasRestored] = useState(false)
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
@@ -127,13 +130,33 @@ export function ImportRoute() {
   const effectiveMode: ImportMode = hasLocationData ? storedMode : 'folder'
   const isImporting = status === 'importing'
   const isBusy = isImporting || isAnalyzing
-  const isEmpty = isSupported && preview.totalCount === 0
-  const isSkippingDuplicates =
-    skipDuplicates && effectiveMode !== 'restore-replace'
-  const importCount =
-    isSkippingDuplicates && chosen
-      ? chosen.duplicates.importableCount
-      : (preview?.totalCount ?? 0)
+  const isReplace = effectiveMode === 'restore-replace'
+  const isSkippingDuplicates = skipDuplicates && !isReplace
+
+  const plan = useMemo(
+    () =>
+      chosen
+        ? buildImportPlan({
+            files: [{ name: chosen.file.name, file: chosen.parsed }],
+            liveTree: chosen.liveTree,
+            mode: effectiveMode,
+            skipDuplicates: true,
+          })
+        : null,
+    [chosen, effectiveMode],
+  )
+  const previewNodes = useMemo(
+    () => (plan ? toPreviewNodes(plan.tree, isSkippingDuplicates) : []),
+    [plan, isSkippingDuplicates],
+  )
+  const newCount = plan?.counts.new ?? 0
+  const duplicateCount = plan?.counts.duplicate ?? 0
+  const importCount = isSkippingDuplicates
+    ? newCount
+    : newCount + duplicateCount
+  const isEmpty = isSupported && newCount + duplicateCount === 0
+  const isAllDuplicates =
+    isSkippingDuplicates && newCount === 0 && duplicateCount > 0
 
   const analyzeLatestFile = useRef(createLatestOnly(analyzeFile)).current
 
@@ -145,16 +168,15 @@ export function ImportRoute() {
     try {
       const outcome = await analyzeLatestFile(file)
       if (!outcome.isCurrent || importStartedReference.current) return
-      const { parsed, text, replaceDiff, duplicates } = outcome.value
-      setChosen({ file, text, preview: parsed, replaceDiff, duplicates })
-      setStatus(parsed.format === 'unknown' ? 'error' : 'idle')
-      setErrorMessage(
-        parsed.format === 'unknown' ? i18n.t('unsupportedFileFormat') : '',
-      )
+      setChosen({ file, ...outcome.value })
+      setAnalysisError(null)
+      setStatus('idle')
+      setErrorMessage('')
     } catch (error) {
       setChosen(null)
-      setStatus('error')
-      setErrorMessage((error as Error).message)
+      setAnalysisError({ file, message: (error as Error).message })
+      setStatus('idle')
+      setErrorMessage('')
     } finally {
       setIsAnalyzing(false)
     }
@@ -235,6 +257,7 @@ export function ImportRoute() {
   const handleReset = () => {
     setUndoSnapshot(null)
     setChosen(null)
+    setAnalysisError(null)
     setStatus('idle')
     setErrorMessage('')
   }
@@ -323,19 +346,69 @@ export function ImportRoute() {
         isComplete={isSupported}
       >
         <ImportFileStep
-          file={chosen?.file ?? null}
+          file={chosen?.file ?? analysisError?.file ?? null}
           onFile={(file) => void handleFile(file)}
           disabled={isBusy}
         />
       </ImportStep>
 
-      {isSupported && preview && (
+      {isAnalyzing && (
+        <>
+          <ImportStep
+            number={2}
+            title={i18n.t('importPreview')}
+            isComplete={false}
+          >
+            <ImportPreviewSkeleton />
+          </ImportStep>
+          <Button type="submit" size="lg" disabled>
+            <Spinner data-icon="inline-start" />
+            {i18n.t('import_reading')}
+          </Button>
+        </>
+      )}
+
+      {!isAnalyzing && analysisError && (
+        <Alert variant="destructive" tabIndex={-1} ref={focusOnMount}>
+          <CircleAlertIcon />
+          <AlertTitle>{i18n.t('import_unreadableTitle')}</AlertTitle>
+          <AlertDescription>{analysisError.message}</AlertDescription>
+        </Alert>
+      )}
+
+      {!isAnalyzing && isSupported && preview && plan && (
         <>
           <ImportStep number={2} title={i18n.t('importPreview')} isComplete>
             <div className="flex flex-col gap-3">
-              <ImportPreviewStep preview={preview} />
-              {effectiveMode === 'restore-replace' && chosen?.replaceDiff && (
-                <ImportReplaceDiffAlert diff={chosen.replaceDiff} />
+              <ImportPreviewStep
+                preview={preview}
+                newCount={newCount}
+                duplicateCount={duplicateCount}
+                showDuplicates={isSkippingDuplicates}
+              />
+              {isReplace && (
+                <Alert>
+                  <InfoIcon />
+                  <AlertTitle>{i18n.t('import_replaceNoteTitle')}</AlertTitle>
+                  <AlertDescription>
+                    {i18n.t('import_replaceNoteDescription')}
+                  </AlertDescription>
+                </Alert>
+              )}
+              {isAllDuplicates ? (
+                <ImportAllDuplicates
+                  onTurnOffSkipDuplicates={() => void setSkipDuplicates(false)}
+                />
+              ) : (
+                !isEmpty && (
+                  <ImportPreviewTree key={chosen?.id} nodes={previewNodes} />
+                )
+              )}
+              {isReplace && (
+                <ImportReplaceDeletions
+                  removed={plan.removed}
+                  addedCount={newCount}
+                />
               )}
             </div>
           </ImportStep>
@@ -353,11 +426,11 @@ export function ImportRoute() {
             />
           </ImportStep>
 
-          {effectiveMode !== 'restore-replace' && (
+          {!isReplace && (
             <ImportSkipDuplicates
               isChecked={skipDuplicates}
               onCheckedChange={(checked) => void setSkipDuplicates(checked)}
-              duplicateCount={chosen?.duplicates.skippedDuplicates ?? 0}
+              duplicateCount={duplicateCount}
               disabled={isImporting}
             />
           )}
@@ -368,11 +441,11 @@ export function ImportRoute() {
             disabled={isBusy || isEmpty || importCount === 0}
           >
             {isImporting && <Spinner data-icon="inline-start" />}
-            {isImporting
-              ? i18n.t('import_importing')
-              : i18n.t('import_submit', importCount, [
-                  formatCount(importCount),
-                ])}
+            {isImporting && i18n.t('import_importing')}
+            {!isImporting && isAllDuplicates && i18n.t('import_nothingNew')}
+            {!isImporting &&
+              !isAllDuplicates &&
+              i18n.t('import_submit', importCount, [formatCount(importCount)])}
           </Button>
           {progress.state.isCardVisible && (
             <OperationProgressCard

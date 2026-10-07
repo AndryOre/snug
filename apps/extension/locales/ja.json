@@ -662,9 +662,26 @@
     "message": "書き出しに失敗しました",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
+  "popup_chooseFiles": {
     "message": "ファイルを選択…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "$1 個のファイル · ブックマーク $2 件"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "$1 個のファイルを読み取れずスキップしました"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "$1 個のファイルをインポートしました · ブックマーク $2 件。"
+  },
+  "popup_openingImportTitle": {
+    "message": "インポートページを開いています",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "復元 – 置換と大きなバッチはインポートページで開きます。そちらでファイルをもう一度選択してください。",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "読み込み中…",
@@ -1031,6 +1048,74 @@
   },
   "import_skippedDuplicates": {
     "n": "重複のため $1 件をスキップしました"
+  },
+  "import_previewNew": {
+    "1": "新規 $1 件",
+    "n": "新規 $1 件"
+  },
+  "import_previewDuplicates": {
+    "1": "重複 $1 件はスキップされます",
+    "n": "重複 $1 件はスキップされます"
+  },
+  "import_previewWillImport": {
+    "1": "$1 件のブックマークを読み込みます",
+    "n": "$1 件のブックマークを読み込みます"
+  },
+  "import_duplicateBadge": {
+    "message": "重複 · スキップ",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "このファイル内のブックマーク",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "このファイルのブックマークはすべてブラウザに既にあります。",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "もう一度読み込むには、「重複をスキップ」をオフにしてください。",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "「重複をスキップ」をオフにする",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "読み込む新しいブックマークはありません",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "ファイルを読み込み中…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "このファイルを読み取れません",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "「復元 — 置き換え」はファイル全体を読み込みます。",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "フォルダを選ぶには、「フォルダを作成」または「復元 — 統合」を選んでください。",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "削除されます（$1）",
+    "n": "削除されます（$1）"
+  },
+  "import_deleteDescription": {
+    "1": "置き換えるとこれらが削除され、$1 件が追加されます。先に Snug が安全スナップショットを保存します。",
+    "n": "置き換えるとこれらが削除され、$1 件が追加されます。先に Snug が安全スナップショットを保存します。"
+  },
+  "import_deleteNone": {
+    "message": "削除されるものはありません。",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "削除されるブックマーク",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
   },
   "shell_navDuplicates": {
     "message": "重複",

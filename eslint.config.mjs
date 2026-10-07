@@ -54,7 +54,7 @@ const shadcnNoRestyleContracts = [
   },
   {
     pattern: '^Card$',
-    allow: ['layout', 'ring-primary/50'],
+    allow: ['layout', 'ring-primary/50', 'ring-destructive/40'],
   },
   {
     pattern: '^CardTitle$',

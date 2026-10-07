@@ -662,9 +662,28 @@
     "message": "Export fehlgeschlagen",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
-    "message": "Datei wählen …",
-    "description": "Popup button that opens the file picker to import bookmarks"
+  "popup_chooseFiles": {
+    "message": "Dateien auswählen…",
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "$1 Dateien · $2 Lesezeichen"
+  },
+  "popup_importSkippedFilesTitle": {
+    "1": "$1 Datei konnte nicht gelesen werden und wurde übersprungen",
+    "n": "$1 Dateien konnten nicht gelesen werden und wurden übersprungen"
+  },
+  "popup_importSkippedFilesResult": {
+    "1": "$1 Datei importiert · $2 Lesezeichen.",
+    "n": "$1 Dateien importiert · $2 Lesezeichen."
+  },
+  "popup_openingImportTitle": {
+    "message": "Importseite wird geöffnet",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "Wiederherstellen – ersetzen und große Stapel öffnen die Importseite. Wähle die Dateien dort erneut aus.",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "Import läuft …",
@@ -1034,6 +1053,74 @@
   "import_skippedDuplicates": {
     "1": "$1 als Duplikat übersprungen",
     "n": "$1 als Duplikate übersprungen"
+  },
+  "import_previewNew": {
+    "1": "$1 neu",
+    "n": "$1 neu"
+  },
+  "import_previewDuplicates": {
+    "1": "$1 Duplikat wird übersprungen",
+    "n": "$1 Duplikate werden übersprungen"
+  },
+  "import_previewWillImport": {
+    "1": "$1 Lesezeichen wird importiert",
+    "n": "$1 Lesezeichen werden importiert"
+  },
+  "import_duplicateBadge": {
+    "message": "Duplikat · übersprungen",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "Lesezeichen in dieser Datei",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "Alle Lesezeichen in dieser Datei sind bereits in Ihrem Browser.",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "Schalten Sie „Duplikate überspringen“ aus, um sie erneut zu importieren.",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "Duplikate überspringen ausschalten",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "Nichts Neues zu importieren",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "Datei wird gelesen …",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "Diese Datei kann nicht gelesen werden",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "Wiederherstellen – ersetzen importiert die ganze Datei.",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "Wählen Sie „Ordner erstellen“ oder „Wiederherstellen – zusammenführen“, um Ordner auszuwählen.",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "Wird gelöscht ($1)",
+    "n": "Wird gelöscht ($1)"
+  },
+  "import_deleteDescription": {
+    "1": "Ersetzen entfernt diese und fügt $1 hinzu. Snug speichert zuerst einen Sicherheits-Snapshot.",
+    "n": "Ersetzen entfernt diese und fügt $1 hinzu. Snug speichert zuerst einen Sicherheits-Snapshot."
+  },
+  "import_deleteNone": {
+    "message": "Es wird nichts gelöscht.",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "Lesezeichen, die gelöscht werden",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
   },
   "shell_navDuplicates": {
     "message": "Duplikate",

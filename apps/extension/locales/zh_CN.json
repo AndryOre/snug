@@ -662,9 +662,26 @@
     "message": "导出失败",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
+  "popup_chooseFiles": {
     "message": "选择文件…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "$1 个文件 · $2 个书签"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "有 $1 个文件无法读取，已跳过"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "已导入 $1 个文件 · $2 个书签。"
+  },
+  "popup_openingImportTitle": {
+    "message": "正在打开导入页面",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "恢复 – 替换和较大的批量会在导入页面中打开。请在那里重新选择文件。",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "正在导入…",
@@ -1031,6 +1048,74 @@
   },
   "import_skippedDuplicates": {
     "n": "已作为重复项跳过 $1 个"
+  },
+  "import_previewNew": {
+    "1": "$1 个新书签",
+    "n": "$1 个新书签"
+  },
+  "import_previewDuplicates": {
+    "1": "$1 个重复项将被跳过",
+    "n": "$1 个重复项将被跳过"
+  },
+  "import_previewWillImport": {
+    "1": "将导入 $1 个书签",
+    "n": "将导入 $1 个书签"
+  },
+  "import_duplicateBadge": {
+    "message": "重复 · 已跳过",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "此文件中的书签",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "此文件中的所有书签都已在你的浏览器中。",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "关闭“跳过重复项”即可再次导入。",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "关闭“跳过重复项”",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "没有可导入的新书签",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "正在读取文件…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "无法读取此文件",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "“恢复——替换”会导入整个文件。",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "选择“创建文件夹”或“恢复——合并”以挑选文件夹。",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "将被删除（$1）",
+    "n": "将被删除（$1）"
+  },
+  "import_deleteDescription": {
+    "1": "替换会删除这些书签并添加 $1 个。Snug 会先保存安全快照。",
+    "n": "替换会删除这些书签并添加 $1 个。Snug 会先保存安全快照。"
+  },
+  "import_deleteNone": {
+    "message": "不会删除任何内容。",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "将被删除的书签",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
   },
   "shell_navDuplicates": {
     "message": "重复项",

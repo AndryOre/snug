@@ -34,6 +34,30 @@ describe('plural messages in en', () => {
   })
 })
 
+describe('plural messages for the Import preview in en', () => {
+  beforeEach(() => {
+    resetFakeI18n('en')
+  })
+
+  it('pluralizes the replace deletion description by the added count', () => {
+    expect(i18n.t('import_deleteDescription', 1, ['1'])).toBe(
+      'Replace removes these and adds 1 bookmark. Snug saves a Safety snapshot first.',
+    )
+    expect(i18n.t('import_deleteDescription', 3, ['3'])).toBe(
+      'Replace removes these and adds 3 bookmarks. Snug saves a Safety snapshot first.',
+    )
+  })
+
+  it('pluralizes the duplicates line by the duplicate count', () => {
+    expect(i18n.t('import_previewDuplicates', 1, ['1'])).toBe(
+      '1 duplicate will be skipped',
+    )
+    expect(i18n.t('import_previewDuplicates', 37, ['37'])).toBe(
+      '37 duplicates will be skipped',
+    )
+  })
+})
+
 describe('plural messages in ru', () => {
   beforeEach(() => {
     resetFakeI18n('ru')

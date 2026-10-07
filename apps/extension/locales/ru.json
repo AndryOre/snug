@@ -662,9 +662,26 @@
     "message": "Не удалось выполнить экспорт",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
-    "message": "Выбрать файл…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+  "popup_chooseFiles": {
+    "message": "Выбрать файлы…",
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "Файлов: $1 · закладок: $2"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "Не удалось прочитать файлов: $1, они пропущены"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "Импортировано файлов: $1 · закладок: $2."
+  },
+  "popup_openingImportTitle": {
+    "message": "Открывается страница импорта",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "Восстановление – замена и большие пакеты открываются на странице импорта. Выберите файлы там ещё раз.",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "Импортируем…",
@@ -1031,6 +1048,74 @@
   },
   "import_skippedDuplicates": {
     "n": "Пропущено как дубликаты: $1"
+  },
+  "import_previewNew": {
+    "1": "Новых: $1",
+    "n": "Новых: $1"
+  },
+  "import_previewDuplicates": {
+    "1": "Дубликатов будет пропущено: $1",
+    "n": "Дубликатов будет пропущено: $1"
+  },
+  "import_previewWillImport": {
+    "1": "Будет импортировано закладок: $1",
+    "n": "Будет импортировано закладок: $1"
+  },
+  "import_duplicateBadge": {
+    "message": "Дубликат · пропущен",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "Закладки в этом файле",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "Все закладки из этого файла уже есть в вашем браузере.",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "Отключите «Пропускать дубликаты», чтобы импортировать их снова.",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "Отключить «Пропускать дубликаты»",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "Нет новых закладок для импорта",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "Чтение файла…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "Не удалось прочитать этот файл",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "«Восстановить — заменить» импортирует весь файл.",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "Чтобы выбрать папки, выберите «Создать папку» или «Восстановить — объединить».",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "Будет удалено ($1)",
+    "n": "Будет удалено ($1)"
+  },
+  "import_deleteDescription": {
+    "1": "При замене они удаляются, а добавляется закладок: $1. Сначала Snug сохраняет страховой снимок.",
+    "n": "При замене они удаляются, а добавляется закладок: $1. Сначала Snug сохраняет страховой снимок."
+  },
+  "import_deleteNone": {
+    "message": "Ничего не будет удалено.",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "Закладки, которые будут удалены",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
   },
   "shell_navDuplicates": {
     "message": "Дубликаты",

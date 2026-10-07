@@ -175,8 +175,12 @@ relative to `apps/extension/` unless it starts with `packages/`.
   refresh/get-selected), `export-toolbar.tsx`, `export-bar.tsx` and
   `export-tree-states.tsx` (loading/no-bookmarks/load-error/no-results).
 - **`components/import/`** — the Import page's steps: `import-file-step.tsx`,
-  `import-mode-step.tsx`, `import-preview-step.tsx` and the `import-step.tsx`
-  wrapper.
+  `import-mode-step.tsx`, `import-preview-step.tsx` (the per-root summary),
+  `import-preview-tree.tsx` (the read-only itemized tree with
+  `Duplicate · skipped` badges), `import-replace-deletions.tsx` (the
+  collapsible, virtualized `Will be deleted (N)` list) and the `import-step.tsx`
+  wrapper. The route builds one `ImportPlan` per chosen file and feeds it to all
+  of them.
 - **`components/duplicates/`** — the Duplicates page's group card.
 - **`components/popup/`** — the popup's `export-section.tsx`,
   `import-section.tsx`, `auto-export-status-item.tsx` and `footer.tsx`.

@@ -98,7 +98,22 @@ export async function planPopupImportBatch(
   const [first] = requests
   if (!first) throw new Error(i18n.t('import_noBookmarks'))
   if (requests.length === 1) return planPopupImport(first)
-  if (first.mode === 'restore-replace') return { kind: 'app' }
+  const { plan } = await planSummedBatch(requests, first)
+  return plan
+}
+
+interface SummedBatchPlan {
+  plan: PopupImportPlan
+  bookmarkCount: number
+}
+
+async function planSummedBatch(
+  requests: PopupImportRequest[],
+  first: PopupImportRequest,
+): Promise<SummedBatchPlan> {
+  if (first.mode === 'restore-replace') {
+    return { plan: { kind: 'app' }, bookmarkCount: 0 }
+  }
 
   const liveTree = await browser.bookmarks.getTree()
   const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
@@ -126,9 +141,94 @@ export async function planPopupImportBatch(
   }
 
   if (remainingCount === 0 && skippedDuplicates > 0) {
-    return { kind: 'all-duplicates', skippedDuplicates }
+    return {
+      plan: { kind: 'all-duplicates', skippedDuplicates },
+      bookmarkCount: 0,
+    }
   }
-  return remainingCount > POPUP_IMPORT_BOOKMARK_LIMIT
-    ? { kind: 'app' }
-    : { kind: 'import', mode: first.mode }
+  const plan: PopupImportPlan =
+    remainingCount > POPUP_IMPORT_BOOKMARK_LIMIT
+      ? { kind: 'app' }
+      : { kind: 'import', mode: first.mode }
+  return { plan, bookmarkCount: remainingCount }
+}
+
+/**
+ * The outcome of planning the files picked in the popup.
+ */
+export interface PopupFileBatchPlan {
+  plan: PopupImportPlan
+  /**
+   * The picked files that parsed with at least one bookmark, in pick order.
+   */
+  readableRequests: PopupImportRequest[]
+  /**
+   * How many picked files were left out because they could not be read.
+   */
+  skippedFileCount: number
+  /**
+   * Bookmarks the batch will create, summed across the readable files after
+   * Skip duplicates; 0 when the plan is not an import or for a lone file.
+   */
+  bookmarkCount: number
+}
+
+function isReadableRequest(
+  request: PopupImportRequest,
+  liveRootTitles: ReturnType<typeof resolveImportRootTitles>,
+): boolean {
+  try {
+    const { tree } = parseImportFile(
+      request.text,
+      request.mimeType,
+      request.fileName,
+      liveRootTitles,
+    )
+    return countBookmarks(tree) > 0
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Plans the popup's picked files. A single picked file keeps its own errors
+ * and plan. With several, files that cannot be read (unsupported or malformed
+ * content, no bookmarks) are skipped and the rest are planned as one batch
+ * with the summed {@link POPUP_IMPORT_BOOKMARK_LIMIT} rule.
+ * @param requests The picked files, in pick order, sharing one mode.
+ * @returns The plan with the readable files, the skipped count and the
+ *   bookmark total.
+ * @throws {Error} When a lone file is unreadable, or no picked file is.
+ */
+export async function planPopupFileBatch(
+  requests: PopupImportRequest[],
+): Promise<PopupFileBatchPlan> {
+  const [first] = requests
+  if (!first) throw new Error(i18n.t('import_noBookmarks'))
+  if (requests.length === 1) {
+    return {
+      plan: await planPopupImport(first),
+      readableRequests: requests,
+      skippedFileCount: 0,
+      bookmarkCount: 0,
+    }
+  }
+
+  const liveTree = await browser.bookmarks.getTree()
+  const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
+  const readableRequests = requests.filter((request) =>
+    isReadableRequest(request, liveRootTitles),
+  )
+  const [firstReadable] = readableRequests
+  if (!firstReadable) throw new Error(i18n.t('import_noBookmarks'))
+  const { plan, bookmarkCount } = await planSummedBatch(
+    readableRequests,
+    firstReadable,
+  )
+  return {
+    plan,
+    readableRequests,
+    skippedFileCount: requests.length - readableRequests.length,
+    bookmarkCount,
+  }
 }

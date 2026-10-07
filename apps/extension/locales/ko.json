@@ -662,9 +662,26 @@
     "message": "내보내기에 실패했어요",
     "description": "Popup toast title when an export fails"
   },
-  "popup_chooseFile": {
+  "popup_chooseFiles": {
     "message": "파일 선택…",
-    "description": "Popup button that opens the file picker to import bookmarks"
+    "description": "Popup button that opens the file picker to import one or more bookmark files"
+  },
+  "popup_importBatchSummary": {
+    "n": "파일 $1개 · 북마크 $2개"
+  },
+  "popup_importSkippedFilesTitle": {
+    "n": "파일 $1개를 읽을 수 없어 건너뛰었습니다"
+  },
+  "popup_importSkippedFilesResult": {
+    "n": "파일 $1개 가져옴 · 북마크 $2개."
+  },
+  "popup_openingImportTitle": {
+    "message": "가져오기 페이지를 여는 중",
+    "description": "Popup toast title when a file batch is handed to the Import page"
+  },
+  "popup_openingImportDescription": {
+    "message": "복원 – 바꾸기와 큰 일괄 작업은 가져오기 페이지에서 열립니다. 그곳에서 파일을 다시 선택하세요.",
+    "description": "Popup toast text asking to choose the files again on the Import page"
   },
   "popup_importing": {
     "message": "가져오는 중…",
@@ -1031,6 +1048,74 @@
   },
   "import_skippedDuplicates": {
     "n": "중복으로 $1개를 건너뛰었습니다"
+  },
+  "import_previewNew": {
+    "1": "새 항목 $1개",
+    "n": "새 항목 $1개"
+  },
+  "import_previewDuplicates": {
+    "1": "중복 $1개는 건너뜁니다",
+    "n": "중복 $1개는 건너뜁니다"
+  },
+  "import_previewWillImport": {
+    "1": "북마크 $1개를 가져옵니다",
+    "n": "북마크 $1개를 가져옵니다"
+  },
+  "import_duplicateBadge": {
+    "message": "중복 · 건너뜀",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "이 파일의 북마크",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "이 파일의 모든 북마크가 이미 브라우저에 있습니다.",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "다시 가져오려면 중복 건너뛰기를 끄세요.",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "중복 건너뛰기 끄기",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "가져올 새 북마크가 없습니다",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "파일을 읽는 중…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "이 파일을 읽을 수 없습니다",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "복원 — 교체는 파일 전체를 가져옵니다.",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "폴더를 선택하려면 폴더 만들기 또는 복원 — 병합을 선택하세요.",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "삭제될 항목 ($1)",
+    "n": "삭제될 항목 ($1)"
+  },
+  "import_deleteDescription": {
+    "1": "교체하면 이 북마크가 삭제되고 $1개가 추가됩니다. Snug가 먼저 안전 스냅샷을 저장합니다.",
+    "n": "교체하면 이 북마크가 삭제되고 $1개가 추가됩니다. Snug가 먼저 안전 스냅샷을 저장합니다."
+  },
+  "import_deleteNone": {
+    "message": "삭제되는 항목이 없습니다.",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "삭제될 북마크",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
   },
   "shell_navDuplicates": {
     "message": "중복",
