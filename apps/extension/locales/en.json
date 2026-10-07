@@ -1042,6 +1042,74 @@
     "1": "$1 skipped as a duplicate",
     "n": "$1 skipped as duplicates"
   },
+  "import_previewNew": {
+    "1": "$1 new",
+    "n": "$1 new"
+  },
+  "import_previewDuplicates": {
+    "1": "$1 duplicate will be skipped",
+    "n": "$1 duplicates will be skipped"
+  },
+  "import_previewWillImport": {
+    "1": "$1 bookmark will be imported",
+    "n": "$1 bookmarks will be imported"
+  },
+  "import_duplicateBadge": {
+    "message": "Duplicate · skipped",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "Bookmarks in this file",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "Every bookmark in this file is already in your browser.",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "Turn off Skip duplicates to import them again.",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "Turn off Skip duplicates",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "Nothing new to import",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "Reading file…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "Can’t read this file",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "Restore — replace imports the whole file.",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "Choose Create folder or Restore — merge to pick folders.",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "Will be deleted ($1)",
+    "n": "Will be deleted ($1)"
+  },
+  "import_deleteDescription": {
+    "1": "Replace removes these and adds $1 bookmark. Snug saves a Safety snapshot first.",
+    "n": "Replace removes these and adds $1 bookmarks. Snug saves a Safety snapshot first."
+  },
+  "import_deleteNone": {
+    "message": "Nothing will be deleted.",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "Bookmarks that will be deleted",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
+  },
   "shell_navDuplicates": {
     "message": "Duplicates",
     "description": "App sidebar nav item and page title"

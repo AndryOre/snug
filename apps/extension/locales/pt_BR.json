@@ -1052,6 +1052,74 @@
     "1": "$1 ignorado como duplicado",
     "n": "$1 ignorados como duplicados"
   },
+  "import_previewNew": {
+    "1": "$1 novo",
+    "n": "$1 novos"
+  },
+  "import_previewDuplicates": {
+    "1": "$1 duplicado será ignorado",
+    "n": "$1 duplicados serão ignorados"
+  },
+  "import_previewWillImport": {
+    "1": "$1 favorito será importado",
+    "n": "$1 favoritos serão importados"
+  },
+  "import_duplicateBadge": {
+    "message": "Duplicado · ignorado",
+    "description": "Badge on a bookmark row the import skips as a duplicate"
+  },
+  "import_treeLabel": {
+    "message": "Favoritos neste arquivo",
+    "description": "Accessible name of the Import preview tree"
+  },
+  "import_allDuplicatesTitle": {
+    "message": "Todos os favoritos deste arquivo já estão no seu navegador.",
+    "description": "Import preview empty state title when every bookmark already exists"
+  },
+  "import_allDuplicatesDescription": {
+    "message": "Desative Ignorar duplicados para importá-los novamente.",
+    "description": "Import preview empty state hint to turn Skip duplicates off"
+  },
+  "import_allDuplicatesAction": {
+    "message": "Desativar Ignorar duplicados",
+    "description": "Button that turns Skip duplicates off"
+  },
+  "import_nothingNew": {
+    "message": "Nada novo para importar",
+    "description": "Disabled import button label when nothing new would be created"
+  },
+  "import_reading": {
+    "message": "Lendo o arquivo…",
+    "description": "Disabled import button label while the file is being read"
+  },
+  "import_unreadableTitle": {
+    "message": "Não foi possível ler este arquivo",
+    "description": "Alert title when the chosen file cannot be read"
+  },
+  "import_replaceNoteTitle": {
+    "message": "Restaurar — substituir importa o arquivo inteiro.",
+    "description": "Info note title shown above the read-only replace tree"
+  },
+  "import_replaceNoteDescription": {
+    "message": "Escolha Criar pasta ou Restaurar — mesclar para selecionar pastas.",
+    "description": "Info note body telling which modes pick folders"
+  },
+  "import_deleteTitle": {
+    "1": "Será excluído ($1)",
+    "n": "Serão excluídos ($1)"
+  },
+  "import_deleteDescription": {
+    "1": "Substituir exclui estes favoritos e adiciona $1. O Snug salva antes um instantâneo de segurança.",
+    "n": "Substituir exclui estes favoritos e adiciona $1. O Snug salva antes um instantâneo de segurança."
+  },
+  "import_deleteNone": {
+    "message": "Nada será excluído.",
+    "description": "Replace deletion card text when no bookmark would be deleted"
+  },
+  "import_deleteListLabel": {
+    "message": "Favoritos que serão excluídos",
+    "description": "Accessible name of the list of bookmarks a replace deletes"
+  },
   "shell_navDuplicates": {
     "message": "Duplicados",
     "description": "App sidebar nav item and page title"

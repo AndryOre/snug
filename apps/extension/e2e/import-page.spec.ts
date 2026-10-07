@@ -58,10 +58,12 @@ test.describe('Import page', () => {
     await chooseFile(page, 'bookmarks.html')
 
     await expect(page.getByText('bookmarks.html')).toBeVisible()
-    await expect(page.getByText('Bookmarks bar')).toBeVisible()
-    await expect(page.getByText('2 bookmarks')).toBeVisible()
-    await expect(page.getByText('Other bookmarks')).toBeVisible()
-    await expect(page.getByText('1 bookmark', { exact: true })).toBeVisible()
+    await expect(
+      page.getByText('Bookmarks bar 2 · Other bookmarks 1'),
+    ).toBeVisible()
+    await expect(
+      page.getByText('3 new · 0 duplicates will be skipped'),
+    ).toBeVisible()
     await expect(
       page.getByRole('radio', { name: /^Restore — merge/ }),
     ).toBeEnabled()
@@ -229,7 +231,7 @@ test.describe('Import page', () => {
     ])
   })
 
-  test('replace preview shows removed and added counts, with no "cannot be undone" copy', async ({
+  test('replace preview lists the bookmarks that will be deleted, with no "cannot be undone" copy', async ({
     openExtensionPage,
     seedBookmarks,
   }) => {
@@ -241,10 +243,50 @@ test.describe('Import page', () => {
     await selectMode(page, 'Restore — replace')
 
     await expect(
-      page.getByText('Replace will remove 1 bookmark and add 3'),
+      page.getByText(en.import_replaceNoteTitle.message),
     ).toBeVisible()
+    await expect(
+      page.getByText(
+        'Replace removes these and adds 3 bookmarks. Snug saves a Safety snapshot first.',
+      ),
+    ).toBeVisible()
+    await expect(
+      page.getByRole('tree', { name: en.import_treeLabel.message }),
+    ).toBeVisible()
+    await expect(page.getByText(en.import_duplicateBadge.message)).toHaveCount(
+      0,
+    )
+
+    const deletionList = page.getByRole('list', {
+      name: en.import_deleteListLabel.message,
+    })
+    await expect(deletionList).toHaveCount(0)
+    await page.getByRole('button', { name: /^Will be deleted \(1\)/ }).click()
+    await expect(deletionList).toBeVisible()
+    await expect(
+      deletionList.getByText('Existing', { exact: true }),
+    ).toBeVisible()
+    await expect(
+      deletionList.getByText('https://existing-other.example/page'),
+    ).toBeVisible()
+    await expect(deletionList.getByText('Other bookmarks')).toBeVisible()
+
     await submitImport(page, 3)
     await expect(page.getByText(/cannot be undone/i)).toHaveCount(0)
+  })
+
+  test('replace into empty roots says nothing will be deleted', async ({
+    openExtensionPage,
+  }) => {
+    const page = await openImportPage(openExtensionPage)
+    await chooseFile(page, 'bookmarks.json')
+    await selectMode(page, 'Restore — replace')
+
+    await expect(page.getByText('Will be deleted (0)')).toBeVisible()
+    await expect(page.getByText(en.import_deleteNone.message)).toBeVisible()
+    await expect(
+      page.getByRole('button', { name: /^Will be deleted/ }),
+    ).toHaveCount(0)
   })
 
   test('Undo import restores the pre-import bookmarks', async ({
@@ -307,6 +349,14 @@ test.describe('Import page', () => {
           '1 bookmark in this file already exists or repeats and will be skipped',
         ),
       ).toBeVisible()
+      await expect(
+        page.getByText('2 new · 1 duplicate will be skipped'),
+      ).toBeVisible()
+      await expect(
+        page
+          .getByRole('tree', { name: en.import_treeLabel.message })
+          .getByText(en.import_duplicateBadge.message),
+      ).toHaveCount(1)
       await submitImport(page, 2)
       await expectSuccess(page)
       await expect(page.getByText('1 skipped as a duplicate')).toBeVisible()
@@ -328,11 +378,48 @@ test.describe('Import page', () => {
       const page = await openImportPage(openExtensionPage)
       await chooseFile(page, 'bookmarks.html')
       await selectMode(page, 'Create folder')
+      await expect(
+        page.getByText(en.import_duplicateBadge.message),
+      ).toHaveCount(1)
       await page.getByRole('switch', { name: SWITCH_NAME }).click()
 
+      await expect(page.getByText('3 bookmarks will be imported')).toBeVisible()
+      await expect(
+        page.getByText(en.import_duplicateBadge.message),
+      ).toHaveCount(0)
       await submitImport(page, 3)
       await expectSuccess(page)
       await expect(page.getByText(/skipped as/)).toHaveCount(0)
+    })
+
+    test('every bookmark already exists: nothing new to import until Skip duplicates is turned off', async ({
+      openExtensionPage,
+      seedBookmarks,
+    }) => {
+      await seedBookmarks([
+        { title: 'A', url: 'https://html-bar-a.example/page' },
+        { title: 'B', url: 'https://html-bar-b.example/page' },
+        { title: 'C', url: 'https://html-other-a.example/page' },
+      ])
+      const page = await openImportPage(openExtensionPage)
+      await chooseFile(page, 'bookmarks.html')
+
+      await expect(
+        page.getByText(en.import_allDuplicatesTitle.message),
+      ).toBeVisible()
+      await expect(
+        page.getByRole('button', { name: en.import_nothingNew.message }),
+      ).toBeDisabled()
+
+      await page
+        .getByRole('button', { name: en.import_allDuplicatesAction.message })
+        .click()
+      await expect(
+        page.getByRole('tree', { name: en.import_treeLabel.message }),
+      ).toBeVisible()
+      await expect(
+        page.getByRole('button', { name: 'Import 3 bookmarks' }),
+      ).toBeEnabled()
     })
 
     test('is not rendered in Restore - replace', async ({
@@ -394,10 +481,7 @@ test.describe('Import page', () => {
     const page = await openImportPage(openExtensionPage)
     await chooseFile(page, 'bookmarks.csv')
 
-    await expect(
-      page.getByText('Imported bookmarks', { exact: true }),
-    ).toBeVisible()
-    await expect(page.getByText('3 bookmarks', { exact: true })).toBeVisible()
+    await expect(page.getByText('Imported bookmarks 3')).toBeVisible()
     await expect(
       page.getByRole('radio', { name: /^Restore — merge/ }),
     ).toBeDisabled()
@@ -463,7 +547,7 @@ test.describe('Import page', () => {
     await expect(
       page.getByRole('radio', { name: /^Restore — merge/ }),
     ).toBeEnabled()
-    await expect(page.getByText('Other bookmarks')).toBeVisible()
+    await expect(page.getByText(/Other bookmarks \d/)).toBeVisible()
     await selectMode(page, 'Restore — merge')
     await submitImport(page, 4)
     await expectSuccess(page)
@@ -516,10 +600,56 @@ test.describe('Import page', () => {
       buffer: Buffer.from('this is not a bookmarks file'),
     })
 
-    await expect(page.getByText(en.import_errorTitle.message)).toBeVisible()
+    await expect(
+      page.getByText(en.import_unreadableTitle.message),
+    ).toBeVisible()
     await expect(page.getByText(en.unsupportedFileFormat.message)).toBeVisible()
     await expect(page.getByRole('button', { name: /^Import \d+/ })).toHaveCount(
       0,
     )
+  })
+  test('previews a 10,000 bookmark upload quickly and keeps the tree virtualized and scrollable', async ({
+    openExtensionPage,
+  }) => {
+    const folderCount = 100
+    const perFolder = 100
+    const bar = Array.from({ length: folderCount }, (_, folderIndex) => ({
+      title: `Folder ${folderIndex}`,
+      children: Array.from({ length: perFolder }, (_, index) => ({
+        title: `Bookmark ${folderIndex}-${index}`,
+        url: `https://bulk.example/${folderIndex}/${index}`,
+      })),
+    }))
+    const content = JSON.stringify([
+      { id: '1', title: 'Bookmarks bar', children: bar },
+      { id: '2', title: 'Other bookmarks', children: [] },
+    ])
+    const page = await openImportPage(openExtensionPage)
+    await page.getByLabel(en.import_fileInputLabel.message).setInputFiles({
+      name: 'bulk.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(content),
+    })
+
+    const tree = page.getByRole('tree', { name: en.import_treeLabel.message })
+    await expect(tree).toBeVisible({ timeout: 15_000 })
+    await expect(
+      page.getByText('10,000 new · 0 duplicates will be skipped'),
+    ).toBeVisible()
+    await expect(
+      page.getByRole('button', { name: 'Import 10,000 bookmarks' }),
+    ).toBeVisible()
+    expect(await tree.getByRole('treeitem').count()).toBeLessThan(150)
+
+    const frameDelayMs = await tree.evaluate(async (element) => {
+      const startedAt = performance.now()
+      element.scrollTo({ top: element.scrollHeight / 2 })
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(resolve))
+      })
+      return performance.now() - startedAt
+    })
+    expect(frameDelayMs).toBeLessThan(2000)
+    expect(await tree.getByRole('treeitem').count()).toBeLessThan(150)
   })
 })
