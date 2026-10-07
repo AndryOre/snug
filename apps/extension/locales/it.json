@@ -962,19 +962,15 @@
     "description": "Error title when undoing an import fails"
   },
   "safetySnapshot_title": {
-    "message": "Istantanea di sicurezza",
+    "message": "Istantanee di sicurezza",
     "description": "Settings card title"
   },
   "safetySnapshot_description": {
-    "message": "Creata automaticamente prima di ogni sostituzione. Viene conservata solo la più recente.",
+    "message": "Snug conserva le ultime 5. Ognuna viene salvata anche nei Download.",
     "description": "Settings card description"
   },
-  "safetySnapshot_fileNote": {
-    "message": "La stessa copia è salvata come file nella cartella Download.",
-    "description": "Note that the snapshot is also a file in Downloads"
-  },
   "safetySnapshot_restore": {
-    "message": "Ripristina istantanea",
+    "message": "Ripristina",
     "description": "Button that restores the Safety snapshot"
   },
   "safetySnapshot_emptyTitle": {
@@ -982,7 +978,7 @@
     "description": "Empty state title when no snapshot exists"
   },
   "safetySnapshot_emptyDescription": {
-    "message": "Ne viene creata una automaticamente la prima volta che sostituisci i segnalibri.",
+    "message": "Snug ne salva una automaticamente prima del prossimo Ripristina — sostituisci, oppure puoi crearne una ora.",
     "description": "Empty state body when no snapshot exists"
   },
   "safetySnapshot_restoreTitle": {
@@ -1254,5 +1250,33 @@
   "reviewPrompt_notNow": {
     "message": "Non ora",
     "description": "Popup Review prompt button that dismisses the card"
+  },
+  "safetySnapshot_take": {
+    "message": "Crea un'istantanea ora",
+    "description": "Button that takes a Safety snapshot now"
+  },
+  "safetySnapshot_taking": {
+    "message": "Creazione dell'istantanea…",
+    "description": "Take button label while it runs"
+  },
+  "safetySnapshot_takeFailedTitle": {
+    "message": "Impossibile creare l'istantanea",
+    "description": "Error title when a snapshot cannot be taken"
+  },
+  "safetySnapshot_downloadFailedTitle": {
+    "message": "Impossibile scaricare l'istantanea",
+    "description": "Error title when a snapshot cannot be downloaded"
+  },
+  "safetySnapshot_failedDescription": {
+    "message": "Chrome ha bloccato il download. Controlla le impostazioni dei download e riprova.",
+    "description": "Error body when Chrome blocks the snapshot download"
+  },
+  "safetySnapshot_latest": {
+    "message": "Ultima",
+    "description": "Badge on the newest snapshot row"
+  },
+  "safetySnapshot_download": {
+    "message": "Scarica",
+    "description": "Button that saves a snapshot to Downloads"
   }
 }

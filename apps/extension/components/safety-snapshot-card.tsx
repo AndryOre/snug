@@ -1,5 +1,9 @@
 import { i18n } from '#i18n'
-import { Alert, AlertDescription } from '@workspace/ui/components/alert'
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from '@workspace/ui/components/alert'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -9,6 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@workspace/ui/components/alert-dialog'
+import { Badge } from '@workspace/ui/components/badge'
 import { Button } from '@workspace/ui/components/button'
 import {
   Card,
@@ -29,55 +34,95 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
+  ItemGroup,
   ItemMedia,
   ItemTitle,
 } from '@workspace/ui/components/item'
 import { Spinner } from '@workspace/ui/components/spinner'
-import { ArchiveIcon, CircleAlertIcon } from 'lucide-react'
+import {
+  CircleAlertIcon,
+  DownloadIcon,
+  ShieldIcon,
+  Undo2Icon,
+} from 'lucide-react'
 import { useRef, useState } from 'react'
 
 import { countBookmarks } from '@/lib/count-bookmarks'
 import { formatCount } from '@/lib/format-count'
 import { formatSnapshotDate } from '@/lib/format-snapshot-date'
 import {
+  downloadSafetySnapshot,
   restoreSafetySnapshot,
   safetySnapshotStore,
+  takeSafetySnapshot,
 } from '@/lib/safety-snapshot'
+import type { SafetySnapshot } from '@/lib/safety-snapshot'
 import { useStorageItem } from '@/lib/use-storage-item'
 
-type RestoreStatus = 'idle' | 'restoring' | 'restored' | 'error'
+type CardStatus =
+  | 'idle'
+  | 'restoring'
+  | 'restored'
+  | 'taking'
+  | 'take-error'
+  | 'download-error'
+  | 'restore-error'
 
 /**
- * The Settings card for the Safety snapshot: when it was taken, how many
- * bookmarks it holds, that the same copy is a file in Downloads, and a
- * Restore snapshot button behind its own confirmation. Shows an empty state
- * until a first snapshot exists. Restoring takes a new snapshot first, so the
- * card then shows that newer one.
- * @returns The snapshot details and restore action.
+ * The Settings card for Safety snapshots: a Take a snapshot now button and
+ * the stored list, newest first, each row with its date, bookmark count and
+ * Download and Restore actions (Restore behind its own confirmation). The
+ * newest row carries a Latest badge. Shows an empty state until a first
+ * snapshot exists. Restoring takes a new snapshot first, which joins the
+ * list; the other snapshots are kept.
+ * @returns The snapshot list and its actions.
  */
 export function SafetySnapshotCard() {
-  const [snapshot] = useStorageItem(safetySnapshotStore)
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
-  const [status, setStatus] = useState<RestoreStatus>('idle')
+  const [snapshots] = useStorageItem(safetySnapshotStore)
+  const [restoreTarget, setRestoreTarget] = useState<SafetySnapshot | null>(
+    null,
+  )
+  const [status, setStatus] = useState<CardStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
-  const restoreGuard = useRef(false)
-  const isRestoring = status === 'restoring'
+  const busyGuard = useRef(false)
+  const isBusy = status === 'restoring' || status === 'taking'
 
-  const handleRestore = async () => {
-    if (!snapshot || restoreGuard.current) return
-    restoreGuard.current = true
-    setIsConfirmOpen(false)
-    setStatus('restoring')
+  const runExclusive = async (
+    busyStatus: CardStatus,
+    failedStatus: CardStatus,
+    successStatus: CardStatus,
+    action: () => Promise<unknown>,
+  ) => {
+    if (busyGuard.current) return
+    busyGuard.current = true
+    setStatus(busyStatus)
     setErrorMessage('')
     try {
-      await restoreSafetySnapshot(snapshot)
-      setStatus('restored')
+      await action()
+      setStatus(successStatus)
     } catch (error) {
-      setStatus('error')
+      setStatus(failedStatus)
       setErrorMessage((error as Error).message)
     } finally {
-      restoreGuard.current = false
+      busyGuard.current = false
     }
+  }
+
+  const handleTake = () =>
+    runExclusive('taking', 'take-error', 'idle', takeSafetySnapshot)
+
+  const handleDownload = (snapshot: SafetySnapshot) =>
+    runExclusive('idle', 'download-error', 'idle', () =>
+      downloadSafetySnapshot(snapshot),
+    )
+
+  const handleRestore = () => {
+    const target = restoreTarget
+    if (!target) return Promise.resolve()
+    setRestoreTarget(null)
+    return runExclusive('restoring', 'restore-error', 'restored', () =>
+      restoreSafetySnapshot(target),
+    )
   }
 
   return (
@@ -90,42 +135,95 @@ export function SafetySnapshotCard() {
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-3">
-          {snapshot ? (
-            <Item variant="muted">
-              <ItemMedia variant="icon">
-                <ArchiveIcon />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle>{formatSnapshotDate(snapshot.takenAt)}</ItemTitle>
-                <ItemDescription>
-                  <span className="block">
-                    {i18n.t(
-                      'importPreviewCount',
-                      countBookmarks(snapshot.roots),
-                      [formatCount(countBookmarks(snapshot.roots))],
-                    )}
-                  </span>
-                  <span className="block">
-                    {i18n.t('safetySnapshot_fileNote')}
-                  </span>
-                </ItemDescription>
-              </ItemContent>
-              <ItemActions>
-                <Button
-                  variant="outline"
-                  disabled={isRestoring}
-                  onClick={() => setIsConfirmOpen(true)}
-                >
-                  {isRestoring && <Spinner data-icon="inline-start" />}
-                  {i18n.t('safetySnapshot_restore')}
-                </Button>
-              </ItemActions>
-            </Item>
+          <Button
+            variant="outline"
+            className="self-start"
+            disabled={isBusy}
+            onClick={() => void handleTake()}
+          >
+            {status === 'taking' ? (
+              <Spinner data-icon="inline-start" />
+            ) : (
+              <ShieldIcon data-icon="inline-start" />
+            )}
+            {i18n.t(
+              status === 'taking'
+                ? 'safetySnapshot_taking'
+                : 'safetySnapshot_take',
+            )}
+          </Button>
+
+          {status === 'take-error' || status === 'download-error' ? (
+            <Alert variant="destructive">
+              <CircleAlertIcon />
+              <AlertTitle>
+                {i18n.t(
+                  status === 'take-error'
+                    ? 'safetySnapshot_takeFailedTitle'
+                    : 'safetySnapshot_downloadFailedTitle',
+                )}
+              </AlertTitle>
+              <AlertDescription>
+                {i18n.t('safetySnapshot_failedDescription')}
+              </AlertDescription>
+            </Alert>
+          ) : null}
+
+          {snapshots.length > 0 ? (
+            <ItemGroup>
+              {snapshots.map((snapshot, index) => {
+                const count = countBookmarks(snapshot.roots)
+                return (
+                  <Item
+                    key={snapshot.takenAt}
+                    variant="muted"
+                    data-testid="safety-snapshot-row"
+                  >
+                    <ItemMedia variant="icon">
+                      <ShieldIcon />
+                    </ItemMedia>
+                    <ItemContent>
+                      <ItemTitle>
+                        {formatSnapshotDate(snapshot.takenAt)}
+                        {index === 0 && (
+                          <Badge>{i18n.t('safetySnapshot_latest')}</Badge>
+                        )}
+                      </ItemTitle>
+                      <ItemDescription>
+                        {i18n.t('importPreviewCount', count, [
+                          formatCount(count),
+                        ])}
+                      </ItemDescription>
+                    </ItemContent>
+                    <ItemActions>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        disabled={isBusy}
+                        onClick={() => void handleDownload(snapshot)}
+                      >
+                        <DownloadIcon data-icon="inline-start" />
+                        {i18n.t('safetySnapshot_download')}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        disabled={isBusy}
+                        onClick={() => setRestoreTarget(snapshot)}
+                      >
+                        <Undo2Icon data-icon="inline-start" />
+                        {i18n.t('safetySnapshot_restore')}
+                      </Button>
+                    </ItemActions>
+                  </Item>
+                )
+              })}
+            </ItemGroup>
           ) : (
             <Empty>
               <EmptyHeader>
                 <EmptyMedia variant="icon">
-                  <ArchiveIcon />
+                  <ShieldIcon />
                 </EmptyMedia>
                 <EmptyTitle>{i18n.t('safetySnapshot_emptyTitle')}</EmptyTitle>
                 <EmptyDescription>
@@ -142,7 +240,7 @@ export function SafetySnapshotCard() {
               </AlertDescription>
             </Alert>
           )}
-          {status === 'error' && (
+          {status === 'restore-error' && (
             <Alert variant="destructive">
               <CircleAlertIcon />
               <AlertDescription>{errorMessage}</AlertDescription>
@@ -151,7 +249,12 @@ export function SafetySnapshotCard() {
         </div>
       </CardContent>
 
-      <AlertDialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+      <AlertDialog
+        open={restoreTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setRestoreTarget(null)
+        }}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
@@ -159,7 +262,7 @@ export function SafetySnapshotCard() {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {i18n.t('safetySnapshot_restoreDescription', [
-                snapshot ? formatSnapshotDate(snapshot.takenAt) : '',
+                restoreTarget ? formatSnapshotDate(restoreTarget.takenAt) : '',
               ])}
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -167,7 +270,7 @@ export function SafetySnapshotCard() {
             <AlertDialogCancel>{i18n.t('cancel')}</AlertDialogCancel>
             <Button
               variant="destructive"
-              disabled={isRestoring}
+              disabled={isBusy}
               onClick={() => void handleRestore()}
             >
               {i18n.t('safetySnapshot_restoreConfirm')}
