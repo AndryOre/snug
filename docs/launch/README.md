@@ -1,9 +1,10 @@
 # Launch kit
 
-The plan and index for the Snug 2.0 relaunch. Snug was "Bookmark Import/Export"
-until the 2.0 rename, so every channel frames the launch as the same extension,
-renamed and rebuilt. The only conversion is installing from the Chrome Web
-Store.
+The plan and index for the Snug 2.0 launch. Snug was "Bookmark Import/Export"
+until the 2.0 rename. Only X and YouTube, the maker's own channels, announce the
+rename. Directories, Product Hunt, Show HN and Reddit have never listed the old
+name, so their copy does not mention it. The only conversion is installing from
+the Chrome Web Store.
 
 Nothing in the kit has been submitted or posted. Every submission needs a human
 confirmation first.

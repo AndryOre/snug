@@ -1,9 +1,11 @@
 # Directory submission copy
 
-Copy for the Launch kit's directory submissions: the Snug 2.0 relaunch (Snug was
-Bookmark Import/Export). One section per variant ID; the headings match the
-`variant` column in `directories.csv`. Use a different variant per directory
-type, never the same description everywhere.
+Copy for the Launch kit's directory submissions. One section per variant ID; the
+headings match the `variant` column in `directories.csv`. Use a different
+variant per directory type, never the same description everywhere. Do not
+mention the old name, Bookmark Import/Export, or the 2.0 relaunch: the
+directories have never listed the extension before, so the old name only
+confuses readers.
 
 Rules for every variant:
 
@@ -35,20 +37,18 @@ listings). Lead with the outcome: move and back up bookmarks intact.
 
 - **Name:** Snug
 - **Tagline** (57/60): Export, import and back up your bookmarks, on your device
-- **Short description** (153/160): Snug moves your bookmarks between browsers as
+- **Short description** (120/160): Snug moves your bookmarks between browsers as
   you left them. Six export formats, import with preview, scheduled backups.
-  Formerly Bookmark Import/Export.
 - **Campaign tag:** the directory's own tag from `directories.csv`
 
-**Long description** (495 characters)
+**Long description** (451 characters)
 
-Snug 2.0 is the relaunch of Bookmark Import/Export, a Chrome extension that
-moves your bookmarks between browsers exactly as you left them. Export the whole
-tree or only chosen folders in HTML, JSON, CSV, Markdown, OPML or XBEL. Import
-shows a preview first, then merges, replaces, or adds everything to a new
-folder. A replace saves a Safety snapshot, so you can undo it. Auto-export
-writes scheduled backups to your Downloads folder. Snug works in Chromium
-browsers and makes no network calls.
+Snug is a Chrome extension that moves your bookmarks between browsers exactly as
+you left them. Export the whole tree or only chosen folders in HTML, JSON, CSV,
+Markdown, OPML or XBEL. Import shows a preview first, then merges, replaces, or
+adds everything to a new folder. A replace saves a Safety snapshot, so you can
+undo it. Auto-export writes scheduled backups to your Downloads folder. Snug
+works in Chromium browsers and makes no network calls.
 
 **Feature bullets**
 
@@ -136,15 +136,14 @@ supply-chain signals.
   OpenSSF Scorecard, pinned CI.
 - **Campaign tag:** the directory's own tag from `directories.csv`
 
-**Long description** (502 characters)
+**Long description** (447 characters)
 
 Snug is an open source Chrome Manifest V3 extension for bookmark export, import
 and backup, MIT licensed, built with WXT, React 19 and Tailwind CSS v4. It reads
 and writes the browser bookmarks tree directly and makes no network calls, so
 the privacy claim can be checked in the source. The repository runs CodeQL,
 tracks an OpenSSF Scorecard, and pins its CI. It exports six formats, previews
-imports, and undoes a replace from a Safety snapshot. It was Bookmark
-Import/Export before the 2.0 relaunch.
+imports, and undoes a replace from a Safety snapshot.
 
 **Feature bullets**
 
@@ -179,7 +178,7 @@ nothing to send it to.
   public.
 - **Campaign tag:** the directory's own tag from `directories.csv`
 
-**Long description** (540 characters)
+**Long description** (488 characters)
 
 Your bookmarks are years of curated work, and handing them to an unknown
 extension feels riskier than it should. Snug reads and writes the browser
@@ -187,7 +186,7 @@ bookmarks tree on your device and makes no network calls, so there is no server
 to trust. It needs no account and collects no data. You can export everything or
 one folder, import with a preview, undo a replace from a Safety snapshot, and
 schedule backups to your Downloads folder. The source is public, with CodeQL and
-an OpenSSF Scorecard. Snug 2.0 is the relaunch of Bookmark Import/Export.
+an OpenSSF Scorecard.
 
 **Feature bullets**
 
@@ -219,20 +218,19 @@ The product name stays "Snug".
 - **Name:** Snug
 - **Tagline** (60/60): Exporta, importa y respalda tus marcadores en tu
   dispositivo
-- **Short description** (151/160): Snug lleva tus marcadores de un navegador a
+- **Short description** (120/160): Snug lleva tus marcadores de un navegador a
   otro tal como los dejaste. Seis formatos, vista previa y copias programadas.
-  Antes, Bookmark Import/Export.
 - **Campaign tag:** the directory's own tag from `directories.csv`
 
-**Long description** (531 characters)
+**Long description** (483 characters)
 
-Snug 2.0 es el relanzamiento de Bookmark Import/Export, una extensión de Chrome
-que lleva tus marcadores de un navegador a otro tal como los dejaste. Exporta
-todo el árbol o solo las carpetas que elijas en HTML, JSON, CSV, Markdown, OPML
-o XBEL. Al importar ves una vista previa y decides si combinar, reemplazar o
-añadir todo a una carpeta nueva. Si reemplazas, Snug guarda una copia de
-seguridad para que puedas deshacerlo. La exportación automática guarda copias
-programadas en Descargas. No hace llamadas de red ni pide cuenta.
+Snug es una extensión de Chrome que lleva tus marcadores de un navegador a otro
+tal como los dejaste. Exporta todo el árbol o solo las carpetas que elijas en
+HTML, JSON, CSV, Markdown, OPML o XBEL. Al importar ves una vista previa y
+decides si combinar, reemplazar o añadir todo a una carpeta nueva. Si
+reemplazas, Snug guarda una copia de seguridad para que puedas deshacerlo. La
+exportación automática guarda copias programadas en Descargas. No hace llamadas
+de red ni pide cuenta.
 
 **Feature bullets**
 
