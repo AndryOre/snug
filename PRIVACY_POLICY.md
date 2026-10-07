@@ -6,7 +6,7 @@ Last updated: October 6, 2026
 
 Snug is committed to protecting your privacy. This Privacy Policy explains our
 practices regarding the collection, use, and disclosure of information that we
-receive through our Chrome extension.
+receive through our browser extension.
 
 ## Information Collection and Use
 
@@ -30,7 +30,7 @@ data to external servers.
 ### Favicons
 
 - To display site icons next to your bookmarks, the extension reads favicons
-  through Chrome's built-in `_favicon` API. This looks up favicons already
+  through the browser's built-in `_favicon` API. This looks up favicons already
   cached by your browser and does not make any network request to us or to the
   bookmarked sites.
 
@@ -65,12 +65,13 @@ data to external servers.
   export configuration — using the browser's local storage (`storage.local`).
   This data stays on your device and is never transmitted anywhere.
 - Snug may show a one-time, dismissible card in the popup inviting you to review
-  the extension on the Chrome Web Store after your first successful export. To
-  show it only once, Snug stores two local timestamps in `storage.local`: when
-  the card became available and when you dismissed it. They contain no bookmark
-  content, no personal information and no identifier, and are never transmitted
-  anywhere. The card is only a link: opening the store page is your choice, and
-  Snug itself makes no network request for it.
+  the extension on the store it was installed from (Chrome Web Store or
+  Microsoft Edge Add-ons) after your first successful export. To show it only
+  once, Snug stores two local timestamps in `storage.local`: when the card
+  became available and when you dismissed it. They contain no bookmark content,
+  no personal information and no identifier, and are never transmitted anywhere.
+  The card is only a link: opening the store page is your choice, and Snug
+  itself makes no network request for it.
 - Before every "Restore — replace" import, Snug saves a safety snapshot of your
   bookmarks bar and other bookmarks so the import can be undone. This stores
   your bookmark content (titles, addresses and folder structure) locally in the
@@ -85,7 +86,7 @@ purpose described:
 | Permission         | Purpose                                                                                                                                       |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bookmarks`        | Read and write your browser bookmarks to support import and export.                                                                           |
-| `favicon`          | Display site icons next to bookmarks via Chrome's built-in `_favicon` API.                                                                    |
+| `favicon`          | Display site icons next to bookmarks via the browser's built-in `_favicon` API.                                                               |
 | `storage`          | Save your local preferences and settings on your device.                                                                                      |
 | `alarms`           | Schedule and trigger automatic bookmark exports at the configured interval.                                                                   |
 | `downloads`        | Save automatic exports and safety snapshot files to your device, and delete Snug's own old automatic export files (Retention).                |
