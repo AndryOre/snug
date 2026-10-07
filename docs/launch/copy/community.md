@@ -1,8 +1,10 @@
 # Community launch copy
 
-Ready-to-paste text for the Snug 2.0 relaunch on Product Hunt, Hacker News,
-Reddit, X and YouTube. Snug was "Bookmark Import/Export" until the 2.0 rename,
-so every post frames the launch as the same extension, renamed and rebuilt.
+Ready-to-paste text for the Snug 2.0 launch on Product Hunt, Hacker News,
+Reddit, X and YouTube. Snug was "Bookmark Import/Export" until the 2.0 rename.
+Product Hunt, Hacker News and Reddit have never seen the old name, so those
+posts do not mention it. X and YouTube are the maker's own channels and keep the
+rename announcement.
 
 Nothing here has been posted. Posting is manual, by the maker, from their own
 account.
@@ -105,7 +107,7 @@ Snug moves your bookmarks between browsers exactly as you left them. Export the 
 ### Maker first comment
 
 ```text
-Hi Product Hunt. I'm the maker of Snug. It launched as "Bookmark Import/Export" and today it is relaunching as Snug 2.0, a new name and a rebuilt interface for the same job.
+Hi Product Hunt. I'm the maker of Snug, a Chrome extension for moving and backing up your bookmarks.
 
 Snug moves your bookmarks between browsers exactly as you left them. You can export the whole tree or only the folders you pick, in six formats: HTML, JSON, CSV, Markdown, OPML and XBEL. Import shows a preview first, then you choose to merge, replace, or add everything to a new folder. A replace saves a Safety snapshot, so you can undo it.
 
@@ -116,7 +118,7 @@ Everything runs on your device. Snug makes no network calls, needs no account, a
 What it does not do: it imports one file at a time, and it is not a sync service or a bookmark manager.
 
 Install: https://snug.andryore.dev/install?c=producthunt
-More on the 2.0 changes: https://snug.andryore.dev/?c=producthunt
+More details: https://snug.andryore.dev/?c=producthunt
 
 I would like to hear which bookmark moves or backups gave you trouble before, and which formats you still miss.
 ```
@@ -152,7 +154,7 @@ Show HN: Snug, a local-only bookmark export, import and backup extension
 ### First comment
 
 ```text
-I made Snug, a Chrome extension (Manifest V3, any Chromium browser) for moving and backing up bookmarks. It has been on the Chrome Web Store as "Bookmark Import/Export" and I just renamed and rebuilt it as Snug 2.0.
+I made Snug, a Chrome extension (Manifest V3, any Chromium browser) for moving and backing up bookmarks.
 
 What it does: export the whole bookmark tree or selected folders as HTML, JSON, CSV, Markdown, OPML or XBEL. Import reads a file (including a Chrome profile Bookmarks file or Safari bookmarks) and shows a preview before anything changes. You then merge, replace, or put everything in a new folder. A replace first saves a Safety snapshot so it can be undone. There is also a duplicates page and a scheduled Auto-export to the Downloads folder.
 
@@ -193,16 +195,16 @@ under 10% of your account's activity.
   submit form. Check the flair list when posting.
 - Tag: `reddit-chrome_extensions`
 
-Title (88 of 300):
+Title (50 of 300):
 
 ```text
-Snug 2.0 (formerly Bookmark Import/Export): export, import and back up bookmarks locally
+Snug: export, import and back up bookmarks locally
 ```
 
 Body:
 
 ```text
-I'm the developer. Bookmark Import/Export is now Snug, version 2.0: same extension, new name and a rebuilt interface.
+I'm the developer of Snug, an extension for moving and backing up bookmarks.
 
 What it does:
 - Exports the whole bookmark tree or only the folders you pick, as HTML, JSON, CSV, Markdown, OPML or XBEL.
@@ -235,16 +237,16 @@ Feedback on import edge cases is welcome.
   here, so it stays plain.
 - Tag: `reddit-opensource`
 
-Title (100 of 300):
+Title (96 of 300):
 
 ```text
-Snug 2.0: an MIT-licensed Chrome extension to export, import and back up bookmarks, no network calls
+Snug: an MIT-licensed Chrome extension to export, import and back up bookmarks, no network calls
 ```
 
 Body:
 
 ```text
-I maintain Snug, previously published as Bookmark Import/Export. Version 2.0 renames it and rebuilds the interface. Source and license: https://github.com/AndryOre/snug (MIT).
+I maintain Snug. Source and license: https://github.com/AndryOre/snug (MIT).
 
 It exports bookmarks (whole tree or chosen folders) as HTML, JSON, CSV, Markdown, OPML or XBEL, and imports with a preview before anything changes. Merge, replace, or add to a new folder; a replace saves a Safety snapshot so it can be undone. It also finds duplicates and runs scheduled exports to the Downloads folder.
 
@@ -277,7 +279,7 @@ Snug - Export, import and back up your bookmarks on your device
 Body:
 
 ```text
-I built Snug, a free Chrome extension for moving and backing up bookmarks. It started as "Bookmark Import/Export", and version 2.0 renames it and rebuilds the interface.
+I built Snug, a free Chrome extension for moving and backing up bookmarks.
 
 It exports the whole tree or chosen folders in six formats, previews every import, and lets you undo a replace from a Safety snapshot. Auto-export saves scheduled backups to your Downloads folder. Everything stays on your device: no account, no network calls, open source under MIT.
 
