@@ -5,9 +5,13 @@ import {
   type ExportTicker,
 } from '@/lib/export-control'
 import { getFaviconBase64 } from '@/lib/favicon'
+import {
+  isBookmarksBar,
+  isOtherBookmarks,
+  ROOT_FOLDER_IDS,
+} from '@/lib/root-folders'
+import { millisecondsToSeconds } from '@/lib/timestamps'
 import type { ExtendedBookmarkTreeNode } from '@/lib/types'
-
-import { isBookmarksBar, isOtherBookmarks } from './root-folders'
 
 type HtmlNodeOptions = Omit<
   ExportHTMLOptions,
@@ -113,7 +117,7 @@ async function generateHtmlContent(
         isOtherBookmarks(node) && options.hideOtherBookmarks
       const isParentFolderHidden =
         options.hideParentFolder &&
-        node.id !== '0' &&
+        node.id !== ROOT_FOLDER_IDS.virtualRoot &&
         !isBookmarksBar(node) &&
         !isOtherBookmarks(node)
 
@@ -152,11 +156,11 @@ async function appendBookmarkLine(
   let attributes = `HREF="${escapeUrl(node.url!)}"`
 
   if (options.includeDateAdded && node.dateAdded) {
-    attributes += ` ADD_DATE="${Math.floor(node.dateAdded / 1000)}"`
+    attributes += ` ADD_DATE="${millisecondsToSeconds(node.dateAdded)}"`
   }
 
   if (options.includeDateLastUsed && node.dateLastUsed) {
-    attributes += ` LAST_USED="${Math.floor(node.dateLastUsed / 1000)}"`
+    attributes += ` LAST_USED="${millisecondsToSeconds(node.dateLastUsed)}"`
   }
 
   if (options.includeIconData) {
@@ -190,11 +194,11 @@ async function appendFolderLines(
   let attributes = ''
 
   if (options.includeDateAdded && node.dateAdded) {
-    attributes += ` ADD_DATE="${Math.floor(node.dateAdded / 1000)}"`
+    attributes += ` ADD_DATE="${millisecondsToSeconds(node.dateAdded)}"`
   }
 
   if (options.includeDateGroupModified && node.dateGroupModified) {
-    attributes += ` LAST_MODIFIED="${Math.floor(node.dateGroupModified / 1000)}"`
+    attributes += ` LAST_MODIFIED="${millisecondsToSeconds(node.dateGroupModified)}"`
   }
 
   if (isBookmarksBar(node)) {
