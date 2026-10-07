@@ -23,6 +23,43 @@ export const CHROME_WEB_STORE_URL = `https://chromewebstore.google.com/detail/${
 export const CHROME_WEB_STORE_REVIEWS_URL = `${CHROME_WEB_STORE_URL}/reviews`
 
 /**
+ * The extension's Microsoft Edge Add-ons item ID.
+ */
+export const EDGE_ADD_ONS_EXTENSION_ID = 'efknehclgcncocgochoibgiiagklcnho'
+
+/**
+ * The Microsoft Edge Add-ons listing URL. Edge has no separate reviews page,
+ * so this is also the review destination.
+ */
+export const EDGE_ADD_ONS_URL = `https://microsoftedge.microsoft.com/addons/detail/${EDGE_ADD_ONS_EXTENSION_ID}`
+
+/**
+ * Whether this bundle was built for Microsoft Edge (`wxt build -b edge`).
+ * @returns True on the Edge build target.
+ */
+function isEdgeBuild(): boolean {
+  return import.meta.env.BROWSER === 'edge'
+}
+
+/**
+ * The store listing URL for the build target: Edge Add-ons on Edge, the Chrome
+ * Web Store otherwise.
+ * @returns The URL to open for the listing.
+ */
+export function getStoreListingUrl(): string {
+  return isEdgeBuild() ? EDGE_ADD_ONS_URL : CHROME_WEB_STORE_URL
+}
+
+/**
+ * The store reviews URL for the build target: the Edge Add-ons listing on Edge,
+ * the Chrome Web Store reviews tab otherwise.
+ * @returns The URL to open for leaving a review.
+ */
+export function getStoreReviewsUrl(): string {
+  return isEdgeBuild() ? EDGE_ADD_ONS_URL : CHROME_WEB_STORE_REVIEWS_URL
+}
+
+/**
  * The product name. Never translated, so every locale's `extensionName`
  * message must equal it.
  */

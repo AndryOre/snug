@@ -62,7 +62,12 @@ function focusOnMount(element: HTMLElement | null) {
 }
 
 function openBookmarkManager() {
-  void browser.tabs.create({ url: 'chrome://bookmarks' })
+  void browser.tabs.create({
+    url:
+      import.meta.env.BROWSER === 'edge'
+        ? 'edge://favorites'
+        : 'chrome://bookmarks',
+  })
 }
 
 interface ChosenFile {

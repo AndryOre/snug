@@ -7,6 +7,10 @@
     "message": "북마크를 일반적인 형식으로 내보내고 Chrome·Safari에서 가져오며 자동 백업까지. 모든 작업은 기기 안에서.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "북마크를 일반적인 형식으로 내보내고 가져오며, 일정에 따라 백업하세요. 모든 데이터는 로컬에 남습니다.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "북마크를 내보내고, 가져오고, 백업하세요. 모든 작업은 기기 안에서만 이루어져요.",
     "description": "Welcome page subtitle"
@@ -906,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: 북마크 내보내기·가져오기·백업",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "다운로드 $ID$이(가) 중단되었습니다.",
@@ -1239,12 +1243,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Chrome 웹 스토어의 솔직한 리뷰는 다른 사람들이 Snug를 찾는 데 도움이 됩니다.",
+    "message": "스토어에 남긴 솔직한 리뷰는 다른 사람들이 찾는 데 도움이 됩니다.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "리뷰 남기기",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "나중에",

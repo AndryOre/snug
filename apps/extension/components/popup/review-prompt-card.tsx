@@ -11,7 +11,7 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { type MouseEvent, useId } from 'react'
 
 import { useAutoExportLastRun } from '@/components/popup/auto-export-status-item'
-import { CHROME_WEB_STORE_REVIEWS_URL } from '@/lib/brand'
+import { getStoreReviewsUrl } from '@/lib/brand'
 import { dismissReviewPrompt, isReviewPromptVisible } from '@/lib/review-prompt'
 import { reviewPromptStore } from '@/lib/storage'
 import { useStorageItem } from '@/lib/use-storage-item'
@@ -23,11 +23,11 @@ function dismiss() {
 async function openReviewsPage(event: MouseEvent<HTMLAnchorElement>) {
   event.preventDefault()
   await dismissReviewPrompt(Date.now())
-  await browser.tabs.create({ url: CHROME_WEB_STORE_REVIEWS_URL })
+  await browser.tabs.create({ url: getStoreReviewsUrl() })
 }
 
 /**
- * Popup card inviting an honest Chrome Web Store review. Renders only while
+ * Popup card inviting an honest store review. Renders only while
  * {@link isReviewPromptVisible} holds and reacts to storage changes, so it
  * appears right after a popup export. Both actions retire it permanently.
  * @returns The Review prompt card, or `null` when hidden.
@@ -53,7 +53,7 @@ export function ReviewPromptCard() {
       </ItemContent>
       <ItemActions>
         <a
-          href={CHROME_WEB_STORE_REVIEWS_URL}
+          href={getStoreReviewsUrl()}
           target="_blank"
           rel="noopener noreferrer"
           className={buttonVariants({ size: 'sm' })}

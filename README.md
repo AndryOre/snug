@@ -45,12 +45,13 @@ bookmarks tree, locally — no account, no cloud, no server to trust. See the
 
 ## Install
 
-Install from the Chrome Web Store:
+Install from the Chrome Web Store or Microsoft Edge Add-ons:
 
 [![Chrome Web Store][Chrome Web Store]][Chrome Web Store-url]
+[![Microsoft Edge Add-ons][Microsoft Edge Add-ons]][Microsoft Edge Add-ons-url]
 
-Snug works on Chrome and any other Chromium-based browser (Edge, Opera, Brave)
-from the same listing.
+Snug also works on other Chromium-based browsers (Opera, Brave) through the
+Chrome Web Store listing.
 
 ## Privacy
 
@@ -117,6 +118,10 @@ for details.
   https://img.shields.io/badge/Chrome%20Web%20Store-4285F4.svg?style=flat&logo=Chrome-Web-Store&logoColor=white
 [Chrome Web Store-url]:
   https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn
+[Microsoft Edge Add-ons]:
+  https://img.shields.io/badge/Microsoft%20Edge%20Add--ons-0078D7.svg?style=flat&logo=Microsoft-Edge&logoColor=white
+[Microsoft Edge Add-ons-url]:
+  https://microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho
 [CI]:
   https://img.shields.io/github/actions/workflow/status/AndryOre/snug/ci.yml?branch=main&style=flat
 [CI-url]: https://github.com/AndryOre/snug/actions/workflows/ci.yml

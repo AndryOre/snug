@@ -7,6 +7,10 @@
     "message": "Lesezeichen in gängigen Formaten exportieren, aus Chrome oder Safari importieren und automatisch sichern. Alles lokal.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Exportiere, importiere und sichere deine Lesezeichen in gängigen Formaten, nach Zeitplan. Alles bleibt lokal.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Lesezeichen exportieren, importieren und sichern – komplett auf deinem Gerät.",
     "description": "Welcome page subtitle"
@@ -906,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug – Lesezeichen exportieren, importieren und sichern",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Download $ID$ wurde unterbrochen.",
@@ -1245,12 +1249,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Eine ehrliche Bewertung im Chrome Web Store hilft anderen, es zu finden.",
+    "message": "Eine ehrliche Bewertung im Store hilft anderen, es zu finden.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Bewertung abgeben",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Jetzt nicht",

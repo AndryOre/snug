@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "wxt",
     "build": "wxt build",
-    "zip": "wxt zip",
+    "zip": "wxt zip && wxt zip -b edge",
     "check": "tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

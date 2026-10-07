@@ -7,6 +7,10 @@
     "message": "Экспорт, импорт и резервные копии закладок в распространённых форматах, из Chrome и Safari. Всё локально.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Экспортируйте, импортируйте и резервируйте закладки в популярных форматах по расписанию. Всё остаётся локально.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Экспортируйте, импортируйте и сохраняйте копии закладок — полностью на вашем устройстве.",
     "description": "Welcome page subtitle"
@@ -906,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug — экспорт, импорт и резервные копии закладок",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Загрузка $ID$ была прервана.",
@@ -1239,12 +1243,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Честный отзыв в Chrome Web Store помогает другим людям найти расширение.",
+    "message": "Честный отзыв в магазине помогает другим людям найти расширение.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Оставить отзыв",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Не сейчас",

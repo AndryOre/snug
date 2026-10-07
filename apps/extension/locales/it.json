@@ -7,6 +7,10 @@
     "message": "Esporta, importa e fai il backup dei segnalibri in formati comuni, da Chrome o Safari. Tutto in locale.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Esporta, importa e salva i tuoi segnalibri nei formati comuni, con pianificazione. Tutto resta in locale.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Esporta, importa e fai il backup dei tuoi segnalibri — interamente sul tuo dispositivo.",
     "description": "Welcome page subtitle"
@@ -913,7 +917,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: esporta e fai il backup dei segnalibri, in locale",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "Il download $ID$ è stato interrotto.",
@@ -1253,12 +1257,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Una recensione sincera sul Chrome Web Store aiuta altre persone a trovarlo.",
+    "message": "Una recensione sincera sullo store aiuta altre persone a trovarlo.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Lascia una recensione",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Non ora",
