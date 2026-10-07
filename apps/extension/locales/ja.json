@@ -7,6 +7,10 @@
     "message": "ブックマークを一般的な形式で書き出し、ChromeやSafariから読み込み、自動バックアップ。すべて端末内。",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "ブックマークを一般的な形式でエクスポート・インポートし、スケジュールでバックアップ。すべてローカルに保存されます。",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "ブックマークの書き出し、読み込み、バックアップを、すべて端末内で。",
     "description": "Welcome page subtitle"
@@ -894,7 +898,7 @@
   },
   "extensionManifestName": {
     "message": "Snug: ブックマークの書き出し・読み込み・バックアップ",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "ダウンロード $ID$ が中断されました。",
@@ -1231,12 +1235,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Chrome ウェブストアでの率直なレビューは、ほかの人が Snug を見つける助けになります。",
+    "message": "ストアでの率直なレビューは、他の人が見つける助けになります。",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "レビューを書く",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "今はしない",

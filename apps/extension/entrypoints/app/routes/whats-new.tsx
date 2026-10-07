@@ -10,7 +10,7 @@ import {
 } from '@workspace/ui/components/item'
 import { ExternalLinkIcon } from 'lucide-react'
 
-import { CHROME_WEB_STORE_URL } from '@/lib/brand'
+import { getStoreListingUrl } from '@/lib/brand'
 import {
   formatChangelogDate,
   getChangelog,
@@ -104,7 +104,7 @@ export function WhatsNewRoute() {
         </ItemContent>
         <ItemActions>
           <a
-            href={CHROME_WEB_STORE_URL}
+            href={getStoreListingUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className={buttonVariants({ variant: 'ghost', size: 'sm' })}

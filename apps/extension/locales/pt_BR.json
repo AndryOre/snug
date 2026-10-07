@@ -7,6 +7,10 @@
     "message": "Exporte, importe e faça backup dos favoritos em formatos comuns, do Chrome ou Safari. Tudo local.",
     "description": "Description of the extension"
   },
+  "extensionDescriptionEdge": {
+    "message": "Exporte, importe e faça backup dos seus favoritos em formatos comuns, com agendamento. Tudo fica local.",
+    "description": "Description of the extension on the Microsoft Edge Add-ons listing. Names no browser."
+  },
   "welcomeSubtitle": {
     "message": "Exporte, importe e faça backup dos seus favoritos — tudo no seu dispositivo.",
     "description": "Welcome page subtitle"
@@ -906,7 +910,7 @@
   },
   "extensionManifestName": {
     "message": "Snug — Backup e transferência de favoritos",
-    "description": "Manifest-only extension name with a descriptor, shown as the Chrome Web Store title. Never rendered inside the extension."
+    "description": "Manifest-only extension name with a descriptor, shown as the store title. Never rendered inside the extension."
   },
   "downloadInterrupted": {
     "message": "O download $ID$ foi interrompido.",
@@ -1255,12 +1259,12 @@
     "description": "Popup Review prompt card title (also its accessible name)"
   },
   "reviewPrompt_description": {
-    "message": "Uma avaliação sincera na Chrome Web Store ajuda outras pessoas a encontrá-lo.",
+    "message": "Uma avaliação sincera na loja ajuda outras pessoas a encontrá-lo.",
     "description": "Popup Review prompt card description"
   },
   "reviewPrompt_leaveReview": {
     "message": "Deixar uma avaliação",
-    "description": "Popup Review prompt link to the Chrome Web Store reviews page"
+    "description": "Popup Review prompt link to the store reviews page"
   },
   "reviewPrompt_notNow": {
     "message": "Agora não",
