@@ -1374,5 +1374,22 @@
   "safetySnapshot_download": {
     "message": "下载",
     "description": "Button that saves a snapshot to Downloads"
+  },
+  "import_addFiles": {
+    "message": "添加文件",
+    "description": "Button that adds more files to the Import file list"
+  },
+  "import_removeFile": {
+    "message": "移除 $NAME$",
+    "description": "Accessible name of the button that removes a file from the Import file list; $NAME$ is the file name",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "import_skippedFilesTitle": {
+    "message": "未导入的文件",
+    "description": "Heading above the files an Import batch left out, each with its reason"
   }
 }

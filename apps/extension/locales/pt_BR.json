@@ -60,7 +60,7 @@
     "description": "Include last used dates"
   },
   "dropFileHere": {
-    "message": "Solte aqui o seu arquivo de favoritos",
+    "message": "Solte aqui os seus arquivos de favoritos",
     "description": "File drop zone prompt"
   },
   "orClickToSelect": {
@@ -1402,5 +1402,22 @@
   "safetySnapshot_download": {
     "message": "Baixar",
     "description": "Button that saves a snapshot to Downloads"
+  },
+  "import_addFiles": {
+    "message": "Adicionar arquivos",
+    "description": "Button that adds more files to the Import file list"
+  },
+  "import_removeFile": {
+    "message": "Remover $NAME$",
+    "description": "Accessible name of the button that removes a file from the Import file list; $NAME$ is the file name",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "import_skippedFilesTitle": {
+    "message": "Arquivos não importados",
+    "description": "Heading above the files an Import batch left out, each with its reason"
   }
 }
