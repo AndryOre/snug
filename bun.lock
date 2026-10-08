@@ -120,6 +120,7 @@
         "@types/react": "catalog:",
         "@types/web": "0.0.166",
         "typescript": "catalog:",
+        "vitest": "catalog:",
       },
     },
     "packages/ui": {
