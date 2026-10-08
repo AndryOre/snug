@@ -80,12 +80,13 @@ const importFileHtml = `<!DOCTYPE NETSCAPE-Bookmark-file-1>
   <DL><p>
     <DT><A HREF="https://github.com/">GitHub</A>
     <DT><A HREF="https://developer.mozilla.org/">MDN Web Docs</A>
-    <DT><A HREF="https://www.wikipedia.org/">Wikipedia</A>
+    <DT><A HREF="https://vite.dev/">Vite</A>
+    <DT><A HREF="https://caniuse.com/">Can I use</A>
   </DL><p>
   <DT><H3>Other bookmarks</H3>
   <DL><p>
     <DT><A HREF="https://news.ycombinator.com/">Hacker News</A>
-    <DT><A HREF="https://www.openstreetmap.org/">OpenStreetMap</A>
+    <DT><A HREF="https://lobste.rs/">Lobsters</A>
   </DL><p>
 </DL><p>
 `
@@ -211,6 +212,10 @@ test('composes the five store screenshots', async ({
   })
   await expect(importPage.getByRole('radio')).toHaveCount(3)
   await importPage.getByRole('radio').nth(1).click()
+  if (IS_LANDING)
+    await importPage
+      .getByRole('tree')
+      .evaluate((tree) => tree.scrollIntoView({ block: 'start' }))
   const importShot = await captureRaw(importPage, 'body', '02-import.png')
   await emitSlide(composer, importShot, outputPath('02-import.png'), {
     ...captions.import,
