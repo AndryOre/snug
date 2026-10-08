@@ -23,7 +23,7 @@ import {
   InfoIcon,
   Undo2Icon,
 } from 'lucide-react'
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import type { SubmitEvent } from 'react'
 
 import { ImportAllDuplicates } from '@/components/import/import-all-duplicates'
@@ -44,6 +44,7 @@ import { ImportCanceledError, wasImportRestored } from '@/lib/import-control'
 import {
   buildImportPlan,
   collectDuplicateIds,
+  countSelectedDuplicates,
   pruneFilesToChecked,
 } from '@/lib/import-plan'
 import { getImportPreview } from '@/lib/import-preview'
@@ -204,7 +205,16 @@ export function ImportRoute() {
   const [undoSnapshot, setUndoSnapshot] = useState<SafetySnapshot | null>(null)
   const [skippedCount, setSkippedCount] = useState(0)
   const [skippedDuplicatesCount, setSkippedDuplicatesCount] = useState(0)
-  const [selectedCount, setSelectedCount] = useState<number | null>(null)
+  const [selection, setSelection] = useState<{
+    count: number
+    ids: ReadonlySet<string>
+  } | null>(null)
+  const selectedCount = selection?.count ?? null
+  const handleSelectionChange = useCallback(
+    (count: number, ids: string[]) =>
+      setSelection({ count, ids: new Set(ids) }),
+    [],
+  )
   const selectionReference = useRef<ImportPreviewTreeHandle>(null)
   const progress = useOperationProgress()
 
@@ -258,6 +268,10 @@ export function ImportRoute() {
   )
   const newCount = plan?.counts.new ?? 0
   const duplicateCount = plan?.counts.duplicate ?? 0
+  const selectedDuplicateCount =
+    plan && selection
+      ? countSelectedDuplicates(plan.tree, selection.ids, isSkippingDuplicates)
+      : duplicateCount
   const fullImportCount = isSkippingDuplicates
     ? newCount
     : newCount + duplicateCount
@@ -532,7 +546,9 @@ export function ImportRoute() {
               <ImportPreviewStep
                 preview={preview}
                 newCount={previewNewCount}
-                duplicateCount={isSkippingDuplicates ? duplicateCount : 0}
+                duplicateCount={
+                  isSkippingDuplicates ? selectedDuplicateCount : 0
+                }
                 showDuplicates={isSkippingDuplicates}
               />
               {isReplace && (
@@ -555,7 +571,7 @@ export function ImportRoute() {
                     nodes={previewNodes}
                     isSelectable={!isReplace}
                     ref={selectionReference}
-                    onSelectionChange={setSelectedCount}
+                    onSelectionChange={handleSelectionChange}
                   />
                 )
               )}
@@ -586,7 +602,7 @@ export function ImportRoute() {
             <ImportSkipDuplicates
               isChecked={skipDuplicates}
               onCheckedChange={(checked) => void setSkipDuplicates(checked)}
-              duplicateCount={duplicateCount}
+              duplicateCount={selectedDuplicateCount}
               disabled={isImporting}
             />
           )}

@@ -1040,7 +1040,7 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "n": "이 파일의 북마크 $1개는 이미 있거나 반복되어 건너뜁니다"
+    "n": "선택한 북마크 $1개는 이미 있거나 반복되어 건너뜁니다"
   },
   "import_skipDuplicatesNone": {
     "message": "이 파일의 북마크 중 이미 있는 것은 없습니다.",

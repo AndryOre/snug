@@ -416,7 +416,7 @@ test.describe('Import page', () => {
       ).toBeChecked()
       await expect(
         page.getByText(
-          '1 bookmark in this file already exists or repeats and will be skipped',
+          '1 selected bookmark already exists or repeats and will be skipped',
         ),
       ).toBeVisible()
       await expect(
@@ -436,6 +436,84 @@ test.describe('Import page', () => {
       expect(urls.match(/html-bar-a\.example/g)).toHaveLength(1)
       expect(urls).toContain('html-bar-b.example')
       expect(urls).toContain('html-other-a.example')
+    })
+
+    test('the duplicate figure follows the selection and matches the success alert', async ({
+      openExtensionPage,
+      seedBookmarks,
+    }) => {
+      await seedBookmarks([{ title: 'Seen', url: 'https://seen.example/' }])
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [
+        {
+          name: 'repeats.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup([
+            'https://seen.example/',
+            'https://a.example/',
+            'https://a.example/',
+            'https://b.example/',
+          ]),
+        },
+      ])
+      await selectMode(page, 'Create folder')
+
+      await expect(
+        page.getByText('2 new · 2 duplicates will be skipped'),
+      ).toBeVisible()
+      await expect(
+        page.getByText(
+          '2 selected bookmarks already exist or repeat and will be skipped',
+        ),
+      ).toBeVisible()
+
+      await toggleRow(page, 'Item 1')
+
+      await expect(
+        page.getByText('1 new · 1 duplicate will be skipped'),
+      ).toBeVisible()
+      await expect(
+        page.getByText(
+          '1 selected bookmark already exists or repeats and will be skipped',
+        ),
+      ).toBeVisible()
+
+      await submitImport(page, 1)
+      await expectSuccess(page)
+      await expect(page.getByText('1 skipped as a duplicate')).toBeVisible()
+    })
+
+    test('off: the helper counts checked duplicates whose original is checked', async ({
+      openExtensionPage,
+      seedBookmarks,
+    }) => {
+      await seedBookmarks([{ title: 'Seen', url: 'https://seen.example/' }])
+      const page = await openImportPage(openExtensionPage)
+      await chooseFiles(page, [
+        {
+          name: 'repeats.json',
+          mimeType: 'application/json',
+          buffer: jsonBackup([
+            'https://seen.example/',
+            'https://a.example/',
+            'https://a.example/',
+          ]),
+        },
+      ])
+      await selectMode(page, 'Create folder')
+      await page.getByRole('switch', { name: SWITCH_NAME }).click()
+
+      await expect(
+        page.getByText(
+          '2 selected bookmarks already exist or repeat and will be skipped',
+        ),
+      ).toBeVisible()
+      await toggleRow(page, 'Item 1')
+      await expect(
+        page.getByText(
+          '1 selected bookmark already exists or repeats and will be skipped',
+        ),
+      ).toBeVisible()
     })
 
     test('off: duplicates are created and counted', async ({

@@ -1043,8 +1043,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 Lesezeichen in dieser Datei existiert bereits oder wiederholt sich und wird übersprungen",
-    "n": "$1 Lesezeichen in dieser Datei existieren bereits oder wiederholen sich und werden übersprungen"
+    "1": "$1 ausgewähltes Lesezeichen existiert bereits oder wiederholt sich und wird übersprungen",
+    "n": "$1 ausgewählte Lesezeichen existieren bereits oder wiederholen sich und werden übersprungen"
   },
   "import_skipDuplicatesNone": {
     "message": "Kein Lesezeichen in dieser Datei existiert bereits.",
