@@ -42,10 +42,10 @@
 
 4. Promo assets are not auto-discovered. To ship the new locale in the promo
    video and the store pack, also add it to the hard-coded locale lists in
-   `apps/video/src/copy/locales.ts` and `apps/video/src/copy/messages.ts`, add
-   its captions to `apps/extension/e2e-store/captions.ts`, and add its
-   `apps/video/public/screenshots/<locale>/` slides. Skip this step if the
-   locale is extension-only.
+   `apps/video/src/copy/locales.ts` and `apps/video/src/copy/messages.ts`, and
+   add its captions to `apps/extension/e2e-store/captions.ts`. The video's
+   `apps/video/public/screenshots/<locale>/` slides are copied automatically by
+   `bun run store:screenshots`. Skip this step if the locale is extension-only.
 
 5. Run `bun run check` and `bun run test` to confirm the new locale doesn't
    break type generation or parity.
