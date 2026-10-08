@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Posso importare più file alla volta?",
-        "answer": "Sì. Scegli o trascina più file nella pagina Importa e Snug li importa in un colpo solo."
+        "answer": "Sì. Scegli o trascina più file nella pagina Importa o nel popup della barra degli strumenti e Snug li importa in un colpo solo."
       },
       "permissions": {
         "question": "Perché ha bisogno di accedere a tutti i miei segnalibri?",

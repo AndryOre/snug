@@ -88,32 +88,46 @@ const ANCHOR = { x: VIEWPORT.width / 2, y: VIEWPORT.height / 2 } as const
 const LAYER = { width: 1520, height: 860 } as const
 const ORIGIN = { x: 344, y: 158 } as const
 
-const FILE_ICON = 64
-const IMPORT_FILE_NAME = 'bookmarks.json'
-const FILE_CENTER = { x: ORIGIN.x + 56, y: ORIGIN.y + 50 } as const
-const MODE_TOP = 128
+const FILE_ICON = 44
+const FILE_ROW = { height: 72, gap: 8, width: 640 } as const
+const IMPORT_FILES = [
+  { name: 'bookmarks.json', format: 'json', count: 8 },
+  { name: 'chrome-export.html', format: 'html', count: 6 },
+  { name: 'work-links.csv', format: 'csv', count: 4 },
+] as const
+const FILE_CENTER = {
+  x: ORIGIN.x + 16 + FILE_ICON / 2,
+  y: ORIGIN.y + 36,
+} as const
+const MODE_TOP = 252
 const SEGMENT_TOP = MODE_TOP + 34
-const TREE_TOP = 250
-const RIGHT_LEFT = 660
-const RIGHT_WIDTH = 472
-const ALERT_TOP = TREE_TOP + 36
-const BUTTON_TOP = 500
-const TOAST_TOP = 580
+const TREE_TOP = 366
+const TREE_WIDTH = 600
+const RIGHT_LEFT = 680
+const RIGHT_WIDTH = 452
+const BUTTON_TOP = TREE_TOP + 36
+const TOAST_TOP = BUTTON_TOP + 100
 
-const BOOKMARK_COUNT = 18
+const BOOKMARKS_BAR_COUNT = 11
+const OTHER_BOOKMARKS_COUNT = 7
+const DUPLICATE_COUNT = 2
+const NEW_COUNT = BOOKMARKS_BAR_COUNT + OTHER_BOOKMARKS_COUNT - DUPLICATE_COUNT
+const REPLACE_ADDED_COUNT = IMPORT_FILES[0].count
 const REMOVED_COUNT = 42
 
 const T = {
   windowIn: 4,
   flyStart: 12,
   land: 40,
-  treeStart: 44,
+  secondFile: 50,
+  thirdFile: 56,
+  treeStart: 62,
   treeStagger: 5,
-  cursorModeArrive: 92,
-  modeClick: 100,
-  buttonArrive: 146,
-  buttonClick: 154,
-  toastIn: 160,
+  cursorModeArrive: 104,
+  modeClick: 112,
+  buttonArrive: 150,
+  buttonClick: 158,
+  toastIn: 164,
 } as const
 
 /**
@@ -128,17 +142,17 @@ export const IMPORT_AUDIO_FRAMES = {
 const CAMERA: CameraKeyframe[] = [
   { frame: 0, x: 760, y: 430, zoom: 0.68 },
   { frame: 82, x: 760, y: 440, zoom: 0.85 },
-  { frame: 136, x: 760, y: 500, zoom: 0.85 },
+  { frame: 140, x: 760, y: 500, zoom: 0.85 },
 ]
 
-const TREE: Pick<TreeRowProps, 'kind' | 'label' | 'depth'>[] = [
+const TREE: (Pick<TreeRowProps, 'kind' | 'label' | 'depth'> & {
+  duplicate?: boolean
+})[] = [
   { kind: 'folder', label: 'Reading list', depth: 0 },
   { kind: 'bookmark', label: 'MDN Web Docs', depth: 1 },
-  { kind: 'bookmark', label: 'Remotion', depth: 1 },
-  { kind: 'bookmark', label: 'GitHub', depth: 1 },
+  { kind: 'bookmark', label: 'Remotion', depth: 1, duplicate: true },
   { kind: 'folder', label: 'Design', depth: 0 },
   { kind: 'bookmark', label: 'Figma', depth: 1 },
-  { kind: 'bookmark', label: 'Dribbble', depth: 1 },
 ]
 
 const layerPoint = (x: number, y: number): { x: number; y: number } => ({
@@ -189,78 +203,114 @@ const SectionLabel = ({
   </div>
 )
 
-const FileCard = ({
+const FileRow = ({
   locale,
-  family,
-  fileVisible,
-  countText,
+  index,
+  visible,
+  hidden,
 }: {
   locale: Locale
-  family: string
-  fileVisible: number
-  countText: string
-}) => (
-  <div
-    style={{
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      width: 1132,
-      height: 100,
-      boxSizing: 'border-box',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 24,
-      padding: '0 24px',
-      borderRadius: 16,
-      background: theme.ui.surface,
-      border: `1.5px solid ${theme.ui.border}`,
-    }}
-  >
-    <div style={{ width: FILE_ICON, opacity: fileVisible }}>
-      <FileIcon format={IMPORT_FILE_START.format} size={FILE_ICON} />
-    </div>
+  index: number
+  visible: number
+  hidden: number
+}) => {
+  const file = IMPORT_FILES[index]
+  if (file === undefined) return null
+  const opacity = visible * (1 - hidden)
+  return (
     <div
       style={{
-        flex: 1,
-        minWidth: 0,
-        opacity: fileVisible,
+        position: 'absolute',
+        left: 0,
+        top: index * (FILE_ROW.height + FILE_ROW.gap),
+        width: FILE_ROW.width,
+        height: FILE_ROW.height,
+        boxSizing: 'border-box',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 20,
+        padding: '0 16px',
+        borderRadius: 14,
+        background: theme.ui.surface,
+        border: `1.5px solid ${theme.ui.border}`,
+        opacity: index === 0 ? 1 : opacity,
+        transform: `translateY(${(1 - visible) * 14}px)`,
+      }}
+    >
+      <div style={{ width: FILE_ICON, opacity: index === 0 ? visible : 1 }}>
+        <FileIcon format={file.format} size={FILE_ICON} />
+      </div>
+      <div
+        style={{
+          flex: 1,
+          minWidth: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+        }}
+      >
+        <div style={{ fontSize: 24, fontWeight: 700 }}>{file.name}</div>
+        <div style={{ fontSize: 18, color: theme.ui.mutedText }}>
+          {plural(locale, 'importPreviewCount', file.count, [
+            String(file.count),
+          ])}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const PreviewSummary = ({
+  locale,
+  enter,
+}: {
+  locale: Locale
+  enter: number
+}) => {
+  const rootsText = `${message(locale, 'bookmarksBar')} ${BOOKMARKS_BAR_COUNT} · ${message(locale, 'otherBookmarks')} ${OTHER_BOOKMARKS_COUNT}`
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: RIGHT_LEFT,
+        top: 0,
+        width: RIGHT_WIDTH,
+        boxSizing: 'border-box',
+        padding: '16px 20px',
+        borderRadius: 14,
         display: 'flex',
         flexDirection: 'column',
-        gap: 4,
+        gap: 6,
+        background: theme.ui.surfaceMuted,
+        opacity: enter,
       }}
     >
-      <div style={{ fontSize: 26, fontWeight: 700 }}>{IMPORT_FILE_NAME}</div>
-      <div style={{ fontSize: 20, color: theme.ui.mutedText }}>{countText}</div>
+      <div style={{ fontSize: 22, fontWeight: 700 }}>{rootsText}</div>
+      <div style={{ fontSize: 18, color: theme.ui.mutedText }}>
+        {[
+          plural(locale, 'import_previewNew', NEW_COUNT, [String(NEW_COUNT)]),
+          plural(locale, 'import_previewDuplicates', DUPLICATE_COUNT, [
+            String(DUPLICATE_COUNT),
+          ]),
+        ].join(' · ')}
+      </div>
     </div>
-    <div
-      style={{
-        fontFamily: family,
-        fontSize: 20,
-        fontWeight: 600,
-        color: theme.colors.secondary,
-        opacity: fileVisible,
-        whiteSpace: 'nowrap',
-      }}
-    >
-      {message(locale, 'import_changeFile')}
-    </div>
-  </div>
-)
+  )
+}
 
-const ReplaceAlert = ({ locale, enter }: { locale: Locale; enter: number }) => (
+const DeletionCard = ({ locale, enter }: { locale: Locale; enter: number }) => (
   <div
     style={{
       position: 'absolute',
       left: RIGHT_LEFT,
-      top: ALERT_TOP,
+      top: 0,
       width: RIGHT_WIDTH,
       boxSizing: 'border-box',
-      padding: '18px 22px',
+      padding: '16px 20px',
       borderRadius: 14,
       display: 'flex',
       flexDirection: 'column',
-      gap: 8,
+      gap: 6,
       background: 'oklch(0.3 0.08 25 / 45%)',
       border: '1.5px solid oklch(0.65 0.2 25 / 60%)',
       opacity: enter,
@@ -271,13 +321,11 @@ const ReplaceAlert = ({ locale, enter }: { locale: Locale; enter: number }) => (
       style={{
         fontSize: 22,
         fontWeight: 700,
-        lineHeight: 1.25,
         color: 'oklch(0.8 0.14 25)',
       }}
     >
-      {plural(locale, 'import_replaceDiffTitle', REMOVED_COUNT, [
+      {plural(locale, 'import_deleteTitle', REMOVED_COUNT, [
         String(REMOVED_COUNT),
-        String(BOOKMARK_COUNT),
       ])}
     </div>
     <div
@@ -287,15 +335,37 @@ const ReplaceAlert = ({ locale, enter }: { locale: Locale; enter: number }) => (
         color: theme.colors.secondary,
       }}
     >
-      {message(locale, 'import_replaceDiffDescription')}
+      {plural(locale, 'import_deleteDescription', REPLACE_ADDED_COUNT, [
+        String(REPLACE_ADDED_COUNT),
+      ])}
     </div>
+  </div>
+)
+
+const DuplicateBadge = ({ locale }: { locale: Locale }) => (
+  <div
+    style={{
+      position: 'absolute',
+      right: 14,
+      top: 11,
+      padding: '4px 12px',
+      borderRadius: 999,
+      fontSize: 16,
+      fontWeight: 600,
+      whiteSpace: 'nowrap',
+      color: theme.ui.mutedText,
+      border: `1.5px solid ${theme.ui.borderStrong}`,
+    }}
+  >
+    {message(locale, 'import_duplicateBadge')}
   </div>
 )
 
 /**
  * Import scene (local frames 0-209): the exported file lands on the Import
- * page, the preview tree builds, the mode flips to replace with its diff
- * alert, and the Undo toast follows the confirm click.
+ * page, two more files join it, the selection tree builds with checkboxes and
+ * a skipped duplicate, the mode flips to replace (one file, deletion card),
+ * and the Undo toast follows the confirm click.
  */
 export const ImportScene = ({ locale }: SceneProps) => {
   const frame = useCurrentFrame()
@@ -314,11 +384,6 @@ export const ImportScene = ({ locale }: SceneProps) => {
     [modeLabelsKey, family],
   )
 
-  const countText = plural(locale, 'importPreviewCount', BOOKMARK_COUNT, [
-    String(BOOKMARK_COUNT),
-  ])
-  const confirmCount = String(BOOKMARK_COUNT)
-
   const modeProgress = spring({
     frame: frame - T.modeClick,
     fps,
@@ -326,7 +391,12 @@ export const ImportScene = ({ locale }: SceneProps) => {
   })
   const replaced = clicksBy([T.modeClick], frame) > 0
   const confirmed = clicksBy([T.buttonClick], frame) > 0
-  const alertEnter = spring({
+  const panelEnter = spring({
+    frame: frame - T.treeStart,
+    fps,
+    config: SPRING.settle,
+  })
+  const deletionEnter = spring({
     frame: frame - T.modeClick - 6,
     fps,
     config: SPRING.settle,
@@ -346,6 +416,11 @@ export const ImportScene = ({ locale }: SceneProps) => {
     frame,
     T.buttonClick + 4,
     T.buttonClick + 10,
+  )
+  const extraFilesHidden = progressBetween(
+    frame,
+    T.modeClick + 2,
+    T.modeClick + 14,
   )
 
   const camera = cameraStateAt(CAMERA, frame, fps, 24)
@@ -406,11 +481,23 @@ export const ImportScene = ({ locale }: SceneProps) => {
           layer={LAYER}
         >
           <AppWindow locale={locale} active="import">
-            <FileCard
+            <FileRow
               locale={locale}
-              family={family}
-              fileVisible={landed ? 1 : 0}
-              countText={countText}
+              index={0}
+              visible={landed ? 1 : 0}
+              hidden={0}
+            />
+            <FileRow
+              locale={locale}
+              index={1}
+              visible={progressBetween(frame, T.secondFile, T.secondFile + 10)}
+              hidden={extraFilesHidden}
+            />
+            <FileRow
+              locale={locale}
+              index={2}
+              visible={progressBetween(frame, T.thirdFile, T.thirdFile + 10)}
+              hidden={extraFilesHidden}
             />
             <div style={{ position: 'absolute', left: 0, top: MODE_TOP }}>
               <SectionLabel family={family}>
@@ -430,7 +517,7 @@ export const ImportScene = ({ locale }: SceneProps) => {
                 position: 'absolute',
                 left: 0,
                 top: TREE_TOP,
-                width: 600,
+                width: TREE_WIDTH,
               }}
             >
               <SectionLabel family={family}>
@@ -442,12 +529,13 @@ export const ImportScene = ({ locale }: SceneProps) => {
                 position: 'absolute',
                 left: 0,
                 top: TREE_TOP + 36,
-                width: 600,
+                width: TREE_WIDTH,
               }}
             >
               {TREE.map((row, index) => {
+                const start = T.treeStart + index * T.treeStagger
                 const enter = spring({
-                  frame: frame - T.treeStart - index * T.treeStagger,
+                  frame: frame - start,
                   fps,
                   config: SPRING.settle,
                 })
@@ -455,18 +543,34 @@ export const ImportScene = ({ locale }: SceneProps) => {
                   <div
                     key={row.label}
                     style={{
+                      position: 'relative',
                       opacity: enter,
                       transform: `translateX(${(1 - enter) * -24}px)`,
                     }}
                   >
-                    <TreeRow {...row} expanded={row.kind === 'folder'} />
+                    <TreeRow
+                      kind={row.kind}
+                      label={row.label}
+                      depth={row.depth}
+                      expanded={row.kind === 'folder'}
+                      checkProgress={
+                        row.duplicate === true
+                          ? 0
+                          : progressBetween(frame, start + 8, start + 20)
+                      }
+                    />
+                    {!replaced && row.duplicate === true ? (
+                      <DuplicateBadge locale={locale} />
+                    ) : null}
                   </div>
                 )
               })}
             </div>
             {replaced ? (
-              <ReplaceAlert locale={locale} enter={alertEnter} />
-            ) : null}
+              <DeletionCard locale={locale} enter={deletionEnter} />
+            ) : (
+              <PreviewSummary locale={locale} enter={panelEnter} />
+            )}
             <div
               style={{
                 position: 'absolute',
@@ -482,8 +586,8 @@ export const ImportScene = ({ locale }: SceneProps) => {
               <Button press={press - pressRelease}>
                 {replaced
                   ? message(locale, 'import_replaceConfirm')
-                  : plural(locale, 'import_submit', BOOKMARK_COUNT, [
-                      confirmCount,
+                  : plural(locale, 'import_submit', NEW_COUNT, [
+                      String(NEW_COUNT),
                     ])}
               </Button>
             </div>

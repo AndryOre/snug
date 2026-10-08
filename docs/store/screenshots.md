@@ -1,6 +1,6 @@
 # Store screenshots
 
-Chrome Web Store screenshots for Snug v2.0.0: five 1280x800 slides for each of
+Chrome Web Store screenshots for Snug v2.0.3: five 1280x800 slides for each of
 the 10 locales (50 PNGs) in `docs/store/assets/screenshots/<locale>/`, plus a
 global English set in the flat `docs/store/assets/screenshots/` folder that is
 the default. Each slide is a translated caption on the aurora ground over a crop

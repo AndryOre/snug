@@ -139,9 +139,7 @@ export const PrimitivesGallery = ({ locale }: SceneProps) => {
         <Section title="Button">
           <Button>{message(locale, 'exportNow')}</Button>
           <Button variant="outline">{message(locale, 'cancel')}</Button>
-          <Button variant="ghost">
-            {message(locale, 'import_changeFile')}
-          </Button>
+          <Button variant="ghost">{message(locale, 'import_addFiles')}</Button>
         </Section>
         <Section title="SegmentedControl">
           <SegmentedControl

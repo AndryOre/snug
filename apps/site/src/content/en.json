@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Can I import several files at once?",
-        "answer": "Yes. Pick or drop several files on the Import page and Snug imports them in one go."
+        "answer": "Yes. Pick or drop several files on the Import page or in the toolbar popup and Snug imports them in one go."
       },
       "permissions": {
         "question": "Why does it need access to all my bookmarks?",

@@ -80,12 +80,13 @@ const importFileHtml = `<!DOCTYPE NETSCAPE-Bookmark-file-1>
   <DL><p>
     <DT><A HREF="https://github.com/">GitHub</A>
     <DT><A HREF="https://developer.mozilla.org/">MDN Web Docs</A>
-    <DT><A HREF="https://www.wikipedia.org/">Wikipedia</A>
+    <DT><A HREF="https://vite.dev/">Vite</A>
+    <DT><A HREF="https://caniuse.com/">Can I use</A>
   </DL><p>
   <DT><H3>Other bookmarks</H3>
   <DL><p>
     <DT><A HREF="https://news.ycombinator.com/">Hacker News</A>
-    <DT><A HREF="https://www.openstreetmap.org/">OpenStreetMap</A>
+    <DT><A HREF="https://lobste.rs/">Lobsters</A>
   </DL><p>
 </DL><p>
 `
@@ -211,6 +212,23 @@ test('composes the five store screenshots', async ({
   })
   await expect(importPage.getByRole('radio')).toHaveCount(3)
   await importPage.getByRole('radio').nth(1).click()
+  await importPage.addStyleTag({
+    content: '*, *::before, *::after { transition: none !important; }',
+  })
+  await importPage
+    .getByRole('searchbox', { name: message('searchBookmarks') })
+    .evaluate((searchbox) => {
+      const header = document.querySelector('header')
+      const headerHeight = header ? header.getBoundingClientRect().height : 0
+      searchbox.scrollIntoView({ block: 'start' })
+      let scroller: HTMLElement | null = searchbox.parentElement
+      while (scroller && scroller.scrollHeight <= scroller.clientHeight)
+        scroller = scroller.parentElement
+      scroller?.scrollBy(0, -(headerHeight + 16))
+    })
+  await expect(
+    importPage.getByRole('treeitem', { checked: true }),
+  ).not.toHaveCount(0)
   const importShot = await captureRaw(importPage, 'body', '02-import.png')
   await emitSlide(composer, importShot, outputPath('02-import.png'), {
     ...captions.import,

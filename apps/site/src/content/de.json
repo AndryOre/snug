@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "Kann ich mehrere Dateien gleichzeitig importieren?",
-        "answer": "Ja. Wähle auf der Importseite mehrere Dateien aus oder ziehe sie dorthin, und Snug importiert sie in einem Durchgang."
+        "answer": "Ja. Wähle auf der Importseite oder im Popup der Symbolleiste mehrere Dateien aus oder ziehe sie dorthin, und Snug importiert sie in einem Durchgang."
       },
       "permissions": {
         "question": "Warum braucht es Zugriff auf alle meine Lesezeichen?",
