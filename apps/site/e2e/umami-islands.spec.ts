@@ -2,11 +2,17 @@ import { expect, test } from '@playwright/test'
 
 import { hydratedFaq } from './faq-helpers'
 
-test('video poster carries video-play', async ({ page }) => {
+test('video poster overlay carries video-play, never the link itself', async ({
+  page,
+}) => {
   await page.goto('/')
-  await expect(page.locator('[data-video-poster]')).toHaveAttribute(
+  await expect(page.locator('[data-video-play-overlay]')).toHaveAttribute(
     'data-umami-event',
     'video-play',
+  )
+  await expect(page.locator('[data-video-poster]')).not.toHaveAttribute(
+    'data-umami-event',
+    /.*/,
   )
 })
 

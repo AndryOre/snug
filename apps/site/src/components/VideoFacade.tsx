@@ -73,7 +73,6 @@ export default function VideoFacade({
   return (
     <a
       data-video-poster
-      data-umami-event="video-play"
       href={youtubeWatchUrl(videoId)}
       aria-label={`${playLabel}${labelSeparator}${title}`}
       onClick={activate}
@@ -90,7 +89,11 @@ export default function VideoFacade({
         decoding="async"
         className="h-full w-full object-cover"
       />
-      <span className="absolute inset-0 grid place-items-center">
+      <span
+        data-video-play-overlay
+        data-umami-event="video-play"
+        className="absolute inset-0 grid place-items-center"
+      >
         <span
           aria-hidden="true"
           className={cn(
