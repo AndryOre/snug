@@ -1342,6 +1342,9 @@
   "changelog_2_0_3_1": {
     "message": "最初のエクスポートのあと、Snug はレビューを書いてもらえるか一度だけたずねます。閉じれば、二度と表示されません。"
   },
+  "changelog_2_1_0_1": {
+    "message": "インポートが大きく進化しました。複数のファイルをまとめて選択またはドロップし、ツリーでプレビューして、取り込む内容を細かく選べます。ツールバーのポップアップでもファイルのドロップに対応しました。"
+  },
   "reviewPrompt_title": {
     "message": "Snug は役に立っていますか？",
     "description": "Popup Review prompt card title (also its accessible name)"

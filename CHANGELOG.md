@@ -4,6 +4,12 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.1.0] - 2026-10-08
+
+- Import got a big upgrade: pick or drop several files at once, preview them as
+  a tree and choose exactly what to bring in. The toolbar popup accepts dropped
+  files too.
+
 ## [2.0.3] - 2026-10-06
 
 - The popup now shows a one-time, dismissible Review prompt after your first
