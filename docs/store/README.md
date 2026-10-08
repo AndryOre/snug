@@ -1,7 +1,7 @@
 # Chrome Web Store listing pack for Snug v2.0.3
 
 A field-by-field mirror of the Chrome Web Store Developer Dashboard for Snug
-v2.0.0. Every field is a plain-text block you can copy straight into the
+v2.0.3. Every field is a plain-text block you can copy straight into the
 dashboard, with a character count next to each limited field. Nothing in this
 pack has been uploaded or submitted.
 
