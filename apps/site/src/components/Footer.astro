@@ -37,7 +37,12 @@ const noteParts = footer.note.split('Snug')
       <ul class="flex flex-wrap gap-x-6 gap-y-2">
         {links.map((link) => (
           <li>
-            <TextLink href={link.href} data-footer-link={link.key}>
+            <TextLink
+              href={link.href}
+              data-footer-link={link.key}
+              data-umami-event="outbound-click"
+              data-umami-event-target={`footer-${link.key}`}
+            >
               {link.label}
             </TextLink>
           </li>

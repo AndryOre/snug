@@ -135,13 +135,19 @@ Work the remaining directory rows. When a listing goes live, set `Status` and
 
 ## Metrics
 
-Two sources, read together.
+Umami is the primary source; the nginx log and the Chrome Web Store UTM report
+are the cross-check.
 
-**Landing page visits and install clicks.** Visits come from the nginx access
-log ([ADR 0011](../adr/0011-landing-static-site-no-third-party-scripts.md)).
-Grep the log for `c=<tag>` per Campaign tag. A request to `/?c=<tag>` is a
-visit. A request to `/install?c=<tag>` is an install click, answered with a 302
-to the listing. The log is short-lived, so save the counts at each check.
+**Primary: Umami Cloud.** Pageviews, referrers, countries and click events
+(install, reviews, video, FAQ, language, theme, outbound) come from the Umami
+dashboard ([ADR 0017](../adr/0017-landing-umami-cloud-cookieless-analytics.md)).
+Blockers and Do Not Track hide some visitors, so it undercounts.
+
+**Cross-check: landing page visits and install clicks.** The nginx access log
+shows every request, including those a blocker hides from Umami. Grep the log
+for `c=<tag>` per Campaign tag. A request to `/?c=<tag>` is a visit. A request
+to `/install?c=<tag>` is an install click, answered with a 302 to the listing.
+The log is short-lived, so save the counts at each check.
 
 **Listing views by campaign.** The Chrome Web Store dashboard UTM report, by
 campaign, shows listing views per Campaign tag. The Install redirect adds
@@ -174,7 +180,8 @@ Copy this into a new file under `docs/launch/` when day 30 arrives.
 
 - D: YYYY-MM-DD
 - Period read: YYYY-MM-DD to YYYY-MM-DD
-- Sources: nginx access log, CWS dashboard (UTM report by campaign)
+- Sources: Umami (primary), nginx access log and CWS dashboard (UTM report by
+  campaign) as cross-check
 
 ## Totals vs baseline
 

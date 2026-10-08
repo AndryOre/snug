@@ -15,6 +15,8 @@ const { placement, label } = Astro.props
 <a
   href={installHref(placement)}
   data-install={placement}
+  data-umami-event="install"
+  data-umami-event-placement={placement}
   class={cn(
     buttonVariants({ size: 'xl' }),
     'motion-safe:hover:-translate-y-px',

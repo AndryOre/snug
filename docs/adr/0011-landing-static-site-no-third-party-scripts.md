@@ -2,7 +2,11 @@
 
 ## Status
 
-Accepted.
+Accepted. Partially superseded by
+[ADR 0017](0017-landing-umami-cloud-cookieless-analytics.md) for the website
+only: the landing now loads Umami Cloud cookieless analytics. The extension
+clause (no analytics inside the extension) and the access-log and `/install`
+measurement still stand.
 
 ## Context
 
