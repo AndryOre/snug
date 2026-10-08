@@ -132,13 +132,13 @@ the Snug rename.
 
 ## Objections
 
-| Objection                                      | Response                                                                                                                                         |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| "Why does it need access to all my bookmarks?" | It is the only way to read and write them. It makes no network calls; the source is public.                                                      |
-| "Is a solo-dev extension safe?"                | Public source, CodeQL, OpenSSF Scorecard and Best Practices (links below), pinned CI.                                                            |
-| "My browser already exports HTML."             | Built-in export has no folder selection, preview, undo, schedule, dedupe or extra formats.                                                       |
-| "Will it overwrite my current bookmarks?"      | Never silently: preview first, and replace saves a Safety snapshot you can restore.                                                              |
-| "Can I import several files at once?"          | Yes: pick several files and Snug imports them as one batch, each in its own folder, and Cancel puts your bookmarks back. Replace needs one file. |
+| Objection                                      | Response                                                                                                                                                                          |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Why does it need access to all my bookmarks?" | It is the only way to read and write them. It makes no network calls; the source is public.                                                                                       |
+| "Is a solo-dev extension safe?"                | Public source, CodeQL, OpenSSF Scorecard and Best Practices (links below), pinned CI.                                                                                             |
+| "My browser already exports HTML."             | Built-in export has no folder selection, preview, undo, schedule, dedupe or extra formats.                                                                                        |
+| "Will it overwrite my current bookmarks?"      | Never silently: preview first, and replace saves a Safety snapshot you can restore.                                                                                               |
+| "Can I import several files at once?"          | Yes: pick several files and Snug imports them as one batch, each in its own folder (Folder mode, two or more files), and Cancel puts your bookmarks back. Replace needs one file. |
 
 **Trust links:**
 
