@@ -43,7 +43,13 @@ const { journey } = hero
   </p>
   <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
     <InstallButton placement="hero" label={hero.install} />
-    <TextLink href={TRUST_LINK_HREFS.source}>{hero.source}</TextLink>
+    <TextLink
+      href={TRUST_LINK_HREFS.source}
+      data-umami-event="outbound-click"
+      data-umami-event-target="hero-source"
+    >
+      {hero.source}
+    </TextLink>
   </div>
   <p class="mt-4 text-sm text-muted-foreground">{hero.note}</p>
   <figure

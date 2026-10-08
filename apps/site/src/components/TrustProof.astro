@@ -34,7 +34,13 @@ const linkKeys = [
   <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
     {linkKeys.map((key) => (
       <li>
-        <TextLink href={TRUST_LINK_HREFS[key]}>{trust.links[key]}</TextLink>
+        <TextLink
+          href={TRUST_LINK_HREFS[key]}
+          data-umami-event="outbound-click"
+          data-umami-event-target={`trust-${key}`}
+        >
+          {trust.links[key]}
+        </TextLink>
       </li>
     ))}
   </ul>
