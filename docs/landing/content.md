@@ -994,7 +994,7 @@ cloud. To move bookmarks to another browser or computer, export a file and
 import it there.
 
 **Can I import several files at once?** Yes. Pick or drop several files on the
-Import page and Snug imports them in one go.
+Import page or in the toolbar popup and Snug imports them in one go.
 
 **Why does it need access to all my bookmarks?** Reading and writing them is the
 only way an extension can export and import them. Snug makes no network calls,

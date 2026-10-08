@@ -126,7 +126,7 @@
       },
       "oneFile": {
         "question": "¿Puedo importar varios archivos a la vez?",
-        "answer": "Sí. Elige o suelta varios archivos en la página Importar y Snug los importa de una sola vez."
+        "answer": "Sí. Elige o suelta varios archivos en la página Importar o en el popup de la barra de herramientas y Snug los importa de una sola vez."
       },
       "permissions": {
         "question": "¿Por qué necesita acceso a todos mis marcadores?",
