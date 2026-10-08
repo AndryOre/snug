@@ -1358,6 +1358,9 @@
   "changelog_2_0_3_1": {
     "message": "After your first export, Snug now asks once if you'd like to leave a review. Dismiss it and it's gone for good."
   },
+  "changelog_2_1_0_1": {
+    "message": "Import got a big upgrade: pick or drop several files at once, preview them as a tree and choose exactly what to bring in. The toolbar popup accepts dropped files too."
+  },
   "reviewPrompt_title": {
     "message": "Is Snug working for you?",
     "description": "Popup Review prompt card title (also its accessible name)"

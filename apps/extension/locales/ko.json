@@ -1342,6 +1342,9 @@
   "changelog_2_0_3_1": {
     "message": "첫 내보내기 후에 Snug가 리뷰를 남겨 주실 수 있는지 한 번만 묻습니다. 닫으면 다시는 나타나지 않습니다."
   },
+  "changelog_2_1_0_1": {
+    "message": "가져오기가 크게 좋아졌어요. 여러 파일을 한 번에 선택하거나 끌어다 놓고, 트리로 미리 본 다음 가져올 항목을 정확히 고를 수 있어요. 도구 모음 팝업에서도 파일을 끌어다 놓을 수 있어요."
+  },
   "reviewPrompt_title": {
     "message": "Snug가 잘 작동하나요?",
     "description": "Popup Review prompt card title (also its accessible name)"

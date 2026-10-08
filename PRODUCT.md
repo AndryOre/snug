@@ -65,7 +65,7 @@ bookmark tree, so trust is the main question they bring.
 - No sync, no cloud, no account, no pricing, no signup. Nothing may imply any of
   these.
 - Interface in 10 languages; follows the browser theme and language.
-- Current version 2.0.3. The Chrome Web Store Featured badge program is closed.
+- Current version 2.1.0. The Chrome Web Store Featured badge program is closed.
 
 Terms: Auto-export, Safety snapshot, Retention, Skip duplicates.
 

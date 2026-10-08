@@ -1359,6 +1359,9 @@
   "changelog_2_0_3_1": {
     "message": "Dopo la tua prima esportazione, Snug ti chiede una sola volta se vuoi lasciare una recensione. Se chiudi la scheda, non riappare più."
   },
+  "changelog_2_1_0_1": {
+    "message": "L'importazione è molto migliorata: scegli o trascina più file insieme, guardali in anteprima come albero e decidi esattamente cosa importare. Anche il popup della barra degli strumenti accetta i file trascinati."
+  },
   "reviewPrompt_title": {
     "message": "Snug ti sta funzionando?",
     "description": "Popup Review prompt card title (also its accessible name)"

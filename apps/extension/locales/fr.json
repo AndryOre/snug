@@ -1371,6 +1371,9 @@
   "changelog_2_0_3_1": {
     "message": "Après votre première exportation, Snug vous demande une seule fois si vous souhaitez laisser un avis. Fermez la carte et elle ne reviendra plus."
   },
+  "changelog_2_1_0_1": {
+    "message": "L'import a beaucoup évolué : choisissez ou déposez plusieurs fichiers à la fois, prévisualisez-les sous forme d'arborescence et décidez précisément ce qui est importé. La fenêtre de la barre d'outils accepte aussi les fichiers déposés."
+  },
   "reviewPrompt_title": {
     "message": "Snug vous convient-il ?",
     "description": "Popup Review prompt card title (also its accessible name)"
