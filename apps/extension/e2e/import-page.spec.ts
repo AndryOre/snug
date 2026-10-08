@@ -28,9 +28,10 @@ async function selectMode(page: Page, label: string): Promise<void> {
 }
 
 async function submitImport(page: Page, count: number): Promise<void> {
+  const noun = count === 1 ? 'bookmark' : 'bookmarks'
   await page
     .getByRole('button', {
-      name: `Import ${count.toLocaleString('en-US')} bookmarks`,
+      name: `Import ${count.toLocaleString('en-US')} ${noun}`,
     })
     .click()
 }

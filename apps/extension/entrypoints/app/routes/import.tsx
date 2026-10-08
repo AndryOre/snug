@@ -603,6 +603,7 @@ export function ImportRoute() {
               isChecked={skipDuplicates}
               onCheckedChange={(checked) => void setSkipDuplicates(checked)}
               duplicateCount={selectedDuplicateCount}
+              fileDuplicateCount={duplicateCount}
               disabled={isImporting}
             />
           )}
