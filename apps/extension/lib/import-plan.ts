@@ -295,3 +295,26 @@ export function collectDuplicateIds(
     })
   return collect(nodes)
 }
+
+/**
+ * Counts the duplicates that follow the Import selection. With
+ * `skipDuplicates` on it is the length of {@link collectDuplicateIds}: what the
+ * import will actually skip. With it off, duplicates are checkable, so it is
+ * how many checked duplicates would be skipped if the switch were turned on: a
+ * checked existing duplicate always counts, a checked in-batch duplicate only
+ * while its earlier copy is checked too.
+ * @param nodes The plan's display tree.
+ * @param checkedIds The path ids the user left checked.
+ * @param isSkippingDuplicates Whether Skip duplicates is on.
+ * @returns The duplicate count for the current selection.
+ */
+export function countSelectedDuplicates(
+  nodes: readonly PlanNode[],
+  checkedIds: ReadonlySet<string>,
+  isSkippingDuplicates: boolean,
+): number {
+  const listed = collectDuplicateIds(nodes, checkedIds)
+  return isSkippingDuplicates
+    ? listed.length
+    : listed.filter((id) => checkedIds.has(id)).length
+}

@@ -1051,8 +1051,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 marcador de este archivo ya existe o se repite y se omitirá",
-    "n": "$1 marcadores de este archivo ya existen o se repiten y se omitirán"
+    "1": "$1 marcador seleccionado ya existe o se repite y se omitirá",
+    "n": "$1 marcadores seleccionados ya existen o se repiten y se omitirán"
   },
   "import_skipDuplicatesNone": {
     "message": "Ningún marcador de este archivo existe ya.",

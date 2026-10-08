@@ -1051,8 +1051,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 segnalibro di questo file esiste già o si ripete e verrà saltato",
-    "n": "$1 segnalibri di questo file esistono già o si ripetono e verranno saltati"
+    "1": "$1 segnalibro selezionato esiste già o si ripete e verrà saltato",
+    "n": "$1 segnalibri selezionati esistono già o si ripetono e verranno saltati"
   },
   "import_skipDuplicatesNone": {
     "message": "Nessun segnalibro di questo file esiste già.",

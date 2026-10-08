@@ -13,7 +13,7 @@ import {
   ChevronsUpDownIcon,
   SearchIcon,
 } from 'lucide-react'
-import { useImperativeHandle, useRef, useState } from 'react'
+import { useCallback, useImperativeHandle, useRef, useState } from 'react'
 import type { Ref } from 'react'
 
 import { BookmarkTreeView } from '@/components/export/bookmark-tree-view'
@@ -49,7 +49,7 @@ interface ImportPreviewTreeProperties {
    * Handle to read the checked ids on submit.
    */
   ref: Ref<ImportPreviewTreeHandle>
-  onSelectionChange: (count: number) => void
+  onSelectionChange: (count: number, checkedIds: string[]) => void
 }
 
 /**
@@ -63,7 +63,7 @@ interface ImportPreviewTreeProperties {
  * @param root0.nodes The tree to show.
  * @param root0.isSelectable Whether the tree has checkboxes.
  * @param root0.ref Handle exposing the checked ids.
- * @param root0.onSelectionChange Called with the checked bookmark count.
+ * @param root0.onSelectionChange Called with the checked bookmark count and ids; must be stable.
  * @returns The toolbar and the tree.
  */
 export function ImportPreviewTree({
@@ -77,6 +77,12 @@ export function ImportPreviewTree({
   useImperativeHandle(ref, () => ({
     getCheckedIds: () => treeReference.current?.getCheckedIds() ?? [],
   }))
+  const handleSelectionChange = useCallback(
+    (count: number) => {
+      onSelectionChange(count, treeReference.current?.getCheckedIds() ?? [])
+    },
+    [onSelectionChange],
+  )
   const searchInputReference = useRef<HTMLInputElement>(null)
   useSlashToFocus(searchInputReference)
 
@@ -131,7 +137,7 @@ export function ImportPreviewTree({
           isCheckedByDefault
           renderBadge={renderDuplicateBadge}
           autoExpandToken={EXPAND_ALL_ON_MOUNT_TOKEN}
-          onSelectionChange={onSelectionChange}
+          onSelectionChange={handleSelectionChange}
           onTotalChange={ignoreCount}
           className="max-h-105"
           emptyState={

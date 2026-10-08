@@ -1040,7 +1040,7 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "n": "このファイルの $1 件のブックマークは既に存在するか重複しているため、スキップされます"
+    "n": "選択した $1 件のブックマークは既に存在するか重複しているため、スキップされます"
   },
   "import_skipDuplicatesNone": {
     "message": "このファイルのブックマークで既に存在するものはありません。",
