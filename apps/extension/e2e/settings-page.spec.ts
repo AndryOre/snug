@@ -205,3 +205,21 @@ test('Take a snapshot now saves the file and adds a row', async ({
     page.getByText(en.safetySnapshot_emptyTitle.message),
   ).toHaveCount(0)
 })
+
+test('Safety snapshot deep link scrolls to the card and focuses its title; plain Settings does not', async ({
+  openExtensionPage,
+}) => {
+  const page = await openExtensionPage(
+    'app.html#/settings?section=safety-snapshot',
+  )
+  const title = page.getByText(en.safetySnapshot_title.message, {
+    exact: true,
+  })
+  await expect(title).toBeFocused()
+  await expect(title).toBeInViewport()
+
+  const plain = await openExtensionPage('app.html#/settings')
+  await expect(
+    plain.getByText(en.safetySnapshot_title.message, { exact: true }),
+  ).not.toBeFocused()
+})

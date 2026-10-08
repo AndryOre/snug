@@ -45,7 +45,7 @@ import {
   ShieldIcon,
   Undo2Icon,
 } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { countBookmarks } from '@/lib/count-bookmarks'
 import { formatCount } from '@/lib/format-count'
@@ -76,9 +76,27 @@ type CardStatus =
  * newest row carries a Latest badge. Shows an empty state until a first
  * snapshot exists. Restoring takes a new snapshot first, which joins the
  * list; the other snapshots are kept.
+ * @param props The component props.
+ * @param props.focusTitleOnMount Scrolls the card into view and focuses its
+ * title, after the App shell's page-change heading focus.
  * @returns The snapshot list and its actions.
  */
-export function SafetySnapshotCard() {
+export function SafetySnapshotCard({
+  focusTitleOnMount = false,
+}: {
+  focusTitleOnMount?: boolean
+}) {
+  const titleReference = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!focusTitleOnMount) return
+    const timer = setTimeout(() => {
+      titleReference.current?.scrollIntoView({ block: 'start' })
+      titleReference.current?.focus()
+    }, 0)
+    return () => clearTimeout(timer)
+  }, [focusTitleOnMount])
+
   const [snapshots] = useStorageItem(safetySnapshotStore)
   const [restoreTarget, setRestoreTarget] = useState<SafetySnapshot | null>(
     null,
@@ -131,7 +149,9 @@ export function SafetySnapshotCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{i18n.t('safetySnapshot_title')}</CardTitle>
+        <CardTitle ref={titleReference} tabIndex={-1}>
+          {i18n.t('safetySnapshot_title')}
+        </CardTitle>
         <CardDescription>
           {i18n.t('safetySnapshot_description')}
         </CardDescription>
