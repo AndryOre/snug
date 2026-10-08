@@ -99,9 +99,9 @@ Description (1212 chars):
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
 
-Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers or a browser's bookmarks file, with a preview first. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
+Export your whole bookmark tree or just the folder you choose, in common formats such as HTML or JSON. Import files from other bookmark managers or a browser's bookmarks file, with a preview first of what will be added, skipped and deleted. Pick or drop several files at once. Then merge into your existing bookmarks, replace them outright, or drop everything into a new folder — your call every time.
 
-Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
+Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. The latest five are kept on your device. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
 Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks straight to your Downloads folder on its own, in the formats you pick. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
 
@@ -404,7 +404,7 @@ other than Edge.
 Test steps (no account or login is needed, everything is local):
 1. Click the Snug toolbar icon. The popup offers "Export everything" in one click.
 2. Open the Export page from the popup. Pick a folder in the tree, choose a format (HTML, JSON, CSV, Markdown, OPML or XBEL) and click Export. A file is saved to Downloads.
-3. Open the Import page. Choose a bookmarks file (an HTML export from step 2 works). A preview is shown first. Choose Merge, Replace or New folder, then confirm. Nothing changes until you confirm.
+3. Open the Import page. Choose one or more bookmarks files with "Choose files…" (an HTML export from step 2 works). A preview is shown first. Choose Merge, Replace or New folder, then confirm. Nothing changes until you confirm.
 4. After a Replace import, use Undo to restore the previous bookmarks from the safety snapshot.
 5. Open the Duplicates page. It lists repeated bookmarks. Only the ones you tick are deleted.
 6. Open Auto-export, turn it on and pick a schedule. Use "Export now" to run one backup immediately.
