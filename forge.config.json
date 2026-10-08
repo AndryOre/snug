@@ -41,7 +41,8 @@
   },
   "handoff": {
     "maxLines": 60,
-    "maxChars": 8000
+    "maxChars": 8000,
+    "autoChain": true
   },
   "usage": {
     "oversizedReadLines": 400,
