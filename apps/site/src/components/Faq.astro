@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { faq } = getClosingCopy(Astro.props.locale)
-const entries = Object.values(faq.items)
+const entries = Object.entries(faq.items).map(([id, item]) => ({ id, ...item }))
 ---
 
 <Section section="faq" heading={faq.heading}>

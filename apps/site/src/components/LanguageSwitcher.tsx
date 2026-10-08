@@ -77,6 +77,8 @@ export default function LanguageSwitcher({
               <li key={option.code}>
                 <a
                   href={option.href}
+                  data-umami-event="language-change"
+                  data-umami-event-locale={option.code}
                   lang={option.tag}
                   hrefLang={option.tag}
                   aria-current={

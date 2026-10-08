@@ -73,6 +73,7 @@ export default function VideoFacade({
   return (
     <a
       data-video-poster
+      data-umami-event="video-play"
       href={youtubeWatchUrl(videoId)}
       aria-label={`${playLabel}${labelSeparator}${title}`}
       onClick={activate}

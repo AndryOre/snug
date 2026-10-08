@@ -134,6 +134,8 @@ export default function ThemeMenu({ copy }: { copy: ThemeMenuCopy }) {
                 <DropdownMenuRadioItem
                   key={value}
                   value={value}
+                  data-umami-event="theme-change"
+                  data-umami-event-theme={value}
                   closeOnClick
                   className="min-h-11"
                 >
