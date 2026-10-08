@@ -670,6 +670,14 @@
     "message": "Scegli i file…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "Rilascia i file per importarli",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "Importazione in corso. I file rilasciati vengono ignorati.",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "$1 file · $2 segnalibri"
   },

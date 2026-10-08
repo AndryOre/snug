@@ -674,6 +674,14 @@
     "message": "Escolher arquivos…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "Solte os arquivos para importar",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "Importação em andamento. Arquivos soltos são ignorados.",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "$1 arquivos · $2 favoritos"
   },
