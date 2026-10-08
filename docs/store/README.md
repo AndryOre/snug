@@ -204,16 +204,16 @@ locale with no URL shows no video.
 
 | Locale | Video file             | YouTube URL                  |
 | ------ | ---------------------- | ---------------------------- |
-| en     | `snug-promo-en.mp4`    | https://youtu.be/2F3DndQFCLY |
-| es     | `snug-promo-es.mp4`    | https://youtu.be/jolFPCjmpO4 |
-| de     | `snug-promo-de.mp4`    | https://youtu.be/_V8AzYPQE7Y |
-| fr     | `snug-promo-fr.mp4`    | https://youtu.be/Dhack45iK_8 |
-| it     | `snug-promo-it.mp4`    | https://youtu.be/ucqSd0kdy_8 |
-| ja     | `snug-promo-ja.mp4`    | https://youtu.be/bdsNWmhinC0 |
-| ko     | `snug-promo-ko.mp4`    | https://youtu.be/LBz7s79Mzc0 |
-| pt_BR  | `snug-promo-pt_BR.mp4` | https://youtu.be/c2wUbmYZAj8 |
-| ru     | `snug-promo-ru.mp4`    | https://youtu.be/LObFipCZA4g |
-| zh_CN  | `snug-promo-zh_CN.mp4` | https://youtu.be/HtxCtXPZcYE |
+| en     | `snug-promo-en.mp4`    | https://youtu.be/9aXa4aAWr_s |
+| es     | `snug-promo-es.mp4`    | https://youtu.be/9wwci2Fy5rg |
+| de     | `snug-promo-de.mp4`    | https://youtu.be/R7pGr7DZO3s |
+| fr     | `snug-promo-fr.mp4`    | https://youtu.be/H_pXUUNblrI |
+| it     | `snug-promo-it.mp4`    | https://youtu.be/OemCOGPPwM8 |
+| ja     | `snug-promo-ja.mp4`    | https://youtu.be/qDjl5u6PIAY |
+| ko     | `snug-promo-ko.mp4`    | https://youtu.be/w66oGhia_LA |
+| pt_BR  | `snug-promo-pt_BR.mp4` | https://youtu.be/_2YjNboONIY |
+| ru     | `snug-promo-ru.mp4`    | https://youtu.be/xwca7V7_NXU |
+| zh_CN  | `snug-promo-zh_CN.mp4` | https://youtu.be/Xa-w1HDylYI |
 
 Screenshots: the v1.3.0 listing carries 5 global screenshots plus 5 localized
 for each of EN and ES. All of them show the old product and must be deleted.
