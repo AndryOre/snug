@@ -33,8 +33,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: 'Hourly to weekly, straight to your Downloads folder.',
     },
     popup: {
-      headline: 'Export everything in one click',
-      subtitle: 'Right from the toolbar.',
+      headline: 'Export or import from the toolbar',
+      subtitle: 'One-click export, or drop files to import.',
     },
     local: {
       headline: 'Everything stays on your device',
@@ -61,8 +61,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: 'De cada hora a semanal, directo a tu carpeta de Descargas.',
     },
     popup: {
-      headline: 'Exporta todo con un clic',
-      subtitle: 'Directo desde la barra de herramientas.',
+      headline: 'Exporta o importa desde la barra',
+      subtitle: 'Exporta con un clic o suelta archivos para importar.',
     },
     local: {
       headline: 'Todo se queda en tu dispositivo',
@@ -91,8 +91,9 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
         'Von stündlich bis wöchentlich, direkt in deinen Download-Ordner.',
     },
     popup: {
-      headline: 'Alles mit einem Klick exportieren',
-      subtitle: 'Direkt aus der Symbolleiste.',
+      headline: 'Export und Import per Symbolleiste',
+      subtitle:
+        'Mit einem Klick exportieren oder Dateien zum Importieren ablegen.',
     },
     local: {
       headline: 'Alles bleibt auf deinem Gerät',
@@ -121,8 +122,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
         'Chaque heure ou chaque semaine, directement dans Téléchargements.',
     },
     popup: {
-      headline: 'Tout exporter en un clic',
-      subtitle: "Directement depuis la barre d'outils.",
+      headline: 'Exporter ou importer depuis la barre',
+      subtitle: 'Export en un clic, ou déposez des fichiers pour importer.',
     },
     local: {
       headline: 'Tout reste sur votre appareil',
@@ -150,8 +151,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
         'Da ogni ora a ogni settimana, direttamente nella cartella Download.',
     },
     popup: {
-      headline: 'Esporta tutto con un clic',
-      subtitle: 'Direttamente dalla barra degli strumenti.',
+      headline: 'Esporta o importa dalla barra',
+      subtitle: 'Esporta con un clic o trascina i file per importare.',
     },
     local: {
       headline: 'Tutto resta sul tuo dispositivo',
@@ -178,8 +179,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: '毎時から毎週まで、ダウンロードフォルダへ直接保存します。',
     },
     popup: {
-      headline: 'ワンクリックですべて書き出し',
-      subtitle: 'ツールバーからすぐに。',
+      headline: 'ツールバーから書き出しも読み込みも',
+      subtitle: 'ワンクリックで書き出し。ファイルをドロップして読み込み。',
     },
     local: {
       headline: 'すべてお使いの端末の中に',
@@ -205,8 +206,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: '매시간부터 매주까지, 다운로드 폴더에 바로 저장돼요.',
     },
     popup: {
-      headline: '한 번의 클릭으로 모두 내보내기',
-      subtitle: '툴바에서 바로 실행해요.',
+      headline: '툴바에서 내보내기와 가져오기',
+      subtitle: '클릭 한 번으로 내보내고, 파일을 놓아 가져와요.',
     },
     local: {
       headline: '모든 것은 내 기기 안에서',
@@ -233,8 +234,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: 'De hora em hora a semanalmente, direto na pasta Downloads.',
     },
     popup: {
-      headline: 'Exporte tudo com um clique',
-      subtitle: 'Direto da barra de ferramentas.',
+      headline: 'Exporte ou importe pela barra',
+      subtitle: 'Exporte com um clique ou solte arquivos para importar.',
     },
     local: {
       headline: 'Tudo fica no seu dispositivo',
@@ -261,8 +262,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: 'От ежечасных до еженедельных, сразу в папку «Загрузки».',
     },
     popup: {
-      headline: 'Весь экспорт в один клик',
-      subtitle: 'Прямо с панели инструментов.',
+      headline: 'Экспорт и импорт с панели',
+      subtitle: 'Экспорт в один клик, импорт — перетаскиванием файлов.',
     },
     local: {
       headline: 'Всё остаётся на вашем устройстве',
@@ -289,8 +290,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
       subtitle: '从每小时到每周，直接保存到下载文件夹。',
     },
     popup: {
-      headline: '一键导出全部书签',
-      subtitle: '直接在工具栏中使用。',
+      headline: '在工具栏中导出或导入',
+      subtitle: '一键导出，或拖入文件即可导入。',
     },
     local: {
       headline: '一切都留在你的设备上',

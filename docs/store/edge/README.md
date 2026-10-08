@@ -308,8 +308,7 @@ Promo video: none for Edge (leave empty).
 
 Per-language screenshots: Partner Center accepts a set per language. Reuse the
 localized slides from `assets/screenshots/<locale>/` on each language, after the
-review in the checklist (screenshot 02 shows the Import screen, which can name
-other browsers).
+review in the checklist.
 
 ## Privacy
 
@@ -425,8 +424,9 @@ Snug makes no network requests and loads no remote code. All data stays on the d
    build's `extensionDescription`, the Import screen strings and the review
    prompt mention Chrome and Safari; AO-1534 owns the Edge-specific copy.
 3. **Screenshots.** Open each global slide and each localized slide you plan to
-   upload. Screenshot 02 (Import) can show source names such as "Chrome
-   Bookmarks files". Re-capture or skip any slide that names another browser.
+   upload. Re-capture or skip any slide that names another browser. Screenshot
+   02 (Import) currently shows only the preview tree and import modes, with no
+   source or browser names.
 4. **Logo.** `assets/edge-logo-300.png` is generated (300x300 PNG). Regenerate
    with `bun run brand:export` if the brand mark changes.
 5. **Partner Center, existing product (Store ID `0RDCK9J6Z4VS`).** Do not create

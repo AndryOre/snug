@@ -278,6 +278,19 @@ test('composes the five store screenshots', async ({
 
   const popup = await openExtensionPage('popup.html')
   await expect(popup.getByTestId('popup-frame')).toBeVisible()
+  const dragData = await popup.evaluateHandle(() => {
+    const transfer = new DataTransfer()
+    transfer.items.add(
+      new File(['<!DOCTYPE NETSCAPE-Bookmark-file-1>'], 'bookmarks.html', {
+        type: 'text/html',
+      }),
+    )
+    return transfer
+  })
+  await popup
+    .locator('section:has(input[type="file"])')
+    .dispatchEvent('dragover', { dataTransfer: dragData })
+  await expect(popup.getByTestId('popup-import-drop-overlay')).toBeVisible()
   if (IS_LANDING) {
     await popup.addStyleTag({
       content: `
