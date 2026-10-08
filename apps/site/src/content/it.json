@@ -86,13 +86,13 @@
       "export": "Pagina di esportazione: scegli le cartelle dall'albero, un formato ed esporta.",
       "import": "Anteprima di importazione: vedi cosa cambia, poi scegli unisci, sostituisci o nuova cartella.",
       "autoExport": "Esportazione automatica: ogni giorno, in HTML, JSON e Markdown, con la prossima esecuzione in vista.",
-      "popup": "Il popup nella barra degli strumenti esporta tutto con un clic."
+      "popup": "Il popup nella barra degli strumenti esporta con un clic e importa i file che ci trascini sopra."
     },
     "alts": {
       "export": "Pagina di esportazione di Snug: un albero delle cartelle dei segnalibri, un selettore di formato e il pulsante Esporta",
       "import": "Anteprima di importazione di Snug: un elenco di segnalibri da aggiungere, saltare o eliminare, con le opzioni unisci, sostituisci e nuovo",
       "autoExport": "Impostazioni di esportazione automatica di Snug: una pianificazione giornaliera, tre formati e l'ora della prossima esecuzione",
-      "popup": "Popup di Snug nella barra degli strumenti con un solo pulsante per esportare tutti i segnalibri"
+      "popup": "Popup di Snug nella barra degli strumenti con un riquadro tratteggiato con la scritta Trascina i file da importare"
     }
   },
   "video": {

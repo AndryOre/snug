@@ -86,13 +86,13 @@
       "export": "Export page: pick folders from the tree, choose a format, export.",
       "import": "Import preview: see what will change, then pick merge, replace or new.",
       "autoExport": "Auto-export: daily, in HTML, JSON and Markdown, with the next run shown.",
-      "popup": "The toolbar popup exports everything in one click."
+      "popup": "The toolbar popup exports in one click and imports files you drop on it."
     },
     "alts": {
       "export": "Snug's export page: a bookmark folder tree, a format picker and the Export button",
       "import": "Snug's import preview: a list of bookmarks to add, skip or delete, with merge, replace and new options",
       "autoExport": "Snug's auto-export settings: a daily schedule, three formats and the next run time",
-      "popup": "Snug's toolbar popup with a single button to export all bookmarks"
+      "popup": "Snug's toolbar popup with a dashed overlay reading Drop files to import"
     }
   },
   "video": {

@@ -86,13 +86,13 @@
       "export": "Page d'exportation : choisissez des dossiers dans l'arborescence, un format, puis exportez.",
       "import": "Aperçu de l'import : voyez ce qui change, puis choisissez fusionner, remplacer ou nouveau dossier.",
       "autoExport": "Exportation automatique : chaque jour, en HTML, JSON et Markdown, avec la prochaine exécution affichée.",
-      "popup": "La fenêtre de la barre d'outils exporte tout en un clic."
+      "popup": "La fenêtre de la barre d'outils exporte en un clic et importe les fichiers que vous y déposez."
     },
     "alts": {
       "export": "Page d'export de Snug : une arborescence de dossiers de favoris, un sélecteur de format et le bouton Exporter",
       "import": "Aperçu d'import de Snug : une liste de favoris à ajouter, ignorer ou supprimer, avec les options fusionner, remplacer et nouveau",
       "autoExport": "Réglages de l'export automatique de Snug : une planification quotidienne, trois formats et l'heure de la prochaine exécution",
-      "popup": "Fenêtre contextuelle de Snug dans la barre d'outils avec un seul bouton pour exporter tous les favoris"
+      "popup": "Fenêtre contextuelle de Snug dans la barre d'outils avec un cadre en pointillés indiquant Déposez des fichiers à importer"
     }
   },
   "video": {
