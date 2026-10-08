@@ -666,6 +666,14 @@
     "message": "Dateien auswählen…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "Dateien zum Importieren ablegen",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "Import läuft. Abgelegte Dateien werden ignoriert.",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "$1 Dateien · $2 Lesezeichen"
   },

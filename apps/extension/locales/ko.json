@@ -666,6 +666,14 @@
     "message": "파일 선택…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "파일을 놓아 가져오기",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "가져오는 중입니다. 놓은 파일은 무시됩니다.",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "파일 $1개 · 북마크 $2개"
   },

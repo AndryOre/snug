@@ -666,6 +666,14 @@
     "message": "选择文件…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "拖放文件以导入",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "正在导入。拖放的文件将被忽略。",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "$1 个文件 · $2 个书签"
   },

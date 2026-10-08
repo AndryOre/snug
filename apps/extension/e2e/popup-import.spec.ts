@@ -312,3 +312,177 @@ test('the skipped-files warning names at most three files and counts the rest', 
   await expect(popup.getByText(/broken-4\.json/)).toHaveCount(0)
   await expect(popup.getByText('and 2 more.')).toBeVisible()
 })
+
+interface DroppedFile {
+  name: string
+  mimeType: string
+  content: string
+}
+
+async function dropOnImportSection(
+  page: Page,
+  files: DroppedFile[],
+): Promise<void> {
+  /* eslint-disable unicorn/isolated-functions -- this callback runs in the popup's own browser context, where DOM globals are real */
+  await page.evaluate((droppedFiles) => {
+    const section = document
+      .querySelector('input[type="file"]')
+      ?.closest('section')
+    if (!section) throw new Error('import section missing')
+    const transfer = new DataTransfer()
+    for (const { name, mimeType, content } of droppedFiles) {
+      transfer.items.add(new File([content], name, { type: mimeType }))
+    }
+    for (const type of ['dragover', 'drop']) {
+      section.dispatchEvent(
+        new DragEvent(type, {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: transfer,
+        }),
+      )
+    }
+  }, files)
+  /* eslint-enable unicorn/isolated-functions -- scoped to the callback above only */
+}
+
+test('dropping one file on the Import section quick imports it', async ({
+  openExtensionPage,
+  readBookmarkTree,
+}) => {
+  const popup = await openExtensionPage('popup.html')
+
+  await dropOnImportSection(popup, [
+    {
+      name: 'dropped.csv',
+      mimeType: 'text/csv',
+      content: 'title,url\nDropped A,https://dropped-a.example/page',
+    },
+  ])
+  await expectImportToast(popup)
+
+  const [root] = await readBookmarkTree()
+  const otherBookmarks = root?.children?.find((n) => n.id === '2')
+  const importedFolder = otherBookmarks?.children?.find(
+    (n) => n.title === 'Imported bookmarks',
+  )
+  expect(importedFolder?.children?.map((n) => n.url)).toEqual([
+    'https://dropped-a.example/page',
+  ])
+})
+
+test('dragging files over the Import section shows the drop label and dropping several imports one batch', async ({
+  openExtensionPage,
+  readBookmarkTree,
+}) => {
+  const popup = await openExtensionPage('popup.html')
+
+  await popup.evaluate(() => {
+    const transfer = new DataTransfer()
+    transfer.items.add(new File(['x'], 'a.csv', { type: 'text/csv' }))
+    document
+      .querySelector('input[type="file"]')
+      ?.closest('section')
+      ?.dispatchEvent(
+        new DragEvent('dragover', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: transfer,
+        }),
+      )
+  })
+
+  await expect(popup.getByText('Drop files to import')).toBeVisible()
+
+  await dropOnImportSection(popup, [
+    {
+      name: 'one.csv',
+      mimeType: 'text/csv',
+      content: 'title,url\nOne,https://drop-one.example/page',
+    },
+    {
+      name: 'two.csv',
+      mimeType: 'text/csv',
+      content: 'title,url\nTwo,https://drop-two.example/page',
+    },
+  ])
+  await expectImportToast(popup)
+  await expect(popup.getByText('Drop files to import')).not.toBeVisible()
+
+  const [root] = await readBookmarkTree()
+  const otherBookmarks = root?.children?.find((n) => n.id === '2')
+  const importedFolder = otherBookmarks?.children?.find(
+    (n) => n.title === 'Imported bookmarks',
+  )
+  expect(importedFolder?.children?.map((n) => n.url)).toEqual([
+    'https://drop-one.example/page',
+    'https://drop-two.example/page',
+  ])
+})
+
+test('a drop while an import is running is ignored', async ({
+  openExtensionPage,
+  readBookmarkTree,
+}) => {
+  const popup = await openExtensionPage('popup.html')
+
+  await popup.evaluate(async () => {
+    const section = document
+      .querySelector('input[type="file"]')
+      ?.closest('section')
+    if (!section) throw new Error('import section missing')
+    const drop = (file: File) => {
+      const transfer = new DataTransfer()
+      transfer.items.add(file)
+      section.dispatchEvent(
+        new DragEvent('drop', {
+          bubbles: true,
+          cancelable: true,
+          dataTransfer: transfer,
+        }),
+      )
+    }
+    const { promise: gate, resolve: release } = Promise.withResolvers<void>()
+    const slow = new File(
+      ['title,url\nSlow,https://slow.example/page'],
+      'slow.csv',
+      { type: 'text/csv' },
+    )
+    const originalText = slow.text.bind(slow)
+    Object.defineProperty(slow, 'text', {
+      value: async () => {
+        await gate
+        return originalText()
+      },
+    })
+    drop(slow)
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    drop(
+      new File(['title,url\nLate,https://late.example/page'], 'late.csv', {
+        type: 'text/csv',
+      }),
+    )
+    Object.defineProperty(globalThis, 'releaseSlowDrop', { value: release })
+  })
+
+  await expect(
+    popup.getByText('Import in progress. Dropped files are ignored.'),
+  ).toBeVisible()
+
+  await popup.evaluate(() => {
+    ;(
+      globalThis as unknown as { releaseSlowDrop: () => void }
+    ).releaseSlowDrop()
+  })
+
+  await expectImportToast(popup)
+
+  const [root] = await readBookmarkTree()
+  const otherBookmarks = root?.children?.find((n) => n.id === '2')
+  const importedFolder = otherBookmarks?.children?.find(
+    (n) => n.title === 'Imported bookmarks',
+  )
+  expect(importedFolder?.children?.map((n) => n.url)).toEqual([
+    'https://slow.example/page',
+  ])
+})

@@ -666,6 +666,14 @@
     "message": "ファイルを選択…",
     "description": "Popup button that opens the file picker to import one or more bookmark files"
   },
+  "popup_dropFilesToImport": {
+    "message": "ファイルをドロップしてインポート",
+    "description": "Popup Import section label shown while files are dragged over it"
+  },
+  "popup_importBusyDropIgnored": {
+    "message": "インポート中です。ドロップしたファイルは無視されます。",
+    "description": "Popup muted line while an import runs, explaining that dropped files are ignored"
+  },
   "popup_importBatchSummary": {
     "n": "$1 個のファイル · ブックマーク $2 件"
   },
