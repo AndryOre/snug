@@ -48,7 +48,11 @@ const { proof } = getClosingCopy(Astro.props.locale)
     ))}
   </CardGrid>
   <p class="mt-8">
-    <TextLink href={STORE_REVIEWS_URL} data-reviews-link>
+    <TextLink
+      href={STORE_REVIEWS_URL}
+      data-reviews-link
+      data-umami-event="reviews-click"
+    >
       {proof.link}
     </TextLink>
   </p>
