@@ -17,33 +17,34 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 
 ## Scripts
 
-| Script                      | What it does                                                                                                                                                 |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `bun run dev`               | Starts the WXT dev server for `apps/extension` (Chrome MV3).                                                                                                 |
-| `bun run build`             | Turborepo build of every workspace (Chrome MV3 for the extension).                                                                                           |
-| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                                                                               |
-| `bun run check`             | Aggregate gate: each workspace's `check` plus the root `format:check` → `lint` → `typecheck` → `knip`, in parallel under Turborepo. Run before opening a PR. |
-| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                                                                                |
-| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                                                 |
-| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                                                             |
-| `bun run clean`             | Removes build output, `.turbo` and every workspace's `node_modules`.                                                                                         |
-| `bun run cache:clear`       | Clears ESLint, Turborepo and `node_modules/.cache` caches.                                                                                                   |
-| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                                                 |
-| `bun run format:write`      | Formats the repo with Prettier.                                                                                                                              |
-| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                    |
-| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                    |
-| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                       |
-| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension` and `apps/video`.                                                                        |
-| `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                                                              |
-| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).                                    |
-| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                                                   |
-| `bun run test:e2e`          | Builds the extension (`wxt build`), then runs the Playwright E2E suite (`apps/extension/e2e/**`).                                                            |
-| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                                                         |
-| `bun run video:studio`      | Starts Remotion Studio for `apps/video` (Tailscale-bound wrapper when installed).                                                                            |
-| `bun run video:still`       | Renders one still frame of the promo (`remotion still`).                                                                                                     |
-| `bun run video:render`      | Renders the promo for every locale into `apps/video/out/`.                                                                                                   |
-| `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                              |
-| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                         |
+| Script                      | What it does                                                                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bun run dev`               | Starts the WXT dev server for `apps/extension` (Chrome MV3).                                                                                                     |
+| `bun run build`             | Turborepo build of every workspace (Chrome MV3 for the extension).                                                                                               |
+| `bun run zip`               | Builds and packages the extension into a distributable `.zip`.                                                                                                   |
+| `bun run check`             | Aggregate gate: each workspace's `check` plus the root `format:check` → `lint` → `typecheck` → `knip`, in parallel under Turborepo. Run before opening a PR.     |
+| `bun run fix`               | Aggregate autofix: `format:write` → `lint:fix` → `typecheck`.                                                                                                    |
+| `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                                                     |
+| `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                                                                 |
+| `bun run clean`             | Removes build output, `.turbo` and every workspace's `node_modules`.                                                                                             |
+| `bun run cache:clear`       | Clears ESLint, Turborepo and `node_modules/.cache` caches.                                                                                                       |
+| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                                                     |
+| `bun run format:write`      | Formats the repo with Prettier.                                                                                                                                  |
+| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                        |
+| `bun run env:encrypt`       | Encrypts the root `.env` in place with dotenvx.                                                                                                                  |
+| `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                        |
+| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                           |
+| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                               |
+| `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                                                                  |
+| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).                                        |
+| `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                                                       |
+| `bun run test:e2e`          | Turborepo runs each workspace's Playwright E2E suite: the extension (builds with `wxt build` first, `apps/extension/e2e/**`) and the site (`astro build` first). |
+| `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                                                             |
+| `bun run video:studio`      | Starts Remotion Studio for `apps/video` (Tailscale-bound wrapper when installed).                                                                                |
+| `bun run video:still`       | Renders one still frame of the promo (`remotion still`).                                                                                                         |
+| `bun run video:render`      | Renders the promo for every locale into `apps/video/out/`.                                                                                                       |
+| `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                                  |
+| `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                             |
 
 ## Git hooks
 

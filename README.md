@@ -35,8 +35,9 @@ bookmarks tree, locally — no account, no cloud, no server to trust. See the
 - Choose which bookmarks to import: check single bookmarks or whole folders in
   the preview (not for a replace).
 - Import several files at once as one batch, from the popup or the Import page.
-  In Folder mode with two or more files, each file gets its own folder. Cancel
-  puts your bookmarks back as they were.
+  Drop files straight on the popup's Import section. In Folder mode with two or
+  more files, each file gets its own folder. Cancel puts your bookmarks back as
+  they were.
 - Undo a replace: Snug saves a Safety snapshot first, keeps the latest five on
   your device, and lets you restore or download any of them from Settings. You
   can also take one at any time.

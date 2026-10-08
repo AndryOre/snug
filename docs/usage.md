@@ -77,20 +77,22 @@ falls back to "Bookmarks".
 1. Quick import, from the popup:
    - Optionally change the default import mode (see **Settings** below) — it
      starts on **Restore — merge**.
-   - Click "Choose file…" and select one or more bookmarks files (see **Import
-     sources** below).
+   - Click "Choose files…" and select one or more bookmarks files (see **Import
+     sources** below), or drop them on the popup's Import section. A "Drop files
+     to import" overlay appears while you drag. Files dropped while an import is
+     running are ignored.
    - The extension automatically detects each format and imports the bookmarks
      immediately using the default import mode. A CSV file — or any other file
      with no Bookmarks Bar/Other Bookmarks data — always imports into a new
      "Imported Bookmarks" folder instead, regardless of the default mode.
    - Several files are imported together as one **Import batch** (see below). A
-     file Snug cannot read is left out, and the result tells you how many were
-     skipped.
-   - If the default mode is **Restore — replace**, you're warned and asked to
-     confirm before the import runs, since it deletes your current bookmarks (a
-     Safety snapshot is saved first, so you can undo it); canceling imports
-     nothing. Restore — replace, and very large imports, open the app's
-     **Import** page instead of running in the popup.
+     file Snug cannot read is left out. The warning lists up to three skipped
+     files as `name: reason`, then "and N more".
+   - If the default mode is **Restore — replace**, the popup shows only an
+     inline warning that your existing bookmarks will be replaced. Picking a
+     file then opens the app's **Import** page, where you review the replace and
+     confirm it (a Safety snapshot is saved first, so you can undo it). Very
+     large imports open the **Import** page too.
 2. Preview first, from the app's **Import** page:
    - Drop or select one or more bookmarks files. Each file gets a row with its
      detected format and bookmark count, or the reason it cannot be read. You
@@ -113,9 +115,9 @@ falls back to "Bookmarks".
      remove and add, lists the bookmarks that will be deleted, and requires
      confirming a warning dialog before the import runs.
    - **Skip duplicates** (on by default) leaves out any bookmark whose URL
-     already exists in your browser, and tells you how many it will skip. It
-     applies to Create folder and Restore — merge, not to Restore — replace. The
-     switch is shared with Quick import.
+     already exists in your browser, and tells you how many of the selected
+     bookmarks it will skip. It applies to Create folder and Restore — merge,
+     not to Restore — replace. The switch is shared with Quick import.
 
 ### Import selection
 
@@ -156,8 +158,8 @@ content. It reads:
 Before every Restore — replace, Snug saves a **Safety snapshot** of your
 Bookmarks Bar and Other Bookmarks: a JSON file in your Downloads folder
 (`snug-safety-snapshot-<date>.json`), plus a copy kept inside the extension. The
-replace confirmation tells you this and links to Settings. If the snapshot can't
-be saved, nothing is deleted.
+replace confirmation tells you this and links to the Safety snapshot card in
+Settings. If the snapshot can't be saved, nothing is deleted.
 
 - After a replace, **Undo import** on the result restores the snapshot.
 - In **Settings**, the Safety snapshot card lists the latest five snapshots. You
