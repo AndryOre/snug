@@ -86,13 +86,13 @@
       "export": "Página de exportação: escolha pastas da árvore, um formato e exporte.",
       "import": "Pré-visualização da importação: veja o que muda e escolha mesclar, substituir ou pasta nova.",
       "autoExport": "Exportação automática: diária, em HTML, JSON e Markdown, com a próxima execução à vista.",
-      "popup": "O pop-up da barra de ferramentas exporta tudo com um clique."
+      "popup": "O pop-up da barra de ferramentas exporta com um clique e importa os arquivos que você solta nele."
     },
     "alts": {
       "export": "Página de exportação do Snug: uma árvore de pastas de favoritos, um seletor de formato e o botão Exportar",
       "import": "Prévia de importação do Snug: uma lista de favoritos para adicionar, ignorar ou excluir, com as opções mesclar, substituir e novo",
       "autoExport": "Configurações de exportação automática do Snug: uma programação diária, três formatos e o horário da próxima execução",
-      "popup": "Pop-up do Snug na barra de ferramentas com um único botão para exportar todos os favoritos"
+      "popup": "Pop-up do Snug na barra de ferramentas com uma borda tracejada indicando Solte arquivos para importar"
     }
   },
   "video": {

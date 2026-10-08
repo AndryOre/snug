@@ -86,13 +86,13 @@
       "export": "Página de exportación: elige carpetas del árbol, un formato y exporta.",
       "import": "Vista previa de importación: mira qué cambia y elige combinar, reemplazar o carpeta nueva.",
       "autoExport": "Exportación automática: a diario, en HTML, JSON y Markdown, con la próxima ejecución a la vista.",
-      "popup": "La ventana de la barra de herramientas exporta todo con un clic."
+      "popup": "La ventana de la barra de herramientas exporta con un clic e importa los archivos que sueltas en ella."
     },
     "alts": {
       "export": "Página de exportación de Snug: un árbol de carpetas de marcadores, un selector de formato y el botón Exportar",
       "import": "Vista previa de importación de Snug: una lista de marcadores por añadir, omitir o eliminar, con las opciones combinar, reemplazar y nuevo",
       "autoExport": "Ajustes de exportación automática de Snug: una programación diaria, tres formatos y la hora de la próxima ejecución",
-      "popup": "Ventana emergente de Snug en la barra de herramientas con un solo botón para exportar todos los marcadores"
+      "popup": "Ventana emergente de Snug en la barra de herramientas con un recuadro punteado que dice Suelta archivos para importar"
     }
   },
   "video": {

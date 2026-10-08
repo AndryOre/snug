@@ -86,13 +86,13 @@
       "export": "Exportseite: Ordner aus dem Baum wählen, Format festlegen, exportieren.",
       "import": "Importvorschau: sehen, was sich ändert, dann Zusammenführen, Ersetzen oder neuer Ordner wählen.",
       "autoExport": "Auto-Export: täglich, in HTML, JSON und Markdown, mit dem nächsten Lauf.",
-      "popup": "Das Popup in der Symbolleiste exportiert alles mit einem Klick."
+      "popup": "Das Popup in der Symbolleiste exportiert mit einem Klick und importiert Dateien, die du darauf ablegst."
     },
     "alts": {
       "export": "Exportseite von Snug: ein Ordnerbaum der Lesezeichen, eine Formatauswahl und die Schaltfläche Exportieren",
       "import": "Importvorschau von Snug: eine Liste von Lesezeichen zum Hinzufügen, Überspringen oder Löschen, mit den Optionen Zusammenführen, Ersetzen und Neu",
       "autoExport": "Einstellungen für den automatischen Export in Snug: ein täglicher Zeitplan, drei Formate und der Zeitpunkt des nächsten Laufs",
-      "popup": "Snug-Popup in der Symbolleiste mit einer einzigen Schaltfläche zum Exportieren aller Lesezeichen"
+      "popup": "Snug-Popup in der Symbolleiste mit einem gestrichelten Rahmen und dem Text Dateien zum Importieren ablegen"
     }
   },
   "video": {

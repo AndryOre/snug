@@ -643,25 +643,25 @@ its own set (`es/`, `de/`, `fr/`, `it/`, `ja/`, `ko/`, `pt_BR/`, `ru/`,
 | `01-export.png`      | Export page: pick folders from the tree, choose a format, export.        |
 | `02-import.png`      | Import preview: see what will change, then pick merge, replace or new.   |
 | `03-auto-export.png` | Auto-export: daily, in HTML, JSON and Markdown, with the next run shown. |
-| `04-popup.png`       | The toolbar popup exports everything in one click.                       |
+| `04-popup.png`       | The toolbar popup exports in one click and imports files you drop on it. |
 
 ### ES
 
-| Image                | Caption                                                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------ |
-| `01-export.png`      | Página de exportación: elige carpetas del árbol, un formato y exporta.                           |
-| `02-import.png`      | Vista previa de importación: mira qué cambia y elige combinar, reemplazar o carpeta nueva.       |
-| `03-auto-export.png` | Exportación automática: a diario, en HTML, JSON y Markdown, con la próxima ejecución a la vista. |
-| `04-popup.png`       | La ventana de la barra de herramientas exporta todo con un clic.                                 |
+| Image                | Caption                                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------------------ |
+| `01-export.png`      | Página de exportación: elige carpetas del árbol, un formato y exporta.                                 |
+| `02-import.png`      | Vista previa de importación: mira qué cambia y elige combinar, reemplazar o carpeta nueva.             |
+| `03-auto-export.png` | Exportación automática: a diario, en HTML, JSON y Markdown, con la próxima ejecución a la vista.       |
+| `04-popup.png`       | La ventana de la barra de herramientas exporta con un clic e importa los archivos que sueltas en ella. |
 
 ### DE
 
-| Image                | Caption                                                                                         |
-| -------------------- | ----------------------------------------------------------------------------------------------- |
-| `01-export.png`      | Exportseite: Ordner aus dem Baum wählen, Format festlegen, exportieren.                         |
-| `02-import.png`      | Importvorschau: sehen, was sich ändert, dann Zusammenführen, Ersetzen oder neuer Ordner wählen. |
-| `03-auto-export.png` | Auto-Export: täglich, in HTML, JSON und Markdown, mit dem nächsten Lauf.                        |
-| `04-popup.png`       | Das Popup in der Symbolleiste exportiert alles mit einem Klick.                                 |
+| Image                | Caption                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------- |
+| `01-export.png`      | Exportseite: Ordner aus dem Baum wählen, Format festlegen, exportieren.                                 |
+| `02-import.png`      | Importvorschau: sehen, was sich ändert, dann Zusammenführen, Ersetzen oder neuer Ordner wählen.         |
+| `03-auto-export.png` | Auto-Export: täglich, in HTML, JSON und Markdown, mit dem nächsten Lauf.                                |
+| `04-popup.png`       | Das Popup in der Symbolleiste exportiert mit einem Klick und importiert Dateien, die du darauf ablegst. |
 
 ### FR
 
@@ -670,7 +670,7 @@ its own set (`es/`, `de/`, `fr/`, `it/`, `ja/`, `ko/`, `pt_BR/`, `ru/`,
 | `01-export.png`      | Page d'exportation : choisissez des dossiers dans l'arborescence, un format, puis exportez.             |
 | `02-import.png`      | Aperçu de l'import : voyez ce qui change, puis choisissez fusionner, remplacer ou nouveau dossier.      |
 | `03-auto-export.png` | Exportation automatique : chaque jour, en HTML, JSON et Markdown, avec la prochaine exécution affichée. |
-| `04-popup.png`       | La fenêtre de la barre d'outils exporte tout en un clic.                                                |
+| `04-popup.png`       | La fenêtre de la barre d'outils exporte en un clic et importe les fichiers que vous y déposez.          |
 
 ### IT
 
@@ -679,16 +679,16 @@ its own set (`es/`, `de/`, `fr/`, `it/`, `ja/`, `ko/`, `pt_BR/`, `ru/`,
 | `01-export.png`      | Pagina di esportazione: scegli le cartelle dall'albero, un formato ed esporta.                       |
 | `02-import.png`      | Anteprima di importazione: vedi cosa cambia, poi scegli unisci, sostituisci o nuova cartella.        |
 | `03-auto-export.png` | Esportazione automatica: ogni giorno, in HTML, JSON e Markdown, con la prossima esecuzione in vista. |
-| `04-popup.png`       | Il popup nella barra degli strumenti esporta tutto con un clic.                                      |
+| `04-popup.png`       | Il popup nella barra degli strumenti esporta con un clic e importa i file che ci trascini sopra.     |
 
 ### JA
 
-| Image                | Caption                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------ |
-| `01-export.png`      | 書き出しページ：ツリーからフォルダーを選び、形式を選んで書き出します。               |
-| `02-import.png`      | 読み込みプレビュー：変更内容を確認し、統合、置き換え、新しいフォルダーから選びます。 |
-| `03-auto-export.png` | 自動書き出し：毎日、HTML、JSON、Markdown で。次回の実行も表示されます。              |
-| `04-popup.png`       | ツールバーのポップアップから、ワンクリックですべてを書き出せます。                   |
+| Image                | Caption                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------- |
+| `01-export.png`      | 書き出しページ：ツリーからフォルダーを選び、形式を選んで書き出します。                   |
+| `02-import.png`      | 読み込みプレビュー：変更内容を確認し、統合、置き換え、新しいフォルダーから選びます。     |
+| `03-auto-export.png` | 自動書き出し：毎日、HTML、JSON、Markdown で。次回の実行も表示されます。                  |
+| `04-popup.png`       | ツールバーのポップアップは、ワンクリックで書き出し、ドロップしたファイルを読み込めます。 |
 
 ### KO
 
@@ -697,25 +697,25 @@ its own set (`es/`, `de/`, `fr/`, `it/`, `ja/`, `ko/`, `pt_BR/`, `ru/`,
 | `01-export.png`      | 내보내기 페이지: 트리에서 폴더를 고르고, 형식을 선택해 내보내요.               |
 | `02-import.png`      | 가져오기 미리보기: 무엇이 바뀌는지 확인하고 병합, 교체, 새 폴더 중에서 골라요. |
 | `03-auto-export.png` | 자동 내보내기: 매일, HTML, JSON, Markdown으로, 다음 실행 시각도 표시돼요.      |
-| `04-popup.png`       | 툴바 팝업은 클릭 한 번으로 모두 내보내요.                                      |
+| `04-popup.png`       | 툴바 팝업은 클릭 한 번으로 내보내고, 놓아 둔 파일을 가져와요.                  |
 
 ### PT_BR
 
-| Image                | Caption                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| `01-export.png`      | Página de exportação: escolha pastas da árvore, um formato e exporte.                        |
-| `02-import.png`      | Pré-visualização da importação: veja o que muda e escolha mesclar, substituir ou pasta nova. |
-| `03-auto-export.png` | Exportação automática: diária, em HTML, JSON e Markdown, com a próxima execução à vista.     |
-| `04-popup.png`       | O pop-up da barra de ferramentas exporta tudo com um clique.                                 |
+| Image                | Caption                                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| `01-export.png`      | Página de exportação: escolha pastas da árvore, um formato e exporte.                             |
+| `02-import.png`      | Pré-visualização da importação: veja o que muda e escolha mesclar, substituir ou pasta nova.      |
+| `03-auto-export.png` | Exportação automática: diária, em HTML, JSON e Markdown, com a próxima execução à vista.          |
+| `04-popup.png`       | O pop-up da barra de ferramentas exporta com um clique e importa os arquivos que você solta nele. |
 
 ### RU
 
-| Image                | Caption                                                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------ |
-| `01-export.png`      | Страница экспорта: выберите папки в дереве и формат, затем экспортируйте.                        |
-| `02-import.png`      | Предпросмотр импорта: посмотрите, что изменится, и выберите объединение, замену или новую папку. |
-| `03-auto-export.png` | Автоэкспорт: ежедневно, в HTML, JSON и Markdown, с указанием следующего запуска.                 |
-| `04-popup.png`       | Всплывающее окно на панели инструментов экспортирует всё одним щелчком.                          |
+| Image                | Caption                                                                                                     |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `01-export.png`      | Страница экспорта: выберите папки в дереве и формат, затем экспортируйте.                                   |
+| `02-import.png`      | Предпросмотр импорта: посмотрите, что изменится, и выберите объединение, замену или новую папку.            |
+| `03-auto-export.png` | Автоэкспорт: ежедневно, в HTML, JSON и Markdown, с указанием следующего запуска.                            |
+| `04-popup.png`       | Всплывающее окно на панели инструментов экспортирует одним щелчком и импортирует перетащенные в него файлы. |
 
 ### ZH_CN
 
@@ -724,7 +724,7 @@ its own set (`es/`, `de/`, `fr/`, `it/`, `ja/`, `ko/`, `pt_BR/`, `ru/`,
 | `01-export.png`      | 导出页面：从树中选择文件夹和格式，然后导出。                            |
 | `02-import.png`      | 导入预览：查看将发生的更改，再选择合并、替换或新建文件夹。              |
 | `03-auto-export.png` | 自动导出：每天一次，格式为 HTML、JSON 和 Markdown，并显示下次运行时间。 |
-| `04-popup.png`       | 工具栏弹出窗口一键导出全部书签。                                        |
+| `04-popup.png`       | 工具栏弹出窗口可一键导出，也可导入拖入的文件。                          |
 
 The fifth store slide (`05-local.png`) has no interface in it, so it is not used
 here.
