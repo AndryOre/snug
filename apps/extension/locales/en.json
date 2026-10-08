@@ -681,6 +681,10 @@
     "1": "$1 file imported · $2 bookmarks.",
     "n": "$1 files imported · $2 bookmarks."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "and $1 more.",
+    "n": "and $1 more."
+  },
   "popup_openingImportTitle": {
     "message": "Opening the Import page",
     "description": "Popup toast title when a file batch is handed to the Import page"
@@ -1050,8 +1054,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 bookmark in this file already exists or repeats and will be skipped",
-    "n": "$1 bookmarks in this file already exist or repeat and will be skipped"
+    "1": "$1 selected bookmark already exists or repeats and will be skipped",
+    "n": "$1 selected bookmarks already exist or repeat and will be skipped"
   },
   "import_skipDuplicatesNone": {
     "message": "No bookmarks in this file already exist.",

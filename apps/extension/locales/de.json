@@ -677,6 +677,10 @@
     "1": "$1 Datei importiert · $2 Lesezeichen.",
     "n": "$1 Dateien importiert · $2 Lesezeichen."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "und $1 weitere.",
+    "n": "und $1 weitere."
+  },
   "popup_openingImportTitle": {
     "message": "Importseite wird geöffnet",
     "description": "Popup toast title when a file batch is handed to the Import page"
@@ -1043,8 +1047,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 Lesezeichen in dieser Datei existiert bereits oder wiederholt sich und wird übersprungen",
-    "n": "$1 Lesezeichen in dieser Datei existieren bereits oder wiederholen sich und werden übersprungen"
+    "1": "$1 ausgewähltes Lesezeichen existiert bereits oder wiederholt sich und wird übersprungen",
+    "n": "$1 ausgewählte Lesezeichen existieren bereits oder wiederholen sich und werden übersprungen"
   },
   "import_skipDuplicatesNone": {
     "message": "Kein Lesezeichen in dieser Datei existiert bereits.",

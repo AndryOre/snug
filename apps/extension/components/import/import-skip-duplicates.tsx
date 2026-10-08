@@ -13,6 +13,7 @@ interface ImportSkipDuplicatesProperties {
   isChecked: boolean
   onCheckedChange: (isChecked: boolean) => void
   duplicateCount: number
+  fileDuplicateCount: number
   disabled: boolean
 }
 
@@ -22,7 +23,8 @@ interface ImportSkipDuplicatesProperties {
  * @param root0 This component's properties.
  * @param root0.isChecked Whether Skip duplicates is on.
  * @param root0.onCheckedChange Called with the new switch state.
- * @param root0.duplicateCount How many bookmarks would be skipped.
+ * @param root0.duplicateCount How many selected bookmarks would be skipped.
+ * @param root0.fileDuplicateCount How many bookmarks in the whole file are duplicates.
  * @param root0.disabled Whether the switch is disabled (import in flight).
  * @returns The switch field.
  */
@@ -30,6 +32,7 @@ export function ImportSkipDuplicates({
   isChecked,
   onCheckedChange,
   duplicateCount,
+  fileDuplicateCount,
   disabled,
 }: ImportSkipDuplicatesProperties) {
   return (
@@ -39,7 +42,7 @@ export function ImportSkipDuplicates({
           {i18n.t('import_skipDuplicates')}
         </FieldLabel>
         <FieldDescription>
-          {duplicateCount > 0
+          {fileDuplicateCount > 0
             ? i18n.t('import_skipDuplicatesFound', duplicateCount, [
                 formatCount(duplicateCount),
               ])

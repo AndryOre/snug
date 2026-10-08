@@ -266,6 +266,7 @@ test('several files quick import in one run and an unreadable one is skipped and
   await expect(
     popup.getByText("1 file couldn't be read and was skipped"),
   ).toBeVisible()
+  await expect(popup.getByText(/broken\.json: \S/)).toBeVisible()
 
   const [root] = await readBookmarkTree()
   const otherBookmarks = root?.children?.find((n) => n.id === '2')
@@ -277,4 +278,37 @@ test('several files quick import in one run and an unreadable one is skipped and
     'https://first-b.example/page',
     'https://second-a.example/page',
   ])
+})
+
+test('the skipped-files warning names at most three files and counts the rest', async ({
+  openExtensionPage,
+}) => {
+  const popup = await openExtensionPage('popup.html')
+  const brokenFiles = [1, 2, 3, 4, 5].map((index) => ({
+    name: `broken-${index}.json`,
+    mimeType: 'application/json',
+    buffer: Buffer.from('{not json'),
+  }))
+  await popup.locator('input[type="file"]').setInputFiles([
+    {
+      name: 'good-a.csv',
+      mimeType: 'text/csv',
+      buffer: Buffer.from('title,url\nGood A,https://good-a.example/page'),
+    },
+    {
+      name: 'good-b.csv',
+      mimeType: 'text/csv',
+      buffer: Buffer.from('title,url\nGood B,https://good-b.example/page'),
+    },
+    ...brokenFiles,
+  ])
+
+  await expect(
+    popup.getByText("5 files couldn't be read and were skipped"),
+  ).toBeVisible()
+  await expect(popup.getByText(/broken-1\.json: \S/)).toBeVisible()
+  await expect(popup.getByText(/broken-2\.json: \S/)).toBeVisible()
+  await expect(popup.getByText(/broken-3\.json: \S/)).toBeVisible()
+  await expect(popup.getByText(/broken-4\.json/)).toHaveCount(0)
+  await expect(popup.getByText('and 2 more.')).toBeVisible()
 })

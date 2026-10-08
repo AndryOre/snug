@@ -15,6 +15,7 @@ import { normalizeUrl } from './duplicates'
 import {
   buildImportPlan,
   collectDuplicateIds,
+  countSelectedDuplicates,
   type PlanBookmark,
   type PlanNode,
   pruneFilesToChecked,
@@ -357,5 +358,49 @@ describe('collectDuplicateIds', () => {
       second.id,
     ])
     expect(collectDuplicateIds(plan.tree, new Set())).toEqual([])
+  })
+})
+
+async function duplicatePlan() {
+  const existing = await browser.bookmarks.create({
+    title: 'Seen',
+    url: 'https://seen.example/',
+  })
+  const file = barFile(
+    mark('Seen', existing.url ?? ''),
+    mark('A', 'https://a.example/'),
+    mark('A again', 'https://a.example/'),
+  )
+  const plan = buildImportPlan({
+    files: [{ file }],
+    liveTree: await browser.bookmarks.getTree(),
+    mode: 'restore-merge',
+    skipDuplicates: true,
+  })
+  const [seen, original, repeat] = leaves(plan.tree)
+  if (!seen || !original || !repeat) throw new Error('fixture incomplete')
+  return { plan, seen, original, repeat }
+}
+
+describe('countSelectedDuplicates', () => {
+  it('skip on: counts existing always and in-batch while the original is checked', async () => {
+    const { plan, seen, original, repeat } = await duplicatePlan()
+    const count = (ids: string[]) =>
+      countSelectedDuplicates(plan.tree, new Set(ids), true)
+    expect(count([seen.id, original.id, repeat.id])).toBe(2)
+    expect(count([original.id])).toBe(2)
+    expect(count([seen.id])).toBe(1)
+    expect(count([])).toBe(1)
+  })
+
+  it('skip off: counts checked duplicates whose original is checked too', async () => {
+    const { plan, seen, original, repeat } = await duplicatePlan()
+    const count = (ids: string[]) =>
+      countSelectedDuplicates(plan.tree, new Set(ids), false)
+    expect(count([seen.id, original.id, repeat.id])).toBe(2)
+    expect(count([seen.id, repeat.id])).toBe(1)
+    expect(count([original.id, repeat.id])).toBe(1)
+    expect(count([original.id])).toBe(0)
+    expect(count([])).toBe(0)
   })
 })

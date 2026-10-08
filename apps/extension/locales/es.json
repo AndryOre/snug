@@ -681,6 +681,10 @@
     "1": "$1 archivo importado · $2 marcadores.",
     "n": "$1 archivos importados · $2 marcadores."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "y $1 más.",
+    "n": "y $1 más."
+  },
   "popup_openingImportTitle": {
     "message": "Abriendo la página Importar",
     "description": "Popup toast title when a file batch is handed to the Import page"
@@ -1051,8 +1055,8 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "1": "$1 marcador de este archivo ya existe o se repite y se omitirá",
-    "n": "$1 marcadores de este archivo ya existen o se repiten y se omitirán"
+    "1": "$1 marcador seleccionado ya existe o se repite y se omitirá",
+    "n": "$1 marcadores seleccionados ya existen o se repiten y se omitirán"
   },
   "import_skipDuplicatesNone": {
     "message": "Ningún marcador de este archivo existe ya.",

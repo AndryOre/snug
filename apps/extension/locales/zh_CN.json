@@ -675,6 +675,9 @@
   "popup_importSkippedFilesResult": {
     "n": "已导入 $1 个文件 · $2 个书签。"
   },
+  "popup_importSkippedFilesMore": {
+    "n": "以及另外 $1 个。"
+  },
   "popup_openingImportTitle": {
     "message": "正在打开导入页面",
     "description": "Popup toast title when a file batch is handed to the Import page"
@@ -1040,7 +1043,7 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "n": "此文件中有 $1 个书签已存在或重复，将被跳过"
+    "n": "所选书签中有 $1 个已存在或重复，将被跳过"
   },
   "import_skipDuplicatesNone": {
     "message": "此文件中没有已存在的书签。",

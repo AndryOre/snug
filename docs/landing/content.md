@@ -20,8 +20,8 @@ document is content only: it does not decide layout, visuals or components.
 - **One conversion:** the install button goes to the Chrome Web Store through
   the counted `/install` redirect. The store listing is
   `https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn`.
-- **Never imply:** cloud, sync, an account, pricing, importing several files at
-  once, or any format or capability Snug does not ship.
+- **Never imply:** cloud, sync, an account, pricing, or any format or capability
+  Snug does not ship.
 - **Store figures, read 2026-10-05:** 5,000 users, 4.8 stars from 20 ratings.
   Re-check on the listing before launch.
 
@@ -1576,8 +1576,8 @@ ship in `lib/auto-export.ts`.
 
 ## Claim sweep
 
-- No sync, cloud, account, pricing or "several files" claim anywhere, checked
-  against Product: Capabilities and Constraints and Context: Words to avoid.
+- No sync, cloud, account or pricing claim anywhere, checked against Product:
+  Capabilities and Constraints and Context: Words to avoid.
 - No exclamation points, emoji, em dashes in short copy, or "seamless",
   "powerful", "effortless", "supercharge".
 - Not claimed anywhere: customer logos, press, case studies, usage metrics

@@ -13,6 +13,18 @@ export const APP_ROUTES = {
 } as const
 
 /**
+ * The Settings sections a deep link can target.
+ */
+export const SETTINGS_SECTIONS = ['safety-snapshot'] as const
+
+export type SettingsSection = (typeof SETTINGS_SECTIONS)[number]
+
+/**
+ * The Settings route deep-linking to the Safety snapshot card.
+ */
+export const SAFETY_SNAPSHOT_SETTINGS_ROUTE = `${APP_ROUTES.settings}?section=safety-snapshot`
+
+/**
  * Builds the absolute URL of the full-page App (`app.html`) with a hash
  * route, e.g. `chrome-extension://<id>/app.html#/auto-export`. The App uses
  * hash history, so the route lives after the `#`.

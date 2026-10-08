@@ -675,6 +675,9 @@
   "popup_importSkippedFilesResult": {
     "n": "Импортировано файлов: $1 · закладок: $2."
   },
+  "popup_importSkippedFilesMore": {
+    "n": "и ещё $1."
+  },
   "popup_openingImportTitle": {
     "message": "Открывается страница импорта",
     "description": "Popup toast title when a file batch is handed to the Import page"
@@ -1040,7 +1043,7 @@
     "description": "Label of the switch on the Import page that skips bookmarks the browser already has"
   },
   "import_skipDuplicatesFound": {
-    "n": "Закладок в этом файле, которые уже есть или повторяются и будут пропущены: $1"
+    "n": "Выбранных закладок, которые уже есть или повторяются и будут пропущены: $1"
   },
   "import_skipDuplicatesNone": {
     "message": "Закладок из этого файла, которые уже есть, нет.",

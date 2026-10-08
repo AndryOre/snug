@@ -27,6 +27,7 @@ describe('AppRouter', () => {
     vi.doMock('./routes/export', () => ({ ExportRoute: () => null }))
     vi.doMock('./routes/import', () => ({ ImportRoute: () => null }))
     Element.prototype.scrollTo = vi.fn()
+    Element.prototype.scrollIntoView = vi.fn()
     vi.stubGlobal('matchMedia', () => ({
       matches: false,
       addEventListener: vi.fn(),
@@ -121,5 +122,37 @@ describe('AppRouter', () => {
     await vi.waitFor(() => {
       expect(document.querySelector('[data-mobile="true"]')).toBe(null)
     })
+  })
+
+  it('focuses the Safety snapshot card title on a section deep link', async () => {
+    globalThis.location.hash = '#/settings?section=safety-snapshot'
+    const { AppRouter } = await import('./router')
+    const harness = createDomHarness()
+    mountedHarnesses.push(harness)
+
+    await harness.render(createElement(AppRouter))
+
+    await vi.waitFor(() => {
+      expect(document.activeElement).toBe(
+        [...harness.container.querySelectorAll('[tabindex="-1"]')].find(
+          (element) => element.textContent === 'safetySnapshot_title',
+        ),
+      )
+    })
+  })
+
+  it('does not move focus on a plain Settings visit or an invalid section', async () => {
+    globalThis.location.hash = '#/settings?section=bogus'
+    const { AppRouter } = await import('./router')
+    const harness = createDomHarness()
+    mountedHarnesses.push(harness)
+
+    await harness.render(createElement(AppRouter))
+
+    await vi.waitFor(() => {
+      expect(harness.container.textContent).toContain('safetySnapshot_title')
+    })
+    await new Promise((resolve) => setTimeout(resolve, 20))
+    expect(document.activeElement).toBe(document.body)
   })
 })
