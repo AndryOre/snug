@@ -8,7 +8,11 @@ import {
   RouterProvider,
 } from '@tanstack/react-router'
 
-import { APP_ROUTES } from '@/lib/app-url'
+import {
+  APP_ROUTES,
+  SETTINGS_SECTIONS,
+  type SettingsSection,
+} from '@/lib/app-url'
 
 import { AppShell } from './app-shell'
 import { AutoExportRoute } from './routes/auto-export'
@@ -70,6 +74,11 @@ const routeTree = rootRoute.addChildren([
     getParentRoute: () => rootRoute,
     path: APP_ROUTES.settings,
     component: SettingsRoute,
+    validateSearch: (
+      search: Record<string, unknown>,
+    ): { section?: SettingsSection } => ({
+      section: SETTINGS_SECTIONS.find((section) => section === search.section),
+    }),
   }),
   createRoute({
     getParentRoute: () => rootRoute,

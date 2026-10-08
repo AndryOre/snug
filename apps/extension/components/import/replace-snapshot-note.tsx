@@ -57,6 +57,7 @@ export function ReplaceSnapshotNote({
       ) : (
         <Link
           to={APP_ROUTES.settings}
+          search={{ section: 'safety-snapshot' }}
           className={buttonVariants({ variant: 'link', size: 'sm' })}
         >
           {linkLabel}

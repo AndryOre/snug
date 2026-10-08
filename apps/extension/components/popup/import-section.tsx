@@ -27,7 +27,11 @@ import { useId, useRef, useState } from 'react'
 
 import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
 import { OperationProgressCard } from '@/components/operation-progress-card'
-import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
+import {
+  APP_ROUTES,
+  getAppUrl,
+  SAFETY_SNAPSHOT_SETTINGS_ROUTE,
+} from '@/lib/app-url'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError } from '@/lib/import-control'
 import { getImportModeItems } from '@/lib/import-mode-items'
@@ -354,7 +358,7 @@ export function ImportSection() {
             <ReplaceSnapshotNote
               onOpenSettings={() =>
                 void browser.tabs.create({
-                  url: getAppUrl(APP_ROUTES.settings),
+                  url: getAppUrl(SAFETY_SNAPSHOT_SETTINGS_ROUTE),
                 })
               }
             />
