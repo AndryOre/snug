@@ -232,7 +232,7 @@ test.describe('Import page', () => {
       dialog.getByRole('link', {
         name: en.replaceSnapshotSettingsLink.message,
       }),
-    ).toHaveAttribute('href', /#\/settings$/)
+    ).toHaveAttribute('href', /#\/settings\?section=safety-snapshot$/)
     await page
       .getByRole('button', { name: en.import_replaceConfirm.message })
       .click()
