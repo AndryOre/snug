@@ -675,6 +675,9 @@
   "popup_importSkippedFilesResult": {
     "n": "$1 個のファイルをインポートしました · ブックマーク $2 件。"
   },
+  "popup_importSkippedFilesMore": {
+    "n": "ほか $1 件。"
+  },
   "popup_openingImportTitle": {
     "message": "インポートページを開いています",
     "description": "Popup toast title when a file batch is handed to the Import page"

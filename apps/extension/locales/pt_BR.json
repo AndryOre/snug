@@ -685,6 +685,10 @@
     "1": "$1 arquivo importado · $2 favoritos.",
     "n": "$1 arquivos importados · $2 favoritos."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "e mais $1.",
+    "n": "e mais $1."
+  },
   "popup_openingImportTitle": {
     "message": "Abrindo a página Importar",
     "description": "Popup toast title when a file batch is handed to the Import page"

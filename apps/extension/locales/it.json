@@ -681,6 +681,10 @@
     "1": "$1 file importato · $2 segnalibri.",
     "n": "$1 file importati · $2 segnalibri."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "e altri $1.",
+    "n": "e altri $1."
+  },
   "popup_openingImportTitle": {
     "message": "Apertura della pagina Importa",
     "description": "Popup toast title when a file batch is handed to the Import page"
