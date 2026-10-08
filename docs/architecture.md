@@ -64,8 +64,11 @@ relative to `apps/extension/` unless it starts with `packages/`.
   renders nothing.
 - **`popup/`** — the toolbar popup: one compact screen with an export section
   (format + "Export all"), an import section (Quick import of one or more files
-  with the default mode), an auto-export status row and a footer that opens the
-  App. It shares no React tree with the App.
+  with the default mode; the whole section is also a drop target that feeds the
+  same handler as the file picker and ignores drops while an import runs), a
+  Review prompt card, an auto-export status row and a footer that opens the App.
+  `App.tsx` composes them and `main.tsx` mounts it. It shares no React tree with
+  the App.
 - **`app/`** — the single full-page App (`app.html`, also the manifest's
   `options_ui` page, opened in a tab). A hash-routed shell built on TanStack
   Router (`router.tsx`, hash history, see
@@ -76,10 +79,14 @@ relative to `apps/extension/` unless it starts with `packages/`.
   Duplicates (scan and delete duplicate bookmarks), Auto-export (status,
   schedule, Export now), Settings (theme, tree display, default import mode,
   Safety snapshot restore), What's new (changelog) and Welcome (first-install
-  tour). The sidebar lists every route except Welcome. On each navigation the
-  shell moves focus to the page's `h1` and announces the new title. Route paths
-  live in `lib/app-url.ts` (`APP_ROUTES`, `getAppUrl`) so the popup, background
-  and changelog deep-link with `app.html#/<route>`.
+  tour). `main.tsx` mounts the shell. Settings reads an optional
+  `?section=safety-snapshot` search param (validated against `SETTINGS_SECTIONS`
+  in `router.tsx`) and focuses the Safety snapshot card. The sidebar lists every
+  route except Welcome. On each navigation the shell moves focus to the page's
+  `h1` and announces the new title. Route paths live in `lib/app-url.ts`
+  (`APP_ROUTES`, `getAppUrl`) so the popup, background and changelog deep-link
+  with `app.html#/<route>`. `lib/app-url.ts` also holds `SETTINGS_SECTIONS` and
+  `SAFETY_SNAPSHOT_SETTINGS_ROUTE`.
 - **`offscreen/`** — the hidden document used for blob downloads (see Runtime
   contexts).
 - **`advanced-export/`, `advanced-import/`, `update/`, `welcome/`** — the legacy
@@ -140,7 +147,38 @@ relative to `apps/extension/` unless it starts with `packages/`.
   parsed files into a display tree (bookmarks tagged new or duplicate, one
   top-level node per file), the list of bookmarks a Restore-replace will remove,
   and the counts; `pruneFilesToChecked` prunes the parsed files to the checked
-  ids for an Import selection. It never touches `chrome.bookmarks`.
+  ids for an Import selection. `collectDuplicateIds` lists the duplicate
+  bookmarks the import still has to see so it can skip and count them, and
+  `countSelectedDuplicates` counts the duplicates that follow the current
+  selection (what Skip duplicates will skip, or would skip if turned on). It
+  never touches `chrome.bookmarks`.
+- **`import-preview-tree.ts`** — `toPreviewNodes` maps the plan's display tree
+  to the read-only nodes the tree core renders, disabling duplicates only while
+  Skip duplicates is on.
+- **`import-lock.ts`** — `withImportLock` and `ImportLockHeldError`: a Web Lock
+  (`IMPORT_LOCK_NAME`) that serializes imports across the popup and every App
+  tab, failing fast instead of queueing.
+- **`popup-import-plan.ts`** — the popup's decision on whether a picked import
+  runs in place or opens the Import page. `planPopupImport` plans a single file,
+  `planPopupImportBatch` the readable files as one batch, and
+  `planPopupFileBatch` the whole pick: a lone file keeps its own errors, with
+  several the unreadable ones (unsupported format, malformed content, no
+  bookmarks) are returned as `skippedFiles` with the same localized reason the
+  Import page shows. Restore-replace and anything above
+  `POPUP_IMPORT_BOOKMARK_LIMIT` bookmarks go to the App.
+- **`duplicate-selection.ts`** — the Duplicates page's selection rules: which
+  copy of a group is kept (`getKeptCopyId`), which ids get deleted
+  (`getCopyIdsToDelete`, `getReviewedIdsStillToDelete`) and
+  `deleteBookmarksById`.
+- **`review-prompt.ts`** — the Review prompt state: `markReviewPromptEligible`
+  after a successful export, `dismissReviewPrompt`, and `isReviewPromptVisible`
+  (never after dismissal, not while the last Auto-export run failed). Persisted
+  in `reviewPromptStore`.
+- **`popup-status.ts`** and **`next-run-status.ts`** — pure resolvers for the
+  auto-export status shown in the popup (`resolvePopupStatus`: failed, next run
+  or off) and on the Auto-export page (`resolveNextRunStatus`).
+- **`auto-export-form.ts`** — parsing helpers for the Auto-export form fields
+  (`resolveFormats`, `resolveFolder`, `parseKeepLast`).
 - **`duplicates.ts`** — URL normalization and `findDuplicateGroups` for the
   Duplicates page, oldest copy first. `skip-duplicates.ts` reuses the same
   normalization to drop bookmarks that already exist (never in Restore-replace),
@@ -183,6 +221,24 @@ relative to `apps/extension/` unless it starts with `packages/`.
   `ExtendedBookmarkTreeNode`, `ParsedBookmark`, `BookmarkFormat`, `ImportMode`,
   `AutoExportConfig`, `ImportPreview`, `CheckedState`, and the component prop
   interfaces for the Export page's tree.
+- **Small shared helpers** — `bookmark-tree-nodes.ts` (collecting ids, checked
+  state and filtering for the trees), `count-bookmarks.ts`, `root-folders.ts`
+  (root ids and `isBookmarksBar`/`isOtherBookmarks`), `path-segment.ts`,
+  `csv-escaping.ts`, `parse-json-once.ts`, `timestamps.ts` (seconds and
+  milliseconds), `time-format.ts` and
+  `format-count.ts`/`format-snapshot-date.ts` (locale-aware display),
+  `import-mode-items.ts` (the mode selector's items), `export-all-bookmarks.ts`
+  (the popup's whole-tree export), `latest-only.ts` (ignores stale async
+  results), `use-operation-progress.ts` (state behind the progress card),
+  `use-slash-to-focus.ts`, `theme-cache.ts` and `document-language.ts` (applied
+  before first paint), `version.ts` (changelog and What's new version checks)
+  and `brand.ts` (product name, site and store URLs).
+- **`lib/importers/`** extras — `mobile-root.ts` (`shouldClearMobileRoot`, the
+  rule shared by the importers and the replace diff) and `url-validation.ts`
+  (`isAllowedBookmarkUrl`). `lib/exporters/export-tree.ts` is the shared tree
+  builder behind the Markdown, OPML and XBEL exporters.
+- **`lib/testing/`** — test-only fakes and harnesses (`fake-bookmarks.ts`,
+  `fake-i18n.ts`, `fake-locks.ts`, `setup-locks.ts`, `dom-harness.ts`).
 - **`changelog.ts`** — the ordered list of release entries the What's new route
   renders, each pointing at i18n message keys rather than embedding text
   directly.
@@ -201,13 +257,20 @@ relative to `apps/extension/` unless it starts with `packages/`.
   `import-mode-step.tsx`, `import-preview-step.tsx` (the per-root summary),
   `import-preview-tree.tsx` (the itemized tree built on the tree core, with
   `Duplicate · skipped` badges and checkboxes for the Import selection),
+  `import-skip-duplicates.tsx` (the Skip duplicates switch and its count),
+  `import-all-duplicates.tsx` (the empty state when every bookmark is a
+  duplicate), `import-preview-skeleton.tsx` (the loading placeholder),
+  `replace-snapshot-note.tsx` (the Safety snapshot paragraph of the
+  Restore-replace warning, also used by the popup),
   `import-replace-deletions.tsx` (the collapsible, virtualized
   `Will be deleted (N)` list) and the `import-step.tsx` wrapper. The route
   builds one `ImportPlan` over all chosen files (one top-level node per file)
   and feeds it to all of them.
-- **`components/duplicates/`** — the Duplicates page's group card.
+- **`components/duplicates/`** — the Duplicates page's group card
+  (`duplicate-group-card.tsx`).
 - **`components/popup/`** — the popup's `export-section.tsx`,
-  `import-section.tsx`, `auto-export-status-item.tsx` and `footer.tsx`.
+  `import-section.tsx` (including the drop target), `review-prompt-card.tsx`,
+  `auto-export-status-item.tsx` and `footer.tsx`.
 - **`packages/ui/src/components/`** — the shadcn/ui-generated primitives
   (`button.tsx`, `dialog.tsx`, `select.tsx`, etc.), shared through the
   `@workspace/ui` package along with `packages/ui/src/hooks`,
@@ -215,7 +278,11 @@ relative to `apps/extension/` unless it starts with `packages/`.
   `packages/ui/src/styles/globals.css`. Generated registry code; not
   hand-authored, not covered by the rest of this map's conventions.
 - Top-level: `export-options-panel.tsx` (the shared **Export options** panel),
-  `time-picker.tsx` (locale-aware) and `theme-provider.tsx`.
+  `time-picker.tsx` (locale-aware), `theme-provider.tsx`,
+  `safety-snapshot-card.tsx` (the Settings card listing, taking, downloading and
+  restoring Safety snapshots), `operation-progress-card.tsx` (the progress bar
+  and Cancel shown during a long import or export) and `wordmark.tsx` (the Snug
+  wordmark).
 
 ## Runtime contexts
 
