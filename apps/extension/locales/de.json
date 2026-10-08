@@ -1351,6 +1351,9 @@
   "changelog_2_0_3_1": {
     "message": "Nach deinem ersten Export fragt Snug einmalig, ob du eine Bewertung hinterlassen möchtest. Schließt du die Karte, erscheint sie nie wieder."
   },
+  "changelog_2_1_0_1": {
+    "message": "Der Import wurde deutlich verbessert: Wähle mehrere Dateien aus oder ziehe sie hinein, sieh sie dir vorab als Baum an und entscheide genau, was übernommen wird. Auch das Popup in der Symbolleiste nimmt abgelegte Dateien an."
+  },
   "reviewPrompt_title": {
     "message": "Funktioniert Snug für dich?",
     "description": "Popup Review prompt card title (also its accessible name)"

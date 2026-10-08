@@ -1342,6 +1342,9 @@
   "changelog_2_0_3_1": {
     "message": "完成首次导出后，Snug 会询问一次您是否愿意留下评价。关闭后将不再显示。"
   },
+  "changelog_2_1_0_1": {
+    "message": "导入大幅升级：可一次选择或拖放多个文件，以树形预览，并精确选择要导入的内容。工具栏弹窗也支持拖放文件。"
+  },
   "reviewPrompt_title": {
     "message": "Snug 好用吗？",
     "description": "Popup Review prompt card title (also its accessible name)"

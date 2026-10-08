@@ -1371,6 +1371,9 @@
   "changelog_2_0_3_1": {
     "message": "Depois da sua primeira exportação, o Snug pergunta uma única vez se você quer deixar uma avaliação. Se você dispensar o cartão, ele não volta mais."
   },
+  "changelog_2_1_0_1": {
+    "message": "A importação evoluiu bastante: escolha ou solte vários arquivos de uma vez, veja uma prévia em árvore e decida exatamente o que trazer. O pop-up da barra de ferramentas também aceita arquivos soltos."
+  },
   "reviewPrompt_title": {
     "message": "O Snug está funcionando para você?",
     "description": "Popup Review prompt card title (also its accessible name)"
