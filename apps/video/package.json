@@ -24,13 +24,15 @@
     "@types/bun": "catalog:",
     "@types/react": "catalog:",
     "@types/web": "0.0.166",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "scripts": {
     "studio": "if command -v remotion-studio >/dev/null 2>&1; then remotion-studio src/index.ts --port 3123; else remotion studio src/index.ts --port 3123; fi",
     "still": "remotion still src/index.ts",
     "render": "bun scripts/render-all.ts",
     "thumbnails": "bun scripts/render-thumbnails.ts",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "test": "vitest run"
   }
 }
