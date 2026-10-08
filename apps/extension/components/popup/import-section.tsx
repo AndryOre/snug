@@ -22,7 +22,9 @@ import {
 } from '@workspace/ui/components/select'
 import { Spinner } from '@workspace/ui/components/spinner'
 import { toast } from '@workspace/ui/components/toast'
+import { cn } from '@workspace/ui/lib/utils'
 import { FilesIcon, TriangleAlertIcon, UploadIcon } from 'lucide-react'
+import type { DragEvent } from 'react'
 import { useId, useRef, useState } from 'react'
 
 import { ReplaceSnapshotNote } from '@/components/import/replace-snapshot-note'
@@ -105,6 +107,10 @@ function describeSkippedBookmarks(result: ImportResult): string[] {
   ].filter(Boolean)
 }
 
+function hasDraggedFiles(event: DragEvent): boolean {
+  return event.dataTransfer.types.includes('Files')
+}
+
 function reportImportError(error: unknown): void {
   toast.add(
     error instanceof ImportCanceledError
@@ -131,7 +137,9 @@ function reportImportError(error: unknown): void {
  * bookmarks, never run in the popup, because Chrome closes it on focus loss
  * mid-import; they open the App Import page instead. The button shows a
  * spinner and is disabled from the moment a file is picked until the import
- * ends; the outcome is reported with a toast.
+ * ends; the outcome is reported with a toast. The whole section is also a
+ * drop target that feeds the same handler as the picker; drops are ignored
+ * while an import is running.
  * @returns The import section element.
  */
 export function ImportSection() {
@@ -140,6 +148,7 @@ export function ImportSection() {
   const [mode, setMode] = useStorageItem(defaultImportModeStore)
   const isBusyReference = useRef(false)
   const [isImporting, setIsImporting] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
   const [batchSummary, setBatchSummary] = useState<BatchSummary | null>(null)
   const progress = useOperationProgress()
 
@@ -277,11 +286,7 @@ export function ImportSection() {
     }
   }
 
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const files = [...(event.target.files ?? [])]
-    event.target.value = ''
+  const importFiles = async (files: File[]) => {
     const [file] = files
     if (!file || isBusyReference.current) return
     isBusyReference.current = true
@@ -308,101 +313,152 @@ export function ImportSection() {
     }
   }
 
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const files = [...(event.target.files ?? [])]
+    event.target.value = ''
+    await importFiles(files)
+  }
+
+  const handleDragOver = (event: DragEvent) => {
+    if (!hasDraggedFiles(event)) return
+    event.preventDefault()
+    if (!isImporting) setIsDragging(true)
+  }
+
+  const handleDragLeave = (event: DragEvent) => {
+    if (event.currentTarget.contains(event.relatedTarget as Node | null)) return
+    setIsDragging(false)
+  }
+
+  const handleDrop = (event: DragEvent) => {
+    if (!hasDraggedFiles(event)) return
+    event.preventDefault()
+    setIsDragging(false)
+    if (isImporting) return
+    void importFiles([...event.dataTransfer.files])
+  }
+
   return (
-    <section className="flex flex-col gap-2">
-      <input
-        ref={fileInputReference}
-        type="file"
-        multiple
-        accept=".csv,.json,.html,.htm,.xbel,.xml"
-        className="hidden"
-        onChange={(event) => void handleFileChange(event)}
-      />
-
-      <Field>
-        <FieldLabel htmlFor={modeSelectId}>
-          {i18n.t('defaultImportMode')}
-        </FieldLabel>
-        <Select
-          items={getImportModeItems()}
-          value={mode}
-          onValueChange={(value) => void setMode(value as ImportMode)}
+    <section
+      className="relative"
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      {isDragging && (
+        <div
+          className="pointer-events-none absolute -inset-2 z-10 flex items-center justify-center gap-2 rounded-lg border-2 border-dashed border-primary bg-primary/5 text-sm font-medium text-primary"
+          data-testid="popup-import-drop-overlay"
         >
-          <SelectTrigger id={modeSelectId} className="w-full">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="folder">
-                {i18n.t('importModeFolder')}
-              </SelectItem>
-              <SelectItem value="restore-merge">
-                {i18n.t('importModeRestoreMerge')}
-              </SelectItem>
-              <SelectItem value="restore-replace">
-                {i18n.t('importModeRestoreReplace')}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </Field>
-
-      {mode === 'restore-replace' && (
-        <Alert variant="destructive">
-          <TriangleAlertIcon />
-          <AlertTitle>{i18n.t('popup_replaceAlertTitle')}</AlertTitle>
-          <AlertDescription>
-            {i18n.t('importModeRestoreReplaceWarning')}
-          </AlertDescription>
-          <AlertDescription className="mt-2">
-            <ReplaceSnapshotNote
-              onOpenSettings={() =>
-                void browser.tabs.create({
-                  url: getAppUrl(SAFETY_SNAPSHOT_SETTINGS_ROUTE),
-                })
-              }
-            />
-          </AlertDescription>
-        </Alert>
+          <UploadIcon className="size-4" aria-hidden />
+          {i18n.t('popup_dropFilesToImport')}
+        </div>
       )}
-
-      {batchSummary && (
-        <Item variant="muted" size="sm">
-          <ItemMedia variant="icon">
-            <FilesIcon />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>
-              {i18n.t('popup_importBatchSummary', batchSummary.fileCount, [
-                formatCount(batchSummary.fileCount),
-                formatCount(batchSummary.bookmarkCount),
-              ])}
-            </ItemTitle>
-          </ItemContent>
-        </Item>
-      )}
-
-      <Button
-        variant="outline"
-        className="w-full"
-        disabled={isImporting}
-        onClick={() => fileInputReference.current?.click()}
-      >
-        {isImporting ? (
-          <Spinner data-icon="inline-start" />
-        ) : (
-          <UploadIcon data-icon="inline-start" />
-        )}
-        {isImporting ? i18n.t('popup_importing') : i18n.t('popup_chooseFiles')}
-      </Button>
-
-      {progress.state.isCardVisible && (
-        <OperationProgressCard
-          kind="import"
-          state={progress.state}
-          onCancel={progress.requestCancel}
+      <div className={cn('flex flex-col gap-2', isDragging && 'invisible')}>
+        <input
+          ref={fileInputReference}
+          type="file"
+          multiple
+          accept=".csv,.json,.html,.htm,.xbel,.xml"
+          className="hidden"
+          onChange={(event) => void handleFileChange(event)}
         />
-      )}
+
+        <Field>
+          <FieldLabel htmlFor={modeSelectId}>
+            {i18n.t('defaultImportMode')}
+          </FieldLabel>
+          <Select
+            items={getImportModeItems()}
+            value={mode}
+            onValueChange={(value) => void setMode(value as ImportMode)}
+          >
+            <SelectTrigger id={modeSelectId} className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="folder">
+                  {i18n.t('importModeFolder')}
+                </SelectItem>
+                <SelectItem value="restore-merge">
+                  {i18n.t('importModeRestoreMerge')}
+                </SelectItem>
+                <SelectItem value="restore-replace">
+                  {i18n.t('importModeRestoreReplace')}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </Field>
+
+        {mode === 'restore-replace' && (
+          <Alert variant="destructive">
+            <TriangleAlertIcon />
+            <AlertTitle>{i18n.t('popup_replaceAlertTitle')}</AlertTitle>
+            <AlertDescription>
+              {i18n.t('importModeRestoreReplaceWarning')}
+            </AlertDescription>
+            <AlertDescription className="mt-2">
+              <ReplaceSnapshotNote
+                onOpenSettings={() =>
+                  void browser.tabs.create({
+                    url: getAppUrl(SAFETY_SNAPSHOT_SETTINGS_ROUTE),
+                  })
+                }
+              />
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {batchSummary && (
+          <Item variant="muted" size="sm">
+            <ItemMedia variant="icon">
+              <FilesIcon />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>
+                {i18n.t('popup_importBatchSummary', batchSummary.fileCount, [
+                  formatCount(batchSummary.fileCount),
+                  formatCount(batchSummary.bookmarkCount),
+                ])}
+              </ItemTitle>
+            </ItemContent>
+          </Item>
+        )}
+
+        <Button
+          variant="outline"
+          className="w-full"
+          disabled={isImporting}
+          onClick={() => fileInputReference.current?.click()}
+        >
+          {isImporting ? (
+            <Spinner data-icon="inline-start" />
+          ) : (
+            <UploadIcon data-icon="inline-start" />
+          )}
+          {isImporting
+            ? i18n.t('popup_importing')
+            : i18n.t('popup_chooseFiles')}
+        </Button>
+
+        {isImporting && (
+          <p className="text-xs text-muted-foreground">
+            {i18n.t('popup_importBusyDropIgnored')}
+          </p>
+        )}
+
+        {progress.state.isCardVisible && (
+          <OperationProgressCard
+            kind="import"
+            state={progress.state}
+            onCancel={progress.requestCancel}
+          />
+        )}
+      </div>
     </section>
   )
 }

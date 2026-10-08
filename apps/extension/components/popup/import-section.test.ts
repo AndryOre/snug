@@ -86,6 +86,26 @@ async function pick(input: HTMLInputElement, files: File | File[]) {
   })
 }
 
+async function dispatchDrag(
+  target: Element,
+  type: 'dragover' | 'drop',
+  files: File[],
+  types: string[] = ['Files'],
+) {
+  const event = new Event(type, { bubbles: true, cancelable: true })
+  Object.defineProperty(event, 'dataTransfer', { value: { files, types } })
+  await act(async () => {
+    target.dispatchEvent(event)
+  })
+  return event
+}
+
+function dropSection(harness: DomHarness): Element {
+  const section = harness.container.querySelector('section')
+  if (!section) throw new Error('section missing')
+  return section
+}
+
 async function createdUrls(): Promise<string[]> {
   const urls: string[] = []
   const visit = (node: Browser.bookmarks.BookmarkTreeNode) => {
@@ -131,6 +151,54 @@ afterEach(() => {
 })
 
 describe('popup ImportSection', () => {
+  it('shows the drop label while files are dragged over and imports a dropped file', async () => {
+    const { harness } = await mountSection()
+    const section = dropSection(harness)
+
+    await dispatchDrag(section, 'dragover', [])
+    expect(harness.container.textContent).toContain('popup_dropFilesToImport')
+
+    await dispatchDrag(section, 'drop', [csvFile(2)])
+    await settle()
+
+    expect(harness.container.textContent).not.toContain(
+      'popup_dropFilesToImport',
+    )
+    expect(runImportMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('ignores non-file drags', async () => {
+    const { harness } = await mountSection()
+    const section = dropSection(harness)
+
+    const event = await dispatchDrag(section, 'dragover', [], ['text/plain'])
+
+    expect(event.defaultPrevented).toBe(false)
+    expect(harness.container.textContent).not.toContain(
+      'popup_dropFilesToImport',
+    )
+  })
+
+  it('ignores drops while an import is running and explains why', async () => {
+    const { harness, input } = await mountSection()
+    const first = deferredTextFile(csvFile(2))
+
+    await pick(input, first.file)
+    expect(harness.container.textContent).toContain(
+      'popup_importBusyDropIgnored',
+    )
+    const section = dropSection(harness)
+    await dispatchDrag(section, 'dragover', [])
+    expect(harness.container.textContent).not.toContain(
+      'popup_dropFilesToImport',
+    )
+    await dispatchDrag(section, 'drop', [csvFile(2, 'other')])
+    first.release()
+    await settle()
+
+    expect(runImportMock).toHaveBeenCalledTimes(1)
+  })
+
   it('disables Choose file as soon as a file is picked and runs one import for two quick picks', async () => {
     const { harness, input } = await mountSection()
     const first = deferredTextFile(csvFile(2))
