@@ -34,6 +34,16 @@ const standalone = { ...privacy.meta, path: '/privacy/' }
           {privacy.website.heading}
         </h2>
         <p class="mt-4 leading-prose">{privacy.website.body}</p>
+        <h3 class="mt-6 font-heading text-lg font-medium">
+          {privacy.website.collectedHeading}
+        </h3>
+        <ul class="mt-2 list-disc space-y-1 pl-6 leading-prose">
+          {privacy.website.collected.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="mt-4 leading-prose">{privacy.website.noCookies}</p>
+        <p class="mt-4 leading-prose">{privacy.website.logs}</p>
         <p class="mt-4 leading-prose">{privacy.theme}</p>
       </section>
     </div>

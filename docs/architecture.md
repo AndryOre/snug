@@ -39,9 +39,11 @@ relative to `apps/extension/` unless it starts with `packages/`.
   interactivity is needed. It reuses `@workspace/ui` for components and the
   theme: pages import `@workspace/ui/globals.css` once and compose
   `@workspace/ui/components/*`, with Tailwind wired through `@tailwindcss/vite`
-  in `astro.config.ts`, so brand tokens stay in one place. It makes no
-  third-party requests
-  ([ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
+  in `astro.config.ts`, so brand tokens stay in one place. Its only third-party
+  request on load is the Umami Cloud cookieless analytics script
+  ([ADR 0017](adr/0017-landing-umami-cloud-cookieless-analytics.md), partially
+  superseding
+  [ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
   video it has no runtime link to the extension. Rules: `apps/site/AGENTS.md`.
 - **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
   thumbnails. It has no runtime link to the extension: it reads

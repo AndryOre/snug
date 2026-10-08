@@ -267,13 +267,20 @@ test.describe('privacy page', () => {
     }
   })
 
-  test('states the English-only scope and the log-only visit counting', () => {
+  test('states the English-only scope, the Umami disclosure and the log fields', () => {
     const html = readBuilt('privacy/index.html')
     expect(html).toContain('<html lang="en"')
     expect(html).toContain('English only')
-    expect(html).toContain('no analytics')
+    expect(html).toContain('Umami Cloud')
+    expect(html).toContain('Pageviews')
+    expect(html).toContain('Browser, operating system and device type')
+    expect(html).toContain('Country')
+    expect(html).toContain('sets no cookies')
+    expect(html).toContain('Do Not Track')
+    expect(html).toContain('referer')
+    expect(html).toContain('user-agent')
     expect(html).toContain('masked')
-    expect(html).not.toMatch(/Plausible|PostHog|Umami|Google Analytics/)
+    expect(html).not.toMatch(/Plausible|PostHog|Google Analytics/)
     expect(html).not.toMatch(/<script src=/)
   })
 

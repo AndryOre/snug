@@ -22,11 +22,14 @@ tokens of its own. The code map is
   `packages/ui/src/styles/globals.css`, never arbitrary values or `<style>`
   blocks. The React JSX rules do not apply to `.astro` templates.
 
-- No third-party scripts, fonts, embeds or requests on page load, and no
-  analytics of any kind
-  ([ADR 0011](../../docs/adr/0011-landing-static-site-no-third-party-scripts.md)).
-  Visits are counted from the server access log with masked IPs. The promo video
-  may load from YouTube only after the visitor clicks it.
+- No third-party scripts, fonts, embeds or requests on page load, except the one
+  Umami Cloud cookieless analytics script
+  ([ADR 0017](../../docs/adr/0017-landing-umami-cloud-cookieless-analytics.md),
+  which partially supersedes
+  [ADR 0011](../../docs/adr/0011-landing-static-site-no-third-party-scripts.md)).
+  The server access log (masked IPs, referer and user-agent) and the `/install`
+  redirect stay as a cross-check. The promo video may load from YouTube only
+  after the visitor clicks it.
 - Default to `.astro` components that render to static HTML. Use a React island
   (`client:*`) only for real interactivity, and prefer `client:visible` or
   `client:idle` over `client:load`. The FAQ accordion and the language popover
