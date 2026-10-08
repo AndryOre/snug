@@ -249,18 +249,24 @@ whole popup for no brand-signal gain, since icon-library choice carries far less
 weight than type, color, and the logo (already decided). Zero migration cost,
 zero visual change.
 
-**Assets (2026-10-01): raster exports done via `tools/export.mjs`.** Run with
+**Assets (2026-10-01, historical note: paths below were the brand-kit output at
+the time; current locations are listed at the end of this paragraph): raster
+exports done via `tools/export.mjs`.** Run with
 `BRAND_TOOLS_MODULES=<bookmarks-import-export checkout> node tools/export.mjs`
 (uses that repo's own `playwright` devDependency — no separate install needed).
-Produces: `logo/png/mark-{16,32,48,128,512}.png` (flat gradient, transparent —
-the same files serve Chrome, Edge, and Firefox/AMO; none of the three needs a
-different design at these sizes), `store/small-tile-440x280.png` and
-`store/marquee-1400x560.png` (CWS listing),
+Produces: `logo/png/mark-{16,32,48,128,512}.png` (the 512 size is no longer
+kept) (flat gradient, transparent — the same files serve Chrome, Edge, and
+Firefox/AMO; none of the three needs a different design at these sizes),
+`store/small-tile-440x280.png` and `store/marquee-1400x560.png` (CWS listing),
 `apps/site/public/og/og-<locale>.png` (1200×630, real short-summary copy from
 `copy.md`, both under the 300 KB budget), `readme/cover-1280x640.png` (README
 banner, using `copy.md`'s README tagline). **Not generated**: CWS screenshots
 (1280×800) — those need the real running popup UI after the rebrand ships, not a
-brand-kit render; left for the `/forge` application pass.
+brand-kit render; left for the `/forge` application pass. Current locations:
+`docs/brand/logo/png/mark-{16,32,48,128}.png`,
+`docs/store/assets/small-tile-440x280.png`,
+`docs/store/assets/marquee-1400x560.png` and `docs/assets/readme-banner.png`
+(the README banner, formerly `readme/cover-1280x640.png`).
 
 - A name tied to "import/export" literally, or to "bookmarks" in a way that
   blocks the tool from ever covering more than bookmarks later.
