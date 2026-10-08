@@ -1,3 +1,4 @@
+import { i18n } from '#i18n'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
@@ -215,7 +216,7 @@ describe('planPopupFileBatch', () => {
     ])
     expect(result.plan).toEqual({ kind: 'import', mode: 'folder' })
     expect(result.readableRequests).toHaveLength(2)
-    expect(result.skippedFileCount).toBe(0)
+    expect(result.skippedFiles).toEqual([])
     expect(result.bookmarkCount).toBe(5)
   })
 
@@ -232,15 +233,35 @@ describe('planPopupFileBatch', () => {
       'file-0.csv',
       'file-1000.csv',
     ])
-    expect(result.skippedFileCount).toBe(2)
+    expect(result.skippedFiles.map((file) => file.fileName)).toEqual([
+      'broken.json',
+      'e.csv',
+    ])
+    expect(result.skippedFiles[0]?.reason).toBeTruthy()
+    expect(result.skippedFiles[1]?.reason).toBe(i18n.t('unsupportedFileFormat'))
     expect(result.bookmarkCount).toBe(5)
+  })
+
+  it('reports a file with no bookmarks using the Import page message', async () => {
+    const emptyFolder = {
+      ...csvRequest(1, 0),
+      text: JSON.stringify({ id: '1', title: 'Bookmarks bar', children: [] }),
+      fileName: 'empty.json',
+      mimeType: 'application/json',
+    }
+    const result = await planPopupFileBatch([emptyFolder, csvRequest(2, 1000)])
+    expect(result.skippedFiles).toEqual([
+      { fileName: 'empty.json', reason: i18n.t('import_noBookmarks') },
+    ])
   })
 
   it('skips a file whose read failed and came back as empty text', async () => {
     const unreadable = { ...csvRequest(1, 0), text: '', fileName: 'gone.csv' }
     const result = await planPopupFileBatch([unreadable, csvRequest(2, 1000)])
     expect(result.plan.kind).toBe('import')
-    expect(result.skippedFileCount).toBe(1)
+    expect(result.skippedFiles).toEqual([
+      { fileName: 'gone.csv', reason: i18n.t('unsupportedFileFormat') },
+    ])
     expect(result.bookmarkCount).toBe(2)
   })
 

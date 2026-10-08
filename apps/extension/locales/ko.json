@@ -675,6 +675,9 @@
   "popup_importSkippedFilesResult": {
     "n": "파일 $1개 가져옴 · 북마크 $2개."
   },
+  "popup_importSkippedFilesMore": {
+    "n": "외 $1개."
+  },
   "popup_openingImportTitle": {
     "message": "가져오기 페이지를 여는 중",
     "description": "Popup toast title when a file batch is handed to the Import page"

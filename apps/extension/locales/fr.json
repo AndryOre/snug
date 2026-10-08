@@ -685,6 +685,10 @@
     "1": "$1 fichier importé · $2 favoris.",
     "n": "$1 fichiers importés · $2 favoris."
   },
+  "popup_importSkippedFilesMore": {
+    "1": "et $1 autre.",
+    "n": "et $1 autres."
+  },
   "popup_openingImportTitle": {
     "message": "Ouverture de la page Importer",
     "description": "Popup toast title when a file batch is handed to the Import page"

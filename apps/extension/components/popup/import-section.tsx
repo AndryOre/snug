@@ -31,6 +31,7 @@ import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { formatCount } from '@/lib/format-count'
 import { ImportCanceledError } from '@/lib/import-control'
 import { getImportModeItems } from '@/lib/import-mode-items'
+import type { SkippedPopupFile } from '@/lib/popup-import-plan'
 import { planPopupFileBatch, planPopupImport } from '@/lib/popup-import-plan'
 import { runImport } from '@/lib/run-import'
 import type { ImportBatchFile } from '@/lib/run-import-batch'
@@ -52,7 +53,24 @@ interface PendingBatch {
   mode: ImportMode
   skipDuplicates: boolean
   bookmarkCount: number
-  skippedFileCount: number
+  skippedFiles: SkippedPopupFile[]
+}
+
+const MAX_NAMED_SKIPPED_FILES = 3
+
+function describeSkippedFiles(skippedFiles: SkippedPopupFile[]): string[] {
+  const named = skippedFiles
+    .slice(0, MAX_NAMED_SKIPPED_FILES)
+    .map(({ fileName, reason }) => `${fileName}: ${reason}`)
+  const hiddenCount = skippedFiles.length - named.length
+  return hiddenCount > 0
+    ? [
+        ...named,
+        i18n.t('popup_importSkippedFilesMore', hiddenCount, [
+          formatCount(hiddenCount),
+        ]),
+      ]
+    : named
 }
 
 interface BatchSummary {
@@ -181,7 +199,7 @@ export function ImportSection() {
         skipDuplicates: shouldSkipDuplicates,
       })),
     )
-    const { plan, readableRequests, skippedFileCount, bookmarkCount } =
+    const { plan, readableRequests, skippedFiles, bookmarkCount } =
       await planPopupFileBatch(requests)
     if (plan.kind === 'app') {
       toast.add({
@@ -207,7 +225,7 @@ export function ImportSection() {
       mode: plan.mode,
       skipDuplicates: shouldSkipDuplicates,
       bookmarkCount,
-      skippedFileCount,
+      skippedFiles,
     }
   }
 
@@ -224,21 +242,21 @@ export function ImportSection() {
         onProgress: progress.report,
       })
       const notes = describeSkippedBookmarks(result)
-      if (batch.skippedFileCount > 0) {
+      const skippedCount = batch.skippedFiles.length
+      if (skippedCount > 0) {
         toast.add({
           type: 'warning',
-          title: i18n.t(
-            'popup_importSkippedFilesTitle',
-            batch.skippedFileCount,
-            [formatCount(batch.skippedFileCount)],
-          ),
+          title: i18n.t('popup_importSkippedFilesTitle', skippedCount, [
+            formatCount(skippedCount),
+          ]),
           description: [
+            ...describeSkippedFiles(batch.skippedFiles),
             i18n.t('popup_importSkippedFilesResult', batch.files.length, [
               formatCount(batch.files.length),
               formatCount(batch.bookmarkCount),
             ]),
             ...(notes.length > 0 ? [`${notes.join('. ')}.`] : []),
-          ].join(' '),
+          ].join('\n'),
         })
         return
       }

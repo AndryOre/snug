@@ -154,6 +154,15 @@ async function planSummedBatch(
 }
 
 /**
+ * A picked file the popup left out, with the localized reason the Import page
+ * shows for the same file.
+ */
+export interface SkippedPopupFile {
+  fileName: string
+  reason: string
+}
+
+/**
  * The outcome of planning the files picked in the popup.
  */
 export interface PopupFileBatchPlan {
@@ -163,9 +172,10 @@ export interface PopupFileBatchPlan {
    */
   readableRequests: PopupImportRequest[]
   /**
-   * How many picked files were left out because they could not be read.
+   * The picked files left out because they could not be read, in pick order,
+   * each with its reason.
    */
-  skippedFileCount: number
+  skippedFiles: SkippedPopupFile[]
   /**
    * Bookmarks the batch will create, summed across the readable files after
    * Skip duplicates; 0 when the plan is not an import or for a lone file.
@@ -173,20 +183,27 @@ export interface PopupFileBatchPlan {
   bookmarkCount: number
 }
 
-function isReadableRequest(
+function findUnreadableReason(
   request: PopupImportRequest,
   liveRootTitles: ReturnType<typeof resolveImportRootTitles>,
-): boolean {
+): string | null {
   try {
+    const { format } = getImportPreview(
+      request.text,
+      request.mimeType,
+      request.fileName,
+      liveRootTitles,
+    )
+    if (format === 'unknown') return i18n.t('unsupportedFileFormat')
     const { tree } = parseImportFile(
       request.text,
       request.mimeType,
       request.fileName,
       liveRootTitles,
     )
-    return countBookmarks(tree) > 0
-  } catch {
-    return false
+    return countBookmarks(tree) > 0 ? null : i18n.t('import_noBookmarks')
+  } catch (error) {
+    return (error as Error).message
   }
 }
 
@@ -196,8 +213,8 @@ function isReadableRequest(
  * content, no bookmarks) are skipped and the rest are planned as one batch
  * with the summed {@link POPUP_IMPORT_BOOKMARK_LIMIT} rule.
  * @param requests The picked files, in pick order, sharing one mode.
- * @returns The plan with the readable files, the skipped count and the
- *   bookmark total.
+ * @returns The plan with the readable files, the skipped files with their
+ *   reasons and the bookmark total.
  * @throws {Error} When a lone file is unreadable, or no picked file is.
  */
 export async function planPopupFileBatch(
@@ -209,26 +226,25 @@ export async function planPopupFileBatch(
     return {
       plan: await planPopupImport(first),
       readableRequests: requests,
-      skippedFileCount: 0,
+      skippedFiles: [],
       bookmarkCount: 0,
     }
   }
 
   const liveTree = await browser.bookmarks.getTree()
   const liveRootTitles = resolveImportRootTitles(liveTree[0]?.children ?? [])
-  const readableRequests = requests.filter((request) =>
-    isReadableRequest(request, liveRootTitles),
-  )
+  const readableRequests: PopupImportRequest[] = []
+  const skippedFiles: SkippedPopupFile[] = []
+  for (const request of requests) {
+    const reason = findUnreadableReason(request, liveRootTitles)
+    if (reason === null) readableRequests.push(request)
+    else skippedFiles.push({ fileName: request.fileName, reason })
+  }
   const [firstReadable] = readableRequests
   if (!firstReadable) throw new Error(i18n.t('import_noBookmarks'))
   const { plan, bookmarkCount } = await planSummedBatch(
     readableRequests,
     firstReadable,
   )
-  return {
-    plan,
-    readableRequests,
-    skippedFileCount: requests.length - readableRequests.length,
-    bookmarkCount,
-  }
+  return { plan, readableRequests, skippedFiles, bookmarkCount }
 }

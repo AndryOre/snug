@@ -675,6 +675,9 @@
   "popup_importSkippedFilesResult": {
     "n": "已导入 $1 个文件 · $2 个书签。"
   },
+  "popup_importSkippedFilesMore": {
+    "n": "以及另外 $1 个。"
+  },
   "popup_openingImportTitle": {
     "message": "正在打开导入页面",
     "description": "Popup toast title when a file batch is handed to the Import page"
