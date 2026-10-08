@@ -48,11 +48,11 @@ remembered between sessions and shared by Quick import and the Import page.
 Formats without location data always import in Folder mode regardless. _Avoid_:
 preferred mode, saved mode.
 
-**Quick import** Importing a file directly from the popup in one step, using the
-default import mode and committing immediately, as opposed to the Import page's
-preview-first flow, which shows the Import preview and lets the user choose a
-mode before anything changes. _Avoid_: basic import, simple import, popup
-import.
+**Quick import** Importing one or more files directly from the popup, picked or
+dropped, in one step, using the default import mode and committing immediately,
+as opposed to the Import page's preview-first flow, which shows the Import
+preview and lets the user choose a mode before anything changes. _Avoid_: basic
+import, simple import, popup import.
 
 **Import preview** A summary shown before committing an import: how many
 bookmarks were found, split by root folder, and whether the file carries
