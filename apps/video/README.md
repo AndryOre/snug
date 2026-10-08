@@ -76,6 +76,9 @@ circle kept clear for the play button) into
   `apps/extension/e2e-store/captions.ts`; video-only strings are in
   `video-copy.ts`.
 - `src/theme.ts` brand tokens ported from `docs/brand/tokens.css`.
+- `public/screenshots/<locale>/` slides `01` to `04`, generated: never edit by
+  hand. `bun run store:screenshots` (in `apps/extension`) copies them from
+  `docs/store/assets/screenshots/<locale>/`.
 - `public/fonts/` vendored Geist, Geist Mono and Space Grotesk (OFL). ja, ko and
   zh_CN use Noto Sans via `@remotion/google-fonts`; ru uses Geist for display
   text because Space Grotesk has no Cyrillic.

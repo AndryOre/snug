@@ -64,6 +64,11 @@ locale with `bun run store:screenshots --project=de`. The spec lives in
 `e2e-store/store-screenshots.spec.ts`; it is outside `e2e/`, so
 `bun run test:e2e` never runs it.
 
+The same run also copies slides `01` to `04` of each locale into
+`apps/video/public/screenshots/<locale>/`, so the promo video's screenshots
+never drift from the store set (also with `--project=<locale>`). The landing
+variants do not copy.
+
 Each run seeds a fresh temporary Chromium profile with example bookmarks (well
 known public sites) and the final Auto-export configuration, launches it in the
 locale under test, captures the real UI with `locator.screenshot` at a device

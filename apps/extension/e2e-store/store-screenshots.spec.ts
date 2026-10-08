@@ -21,6 +21,10 @@ const SCREENSHOTS_ROOT = path.resolve(
     ? '../site/src/assets/screenshots'
     : '../../docs/store/assets/screenshots',
 )
+const VIDEO_SCREENSHOTS_ROOT = path.resolve(
+  EXTENSION_ROOT,
+  '../video/public/screenshots',
+)
 const DEFAULT_LOCALE = 'en'
 const SLIDE_FILES = [
   '01-export.png',
@@ -29,6 +33,7 @@ const SLIDE_FILES = [
   '04-popup.png',
   '05-local.png',
 ]
+const VIDEO_SLIDE_FILES = SLIDE_FILES.slice(0, 4)
 const RAW_DIRECTORY = path.resolve(EXTENSION_ROOT, 'test-results/store/raw')
 const DEVICE_SCALE_FACTOR = 2
 const STORE_APP_CAPTURE = { width: 1280, height: 716 }
@@ -344,6 +349,15 @@ test('composes the five store screenshots', async ({
       outputPath('05-local.png'),
     )
   await composerBrowser.close()
+  if (!IS_LANDING) {
+    const videoDirectory = path.join(VIDEO_SCREENSHOTS_ROOT, locale)
+    await mkdir(videoDirectory, { recursive: true })
+    for (const fileName of VIDEO_SLIDE_FILES)
+      await copyFile(
+        path.join(localeDirectory, fileName),
+        path.join(videoDirectory, fileName),
+      )
+  }
   if (!IS_LANDING && locale === DEFAULT_LOCALE) {
     for (const fileName of SLIDE_FILES)
       await copyFile(
