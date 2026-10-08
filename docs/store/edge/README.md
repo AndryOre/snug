@@ -81,20 +81,20 @@ in English. Counts are characters, including spaces and line breaks.
 
 | Locale | Characters | Limit         |
 | ------ | ---------- | ------------- |
-| en     | 1212       | 250 to 10,000 |
-| es     | 1376       | 250 to 10,000 |
-| pt_BR  | 1339       | 250 to 10,000 |
-| fr     | 1548       | 250 to 10,000 |
-| de     | 1498       | 250 to 10,000 |
-| ja     | 603        | 250 to 10,000 |
-| zh_CN  | 401        | 250 to 10,000 |
-| ru     | 1281       | 250 to 10,000 |
-| it     | 1367       | 250 to 10,000 |
-| ko     | 620        | 250 to 10,000 |
+| en     | 1332       | 250 to 10,000 |
+| es     | 1517       | 250 to 10,000 |
+| pt_BR  | 1489       | 250 to 10,000 |
+| fr     | 1697       | 250 to 10,000 |
+| de     | 1662       | 250 to 10,000 |
+| ja     | 666        | 250 to 10,000 |
+| zh_CN  | 441        | 250 to 10,000 |
+| ru     | 1426       | 250 to 10,000 |
+| it     | 1507       | 250 to 10,000 |
+| ko     | 689        | 250 to 10,000 |
 
 #### English (en, default)
 
-Description (1212 chars):
+Description (1332 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
@@ -110,14 +110,14 @@ Snug runs entirely on your device — no account, no cloud, no server. Every ope
 
 #### Spanish (es)
 
-Description (1376 chars):
+Description (1517 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.
 
-Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos comunes como HTML o JSON. Importa archivos de otros gestores de marcadores o el archivo de marcadores de un navegador, con una vista previa primero. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
+Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos comunes como HTML o JSON. Importa archivos de otros gestores de marcadores o el archivo de marcadores de un navegador, con una vista previa primero de lo que se añadirá, omitirá y eliminará. Puedes elegir o soltar varios archivos a la vez. Luego decides: combinarlos con tus marcadores actuales, reemplazarlos por completo, o guardarlo todo en una carpeta nueva — tú decides cada vez.
 
-Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
+Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Se conservan las últimas cinco en tu dispositivo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
 
 Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores directo a tu carpeta de Descargas, en los formatos que elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
 
@@ -126,14 +126,14 @@ Snug funciona completamente en tu dispositivo — sin cuenta, sin nube, sin serv
 
 #### Portuguese, Brazil (pt_BR)
 
-Description (1339 chars):
+Description (1489 chars):
 
 ```text
 O Snug leva seus favoritos entre navegadores, exatamente como você os deixou — nada é enviado a lugar nenhum e você não precisa de conta.
 
-Exporte toda a árvore de favoritos ou só a pasta que escolher, em formatos comuns como HTML ou JSON. Importe arquivos de outros gerenciadores de favoritos ou o arquivo de favoritos de um navegador, com uma prévia primeiro. Depois decida: mesclar com os favoritos atuais, substituí-los por completo ou colocar tudo em uma pasta nova — a escolha é sempre sua.
+Exporte toda a árvore de favoritos ou só a pasta que escolher, em formatos comuns como HTML ou JSON. Importe arquivos de outros gerenciadores de favoritos ou o arquivo de favoritos de um navegador, com uma prévia primeiro do que será adicionado, ignorado e excluído. Você pode escolher ou soltar vários arquivos de uma vez. Depois decida: mesclar com os favoritos atuais, substituí-los por completo ou colocar tudo em uma pasta nova — a escolha é sempre sua.
 
-Antes de qualquer substituição, o Snug salva um instantâneo de segurança dos seus favoritos, para você poder desfazer. Uma página Duplicados encontra favoritos repetidos e exclui só os que você escolher, e a importação pode ignorar duplicados.
+Antes de qualquer substituição, o Snug salva um instantâneo de segurança dos seus favoritos, para você poder desfazer. Os cinco mais recentes ficam no seu dispositivo. Uma página Duplicados encontra favoritos repetidos e exclui só os que você escolher, e a importação pode ignorar duplicados.
 
 Configure um agendamento uma única vez — por hora, diário, semanal e mais — e o Snug salva seus favoritos direto na pasta Downloads, nos formatos que você escolher. A Retenção mantém só os backups mais recentes, e um aviso informa se algum falhar. Os nomes de arquivo podem incluir data e hora automaticamente.
 
@@ -142,14 +142,14 @@ O Snug roda inteiramente no seu dispositivo — sem conta, sem nuvem, sem servid
 
 #### French (fr)
 
-Description (1548 chars):
+Description (1697 chars):
 
 ```text
 Snug déplace vos favoris d'un navigateur à l'autre, exactement comme vous les avez laissés — rien n'est envoyé nulle part, aucun compte requis.
 
-Exportez toute l'arborescence de vos favoris ou seulement le dossier de votre choix, dans des formats courants comme HTML ou JSON. Importez des fichiers d'autres gestionnaires de favoris ou le fichier de favoris d'un navigateur, avec un aperçu d'abord. Puis choisissez : fusionner avec vos favoris existants, les remplacer entièrement, ou tout déposer dans un nouveau dossier — à chaque fois, c'est vous qui décidez.
+Exportez toute l'arborescence de vos favoris ou seulement le dossier de votre choix, dans des formats courants comme HTML ou JSON. Importez des fichiers d'autres gestionnaires de favoris ou le fichier de favoris d'un navigateur, avec d'abord un aperçu de ce qui sera ajouté, ignoré et supprimé. Vous pouvez choisir ou déposer plusieurs fichiers d'un coup. Puis choisissez : fusionner avec vos favoris existants, les remplacer entièrement, ou tout déposer dans un nouveau dossier — à chaque fois, c'est vous qui décidez.
 
-Avant tout remplacement, Snug enregistre un instantané de sécurité de vos favoris pour que vous puissiez l'annuler. Une page Doublons repère les favoris en double et supprime uniquement ceux que vous choisissez, et l'import peut ignorer les doublons.
+Avant tout remplacement, Snug enregistre un instantané de sécurité de vos favoris pour que vous puissiez l'annuler. Les cinq derniers restent sur votre appareil. Une page Doublons repère les favoris en double et supprime uniquement ceux que vous choisissez, et l'import peut ignorer les doublons.
 
 Configurez un horaire une seule fois — toutes les heures, chaque jour, chaque semaine, et plus — et Snug sauvegarde vos favoris directement dans votre dossier Téléchargements, dans les formats de votre choix. La Rétention ne conserve que les sauvegardes les plus récentes, et une notification vous prévient en cas d'échec. Les noms de fichier peuvent inclure automatiquement la date et l'heure.
 
@@ -158,14 +158,14 @@ Snug fonctionne entièrement sur votre appareil — pas de compte, pas de cloud,
 
 #### German (de)
 
-Description (1498 chars):
+Description (1662 chars):
 
 ```text
 Snug überträgt deine Lesezeichen zwischen Browsern, genau so, wie du sie hinterlassen hast – nichts wird irgendwohin gesendet, und ein Konto brauchst du nicht.
 
-Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl, in gängigen Formaten wie HTML oder JSON. Importiere Dateien aus anderen Lesezeichen-Managern oder die Lesezeichen-Datei eines Browsers, zuerst mit einer Vorschau. Dann entscheidest du: mit deinen vorhandenen Lesezeichen zusammenführen, sie komplett ersetzen oder alles in einem neuen Ordner ablegen – jedes Mal deine Entscheidung.
+Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl, in gängigen Formaten wie HTML oder JSON. Importiere Dateien aus anderen Lesezeichen-Managern oder die Lesezeichen-Datei eines Browsers, zuerst mit einer Vorschau, die zeigt, was hinzugefügt, übersprungen und gelöscht wird. Du kannst mehrere Dateien auf einmal auswählen oder ablegen. Dann entscheidest du: mit deinen vorhandenen Lesezeichen zusammenführen, sie komplett ersetzen oder alles in einem neuen Ordner ablegen – jedes Mal deine Entscheidung.
 
-Vor jedem Ersetzen legt Snug eine Sicherheitskopie deiner Lesezeichen an, damit du es rückgängig machen kannst. Die Seite Duplikate findet doppelte Lesezeichen und löscht nur die, die du auswählst, und beim Import lassen sich Duplikate überspringen.
+Vor jedem Ersetzen legt Snug eine Sicherheitskopie deiner Lesezeichen an, damit du es rückgängig machen kannst. Die letzten fünf bleiben auf deinem Gerät. Die Seite Duplikate findet doppelte Lesezeichen und löscht nur die, die du auswählst, und beim Import lassen sich Duplikate überspringen.
 
 Richte einmal einen Zeitplan ein – stündlich, täglich, wöchentlich und mehr –, und Snug sichert deine Lesezeichen von selbst direkt in deinen Download-Ordner, in den Formaten, die du wählst. Die Aufbewahrung behält nur die neuesten Sicherungen, und eine Benachrichtigung meldet, wenn eine fehlschlägt. Dateinamen können automatisch Datum und Uhrzeit enthalten.
 
@@ -174,12 +174,12 @@ Snug läuft vollständig auf deinem Gerät – kein Konto, keine Cloud, kein Ser
 
 #### Japanese (ja)
 
-Description (603 chars):
+Description (666 chars):
 
 ```text
 Snugは、ブックマークをブラウザー間でそのままの状態で移せます。データはどこにも送信されず、アカウントも不要です。
 
-ブックマーク全体、または選んだフォルダーだけを、HTMLやJSONなどの一般的な形式で書き出せます。ほかのブックマーク管理ツールのファイルや、ブラウザーのブックマークファイルを読み込め、まずプレビューで確認できます。そのうえで、既存のブックマークと統合するか、完全に置き換えるか、新しいフォルダーにまとめて入れるかを、毎回自分で選べます。
+ブックマーク全体、または選んだフォルダーだけを、HTMLやJSONなどの一般的な形式で書き出せます。ほかのブックマーク管理ツールのファイルや、ブラウザーのブックマークファイルを読み込め、まず追加・スキップ・削除される内容をプレビューで確認できます。複数のファイルをまとめて選ぶか、ドロップして読み込めます。そのうえでプレビューで確認できます。そのうえで、既存のブックマークと統合するか、完全に置き換えるか、新しいフォルダーにまとめて入れるかを、毎回自分で選べます。
 
 置き換えの前には、Snugがブックマークの安全スナップショットを保存するので、元に戻せます。「重複」ページでは重複したブックマークを見つけ、選んだものだけを削除できます。読み込み時に重複をスキップすることもできます。
 
@@ -190,14 +190,14 @@ Snugはすべて端末内で動作します。アカウント、クラウド、�
 
 #### Chinese, Simplified (zh_CN)
 
-Description (401 chars):
+Description (441 chars):
 
 ```text
 Snug 在浏览器之间原样迁移你的书签：不会向任何地方发送数据，也无需账号。
 
-可导出整个书签树或你选择的文件夹，支持 HTML 或 JSON 等常见格式。可导入其他书签管理工具的文件或浏览器的书签文件，并先提供预览。然后由你决定：与现有书签合并、完全替换，或全部放进一个新文件夹。每次都由你决定。
+可导出整个书签树或你选择的文件夹，支持 HTML 或 JSON 等常见格式。可导入其他书签管理工具的文件或浏览器的书签文件，并先预览将添加、跳过和删除的内容。还可以一次选择或拖入多个文件。然后由你决定：与现有书签合并、完全替换，或全部放进一个新文件夹。每次都由你决定。
 
-每次替换之前，Snug 都会先保存书签的安全快照，方便你撤销。“重复项”页面可查找重复书签，并只删除你选中的；导入时也可以跳过重复项。
+每次替换之前，Snug 都会先保存书签的安全快照，方便你撤销。最新的五份会保存在你的设备上。“重复项”页面可查找重复书签，并只删除你选中的；导入时也可以跳过重复项。
 
 只需设置一次计划，可按每小时、每天、每周等间隔，Snug 就会自动把书签按你选的格式备份到下载文件夹。保留设置只留下最新的备份，备份失败时会有通知提醒。文件名可自动包含日期和时间。
 
@@ -206,14 +206,14 @@ Snug 完全在你的设备上运行：无需账号，没有云端，没有服务
 
 #### Russian (ru)
 
-Description (1281 chars):
+Description (1426 chars):
 
 ```text
 Snug переносит ваши закладки между браузерами в точности так, как вы их оставили: ничего не отправляется наружу, аккаунт не нужен.
 
-Экспортируйте всё дерево закладок или только выбранную папку в распространённых форматах, например HTML или JSON. Импортируйте файлы из других менеджеров закладок или файл закладок браузера, сначала с предпросмотром. Затем решайте сами: объединить с текущими закладками, полностью заменить их или сложить всё в новую папку.
+Экспортируйте всё дерево закладок или только выбранную папку в распространённых форматах, например HTML или JSON. Импортируйте файлы из других менеджеров закладок или файл закладок браузера, сначала с предпросмотром того, что будет добавлено, пропущено и удалено. Можно выбрать или перетащить сразу несколько файлов. Затем решайте сами: объединить с текущими закладками, полностью заменить их или сложить всё в новую папку.
 
-Перед любой заменой Snug сохраняет страховочный снимок ваших закладок, чтобы её можно было отменить. Страница «Дубликаты» находит повторяющиеся закладки и удаляет только те, что вы выбрали, а при импорте дубликаты можно пропускать.
+Перед любой заменой Snug сохраняет страховочный снимок ваших закладок, чтобы её можно было отменить. Пять последних остаются на вашем устройстве. Страница «Дубликаты» находит повторяющиеся закладки и удаляет только те, что вы выбрали, а при импорте дубликаты можно пропускать.
 
 Настройте расписание один раз — каждый час, каждый день, каждую неделю и не только, — и Snug будет сам сохранять закладки в папку «Загрузки» в выбранных форматах. Хранение оставляет только последние копии, а уведомление сообщит, если копия не удалась. В имена файлов можно автоматически добавлять дату и время.
 
@@ -222,14 +222,14 @@ Snug работает целиком на вашем устройстве: бе�
 
 #### Italian (it)
 
-Description (1367 chars):
+Description (1507 chars):
 
 ```text
 Snug sposta i tuoi segnalibri tra i browser, esattamente come li hai lasciati — niente viene inviato da nessuna parte e non serve alcun account.
 
-Esporta l'intera struttura dei segnalibri o solo la cartella che scegli, in formati comuni come HTML o JSON. Importa i file di altri gestori di segnalibri o il file dei segnalibri di un browser, con prima un'anteprima. Poi decidi: unirli ai segnalibri esistenti, sostituirli del tutto o metterli in una nuova cartella — ogni volta scegli tu.
+Esporta l'intera struttura dei segnalibri o solo la cartella che scegli, in formati comuni come HTML o JSON. Importa i file di altri gestori di segnalibri o il file dei segnalibri di un browser, con prima un'anteprima di ciò che verrà aggiunto, saltato ed eliminato. Puoi scegliere o trascinare più file insieme. Poi decidi: unirli ai segnalibri esistenti, sostituirli del tutto o metterli in una nuova cartella — ogni volta scegli tu.
 
-Prima di ogni sostituzione, Snug salva un'istantanea di sicurezza dei tuoi segnalibri, così puoi annullarla. Una pagina Duplicati trova i segnalibri ripetuti ed elimina solo quelli che scegli, e l'importazione può saltare i duplicati.
+Prima di ogni sostituzione, Snug salva un'istantanea di sicurezza dei tuoi segnalibri, così puoi annullarla. Le ultime cinque restano sul tuo dispositivo. Una pagina Duplicati trova i segnalibri ripetuti ed elimina solo quelli che scegli, e l'importazione può saltare i duplicati.
 
 Imposta una pianificazione una sola volta — ogni ora, ogni giorno, ogni settimana e altro — e Snug salva i tuoi segnalibri direttamente nella cartella Download, nei formati che scegli. La Conservazione tiene solo i backup più recenti e una notifica ti avvisa se uno fallisce. I nomi dei file possono includere automaticamente data e ora.
 
@@ -238,14 +238,14 @@ Snug funziona interamente sul tuo dispositivo — nessun account, nessun cloud, 
 
 #### Korean (ko)
 
-Description (620 chars):
+Description (689 chars):
 
 ```text
 Snug는 북마크를 브라우저 사이에서 있는 그대로 옮겨 줘요. 어디로도 전송되지 않고 계정도 필요 없어요.
 
-북마크 전체 또는 선택한 폴더만 HTML이나 JSON 같은 일반적인 형식으로 내보낼 수 있어요. 다른 북마크 관리 도구의 파일이나 브라우저의 북마크 파일을 가져올 수 있고, 먼저 미리 보기로 확인해요. 그런 다음 기존 북마크와 병합할지, 완전히 교체할지, 새 폴더에 모두 담을지 매번 직접 선택해요.
+북마크 전체 또는 선택한 폴더만 HTML이나 JSON 같은 일반적인 형식으로 내보낼 수 있어요. 다른 북마크 관리 도구의 파일이나 브라우저의 북마크 파일을 가져올 수 있고, 먼저 추가, 건너뛰기, 삭제될 항목을 미리 보기로 확인해요. 파일 여러 개를 한꺼번에 고르거나 끌어다 놓을 수도 있어요. 그런 다음 기존 북마크와 병합할지, 완전히 교체할지, 새 폴더에 모두 담을지 매번 직접 선택해요.
 
-교체하기 전에 Snug가 북마크의 안전 스냅샷을 저장하므로 실행 취소할 수 있어요. 중복 페이지에서는 중복된 북마크를 찾아 선택한 것만 삭제하고, 가져올 때 중복을 건너뛸 수도 있어요.
+교체하기 전에 Snug가 북마크의 안전 스냅샷을 저장하므로 실행 취소할 수 있어요. 최신 5개는 기기에 보관돼요. 중복 페이지에서는 중복된 북마크를 찾아 선택한 것만 삭제하고, 가져올 때 중복을 건너뛸 수도 있어요.
 
 일정을 한 번만 설정하면 매시간, 매일, 매주 등 원하는 주기로 선택한 형식의 백업이 다운로드 폴더에 자동으로 저장돼요. 보존 설정으로 최신 백업만 남기고, 백업이 실패하면 알림으로 알려 드려요. 파일 이름에 날짜와 시간을 자동으로 넣을 수 있어요.
 
@@ -404,7 +404,7 @@ other than Edge.
 Test steps (no account or login is needed, everything is local):
 1. Click the Snug toolbar icon. The popup offers "Export everything" in one click.
 2. Open the Export page from the popup. Pick a folder in the tree, choose a format (HTML, JSON, CSV, Markdown, OPML or XBEL) and click Export. A file is saved to Downloads.
-3. Open the Import page. Choose one or more bookmarks files with "Choose files…" (an HTML export from step 2 works). A preview is shown first. Choose Merge, Replace or New folder, then confirm. Nothing changes until you confirm.
+3. Open the Import page. Drop one or more bookmarks files on the page, or click it to select them (an HTML export from step 2 works). A preview is shown first. Choose Merge, Replace or New folder, then confirm. Nothing changes until you confirm.
 4. After a Replace import, use Undo to restore the previous bookmarks from the safety snapshot.
 5. Open the Duplicates page. It lists repeated bookmarks. Only the ones you tick are deleted.
 6. Open Auto-export, turn it on and pick a schedule. Use "Export now" to run one backup immediately.
