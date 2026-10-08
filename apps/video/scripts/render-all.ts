@@ -126,6 +126,7 @@ const main = async () => {
   console.log('Bundling…')
   const serveUrl = await bundle({
     entryPoint: path.join(ROOT, 'src', 'index.ts'),
+    rspack: true,
   })
 
   const failures: string[] = []
