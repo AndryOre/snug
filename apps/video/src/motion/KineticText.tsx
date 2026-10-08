@@ -6,6 +6,7 @@ import type { Locale } from '../copy'
 import { fontStackFor } from '../fonts'
 import { theme } from '../theme'
 import { SPRING } from './easing'
+import { splitWords } from './split-words'
 
 export type KineticTextProps = {
   text: string
@@ -41,36 +42,6 @@ const WRAP_WIDTH_FACTOR = 1.7
 
 const isCjk = (locale: Locale): boolean =>
   ['ja', 'ko', 'zh_CN'].includes(locale)
-
-const splitWords = (text: string, locale: Locale): string[] => {
-  const segmenter = new Intl.Segmenter(locale.replace('_', '-'), {
-    granularity: 'word',
-  })
-  const words: string[] = []
-  let joinNext = false
-  let previousWasSpace = true
-  for (const { segment } of segmenter.segment(text)) {
-    if (segment.trim() === '') {
-      previousWasSpace = true
-      joinNext = false
-      continue
-    }
-    const last = words.at(-1)
-    const isDash = /^\p{Pd}+$/u.test(segment)
-    const isTrailingPunctuation = /^[\p{Pe}\p{Pf}\p{Po}]+$/u.test(segment)
-    if (
-      last !== undefined &&
-      (joinNext || isTrailingPunctuation || (isDash && !previousWasSpace))
-    ) {
-      words[words.length - 1] = last + segment
-    } else {
-      words.push(segment)
-    }
-    joinNext = isDash && !previousWasSpace
-    previousWasSpace = false
-  }
-  return words
-}
 
 /**
  * Fits the text on one line, or on two when one line would shrink it below
