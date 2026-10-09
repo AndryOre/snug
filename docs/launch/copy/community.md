@@ -114,7 +114,7 @@ Snug moves your bookmarks between browsers exactly as you left them. Export the 
 ```text
 Hi Product Hunt. I'm the maker of Snug, a Chrome extension for moving and backing up your bookmarks.
 
-Snug moves your bookmarks between browsers exactly as you left them. You can export the whole tree or only the folders you pick, in six formats: HTML, JSON, CSV, Markdown, OPML and XBEL. Import shows a preview first, then you choose to merge, replace, or add everything to a new folder. A replace saves a Safety snapshot, so you can undo it.
+Snug moves your bookmarks between browsers exactly as you left them. You can export the whole tree or only the folders you pick, in six formats: HTML, JSON, CSV, Markdown, OPML and XBEL. Import takes several files at once, picked or dropped onto the toolbar popup. Snug shows them as a tree preview, you choose exactly what to bring in, and everything lands as one Import batch. With a single file you can merge, replace, or add to a new folder, and a replace saves a Safety snapshot so you can undo it.
 
 It also finds duplicates, and Auto-export writes scheduled backups to your Downloads folder, keeps only the newest files, and notifies you if one fails.
 
@@ -131,15 +131,22 @@ I would like to hear which bookmark moves or backups gave you trouble before, an
 ### Gallery captions
 
 File names come from the launch-assets ticket (AO-1424). Each gallery image is
-built from the matching English store screenshot, in store order.
+built from the matching English store screenshot, in store order. Images 1 to 4
+were regenerated on 2026-10-08 for 2.1.0.
 
-| File                                 | Caption                                                                       |
-| ------------------------------------ | ----------------------------------------------------------------------------- |
-| `producthunt-gallery-1-1270x760.png` | Export exactly what you choose: pick folders and one of six formats           |
-| `producthunt-gallery-2-1270x760.png` | Preview every import first, then merge, replace or add to a new folder        |
-| `producthunt-gallery-3-1270x760.png` | Scheduled backups to your Downloads folder, with Retention and failure alerts |
-| `producthunt-gallery-4-1270x760.png` | Export everything in one click from the toolbar popup                         |
-| `producthunt-gallery-5-1270x760.png` | Everything stays on your device: no account, no network calls, open source    |
+| File                                 | Caption                                                                    |
+| ------------------------------------ | -------------------------------------------------------------------------- |
+| `producthunt-gallery-1-1270x760.png` | Export exactly what you choose: one folder or everything, in six formats   |
+| `producthunt-gallery-2-1270x760.png` | Preview every import as a tree and choose exactly what to bring in         |
+| `producthunt-gallery-3-1270x760.png` | Scheduled backups, hourly to weekly, straight to your Downloads folder     |
+| `producthunt-gallery-4-1270x760.png` | Export in one click, or drop files onto the toolbar popup to import        |
+| `producthunt-gallery-5-1270x760.png` | Everything stays on your device: no account, no network calls, open source |
+
+### Video
+
+```text
+https://youtu.be/9aXa4aAWr_s
+```
 
 ## Show HN
 
