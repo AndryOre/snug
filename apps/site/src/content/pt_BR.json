@@ -187,5 +187,30 @@
     "title": "Página não encontrada",
     "body": "Este endereço não leva a lugar nenhum. Ele pode ter um erro de digitação, ou a página pode ter sido movida.",
     "backLink": "Voltar ao Snug"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Política de Privacidade | Snug",
+      "description": "Como o Snug trata seus dados: a extensão não envia nada para lugar nenhum, e este site usa análise sem cookies."
+    },
+    "homeLink": "Snug",
+    "notice": {
+      "body": "Esta página é uma tradução feita por IA que nenhuma pessoa revisou. Se ela divergir da versão em inglês, prevalece a versão em inglês.",
+      "link": "Ler a versão em inglês"
+    },
+    "website": {
+      "heading": "Este site",
+      "body": "A extensão não envia nada para lugar nenhum. Este site mede as visitas com o Umami Cloud, um serviço de análise sem cookies que processa os dados por nós.",
+      "collectedHeading": "O que o Umami coleta",
+      "collected": {
+        "pageviews": "Visualizações de página e a página de origem do visitante",
+        "environment": "Navegador, sistema operacional e tipo de dispositivo",
+        "country": "País, obtido da requisição e não armazenado como endereço IP",
+        "clicks": "Cliques nos botões de instalação, nas avaliações, no vídeo, nas perguntas do FAQ, nos seletores de idioma e de tema e nos links externos"
+      },
+      "noCookies": "O Umami não define cookies e não armazena nada no seu navegador. Ele respeita o Do Not Track: se o seu navegador o enviar, você não é contado.",
+      "logs": "O servidor web também mantém um registro de acesso com o horário, a página solicitada, o status, o referer e o user-agent do seu navegador. Os endereços IP são mascarados nesse registro, que é lido offline."
+    },
+    "theme": "A sua escolha de tema é armazenada apenas no seu navegador."
   }
 }

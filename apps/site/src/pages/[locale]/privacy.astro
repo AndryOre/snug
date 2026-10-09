@@ -1,0 +1,30 @@
+---
+import type { MarkdownInstance } from 'astro'
+
+import PrivacyPage from '../../components/PrivacyPage.astro'
+import { languageTag, type Locale, LOCALES } from '../../i18n/locales'
+import { TRANSLATED_PRIVACY_LOCALES } from '../../i18n/privacy'
+
+export function getStaticPaths() {
+  return [...TRANSLATED_PRIVACY_LOCALES].map((locale) => ({
+    params: { locale: languageTag(locale).toLowerCase() },
+  }))
+}
+
+const translations = import.meta.glob<
+  MarkdownInstance<Record<string, unknown>>
+>('../../content/privacy/*.md', { eager: true })
+
+const segment = Astro.params.locale
+const locale: Locale | undefined = LOCALES.find(
+  (candidate) => languageTag(candidate).toLowerCase() === segment,
+)
+const translation = translations[`../../content/privacy/${locale}.md`]
+if (!locale || !translation)
+  throw new Error(`No privacy policy for "${segment}"`)
+const { Content: PrivacyPolicy } = translation
+---
+
+<PrivacyPage locale={locale}>
+  <PrivacyPolicy />
+</PrivacyPage>
