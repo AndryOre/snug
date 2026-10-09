@@ -298,10 +298,11 @@ test.describe('privacy page', () => {
     }
   })
 
-  test('states the English-only scope, the Umami disclosure and the log fields', () => {
+  test('states the Umami disclosure and the log fields without a translation notice', () => {
     const html = readBuilt('privacy/index.html')
     expect(html).toContain('<html lang="en"')
-    expect(html).toContain('English only')
+    expect(html).not.toContain('English only')
+    expect(html).not.toContain('translation-notice')
     expect(html).toContain('Umami Cloud')
     expect(html).toContain('Pageviews')
     expect(html).toContain('Browser, operating system and device type')
@@ -312,6 +313,21 @@ test.describe('privacy page', () => {
     expect(html).toContain('user-agent')
     expect(html).toContain('masked')
     expect(html).not.toMatch(/Plausible|PostHog|Google Analytics/)
+  })
+
+  test('serves the Spanish policy with the notice, the English link and the Umami disclosure', () => {
+    const html = readBuilt('es/privacy/index.html')
+    expect(html).toContain('<html lang="es"')
+    expect(html).toContain('translation-notice')
+    expect(html).toContain('prevalece la versión en inglés')
+    expect(html).toMatch(
+      /<a[^>]*href="\/privacy\/"[^>]*>Leer la versión en inglés/,
+    )
+    expect(html).toContain('Umami Cloud')
+    expect(html).toContain('Respeta la opción No rastrear')
+    expect(html).toContain(
+      `<link rel="canonical" href="${SITE_ORIGIN}/es/privacy/"`,
+    )
   })
 
   test('has no og:locale:alternate', () => {

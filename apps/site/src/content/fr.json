@@ -187,5 +187,30 @@
     "title": "Page introuvable",
     "body": "Cette adresse ne mène nulle part. Elle contient peut-être une faute de frappe, ou la page a été déplacée.",
     "backLink": "Retour à Snug"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Politique de confidentialité | Snug",
+      "description": "Comment Snug traite vos données : l'extension n'envoie rien nulle part, et ce site web utilise une mesure d'audience sans cookies."
+    },
+    "homeLink": "Snug",
+    "notice": {
+      "body": "Cette page est une traduction réalisée par IA, qu'aucune personne n'a relue. En cas de différence avec la version anglaise, la version anglaise prévaut.",
+      "link": "Lire la version anglaise"
+    },
+    "website": {
+      "heading": "Ce site web",
+      "body": "L'extension n'envoie rien nulle part. Ce site web mesure les visites avec Umami Cloud, un service d'analyse sans cookies qui traite les données pour notre compte.",
+      "collectedHeading": "Ce qu'Umami collecte",
+      "collected": {
+        "pageviews": "Les pages vues et la page d'où provient le visiteur",
+        "environment": "Le navigateur, le système d'exploitation et le type d'appareil",
+        "country": "Le pays, déduit de la requête et non conservé sous forme d'adresse IP",
+        "clicks": "Les clics sur les boutons d'installation, les avis, la vidéo, les questions de la FAQ, les sélecteurs de langue et de thème, et les liens sortants"
+      },
+      "noCookies": "Umami ne dépose aucun cookie et ne stocke rien dans votre navigateur. Il respecte Do Not Track : si votre navigateur l'envoie, vous n'êtes pas comptabilisé.",
+      "logs": "Le serveur web conserve aussi un journal d'accès avec l'heure, la page demandée, le statut, le référent et le user-agent de votre navigateur. Les adresses IP sont masquées dans ce journal, qui est lu hors ligne."
+    },
+    "theme": "Votre choix de thème est stocké uniquement dans votre navigateur."
   }
 }

@@ -1,0 +1,72 @@
+---
+import { Separator } from '@workspace/ui/components/separator'
+
+import { getContent } from '../i18n/content'
+import { DEFAULT_LOCALE, localePath, type Locale } from '../i18n/locales'
+import { ENGLISH_PRIVACY_PATH, privacyPath } from '../i18n/privacy'
+import Layout from '../layouts/Layout.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { privacy } = getContent(locale)
+const isTranslation = locale !== DEFAULT_LOCALE
+const standalone = { ...privacy.meta, path: privacyPath(locale) }
+---
+
+<Layout locale={locale} standalone={standalone}>
+  <main id="main">
+    <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+      <TextLink
+        href={localePath(locale)}
+        class="py-2 font-mono text-eyebrow tracking-eyebrow text-primary-text uppercase"
+      >
+        {privacy.homeLink}
+      </TextLink>
+      {isTranslation && (
+        <p
+          data-section="translation-notice"
+          class="mt-6 max-w-2xl text-sm text-muted-foreground"
+        >
+          {privacy.notice.body}{' '}
+          <TextLink
+            href={ENGLISH_PRIVACY_PATH}
+            class="min-h-0 text-foreground"
+            hreflang="en"
+            lang="en"
+          >
+            {privacy.notice.link}
+          </TextLink>
+        </p>
+      )}
+      <article data-section="policy" class="prose-policy mt-8 max-w-2xl">
+        <slot />
+      </article>
+      <Separator className="mt-14 max-w-2xl" />
+      <section
+        data-section="website-statement"
+        aria-labelledby="website-heading"
+        class="mt-10 max-w-2xl"
+      >
+        <h2 id="website-heading" class="font-heading text-2xl font-medium">
+          {privacy.website.heading}
+        </h2>
+        <p class="mt-4 leading-prose">{privacy.website.body}</p>
+        <h3 class="mt-6 font-heading text-lg font-medium">
+          {privacy.website.collectedHeading}
+        </h3>
+        <ul class="mt-2 list-disc space-y-1 pl-6 leading-prose">
+          {Object.values(privacy.website.collected).map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="mt-4 leading-prose">{privacy.website.noCookies}</p>
+        <p class="mt-4 leading-prose">{privacy.website.logs}</p>
+        <p class="mt-4 leading-prose">{privacy.theme}</p>
+      </section>
+    </div>
+  </main>
+</Layout>

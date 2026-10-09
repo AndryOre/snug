@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 
-import standaloneEn from '../content/standalone/en.json'
 import {
   assertSameKeys,
   flattenKeys,
@@ -131,6 +130,6 @@ describe('content', () => {
   })
 
   it('titles the privacy page with the same brand separator', () => {
-    expect(standaloneEn.privacy.meta.title).toMatch(/ \| Snug$/u)
+    expect(getContent('en').privacy.meta.title).toMatch(/ \| Snug$/u)
   })
 })

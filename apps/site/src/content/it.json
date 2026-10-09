@@ -187,5 +187,30 @@
     "title": "Pagina non trovata",
     "body": "Questo indirizzo non porta da nessuna parte. Potrebbe contenere un errore di battitura, oppure la pagina è stata spostata.",
     "backLink": "Torna a Snug"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Informativa sulla privacy | Snug",
+      "description": "Come Snug tratta i tuoi dati: l'estensione non invia nulla da nessuna parte e questo sito web usa analisi senza cookie."
+    },
+    "homeLink": "Snug",
+    "notice": {
+      "body": "Questa pagina è una traduzione realizzata con l'IA che nessuna persona ha rivisto. Se differisce dalla versione inglese, prevale la versione inglese.",
+      "link": "Leggi la versione inglese"
+    },
+    "website": {
+      "heading": "Questo sito web",
+      "body": "L'estensione non invia nulla da nessuna parte. Questo sito web misura le visite con Umami Cloud, un servizio di analisi senza cookie che elabora i dati per nostro conto.",
+      "collectedHeading": "Cosa raccoglie Umami",
+      "collected": {
+        "pageviews": "Le visualizzazioni di pagina e la pagina da cui proviene il visitatore",
+        "environment": "Browser, sistema operativo e tipo di dispositivo",
+        "country": "Il paese, ricavato dalla richiesta e non salvato come indirizzo IP",
+        "clicks": "I clic sui pulsanti di installazione, sulle recensioni, sul video, sulle domande delle FAQ, sui selettori di lingua e di tema e sui link in uscita"
+      },
+      "noCookies": "Umami non imposta cookie e non memorizza nulla nel tuo browser. Rispetta Do Not Track: se il tuo browser lo invia, non vieni conteggiato.",
+      "logs": "Il server web conserva anche un log di accesso con l'ora, la pagina richiesta, lo stato, il referer e lo user-agent del tuo browser. Gli indirizzi IP sono mascherati in quel log, che viene letto offline."
+    },
+    "theme": "La scelta del tema viene salvata solo nel tuo browser."
   }
 }
