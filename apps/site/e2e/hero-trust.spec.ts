@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
 
@@ -11,10 +12,12 @@ for (const path of PATHS) {
   test(`${path} renders hero, trust proof and tagged install actions`, async ({
     page,
   }) => {
+    await blockUmami(page)
     const origins = new Set<string>()
     page.on('request', (request) => {
       const url = new URL(request.url())
-      if (url.protocol.startsWith('http')) origins.add(url.origin)
+      if (url.protocol.startsWith('http') && !isUmamiOrigin(url.origin))
+        origins.add(url.origin)
     })
 
     await page.goto(path)

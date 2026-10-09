@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test'
 import type { Locator } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -32,10 +33,12 @@ for (const path of PATHS) {
   test(`${path} renders features, interface and video sections`, async ({
     page,
   }) => {
+    await blockUmami(page)
     const origins = new Set<string>()
     page.on('request', (request) => {
       const url = new URL(request.url())
-      if (url.protocol.startsWith('http')) origins.add(url.origin)
+      if (url.protocol.startsWith('http') && !isUmamiOrigin(url.origin))
+        origins.add(url.origin)
     })
 
     await page.goto(path)
@@ -70,10 +73,15 @@ for (const path of PATHS) {
 }
 
 test('video loads YouTube only after keyboard activation', async ({ page }) => {
+  await blockUmami(page)
   const thirdParty: string[] = []
   page.on('request', (request) => {
     const url = new URL(request.url())
-    if (url.protocol.startsWith('http') && url.origin !== ORIGIN) {
+    if (
+      url.protocol.startsWith('http') &&
+      url.origin !== ORIGIN &&
+      !isUmamiOrigin(url.origin)
+    ) {
       thirdParty.push(url.origin)
     }
   })

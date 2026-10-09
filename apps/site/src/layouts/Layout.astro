@@ -22,6 +22,7 @@ import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import { buildStructuredData } from '../seo/structured-data'
 import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
+import { UMAMI_DOMAINS, UMAMI_SCRIPT_URL, UMAMI_WEBSITE_ID } from '../seo/umami'
 
 const FONT_PRELOAD_URLS: Record<FontPreload, string> = {
   'space-grotesk-latin': spaceGroteskLatin,
@@ -76,6 +77,14 @@ const jsonLd = standalone
       media="(prefers-color-scheme: dark)"
     />
     <script is:inline set:html={THEME_INIT_SCRIPT} />
+    <script
+      is:inline
+      defer
+      src={UMAMI_SCRIPT_URL}
+      data-website-id={UMAMI_WEBSITE_ID}
+      data-do-not-track="true"
+      data-domains={UMAMI_DOMAINS}
+    ></script>
     {LOCALE_CONFIG[locale].preloadFonts.map((font) => (
       <link
         rel="preload"

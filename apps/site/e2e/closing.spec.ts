@@ -3,6 +3,7 @@ import { expect, type Page, test } from '@playwright/test'
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 import { expectNoHorizontalOverflow, MIN_TOUCH_TARGET } from './layout-helpers'
+import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -239,10 +240,12 @@ test('visiting a locale never redirects to another', async ({ page }) => {
 test('proof section keeps third-party requests off the page', async ({
   page,
 }) => {
+  await blockUmami(page)
   const origins = new Set<string>()
   page.on('request', (request) => {
     const url = new URL(request.url())
-    if (url.protocol.startsWith('http')) origins.add(url.origin)
+    if (url.protocol.startsWith('http') && !isUmamiOrigin(url.origin))
+      origins.add(url.origin)
   })
   await page.goto('/')
   await page.waitForLoadState('networkidle')

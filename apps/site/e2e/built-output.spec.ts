@@ -15,6 +15,11 @@ import {
 import { REVIEWS } from '../src/i18n/proof'
 import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
 import { STORE_FACTS } from '../src/seo/store-facts'
+import {
+  UMAMI_DOMAINS,
+  UMAMI_SCRIPT_URL,
+  UMAMI_WEBSITE_ID,
+} from '../src/seo/umami'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
@@ -194,6 +199,32 @@ test.describe('built pages', () => {
   })
 })
 
+test.describe('Umami tracker', () => {
+  const pages = [
+    ...LOCALES.map((locale) => pageFile(locale)),
+    'privacy/index.html',
+    '404.html',
+  ]
+
+  for (const page of pages) {
+    test(`${page} carries exactly one tracker tag`, () => {
+      const tags = readBuilt(page).match(/<script\b[^>]*\bsrc="[^"]*"[^>]*>/g)
+      expect(tags).toHaveLength(1)
+      const [tag] = tags ?? []
+      expect(tag).toContain(`src="${UMAMI_SCRIPT_URL}"`)
+      expect(tag).toMatch(/\bdefer\b/)
+      expect(tag).toContain(`data-website-id="${UMAMI_WEBSITE_ID}"`)
+      expect(tag).toContain('data-do-not-track="true"')
+      expect(tag).toContain(`data-domains="${UMAMI_DOMAINS}"`)
+    })
+  }
+
+  test('uses the documented website ID and domain', () => {
+    expect(UMAMI_WEBSITE_ID).toBe('3c1202a5-f999-425c-936c-c7e4642223ad')
+    expect(UMAMI_DOMAINS).toBe('snug.andryore.dev')
+  })
+})
+
 test.describe('root files', () => {
   test('lists every locale with alternates in the sitemap', () => {
     const sitemap = readBuilt('sitemap.xml')
@@ -281,7 +312,6 @@ test.describe('privacy page', () => {
     expect(html).toContain('user-agent')
     expect(html).toContain('masked')
     expect(html).not.toMatch(/Plausible|PostHog|Google Analytics/)
-    expect(html).not.toMatch(/<script src=/)
   })
 
   test('has no og:locale:alternate', () => {
