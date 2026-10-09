@@ -23,7 +23,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { Wordmark } from '@/components/wordmark'
 import { APP_ROUTES } from '@/lib/app-url'
-import { getSiteUrl, SITE_PRIVACY_URL } from '@/lib/brand'
+import { getSitePrivacyUrl, getSiteUrl } from '@/lib/brand'
 import {
   autoExportConfigStore,
   autoExportLastRunStore,
@@ -277,7 +277,7 @@ export function AppShell() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SiteLinkButton
-                href={SITE_PRIVACY_URL}
+                href={getSitePrivacyUrl()}
                 label={i18n.t('shell_privacyLink')}
                 icon={ShieldCheckIcon}
               />

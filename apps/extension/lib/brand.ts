@@ -70,12 +70,6 @@ export const PRODUCT_NAME = 'Snug'
  */
 export const SITE_URL = 'https://snug.andryore.dev/'
 
-/**
- * The landing site's privacy policy page. English only, so it is the same in
- * every locale.
- */
-export const SITE_PRIVACY_URL = 'https://snug.andryore.dev/privacy/'
-
 const i18n = createI18n<GeneratedI18nStructure>()
 
 /**
@@ -85,6 +79,15 @@ const i18n = createI18n<GeneratedI18nStructure>()
  */
 export function getSiteUrl(): string {
   return `${new URL(SITE_URL).origin}${i18n.t('siteLocalePath')}`
+}
+
+/**
+ * The landing site's privacy policy page in the active UI language: the
+ * localized site URL plus `privacy/` (`/privacy/`, `/de/privacy/`, ...).
+ * @returns The localized privacy policy URL.
+ */
+export function getSitePrivacyUrl(): string {
+  return `${getSiteUrl()}privacy/`
 }
 
 /**

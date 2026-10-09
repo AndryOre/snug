@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
+import { DEFAULT_LOCALE, LOCALES } from './locales'
 import { privacyPath, TRANSLATED_PRIVACY_LOCALES } from './privacy'
 
 const siteRoot = path.resolve(import.meta.dirname, '../..')
@@ -53,6 +54,14 @@ describe('privacyPath', () => {
 })
 
 describe('privacy translations', () => {
+  it('has a translation file for every non-English locale', () => {
+    const missing = LOCALES.filter(
+      (locale) =>
+        locale !== DEFAULT_LOCALE && !TRANSLATED_PRIVACY_LOCALES.has(locale),
+    )
+    expect(missing).toEqual([])
+  })
+
   it('reads the English date and headings from PRIVACY_POLICY.md', () => {
     expect(englishLastUpdated(englishPolicy)).toBeTruthy()
     expect(Object.keys(headingCounts(englishPolicy)).length).toBeGreaterThan(1)

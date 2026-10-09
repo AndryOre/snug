@@ -8,12 +8,12 @@ import {
   CHROME_WEB_STORE_URL,
   EDGE_ADD_ONS_EXTENSION_ID,
   EDGE_ADD_ONS_URL,
+  getSitePrivacyUrl,
   getSiteUrl,
   getStoreListingUrl,
   getStoreReviewsUrl,
   GITHUB_URL,
   PRODUCT_NAME,
-  SITE_PRIVACY_URL,
   SITE_URL,
   TWITTER_URL,
 } from './brand'
@@ -132,8 +132,17 @@ describe('getSiteUrl', () => {
   )
 })
 
-describe('SITE_PRIVACY_URL', () => {
-  it('points at the English privacy page', () => {
-    expect(SITE_PRIVACY_URL).toBe('https://snug.andryore.dev/privacy/')
+describe('getSitePrivacyUrl', () => {
+  beforeEach(() => {
+    resetFakeI18n()
+  })
+
+  it('is the English privacy page for English', () => {
+    expect(getSitePrivacyUrl()).toBe('https://snug.andryore.dev/privacy/')
+  })
+
+  it('is the localized privacy page for a non-English locale', () => {
+    resetFakeI18n('de')
+    expect(getSitePrivacyUrl()).toBe('https://snug.andryore.dev/de/privacy/')
   })
 })
