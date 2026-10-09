@@ -136,6 +136,10 @@ page whose one job is to send visitors to the store listing for the browser in
 use. It is separate from the App and the popup, which live inside the extension.
 _Avoid_: website, homepage, marketing site, promo page.
 
+**Privacy policy** The legal text describing what Snug and the Landing page
+collect. The English version prevails; every other locale shows a translation
+that says so. _Avoid_: privacy page, privacy notice, data policy.
+
 **Install redirect** The landing page's `/install` route, which sends the
 visitor to the store listing for the browser in use with attribution tags so
 install clicks can be counted without cookies or scripts. _Avoid_: download
