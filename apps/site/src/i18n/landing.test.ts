@@ -8,6 +8,7 @@ import {
   getLandingCopy,
   installHref,
   PROMO_VIDEO_IDS,
+  resolveHref,
   SHOT_KEYS,
   TRUST_LINK_HREFS,
   youtubeEmbedUrl,
@@ -83,9 +84,18 @@ describe('landing copy', () => {
     }
   })
 
-  it('links the privacy page with a trailing slash everywhere', () => {
-    expect(TRUST_LINK_HREFS.privacy).toBe('/privacy/')
-    expect(FOOTER_LINK_HREFS.privacy).toBe('/privacy/')
+  it('resolves the privacy links per locale with a trailing slash', () => {
+    for (const links of [TRUST_LINK_HREFS, FOOTER_LINK_HREFS]) {
+      expect(resolveHref(links.privacy, 'en')).toBe('/privacy/')
+      expect(resolveHref(links.privacy, 'es')).toBe('/es/privacy/')
+      expect(resolveHref(links.privacy, 'de')).toBe('/de/privacy/')
+    }
+  })
+
+  it('leaves fixed hrefs untouched', () => {
+    expect(resolveHref(TRUST_LINK_HREFS.source, 'es')).toBe(
+      TRUST_LINK_HREFS.source,
+    )
   })
 
   it('shares one source url between the trust links and the store facts', () => {

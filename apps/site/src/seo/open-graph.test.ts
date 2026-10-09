@@ -31,6 +31,10 @@ describe('ogLocaleAlternates', () => {
     expect(alternates).toHaveLength(LOCALES.length - 1)
     expect(alternates).not.toContain(ogLocale(locale))
   })
+
+  it('limits the list to the given locales', () => {
+    expect(ogLocaleAlternates('es', ['en', 'es'])).toEqual(['en_US'])
+  })
 })
 
 describe('OG_IMAGE', () => {

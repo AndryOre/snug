@@ -9,6 +9,7 @@ import {
   LOCALES,
   SITE_ORIGIN,
 } from '../i18n/locales'
+import { PRIVACY_PAGE_LOCALES, privacyPath } from '../i18n/privacy'
 import { REVIEWS } from '../i18n/proof'
 import { GET as getLlmsFullTxt } from '../pages/llms-full.txt'
 import { GET as getLlmsTxt } from '../pages/llms.txt'
@@ -109,15 +110,15 @@ describe('buildLlmsFullTxt', () => {
 
 describe('buildSitemapXml', () => {
   it('lists every entry with every alternate', () => {
-    const entries = [
-      { loc: 'https://example.test/', lastmod: '2026-10-05' },
-      { loc: 'https://example.test/es/' },
-    ]
     const alternates = [
       { hreflang: 'en', href: 'https://example.test/' },
       { hreflang: 'es', href: 'https://example.test/es/' },
     ]
-    const xml = buildSitemapXml(entries, alternates, [])
+    const entries = [
+      { loc: 'https://example.test/', lastmod: '2026-10-05', alternates },
+      { loc: 'https://example.test/es/', alternates },
+    ]
+    const xml = buildSitemapXml(entries)
 
     expect(xml.match(/<url>/g)).toHaveLength(entries.length)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
@@ -126,7 +127,7 @@ describe('buildSitemapXml', () => {
   })
 
   it('omits lastmod for entries without a known date', () => {
-    const xml = buildSitemapXml([{ loc: 'https://example.test/' }], [], [])
+    const xml = buildSitemapXml([{ loc: 'https://example.test/' }])
 
     expect(xml).not.toContain('<lastmod>')
   })
@@ -250,12 +251,11 @@ describe('buildStructuredData', () => {
 })
 
 describe('buildSitemapXml lastmod', () => {
-  it('stamps every url that has a date, standalone ones included', () => {
-    const xml = buildSitemapXml(
-      [{ loc: 'https://example.test/', lastmod: '2026-10-05' }],
-      [],
-      [{ loc: 'https://example.test/privacy/', lastmod: '2026-10-05' }],
-    )
+  it('stamps every url that has a date', () => {
+    const xml = buildSitemapXml([
+      { loc: 'https://example.test/', lastmod: '2026-10-05' },
+      { loc: 'https://example.test/privacy/', lastmod: '2026-10-05' },
+    ])
 
     expect(xml.match(/<lastmod>2026-10-05<\/lastmod>/g)).toHaveLength(2)
   })
@@ -284,6 +284,7 @@ describe('root file routes', () => {
     for (const locale of LOCALES) {
       expect(text).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }
+    expect(text).toContain(`${SITE_ORIGIN}/privacy/`)
   })
 
   it('serves llms-full.txt as plain text', async () => {
@@ -292,11 +293,13 @@ describe('root file routes', () => {
     expect(await response.text()).toBe(buildLlmsFullTxt(getContent('en')))
   })
 
-  it('serves a sitemap with one url per locale plus the privacy page', async () => {
+  it('serves a sitemap with one url per locale plus the privacy pages', async () => {
     const response = getSitemapXml()
     expect(response.headers.get('Content-Type')).toContain('application/xml')
     const xml = await response.text()
-    expect(xml.match(/<url>/g)).toHaveLength(LOCALES.length + 1)
+    expect(xml.match(/<url>/g)).toHaveLength(
+      LOCALES.length + PRIVACY_PAGE_LOCALES.length,
+    )
     for (const locale of LOCALES) {
       const expected = lastCommitDate([`src/content/${locale}.json`])
       expect(expected).toMatch(/^\d{4}-\d{2}-\d{2}$/)
@@ -304,10 +307,26 @@ describe('root file routes', () => {
         `<loc>${SITE_ORIGIN}${localePath(locale)}</loc>\n    <lastmod>${expected}</lastmod>`,
       )
     }
-    expect(xml).toContain(`<loc>${SITE_ORIGIN}/privacy/</loc>`)
-    expect(xml.match(/<xhtml:link /g)).toHaveLength(
-      LOCALES.length * hreflangAlternates().length,
+    const privacyAlternates = hreflangAlternates(
+      '/privacy/',
+      PRIVACY_PAGE_LOCALES,
     )
+    for (const locale of PRIVACY_PAGE_LOCALES) {
+      expect(xml).toContain(`<loc>${SITE_ORIGIN}${privacyPath(locale)}</loc>`)
+    }
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="es" href="${SITE_ORIGIN}/es/privacy/"/>`,
+    )
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/privacy/"/>`,
+    )
+    expect(xml).toContain(`${SITE_ORIGIN}/de/privacy/`)
+    expect(xml.match(/<xhtml:link /g)).toHaveLength(
+      LOCALES.length * hreflangAlternates().length +
+        PRIVACY_PAGE_LOCALES.length * privacyAlternates.length,
+    )
+    const privacyBlock = xml.slice(xml.indexOf(`<loc>${SITE_ORIGIN}/privacy/`))
+    expect(privacyBlock).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
   })
 })
 

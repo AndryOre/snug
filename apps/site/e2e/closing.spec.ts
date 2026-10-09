@@ -267,10 +267,24 @@ test.describe('without JavaScript', () => {
   })
 })
 
-for (const path of ['/privacy/', '/404/']) {
-  test(`${path} marks no language link as current`, async ({ page }) => {
+test('/404/ marks no language link as current', async ({ page }) => {
+  await page.goto('/404/')
+  await expect(page.locator('a[aria-current]')).toHaveCount(0)
+})
+
+for (const [path, locale] of [
+  ['/privacy/', 'en'],
+  ['/es/privacy/', 'es'],
+] as const) {
+  test(`${path} marks only its own language link as current`, async ({
+    page,
+  }) => {
     await page.goto(path)
-    await expect(page.locator('a[aria-current]')).toHaveCount(0)
+    const current = page.locator(
+      'footer [data-footer-languages] a[aria-current]',
+    )
+    await expect(current).toHaveCount(1)
+    await expect(current).toHaveAttribute('hreflang', locale)
   })
 }
 

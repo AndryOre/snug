@@ -18,6 +18,11 @@ import {
   type FontPreload,
   type Locale,
 } from '../i18n/locales'
+import {
+  ENGLISH_PRIVACY_PATH,
+  PRIVACY_PAGE_LOCALES,
+  privacyPath,
+} from '../i18n/privacy'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import { buildStructuredData } from '../seo/structured-data'
@@ -32,28 +37,40 @@ const FONT_PRELOAD_URLS: Record<FontPreload, string> = {
 interface Props {
   locale: Locale
   notFound?: boolean
+  privacy?: boolean
   standalone?: { title: string; description: string; path: string }
 }
 
-const { locale, notFound = false, standalone } = Astro.props
-const meta = standalone ?? getPageMeta(locale)
-const alternates = standalone ? [] : hreflangAlternates()
-const canonical = `${SITE_ORIGIN}${standalone?.path ?? localePath(locale)}`
-const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
+const { locale, notFound = false, privacy = false, standalone } = Astro.props
 const content = getContent(locale)
+const meta =
+  standalone ?? (privacy ? content.privacy.meta : getPageMeta(locale))
+const alternates = standalone
+  ? []
+  : privacy
+    ? hreflangAlternates(ENGLISH_PRIVACY_PATH, PRIVACY_PAGE_LOCALES)
+    : hreflangAlternates()
+const pagePath =
+  standalone?.path ?? (privacy ? privacyPath(locale) : localePath(locale))
+const canonical = `${SITE_ORIGIN}${pagePath}`
+const ogAlternates = standalone
+  ? []
+  : ogLocaleAlternates(locale, privacy ? PRIVACY_PAGE_LOCALES : undefined)
+const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
 const ogImageAlt = content.seo.ogImageAlt
 const featureTitles = Object.values(content.features.items).map(
   (item) => item.title,
 )
-const jsonLd = standalone
-  ? null
-  : JSON.stringify(
-      buildStructuredData(locale, meta.description, featureTitles, {
-        title: meta.title,
-        videoId: PROMO_VIDEO_IDS[locale],
-        videoDescription: content.video.caption,
-      }),
-    ).replaceAll('<', String.raw`\u003c`)
+const jsonLd =
+  standalone || privacy
+    ? null
+    : JSON.stringify(
+        buildStructuredData(locale, meta.description, featureTitles, {
+          title: meta.title,
+          videoId: PROMO_VIDEO_IDS[locale],
+          videoDescription: content.video.caption,
+        }),
+      ).replaceAll('<', String.raw`\u003c`)
 ---
 
 <html lang={languageTag(locale)} dir={LOCALE_CONFIG[locale].dir}>
@@ -110,10 +127,9 @@ const jsonLd = standalone
         <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonical} />
         <meta property="og:locale" content={ogLocale(locale)} />
-        {!standalone &&
-          ogLocaleAlternates(locale).map((code) => (
-            <meta property="og:locale:alternate" content={code} />
-          ))}
+        {ogAlternates.map((code) => (
+          <meta property="og:locale:alternate" content={code} />
+        ))}
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content={String(OG_IMAGE.width)} />
         <meta property="og:image:height" content={String(OG_IMAGE.height)} />
@@ -134,8 +150,16 @@ const jsonLd = standalone
       notFound && 'flex min-h-dvh flex-col',
     )}
   >
-    <Header locale={locale} markCurrent={!standalone} />
+    <Header
+      locale={locale}
+      markCurrent={!standalone}
+      pageHref={privacy ? privacyPath : undefined}
+    />
     <slot />
-    <Footer locale={locale} markCurrent={!standalone} />
+    <Footer
+      locale={locale}
+      markCurrent={!standalone}
+      pageHref={privacy ? privacyPath : undefined}
+    />
   </body>
 </html>

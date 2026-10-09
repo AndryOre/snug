@@ -66,15 +66,17 @@ export function languageTag(locale: Locale): string {
 }
 
 /**
- * Site-relative path of the page for a locale, always with a trailing slash.
- * English is the root; the others use the lowercase BCP 47 tag (`/pt-br/`).
+ * Site-relative path of a page for a locale, always with a trailing slash.
+ * English is unprefixed; the others use the lowercase BCP 47 tag (`/pt-br/`).
  * @param locale - A supported locale code.
- * @returns The path, e.g. `/` or `/pt-br/`.
+ * @param page - The page's English path, with leading and trailing slashes.
+ * Defaults to the home page.
+ * @returns The path, e.g. `/`, `/pt-br/` or `/es/privacy/`.
  */
-export function localePath(locale: Locale): string {
+export function localePath(locale: Locale, page = '/'): string {
   return locale === DEFAULT_LOCALE
-    ? '/'
-    : `/${languageTag(locale).toLowerCase()}/`
+    ? page
+    : `/${languageTag(locale).toLowerCase()}${page}`
 }
 
 /**
@@ -86,20 +88,25 @@ export interface HreflangAlternate {
 }
 
 /**
- * Alternates for every locale plus `x-default`, which points at the English
- * root. The same set is emitted on every page.
- * @returns The alternates in locale order, `x-default` last.
+ * Alternates for the given locales plus `x-default`, which points at the
+ * English version of the page.
+ * @param page - The page's English path. Defaults to the home page.
+ * @param locales - Locales that have this page. Defaults to every locale.
+ * @returns The alternates in the given order, `x-default` last.
  */
-export function hreflangAlternates(): HreflangAlternate[] {
-  const alternates = LOCALES.map((locale) => ({
+export function hreflangAlternates(
+  page = '/',
+  locales: readonly Locale[] = LOCALES,
+): HreflangAlternate[] {
+  const alternates = locales.map((locale) => ({
     hreflang: languageTag(locale),
-    href: `${SITE_ORIGIN}${localePath(locale)}`,
+    href: `${SITE_ORIGIN}${localePath(locale, page)}`,
   }))
   return [
     ...alternates,
     {
       hreflang: 'x-default',
-      href: `${SITE_ORIGIN}${localePath(DEFAULT_LOCALE)}`,
+      href: `${SITE_ORIGIN}${localePath(DEFAULT_LOCALE, page)}`,
     },
   ]
 }

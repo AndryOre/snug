@@ -52,6 +52,20 @@ describe('locales', () => {
     expect(languageTag('ja')).toBe('ja')
   })
 
+  it('builds a page path for a locale', () => {
+    expect(localePath('en', '/privacy/')).toBe('/privacy/')
+    expect(localePath('pt_BR', '/privacy/')).toBe('/pt-br/privacy/')
+  })
+
+  it('lists only the given locales for a page, x-default on English', () => {
+    const alternates = hreflangAlternates('/privacy/', ['en', 'es'])
+    expect(alternates).toEqual([
+      { hreflang: 'en', href: 'https://snug.andryore.dev/privacy/' },
+      { hreflang: 'es', href: 'https://snug.andryore.dev/es/privacy/' },
+      { hreflang: 'x-default', href: 'https://snug.andryore.dev/privacy/' },
+    ])
+  })
+
   it('lists all ten alternates plus x-default', () => {
     const alternates = hreflangAlternates()
     expect(alternates).toHaveLength(11)
