@@ -320,7 +320,7 @@ describe('root file routes', () => {
     expect(xml).toContain(
       `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/privacy/"/>`,
     )
-    expect(xml).not.toContain('/de/privacy/')
+    expect(xml).toContain(`${SITE_ORIGIN}/de/privacy/`)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       LOCALES.length * hreflangAlternates().length +
         PRIVACY_PAGE_LOCALES.length * privacyAlternates.length,

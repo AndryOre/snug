@@ -88,7 +88,7 @@ describe('landing copy', () => {
     for (const links of [TRUST_LINK_HREFS, FOOTER_LINK_HREFS]) {
       expect(resolveHref(links.privacy, 'en')).toBe('/privacy/')
       expect(resolveHref(links.privacy, 'es')).toBe('/es/privacy/')
-      expect(resolveHref(links.privacy, 'de')).toBe('/privacy/')
+      expect(resolveHref(links.privacy, 'de')).toBe('/de/privacy/')
     }
   })
 
