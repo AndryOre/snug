@@ -18,6 +18,7 @@ row is in `directories.csv`. Every submission needs a human confirmation first.
 | [`copy/community.md`](copy/community.md)                       | Product Hunt, Show HN, Reddit, X and YouTube copy                   |
 | [`press-kit.md`](press-kit.md)                                 | Boilerplate, fact sheet, asset links, contact                       |
 | [`assets/`](assets/)                                           | Product Hunt gallery and thumbnail, X header                        |
+| [`closeout-2026-10-09.md`](closeout-2026-10-09.md)             | Final state of every channel and what still waits on a third party  |
 | [`../store/baseline-2026-09.md`](../store/baseline-2026-09.md) | Pre-rename analytics to compare against                             |
 
 Variant IDs in `copy/directories.md`: `extension`, `alternatives`,
