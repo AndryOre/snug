@@ -55,7 +55,7 @@ for header in content-security-policy x-content-type-options referrer-policy per
   grep -qi "^$header:" <<<"$headers" || fail "missing $header"
 done
 csp="$(grep -i '^content-security-policy:' <<<"$headers")"
-if sed 's#frame-src https://www\.youtube-nocookie\.com\(;\|$\)#frame-src\1#' <<<"$csp" | grep -Eq 'https?://'; then
+if sed -e 's#frame-src https://www\.youtube-nocookie\.com\(;\|$\)#frame-src\1#' -e 's# https://cloud\.umami\.is##' -e 's# https://gateway\.umami\.is##' <<<"$csp" | grep -Eq 'https?://'; then
   fail "CSP names a third-party origin"
 fi
 grep -q 'frame-src https://www.youtube-nocookie.com' <<<"$csp" || fail "CSP lacks the YouTube frame-src"

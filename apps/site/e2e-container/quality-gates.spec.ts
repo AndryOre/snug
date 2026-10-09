@@ -1,13 +1,21 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, test } from '@playwright/test'
+import { expect, type Page, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 import { hydratedFaq } from '../e2e/faq-helpers'
 import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
+import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from '../src/seo/umami'
 
 const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
+
+const UMAMI_ORIGINS = [UMAMI_SCRIPT_ORIGIN, UMAMI_COLLECT_ORIGIN]
+
+async function blockUmami(page: Page): Promise<void> {
+  for (const origin of UMAMI_ORIGINS)
+    await page.route(`${origin}/**`, (route) => route.abort())
+}
 
 const STORE_LISTING_PATH =
   '/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn'
@@ -125,10 +133,11 @@ test('/og/* is cross-origin readable and every other path is not', async ({
 })
 
 for (const path of LOCALE_PATHS) {
-  test(`${path} makes no third-party request on load`, async ({
+  test(`${path} makes no third-party request on load except Umami`, async ({
     page,
     baseURL,
   }) => {
+    await blockUmami(page)
     const siteOrigin = new URL(baseURL ?? '').origin
     const foreignRequests: string[] = []
     page.on('request', (request) => {
@@ -138,7 +147,11 @@ for (const path of LOCALE_PATHS) {
     })
 
     await page.goto(path, { waitUntil: 'networkidle' })
-    expect(foreignRequests).toEqual([])
+    const foreignOrigins = foreignRequests.map((url) => new URL(url).origin)
+    expect(
+      foreignOrigins.filter((origin) => !UMAMI_ORIGINS.includes(origin)),
+    ).toEqual([])
+    expect(foreignOrigins).toContain(UMAMI_SCRIPT_ORIGIN)
   })
 }
 
@@ -152,6 +165,36 @@ for (const path of ['/', '/privacy/']) {
     expect(violations).toEqual([])
   })
 }
+
+test('the served CSP allows exactly the Umami script and connect origins', async ({
+  request,
+}) => {
+  for (const path of ['/', '/privacy/', '/nope/', '/de/nope/']) {
+    const response = await request.get(path)
+    const policy = response.headers()['content-security-policy'] ?? ''
+    const origins = policy
+      .matchAll(/https:\/\/[^\s;]+/g)
+      .map((match) => match[0])
+      .toArray()
+    expect(
+      origins.toSorted((first, second) => first.localeCompare(second)),
+      path,
+    ).toEqual(
+      [
+        UMAMI_SCRIPT_ORIGIN,
+        UMAMI_COLLECT_ORIGIN,
+        'https://www.youtube-nocookie.com',
+      ].toSorted((first, second) => first.localeCompare(second)),
+    )
+    const directives = policy.split(';').map((directive) => directive.trim())
+    expect(
+      directives.find((directive) => directive.startsWith('script-src ')),
+    ).toContain(UMAMI_SCRIPT_ORIGIN)
+    expect(
+      directives.find((directive) => directive.startsWith('connect-src ')),
+    ).toBe(`connect-src 'self' ${UMAMI_COLLECT_ORIGIN}`)
+  }
+})
 
 test('the served CSP allows scripts by hash only', async ({ request }) => {
   for (const path of ['/', '/privacy/', '/nope/', '/de/nope/']) {
@@ -196,6 +239,7 @@ const CSP_PAGES = [
 
 for (const { path, interactive } of CSP_PAGES) {
   test(`${path} raises no CSP violation`, async ({ page }) => {
+    await blockUmami(page)
     const problems: string[] = []
     page.on('console', (message) => {
       if (
@@ -258,10 +302,11 @@ test('the speculation rules resolve with the right MIME type', async ({
     'application/speculationrules+json',
   )
   const parsed = (await rules.json()) as {
-    prerender: { eagerness: string; where: unknown }[]
+    prefetch: { eagerness: string; where: unknown }[]
   }
-  expect(parsed.prerender[0]?.eagerness).toBe('moderate')
-  const serialized = JSON.stringify(parsed.prerender[0]?.where)
+  expect(parsed).not.toHaveProperty('prerender')
+  expect(parsed.prefetch[0]?.eagerness).toBe('moderate')
+  const serialized = JSON.stringify(parsed.prefetch[0]?.where)
   expect(serialized).toContain('/install')
   expect(serialized).toContain('/reviews')
 })
