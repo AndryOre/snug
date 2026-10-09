@@ -106,7 +106,7 @@ test('video loads YouTube only after keyboard activation', async ({ page }) => {
   await expect(player).toBeVisible()
   await expect(player).toHaveAttribute(
     'src',
-    /^https:\/\/www\.youtube-nocookie\.com\/embed\/9aXa4aAWr_s/,
+    /^https:\/\/www\.youtube-nocookie\.com\/embed\/r89MCN-oLCw/,
   )
   await expect.poll(() => thirdParty.length).toBeGreaterThan(0)
   expect(new Set(thirdParty)).toEqual(
@@ -122,7 +122,7 @@ test('without JavaScript the poster links to the watch page', async ({
   await page.goto('/')
   await expect(page.locator('[data-video-poster]')).toHaveAttribute(
     'href',
-    'https://www.youtube.com/watch?v=9aXa4aAWr_s',
+    'https://www.youtube.com/watch?v=r89MCN-oLCw',
   )
   await context.close()
 })
