@@ -76,16 +76,16 @@ export const FEATURE_FORMATS: Partial<
  * Public YouTube video id of the promo in each locale.
  */
 export const PROMO_VIDEO_IDS: Record<Locale, string> = {
-  en: '2F3DndQFCLY',
-  es: 'jolFPCjmpO4',
-  de: '_V8AzYPQE7Y',
-  fr: 'Dhack45iK_8',
-  it: 'ucqSd0kdy_8',
-  ja: 'bdsNWmhinC0',
-  ko: 'LBz7s79Mzc0',
-  pt_BR: 'c2wUbmYZAj8',
-  ru: 'LObFipCZA4g',
-  zh_CN: 'HtxCtXPZcYE',
+  en: '9aXa4aAWr_s',
+  es: '9wwci2Fy5rg',
+  de: 'R7pGr7DZO3s',
+  fr: 'H_pXUUNblrI',
+  it: 'OemCOGPPwM8',
+  ja: 'qDjl5u6PIAY',
+  ko: 'w66oGhia_LA',
+  pt_BR: '_2YjNboONIY',
+  ru: 'xwca7V7_NXU',
+  zh_CN: 'Xa-w1HDylYI',
 }
 
 /**

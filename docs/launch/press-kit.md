@@ -59,7 +59,7 @@ never leave the browser.
 
 ## Promo video
 
-English promo video: <https://youtu.be/2F3DndQFCLY>. Other languages are listed
+English promo video: <https://youtu.be/9aXa4aAWr_s>. Other languages are listed
 in [`../store/README.md`](../store/README.md).
 
 ## Assets
