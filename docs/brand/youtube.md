@@ -192,7 +192,7 @@ Business email: `hello@andryore.dev`.
 Studio > Customization > Layout.
 
 - **Channel trailer** (for people who have not subscribed): the EN promo,
-  `https://youtu.be/9aXa4aAWr_s`.
+  `https://youtu.be/r89MCN-oLCw`.
 - **Featured video** (for subscribers): the latest release walkthrough. Until
   one exists, use the EN promo.
 - **Sections**, in order:

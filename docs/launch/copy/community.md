@@ -145,7 +145,7 @@ were regenerated on 2026-10-08 for 2.1.0.
 ### Video
 
 ```text
-https://youtu.be/9aXa4aAWr_s
+https://youtu.be/r89MCN-oLCw
 ```
 
 ## Show HN

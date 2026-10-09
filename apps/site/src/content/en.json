@@ -187,5 +187,30 @@
     "title": "Page not found",
     "body": "This address doesn't lead anywhere. It may be mistyped, or the page may have moved.",
     "backLink": "Back to Snug"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | Snug",
+      "description": "How Snug handles your data: the extension sends nothing anywhere, and this website uses cookieless analytics."
+    },
+    "homeLink": "Snug",
+    "notice": {
+      "body": "This page is an AI translation that no person has reviewed. If it differs from the English version, the English version prevails.",
+      "link": "Read the English version"
+    },
+    "website": {
+      "heading": "This website",
+      "body": "The extension sends nothing anywhere. This website measures visits with Umami Cloud, a cookieless analytics service that processes the data for us.",
+      "collectedHeading": "What Umami collects",
+      "collected": {
+        "pageviews": "Pageviews and the page that referred the visitor",
+        "environment": "Browser, operating system and device type",
+        "country": "Country, taken from the request and not stored as an IP address",
+        "clicks": "Clicks on install buttons, reviews, the video, FAQ questions, the language and theme switchers, and outbound links"
+      },
+      "noCookies": "Umami sets no cookies and stores nothing in your browser. It respects Do Not Track: if your browser sends it, you are not counted.",
+      "logs": "The web server also keeps an access log with the time, the requested page, the status, the referer and your browser's user-agent. IP addresses are masked in that log, and it is read offline."
+    },
+    "theme": "Your theme choice is stored only in your browser."
   }
 }

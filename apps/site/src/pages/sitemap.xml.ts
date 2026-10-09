@@ -16,7 +16,8 @@ export function GET() {
     {
       loc: `${SITE_ORIGIN}/privacy/`,
       lastmod: lastCommitDate([
-        'src/content/standalone',
+        'src/content/privacy',
+        'src/components/PrivacyPage.astro',
         'src/pages/privacy.astro',
         '../../PRIVACY_POLICY.md',
       ]),
