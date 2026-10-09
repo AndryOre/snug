@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
+import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from '../seo/umami'
 import {
   collectMetaScriptHashes,
   findInlineScriptHashes,
@@ -65,5 +67,22 @@ describe('theme init script', () => {
     expect(
       findInlineScriptHashes(`<script>${THEME_INIT_SCRIPT}</script>`),
     ).toEqual([`'${THEME_INIT_HASH}'`])
+  })
+})
+
+describe('nginx header template', () => {
+  const template = readFileSync(
+    new URL('../../docker/security-headers.conf', import.meta.url),
+    'utf8',
+  )
+
+  it('allows the Umami script and collect origins and nothing inline', () => {
+    expect(template).toContain(
+      `script-src 'self' ${UMAMI_SCRIPT_ORIGIN} ${SCRIPT_HASHES_PLACEHOLDER};`,
+    )
+    expect(template).toContain(`connect-src 'self' ${UMAMI_COLLECT_ORIGIN};`)
+    expect(template).toContain("require-trusted-types-for 'script'")
+    const scriptSource = /script-src [^;]*/.exec(template)?.[0] ?? ''
+    expect(scriptSource).not.toContain("'unsafe-inline'")
   })
 })
