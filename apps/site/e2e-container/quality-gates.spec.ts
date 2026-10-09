@@ -1,21 +1,15 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, type Page, test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 import { hydratedFaq } from '../e2e/faq-helpers'
+import { blockUmami, UMAMI_ORIGINS } from '../e2e/umami-helpers'
 import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
 import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from '../src/seo/umami'
 
 const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
-
-const UMAMI_ORIGINS = [UMAMI_SCRIPT_ORIGIN, UMAMI_COLLECT_ORIGIN]
-
-async function blockUmami(page: Page): Promise<void> {
-  for (const origin of UMAMI_ORIGINS)
-    await page.route(`${origin}/**`, (route) => route.abort())
-}
 
 const STORE_LISTING_PATH =
   '/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn'
