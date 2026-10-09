@@ -4,6 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import {
+  DEFAULT_LOCALE,
   hreflangAlternates,
   languageTag,
   LOCALE_CONFIG,
@@ -12,7 +13,6 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../src/i18n/locales'
-import { PRIVACY_PAGE_LOCALES, privacyPath } from '../src/i18n/privacy'
 import { REVIEWS } from '../src/i18n/proof'
 import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
 import { STORE_FACTS } from '../src/seo/store-facts'
@@ -24,6 +24,18 @@ import {
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
+
+const PRIVACY_PAGE_LOCALES = LOCALES.filter(
+  (locale) =>
+    locale === DEFAULT_LOCALE ||
+    existsSync(path.join(siteRoot, 'src/content/privacy', `${locale}.md`)),
+)
+
+function privacyPath(locale: (typeof LOCALES)[number]): string {
+  return locale !== DEFAULT_LOCALE && PRIVACY_PAGE_LOCALES.includes(locale)
+    ? `/${languageTag(locale).toLowerCase()}/privacy/`
+    : '/privacy/'
+}
 
 function readBuilt(relativePath: string): string {
   return readFileSync(path.join(builtSite, relativePath), 'utf8')
