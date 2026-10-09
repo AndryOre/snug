@@ -1,5 +1,5 @@
 ---
-import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
+import { getLandingCopy, resolveHref, TRUST_LINK_HREFS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import CardGrid from './CardGrid.astro'
 import InstallButton from './InstallButton.astro'
@@ -35,7 +35,7 @@ const linkKeys = [
     {linkKeys.map((key) => (
       <li>
         <TextLink
-          href={TRUST_LINK_HREFS[key]}
+          href={resolveHref(TRUST_LINK_HREFS[key], Astro.props.locale)}
           data-umami-event="outbound-click"
           data-umami-event-target={`trust-${key}`}
         >

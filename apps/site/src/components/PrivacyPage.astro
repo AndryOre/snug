@@ -3,7 +3,7 @@ import { Separator } from '@workspace/ui/components/separator'
 
 import { getContent } from '../i18n/content'
 import { DEFAULT_LOCALE, localePath, type Locale } from '../i18n/locales'
-import { ENGLISH_PRIVACY_PATH, privacyPath } from '../i18n/privacy'
+import { ENGLISH_PRIVACY_PATH } from '../i18n/privacy'
 import Layout from '../layouts/Layout.astro'
 import TextLink from './TextLink.astro'
 
@@ -14,10 +14,9 @@ interface Props {
 const { locale } = Astro.props
 const { privacy } = getContent(locale)
 const isTranslation = locale !== DEFAULT_LOCALE
-const standalone = { ...privacy.meta, path: privacyPath(locale) }
 ---
 
-<Layout locale={locale} standalone={standalone}>
+<Layout locale={locale} privacy>
   <main id="main">
     <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
       <TextLink

@@ -23,6 +23,15 @@ export const TRANSLATED_PRIVACY_LOCALES: ReadonlySet<Locale> = new Set(
 )
 
 /**
+ * Locales that have a privacy page, English first: the canonical policy plus
+ * every translation. These are the hreflang and sitemap alternates.
+ */
+export const PRIVACY_PAGE_LOCALES: readonly Locale[] = LOCALES.filter(
+  (locale) =>
+    locale === DEFAULT_LOCALE || TRANSLATED_PRIVACY_LOCALES.has(locale),
+)
+
+/**
  * Site-relative path of a locale's privacy policy, always with a trailing
  * slash. A locale without a translation falls back to the English policy.
  * @param locale - A supported locale code.

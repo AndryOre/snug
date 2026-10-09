@@ -1,5 +1,10 @@
 ---
-import { FOOTER_LINK_HREFS, getClosingCopy, installHref } from '../i18n/landing'
+import {
+  FOOTER_LINK_HREFS,
+  getClosingCopy,
+  installHref,
+  resolveHref,
+} from '../i18n/landing'
 import { Separator } from '@workspace/ui/components/separator'
 
 import {
@@ -14,13 +19,18 @@ import TextLink from './TextLink.astro'
 interface Props {
   locale: Locale
   markCurrent?: boolean
+  pageHref?: (locale: Locale) => string
 }
 
-const { locale, markCurrent = true } = Astro.props
+const { locale, markCurrent = true, pageHref = localePath } = Astro.props
 const { footer, header } = getClosingCopy(locale)
 const links = [
   { key: 'source', href: FOOTER_LINK_HREFS.source, label: footer.source },
-  { key: 'privacy', href: FOOTER_LINK_HREFS.privacy, label: footer.privacy },
+  {
+    key: 'privacy',
+    href: resolveHref(FOOTER_LINK_HREFS.privacy, locale),
+    label: footer.privacy,
+  },
   {
     key: 'changelog',
     href: FOOTER_LINK_HREFS.changelog,
@@ -55,7 +65,7 @@ const noteParts = footer.note.split('Snug')
         {LOCALES.map((code) => (
           <li>
             <TextLink
-              href={localePath(code)}
+              href={pageHref(code)}
               lang={languageTag(code)}
               hreflang={languageTag(code)}
               aria-current={markCurrent && code === locale ? 'page' : undefined}

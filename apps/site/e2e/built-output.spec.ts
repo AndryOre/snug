@@ -12,6 +12,7 @@ import {
   ogImagePath,
   SITE_ORIGIN,
 } from '../src/i18n/locales'
+import { PRIVACY_PAGE_LOCALES, privacyPath } from '../src/i18n/privacy'
 import { REVIEWS } from '../src/i18n/proof'
 import { ogLocale, ogLocaleAlternates } from '../src/seo/open-graph'
 import { STORE_FACTS } from '../src/seo/store-facts'
@@ -330,8 +331,49 @@ test.describe('privacy page', () => {
     )
   })
 
-  test('has no og:locale:alternate', () => {
-    expect(readBuilt('privacy/index.html')).not.toContain('og:locale:alternate')
+  test('lists hreflang and og:locale alternates for the translated locales only', () => {
+    const alternates = hreflangAlternates('/privacy/', PRIVACY_PAGE_LOCALES)
+    for (const file of ['privacy/index.html', 'es/privacy/index.html']) {
+      const html = readBuilt(file)
+      for (const { hreflang, href } of alternates) {
+        expect(html).toContain(
+          `<link rel="alternate" hreflang="${hreflang}" href="${href}"`,
+        )
+      }
+      expect(html).toContain(
+        `<link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/privacy/"`,
+      )
+      expect(html.match(/rel="alternate" hreflang=/g)).toHaveLength(
+        alternates.length,
+      )
+      expect(html.match(/property="og:locale:alternate"/g)).toHaveLength(
+        PRIVACY_PAGE_LOCALES.length - 1,
+      )
+    }
+    expect(readBuilt('privacy/index.html')).toContain(
+      `<meta property="og:locale:alternate" content="${ogLocale('es')}"`,
+    )
+  })
+
+  test('points the footer links and language list at privacy pages, marking the current locale', () => {
+    const html = readBuilt('es/privacy/index.html')
+    const footer = html.slice(html.indexOf('<footer'))
+    expect(footer).toMatch(
+      /<a[^>]*href="\/es\/privacy\/"[^>]*data-footer-link="privacy"|<a[^>]*data-footer-link="privacy"[^>]*href="\/es\/privacy\/"/,
+    )
+    for (const locale of LOCALES) {
+      expect(footer).toContain(`href="${privacyPath(locale)}"`)
+    }
+    expect(footer).toMatch(
+      /<a[^>]*href="\/es\/privacy\/"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/es\/privacy\/"/,
+    )
+    expect(footer.match(/aria-current="page"/g)).toHaveLength(1)
+    const header = html.slice(
+      html.indexOf('<header'),
+      html.indexOf('</header>'),
+    )
+    expect(header).toContain('/es/privacy/')
+    expect(header).not.toContain('/es/&quot;')
   })
 
   test('is canonical, indexed and listed in the sitemap', () => {
@@ -339,14 +381,22 @@ test.describe('privacy page', () => {
     expect(html).toContain(
       `<link rel="canonical" href="${SITE_ORIGIN}/privacy/"`,
     )
-    expect(readBuilt('sitemap.xml')).toContain(
-      `<loc>${SITE_ORIGIN}/privacy/</loc>`,
+    const sitemap = readBuilt('sitemap.xml')
+    for (const locale of PRIVACY_PAGE_LOCALES) {
+      expect(sitemap).toContain(
+        `<loc>${SITE_ORIGIN}${privacyPath(locale)}</loc>`,
+      )
+    }
+    expect(sitemap).toContain(
+      `<xhtml:link rel="alternate" hreflang="es" href="${SITE_ORIGIN}/es/privacy/"/>`,
     )
   })
 
   for (const locale of LOCALES) {
-    test(`${locale} links the trust section to /privacy`, () => {
-      expect(readBuilt(pageFile(locale))).toContain('href="/privacy/"')
+    test(`${locale} links the trust section and footer to its privacy page`, () => {
+      const html = readBuilt(pageFile(locale))
+      const link = `href="${privacyPath(locale)}"`
+      expect(html.split(link).length - 1).toBeGreaterThanOrEqual(2)
     })
   }
 })

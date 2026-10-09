@@ -35,10 +35,14 @@ export function ogLocale(locale: Locale): string {
  * Open Graph codes of every locale except the given one, for
  * `og:locale:alternate`.
  * @param locale - The page's own locale.
- * @returns The other locales' codes, in locale order.
+ * @param locales - Locales that have this page. Defaults to every locale.
+ * @returns The other locales' codes, in the given order.
  */
-export function ogLocaleAlternates(locale: Locale): string[] {
-  return LOCALES.filter((entry) => entry !== locale).map((entry) =>
-    ogLocale(entry),
-  )
+export function ogLocaleAlternates(
+  locale: Locale,
+  locales: readonly Locale[] = LOCALES,
+): string[] {
+  return locales
+    .filter((entry) => entry !== locale)
+    .map((entry) => ogLocale(entry))
 }

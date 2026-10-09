@@ -155,47 +155,40 @@ export function buildLlmsFullTxt(content: SiteContent): string {
 }
 
 /**
- * One sitemap URL; `lastmod` is omitted when no real change date is known.
+ * One sitemap URL; `lastmod` is omitted when no real change date is known and
+ * `alternates` when the page has no translations.
  */
 export interface SitemapEntry {
   loc: string
   lastmod?: string
+  alternates?: readonly { hreflang: string; href: string }[]
 }
 
 function lastmodLine(lastmod: string | undefined): string {
   return lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ''
 }
 
-/**
- * The XML sitemap listing every locale page with `xhtml:link` alternates.
- * @param entries - Locale pages with their content change dates.
- * @param alternates - The hreflang alternates shared by every locale page.
- * @param standaloneEntries - Pages with no translations, listed without
- * alternates.
- * @returns A complete `sitemap.xml` document.
- */
-export function buildSitemapXml(
-  entries: readonly SitemapEntry[],
-  alternates: readonly { hreflang: string; href: string }[],
-  standaloneEntries: readonly SitemapEntry[],
-): string {
-  const links = alternates
+function alternateLines(alternates: SitemapEntry['alternates']): string {
+  return (alternates ?? [])
     .map(
       ({ hreflang, href }) =>
-        `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${href}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${href}"/>\n`,
     )
-    .join('\n')
-  const urls = entries
+    .join('')
+}
+
+/**
+ * The XML sitemap listing every page with its `xhtml:link` alternates.
+ * @param entries - Pages with their change dates and alternates.
+ * @returns A complete `sitemap.xml` document.
+ */
+export function buildSitemapXml(entries: readonly SitemapEntry[]): string {
+  const allUrls = entries
     .map(
-      ({ loc, lastmod }) =>
-        `  <url>\n    <loc>${loc}</loc>\n${lastmodLine(lastmod)}${links}\n  </url>`,
+      ({ loc, lastmod, alternates }) =>
+        `  <url>\n    <loc>${loc}</loc>\n${lastmodLine(lastmod)}${alternateLines(alternates)}  </url>`,
     )
     .join('\n')
-  const standaloneUrls = standaloneEntries.map(
-    ({ loc, lastmod }) =>
-      `  <url>\n    <loc>${loc}</loc>\n${lastmodLine(lastmod)}  </url>`,
-  )
-  const allUrls = [urls, ...standaloneUrls].join('\n')
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${allUrls}

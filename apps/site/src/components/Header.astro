@@ -14,13 +14,14 @@ import HeaderMenus from './HeaderMenus'
 interface Props {
   locale: Locale
   markCurrent?: boolean
+  pageHref?: (locale: Locale) => string
 }
 
-const { locale, markCurrent = true } = Astro.props
+const { locale, markCurrent = true, pageHref = localePath } = Astro.props
 const { header } = getClosingCopy(locale)
 const options = LOCALES.map((code) => ({
   code,
-  href: localePath(code),
+  href: pageHref(code),
   tag: languageTag(code),
   name: LOCALE_NAMES[code],
 }))

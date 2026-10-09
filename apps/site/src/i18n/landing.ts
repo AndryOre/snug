@@ -1,6 +1,7 @@
 import { STORE_FACTS } from '../seo/store-facts'
 import { getContent, type SiteContent } from './content'
 import { languageTag, type Locale } from './locales'
+import { privacyPath } from './privacy'
 import { formatRatingsSentence } from './proof'
 
 /**
@@ -114,8 +115,21 @@ export const TRUST_LINK_HREFS = {
   scorecard: 'https://scorecard.dev/viewer/?uri=github.com/AndryOre/snug',
   bestPractices: 'https://www.bestpractices.dev/projects/15093',
   ci: 'https://github.com/AndryOre/snug/actions/workflows/ci.yml',
-  privacy: '/privacy/',
+  privacy: privacyPath,
 } as const
+
+/**
+ * Resolves a link target that may depend on the locale.
+ * @param href - A fixed URL, or a function of the locale.
+ * @param locale - The page's locale.
+ * @returns The URL for that locale.
+ */
+export function resolveHref(
+  href: string | ((locale: Locale) => string),
+  locale: Locale,
+): string {
+  return typeof href === 'function' ? href(locale) : href
+}
 
 /**
  * Placements that tag an install button for the counted redirect.
