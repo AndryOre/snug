@@ -50,6 +50,29 @@ An index of every document in this repository.
   ADR 0010.
 - [`docs/adr/0010-bun-workspaces-monorepo.md`](adr/0010-bun-workspaces-monorepo.md)
   — the ADR documenting the bun workspaces and Turborepo monorepo.
+- [`docs/adr/0011-landing-static-site-no-third-party-scripts.md`](adr/0011-landing-static-site-no-third-party-scripts.md)
+  — the ADR documenting the static landing site with no third-party scripts.
+- [`docs/adr/0012-dotenvx-encrypted-deploy-secrets.md`](adr/0012-dotenvx-encrypted-deploy-secrets.md)
+  — the ADR documenting dotenvx-encrypted deploy secrets.
+- [`docs/adr/0013-landing-islands-for-faq-and-language-switcher.md`](adr/0013-landing-islands-for-faq-and-language-switcher.md)
+  — the ADR documenting the landing islands for the FAQ and language switcher.
+- [`docs/adr/0014-landing-theme-follows-system-with-stored-override.md`](adr/0014-landing-theme-follows-system-with-stored-override.md)
+  — the ADR documenting the landing theme that follows the system with a stored
+  override.
+- [`docs/adr/0015-edge-add-ons-publishing.md`](adr/0015-edge-add-ons-publishing.md)
+  — the ADR documenting publishing to Microsoft Edge Add-ons.
+- [`docs/adr/0016-keep-five-safety-snapshots.md`](adr/0016-keep-five-safety-snapshots.md)
+  — the ADR documenting why Snug keeps the latest five Safety snapshots.
+- [`docs/adr/0017-landing-umami-cloud-cookieless-analytics.md`](adr/0017-landing-umami-cloud-cookieless-analytics.md)
+  — the ADR documenting cookieless Umami Cloud analytics on the landing page.
+- [`docs/adr/0018-translated-privacy-policy-english-prevails.md`](adr/0018-translated-privacy-policy-english-prevails.md)
+  — the ADR documenting the translated privacy policy, where English prevails.
+- [`docs/adr/0019-guide-and-release-notes-on-the-website-with-starlight.md`](adr/0019-guide-and-release-notes-on-the-website-with-starlight.md)
+  — the ADR documenting the Guide and release notes on the website with
+  Starlight.
+- [`docs/adr/0020-custom-folder-via-file-system-access.md`](adr/0020-custom-folder-via-file-system-access.md)
+  — the ADR documenting saving Auto-export to a Custom folder with the File
+  System Access API.
 
 ## How-to
 

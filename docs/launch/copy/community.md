@@ -35,16 +35,16 @@ future copy must not state the limit.
 
 ## Facts every post may use
 
-| Fact                                                                                         | Source                   |
-| -------------------------------------------------------------------------------------------- | ------------------------ |
-| Free, open source (MIT), no account, no ads, no data collection, zero network calls          | product-marketing.md     |
-| Six export formats: HTML, JSON, CSV, Markdown, OPML, XBEL; Markdown and OPML are export-only | product-marketing, usage |
-| Whole tree or chosen folders; import preview; merge, replace or new folder; undo for replace | product-marketing.md     |
-| Safety snapshot before a replace; Duplicates page; Skip duplicates on import                 | product-marketing.md     |
-| Scheduled Auto-export to Downloads with Retention and a failure notification                 | product-marketing.md     |
-| Works in Chrome and other Chromium browsers; 10 languages                                    | product-marketing.md     |
-| 5,000 users and 4.8 stars over 20 ratings on the public listing (read 2026-10-05)            | product-marketing.md     |
-| Imports several files at once as one Import batch; no sync, no cloud                         | product-marketing.md     |
+| Fact                                                                                            | Source                   |
+| ----------------------------------------------------------------------------------------------- | ------------------------ |
+| Free, open source (MIT), no account, no ads, no data collection, zero network calls             | product-marketing.md     |
+| Six export formats: HTML, JSON, CSV, Markdown, OPML, XBEL; Markdown and OPML are export-only    | product-marketing, usage |
+| Whole tree or chosen folders; import preview; merge, replace or new folder; undo for replace    | product-marketing.md     |
+| Safety snapshot before a replace; Duplicates page; Skip duplicates on import                    | product-marketing.md     |
+| Scheduled Auto-export to Downloads or a chosen folder with Retention and a failure notification | product-marketing.md     |
+| Works in Chrome and other Chromium browsers; 10 languages                                       | product-marketing.md     |
+| 5,000 users and 4.8 stars over 20 ratings on the public listing (read 2026-10-05)               | product-marketing.md     |
+| Imports several files at once as one Import batch; no sync, no cloud                            | product-marketing.md     |
 
 Re-check the user and rating numbers on the live listing on launch day. They
 move.
@@ -95,7 +95,7 @@ Export, import and back up your bookmarks on your device
 ### Description (253 of 260)
 
 ```text
-Snug moves your bookmarks between browsers exactly as you left them. Export the whole tree or chosen folders in six formats, preview every import, undo a replace, and schedule backups to Downloads. Free, open source, and everything stays on your device.
+Snug moves your bookmarks between browsers exactly as you left them. Export the whole tree or chosen folders in six formats, preview every import, undo a replace, and schedule backups to Downloads or a folder you choose. Free, open source, and everything stays on your device.
 ```
 
 ### Topics (3)
@@ -116,7 +116,7 @@ Hi Product Hunt. I'm the maker of Snug, a Chrome extension for moving and backin
 
 Snug moves your bookmarks between browsers exactly as you left them. You can export the whole tree or only the folders you pick, in six formats: HTML, JSON, CSV, Markdown, OPML and XBEL. Import takes several files at once, picked or dropped onto the toolbar popup. Snug shows them as a tree preview, you choose exactly what to bring in, and everything lands as one Import batch. With a single file you can merge, replace, or add to a new folder, and a replace saves a Safety snapshot so you can undo it.
 
-It also finds duplicates, and Auto-export writes scheduled backups to your Downloads folder, keeps only the newest files, and notifies you if one fails.
+It also finds duplicates, and Auto-export writes scheduled backups to Downloads or a folder you choose, keeps only the newest files, and notifies you if one fails.
 
 Everything runs on your device. Snug makes no network calls, needs no account, and the source is public under the MIT license. It works in Chrome and other Chromium browsers, in 10 languages.
 
@@ -138,7 +138,7 @@ were regenerated on 2026-10-08 for 2.1.0.
 | ------------------------------------ | -------------------------------------------------------------------------- |
 | `producthunt-gallery-1-1270x760.png` | Export exactly what you choose: one folder or everything, in six formats   |
 | `producthunt-gallery-2-1270x760.png` | Preview every import as a tree and choose exactly what to bring in         |
-| `producthunt-gallery-3-1270x760.png` | Scheduled backups, hourly to weekly, straight to your Downloads folder     |
+| `producthunt-gallery-3-1270x760.png` | Scheduled backups, hourly to weekly, to Downloads or a folder you choose   |
 | `producthunt-gallery-4-1270x760.png` | Export in one click, or drop files onto the toolbar popup to import        |
 | `producthunt-gallery-5-1270x760.png` | Everything stays on your device: no account, no network calls, open source |
 
@@ -172,7 +172,7 @@ What it does: export the whole bookmark tree or selected folders as HTML, JSON, 
 
 Everything reads and writes the browser's own bookmarks tree on the device. The extension makes no network calls and has no account, so the privacy claim can be checked in the source instead of taken from a policy. MIT licensed: https://github.com/AndryOre/snug
 
-Limits: Markdown and OPML are export-only, and there is no sync. Auto-export writes to Downloads, because the downloads API can only write inside that folder.
+Limits: Markdown and OPML are export-only, and there is no sync. Auto-export saves to Downloads through the downloads API, or to a folder you choose through the File System Access API, which asks you to confirm access once after the browser restarts.
 
 Install: https://snug.andryore.dev/install?c=hn
 
@@ -222,7 +222,7 @@ What it does:
 - Exports the whole bookmark tree or only the folders you pick, as HTML, JSON, CSV, Markdown, OPML or XBEL.
 - Imports with a preview first. You choose merge, replace, or a new folder, and a replace saves a Safety snapshot you can undo.
 - Finds duplicates, and can skip them on import.
-- Auto-export saves scheduled backups to your Downloads folder, keeps the newest N files, and notifies you if one fails.
+- Auto-export saves scheduled backups to Downloads or a folder you choose, keeps the newest N files, and notifies you if one fails.
 
 It runs on your device, makes no network calls and needs no account. It is open source (MIT): https://github.com/AndryOre/snug
 
@@ -260,7 +260,7 @@ Body:
 ```text
 I maintain Snug. Source and license: https://github.com/AndryOre/snug (MIT).
 
-It exports bookmarks (whole tree or chosen folders) as HTML, JSON, CSV, Markdown, OPML or XBEL, and imports with a preview before anything changes. Merge, replace, or add to a new folder; a replace saves a Safety snapshot so it can be undone. It also finds duplicates and runs scheduled exports to the Downloads folder.
+It exports bookmarks (whole tree or chosen folders) as HTML, JSON, CSV, Markdown, OPML or XBEL, and imports with a preview before anything changes. Merge, replace, or add to a new folder; a replace saves a Safety snapshot so it can be undone. It also finds duplicates and runs scheduled exports to Downloads or a folder you choose.
 
 Everything reads and writes the browser's own bookmarks tree. The extension has no account, no server and no network calls, which is why I kept it open: that claim can be checked in the code. The repository runs CodeQL and OpenSSF Scorecard.
 
@@ -293,7 +293,7 @@ Body:
 ```text
 I built Snug, a free Chrome extension for moving and backing up bookmarks.
 
-It exports the whole tree or chosen folders in six formats, previews every import, and lets you undo a replace from a Safety snapshot. Auto-export saves scheduled backups to your Downloads folder. Everything stays on your device: no account, no network calls, open source under MIT.
+It exports the whole tree or chosen folders in six formats, previews every import, and lets you undo a replace from a Safety snapshot. Auto-export saves scheduled backups to Downloads or a folder you choose. Everything stays on your device: no account, no network calls, open source under MIT.
 
 It does not sync. That was a choice about scope, and I am still deciding what to add next.
 
@@ -344,7 +344,7 @@ Import shows a preview first. Then merge, replace, or add everything to a new fo
 Post 4:
 
 ```text
-Auto-export writes scheduled backups to your Downloads folder, keeps the newest files, and notifies you if one fails.
+Auto-export writes scheduled backups to Downloads or a folder you choose, keeps the newest files, and notifies you if one fails.
 ```
 
 Post 5:
@@ -382,7 +382,7 @@ Al importar ves una vista previa primero. Luego combinas, reemplazas o agregas t
 Post 4:
 
 ```text
-La exportación automática guarda respaldos programados en tu carpeta de Descargas, conserva los archivos más recientes y te avisa si alguno falla.
+La exportación automática guarda respaldos programados en Descargas o en una carpeta que elijas, conserva los archivos más recientes y te avisa si alguno falla.
 ```
 
 Post 5:
@@ -404,7 +404,7 @@ Tag: `youtube`. Both pieces below carry tagged links.
 ```text
 Bookmark Import/Export is now Snug, version 2.0. Same extension, new name and a rebuilt interface.
 
-Export your whole bookmark tree or only the folders you pick, preview every import before it changes anything, and undo a replace. Scheduled backups go to your Downloads folder. Everything stays on your device, with no account and no network calls.
+Export your whole bookmark tree or only the folders you pick, preview every import before it changes anything, and undo a replace. Scheduled backups go to Downloads or a folder you choose. Everything stays on your device, with no account and no network calls.
 
 Chrome Web Store: https://snug.andryore.dev/install?c=youtube
 More: https://snug.andryore.dev/?c=youtube
@@ -422,7 +422,7 @@ What it does:
 - Exports the whole bookmark tree or chosen folders as HTML, JSON, CSV, Markdown, OPML or XBEL.
 - Imports with a preview first: merge, replace, or add to a new folder. A replace saves a Safety snapshot you can undo.
 - Finds duplicates and can skip them on import.
-- Auto-export saves scheduled backups to your Downloads folder and notifies you if one fails.
+- Auto-export saves scheduled backups to Downloads or a folder you choose and notifies you if one fails.
 
 Everything runs on your device. Snug has no account and makes no network calls. It is open source under the MIT license: https://github.com/AndryOre/snug
 

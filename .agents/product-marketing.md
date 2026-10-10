@@ -15,7 +15,8 @@ device.
 them. Export the whole tree or only chosen folders in six formats (HTML, JSON,
 CSV, Markdown, OPML, XBEL). Import with a preview first, then merge, replace, or
 add everything to a new folder, and undo a replace from a Safety snapshot. It
-also finds duplicates and runs scheduled Auto-export to the Downloads folder.
+also finds duplicates and runs scheduled Auto-export to Downloads or a folder
+you choose.
 
 **Product category:** Browser bookmark export/import and backup extension
 (Chrome Web Store, Chromium browsers).
@@ -48,7 +49,7 @@ and without trusting a third party with it.
 **Use cases:**
 
 - Switching between Chrome, Edge, Brave, Opera, or from Safari.
-- Scheduled weekly backup to Downloads.
+- Scheduled weekly backup to Downloads or a folder you choose.
 - Cleaning duplicates before or after an import.
 - Exporting to Markdown, OPML, or CSV for notes apps and spreadsheets.
 
@@ -195,7 +196,7 @@ emoji in copy.
 
 | Term             | Meaning                                                                                                             |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Auto-export      | Scheduled export to the Downloads folder                                                                            |
+| Auto-export      | Scheduled export to Downloads or a folder you choose                                                                |
 | Safety snapshot  | Automatic copy saved before a replace so it can be restored; the latest five are kept, and you can take one anytime |
 | Import selection | The bookmarks and folders you check in the preview to import only those                                             |
 | Import batch     | Several files imported together as one operation; Cancel restores the previous bookmarks                            |

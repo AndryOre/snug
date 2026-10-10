@@ -47,8 +47,8 @@ Snug is a Chrome extension that moves your bookmarks between browsers exactly as
 you left them. Export the whole tree or only chosen folders in HTML, JSON, CSV,
 Markdown, OPML or XBEL. Import shows a preview first, then merges, replaces, or
 adds everything to a new folder. A replace saves a Safety snapshot, so you can
-undo it. Auto-export writes scheduled backups to your Downloads folder. Snug
-works in Chromium browsers and makes no network calls.
+undo it. Auto-export writes scheduled backups to Downloads or a folder you
+choose. Snug works in Chromium browsers and makes no network calls.
 
 **Feature bullets**
 
@@ -94,8 +94,8 @@ Selective Bookmarks and 101 Export History/Bookmarks. Where those export one
 format, Snug exports HTML, JSON, CSV, Markdown, OPML and XBEL, for the whole
 tree or chosen folders. It previews every import, offers merge, replace or new
 folder, and keeps a Safety snapshot so a replace can be undone. Auto-export
-covers scheduled backups to Downloads. Everything runs on your device, with no
-account.
+covers scheduled backups to Downloads or a folder you choose. Everything runs on
+your device, with no account.
 
 **Feature bullets**
 
@@ -185,8 +185,8 @@ extension feels riskier than it should. Snug reads and writes the browser
 bookmarks tree on your device and makes no network calls, so there is no server
 to trust. It needs no account and collects no data. You can export everything or
 one folder, import with a preview, undo a replace from a Safety snapshot, and
-schedule backups to your Downloads folder. The source is public, with CodeQL and
-an OpenSSF Scorecard.
+schedule backups to Downloads or a folder you choose. The source is public, with
+CodeQL and an OpenSSF Scorecard.
 
 **Feature bullets**
 
@@ -195,7 +195,7 @@ an OpenSSF Scorecard.
 - Source is public; the privacy claim is verifiable
 - Export one folder without exposing your whole library
 - Preview before import; replace never happens silently
-- Backups stay in your Downloads folder
+- Backups stay in Downloads or a folder you choose
 
 **Tags:** privacy, local-only, no tracking, open source, bookmarks, backup,
 Chrome extension
@@ -229,8 +229,8 @@ tal como los dejaste. Exporta todo el árbol o solo las carpetas que elijas en
 HTML, JSON, CSV, Markdown, OPML o XBEL. Al importar ves una vista previa y
 decides si combinar, reemplazar o añadir todo a una carpeta nueva. Si
 reemplazas, Snug guarda una copia de seguridad para que puedas deshacerlo. La
-exportación automática guarda copias programadas en Descargas. No hace llamadas
-de red ni pide cuenta.
+exportación automática guarda copias programadas en Descargas o en una carpeta
+que elijas. No hace llamadas de red ni pide cuenta.
 
 **Feature bullets**
 

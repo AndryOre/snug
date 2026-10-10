@@ -60,8 +60,8 @@ bookmark tree, so trust is the main question they bring.
   saves a Safety snapshot first. Snug keeps the latest five on your device, and
   you can restore or download any of them, or take one at any time.
 - Duplicates page, and Skip duplicates on import.
-- Scheduled Auto-export to the Downloads folder, with Retention and an optional
-  failure notification.
+- Scheduled Auto-export to Downloads or a Custom folder, with Retention and an
+  optional failure notification.
 - No sync, no cloud, no account, no pricing, no signup. Nothing may imply any of
   these.
 - Interface in 10 languages; follows the browser theme and language.

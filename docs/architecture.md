@@ -10,15 +10,16 @@ links rot and names mostly don't.
 This is a Chrome MV3 extension for importing and exporting bookmarks in many
 formats (HTML, JSON, CSV, Markdown, OPML and XBEL out; HTML, JSON, CSV, XBEL, a
 Chrome profile `Bookmarks` file and Safari exports in), plus a scheduled
-auto-export to the downloads folder. The extension has no backend and no network
-calls: every operation reads and writes the browser's own bookmarks tree through
-`chrome.bookmarks`, and files are parsed or generated entirely client-side. The
-UI is React, in two surfaces: a compact toolbar popup, and one hash-routed
-full-page App (`app.html`) holding every larger screen. They are separate
-entrypoints with no shared React tree; the popup links into the App for anything
-that needs more room. See [`docs/security.md`](security.md) for the assurance
-case behind the no-network/local-only claim above, the manifest permissions, and
-the threat model.
+auto-export to the downloads folder or a folder the user picks. The extension
+has no backend and no network calls: every operation reads and writes the
+browser's own bookmarks tree through `chrome.bookmarks`, and files are parsed or
+generated entirely client-side. The UI is React, in two surfaces: a compact
+toolbar popup, and one hash-routed full-page App (`app.html`) holding every
+larger screen. They are separate entrypoints with no shared React tree; the
+popup links into the App for anything that needs more room. See
+[`docs/security.md`](security.md) for the assurance case behind the
+no-network/local-only claim above, the manifest permissions, and the threat
+model.
 
 ## Code map
 
@@ -206,14 +207,31 @@ relative to `apps/extension/` unless it starts with `packages/`.
   optional `iconData` export column/field.
 - **`auto-export-retention.ts`** and **`auto-export-notification.ts`** — the
   steps `runAutoExport` runs after an outcome: Retention, and the Failure
-  notification. See Data flows.
+  notification. Retention records what Snug saved (`recordSavedDownload` for
+  Downloads, `recordSavedFolderFile` for a Custom folder) and later deletes only
+  those files, across both Export destinations. See Data flows.
+- **`custom-folder-writer.ts`** — `writeToCustomFolder`: descends the sanitized
+  subfolder path (creating missing segments), picks a free name with a ` (n)`
+  suffix so it never overwrites, and writes through a writable stream.
+- **`folder-handle.ts`** — keeps the Custom folder's `FileSystemDirectoryHandle`
+  in IndexedDB (a handle is not serializable to extension storage), queries and
+  requests Folder access, and wraps `showDirectoryPicker`.
+- **`folder-access-startup.ts`** — `checkFolderAccessAtStartup`: on browser
+  start, warns (Failure notification and badge) when a Custom folder's Folder
+  access is not `granted`.
+- **`folder-access-recovery.ts`** — the Auto-export page's Allow access flow:
+  resolves the recovery alert state and requests Folder access inside the user
+  gesture.
+- **`folder-run-identity.ts`** — gives each Custom folder an identity id
+  (handles in IndexedDB, matched with `isSameEntry`) so Retention can tell
+  whether a recorded run was saved in the folder that is current now.
 - **`auto-export.ts`** — owns the alarm lifecycle (`syncAlarm`, which keeps a
   single one-shot `browser.alarms` alarm — not `periodInMinutes`, which drifts
   across DST — armed at the next due time; `computeNextRun`, the pure function
   behind that due time) and the run itself (`runAutoExport`, which calls the
-  three exporters, hands each result to `browser.downloads.download`, records
-  the outcome, and reschedules). See Data flows for the full next-run-store/
-  catch-up/badge model.
+  three exporters, saves each result to Downloads (`browser.downloads.download`)
+  or the Custom folder, records the outcome, and reschedules). See Data flows
+  for the full next-run-store/ catch-up/badge model.
 - **`storage.ts`** — every persisted setting and its default, as
   `storage.defineItem` calls from `wxt`'s storage wrapper.
 - **`use-storage-item.ts`** — a React hook that subscribes an exported store to
@@ -395,16 +413,22 @@ alarm, so a run always reschedules even if it failed. On a failed
 `scheduled`/`catch-up` run it also sets a toolbar failure badge
 (`chrome.action.setBadgeText('!')` plus a destructive-colored background); the
 next run that succeeds, on any trigger, clears it. After a successful run,
-Retention (`applyRetention`) keeps only the files of the newest `keepLast` runs:
-every download Snug saves has its id recorded, grouped per run, in
-`autoExportDownloadIdsStore`, and the ids of runs beyond the limit are checked
-to still be Snug's own (`byExtensionId`) before `downloads.removeFile` and
-`downloads.erase` run. A missing file is skipped, `0` keeps everything, and a
-failed run deletes nothing. On any failed run, manual included,
-`notifyAutoExportFailure` shows the Failure notification (fixed id, so repeats
-replace it) unless the user turned it off; the background's
-`notifications.onClicked` listener opens the Auto-export page. The interval can
-be hourly, 12 hours, daily, 3 days or weekly (`7d`, on `dayOfWeek`).
+Retention (`applyRetention`) keeps only the files of the newest `keepLast` runs,
+counted across both Export destinations: every download Snug saves has its id
+recorded, grouped per run, in `autoExportDownloadIdsStore`, and the ids of runs
+beyond the limit are checked to still be Snug's own (`byExtensionId`) before
+`downloads.removeFile` and `downloads.erase` run. Files written to a Custom
+folder are recorded by path (`recordSavedFolderFile`) with the folder's identity
+id from `registerFolderIdentity`, and are removed with `removeEntry` on the
+folder handle, only when `isCurrentFolder` confirms that folder is still the
+current one and Folder access is `granted`. Runs from another folder are dropped
+from the history without deleting anything, and runs without access stay for the
+next run. A missing file is skipped, `0` keeps everything, and a failed run
+deletes nothing. On any failed run, manual included, `notifyAutoExportFailure`
+shows the Failure notification (fixed id, so repeats replace it) unless the user
+turned it off; the background's `notifications.onClicked` listener opens the
+Auto-export page. The interval can be hourly, 12 hours, daily, 3 days or weekly
+(`7d`, on `dayOfWeek`).
 
 **Custom folder** (background service worker): with the `folder` Export
 destination, `runAutoExport` does not download. `requireGrantedFolder` loads the

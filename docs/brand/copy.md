@@ -42,8 +42,8 @@ README/docs already pair with "automatic" for this exact feature.)_
 > bookmarks, replace them outright, or drop everything into a new folder — your
 > call every time.
 >
-> Set up a schedule once and Snug backs up your bookmarks straight to your
-> Downloads folder on its own, in the formats and at the interval you pick.
+> Set up a schedule once and Snug backs up your bookmarks on its own, to
+> Downloads or a folder you choose, in the formats and at the interval you pick.
 > Filenames can include the date and time automatically, so nothing gets
 > overwritten or confused with the last one.
 >
@@ -62,10 +62,10 @@ README/docs already pair with "automatic" for this exact feature.)_
 > combinarlos con tus marcadores actuales, reemplazarlos por completo, o
 > guardarlo todo en una carpeta nueva — tú decides cada vez.
 >
-> Configura un horario una sola vez y Snug respalda tus marcadores directo a tu
-> carpeta de Descargas, en los formatos y con la frecuencia que elijas. Los
-> nombres de archivo pueden incluir la fecha y hora automáticamente, así nunca
-> se confunden ni se sobrescriben entre sí.
+> Configura un horario una sola vez y Snug respalda tus marcadores por su
+> cuenta, en Descargas o en una carpeta que elijas, en los formatos y con la
+> frecuencia que elijas. Los nombres de archivo pueden incluir la fecha y hora
+> automáticamente, así nunca se confunden ni se sobrescriben entre sí.
 >
 > Snug funciona completamente en tu dispositivo — sin cuenta, sin nube, sin
 > servidor. Cada operación lee y escribe directamente en los marcadores de tu
@@ -99,7 +99,7 @@ README/docs already pair with "automatic" for this exact feature.)_
 > exactly as you left them. Export your whole tree or just a folder, as HTML,
 > JSON, or CSV. Import back with a preview, then merge, replace, or drop
 > everything into a new folder. Set a schedule once and Snug backs your
-> bookmarks up to your Downloads folder on its own.
+> bookmarks up to Downloads or a folder you choose on its own.
 >
 > Snug makes no network calls. Every operation reads and writes your browser's
 > own bookmarks tree, locally — no account, no cloud, no server to trust. See
@@ -139,9 +139,9 @@ instruction — two corrections came out of that check, now also fixed upstream 
    HTML, JSON, _and_ CSV, for both export and import.
 2. **Scheduled automatic backups already exist.** The brief's naming discussion
    (`naming.md`'s Archiva round) treated "grows into backups later" as a
-   future-only consideration — backups to the Downloads folder, on a schedule,
-   already ship today. This copy names it directly as a current feature, not a
-   roadmap item.
+   future-only consideration — backups to Downloads or a chosen folder, on a
+   schedule, already ship today. This copy names it directly as a current
+   feature, not a roadmap item.
 3. **The "no date-stamped filename" pain was stale.** It was true of old CWS
    reviews, not the current product — customizable filename templates with
    date/time placeholders already shipped (`CHANGELOG.md`: "Added customizable

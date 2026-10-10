@@ -19,5 +19,5 @@ them keep working.
   bookmarks.
 - [Settings](guide/settings.md) — theme, display preferences, and the default
   import mode.
-- [Auto-export](guide/auto-export.md) — scheduled exports, retention, and
-  failure notifications.
+- [Auto-export](guide/auto-export.md) — scheduled exports to Downloads or a
+  Custom folder, retention, and failure notifications.
