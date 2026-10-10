@@ -97,6 +97,13 @@ export type AutoExportInterval = '1h' | '12h' | '1d' | '3d' | '7d'
  */
 export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
 
+/**
+ * Where an Auto-export run saves its files: the browser's `downloads` folder,
+ * or the user-chosen Custom `folder` written through a stored directory
+ * handle.
+ */
+type ExportDestination = 'downloads' | 'folder'
+
 export interface AutoExportConfig {
   enabled: boolean
   interval: AutoExportInterval
@@ -115,6 +122,16 @@ export interface AutoExportConfig {
    * `0` keeps everything. See `applyRetention` in `lib/auto-export-retention.ts`.
    */
   keepLast: number
+  /**
+   * The Export destination. `downloads` is the default and the only value
+   * for configs stored before the Custom folder existed.
+   */
+  destination: ExportDestination
+  /**
+   * Display name of the Custom folder (the handle's `name`), shown in the
+   * Failure reason; `null` while none was ever chosen.
+   */
+  folderName: string | null
 }
 
 /**

@@ -11,6 +11,8 @@ const enabledConfig: AutoExportConfig = {
   path: 'bookmarks-backup/',
   formats: ['html'],
   keepLast: 10,
+  destination: 'downloads',
+  folderName: null,
 }
 
 const failedRun: AutoExportLastRun = {
