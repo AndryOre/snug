@@ -12,7 +12,7 @@ for (const guidePath of GUIDE_PATHS) {
     expect(response?.status()).toBe(200)
     await expect(page.locator('[data-section="header"]')).toHaveCount(1)
     await expect(page.locator('[data-section="footer"]')).toHaveCount(1)
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Guide')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Usage')
   })
 }
 
