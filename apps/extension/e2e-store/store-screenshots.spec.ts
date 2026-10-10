@@ -254,6 +254,7 @@ test('composes the five store screenshots', async ({
       destination: 'folder',
       folderName: 'Bookmarks backups',
     },
+    autoExportConfig$: { v: 4 },
     autoExportNextRun: Date.now() + 8 * hourInMilliseconds,
     autoExportLastRun: {
       at: Date.now() - 16 * hourInMilliseconds,
