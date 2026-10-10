@@ -125,31 +125,55 @@ export const autoExportLastRunStore = storage.defineItem<
 >('local:autoExportLastRun', { fallback: null })
 
 /**
- * The downloads one auto-export run saved: every id of a run is grouped so
- * retention counts runs, not files.
+ * The Downloads files one auto-export run saved: every id of a run is grouped
+ * so retention counts runs, not files.
  */
-export interface AutoExportDownloadRun {
+export interface AutoExportDownloadsRun {
+  destination: 'downloads'
   runAt: number
   ids: number[]
 }
 
 /**
- * Downloads Snug itself saved for auto-export, grouped per run, oldest run
- * first. Persisted so retention still knows which files are Snug's own after
- * the service worker restarts. Version 1 was a flat id list; each legacy id
- * migrates to its own run, so retention deletes exactly what it did before.
- * See `lib/auto-export-retention.ts`.
+ * The Custom folder files one auto-export run saved. `paths` are relative to
+ * the folder's root; `folderId` names the folder's identity in
+ * `lib/folder-run-identity.ts`, so retention can tell whether the run lives in
+ * the folder that is current now.
  */
-export const autoExportDownloadIdsStore = storage.defineItem<
-  AutoExportDownloadRun[]
->('local:autoExportDownloadIds', {
-  fallback: [],
-  version: 2,
-  migrations: {
-    2: (legacyIds: number[]): AutoExportDownloadRun[] =>
-      legacyIds.map((id) => ({ runAt: 0, ids: [id] })),
+export interface AutoExportFolderRun {
+  destination: 'folder'
+  runAt: number
+  folderId: string
+  paths: string[]
+}
+
+/**
+ * One auto-export run in the retention history, tagged by Export destination.
+ */
+export type AutoExportRun = AutoExportDownloadsRun | AutoExportFolderRun
+
+/**
+ * Runs Snug itself saved for auto-export in either Export destination, oldest
+ * run first. Persisted so retention still knows which files are Snug's own
+ * after the service worker restarts. Version 1 was a flat id list, each legacy
+ * id migrating to its own run; version 2 grouped ids per run; version 3 tags
+ * every run with its destination, so each existing group becomes a Downloads
+ * run. The key predates Custom folder runs and is kept for that migration. See
+ * `lib/auto-export-retention.ts`.
+ */
+export const autoExportRunsStore = storage.defineItem<AutoExportRun[]>(
+  'local:autoExportDownloadIds',
+  {
+    fallback: [],
+    version: 3,
+    migrations: {
+      2: (legacyIds: number[]): { runAt: number; ids: number[] }[] =>
+        legacyIds.map((id) => ({ runAt: 0, ids: [id] })),
+      3: (runs: { runAt: number; ids: number[] }[]): AutoExportDownloadsRun[] =>
+        runs.map((run) => ({ destination: 'downloads', ...run })),
+    },
   },
-})
+)
 
 /**
  * The authoritative next due time for auto-export, in epoch milliseconds.
