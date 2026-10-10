@@ -1396,6 +1396,18 @@
   "changelog_2_1_0_1": {
     "message": "La importación mejoró mucho: elige o suelta varios archivos a la vez, previsualízalos como un árbol y decide exactamente qué traer. El popup de la barra de herramientas también acepta archivos soltados."
   },
+  "changelog_2_2_0_1": {
+    "message": "Auto-exportar ahora puede guardar en una Carpeta personalizada que elijas, en cualquier lugar de tu computadora."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Leer la guía de Auto-exportar"
+  },
+  "changelog_2_2_0_2": {
+    "message": "Snug ahora te avisa con anticipación cuando se necesita acceso a la carpeta, y la página de Auto-exportar tiene un botón Permitir acceso para concederlo de nuevo."
+  },
+  "changelog_2_2_0_3": {
+    "message": "Retención conserva solo las ejecuciones más recientes, contadas entre Descargas y la Carpeta personalizada."
+  },
   "reviewPrompt_title": {
     "message": "¿Snug te funciona bien?",
     "description": "Popup Review prompt card title (also its accessible name)"

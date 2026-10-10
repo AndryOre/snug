@@ -1408,6 +1408,18 @@
   "changelog_2_1_0_1": {
     "message": "A importação evoluiu bastante: escolha ou solte vários arquivos de uma vez, veja uma prévia em árvore e decida exatamente o que trazer. O pop-up da barra de ferramentas também aceita arquivos soltos."
   },
+  "changelog_2_2_0_1": {
+    "message": "A exportação automática agora pode salvar em uma Pasta personalizada que você escolher, em qualquer lugar do computador."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Ler o guia da Exportação automática"
+  },
+  "changelog_2_2_0_2": {
+    "message": "O Snug agora avisa com antecedência quando o acesso à pasta é necessário, e a página de Exportação automática tem um botão Permitir acesso para concedê-lo de novo."
+  },
+  "changelog_2_2_0_3": {
+    "message": "A Retenção mantém só as execuções mais recentes, contadas entre Downloads e a Pasta personalizada."
+  },
   "reviewPrompt_title": {
     "message": "O Snug está funcionando para você?",
     "description": "Popup Review prompt card title (also its accessible name)"

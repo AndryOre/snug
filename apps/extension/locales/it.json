@@ -1396,6 +1396,18 @@
   "changelog_2_1_0_1": {
     "message": "L'importazione è molto migliorata: scegli o trascina più file insieme, guardali in anteprima come albero e decidi esattamente cosa importare. Anche il popup della barra degli strumenti accetta i file trascinati."
   },
+  "changelog_2_2_0_1": {
+    "message": "L'esportazione automatica ora può salvare in una Cartella personalizzata a tua scelta, ovunque sul computer."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Leggi la guida all'Esportazione automatica"
+  },
+  "changelog_2_2_0_2": {
+    "message": "Snug ora ti avvisa in anticipo quando serve l'accesso alla cartella, e la pagina Esportazione automatica ha un pulsante Consenti accesso per concederlo di nuovo."
+  },
+  "changelog_2_2_0_3": {
+    "message": "La Conservazione tiene solo le esecuzioni più recenti, contate tra Download e la Cartella personalizzata."
+  },
   "reviewPrompt_title": {
     "message": "Snug ti sta funzionando?",
     "description": "Popup Review prompt card title (also its accessible name)"

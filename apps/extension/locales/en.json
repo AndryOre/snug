@@ -1395,6 +1395,18 @@
   "changelog_2_1_0_1": {
     "message": "Import got a big upgrade: pick or drop several files at once, preview them as a tree and choose exactly what to bring in. The toolbar popup accepts dropped files too."
   },
+  "changelog_2_2_0_1": {
+    "message": "Auto-export can now save to a Custom folder you choose, anywhere on your computer."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Read the Auto-export guide"
+  },
+  "changelog_2_2_0_2": {
+    "message": "Snug now warns you early when Folder access is needed, and the Auto-export page has an Allow access button to grant it again."
+  },
+  "changelog_2_2_0_3": {
+    "message": "Retention keeps only the newest runs, counted across Downloads and the Custom folder."
+  },
   "reviewPrompt_title": {
     "message": "Is Snug working for you?",
     "description": "Popup Review prompt card title (also its accessible name)"

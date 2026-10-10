@@ -1,7 +1,7 @@
 import type { GeneratedI18nStructure } from '#i18n'
 
 import { APP_ROUTES, getAppUrl } from './app-url'
-import { getSiteUrl } from './brand'
+import { getSiteGuideUrl, getSiteUrl } from './brand'
 
 /**
  * Every changelog key is rendered as plain, argument-less text, so this
@@ -66,6 +66,19 @@ export function getChangelog(): ChangelogEntry[] {
   const duplicatesUrl = getAppUrl(APP_ROUTES.duplicates)
 
   return [
+    {
+      version: '2.2.0',
+      isoDate: '2026-10-10',
+      items: [
+        {
+          textKey: 'changelog_2_2_0_1',
+          linkKey: 'changelog_2_2_0_1_link',
+          linkUrl: `${getSiteGuideUrl()}auto-export/`,
+        },
+        { textKey: 'changelog_2_2_0_2' },
+        { textKey: 'changelog_2_2_0_3' },
+      ],
+    },
     {
       version: '2.1.0',
       isoDate: '2026-10-08',
