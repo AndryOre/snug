@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "alternatives": {
+      "title": "书签导出扩展对比 | Snug",
+      "description": "将 Snug 与另外三款用于导出和备份 Chrome 书签的扩展，按格式、导入、定时、语言和数据披露进行对比。核对日期：{date}。"
+    },
+    "selective-bookmarks-export-tool": {
+      "title": "Snug vs Selective Bookmarks Export Tool | Snug",
+      "description": "依据当前商店页面，将 Snug 与 Selective Bookmarks Export Tool 按导出格式、导入、定时和数据披露进行对比。核对日期：{date}。"
+    },
+    "maple-backup": {
+      "title": "Snug vs Maple Backup | Snug",
+      "description": "依据当前商店页面，将 Snug 与 Maple Backup 按快照、可选的在线存储副本、语言和数据披露进行对比。核对日期：{date}。"
+    },
+    "101-export": {
+      "title": "Snug vs 101 Export History/Bookmarks | Snug",
+      "description": "依据当前商店页面，将 Snug 与 101 Export History/Bookmarks 按导出格式、历史记录导出和数据披露进行对比。核对日期：{date}。"
+    }
+  },
+  "shared": {
+    "breadcrumb": {
+      "label": "面包屑导航",
+      "home": "Snug",
+      "alternatives": "替代方案"
+    },
+    "tldr": "简而言之",
+    "atAGlance": "一览",
+    "asOf": "截至 {date}",
+    "notListed": "未列出",
+    "criteria": {
+      "exportFormats": "导出格式",
+      "import": "导入",
+      "chooseFolders": "选择要导出的文件夹",
+      "schedule": "定时导出",
+      "cloudCopies": "在线存储副本",
+      "browsers": "浏览器",
+      "languages": "语言",
+      "usersRating": "用户数与评分",
+      "dataDisclosure": "商店页面上的数据披露"
+    },
+    "compareWithSnug": "与 Snug 对比",
+    "pickSnug": "选择 Snug，如果",
+    "pickOther": "选择 {name}，如果",
+    "switching": "改用 Snug",
+    "checkedNote": "核对依据为 {date} 的各 Chrome 应用商店页面。商店页面会变化，请在决定前到商店页面确认。",
+    "ctaTitle": "用你自己的书签试试 Snug",
+    "ctaBody": "免费开源。无需账号，不发起任何网络请求。",
+    "install": "添加至 Chrome"
+  },
+  "alternatives": {
+    "eyebrow": "替代方案",
+    "title": "Chrome 书签导出扩展对比",
+    "lede": "此表把 Snug 与另外三款可导出或备份 Chrome 书签的扩展放在一起，内容仅依据各 Chrome 应用商店页面在 {date} 的说明。商店页面没有提到的项目，表中标为“未列出”。",
+    "whatToLookFor": {
+      "title": "需要留意什么",
+      "items": [
+        "导出格式。确认你需要的文件类型在列表中，以及扩展自己说明了不能导出什么。",
+        "导入。导出的文件只有能重新导入，或能被其他工具打开，才有用处。",
+        "文件夹选择。想好是需要整棵书签树，还是只要部分文件夹。",
+        "定时。想好是希望导出自动运行，还是只在你点击时运行。",
+        "副本存放在哪里。有些扩展把一切都留在设备上，有些则在登录后提供可选的在线存储副本。",
+        "数据披露。每个商店页面都有一个部分，说明开发者声明处理哪些数据。安装前请先读一遍。"
+      ]
+    },
+    "builtIn": {
+      "name": "Chrome 内置导出",
+      "summary": "Chrome 的书签管理器可以把全部书签导出为一个 HTML 文件，无需安装任何东西。如果你只需要这些，它就够用。"
+    },
+    "cards": {
+      "selective-bookmarks-export-tool": {
+        "pickWhen": "如果你也使用 Firefox，或只需要 HTML 格式，可以选它。"
+      },
+      "maple-backup": {
+        "pickWhen": "如果你想要保存到 Google Drive、OneDrive 或 Dropbox 的可选副本，或想用 {languages} 种语言之一的界面，可以选它。"
+      },
+      "101-export": {
+        "pickWhen": "如果除了书签，你还需要导出浏览历史记录，可以选它。"
+      }
+    }
+  },
+  "pages": {
+    "selective-bookmarks-export-tool": {
+      "eyebrow": "对比",
+      "title": "Snug vs Selective Bookmarks Export Tool",
+      "tldr": "Selective Bookmarks Export Tool 可把选中的书签导出为 HTML，也有 Firefox 和 Edge 版本。Snug 支持 HTML 之外的更多格式，导入时带预览，并按计划运行自动导出。截至 {date}，它的商店页面显示 {users} 位用户和 {rating} 的评分，未列出导入和定时功能。",
+      "whyLook": {
+        "title": "为什么有人想找替代方案",
+        "body": "商店页面描述的是导出为 HTML。导入和定时在 {date} 未列出。如果你需要其他文件格式，或需要自动运行的导出，这几部分就得另找工具。"
+      },
+      "pickSnug": [
+        "你需要 HTML 以外的格式，例如 JSON。",
+        "你想把文件重新导入，带预览，并可选择合并、替换或新文件夹。",
+        "你想让自动导出按计划运行，保存到下载文件夹或你选择的文件夹。",
+        "你想用“重复项”页面找出重复的书签。",
+        "你想要一款不发起网络请求、也无需账号的扩展。"
+      ],
+      "pickOther": [
+        "你也使用 Firefox，因为这款扩展在 Firefox 上也能用。",
+        "HTML 是你唯一需要的格式。",
+        "你想在导出工具本身里使用关键词筛选或深色模式。"
+      ],
+      "switching": {
+        "steps": [
+          "从 Chrome 应用商店安装 Snug。",
+          "打开 Snug，按你需要的格式导出。Snug 直接读取浏览器中已有的书签，所以无需转换。",
+          "如果你有之前导出的 HTML 文件，选择“导入”并选取该文件。",
+          "查看预览，然后选择合并、替换或新文件夹。替换可以通过安全快照撤销。",
+          "如果想按计划导出，请开启自动导出。"
+        ]
+      }
+    },
+    "maple-backup": {
+      "eyebrow": "对比",
+      "title": "Snug vs Maple Backup",
+      "tldr": "Maple Backup 会按每日或指定计划自动生成快照并存放在设备上，登录后还可选择把副本保存到 Google Drive、OneDrive 或 Dropbox。Snug 导出为你自己保管的文件，导入时带预览，并且不发起网络请求。截至 {date}，它的商店页面显示 {users} 位用户和 {rating} 的评分。",
+      "whyLook": {
+        "title": "为什么有人想找替代方案",
+        "body": "截至 {date}，Maple Backup 的商店页面声明会处理个人身份信息、身份验证信息和网站内容，其可选副本需要登录。想要无需账号、不发起网络请求的工具的人，可能会另找别的。"
+      },
+      "pickSnug": [
+        "你想要一款无需账号、不发起网络请求的工具。",
+        "你想要多种格式的导出文件，其他浏览器和工具都能打开。",
+        "你想带预览导入，并选择合并、替换或新文件夹。",
+        "你想要一款可以自己阅读代码的开源扩展。"
+      ],
+      "pickOther": [
+        "你想要保存到 Google Drive、OneDrive 或 Dropbox 的可选副本。",
+        "你想从任意一份已保存的快照恢复。",
+        "你想用 {languages} 种语言之一的界面。",
+        "你想在不设置存放位置的情况下自动生成每日快照。"
+      ],
+      "switching": {
+        "steps": [
+          "从 Chrome 应用商店安装 Snug。",
+          "打开 Snug，按你需要的格式导出书签。Snug 直接读取浏览器中已有的书签，所以无需转换。",
+          "开启自动导出，按计划把文件保存到下载文件夹或你选择的文件夹。",
+          "不再需要时，在扩展页面移除 Maple Backup。"
+        ]
+      }
+    },
+    "101-export": {
+      "eyebrow": "对比",
+      "title": "Snug vs 101 Export History/Bookmarks",
+      "tldr": "101 Export 把 Chrome 历史记录和书签导出为 JSON。按它自己的说明，它不导出为 CSV 或 XLS。Snug 只导出书签，但支持更多格式，也能导入。截至 {date}，它的商店页面显示 {users} 位用户和 {rating} 的评分。",
+      "whyLook": {
+        "title": "为什么有人想找替代方案",
+        "body": "商店标题提到了 CSV 和 XLS，而扩展自己的说明写明它不导出为这两种格式。要转换格式，需要桌面应用 101editor。Chrome 的历史记录最多保留 {historyMonths} 个月。截至 {date}，商店页面只有英文。"
+      },
+      "pickSnug": [
+        "你需要 JSON 以外格式的书签，并且不想用桌面应用。",
+        "你想把文件重新导入，带预览，并可选择合并、替换或新文件夹。",
+        "你想要按计划运行的自动导出。",
+        "你想要英语以外语言的界面。"
+      ],
+      "pickOther": [
+        "除了书签，你还需要导出浏览历史记录。",
+        "JSON 是你唯一需要的格式。",
+        "你想用一款扩展同时处理历史记录和书签。"
+      ],
+      "switching": {
+        "steps": [
+          "从 Chrome 应用商店安装 Snug。",
+          "打开 Snug，按你需要的格式导出书签。Snug 直接读取浏览器中已有的书签，所以无需转换。",
+          "Snug 只导出书签，如果你仍需导出历史记录，请保留 101 Export。",
+          "如果想按计划导出，请开启自动导出。"
+        ]
+      }
+    }
+  }
+}
