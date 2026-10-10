@@ -1670,14 +1670,15 @@ listing; absence is written as "Not listed".
 #### Alternatives page
 
 - **Title:** Bookmark Export Extension Alternatives | Snug
-- **Description:** Compare Snug with three other Chrome bookmark export
-  extensions on formats, import, scheduling, languages and data disclosures.
-  Checked {date}.
+- **Description:** Compare Snug with three other Chrome bookmark export and
+  backup extensions on formats, import, scheduling, languages and data
+  disclosures. Checked {date}.
 - **Eyebrow:** Alternatives
 - **Headline:** Bookmark export extensions for Chrome, compared
-- **Lede:** Three other extensions export Chrome bookmarks. This table puts each
-  next to Snug, using only what each Chrome Web Store listing says on {date}.
-  Where a listing does not mention something, the table says Not listed.
+- **Lede:** This table puts Snug next to three other extensions that export or
+  back up Chrome bookmarks, using only what each Chrome Web Store listing says
+  on {date}. Where a listing does not mention something, the table says Not
+  listed.
 - **What to look for:**
   - Export formats. Check that the file type you need is on the list, and what
     the extension says it does not export.
@@ -1726,11 +1727,9 @@ listing; absence is written as "Not listed".
   - You want a Duplicates page to find repeated bookmarks.
   - You want an extension that makes no network calls and needs no account.
 - **Pick Selective Bookmarks Export Tool if:**
-  - You use Firefox as well, because the extension is also available there and
-    for Edge.
+  - You use Firefox as well, because the extension is also available there.
   - HTML is the only format you need.
   - You want a keyword filter or a dark mode in the export tool itself.
-  - You prefer an MIT-licensed open source project.
 - **Switching to Snug:**
   1. Install Snug from the Chrome Web Store.
   2. Open Snug and export in the format you need. Snug reads the bookmarks

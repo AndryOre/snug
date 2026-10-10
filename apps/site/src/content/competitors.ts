@@ -28,6 +28,7 @@ export interface CompetitorFacts {
   cloudCopies: true | 'not-listed'
   browsers: Listed<readonly string[]>
   dataDisclosure: 'none-declared' | Listed<readonly string[]>
+  historyLimitMonths?: number
   comparisonPage: boolean
 }
 
@@ -101,6 +102,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
     version: '3.2',
     lastUpdated: '2026-10-07',
     languageCount: 1,
+    historyLimitMonths: 3,
     exportFormats: ['JSON'],
     import: 'not-listed',
     chooseFolders: 'not-listed',
