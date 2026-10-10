@@ -13,7 +13,14 @@ if [ "$(git -C "$root" rev-parse --is-shallow-repository)" = true ]; then
 fi
 
 cd "$root/apps/site"
-sources=(src/content src/pages/privacy.astro ../../PRIVACY_POLICY.md)
+sources=(
+  src/content
+  src/pages/privacy.astro
+  ../../PRIVACY_POLICY.md
+  ../../CHANGELOG.md
+  ../../docs/usage.md
+  ../../docs/guide
+)
 
 map='{}'
 while IFS= read -r file; do

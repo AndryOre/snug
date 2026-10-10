@@ -1,15 +1,11 @@
 ---
 import Header from '../../components/Header.astro'
-import { DOCS_PATHS, DOCS_UI } from '../../i18n/docs-ui'
+import { DOCS_PATHS } from '../../i18n/docs-ui'
 import { localePath } from '../../i18n/locales'
 import { resolveDocumentationLocale } from '../locale'
 import DocumentationSearch from './DocumentationSearch.astro'
 
 const locale = resolveDocumentationLocale(Astro.locals.starlightRoute.lang)
-const links = [
-  { href: localePath(locale, DOCS_PATHS.guide), label: DOCS_UI.guide },
-  { href: localePath(locale, DOCS_PATHS.whatsNew), label: DOCS_UI.whatsNew },
-]
 ---
 
 <Header
@@ -17,21 +13,6 @@ const links = [
   skipLink={false}
   pageHref={(code) => localePath(code, DOCS_PATHS.guide)}
 >
-  <nav
-    slot="nav"
-    aria-label={DOCS_UI.navLabel}
-    class="ms-6 hidden items-center gap-1 md:flex"
-  >
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground outline-hidden hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring aria-[current=page]:text-foreground"
-        aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
-      >
-        {link.label}
-      </a>
-    ))}
-  </nav>
   <div slot="search" class="flex min-w-0 flex-1 justify-end">
     <DocumentationSearch />
   </div>

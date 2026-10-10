@@ -10,6 +10,7 @@ import {
   privacyPath,
 } from '../i18n/privacy'
 import { buildSitemapXml } from '../seo/crawlers'
+import { documentationSitemapEntries } from '../seo/documentation-pages'
 import { lastCommitDate } from '../seo/last-modified'
 
 export function GET() {
@@ -33,7 +34,12 @@ export function GET() {
     lastmod: privacyLastmod,
     alternates: privacyAlternates,
   }))
-  return new Response(buildSitemapXml([...homeEntries, ...privacyEntries]), {
+  const entries = [
+    ...homeEntries,
+    ...privacyEntries,
+    ...documentationSitemapEntries(),
+  ]
+  return new Response(buildSitemapXml(entries), {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' },
   })
 }
