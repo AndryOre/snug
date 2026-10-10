@@ -213,22 +213,22 @@
     "theme": "선택한 테마는 브라우저에만 저장돼요."
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "guide": "가이드",
+    "overview": "개요",
+    "exporting": "내보내기",
+    "importing": "가져오기",
+    "duplicates": "중복",
+    "settings": "설정",
+    "autoExport": "자동 내보내기",
+    "whatsNew": "새로운 기능",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "이 번역은 최신 내용이 아니라서 영어 원문을 보여 드려요.",
+      "missing": "이 페이지는 아직 번역되지 않아서 영어 원문을 보여 드려요.",
+      "readEnglish": "이 페이지를 영어로 읽기"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Markdown 복사",
+    "copied": "복사했어요",
+    "copyFailed": "복사하지 못했어요"
   },
   "docsSearch": {
     "noResults": "{query}에 대한 결과가 없습니다.",
