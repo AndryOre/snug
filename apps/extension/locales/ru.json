@@ -738,6 +738,23 @@
     "message": "Откройте автоэкспорт, чтобы разобраться",
     "description": "Popup status item description when the last auto-export failed"
   },
+  "popup_statusFolderAccessTitle": {
+    "message": "Требуется доступ к папке",
+    "description": "Popup status item title when the Custom folder needs Folder access again"
+  },
+  "popup_statusFolderAccessDescription": {
+    "message": "Разрешите доступ к «$FOLDER$», чтобы резервное копирование продолжилось",
+    "description": "Popup status item description when the Custom folder needs Folder access again; $FOLDER$ is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_statusFolderAccessAction": {
+    "message": "Разрешить доступ",
+    "description": "Popup status item button that opens the Auto-export page to allow Folder access"
+  },
   "popup_openApp": {
     "message": "Открыть приложение",
     "description": "Popup footer button that opens the full-page app"

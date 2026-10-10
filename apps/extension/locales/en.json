@@ -745,6 +745,23 @@
     "message": "Open auto-export to review",
     "description": "Popup status item description when the last auto-export failed"
   },
+  "popup_statusFolderAccessTitle": {
+    "message": "Folder access needed",
+    "description": "Popup status item title when the Custom folder needs Folder access again"
+  },
+  "popup_statusFolderAccessDescription": {
+    "message": "Allow access to \"$FOLDER$\" to keep backing up",
+    "description": "Popup status item description when the Custom folder needs Folder access again; $FOLDER$ is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_statusFolderAccessAction": {
+    "message": "Allow access",
+    "description": "Popup status item button that opens the Auto-export page to allow Folder access"
+  },
   "popup_openApp": {
     "message": "Open app",
     "description": "Popup footer button that opens the full-page app"

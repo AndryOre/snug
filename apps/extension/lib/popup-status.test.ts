@@ -72,4 +72,55 @@ describe('resolvePopupStatus', () => {
       }),
     ).toEqual({ kind: 'next-run', nextRun: 5000 })
   })
+
+  it.each(['prompt', 'denied', 'missing'] as const)(
+    'reports folder access needed for a Custom folder with %s access, over a failed run',
+    (folderAccess) => {
+      expect(
+        resolvePopupStatus({
+          config: {
+            ...enabledConfig,
+            destination: 'folder',
+            folderName: 'Backups',
+          },
+          nextRun: 5000,
+          lastRun: failedRun,
+          folderAccess,
+        }),
+      ).toEqual({ kind: 'folder-access', folderName: 'Backups' })
+    },
+  )
+
+  it('ignores folder access when granted, unknown, or for Downloads', () => {
+    const folderConfig = {
+      ...enabledConfig,
+      destination: 'folder',
+      folderName: 'Backups',
+    } as const
+    const expected = { kind: 'next-run', nextRun: 5000 }
+    expect(
+      resolvePopupStatus({
+        config: folderConfig,
+        nextRun: 5000,
+        lastRun: null,
+        folderAccess: 'granted',
+      }),
+    ).toEqual(expected)
+    expect(
+      resolvePopupStatus({
+        config: folderConfig,
+        nextRun: 5000,
+        lastRun: null,
+        folderAccess: null,
+      }),
+    ).toEqual(expected)
+    expect(
+      resolvePopupStatus({
+        config: enabledConfig,
+        nextRun: 5000,
+        lastRun: null,
+        folderAccess: 'prompt',
+      }),
+    ).toEqual(expected)
+  })
 })
