@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 6, 2026
+englishLastUpdated: October 10, 2026
 ---
 
 # Informativa sulla privacy di Snug
 
-Ultimo aggiornamento: 6 ottobre 2026
+Ultimo aggiornamento: 10 ottobre 2026
 
 ## Introduzione
 
@@ -45,15 +45,24 @@ browser e non invia alcun dato a server esterni.
 
 - Puoi attivare, se lo desideri, l'esportazione automatica pianificata dei tuoi
   segnalibri. Una volta attivata, l'estensione esporta i tuoi segnalibri con
-  l'intervallo che configuri e scrive i file risultanti direttamente nella
-  cartella Download del tuo dispositivo usando la funzione di download del
-  browser, senza mostrare una finestra per scegliere dove salvare.
+  l'intervallo che configuri e salva i file risultanti senza mostrare una
+  finestra per scegliere dove salvare. Per impostazione predefinita vengono
+  scritti direttamente nella cartella Download del tuo dispositivo usando la
+  funzione di download del browser. Se scegli una cartella personalizzata,
+  vengono invece scritti in una cartella che hai selezionato sul tuo computer,
+  tramite la File System Access API del browser.
 - Questo avviene solo se attivi esplicitamente l'esportazione automatica e
   configuri una pianificazione; è disattivata per impostazione predefinita.
 - Conservazione: dopo ogni esportazione automatica riuscita, Snug elimina i
   propri file esportati più vecchi oltre il numero che imposti (10 per
   impostazione predefinita; 0 li conserva tutti). Rimuove solo i file che ha
-  salvato lui stesso e non tocca mai gli altri file nella tua cartella Download.
+  salvato lui stesso, nella cartella Download o nella tua cartella
+  personalizzata, e non tocca mai altri file.
+- Cartella personalizzata: la cartella che scegli viene ricordata sul tuo
+  dispositivo, così le esportazioni automatiche possono continuare a scrivervi.
+  Il browser potrebbe chiederti di confermare di nuovo l'accesso. I file non
+  vengono mai inviati a nessun server e la scelta di una cartella non richiede
+  alcun permesso aggiuntivo.
 - Notifiche: se un'esportazione automatica non riesce, Snug mostra una notifica
   di sistema sul tuo dispositivo con il motivo. Puoi disattivarla nella pagina
   Esportazione automatica. Le esportazioni riuscite non generano mai notifiche e
@@ -64,8 +73,10 @@ browser e non invia alcun dato a server esterni.
 - Snug non memorizza alcun dato dell'utente, inclusi i segnalibri, su server
   esterni.
 - Tutti i file creati durante l'esportazione (manuale o automatica) vengono
-  salvati direttamente sul tuo dispositivo locale tramite la funzione di
-  download del browser. Le esportazioni manuali usano un normale link
+  salvati direttamente sul tuo dispositivo locale: nella cartella Download
+  tramite la funzione di download del browser oppure, per le esportazioni
+  automatiche, nella cartella personalizzata che hai scelto tramite la File
+  System Access API del browser. Le esportazioni manuali usano un normale link
   `<a download>` e non richiedono il permesso `downloads`; le esportazioni
   automatiche e il file dell'istantanea di sicurezza usano il permesso
   `downloads`.
@@ -74,6 +85,11 @@ browser e non invia alcun dato a server esterni.
   del file e la configurazione dell'esportazione automatica — usando
   l'archiviazione locale del browser (`storage.local`). Questi dati restano sul
   tuo dispositivo e non vengono mai trasmessi da nessuna parte.
+- Se scegli una cartella personalizzata per le esportazioni automatiche, Snug
+  conserva il riferimento del browser a quella cartella (un handle di cartella,
+  non i tuoi segnalibri né il contenuto della cartella) nell'archiviazione
+  locale del browser dell'estensione (IndexedDB). Resta sul tuo dispositivo e
+  non viene mai trasmesso da nessuna parte.
 - Snug può mostrare nel popup una scheda unica e chiudibile che ti invita a
   recensire l'estensione sullo store da cui è stata installata (Chrome Web Store
   o Microsoft Edge Add-ons) dopo la tua prima esportazione riuscita. Per
