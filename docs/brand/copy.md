@@ -6,10 +6,11 @@
 > `locales/*.json` files.
 
 Generated via `brand-voice:brand-voice-enforcement`, applying `voice.md`. All
-claims grounded in the live product (`docs/usage.md`, `CHANGELOG.md` in the main
-repo) — see the "Facts corrected before writing this" note at the bottom; two
-pains named in `brief.md` turned out to be stale (already shipped) and are
-reflected here as differentiators to surface, not gaps to promise fixing.
+claims grounded in the live product (`docs/usage.md`, `docs/guide/`,
+`CHANGELOG.md` in the main repo) — see the "Facts corrected before writing this"
+note at the bottom; two pains named in `brief.md` turned out to be stale
+(already shipped) and are reflected here as differentiators to surface, not gaps
+to promise fixing.
 
 ## 1. Chrome Web Store listing
 
@@ -115,7 +116,7 @@ README/docs already pair with "automatic" for this exact feature.)_
 - **No hype words**: no "seamless," "effortless," "supercharge," no exclamation
   points anywhere, per "Quietly confident" / "Avoid These Terms."
 - **Named exactly what ships, nothing more**: HTML/JSON/CSV, the three import
-  modes, the backup schedule — all real, all in `docs/usage.md`. Nothing implies
+  modes, the backup schedule — all real, all in `docs/guide/`. Nothing implies
   sync or a server.
 - **"Snug" metaphor used sparingly**: appears once, structurally, in "exactly as
   you left them" / "tal como los dejaste" rather than forcing "tuck in" into
@@ -129,10 +130,10 @@ README/docs already pair with "automatic" for this exact feature.)_
 
 ## Facts corrected before writing this (vs. the original brief/voice guide)
 
-Checked against the live repo (`docs/usage.md`, `CHANGELOG.md`) before writing
-any copy, per the "ground every claim, never invent a feature" instruction — two
-corrections came out of that check, now also fixed upstream in `brief.md` and
-`voice.md`:
+Checked against the live repo (`docs/usage.md`, `docs/guide/`, `CHANGELOG.md`)
+before writing any copy, per the "ground every claim, never invent a feature"
+instruction — two corrections came out of that check, now also fixed upstream in
+`brief.md` and `voice.md`:
 
 1. **CSV was missing.** The brief said "HTML/JSON output"; the product ships
    HTML, JSON, _and_ CSV, for both export and import.

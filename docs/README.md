@@ -53,8 +53,10 @@ An index of every document in this repository.
 
 ## How-to
 
-- [`docs/usage.md`](usage.md) — exporting, importing, duplicates, the Safety
-  snapshot and Undo, and Auto-export.
+- [`docs/usage.md`](usage.md) — opening the app, plus a guide page each for
+  [exporting](guide/exporting.md), [importing](guide/importing.md) (the Safety
+  snapshot and Undo), [duplicates](guide/duplicates.md),
+  [settings](guide/settings.md), and [Auto-export](guide/auto-export.md).
 - [`docs/how-to/add-a-locale.md`](how-to/add-a-locale.md) — steps to add a new
   locale.
 - [`docs/how-to/cut-a-release.md`](how-to/cut-a-release.md) — steps to cut a new
