@@ -213,22 +213,22 @@
     "theme": "Tu elección de tema se guarda solo en tu navegador."
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
+    "guide": "Guía",
+    "overview": "Resumen",
+    "exporting": "Exportar",
+    "importing": "Importar",
+    "duplicates": "Duplicados",
+    "settings": "Ajustes",
     "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "whatsNew": "Novedades",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "Esta traducción está desactualizada, así que se muestra el texto en inglés.",
+      "missing": "Esta página aún no está traducida, así que se muestra el texto en inglés.",
+      "readEnglish": "Leer esta página en inglés"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Copiar Markdown",
+    "copied": "Copiado",
+    "copyFailed": "No se pudo copiar"
   },
   "docsSearch": {
     "noResults": "No hay resultados para {query}.",
