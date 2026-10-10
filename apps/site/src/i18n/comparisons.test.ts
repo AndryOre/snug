@@ -165,6 +165,14 @@ describe('interpolateComparison', () => {
     ).toBe('Pick Maple. Maple!')
   })
 
+  it('fills the history months placeholder the 101 Export copy uses', () => {
+    expect(
+      interpolateComparison('{historyMonths} months', 'en', {
+        historyMonths: 3,
+      }),
+    ).toBe('3 months')
+  })
+
   it('throws on a placeholder without a value', () => {
     expect(() => interpolateComparison('{users}', 'en', {})).toThrow(/users/)
   })

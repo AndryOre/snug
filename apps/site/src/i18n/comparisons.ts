@@ -173,6 +173,7 @@ export interface ComparisonValues {
   users?: number
   rating?: number
   languages?: number
+  historyMonths?: number
   date?: string
   name?: string
 }
@@ -195,7 +196,8 @@ function formatValue(key: string, value: string | number, tag: string): string {
 }
 
 /**
- * Replaces `{users}`, `{rating}`, `{languages}`, `{date}` and `{name}` in a
+ * Replaces `{users}`, `{rating}`, `{languages}`, `{historyMonths}`, `{date}`
+ * and `{name}` in a
  * copy string, formatting numbers and the ISO date with `Intl` for the locale.
  * @param template - A copy string with placeholders.
  * @param locale - The locale to format for.
