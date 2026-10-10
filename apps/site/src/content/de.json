@@ -222,5 +222,9 @@
     "settings": "Settings",
     "autoExport": "Auto-export",
     "whatsNew": "What's new"
+  },
+  "docsSearch": {
+    "noResults": "Keine Ergebnisse für {query}.",
+    "hint": "Versuche es mit einem anderen oder kürzeren Wort."
   }
 }

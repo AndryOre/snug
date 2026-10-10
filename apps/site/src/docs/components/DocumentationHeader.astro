@@ -3,6 +3,7 @@ import Header from '../../components/Header.astro'
 import { DOCS_PATHS, DOCS_UI } from '../../i18n/docs-ui'
 import { localePath } from '../../i18n/locales'
 import { resolveDocumentationLocale } from '../locale'
+import DocumentationSearch from './DocumentationSearch.astro'
 
 const locale = resolveDocumentationLocale(Astro.locals.starlightRoute.lang)
 const links = [
@@ -31,4 +32,7 @@ const links = [
       </a>
     ))}
   </nav>
+  <div slot="search" class="flex min-w-0 flex-1 justify-end">
+    <DocumentationSearch />
+  </div>
 </Header>

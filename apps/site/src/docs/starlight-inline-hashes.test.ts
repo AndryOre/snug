@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest'
 import { collectStarlightInlineScriptHashes } from './starlight-inline-hashes'
 
 describe('collectStarlightInlineScriptHashes', () => {
-  it('hashes the two inline scripts of the sidebar persister', () => {
+  it('hashes the inline scripts of the sidebar persister and the search button', () => {
     const hashes = collectStarlightInlineScriptHashes()
-    expect(hashes).toHaveLength(2)
+    expect(hashes).toHaveLength(3)
     for (const hash of hashes) expect(hash).toMatch(/^sha256-[\w+/]{43}=$/)
   })
 

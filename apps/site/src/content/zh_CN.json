@@ -222,5 +222,9 @@
     "settings": "Settings",
     "autoExport": "Auto-export",
     "whatsNew": "What's new"
+  },
+  "docsSearch": {
+    "noResults": "没有找到与 {query} 相关的结果。",
+    "hint": "请尝试其他词语或更短的词语。"
   }
 }
