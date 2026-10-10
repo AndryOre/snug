@@ -12,4 +12,6 @@ coverage
 apps/video/out
 apps/extension
 apps/video
-docs
+docs/*
+!docs/usage.md
+!docs/guide

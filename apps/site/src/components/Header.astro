@@ -15,9 +15,15 @@ interface Props {
   locale: Locale
   markCurrent?: boolean
   pageHref?: (locale: Locale) => string
+  skipLink?: boolean
 }
 
-const { locale, markCurrent = true, pageHref = localePath } = Astro.props
+const {
+  locale,
+  markCurrent = true,
+  pageHref = localePath,
+  skipLink = true,
+} = Astro.props
 const { header } = getClosingCopy(locale)
 const options = LOCALES.map((code) => ({
   code,
@@ -28,15 +34,17 @@ const options = LOCALES.map((code) => ({
 ---
 
 <header data-section="header" class="relative z-10">
-  <a
-    href="#main"
-    class={buttonVariants({
-      className:
-        'sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50',
-    })}
-  >
-    {header.skipLink}
-  </a>
+  {skipLink && (
+    <a
+      href="#main"
+      class={buttonVariants({
+        className:
+          'sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50',
+      })}
+    >
+      {header.skipLink}
+    </a>
+  )}
   <div class="mx-auto flex h-14 max-w-site items-center justify-between gap-2 px-4 md:px-14">
     <a
       href={localePath(locale)}
@@ -64,6 +72,8 @@ const options = LOCALES.map((code) => ({
         Snug
       </span>
     </a>
+    <slot name="nav" />
+    <slot name="search" />
     <HeaderMenus
       client:idle
       theme={header.theme}
