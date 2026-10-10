@@ -5,8 +5,8 @@ import { buildMarkdownTwin, markdownTwinRoutes } from '../docs/markdown-twin'
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection('docs')
-  return markdownTwinRoutes().flatMap(({ slug, source }) => {
-    const entry = entries.find((candidate) => candidate.id === source.id)
+  return markdownTwinRoutes().flatMap(({ slug }) => {
+    const entry = entries.find((candidate) => candidate.id === slug)
     if (!entry) return []
     const markdown = buildMarkdownTwin(entry.data.title, entry.body ?? '')
     return [{ params: { slug }, props: { markdown } }]

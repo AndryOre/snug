@@ -501,6 +501,9 @@ test.describe('Copy Markdown button', () => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write'])
     await page.goto('/guide/exporting/')
     const button = page.getByRole('button', { name: 'Copy Markdown' })
+    await expect(
+      page.locator('astro-island:has([data-copy-markdown])'),
+    ).not.toHaveAttribute('ssr', '')
     await expect(button).toHaveCSS('min-height', '44px')
     await button.click()
     await expect(page.getByRole('button', { name: 'Copied' })).toBeVisible()
@@ -522,6 +525,9 @@ test.describe('Copy Markdown button', () => {
       })
     })
     await page.goto('/es/guide/exporting/')
+    await expect(
+      page.locator('astro-island:has([data-copy-markdown])'),
+    ).not.toHaveAttribute('ssr', '')
     await page.getByRole('button', { name: 'Copy Markdown' }).click()
     await expect(
       page.getByRole('button', { name: 'Could not copy' }),
