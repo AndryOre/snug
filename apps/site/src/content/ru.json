@@ -213,22 +213,22 @@
     "theme": "Выбранная вами тема сохраняется только в вашем браузере."
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "guide": "Руководство",
+    "overview": "Обзор",
+    "exporting": "Экспорт",
+    "importing": "Импорт",
+    "duplicates": "Дубликаты",
+    "settings": "Настройки",
+    "autoExport": "Автоэкспорт",
+    "whatsNew": "Что нового",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "Этот перевод устарел, поэтому показан английский текст.",
+      "missing": "Эта страница ещё не переведена, поэтому показан английский текст.",
+      "readEnglish": "Прочитать эту страницу на английском"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Копировать Markdown",
+    "copied": "Скопировано",
+    "copyFailed": "Не удалось скопировать"
   },
   "docsSearch": {
     "noResults": "По запросу {query} ничего не найдено.",
