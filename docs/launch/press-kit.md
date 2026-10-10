@@ -59,7 +59,7 @@ has no cloud, so your bookmarks never leave the browser.
 
 ## Promo video
 
-English promo video: <https://youtu.be/r89MCN-oLCw>. Other languages are listed
+English promo video: <https://youtu.be/GA7bAMIAvI0>. Other languages are listed
 in [`../store/README.md`](../store/README.md).
 
 ## Assets
