@@ -33,6 +33,16 @@ export class FakeDirectoryHandle {
     return created
   }
 
+  async isSameEntry(other: unknown): Promise<boolean> {
+    return other === this
+  }
+
+  async removeEntry(name: string): Promise<void> {
+    if (!this.files.delete(name)) {
+      throw new DOMException('not found', 'NotFoundError')
+    }
+  }
+
   async getFileHandle(name: string, options?: { create?: boolean }) {
     if (!this.files.has(name)) {
       if (!options?.create) {

@@ -6,10 +6,12 @@ import {
   autoExportConfigStore,
   autoExportLastRunStore,
   autoExportNotifyOnFailureStore,
+  autoExportRunsStore,
   exportFilenameTemplateStore,
 } from '@/lib/storage'
 import { resetFakeBookmarks } from '@/lib/testing/fake-bookmarks'
 import { FakeDirectoryHandle } from '@/lib/testing/fake-directory-handle'
+import { resetFakeFolderIdentities } from '@/lib/testing/fake-folder-run-identity'
 import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 import type { AutoExportConfig } from '@/lib/types'
 
@@ -24,6 +26,11 @@ vi.mock('@/lib/folder-handle', async () => ({
   queryFolderAccess: async (handle: { queryPermission(): Promise<string> }) =>
     handle.queryPermission(),
 }))
+
+vi.mock(
+  '@/lib/folder-run-identity',
+  async () => import('@/lib/testing/fake-folder-run-identity'),
+)
 
 function folderConfig(overrides: Partial<AutoExportConfig> = {}) {
   return {
@@ -52,6 +59,7 @@ beforeEach(async () => {
   fakeBrowser.reset()
   resetFakeBookmarks()
   resetFakeI18n()
+  resetFakeFolderIdentities()
   folderHandleMock.handle = null
   await exportFilenameTemplateStore.setValue('export')
 })
@@ -128,4 +136,56 @@ describe('runAutoExport with the Custom folder destination', () => {
       expect(browser.action.setBadgeText).toHaveBeenCalledWith({ text: '!' })
     },
   )
+})
+
+describe('runAutoExport retention with the Custom folder destination', () => {
+  it('records each written file and prunes the oldest runs beyond keepLast', async () => {
+    const root = new FakeDirectoryHandle('Backups')
+    folderHandleMock.handle = root
+    await autoExportConfigStore.setValue(
+      folderConfig({ formats: ['json'], path: 'backups', keepLast: 2 }),
+    )
+    mockDownloadsAndBadge()
+
+    vi.useFakeTimers({ toFake: ['Date'] })
+    try {
+      for (let run = 0; run < 3; run++) {
+        vi.setSystemTime(1000 + run)
+        await runAutoExport('manual')
+      }
+    } finally {
+      vi.useRealTimers()
+    }
+
+    const subfolder = root.directories.get('backups')
+    expect(
+      subfolder?.files
+        .keys()
+        .toArray()
+        .toSorted((a, b) => a.localeCompare(b)),
+    ).toEqual(['export (1).json', 'export (2).json'])
+    const runs = await autoExportRunsStore.getValue()
+    expect(runs).toHaveLength(2)
+    expect(runs.every((run) => run.destination === 'folder')).toBe(true)
+  })
+
+  it('drops the runs of a previous Custom folder without deleting its files', async () => {
+    const previous = new FakeDirectoryHandle('Previous')
+    folderHandleMock.handle = previous
+    await autoExportConfigStore.setValue(
+      folderConfig({ formats: ['json'], path: '', keepLast: 1 }),
+    )
+    mockDownloadsAndBadge()
+    await runAutoExport('manual')
+    await new Promise((resolve) => setTimeout(resolve, 5))
+
+    const current = new FakeDirectoryHandle('Current')
+    folderHandleMock.handle = current
+    await runAutoExport('manual')
+
+    expect(previous.files.keys().toArray()).toEqual(['export.json'])
+    expect(current.files.keys().toArray()).toEqual(['export.json'])
+    const runs = await autoExportRunsStore.getValue()
+    expect(runs).toHaveLength(1)
+  })
 })
