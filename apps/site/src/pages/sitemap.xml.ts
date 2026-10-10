@@ -9,6 +9,7 @@ import {
   PRIVACY_PAGE_LOCALES,
   privacyPath,
 } from '../i18n/privacy'
+import { comparisonSitemapEntries } from '../seo/comparison-pages'
 import { buildSitemapXml } from '../seo/crawlers'
 import { documentationSitemapEntries } from '../seo/documentation-pages'
 import { lastCommitDate } from '../seo/last-modified'
@@ -37,6 +38,7 @@ export function GET() {
   const entries = [
     ...homeEntries,
     ...privacyEntries,
+    ...comparisonSitemapEntries(),
     ...documentationSitemapEntries(),
   ]
   return new Response(buildSitemapXml(entries), {

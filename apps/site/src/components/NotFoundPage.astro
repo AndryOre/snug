@@ -18,14 +18,14 @@ interface Props {
 
 const { locale } = Astro.props
 const { notFound } = getClosingCopy(locale)
-const standalone = {
-  title: `${notFound.title} | Snug`,
-  description: notFound.body,
-  path: '/404/',
+const page = {
+  meta: { title: `${notFound.title} | Snug`, description: notFound.body },
+  path: () => '/404/',
+  alternateLocales: [],
 }
 ---
 
-<Layout locale={locale} notFound standalone={standalone}>
+<Layout locale={locale} notFound page={page}>
   <main id="main" class="flex flex-1 px-4">
     <Empty>
       <EmptyHeader className="max-w-prose">

@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "alternatives": {
+      "title": "Alternativen zu Erweiterungen für den Lesezeichen-Export | Snug",
+      "description": "Snug im Vergleich mit drei anderen Chrome-Erweiterungen zum Exportieren und Sichern von Lesezeichen: Formate, Import, Zeitplan, Sprachen und Datenangaben. Geprüft am {date}."
+    },
+    "selective-bookmarks-export-tool": {
+      "title": "Snug vs Selective Bookmarks Export Tool | Snug",
+      "description": "Snug und Selective Bookmarks Export Tool im Vergleich bei Exportformaten, Import, Zeitplan und Datenangaben, nach den aktuellen Store-Einträgen. Geprüft am {date}."
+    },
+    "maple-backup": {
+      "title": "Snug vs Maple Backup | Snug",
+      "description": "Snug und Maple Backup im Vergleich bei Snapshots, optionalen Kopien in Online-Speichern, Sprachen und Datenangaben, nach den aktuellen Store-Einträgen. Geprüft am {date}."
+    },
+    "101-export": {
+      "title": "Snug vs 101 Export History/Bookmarks | Snug",
+      "description": "Snug und 101 Export History/Bookmarks im Vergleich bei Exportformaten, Verlaufsexport und Datenangaben, nach den aktuellen Store-Einträgen. Geprüft am {date}."
+    }
+  },
+  "shared": {
+    "breadcrumb": {
+      "label": "Brotkrumennavigation",
+      "home": "Snug",
+      "alternatives": "Alternativen"
+    },
+    "tldr": "Kurz gesagt",
+    "atAGlance": "Auf einen Blick",
+    "asOf": "Stand: {date}",
+    "notListed": "Nicht aufgeführt",
+    "criteria": {
+      "exportFormats": "Exportformate",
+      "import": "Import",
+      "chooseFolders": "Auswählen, welche Ordner exportiert werden",
+      "schedule": "Zeitgesteuerter Export",
+      "cloudCopies": "Kopien in Online-Speichern",
+      "browsers": "Browser",
+      "languages": "Sprachen",
+      "usersRating": "Nutzer und Bewertung",
+      "dataDisclosure": "Datenangaben im Store-Eintrag"
+    },
+    "compareWithSnug": "Mit Snug vergleichen",
+    "pickSnug": "Wähle Snug, wenn",
+    "pickOther": "Wähle {name}, wenn",
+    "switching": "Zu Snug wechseln",
+    "checkedNote": "Geprüft am {date} anhand des jeweiligen Eintrags im Chrome Web Store. Einträge ändern sich, bestätige die Angaben deshalb im Eintrag, bevor du dich entscheidest.",
+    "ctaTitle": "Probiere Snug mit deinen eigenen Lesezeichen aus",
+    "ctaBody": "Kostenlos und Open Source. Kein Konto, keine Netzwerkaufrufe.",
+    "install": "Zu Chrome hinzufügen"
+  },
+  "alternatives": {
+    "eyebrow": "Alternativen",
+    "title": "Erweiterungen für den Lesezeichen-Export in Chrome im Vergleich",
+    "lede": "Diese Tabelle stellt Snug drei andere Erweiterungen gegenüber, die Chrome-Lesezeichen exportieren oder sichern. Sie stützt sich ausschließlich auf das, was der jeweilige Eintrag im Chrome Web Store am {date} angibt. Wo ein Eintrag etwas nicht erwähnt, steht in der Tabelle „Nicht aufgeführt“.",
+    "whatToLookFor": {
+      "title": "Worauf du achten solltest",
+      "items": [
+        "Exportformate. Prüfe, ob das Dateiformat, das du brauchst, aufgeführt ist, und was die Erweiterung selbst als nicht exportierbar nennt.",
+        "Import. Ein Export hilft nur, wenn du ihn wieder einlesen kannst oder ein anderes Tool ihn öffnet.",
+        "Ordnerauswahl. Entscheide, ob du den ganzen Baum brauchst oder nur einzelne Ordner.",
+        "Zeitplan. Entscheide, ob Exporte von selbst laufen sollen oder nur auf Klick.",
+        "Wohin die Kopien gehen. Manche Erweiterungen behalten alles auf dem Gerät, andere bieten nach der Anmeldung optionale Kopien in Online-Speichern an.",
+        "Die Datenangaben. Jeder Eintrag hat einen Abschnitt, in dem der Entwickler angibt, welche Daten er verarbeitet. Lies ihn, bevor du installierst."
+      ]
+    },
+    "builtIn": {
+      "name": "Der integrierte Export von Chrome",
+      "summary": "Der Lesezeichen-Manager von Chrome exportiert alle deine Lesezeichen in eine einzelne HTML-Datei, ohne dass du etwas installieren musst. Das reicht, wenn du genau das brauchst und nicht mehr."
+    },
+    "cards": {
+      "selective-bookmarks-export-tool": {
+        "pickWhen": "Wähle es, wenn du auch Firefox nutzt oder HTML das einzige Format ist, das du brauchst."
+      },
+      "maple-backup": {
+        "pickWhen": "Wähle es, wenn du optionale Kopien in Google Drive, OneDrive oder Dropbox möchtest oder eine Oberfläche in einer von {languages} Sprachen."
+      },
+      "101-export": {
+        "pickWhen": "Wähle es, wenn du neben Lesezeichen auch deinen Browserverlauf exportieren musst."
+      }
+    }
+  },
+  "pages": {
+    "selective-bookmarks-export-tool": {
+      "eyebrow": "Vergleich",
+      "title": "Snug vs Selective Bookmarks Export Tool",
+      "tldr": "Selective Bookmarks Export Tool exportiert ausgewählte Lesezeichen als HTML und ist auch für Firefox und Edge erhältlich. Snug exportiert in mehr Formate als HTML, importiert mit Vorschau und führt Auto-Export nach Zeitplan aus. Stand {date} zeigt der Eintrag {users} Nutzer und eine Bewertung von {rating}; Import und Zeitplan sind dort nicht aufgeführt.",
+      "whyLook": {
+        "title": "Warum Leute nach einer Alternative suchen",
+        "body": "Der Eintrag beschreibt den Export als HTML. Import und Zeitplan sind Stand {date} nicht aufgeführt. Wer ein anderes Dateiformat oder Exporte braucht, die von selbst laufen, braucht für diese Teile ein anderes Tool."
+      },
+      "pickSnug": [
+        "Du brauchst ein anderes Format als HTML, etwa JSON.",
+        "Du möchtest eine Datei mit Vorschau wieder importieren und zwischen Zusammenführen, Ersetzen und Neuer Ordner wählen.",
+        "Du möchtest, dass Auto-Export nach Zeitplan läuft, in Downloads oder in einen Ordner deiner Wahl.",
+        "Du möchtest eine Duplikate-Seite, um doppelte Lesezeichen zu finden.",
+        "Du willst eine Erweiterung, die keine Netzwerkaufrufe macht und kein Konto braucht."
+      ],
+      "pickOther": [
+        "Du nutzt auch Firefox, denn die Erweiterung gibt es dort ebenfalls.",
+        "HTML ist das einzige Format, das du brauchst.",
+        "Du möchtest einen Stichwortfilter oder einen Dunkelmodus im Export-Tool selbst."
+      ],
+      "switching": {
+        "steps": [
+          "Installiere Snug aus dem Chrome Web Store.",
+          "Öffne Snug und exportiere im gewünschten Format. Snug liest die Lesezeichen, die schon in deinem Browser sind, du musst also nichts umwandeln.",
+          "Wenn du HTML-Dateien aus früheren Exporten hast, wähle Import und die Datei aus.",
+          "Prüfe die Vorschau und wähle dann Zusammenführen, Ersetzen oder Neuer Ordner. Ein Ersetzen lässt sich über den Sicherheits-Snapshot rückgängig machen.",
+          "Aktiviere Auto-Export, wenn du Exporte nach Zeitplan möchtest."
+        ]
+      }
+    },
+    "maple-backup": {
+      "eyebrow": "Vergleich",
+      "title": "Snug vs Maple Backup",
+      "tldr": "Maple Backup legt automatisch tägliche oder zeitgesteuerte Snapshots auf dem Gerät ab, mit optionalen Kopien in Google Drive, OneDrive oder Dropbox nach der Anmeldung. Snug exportiert in Dateien, die du behältst, importiert mit Vorschau und macht keine Netzwerkaufrufe. Stand {date} zeigt der Eintrag {users} Nutzer und eine Bewertung von {rating}.",
+      "whyLook": {
+        "title": "Warum Leute nach einer Alternative suchen",
+        "body": "Stand {date} gibt der Eintrag von Maple Backup an, dass personenbezogene Daten, Authentifizierungsdaten und Website-Inhalte verarbeitet werden, und die optionalen Kopien setzen eine Anmeldung voraus. Wer ein Tool ohne Konto und ohne Netzwerkaufrufe möchte, sucht vielleicht woanders."
+      },
+      "pickSnug": [
+        "Du möchtest ein Tool ohne Konto und ohne Netzwerkaufrufe.",
+        "Du willst Exportdateien in mehreren Formaten, die andere Browser und Tools öffnen können.",
+        "Du möchtest mit Vorschau importieren und zwischen Zusammenführen, Ersetzen und Neuer Ordner wählen.",
+        "Du willst eine Open-Source-Erweiterung, deren Code du lesen kannst."
+      ],
+      "pickOther": [
+        "Du möchtest optionale Kopien in Google Drive, OneDrive oder Dropbox.",
+        "Du möchtest aus jedem gespeicherten Snapshot wiederherstellen.",
+        "Du möchtest eine Oberfläche in einer von {languages} Sprachen.",
+        "Du möchtest automatische tägliche Snapshots, ohne ein Ziel festzulegen."
+      ],
+      "switching": {
+        "steps": [
+          "Installiere Snug aus dem Chrome Web Store.",
+          "Öffne Snug und exportiere deine Lesezeichen im gewünschten Format. Snug liest die Lesezeichen, die schon in deinem Browser sind, du musst also nichts umwandeln.",
+          "Aktiviere Auto-Export, um Dateien nach Zeitplan zu erhalten, in Downloads oder in einem Ordner deiner Wahl.",
+          "Entferne Maple Backup auf der Erweiterungsseite, sobald du es nicht mehr brauchst."
+        ]
+      }
+    },
+    "101-export": {
+      "eyebrow": "Vergleich",
+      "title": "Snug vs 101 Export History/Bookmarks",
+      "tldr": "101 Export exportiert den Chrome-Verlauf und Lesezeichen als JSON. Laut eigenem Hinweis exportiert es nicht nach CSV oder XLS. Snug exportiert nur Lesezeichen, in mehr Formaten, und importiert auch. Stand {date} zeigt der Eintrag {users} Nutzer und eine Bewertung von {rating}.",
+      "whyLook": {
+        "title": "Warum Leute nach einer Alternative suchen",
+        "body": "Der Titel im Store nennt CSV und XLS, und der eigene Hinweis der Erweiterung sagt, dass sie in keines von beiden exportiert. Zum Umwandeln braucht es die Desktop-App 101editor. Chrome begrenzt den Verlauf auf {historyMonths} Monate. Stand {date} ist der Eintrag nur auf Englisch."
+      },
+      "pickSnug": [
+        "Du brauchst Lesezeichen in einem anderen Format als JSON, ohne Desktop-App.",
+        "Du möchtest eine Datei mit Vorschau wieder importieren und zwischen Zusammenführen, Ersetzen und Neuer Ordner wählen.",
+        "Du möchtest Auto-Export nach Zeitplan.",
+        "Du möchtest die Oberfläche in einer anderen Sprache als Englisch."
+      ],
+      "pickOther": [
+        "Du musst neben Lesezeichen auch deinen Browserverlauf exportieren.",
+        "JSON ist das einzige Format, das du brauchst.",
+        "Du möchtest eine Erweiterung für Verlauf und Lesezeichen zugleich."
+      ],
+      "switching": {
+        "steps": [
+          "Installiere Snug aus dem Chrome Web Store.",
+          "Öffne Snug und exportiere deine Lesezeichen im gewünschten Format. Snug liest die Lesezeichen, die schon in deinem Browser sind, du musst also nichts umwandeln.",
+          "Lass 101 Export installiert, wenn du weiterhin den Verlauf exportieren musst, denn Snug exportiert nur Lesezeichen.",
+          "Aktiviere Auto-Export, wenn du Exporte nach Zeitplan möchtest."
+        ]
+      }
+    }
+  }
+}

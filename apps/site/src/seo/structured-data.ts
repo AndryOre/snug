@@ -113,3 +113,64 @@ export function buildStructuredData(
     ],
   }
 }
+
+/**
+ * One step of a comparison page's breadcrumb trail.
+ */
+interface ComparisonBreadcrumb {
+  name: string
+  path: string
+}
+
+/**
+ * Locale-specific facts that feed a comparison page's `WebPage` and
+ * `BreadcrumbList` nodes.
+ */
+export interface ComparisonStructuredDataPage {
+  title: string
+  description: string
+  path: string
+  breadcrumbs: readonly ComparisonBreadcrumb[]
+}
+
+/**
+ * One schema.org `@graph` for the Alternatives page or a comparison page: a
+ * `WebPage` that is `about` the shared `SoftwareApplication` and a
+ * `BreadcrumbList`. It never carries a competitor `AggregateRating`, `Review`
+ * or `Product`.
+ * @param locale - A supported locale code.
+ * @param page - The page's title, description, path and breadcrumb trail.
+ * @returns A JSON-LD object ready to serialize.
+ */
+export function buildComparisonStructuredData(
+  locale: Locale,
+  page: ComparisonStructuredDataPage,
+) {
+  const pageUrl = `${SITE_ORIGIN}${page.path}`
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: page.title,
+        description: page.description,
+        inLanguage: languageTag(locale),
+        isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+        about: { '@id': `${SITE_ORIGIN}/#software` },
+        breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: page.breadcrumbs.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.name,
+          item: `${SITE_ORIGIN}${crumb.path}`,
+        })),
+      },
+    ],
+  }
+}
