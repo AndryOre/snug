@@ -49,7 +49,12 @@ tokens of its own. The code map is
   `src/styles/docs.css`, which maps every Starlight variable to the shared UI
   tokens. Starlight's inline scripts reach the CSP through
   `collectStarlightInlineScriptHashes`, `prefetch` stays off and Starlight's 404
-  route stays disabled, so the Guide adds no third-party request.
+  route stays disabled, so the Guide adds no third-party request. Search keeps
+  `require-trusted-types-for 'script'` working through the single `default`
+  policy in `src/docs/search-trusted-types.ts`
+  ([ADR 0019](../../docs/adr/0019-guide-and-release-notes-on-the-website-with-starlight.md));
+  verify it against the nginx header with `e2e-container/guide-search.spec.ts`,
+  never only the Astro meta tag.
 - Never run `bun run build`. Verify with `bun run check` from the repo root.
 - E2E specs build their locale paths with `LOCALES.map` from `src/i18n/locales`,
   never a copied list. Build-output assertions live in

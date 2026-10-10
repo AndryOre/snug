@@ -70,3 +70,34 @@ test('the Guide loads without console errors or third-party requests', async ({
   expect(problems).toEqual([])
   expect(foreign).toEqual([])
 })
+
+test('the mobile drawer traps focus, closes with Escape and returns focus', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 800 })
+  await page.goto('/guide/')
+  const toggle = page.getByRole('button', { name: 'Guide' })
+  await toggle.click()
+  const drawer = page.locator('#starlight__sidebar')
+  await expect(drawer).toBeVisible()
+  await expect(drawer.getByRole('link').first()).toBeFocused()
+  await expect(page.locator('.main-frame')).toHaveAttribute('inert', '')
+  await page.keyboard.press('Escape')
+  await expect(drawer).toBeHidden()
+  await expect(toggle).toBeFocused()
+  await expect(page.locator('.main-frame')).not.toHaveAttribute('inert', '')
+})
+
+test('the search button opens the dialog with Ctrl K and closes with Escape', async ({
+  page,
+}) => {
+  await page.goto('/guide/')
+  const dialog = page.getByRole('dialog')
+  await expect(dialog).toBeHidden()
+  await expect(page.locator('dialog input')).toBeAttached()
+  await page.keyboard.press('Control+k')
+  await expect(dialog).toBeVisible()
+  await expect(dialog.getByRole('textbox')).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(dialog).toBeHidden()
+})

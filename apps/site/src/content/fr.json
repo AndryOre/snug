@@ -212,5 +212,9 @@
       "logs": "Le serveur web conserve aussi un journal d'accès avec l'heure, la page demandée, le statut, le référent et le user-agent de votre navigateur. Les adresses IP sont masquées dans ce journal, qui est lu hors ligne."
     },
     "theme": "Votre choix de thème est stocké uniquement dans votre navigateur."
+  },
+  "docsSearch": {
+    "noResults": "Aucun résultat pour {query}.",
+    "hint": "Essayez un autre mot, ou un mot plus court."
   }
 }

@@ -8,6 +8,7 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/space-grotesk';
 @import '@workspace/ui/theme.css';
+@import './docs-chrome.css';
 
 @source '../';
 @source '../../../../packages/ui/src/components/accordion.tsx';
@@ -89,11 +90,58 @@
   --sl-color-accent-high: var(--primary-text);
   --sl-nav-height: 3.5rem;
   --sl-content-pad-x: 1rem;
+  --sl-content-width: 46rem;
+  --sl-sidebar-width: 15rem;
+  --sl-sidebar-pad-x: 0.75rem;
+  --sl-menu-button-size: 2.75rem;
+  --sl-mobile-toc-height: 3.75rem;
+  --sl-color-backdrop-overlay: color-mix(
+    in oklab,
+    var(--background) 55%,
+    black
+  );
+  --docs-toc-width: 12.5rem;
+  --docs-edge: 1rem;
+  --docs-target: 2.75rem;
+  --docs-radius: calc(var(--radius) * 0.8);
+  --docs-radius-dialog: calc(var(--radius) * 1.4);
 }
 
 :root.dark {
   color-scheme: dark;
   --sl-color-text-invert: var(--primary-foreground);
+}
+
+@media (min-width: 50rem) {
+  :root {
+    --sl-content-pad-x: 1.5rem;
+    --docs-edge: 1.5rem;
+  }
+
+  :root[data-has-sidebar] {
+    --sl-content-inline-start: calc(var(--docs-edge) + var(--sl-sidebar-width));
+  }
+}
+
+@media (min-width: 72rem) {
+  :root {
+    --sl-content-pad-x: 2.5rem;
+    --sl-mobile-toc-height: 0rem;
+    --docs-edge: max(
+      3.5rem,
+      calc((100vw - var(--container-site, 77.5rem)) / 2 + 3.5rem)
+    );
+  }
+}
+
+:root[data-has-sidebar]:not([data-has-toc]) {
+  --sl-mobile-toc-height: 3.75rem;
+}
+
+@media (min-width: 50rem) {
+  :root[data-has-sidebar]:not([data-has-toc]) {
+    --sl-mobile-toc-height: 0rem;
+  }
 }
 
 @layer base {

@@ -31,6 +31,15 @@ solved the same problem with Astro and Starlight on the same Astro version.
 - Starlight's search (Pagefind, self-hosted), table of contents, mobile sidebar
   and Copy Markdown button are sanctioned scripts on these pages, in addition to
   the islands in ADR 0013. No third-party request is added.
+- Search needs `'wasm-unsafe-eval'` in `script-src` (Pagefind runs as
+  WebAssembly) and nothing else: `'unsafe-eval'` stays out.
+- `require-trusted-types-for 'script'` (ADR 0017) stays. Pagefind writes result
+  excerpts through `innerHTML` and starts its search worker with
+  `new Worker(url)`, both Trusted Types sinks. The Guide registers one `default`
+  policy (`src/docs/search-trusted-types.ts`): HTML passes only with every tag
+  but `<mark>` turned into text, and the only script URL it lets through is the
+  same-origin `/pagefind/pagefind-worker.js`. It defines no script callback.
+  Without Trusted Types support the policy is not registered and is not needed.
 
 ## Considered Options
 
