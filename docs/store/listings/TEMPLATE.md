@@ -18,8 +18,9 @@ Translate the English detailed description from the listing pack. Keep the
 product name `Snug` untranslated, and keep the format and source names (HTML,
 JSON, CSV, Markdown, OPML, XBEL, Chrome, Safari) in English. Cover every shipped
 feature: the six export formats, the import sources, the safety snapshot with
-Undo, the Duplicates page and Skip duplicates, the schedules with Retention and
-the failure notification, the accessible tree and the 10 locales.
+Undo, the Duplicates page and Skip duplicates, the schedules with Retention, the
+Downloads or Custom folder destination (Folder access) and the failure
+notification, the accessible tree and the 10 locales.
 
 ## Source notes
 

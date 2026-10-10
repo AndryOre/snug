@@ -1,4 +1,4 @@
-# Microsoft Edge Add-ons listing pack for Snug v2.0.0
+# Microsoft Edge Add-ons listing pack for Snug v2.2.0
 
 A field-by-field mirror of the Partner Center "Update" flow for the existing
 Edge product (Store ID `0RDCK9J6Z4VS`, extension ID
@@ -22,7 +22,7 @@ taken on 2026-10-07.
 | Field          | Live listing                                                                                    | This pack                                                                                  |
 | -------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Name           | `Bookmark Import/Export` (old name)                                                             | `Snug: Bookmark Export, Import & Backup`                                                   |
-| Version        | 1.0.0 (last update 2024-08-09)                                                                  | 2.0.0                                                                                      |
+| Version        | 1.0.0 (last update 2024-08-09)                                                                  | 2.2.0                                                                                      |
 | Permissions    | 2: `bookmarks`, `favicon`                                                                       | 8: adds `storage`, `alarms`, `downloads`, `offscreen`, `unlimitedStorage`, `notifications` |
 | Category       | Productivity                                                                                    | Productivity (unchanged)                                                                   |
 | Search terms   | 7 terms, all bookmark-related                                                                   | 7 terms, 21 words or fewer                                                                 |
@@ -81,20 +81,20 @@ in English. Counts are characters, including spaces and line breaks.
 
 | Locale | Characters | Limit         |
 | ------ | ---------- | ------------- |
-| en     | 1332       | 250 to 10,000 |
-| es     | 1517       | 250 to 10,000 |
-| pt_BR  | 1489       | 250 to 10,000 |
-| fr     | 1697       | 250 to 10,000 |
-| de     | 1662       | 250 to 10,000 |
-| ja     | 666        | 250 to 10,000 |
-| zh_CN  | 441        | 250 to 10,000 |
-| ru     | 1426       | 250 to 10,000 |
-| it     | 1507       | 250 to 10,000 |
-| ko     | 689        | 250 to 10,000 |
+| en     | 1347       | 250 to 10,000 |
+| es     | 1554       | 250 to 10,000 |
+| pt_BR  | 1513       | 250 to 10,000 |
+| fr     | 1719       | 250 to 10,000 |
+| de     | 1689       | 250 to 10,000 |
+| ja     | 677        | 250 to 10,000 |
+| zh_CN  | 449        | 250 to 10,000 |
+| ru     | 1453       | 250 to 10,000 |
+| it     | 1525       | 250 to 10,000 |
+| ko     | 701        | 250 to 10,000 |
 
 #### English (en, default)
 
-Description (1332 chars):
+Description (1347 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
@@ -103,14 +103,14 @@ Export your whole bookmark tree or just the folder you choose, in common formats
 
 Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. The latest five are kept on your device. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
-Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks straight to your Downloads folder on its own, in the formats you pick. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
+Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks on its own, in the formats you pick, to your Downloads folder or a folder you choose. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
 
 Snug runs entirely on your device — no account, no cloud, no server. Every operation reads and writes your browser's own bookmarks tree, and that's the whole trust story. The bookmark tree works fully with the keyboard and screen readers, and Snug speaks 10 languages.
 ```
 
 #### Spanish (es)
 
-Description (1517 chars):
+Description (1554 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.
@@ -119,14 +119,14 @@ Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos c
 
 Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Se conservan las últimas cinco en tu dispositivo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
 
-Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores directo a tu carpeta de Descargas, en los formatos que elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
+Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores por su cuenta, en los formatos que elijas, a tu carpeta de Descargas o a una carpeta que tú elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
 
 Snug funciona completamente en tu dispositivo — sin cuenta, sin nube, sin servidor. Cada operación lee y escribe directamente en los marcadores de tu navegador, y esa es toda la historia de confianza. El árbol de marcadores funciona por completo con el teclado y lectores de pantalla, y Snug habla 10 idiomas.
 ```
 
 #### Portuguese, Brazil (pt_BR)
 
-Description (1489 chars):
+Description (1513 chars):
 
 ```text
 O Snug leva seus favoritos entre navegadores, exatamente como você os deixou — nada é enviado a lugar nenhum e você não precisa de conta.
@@ -135,14 +135,14 @@ Exporte toda a árvore de favoritos ou só a pasta que escolher, em formatos com
 
 Antes de qualquer substituição, o Snug salva um instantâneo de segurança dos seus favoritos, para você poder desfazer. Os cinco mais recentes ficam no seu dispositivo. Uma página Duplicados encontra favoritos repetidos e exclui só os que você escolher, e a importação pode ignorar duplicados.
 
-Configure um agendamento uma única vez — por hora, diário, semanal e mais — e o Snug salva seus favoritos direto na pasta Downloads, nos formatos que você escolher. A Retenção mantém só os backups mais recentes, e um aviso informa se algum falhar. Os nomes de arquivo podem incluir data e hora automaticamente.
+Configure um agendamento uma única vez — por hora, diário, semanal e mais — e o Snug salva seus favoritos nos formatos que você escolher, na pasta Downloads ou em uma pasta de sua escolha. A Retenção mantém só os backups mais recentes, e um aviso informa se algum falhar. Os nomes de arquivo podem incluir data e hora automaticamente.
 
 O Snug roda inteiramente no seu dispositivo — sem conta, sem nuvem, sem servidor. Cada operação lê e grava direto nos favoritos do seu navegador, e essa é toda a história de confiança. A árvore de favoritos funciona totalmente com teclado e leitores de tela, e o Snug fala 10 idiomas.
 ```
 
 #### French (fr)
 
-Description (1697 chars):
+Description (1719 chars):
 
 ```text
 Snug déplace vos favoris d'un navigateur à l'autre, exactement comme vous les avez laissés — rien n'est envoyé nulle part, aucun compte requis.
@@ -151,14 +151,14 @@ Exportez toute l'arborescence de vos favoris ou seulement le dossier de votre ch
 
 Avant tout remplacement, Snug enregistre un instantané de sécurité de vos favoris pour que vous puissiez l'annuler. Les cinq derniers restent sur votre appareil. Une page Doublons repère les favoris en double et supprime uniquement ceux que vous choisissez, et l'import peut ignorer les doublons.
 
-Configurez un horaire une seule fois — toutes les heures, chaque jour, chaque semaine, et plus — et Snug sauvegarde vos favoris directement dans votre dossier Téléchargements, dans les formats de votre choix. La Rétention ne conserve que les sauvegardes les plus récentes, et une notification vous prévient en cas d'échec. Les noms de fichier peuvent inclure automatiquement la date et l'heure.
+Configurez un horaire une seule fois — toutes les heures, chaque jour, chaque semaine, et plus — et Snug sauvegarde vos favoris dans les formats de votre choix, dans votre dossier Téléchargements ou dans un dossier de votre choix. La Rétention ne conserve que les sauvegardes les plus récentes, et une notification vous prévient en cas d'échec. Les noms de fichier peuvent inclure automatiquement la date et l'heure.
 
 Snug fonctionne entièrement sur votre appareil — pas de compte, pas de cloud, pas de serveur. Chaque opération lit et écrit directement dans l'arborescence de favoris de votre navigateur, et c'est toute l'histoire de la confiance. L'arbre des favoris s'utilise entièrement au clavier et avec un lecteur d'écran, et Snug parle 10 langues.
 ```
 
 #### German (de)
 
-Description (1662 chars):
+Description (1689 chars):
 
 ```text
 Snug überträgt deine Lesezeichen zwischen Browsern, genau so, wie du sie hinterlassen hast – nichts wird irgendwohin gesendet, und ein Konto brauchst du nicht.
@@ -167,14 +167,14 @@ Exportiere deine gesamte Lesezeichenstruktur oder nur den Ordner deiner Wahl, in
 
 Vor jedem Ersetzen legt Snug eine Sicherheitskopie deiner Lesezeichen an, damit du es rückgängig machen kannst. Die letzten fünf bleiben auf deinem Gerät. Die Seite Duplikate findet doppelte Lesezeichen und löscht nur die, die du auswählst, und beim Import lassen sich Duplikate überspringen.
 
-Richte einmal einen Zeitplan ein – stündlich, täglich, wöchentlich und mehr –, und Snug sichert deine Lesezeichen von selbst direkt in deinen Download-Ordner, in den Formaten, die du wählst. Die Aufbewahrung behält nur die neuesten Sicherungen, und eine Benachrichtigung meldet, wenn eine fehlschlägt. Dateinamen können automatisch Datum und Uhrzeit enthalten.
+Richte einmal einen Zeitplan ein – stündlich, täglich, wöchentlich und mehr –, und Snug sichert deine Lesezeichen von selbst, in den Formaten, die du wählst, in deinen Download-Ordner oder in einen Ordner deiner Wahl. Die Aufbewahrung behält nur die neuesten Sicherungen, und eine Benachrichtigung meldet, wenn eine fehlschlägt. Dateinamen können automatisch Datum und Uhrzeit enthalten.
 
 Snug läuft vollständig auf deinem Gerät – kein Konto, keine Cloud, kein Server. Jeder Vorgang liest und schreibt direkt in der Lesezeichenstruktur deines Browsers, und das ist die ganze Vertrauensgeschichte. Der Lesezeichenbaum funktioniert vollständig mit Tastatur und Screenreadern, und Snug spricht 10 Sprachen.
 ```
 
 #### Japanese (ja)
 
-Description (666 chars):
+Description (677 chars):
 
 ```text
 Snugは、ブックマークをブラウザー間でそのままの状態で移せます。データはどこにも送信されず、アカウントも不要です。
@@ -183,14 +183,14 @@ Snugは、ブックマークをブラウザー間でそのままの状態で移�
 
 置き換えの前には、Snugがブックマークの安全スナップショットを保存するので、元に戻せます。「重複」ページでは重複したブックマークを見つけ、選んだものだけを削除できます。読み込み時に重複をスキップすることもできます。
 
-スケジュールを一度設定すれば、毎時、毎日、毎週などの間隔で、選んだ形式のバックアップがダウンロードフォルダーに自動で保存されます。保持設定で最新のバックアップだけを残し、失敗したときは通知でお知らせします。ファイル名には日付と時刻を自動で含められます。
+スケジュールを一度設定すれば、毎時、毎日、毎週などの間隔で、選んだ形式のバックアップがダウンロードフォルダーまたは選んだフォルダーに自動で保存されます。保持設定で最新のバックアップだけを残し、失敗したときは通知でお知らせします。ファイル名には日付と時刻を自動で含められます。
 
 Snugはすべて端末内で動作します。アカウント、クラウド、サーバーは不要です。すべての操作はブラウザー自身のブックマークを直接読み書きするだけ。それが信頼の理由のすべてです。ブックマークツリーはキーボードとスクリーンリーダーで完全に操作でき、10言語に対応しています。
 ```
 
 #### Chinese, Simplified (zh_CN)
 
-Description (441 chars):
+Description (449 chars):
 
 ```text
 Snug 在浏览器之间原样迁移你的书签：不会向任何地方发送数据，也无需账号。
@@ -199,14 +199,14 @@ Snug 在浏览器之间原样迁移你的书签：不会向任何地方发送数
 
 每次替换之前，Snug 都会先保存书签的安全快照，方便你撤销。最新的五份会保存在你的设备上。“重复项”页面可查找重复书签，并只删除你选中的；导入时也可以跳过重复项。
 
-只需设置一次计划，可按每小时、每天、每周等间隔，Snug 就会自动把书签按你选的格式备份到下载文件夹。保留设置只留下最新的备份，备份失败时会有通知提醒。文件名可自动包含日期和时间。
+只需设置一次计划，可按每小时、每天、每周等间隔，Snug 就会自动把书签按你选的格式备份到下载文件夹或你选择的文件夹。保留设置只留下最新的备份，备份失败时会有通知提醒。文件名可自动包含日期和时间。
 
 Snug 完全在你的设备上运行：无需账号，没有云端，没有服务器。每个操作都直接读写浏览器自身的书签，这就是信任的全部。书签树可完全通过键盘和屏幕阅读器使用，并支持 10 种语言。
 ```
 
 #### Russian (ru)
 
-Description (1426 chars):
+Description (1453 chars):
 
 ```text
 Snug переносит ваши закладки между браузерами в точности так, как вы их оставили: ничего не отправляется наружу, аккаунт не нужен.
@@ -215,14 +215,14 @@ Snug переносит ваши закладки между браузерам�
 
 Перед любой заменой Snug сохраняет страховочный снимок ваших закладок, чтобы её можно было отменить. Пять последних остаются на вашем устройстве. Страница «Дубликаты» находит повторяющиеся закладки и удаляет только те, что вы выбрали, а при импорте дубликаты можно пропускать.
 
-Настройте расписание один раз — каждый час, каждый день, каждую неделю и не только, — и Snug будет сам сохранять закладки в папку «Загрузки» в выбранных форматах. Хранение оставляет только последние копии, а уведомление сообщит, если копия не удалась. В имена файлов можно автоматически добавлять дату и время.
+Настройте расписание один раз — каждый час, каждый день, каждую неделю и не только, — и Snug будет сам сохранять закладки в выбранных форматах в папку «Загрузки» или в выбранную вами папку. Хранение оставляет только последние копии, а уведомление сообщит, если копия не удалась. В имена файлов можно автоматически добавлять дату и время.
 
 Snug работает целиком на вашем устройстве: без аккаунта, облака и сервера. Каждая операция читает и записывает дерево закладок самого браузера, и в этом вся суть доверия. Дерево закладок полностью доступно с клавиатуры и для программ чтения с экрана, а Snug говорит на 10 языках.
 ```
 
 #### Italian (it)
 
-Description (1507 chars):
+Description (1525 chars):
 
 ```text
 Snug sposta i tuoi segnalibri tra i browser, esattamente come li hai lasciati — niente viene inviato da nessuna parte e non serve alcun account.
@@ -231,14 +231,14 @@ Esporta l'intera struttura dei segnalibri o solo la cartella che scegli, in form
 
 Prima di ogni sostituzione, Snug salva un'istantanea di sicurezza dei tuoi segnalibri, così puoi annullarla. Le ultime cinque restano sul tuo dispositivo. Una pagina Duplicati trova i segnalibri ripetuti ed elimina solo quelli che scegli, e l'importazione può saltare i duplicati.
 
-Imposta una pianificazione una sola volta — ogni ora, ogni giorno, ogni settimana e altro — e Snug salva i tuoi segnalibri direttamente nella cartella Download, nei formati che scegli. La Conservazione tiene solo i backup più recenti e una notifica ti avvisa se uno fallisce. I nomi dei file possono includere automaticamente data e ora.
+Imposta una pianificazione una sola volta — ogni ora, ogni giorno, ogni settimana e altro — e Snug salva i tuoi segnalibri nei formati che scegli, nella cartella Download o in una cartella a tua scelta. La Conservazione tiene solo i backup più recenti e una notifica ti avvisa se uno fallisce. I nomi dei file possono includere automaticamente data e ora.
 
 Snug funziona interamente sul tuo dispositivo — nessun account, nessun cloud, nessun server. Ogni operazione legge e scrive direttamente nei segnalibri del tuo browser, ed è tutta la storia della fiducia. L'albero dei segnalibri funziona interamente con tastiera e screen reader, e Snug parla 10 lingue.
 ```
 
 #### Korean (ko)
 
-Description (689 chars):
+Description (701 chars):
 
 ```text
 Snug는 북마크를 브라우저 사이에서 있는 그대로 옮겨 줘요. 어디로도 전송되지 않고 계정도 필요 없어요.
@@ -247,7 +247,7 @@ Snug는 북마크를 브라우저 사이에서 있는 그대로 옮겨 줘요. �
 
 교체하기 전에 Snug가 북마크의 안전 스냅샷을 저장하므로 실행 취소할 수 있어요. 최신 5개는 기기에 보관돼요. 중복 페이지에서는 중복된 북마크를 찾아 선택한 것만 삭제하고, 가져올 때 중복을 건너뛸 수도 있어요.
 
-일정을 한 번만 설정하면 매시간, 매일, 매주 등 원하는 주기로 선택한 형식의 백업이 다운로드 폴더에 자동으로 저장돼요. 보존 설정으로 최신 백업만 남기고, 백업이 실패하면 알림으로 알려 드려요. 파일 이름에 날짜와 시간을 자동으로 넣을 수 있어요.
+일정을 한 번만 설정하면 매시간, 매일, 매주 등 원하는 주기로 선택한 형식의 백업이 다운로드 폴더 또는 직접 고른 폴더에 자동으로 저장돼요. 보존 설정으로 최신 백업만 남기고, 백업이 실패하면 알림으로 알려 드려요. 파일 이름에 날짜와 시간을 자동으로 넣을 수 있어요.
 
 Snug는 모든 작업이 기기 안에서만 이루어져요. 계정도, 클라우드도, 서버도 없어요. 모든 작업은 브라우저 자체의 북마크를 직접 읽고 쓸 뿐이고, 그게 신뢰의 전부예요. 북마크 트리는 키보드와 화면 낭독기로 완전히 사용할 수 있고, 10개 언어를 지원해요.
 ```
@@ -314,10 +314,10 @@ review in the checklist.
 
 ### Single purpose
 
-Single purpose description (412 chars):
+Single purpose description (441 chars):
 
 ```text
-Snug helps people keep their bookmarks portable and safe: export, import, back up and clean up. It exports bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL files, imports them from HTML, JSON, CSV, XBEL and other browsers' bookmarks files, undoes a replace with a safety snapshot, removes duplicates the user picks, and runs scheduled backups to the Downloads folder. Everything happens on the user's device.
+Snug helps people keep their bookmarks portable and safe: export, import, back up and clean up. It exports bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL files, imports them from HTML, JSON, CSV, XBEL and other browsers' bookmarks files, undoes a replace with a safety snapshot, removes duplicates the user picks, and runs scheduled backups to the Downloads folder or a folder the user chooses. Everything happens on the user's device.
 ```
 
 ### Permission justifications
@@ -339,10 +339,10 @@ Snug reads the bookmarks tree to export it and to scan for duplicates, and creat
 Snug reads each bookmark's cached site icon from the browser's own favicon cache to show it next to the bookmark in the folder picker and, when the user turns the option on, to embed it in exported files. Icons come from the browser cache, so no request is made to the bookmarked sites.
 ```
 
-`storage` (205 chars):
+`storage` (268 chars):
 
 ```text
-Snug keeps the user's settings and the backup schedule on the device. It also keeps the latest five safety snapshots of the bookmarks, so a replace import can be undone. Nothing is synced or sent anywhere.
+Snug keeps the user's settings, the backup schedule and the handle of the backup folder the user chose (in IndexedDB) on the device. It also keeps the latest five safety snapshots of the bookmarks, so a replace import can be undone. Nothing is synced or sent anywhere.
 ```
 
 `unlimitedStorage` (298 chars):
@@ -351,16 +351,16 @@ Snug keeps the user's settings and the backup schedule on the device. It also ke
 Before a replace import, Snug saves a safety snapshot of the user's bookmarks in extension storage so the import can be undone. A large library can exceed the default quota, so this permission lifts it. Only the latest five snapshots are kept, they stay on the device, and nothing is sent anywhere.
 ```
 
-`alarms` (267 chars):
+`alarms` (296 chars):
 
 ```text
-Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder. There is no alarm unless the user turns scheduled backups on.
+Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder or the folder the user chose. There is no alarm unless the user turns scheduled backups on.
 ```
 
-`downloads` (278 chars):
+`downloads` (380 chars):
 
 ```text
-Snug saves scheduled backups and manual Export now runs to the user's Downloads folder, in a configurable subfolder. With Retention on, it removes only the oldest backup files that Snug itself saved. It only downloads files generated on the device from the user's own bookmarks.
+Snug saves scheduled backups and manual Export now runs to the user's Downloads folder, in a configurable subfolder. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. With Retention on, it removes only the oldest backup files that Snug itself saved. It only downloads files generated on the device from the user's own bookmarks.
 ```
 
 `offscreen` (307 chars):
@@ -406,9 +406,9 @@ Test steps (no account or login is needed, everything is local):
 3. Open the Import page. Drop one or more bookmarks files on the page, or click it to select them (an HTML export from step 2 works). A preview is shown first. Choose Merge, Replace or New folder, then confirm. Nothing changes until you confirm.
 4. After a Replace import, use Undo to restore the previous bookmarks from the safety snapshot.
 5. Open the Duplicates page. It lists repeated bookmarks. Only the ones you tick are deleted.
-6. Open Auto-export, turn it on and pick a schedule. Use "Export now" to run one backup immediately.
+6. Open Auto-export, turn it on and pick a schedule. Use "Export now" to run one backup immediately. Optionally choose "Custom folder" as the destination and pick a folder, then run Export now again: the file is saved there instead of Downloads.
 
-Policy 1.1.8: every change to the user's bookmarks or favorites is started by the user. Imports, Replace, Undo and duplicate removal run only after an explicit click and confirmation. The only automatic action is a backup schedule the user turned on, and it only writes files to Downloads. It never changes bookmarks.
+Policy 1.1.8: every change to the user's bookmarks or favorites is started by the user. Imports, Replace, Undo and duplicate removal run only after an explicit click and confirmation. The only automatic action is a backup schedule the user turned on, and it only writes files to Downloads or to a folder the user picked. It never changes bookmarks.
 
 Policy 1.9: the only notification is one shown when a scheduled backup fails. It can be turned off with the "Failure notification" switch in the Auto-export settings, and the extension keeps working with it off. No notification is shown when backups succeed.
 

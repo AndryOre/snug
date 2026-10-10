@@ -30,10 +30,10 @@ Seite Duplikate findet doppelte Lesezeichen und löscht nur die, die du
 auswählst, und beim Import lassen sich Duplikate überspringen.
 
 Richte einmal einen Zeitplan ein – stündlich, täglich, wöchentlich und mehr –,
-und Snug sichert deine Lesezeichen von selbst direkt in deinen Download-Ordner,
-in den Formaten, die du wählst. Die Aufbewahrung behält nur die neuesten
-Sicherungen, und eine Benachrichtigung meldet, wenn eine fehlschlägt. Dateinamen
-können automatisch Datum und Uhrzeit enthalten.
+und Snug sichert deine Lesezeichen von selbst, in den Formaten, die du wählst,
+in deinen Download-Ordner oder in einen Ordner deiner Wahl. Die Aufbewahrung
+behält nur die neuesten Sicherungen, und eine Benachrichtigung meldet, wenn eine
+fehlschlägt. Dateinamen können automatisch Datum und Uhrzeit enthalten.
 
 Snug läuft vollständig auf deinem Gerät – kein Konto, keine Cloud, kein Server.
 Jeder Vorgang liest und schreibt direkt in der Lesezeichenstruktur deines

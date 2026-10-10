@@ -1,7 +1,19 @@
 ---
 title: Neuigkeiten
-sourceHash: 6cb093a38ee10dfc
+sourceHash: 8d640827463373eb
 ---
+
+## 2.2.0
+
+2026-10-10
+
+- Auto-Export kann jetzt in einen Eigenen Ordner speichern, den du frei auf
+  deinem Computer auswählst.
+- Snug warnt dich jetzt frühzeitig, wenn Ordnerzugriff erforderlich ist, und die
+  Auto-Export-Seite hat eine Schaltfläche „Zugriff erlauben“, um ihn erneut zu
+  gewähren.
+- Aufbewahrung behält nur die neuesten Durchläufe, gezählt über Downloads und
+  den Eigenen Ordner hinweg.
 
 ## 2.1.0
 

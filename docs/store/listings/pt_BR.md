@@ -28,9 +28,10 @@ dispositivo. Uma página Duplicados encontra favoritos repetidos e exclui só os
 que você escolher, e a importação pode ignorar duplicados.
 
 Configure um agendamento uma única vez — por hora, diário, semanal e mais — e o
-Snug salva seus favoritos direto na pasta Downloads, nos formatos que você
-escolher. A Retenção mantém só os backups mais recentes, e um aviso informa se
-algum falhar. Os nomes de arquivo podem incluir data e hora automaticamente.
+Snug salva seus favoritos nos formatos que você escolher, na pasta Downloads ou
+em uma pasta de sua escolha. A Retenção mantém só os backups mais recentes, e um
+aviso informa se algum falhar. Os nomes de arquivo podem incluir data e hora
+automaticamente.
 
 O Snug roda inteiramente no seu dispositivo — sem conta, sem nuvem, sem
 servidor. Cada operação lê e grava direto nos favoritos do seu navegador, e essa

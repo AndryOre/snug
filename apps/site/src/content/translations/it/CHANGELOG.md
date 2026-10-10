@@ -1,7 +1,19 @@
 ---
 title: Novità
-sourceHash: 6cb093a38ee10dfc
+sourceHash: 8d640827463373eb
 ---
+
+## 2.2.0
+
+2026-10-10
+
+- L'esportazione automatica ora può salvare in una Cartella personalizzata a tua
+  scelta, ovunque sul computer.
+- Snug ora ti avvisa in anticipo quando serve l'accesso alla cartella, e la
+  pagina Esportazione automatica ha un pulsante Consenti accesso per concederlo
+  di nuovo.
+- La Conservazione tiene solo le esecuzioni più recenti, contate tra Download e
+  la Cartella personalizzata.
 
 ## 2.1.0
 

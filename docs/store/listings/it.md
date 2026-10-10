@@ -27,10 +27,10 @@ Una pagina Duplicati trova i segnalibri ripetuti ed elimina solo quelli che
 scegli, e l'importazione può saltare i duplicati.
 
 Imposta una pianificazione una sola volta — ogni ora, ogni giorno, ogni
-settimana e altro — e Snug salva i tuoi segnalibri direttamente nella cartella
-Download, nei formati che scegli. La Conservazione tiene solo i backup più
-recenti e una notifica ti avvisa se uno fallisce. I nomi dei file possono
-includere automaticamente data e ora.
+settimana e altro — e Snug salva i tuoi segnalibri nei formati che scegli, nella
+cartella Download o in una cartella a tua scelta. La Conservazione tiene solo i
+backup più recenti e una notifica ti avvisa se uno fallisce. I nomi dei file
+possono includere automaticamente data e ora.
 
 Snug funziona interamente sul tuo dispositivo — nessun account, nessun cloud,
 nessun server. Ogni operazione legge e scrive direttamente nei segnalibri del

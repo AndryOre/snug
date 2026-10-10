@@ -1,7 +1,19 @@
 ---
 title: Nouveautés
-sourceHash: 6cb093a38ee10dfc
+sourceHash: 8d640827463373eb
 ---
+
+## 2.2.0
+
+2026-10-10
+
+- L'export automatique peut désormais enregistrer dans un Dossier personnalisé
+  de votre choix, n'importe où sur votre ordinateur.
+- Snug vous prévient désormais à l'avance lorsque l'accès au dossier est requis,
+  et la page d'export automatique propose un bouton Autoriser l'accès pour
+  l'accorder de nouveau.
+- La Rétention ne garde que les exécutions les plus récentes, comptées sur
+  l'ensemble des Téléchargements et du Dossier personnalisé.
 
 ## 2.1.0
 
