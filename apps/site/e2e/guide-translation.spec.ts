@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { localePath } from '../src/i18n/locales'
+import { languageTag, localePath } from '../src/i18n/locales'
 import {
   TRANSLATED_LOCALES,
   translatedTitle,
@@ -37,7 +37,10 @@ for (const locale of TRANSLATED_LOCALES) {
   }) => {
     await page.goto(localePath(locale, ENGLISH_PATH))
     await expect(page.locator('[data-translation-notice]')).toHaveCount(0)
-    await expect(page.locator('main')).toHaveAttribute('lang', locale)
+    await expect(page.locator('main')).toHaveAttribute(
+      'lang',
+      languageTag(locale),
+    )
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
       translatedTitle(locale) ?? '',
     )
@@ -47,10 +50,13 @@ for (const locale of TRANSLATED_LOCALES) {
 for (const locale of UNTRANSLATED_LOCALES.slice(0, 1)) {
   test('the notice keeps the language of the page chrome', async ({ page }) => {
     await page.goto(localePath(locale, ENGLISH_PATH))
-    await expect(page.locator('html')).toHaveAttribute('lang', locale)
+    await expect(page.locator('html')).toHaveAttribute(
+      'lang',
+      languageTag(locale),
+    )
     await expect(page.locator('[data-translation-notice]')).toHaveAttribute(
       'lang',
-      locale,
+      languageTag(locale),
     )
   })
 }
