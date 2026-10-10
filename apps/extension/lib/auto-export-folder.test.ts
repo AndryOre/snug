@@ -78,6 +78,24 @@ describe('runAutoExport with the Custom folder destination', () => {
     })
   })
 
+  it('uses a destination override instead of the stored one', async () => {
+    const root = new FakeDirectoryHandle('Backups')
+    folderHandleMock.handle = root
+    await autoExportConfigStore.setValue(
+      folderConfig({ destination: 'downloads', formats: ['json'], path: '' }),
+    )
+    const download = mockDownloadsAndBadge()
+
+    await runAutoExport('manual', {
+      formats: ['json'],
+      path: '',
+      destination: 'folder',
+    })
+
+    expect(root.files.has('export.json')).toBe(true)
+    expect(download).not.toHaveBeenCalled()
+  })
+
   it('never overwrites: an existing name gets (1), then (2)', async () => {
     const root = new FakeDirectoryHandle('Backups')
     folderHandleMock.handle = root

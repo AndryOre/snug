@@ -1438,5 +1438,42 @@
   "import_skippedFilesTitle": {
     "message": "Files not imported",
     "description": "Heading above the files an Import batch left out, each with its reason"
+  },
+  "autoExportPage_saveTo": {
+    "message": "Save to",
+    "description": "Label of the Save to group choosing the Export destination"
+  },
+  "autoExportPage_destinationDownloads": {
+    "message": "Downloads",
+    "description": "Save to option: the browser Downloads folder"
+  },
+  "autoExportPage_destinationFolder": {
+    "message": "Custom folder",
+    "description": "Save to option: a folder the user picks anywhere on the computer"
+  },
+  "autoExportPage_chooseFolder": {
+    "message": "Choose folder…",
+    "description": "Button that opens the folder picker when no Custom folder is chosen yet"
+  },
+  "autoExportPage_changeFolder": {
+    "message": "Change folder",
+    "description": "Button that replaces the chosen Custom folder"
+  },
+  "autoExportPage_chooseFolderDescription": {
+    "message": "Pick the folder Snug saves into. It can be anywhere on your computer.",
+    "description": "Help text shown while Custom folder has no folder yet"
+  },
+  "autoExportPage_folderChosenDescription": {
+    "message": "Inside \"$FOLDER$\".",
+    "description": "Description under the subfolder field once a Custom folder is chosen; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_folderRestartHint": {
+    "message": "After Chrome restarts, Snug asks once to confirm access to this folder. Choose \"Allow on every visit\" to keep Auto-export running.",
+    "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
   }
 }

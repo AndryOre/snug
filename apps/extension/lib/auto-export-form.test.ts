@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   parseKeepLast,
+  resolveEffectiveDestination,
   resolveFolder,
   resolveFormats,
 } from './auto-export-form'
@@ -45,4 +46,15 @@ describe('parseKeepLast', () => {
       expect(parseKeepLast(typed)).toBeNull()
     },
   )
+})
+
+describe('resolveEffectiveDestination', () => {
+  it('keeps the stored destination when the picker is available', () => {
+    expect(resolveEffectiveDestination('folder', true)).toBe('folder')
+    expect(resolveEffectiveDestination('downloads', true)).toBe('downloads')
+  })
+
+  it('treats a stored Custom folder as Downloads without the picker', () => {
+    expect(resolveEffectiveDestination('folder', false)).toBe('downloads')
+  })
 })

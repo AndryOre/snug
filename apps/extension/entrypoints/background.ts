@@ -77,6 +77,7 @@ async function runManualExport(
     await runAutoExport('manual', {
       formats: message.formats,
       path: message.path,
+      destination: message.destination,
     })
     return { ok: true }
   } catch (error) {

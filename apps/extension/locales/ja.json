@@ -1422,5 +1422,42 @@
   "import_skippedFilesTitle": {
     "message": "インポートされなかったファイル",
     "description": "Heading above the files an Import batch left out, each with its reason"
+  },
+  "autoExportPage_saveTo": {
+    "message": "保存先",
+    "description": "Label of the Save to group choosing the Export destination"
+  },
+  "autoExportPage_destinationDownloads": {
+    "message": "ダウンロード",
+    "description": "Save to option: the browser Downloads folder"
+  },
+  "autoExportPage_destinationFolder": {
+    "message": "カスタムフォルダ",
+    "description": "Save to option: a folder the user picks anywhere on the computer"
+  },
+  "autoExportPage_chooseFolder": {
+    "message": "フォルダを選択…",
+    "description": "Button that opens the folder picker when no Custom folder is chosen yet"
+  },
+  "autoExportPage_changeFolder": {
+    "message": "フォルダを変更",
+    "description": "Button that replaces the chosen Custom folder"
+  },
+  "autoExportPage_chooseFolderDescription": {
+    "message": "Snug の保存先フォルダを選んでください。パソコン内のどこでも指定できます。",
+    "description": "Help text shown while Custom folder has no folder yet"
+  },
+  "autoExportPage_folderChosenDescription": {
+    "message": "「$FOLDER$」内。",
+    "description": "Description under the subfolder field once a Custom folder is chosen; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_folderRestartHint": {
+    "message": "Chrome の再起動後、Snug はこのフォルダへのアクセスの確認を一度だけ求めます。自動エクスポートを維持するには「毎回許可」を選んでください。",
+    "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
   }
 }

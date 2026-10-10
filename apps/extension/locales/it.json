@@ -1439,5 +1439,42 @@
   "import_skippedFilesTitle": {
     "message": "File non importati",
     "description": "Heading above the files an Import batch left out, each with its reason"
+  },
+  "autoExportPage_saveTo": {
+    "message": "Salva in",
+    "description": "Label of the Save to group choosing the Export destination"
+  },
+  "autoExportPage_destinationDownloads": {
+    "message": "Download",
+    "description": "Save to option: the browser Downloads folder"
+  },
+  "autoExportPage_destinationFolder": {
+    "message": "Cartella personalizzata",
+    "description": "Save to option: a folder the user picks anywhere on the computer"
+  },
+  "autoExportPage_chooseFolder": {
+    "message": "Scegli cartella…",
+    "description": "Button that opens the folder picker when no Custom folder is chosen yet"
+  },
+  "autoExportPage_changeFolder": {
+    "message": "Cambia cartella",
+    "description": "Button that replaces the chosen Custom folder"
+  },
+  "autoExportPage_chooseFolderDescription": {
+    "message": "Scegli la cartella in cui Snug salva i file. Può trovarsi ovunque sul tuo computer.",
+    "description": "Help text shown while Custom folder has no folder yet"
+  },
+  "autoExportPage_folderChosenDescription": {
+    "message": "In \"$FOLDER$\".",
+    "description": "Description under the subfolder field once a Custom folder is chosen; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_folderRestartHint": {
+    "message": "Dopo il riavvio di Chrome, Snug chiede una sola volta di confermare l’accesso a questa cartella. Scegli \"Consenti a ogni visita\" per mantenere attiva l’esportazione automatica.",
+    "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
   }
 }

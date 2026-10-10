@@ -31,6 +31,7 @@ import type {
   AutoExportLastRun,
   AutoExportTrigger,
   DayOfWeek,
+  ExportDestination,
 } from '@/lib/types'
 
 /**
@@ -54,6 +55,7 @@ export interface RunManualExportMessage {
   type: typeof RUN_MANUAL_EXPORT_MESSAGE_TYPE
   formats: ExportFormat[]
   path: string
+  destination?: ExportDestination
 }
 
 /**
@@ -466,13 +468,20 @@ async function requireGrantedFolder(
  * skip above — "Export now" works regardless of the Enable switch or of
  * unsaved changes.
  * @param trigger What caused this run.
- * @param overrides `formats`/`path` to use instead of the stored config.
+ * @param overrides `formats`/`path`/`destination` to use instead of the
+ *   stored config.
  * @param overrides.formats The formats to export, overriding the stored config.
  * @param overrides.path The output path, overriding the stored config.
+ * @param overrides.destination The Export destination, overriding the stored
+ *   one.
  */
 export async function runAutoExport(
   trigger: AutoExportTrigger,
-  overrides?: { formats: ExportFormat[]; path: string },
+  overrides?: {
+    formats: ExportFormat[]
+    path: string
+    destination?: ExportDestination
+  },
 ): Promise<void> {
   const config = await autoExportConfigStore.getValue()
   if (!overrides && (!config.enabled || config.formats.length === 0)) return
@@ -480,7 +489,8 @@ export async function runAutoExport(
   const formats = overrides?.formats ?? config.formats
   const path = overrides?.path ?? config.path
 
-  const isFolderDestination = config.destination === 'folder'
+  const destination = overrides?.destination ?? config.destination
+  const isFolderDestination = destination === 'folder'
   const runAt = Date.now()
   const isTrackedRun = trigger !== 'manual'
   if (isTrackedRun) {

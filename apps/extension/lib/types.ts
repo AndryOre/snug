@@ -102,7 +102,7 @@ export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
  * or the user-chosen Custom `folder` written through a stored directory
  * handle.
  */
-type ExportDestination = 'downloads' | 'folder'
+export type ExportDestination = 'downloads' | 'folder'
 
 export interface AutoExportConfig {
   enabled: boolean
