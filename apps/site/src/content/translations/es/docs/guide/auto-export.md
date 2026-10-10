@@ -1,32 +1,54 @@
 ---
 title: Auto-export
-sourceHash: 3b23ffc5e9f86ebd
+sourceHash: 5eb2acaa2e4867cc
 ---
 
 Snug puede exportar tus marcadores según un horario, sin ninguna acción manual:
 
 1. Abre la página **Auto-export** de la app.
-2. Activa la exportación automática, elige uno o más de los seis formatos, un
-   intervalo y, si quieres, una ruta de carpeta para los archivos exportados.
-   Los intervalos son cada hora, cada 12 horas, diaria, cada 3 días o semanal.
-   Las ejecuciones diarias, cada 3 días y semanales ocurren a una hora
-   preferida; las semanales además te permiten elegir el día. Las ejecuciones
-   cada hora y cada 12 horas ignoran la hora.
+2. Activa la exportación automática, elige uno o más de los seis formatos, dónde
+   guardarlos (Descargas o una Carpeta personalizada), un intervalo y, si
+   quieres, una ruta de subcarpeta para los archivos exportados. Los intervalos
+   son cada hora, cada 12 horas, diaria, cada 3 días o semanal. Las ejecuciones
+   diarias, cada 3 días y semanales ocurren a una hora preferida; las semanales
+   además te permiten elegir el día. Las ejecuciones cada hora y cada 12 horas
+   ignoran la hora.
 3. A partir de entonces, la extensión exporta tus marcadores con ese horario y
-   guarda los archivos directamente en tu carpeta de Descargas, sin cuadro de
-   diálogo para guardar ni avisos adicionales. Si el navegador estaba cerrado o
-   la extensión no estaba disponible cuando tocaba una exportación programada,
-   se pone al día automáticamente poco después de que el navegador vuelva a
-   iniciarse, en lugar de esperar a la siguiente hora programada.
+   guarda los archivos directamente en el lugar que elegiste, Descargas de forma
+   predeterminada, sin cuadro de diálogo para guardar ni avisos adicionales. Si
+   el navegador estaba cerrado o la extensión no estaba disponible cuando tocaba
+   una exportación programada, se pone al día automáticamente poco después de
+   que el navegador vuelva a iniciarse, en lugar de esperar a la siguiente hora
+   programada.
+
+**Guardar en** define el destino. **Descargas** (el valor predeterminado) guarda
+en la carpeta de Descargas del navegador. **Carpeta personalizada** guarda en
+una carpeta que eliges en cualquier lugar de tu equipo: selecciona **Elegir
+carpeta…** y, más adelante, **Cambiar carpeta** para elegir otra. Selecciona
+**Descargas** de nuevo en cualquier momento para volver. La ruta de subcarpeta
+es relativa al destino, así que nombra una carpeta dentro de la carpeta que
+elegiste. Si ya existe un archivo con el mismo nombre, Snug añade el sufijo "
+(1)" y nunca lo sobrescribe.
+
+Tras el primer reinicio del navegador, Chrome te pide una vez que confirmes el
+acceso a la Carpeta personalizada. Elige "Permitir en cada visita" para que las
+ejecuciones desatendidas sigan funcionando.
+
+Si falta el acceso a la carpeta, Snug te avisa al iniciar el navegador. El popup
+y la página **Auto-export** muestran entonces "Se necesita acceso a la carpeta"
+con un botón **Permitir acceso**. Hasta que permitas el acceso, las ejecuciones
+fallan y no se guarda nada en Descargas en su lugar.
 
 **Conservar las últimas N ejecuciones** (Retención, 10 de forma predeterminada)
 limita cuántas exportaciones se acumulan: tras cada ejecución correcta, Snug
-elimina los archivos de sus propias ejecuciones más antiguas más allá de N
-(todos los formatos de una ejecución conservada se quedan) y sus entradas en el
-historial de descargas del navegador. Solo elimina archivos que Snug mismo
-guardó, nunca otros archivos de la carpeta, y un archivo que ya borraste o
-moviste simplemente se omite. Una ejecución fallida no elimina nada. Ponlo en 0
-para conservarlo todo.
+conserva las N ejecuciones más recientes entre Descargas y la Carpeta
+personalizada y elimina los archivos de sus propias ejecuciones más antiguas
+(todos los formatos de una ejecución conservada se quedan). Los archivos
+guardados en Descargas también pierden sus entradas en el historial de descargas
+del navegador. Solo elimina archivos que Snug mismo guardó, nunca otros archivos
+de la carpeta, y un archivo que ya borraste o moviste simplemente se omite. Tras
+cambiar de carpeta, los archivos de la carpeta anterior no se tocan. Una
+ejecución fallida no elimina nada. Ponlo en 0 para conservarlo todo.
 
 **Avisarme cuando falle una exportación** (activado de forma predeterminada)
 muestra una notificación del sistema, con el título "Snug · Falló la exportación
