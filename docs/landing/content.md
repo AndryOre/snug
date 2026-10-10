@@ -26,7 +26,8 @@ document is content only: it does not decide layout, visuals or components.
   Re-check on the listing before launch.
 
 Section order: 1 Hero, 2 Trust proof, 3 Features, 4 Real interface, 5 Video, 6
-Social proof, 7 FAQ, 8 Final call to action and footer, 9 Search metadata.
+Social proof, 7 FAQ, 8 Final call to action and footer, 9 Search metadata, 10
+Comparison pages.
 
 ---
 
@@ -1631,6 +1632,188 @@ and state the platform and the privacy promise. The privacy page title is
 
 Sources: Product: Positioning, Capabilities and Constraints. Scheduled backups
 ship in `lib/auto-export.ts`.
+
+---
+
+## 10. Comparison pages
+
+Copy for the Alternatives page (`/alternatives/`) and the three Comparison
+pages. Source: `apps/site/src/content/comparisons/en.json`, which this section
+mirrors. Numbers and dates are never written in the copy: `{users}`, `{rating}`,
+`{date}`, `{languages}` and `{historyMonths}` are filled from
+`apps/site/src/content/competitors.ts`, and `{name}` is the competitor name.
+Every claim about another extension comes from its live Chrome Web Store
+listing; absence is written as "Not listed".
+
+### EN
+
+#### Shared
+
+- **Breadcrumb:** Snug / Alternatives (label: Breadcrumb)
+- **In short heading:** In short
+- **At a glance heading:** At a glance
+- **As of label:** As of {date}
+- **Absent value:** Not listed
+- **Criteria:** Export formats; Import; Choose which folders to export;
+  Scheduled export; Copies to online storage; Browsers; Languages; Users and
+  rating; Data disclosure on the store listing
+- **Card link:** Compare with Snug
+- **Pick Snug heading:** Pick Snug if
+- **Pick other heading:** Pick {name} if
+- **Switching heading:** Switching to Snug
+- **Checked note:** Checked against each Chrome Web Store listing on {date}.
+  Listings change, so confirm on the listing before you decide.
+- **CTA title:** Try Snug on your own bookmarks
+- **CTA body:** Free and open source. No account, no network calls.
+- **CTA button:** Add to Chrome
+
+#### Alternatives page
+
+- **Title:** Bookmark Export Extension Alternatives | Snug
+- **Description:** Compare Snug with three other Chrome bookmark export
+  extensions on formats, import, scheduling, languages and data disclosures.
+  Checked {date}.
+- **Eyebrow:** Alternatives
+- **Headline:** Bookmark export extensions for Chrome, compared
+- **Lede:** Three other extensions export Chrome bookmarks. This table puts each
+  next to Snug, using only what each Chrome Web Store listing says on {date}.
+  Where a listing does not mention something, the table says Not listed.
+- **What to look for:**
+  - Export formats. Check that the file type you need is on the list, and what
+    the extension says it does not export.
+  - Import. An export only helps if you can read it back in or another tool
+    opens it.
+  - Folder choice. Decide whether you need the whole tree or only some folders.
+  - Scheduling. Decide whether you want exports to run on their own or only when
+    you click.
+  - Where copies go. Some extensions keep everything on the device, and some
+    offer optional copies to online storage after you sign in.
+  - The data disclosure. Every listing has a section that says what the
+    developer declares it handles. Read it before you install.
+- **Built-in option:** Chrome's built-in export. Chrome's bookmark manager
+  exports all of your bookmarks to a single HTML file, with nothing to install.
+  It is enough when you need that and nothing more.
+- **Card, Selective Bookmarks Export Tool:** Pick it when you use Firefox as
+  well, or when HTML is the only format you need.
+- **Card, Maple Backup:** Pick it when you want optional copies in Google Drive,
+  OneDrive or Dropbox, or an interface in one of {languages} languages.
+- **Card, 101 Export:** Pick it when you need to export your browsing history as
+  well as bookmarks.
+
+#### Comparison page: Selective Bookmarks Export Tool
+
+- **Title:** Snug vs Selective Bookmarks Export Tool | Snug
+- **Description:** Snug and Selective Bookmarks Export Tool compared on export
+  formats, import, scheduling and data disclosure, from the live store listings.
+  Checked {date}.
+- **Eyebrow:** Comparison
+- **Headline:** Snug vs Selective Bookmarks Export Tool
+- **In short:** Selective Bookmarks Export Tool exports chosen bookmarks to HTML
+  and is also available for Firefox and Edge. Snug exports to more formats than
+  HTML, imports with a preview, and runs Auto-export on a schedule. As of {date}
+  its listing shows {users} users and a {rating} rating, and does not list
+  import or scheduling.
+- **Why people look for an alternative:** The listing describes export to HTML.
+  Import and scheduling are not listed as of {date}. Someone who needs a
+  different file format, or exports that run on their own, will need another
+  tool for those parts.
+- **Pick Snug if:**
+  - You need a format other than HTML, such as JSON.
+  - You want to import a file back, with a preview and a choice of Merge,
+    Replace or New folder.
+  - You want Auto-export to run on a schedule, to Downloads or to a folder you
+    choose.
+  - You want a Duplicates page to find repeated bookmarks.
+  - You want an extension that makes no network calls and needs no account.
+- **Pick Selective Bookmarks Export Tool if:**
+  - You use Firefox as well, because the extension is also available there and
+    for Edge.
+  - HTML is the only format you need.
+  - You want a keyword filter or a dark mode in the export tool itself.
+  - You prefer an MIT-licensed open source project.
+- **Switching to Snug:**
+  1. Install Snug from the Chrome Web Store.
+  2. Open Snug and export in the format you need. Snug reads the bookmarks
+     already in your browser, so there is nothing to convert.
+  3. If you have HTML files from earlier exports, choose Import and pick the
+     file.
+  4. Check the preview, then choose Merge, Replace or New folder. A Replace can
+     be undone from the Safety snapshot.
+  5. Turn on Auto-export if you want exports on a schedule.
+
+#### Comparison page: Maple Backup
+
+- **Title:** Snug vs Maple Backup | Snug
+- **Description:** Snug and Maple Backup compared on snapshots, optional copies
+  to online storage, languages and data disclosure, from the live store
+  listings. Checked {date}.
+- **Eyebrow:** Comparison
+- **Headline:** Snug vs Maple Backup
+- **In short:** Maple Backup takes automatic daily or scheduled snapshots stored
+  on the device, with optional copies to Google Drive, OneDrive or Dropbox after
+  sign-in. Snug exports to files you keep, imports with a preview, and makes no
+  network calls. As of {date} its listing shows {users} users and a {rating}
+  rating.
+- **Why people look for an alternative:** As of {date}, the Maple Backup listing
+  declares that it handles personally identifiable information, authentication
+  information and website content, and its optional copies use a sign-in.
+  Someone who wants a tool with no account and no network calls may look
+  elsewhere.
+- **Pick Snug if:**
+  - You want a tool with no account and no network calls.
+  - You want export files in several formats that other browsers and tools can
+    open.
+  - You want to import with a preview and choose Merge, Replace or New folder.
+  - You want an open source extension whose code you can read.
+- **Pick Maple Backup if:**
+  - You want optional copies in Google Drive, OneDrive or Dropbox.
+  - You want to restore from any stored snapshot.
+  - You want an interface in one of {languages} languages.
+  - You want automatic daily snapshots without setting a destination.
+- **Switching to Snug:**
+  1. Install Snug from the Chrome Web Store.
+  2. Open Snug and export your bookmarks in the format you need. Snug reads the
+     bookmarks already in your browser, so there is nothing to convert.
+  3. Turn on Auto-export to get files on a schedule, in Downloads or in a folder
+     you choose.
+  4. Remove Maple Backup from the extensions page when you no longer need it.
+
+#### Comparison page: 101 Export
+
+- **Title:** Snug vs 101 Export History/Bookmarks | Snug
+- **Description:** Snug and 101 Export History/Bookmarks compared on export
+  formats, history export and data disclosure, from the live store listings.
+  Checked {date}.
+- **Eyebrow:** Comparison
+- **Headline:** Snug vs 101 Export History/Bookmarks
+- **In short:** 101 Export exports Chrome history and bookmarks as JSON. Its own
+  notice says it does not export to CSV or XLS. Snug exports bookmarks only, in
+  more formats, and also imports. As of {date} its listing shows {users} users
+  and a {rating} rating.
+- **Why people look for an alternative:** The store title mentions CSV and XLS,
+  and the extension's own notice says it does not export to either. Converting
+  needs the 101editor desktop app. Chrome limits history to {historyMonths}
+  months. As of {date} the listing is in English only.
+- **Pick Snug if:**
+  - You need bookmarks in a format other than JSON, without a desktop app.
+  - You want to import a file back, with a preview and a choice of Merge,
+    Replace or New folder.
+  - You want Auto-export on a schedule.
+  - You want the interface in a language other than English.
+- **Pick 101 Export if:**
+  - You need to export your browsing history as well as bookmarks.
+  - JSON is the only format you need.
+  - You want one extension for both history and bookmarks.
+- **Switching to Snug:**
+  1. Install Snug from the Chrome Web Store.
+  2. Open Snug and export your bookmarks in the format you need. Snug reads the
+     bookmarks already in your browser, so there is nothing to convert.
+  3. Keep 101 Export installed if you still need to export history, because Snug
+     exports bookmarks only.
+  4. Turn on Auto-export if you want exports on a schedule.
+
+Sources: Product: Positioning, Capabilities and Constraints; each competitor's
+Chrome Web Store listing, checked 2026-10-10.
 
 ---
 
