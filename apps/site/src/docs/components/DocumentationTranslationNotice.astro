@@ -1,0 +1,28 @@
+---
+import { getContent } from '../../i18n/content'
+import { resolveDocumentationLocale } from '../locale'
+
+const { lang, dir, entry } = Astro.locals.starlightRoute
+const { translationStatus, englishPath } = entry.data
+const { notice } = getContent(resolveDocumentationLocale(lang)).docs
+const hasNotice = translationStatus !== 'translated' && Boolean(englishPath)
+---
+
+{hasNotice && (
+  <p
+    lang={lang}
+    dir={dir}
+    role="note"
+    data-translation-notice={translationStatus}
+    class="mt-4 rounded-lg border border-primary/50 bg-primary/8 px-4 py-3 text-sm text-foreground"
+  >
+    {notice[translationStatus]}{' '}
+    <a
+      href={englishPath}
+      hreflang="en"
+      class="rounded-sm text-foreground underline decoration-border underline-offset-4 outline-hidden hover:decoration-primary focus-visible:ring-3 focus-visible:ring-ring"
+    >
+      {notice.readEnglish}
+    </a>
+  </p>
+)}

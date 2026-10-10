@@ -6,12 +6,12 @@ import { DEFAULT_LOCALE, localePath } from '../../i18n/locales'
 import { resolveDocumentationLocale } from '../locale'
 import DocumentationPagination from './DocumentationPagination.astro'
 
-const { lang, editUrl } = Astro.locals.starlightRoute
+const { lang, dir, editUrl } = Astro.locals.starlightRoute
 const locale = resolveDocumentationLocale(lang)
 const hasEditLink = locale === DEFAULT_LOCALE && Boolean(editUrl)
 ---
 
-<div class="mt-12 flex flex-col gap-8">
+<div class="mt-12 flex flex-col gap-8" lang={lang} dir={dir}>
   {hasEditLink && (
     <TextLink href={String(editUrl)} class="self-start text-sm">
       {DOCS_UI.editPage}

@@ -31,7 +31,10 @@
       "ignoreBinaries": ["remotion-studio"],
     },
     "apps/site": {
-      "entry": ["src/scripts/render-security-headers.ts"],
+      "entry": [
+        "src/scripts/render-security-headers.ts",
+        "src/docs/route-middleware.ts",
+      ],
       // `@fontsource-variable/geist-mono` is only referenced by a relative
       // `url()` in the site's CSS entry, which knip does not trace.
       "ignoreDependencies": ["lighthouse", "@fontsource-variable/geist-mono"],
