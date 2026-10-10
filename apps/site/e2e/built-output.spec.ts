@@ -21,6 +21,7 @@ import {
   UMAMI_SCRIPT_URL,
   UMAMI_WEBSITE_ID,
 } from '../src/seo/umami'
+import { docsString, translatedTitle } from './translated-guide'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
 const builtSite = path.join(siteRoot, 'dist')
@@ -483,13 +484,19 @@ test.describe('Markdown twins', () => {
       const twin = readBuilt(
         `${localePath(locale, '/guide/exporting').slice(1)}.md`,
       )
-      expect(twin).toMatch(/^# Exporting bookmarks\n\n\S/)
+      const title = translatedTitle(locale) ?? 'Exporting bookmarks'
+      const heading = `# ${title}\n\n`
+      expect(twin.startsWith(heading)).toBe(true)
+      expect(twin.slice(heading.length).trim()).not.toBe('')
     })
   }
 
   test('serves What is new and the Guide overview as Markdown', () => {
     expect(readBuilt('changelog.md')).toMatch(/^# What's new\n/)
-    expect(readBuilt('es/guide.md')).toMatch(/^# Usage\n/)
+    const overviewTitle = translatedTitle('es', 'docs/usage.md') ?? 'Usage'
+    expect(readBuilt('es/guide.md').startsWith(`# ${overviewTitle}\n`)).toBe(
+      true,
+    )
   })
 })
 
@@ -528,12 +535,14 @@ test.describe('Copy Markdown button', () => {
     await expect(
       page.locator('astro-island:has([data-copy-markdown])'),
     ).not.toHaveAttribute('ssr', '')
-    await page.getByRole('button', { name: 'Copy Markdown' }).click()
+    await page
+      .getByRole('button', { name: docsString('es', 'copyMarkdown') })
+      .click()
     await expect(
-      page.getByRole('button', { name: 'Could not copy' }),
+      page.getByRole('button', { name: docsString('es', 'copyFailed') }),
     ).toBeVisible()
     await expect(
-      page.getByRole('button', { name: 'Copy Markdown' }),
+      page.getByRole('button', { name: docsString('es', 'copyMarkdown') }),
     ).toBeEnabled({ timeout: 4000 })
   })
 })

@@ -1,9 +1,13 @@
 import { expect, test } from '@playwright/test'
 
-import { DEFAULT_LOCALE, localePath, LOCALES } from '../src/i18n/locales'
+import { localePath } from '../src/i18n/locales'
+import {
+  TRANSLATED_LOCALES,
+  translatedTitle,
+  UNTRANSLATED_LOCALES,
+} from './translated-guide'
 
 const ENGLISH_PATH = '/guide/exporting/'
-const TRANSLATED_LOCALES = LOCALES.filter((locale) => locale !== DEFAULT_LOCALE)
 
 test('English pages never show a translation notice', async ({ page }) => {
   await page.goto(ENGLISH_PATH)
@@ -11,7 +15,7 @@ test('English pages never show a translation notice', async ({ page }) => {
   await expect(page.locator('main')).toHaveAttribute('lang', 'en')
 })
 
-for (const locale of TRANSLATED_LOCALES) {
+for (const locale of UNTRANSLATED_LOCALES) {
   test(`${localePath(locale, ENGLISH_PATH)} shows English text with a notice that links to English`, async ({
     page,
   }) => {
@@ -27,11 +31,26 @@ for (const locale of TRANSLATED_LOCALES) {
   })
 }
 
-test('the notice keeps the language of the page chrome', async ({ page }) => {
-  await page.goto(localePath('es', ENGLISH_PATH))
-  await expect(page.locator('html')).toHaveAttribute('lang', 'es')
-  await expect(page.locator('[data-translation-notice]')).toHaveAttribute(
-    'lang',
-    'es',
-  )
-})
+for (const locale of TRANSLATED_LOCALES) {
+  test(`${localePath(locale, ENGLISH_PATH)} shows the translation without a notice`, async ({
+    page,
+  }) => {
+    await page.goto(localePath(locale, ENGLISH_PATH))
+    await expect(page.locator('[data-translation-notice]')).toHaveCount(0)
+    await expect(page.locator('main')).toHaveAttribute('lang', locale)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+      translatedTitle(locale) ?? '',
+    )
+  })
+}
+
+for (const locale of UNTRANSLATED_LOCALES.slice(0, 1)) {
+  test('the notice keeps the language of the page chrome', async ({ page }) => {
+    await page.goto(localePath(locale, ENGLISH_PATH))
+    await expect(page.locator('html')).toHaveAttribute('lang', locale)
+    await expect(page.locator('[data-translation-notice]')).toHaveAttribute(
+      'lang',
+      locale,
+    )
+  })
+}
