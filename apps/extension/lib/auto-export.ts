@@ -375,7 +375,7 @@ async function clearFailureBadge(): Promise<void> {
  * UI that triggered it (a later ticket), not on the toolbar icon.
  * @returns Resolves once the badge text and color are set.
  */
-async function setFailureBadge(): Promise<void> {
+export async function setFailureBadge(): Promise<void> {
   await browser.action.setBadgeText({ text: '!' })
   await browser.action.setBadgeBackgroundColor({ color: FAILURE_BADGE_COLOR })
 }

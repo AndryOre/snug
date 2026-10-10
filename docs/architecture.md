@@ -56,14 +56,15 @@ relative to `apps/extension/` unless it starts with `packages/`.
 - **`background.ts`** — the MV3 service worker. Registers
   `browser.runtime.onInstalled` (opens the App's Welcome or What's new route,
   and calls `syncAlarm` for every reason so a catch-up run can be armed after an
-  install/update), `browser.runtime.onStartup` (also calls `syncAlarm`) and a
-  storage watcher on the auto-export config that calls `syncAlarm` only when the
-  change affects scheduling (`enabled`/`interval`/`preferredTime`, or `formats`
-  crossing the empty/non-empty boundary — a `path`-only or still-non-empty
-  `formats` change is ignored), and `browser.alarms.onAlarm` (runs the export,
-  telling `runAutoExport` whether this is a `scheduled` or `catch-up` run by
-  comparing the alarm's fire time to the stored next-run time). Has no DOM and
-  renders nothing.
+  install/update), `browser.runtime.onStartup` (also calls `syncAlarm`, and runs
+  the Folder access check below) and a storage watcher on the auto-export config
+  that calls `syncAlarm` only when the change affects scheduling
+  (`enabled`/`interval`/`preferredTime`, or `formats` crossing the
+  empty/non-empty boundary — a `path`-only or still-non-empty `formats` change
+  is ignored), and `browser.alarms.onAlarm` (runs the export, telling
+  `runAutoExport` whether this is a `scheduled` or `catch-up` run by comparing
+  the alarm's fire time to the stored next-run time). Has no DOM and renders
+  nothing.
 - **`popup/`** — the toolbar popup: one compact screen with an export section
   (format + "Export all"), an import section (Quick import of one or more files
   with the default mode; the whole section is also a drop target that feeds the
@@ -177,8 +178,9 @@ relative to `apps/extension/` unless it starts with `packages/`.
   (never after dismissal, not while the last Auto-export run failed). Persisted
   in `reviewPromptStore`.
 - **`popup-status.ts`** and **`next-run-status.ts`** — pure resolvers for the
-  auto-export status shown in the popup (`resolvePopupStatus`: failed, next run
-  or off) and on the Auto-export page (`resolveNextRunStatus`).
+  auto-export status shown in the popup (`resolvePopupStatus`: Folder access
+  needed, failed, next run or off) and on the Auto-export page
+  (`resolveNextRunStatus`).
 - **`auto-export-form.ts`** — parsing helpers for the Auto-export form fields
   (`resolveFormats`, `resolveFolder`, `parseKeepLast`).
 - **`duplicates.ts`** — URL normalization and `findDuplicateGroups` for the
@@ -403,6 +405,25 @@ failed run deletes nothing. On any failed run, manual included,
 replace it) unless the user turned it off; the background's
 `notifications.onClicked` listener opens the Auto-export page. The interval can
 be hourly, 12 hours, daily, 3 days or weekly (`7d`, on `dayOfWeek`).
+
+**Custom folder** (background service worker): with the `folder` Export
+destination, `runAutoExport` does not download. `requireGrantedFolder` loads the
+`FileSystemDirectoryHandle` that `folder-handle.ts` keeps in IndexedDB (a handle
+is not serializable to extension storage) and queries its Folder access without
+prompting; a missing handle or any access other than `granted` fails the run
+with the localized Failure reason `Folder access needed for "{folder}"`, never
+falling back to Downloads. Otherwise `writeToCustomFolder` creates the sanitized
+subfolders under the chosen folder and writes each file through a writable
+stream, adding a ` (n)` suffix on a name collision so it never overwrites. The
+permission prompt needs a user gesture, so it can only be answered on a page.
+Chrome may drop the grant across a restart, so two checks warn before a run
+fails. On browser start, `checkFolderAccessAtStartup`
+(`folder-access-startup.ts`) runs when Auto-export is enabled with a Custom
+folder: if Folder access is not `granted` it shows the Failure notification
+(unless turned off) and sets the failure badge; clicking the notification opens
+the Auto-export page. In the popup, `resolvePopupStatus` returns `folder-access`
+for the same condition, ahead of next run and last failed, and the status item's
+**Allow access** button opens the Auto-export page in the App.
 
 ## Invariants
 

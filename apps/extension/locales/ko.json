@@ -738,6 +738,23 @@
     "message": "자동 내보내기를 열어 확인하세요",
     "description": "Popup status item description when the last auto-export failed"
   },
+  "popup_statusFolderAccessTitle": {
+    "message": "폴더 접근 권한이 필요합니다",
+    "description": "Popup status item title when the Custom folder needs Folder access again"
+  },
+  "popup_statusFolderAccessDescription": {
+    "message": "백업을 계속하려면 \"$FOLDER$\" 폴더에 대한 접근을 허용하세요",
+    "description": "Popup status item description when the Custom folder needs Folder access again; $FOLDER$ is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_statusFolderAccessAction": {
+    "message": "접근 허용",
+    "description": "Popup status item button that opens the Auto-export page to allow Folder access"
+  },
   "popup_openApp": {
     "message": "앱 열기",
     "description": "Popup footer button that opens the full-page app"
