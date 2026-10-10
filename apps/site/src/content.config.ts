@@ -1,11 +1,11 @@
 import { docsSchema } from '@astrojs/starlight/schema'
 import { defineCollection } from 'astro:content'
 
-import { usageOverviewLoader } from './docs/usage-loader'
+import { catalogLoader } from './docs/loader'
 
 export const collections = {
   docs: defineCollection({
-    loader: usageOverviewLoader(),
+    loader: catalogLoader(),
     schema: docsSchema(),
   }),
 }

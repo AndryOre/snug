@@ -212,5 +212,15 @@
       "logs": "Il server web conserva anche un log di accesso con l'ora, la pagina richiesta, lo stato, il referer e lo user-agent del tuo browser. Gli indirizzi IP sono mascherati in quel log, che viene letto offline."
     },
     "theme": "La scelta del tema viene salvata solo nel tuo browser."
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
   }
 }

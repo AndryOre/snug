@@ -212,5 +212,15 @@
       "logs": "O servidor web também mantém um registro de acesso com o horário, a página solicitada, o status, o referer e o user-agent do seu navegador. Os endereços IP são mascarados nesse registro, que é lido offline."
     },
     "theme": "A sua escolha de tema é armazenada apenas no seu navegador."
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
   }
 }

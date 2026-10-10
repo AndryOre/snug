@@ -212,5 +212,15 @@
       "logs": "The web server also keeps an access log with the time, the requested page, the status, the referer and your browser's user-agent. IP addresses are masked in that log, and it is read offline."
     },
     "theme": "Your theme choice is stored only in your browser."
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
   }
 }

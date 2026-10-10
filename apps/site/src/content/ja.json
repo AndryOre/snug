@@ -212,5 +212,15 @@
       "logs": "ウェブサーバーは、時刻、リクエストされたページ、ステータス、リファラー、ブラウザーのユーザーエージェントを含むアクセスログも保持しています。このログでは IP アドレスをマスクしており、オフラインで確認します。"
     },
     "theme": "テーマの選択は、お使いのブラウザー内にのみ保存されます。"
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
   }
 }

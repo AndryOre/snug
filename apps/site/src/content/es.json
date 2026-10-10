@@ -212,5 +212,15 @@
       "logs": "El servidor web también guarda un registro de acceso con la hora, la página solicitada, el estado, el referente y el user-agent de tu navegador. Las direcciones IP se enmascaran en ese registro, y se lee sin conexión."
     },
     "theme": "Tu elección de tema se guarda solo en tu navegador."
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
   }
 }

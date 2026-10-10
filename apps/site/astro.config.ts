@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
+import { buildSidebar } from './src/docs/sidebar'
 import { collectStarlightInlineScriptHashes } from './src/docs/starlight-inline-hashes'
 import { languageTag, LOCALE_NAMES, LOCALES } from './src/i18n/locales'
 import { hiddenUntilFound } from './src/scripts/hidden-until-found'
@@ -47,7 +48,7 @@ export default defineConfig({
         useStarlightDarkModeSwitch: false,
         useStarlightUiThemeColors: false,
       },
-      sidebar: [{ label: 'Guide', slug: 'guide' }],
+      sidebar: buildSidebar(),
       lastUpdated: false,
       favicon: '/favicon.svg',
       head: [
