@@ -838,6 +838,10 @@
     "message": "去评价",
     "description": "What's new screen string"
   },
+  "whatsNew_fullNotesLink": {
+    "message": "完整发行说明",
+    "description": "What's new screen link to the full release notes on the website"
+  },
   "exportPage_title": {
     "message": "导出书签",
     "description": "Export page heading"
@@ -1332,6 +1336,10 @@
   "shell_privacyLink": {
     "message": "隐私",
     "description": "App sidebar footer link to the privacy policy"
+  },
+  "shell_guideLink": {
+    "message": "指南",
+    "description": "App sidebar footer link to the Guide on the website"
   },
   "changelog_2_0_2_1": {
     "message": "Snug 现在有网站了。"

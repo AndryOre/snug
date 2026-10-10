@@ -838,6 +838,10 @@
     "message": "리뷰 남기기",
     "description": "What's new screen string"
   },
+  "whatsNew_fullNotesLink": {
+    "message": "전체 릴리스 노트",
+    "description": "What's new screen link to the full release notes on the website"
+  },
   "exportPage_title": {
     "message": "북마크 내보내기",
     "description": "Export page heading"
@@ -1332,6 +1336,10 @@
   "shell_privacyLink": {
     "message": "개인정보",
     "description": "App sidebar footer link to the privacy policy"
+  },
+  "shell_guideLink": {
+    "message": "가이드",
+    "description": "App sidebar footer link to the Guide on the website"
   },
   "changelog_2_0_2_1": {
     "message": "Snug에 웹사이트가 생겼습니다."

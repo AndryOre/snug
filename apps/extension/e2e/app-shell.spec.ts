@@ -177,14 +177,36 @@ test('sidebar footer links open the landing site in a new tab', async ({
 
   const website = page.getByRole('link', { name: en.shell_siteLink.message })
   const privacy = page.getByRole('link', { name: en.shell_privacyLink.message })
+  const guide = page.getByRole('link', { name: en.shell_guideLink.message })
 
   await expect(website).toHaveAttribute('href', 'https://snug.andryore.dev/')
   await expect(privacy).toHaveAttribute(
     'href',
     'https://snug.andryore.dev/privacy/',
   )
-  for (const link of [website, privacy]) {
+  await expect(guide).toHaveAttribute(
+    'href',
+    'https://snug.andryore.dev/guide/',
+  )
+  for (const link of [website, privacy, guide]) {
     await expect(link).toHaveAttribute('target', '_blank')
     await expect(link).toHaveAttribute('rel', 'noopener noreferrer')
   }
+})
+
+test("the What's new page links to the full release notes in a new tab", async ({
+  openExtensionPage,
+}) => {
+  const page = await openExtensionPage('app.html#/whats-new')
+
+  const releaseNotes = page.getByRole('link', {
+    name: en.whatsNew_fullNotesLink.message,
+  })
+
+  await expect(releaseNotes).toHaveAttribute(
+    'href',
+    'https://snug.andryore.dev/changelog/',
+  )
+  await expect(releaseNotes).toHaveAttribute('target', '_blank')
+  await expect(releaseNotes).toHaveAttribute('rel', 'noopener noreferrer')
 })

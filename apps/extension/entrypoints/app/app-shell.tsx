@@ -18,12 +18,17 @@ import {
 } from '@workspace/ui/components/sidebar'
 import { cn } from 'cn'
 import type { LucideIcon } from 'lucide-react'
-import { ExternalLinkIcon, GlobeIcon, ShieldCheckIcon } from 'lucide-react'
+import {
+  BookOpenIcon,
+  ExternalLinkIcon,
+  GlobeIcon,
+  ShieldCheckIcon,
+} from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { Wordmark } from '@/components/wordmark'
 import { APP_ROUTES } from '@/lib/app-url'
-import { getSitePrivacyUrl, getSiteUrl } from '@/lib/brand'
+import { getSiteGuideUrl, getSitePrivacyUrl, getSiteUrl } from '@/lib/brand'
 import {
   autoExportConfigStore,
   autoExportLastRunStore,
@@ -268,6 +273,13 @@ export function AppShell() {
         </SidebarContent>
         <SidebarFooter>
           <SidebarMenu>
+            <SidebarMenuItem>
+              <SiteLinkButton
+                href={getSiteGuideUrl()}
+                label={i18n.t('shell_guideLink')}
+                icon={BookOpenIcon}
+              />
+            </SidebarMenuItem>
             <SidebarMenuItem>
               <SiteLinkButton
                 href={getSiteUrl()}
