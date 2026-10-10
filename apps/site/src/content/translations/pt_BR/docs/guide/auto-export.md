@@ -1,32 +1,52 @@
 ---
 title: Exportação automática
-sourceHash: 3b23ffc5e9f86ebd
+sourceHash: 5eb2acaa2e4867cc
 ---
 
 O Snug pode exportar seus favoritos em um agendamento, sem nenhuma ação manual:
 
 1. Abra a página **Exportação automática** do app.
-2. Ative a exportação automática e escolha um ou mais dos seis formatos, um
-   intervalo e, se quiser, um caminho de pasta para os arquivos exportados. Os
-   intervalos são de hora em hora, a cada 12 horas, diário, a cada 3 dias ou
-   semanal. As execuções diárias, a cada 3 dias e semanais acontecem em um
-   horário preferido; as semanais também permitem escolher o dia. As execuções
-   de hora em hora e a cada 12 horas ignoram o horário.
+2. Ative a exportação automática e escolha um ou mais dos seis formatos, onde
+   salvá-los (Downloads ou uma Pasta personalizada), um intervalo e, se quiser,
+   um caminho de subpasta para os arquivos exportados. Os intervalos são de hora
+   em hora, a cada 12 horas, diário, a cada 3 dias ou semanal. As execuções
+   diárias, a cada 3 dias e semanais acontecem em um horário preferido; as
+   semanais também permitem escolher o dia. As execuções de hora em hora e a
+   cada 12 horas ignoram o horário.
 3. A partir daí, a extensão exporta seus favoritos nesse agendamento e salva os
-   arquivos direto na pasta Downloads, sem caixa de diálogo para salvar nem
-   confirmações extras. Se o navegador estava fechado ou a extensão indisponível
-   quando uma exportação agendada venceu, ela é recuperada automaticamente logo
-   depois que o navegador iniciar de novo, em vez de esperar o próximo horário
-   agendado.
+   arquivos direto no lugar que você escolheu, Downloads por padrão, sem caixa
+   de diálogo para salvar nem confirmações extras. Se o navegador estava fechado
+   ou a extensão indisponível quando uma exportação agendada venceu, ela é
+   recuperada automaticamente logo depois que o navegador iniciar de novo, em
+   vez de esperar o próximo horário agendado.
+
+**Salvar em** define o destino. **Downloads** (o padrão) salva na pasta
+Downloads do navegador. **Pasta personalizada** salva em uma pasta que você
+escolhe em qualquer lugar do computador: selecione **Escolher pasta…** e,
+depois, **Alterar pasta** para escolher outra. Selecione **Downloads** de novo a
+qualquer momento para voltar. O caminho da subpasta é relativo ao destino, então
+nomeia uma pasta dentro da pasta escolhida. Se já existir um arquivo com o mesmo
+nome, o Snug acrescenta o sufixo " (1)" e nunca o sobrescreve.
+
+Depois da primeira reinicialização do navegador, o Chrome pede uma vez que você
+confirme o acesso à Pasta personalizada. Escolha "Permitir em todas as visitas"
+para que as execuções sem supervisão continuem funcionando.
+
+Se faltar o acesso à pasta, o Snug avisa quando o navegador inicia. O popup e a
+página **Exportação automática** mostram então "Acesso à pasta necessário" com
+um botão **Permitir acesso**. Até você permitir o acesso, as execuções falham e
+nada é salvo em Downloads no lugar.
 
 **Manter as últimas N execuções** (Retenção, padrão 10) limita quantas
-exportações se acumulam: depois de cada execução bem-sucedida, o Snug exclui os
-arquivos das suas próprias execuções mais antigas além de N (todos os formatos
-de uma execução mantida permanecem) e as respectivas entradas no histórico de
-downloads do navegador. Ele só remove arquivos que o próprio Snug salvou, nunca
-outros arquivos da pasta, e um arquivo que você já excluiu ou moveu é
-simplesmente ignorado. Uma execução com falha não exclui nada. Defina 0 para
-manter tudo.
+exportações se acumulam: depois de cada execução bem-sucedida, o Snug mantém as
+N execuções mais recentes entre Downloads e a Pasta personalizada e exclui os
+arquivos das suas próprias execuções mais antigas (todos os formatos de uma
+execução mantida permanecem). Os arquivos salvos em Downloads também perdem suas
+entradas no histórico de downloads do navegador. Ele só remove arquivos que o
+próprio Snug salvou, nunca outros arquivos da pasta, e um arquivo que você já
+excluiu ou moveu é simplesmente ignorado. Depois de trocar de pasta, os arquivos
+da pasta antiga ficam como estão. Uma execução com falha não exclui nada. Defina
+0 para manter tudo.
 
 **Avisar-me quando uma exportação falhar** (ativado por padrão) mostra uma
 notificação do sistema, com o título "Snug · Falha na exportação automática" e o

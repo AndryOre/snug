@@ -1476,5 +1476,26 @@
   "autoExportPage_folderRestartHint": {
     "message": "Chrome을 다시 시작한 후 Snug가 이 폴더에 대한 접근 권한을 한 번 확인합니다. 자동 내보내기를 계속 실행하려면 \"방문할 때마다 허용\"을 선택하세요.",
     "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
+  },
+  "autoExportPage_folderAccessTitle": {
+    "message": "폴더 접근 권한이 필요합니다",
+    "description": "Title of the alert shown when the Custom folder's access is missing"
+  },
+  "autoExportPage_folderAccessDescription": {
+    "message": "접근을 다시 허용할 때까지 Snug는 \"$FOLDER$\"에 저장할 수 없습니다.",
+    "description": "Alert body when Folder access is missing; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_allowAccess": {
+    "message": "접근 허용",
+    "description": "Button that asks the browser to grant Folder access again"
+  },
+  "autoExportPage_folderAccessRefused": {
+    "message": "접근이 허용되지 않았습니다. 허용하기 전까지 자동 내보내기는 저장할 수 없습니다.",
+    "description": "Alert body after the user declined the Folder access request"
   }
 }

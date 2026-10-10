@@ -10,6 +10,7 @@ export type FolderAccess = PermissionState | 'missing'
  */
 interface PermissionAwareDirectoryHandle extends FileSystemDirectoryHandle {
   queryPermission(descriptor: { mode: 'readwrite' }): Promise<PermissionState>
+  requestPermission(descriptor: { mode: 'readwrite' }): Promise<PermissionState>
 }
 
 const DATABASE_NAME = 'snug-custom-folder'
@@ -86,6 +87,20 @@ export async function queryFolderAccess(
   handle: FileSystemDirectoryHandle,
 ): Promise<PermissionState> {
   return (handle as PermissionAwareDirectoryHandle).queryPermission({
+    mode: 'readwrite',
+  })
+}
+
+/**
+ * Asks the user to grant Folder access again. Must be called inside a user
+ * gesture, or the browser rejects the prompt.
+ * @param handle The Custom folder handle to request access for.
+ * @returns The permission state after the prompt.
+ */
+export async function requestFolderAccess(
+  handle: FileSystemDirectoryHandle,
+): Promise<PermissionState> {
+  return (handle as PermissionAwareDirectoryHandle).requestPermission({
     mode: 'readwrite',
   })
 }
