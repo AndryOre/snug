@@ -1476,5 +1476,26 @@
   "autoExportPage_folderRestartHint": {
     "message": "После перезапуска Chrome Snug один раз попросит подтвердить доступ к этой папке. Выберите «Разрешать при каждом посещении», чтобы автоэкспорт продолжал работать.",
     "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
+  },
+  "autoExportPage_folderAccessTitle": {
+    "message": "Нужен доступ к папке",
+    "description": "Title of the alert shown when the Custom folder's access is missing"
+  },
+  "autoExportPage_folderAccessDescription": {
+    "message": "Snug не может сохранять в «$FOLDER$», пока вы снова не разрешите доступ.",
+    "description": "Alert body when Folder access is missing; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_allowAccess": {
+    "message": "Разрешить доступ",
+    "description": "Button that asks the browser to grant Folder access again"
+  },
+  "autoExportPage_folderAccessRefused": {
+    "message": "Доступ не был разрешён. Автоэкспорт не сможет сохранять, пока вы его не разрешите.",
+    "description": "Alert body after the user declined the Folder access request"
   }
 }

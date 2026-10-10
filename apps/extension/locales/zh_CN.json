@@ -1476,5 +1476,26 @@
   "autoExportPage_folderRestartHint": {
     "message": "Chrome 重启后，Snug 会请你确认一次对此文件夹的访问权限。请选择“每次访问时都允许”，以保持自动导出正常运行。",
     "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
+  },
+  "autoExportPage_folderAccessTitle": {
+    "message": "需要文件夹访问权限",
+    "description": "Title of the alert shown when the Custom folder's access is missing"
+  },
+  "autoExportPage_folderAccessDescription": {
+    "message": "在你重新允许访问之前，Snug 无法保存到“$FOLDER$”。",
+    "description": "Alert body when Folder access is missing; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_allowAccess": {
+    "message": "允许访问",
+    "description": "Button that asks the browser to grant Folder access again"
+  },
+  "autoExportPage_folderAccessRefused": {
+    "message": "未允许访问。在你允许之前，自动导出无法保存。",
+    "description": "Alert body after the user declined the Folder access request"
   }
 }

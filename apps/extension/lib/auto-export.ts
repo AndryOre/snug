@@ -365,7 +365,7 @@ export async function readAutoExportLastRun(): Promise<AutoExportLastRun | null>
  * succeeds.
  * @returns Resolves once the badge text is cleared.
  */
-async function clearFailureBadge(): Promise<void> {
+export async function clearFailureBadge(): Promise<void> {
   await browser.action.setBadgeText({ text: '' })
 }
 

@@ -1,6 +1,7 @@
 import { i18n } from '#i18n'
 import {
   Alert,
+  AlertAction,
   AlertDescription,
   AlertTitle,
 } from '@workspace/ui/components/alert'
@@ -80,8 +81,14 @@ import {
   type ExportFormat,
 } from '@/lib/export-formats'
 import {
+  allowFolderAccess,
+  readFolderAccess,
+  resolveFolderAccessAlert,
+} from '@/lib/folder-access-recovery'
+import {
   canPickFolder,
   clearFolderHandle,
+  type FolderAccess,
   pickFolder,
   saveFolderHandle,
 } from '@/lib/folder-handle'
@@ -340,6 +347,34 @@ export function AutoExportRoute() {
   )
   const folderName = destination === 'folder' ? config.folderName : null
   const isFolderMissing = destination === 'folder' && folderName === null
+  const [folderAccess, setFolderAccess] = useState<FolderAccess | null>(null)
+  const [wasAccessRefused, setWasAccessRefused] = useState(false)
+  const hasChosenFolder = folderName !== null
+  const accessAlert = resolveFolderAccessAlert({
+    isFolderDestination: hasChosenFolder,
+    access: folderAccess,
+    wasRefused: wasAccessRefused,
+  })
+
+  useEffect(() => {
+    if (!hasChosenFolder) return
+    let isMounted = true
+    const refresh = async () => {
+      try {
+        const access = await readFolderAccess()
+        if (isMounted) setFolderAccess(access)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    void refresh()
+    const onFocus = () => void refresh()
+    window.addEventListener('focus', onFocus)
+    return () => {
+      isMounted = false
+      window.removeEventListener('focus', onFocus)
+    }
+  }, [hasChosenFolder, folderName])
   const keepLast = config.keepLast ?? 10
   const keepLastText = keepLastDraft ?? String(keepLast)
   const isKeepLastInvalid = parseKeepLast(keepLastText) === null
@@ -381,6 +416,25 @@ export function AutoExportRoute() {
     }
     await saveFolderHandle(handle)
     await save({ destination: 'folder', folderName: handle.name })
+  }
+
+  const allowAccess = async () => {
+    try {
+      const result = await allowFolderAccess()
+      if (result === 'missing') {
+        setWasAccessRefused(false)
+        await save({ folderName: null })
+        return
+      }
+      setWasAccessRefused(result === 'refused')
+      setFolderAccess(result === 'granted' ? 'granted' : 'prompt')
+    } catch (error) {
+      toast.add({
+        title: i18n.t('exportNowFailed'),
+        description: error instanceof Error ? error.message : String(error),
+        type: 'error',
+      })
+    }
   }
 
   const commitFolder = async () => {
@@ -541,6 +595,31 @@ export function AutoExportRoute() {
                   </Button>
                 </div>
               </Field>
+            )}
+
+            {accessAlert !== 'hidden' && folderName !== null && (
+              <Alert variant="destructive">
+                <CircleAlertIcon />
+                <AlertTitle>
+                  {i18n.t('autoExportPage_folderAccessTitle')}
+                </AlertTitle>
+                <AlertDescription>
+                  {accessAlert === 'refused'
+                    ? i18n.t('autoExportPage_folderAccessRefused')
+                    : i18n.t('autoExportPage_folderAccessDescription', [
+                        folderName,
+                      ])}
+                </AlertDescription>
+                <AlertAction>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => void allowAccess()}
+                  >
+                    {i18n.t('autoExportPage_allowAccess')}
+                  </Button>
+                </AlertAction>
+              </Alert>
             )}
 
             {folderName !== null && (

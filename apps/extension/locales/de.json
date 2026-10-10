@@ -1485,5 +1485,26 @@
   "autoExportPage_folderRestartHint": {
     "message": "Nach einem Neustart von Chrome bittet Snug einmalig darum, den Zugriff auf diesen Ordner zu bestätigen. Wähle „Bei jedem Besuch zulassen“, damit der automatische Export weiterläuft.",
     "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
+  },
+  "autoExportPage_folderAccessTitle": {
+    "message": "Ordnerzugriff erforderlich",
+    "description": "Title of the alert shown when the Custom folder's access is missing"
+  },
+  "autoExportPage_folderAccessDescription": {
+    "message": "Snug kann erst wieder in \"$FOLDER$\" speichern, wenn du den Zugriff erneut erlaubst.",
+    "description": "Alert body when Folder access is missing; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_allowAccess": {
+    "message": "Zugriff erlauben",
+    "description": "Button that asks the browser to grant Folder access again"
+  },
+  "autoExportPage_folderAccessRefused": {
+    "message": "Der Zugriff wurde nicht erlaubt. Der automatische Export kann erst speichern, wenn du ihn erlaubst.",
+    "description": "Alert body after the user declined the Folder access request"
   }
 }
