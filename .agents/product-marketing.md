@@ -1,6 +1,6 @@
 # Product Marketing Context
 
-**Document version:** v2 **Last updated:** 2026-10-08
+**Document version:** v3 **Last updated:** 2026-10-10
 
 Snug is free, consumer-facing, and has no pricing, signup, trial, demo or sales
 motion. Marketing skills must not suggest any of those. The only conversion is
@@ -81,24 +81,27 @@ a random extension feels riskier than it should.
 
 ## Competitive Landscape
 
-Numbers verified on the live Chrome Web Store listings on 2026-10-05. Re-check
-before quoting any of them on the page.
+Numbers verified on the live Chrome Web Store listings on 2026-10-10. The site
+reads them from `apps/site/src/content/competitors.ts`. Re-check before quoting
+any of them on the page. "Not listed" means the listing shows no evidence, not
+that the capability is absent.
 
 **Direct:**
 
-| Listing                         | Users | Rating   | Last update | Falls short because                                                         |
-| ------------------------------- | ----- | -------- | ----------- | --------------------------------------------------------------------------- |
-| Selective Bookmarks Export Tool | 10k   | 4.8 (48) | 2026-10-03  | HTML export only; strongest on scope control and polish; open source        |
-| Export Selective Bookmarks      | 5k    | 4.2 (48) | 2026-06-30  | HTML export only                                                            |
-| Bookmark Folder Import & Export | 408   | 5.0 (1)  | 2026-04-21  | TXT/CSV only; almost no adoption                                            |
-| Bookmarks Exporter (oneryx)     | 2k    | 5.0 (7)  | 2022-08-22  | Abandoned; flattens to JSON/CSV for Notion or Excel, not browser-to-browser |
-| 101 Export History/Bookmarks    | 30k   | 3.1 (71) | 2026-08-18  | JSON only; CSV/XLS needs a separate desktop editor despite the name         |
+| Listing                         | Users | Rating   | Version / updated  | What the listing says                                                                             |
+| ------------------------------- | ----- | -------- | ------------------ | ------------------------------------------------------------------------------------------------- |
+| 101 Export History/Bookmarks    | 30k   | 3.1 (71) | 3.2 / 2026-10-07   | Exports history and bookmarks as JSON; its notice says CSV and XLS need the 101editor desktop app |
+| Selective Bookmarks Export Tool | 10k   | 4.8 (48) | 1.7.0 / 2026-10-03 | Exports chosen bookmarks to HTML; keyword filter, dark mode, MIT, 3 languages; import not listed  |
+| Export Selective Bookmarks      | 5k    | 4.2 (48) | 2.1 / 2026-06-30   | Exports a chosen part of the tree to Chrome-compatible HTML; import and schedule not listed       |
+| Bookmark Folder Import & Export | 487   | 5.0 (1)  | 3.4.0 / 2026-04-21 | TXT and CSV export and import by folder; English only; declares website content                   |
+| Bookmarks Exporter (oneryx)     | 2k    | 5.0 (7)  | 0.0.1 / 2022-08-22 | Flat JSON/CSV with folders as tags, for Notion or Excel; not updated since 2022                   |
 
 **Closest overlap on backups:** Maple Backup — Bookmark Snapshots (7k users, 4.0
-from 57 ratings, updated 2026-09-21). Daily or scheduled local snapshots with
-restore, plus optional copies to Google Drive, OneDrive or Dropbox. Its listing
-declares it handles personally identifiable information, authentication
-information and website content. Snug's contrast: it handles none of that.
+from 57 ratings, v5.2 updated 2026-09-21, 15 languages). Daily or scheduled
+local snapshots with restore, plus optional copies to Google Drive, OneDrive or
+Dropbox. Its listing declares it handles personally identifiable information,
+authentication information and website content. Snug's contrast: it handles none
+of that.
 
 **Secondary:** The browser's built-in "Export bookmarks" (HTML only, no preview,
 no schedule, no dedupe) and browser sync (needs an account and a cloud).
@@ -268,6 +271,11 @@ page views, 5.07K impressions, about 24% uninstalls vs installs. Source:
 
 _Newest first. One line per revision: what changed and why._
 
+- v3 (2026-10-10) — Re-verified every competitor on the live listings and moved
+  the facts into `apps/site/src/content/competitors.ts`. 101 Export is 3.2
+  (2026-10-07), Maple Backup lists 15 languages, Bookmark Folder Import & Export
+  is 487 users. Reworded "falls short" cells to what each listing says, with
+  "not listed" for absences.
 - v2 (2026-10-08) — Import limit lifted: several files per Import batch, Import
   selection and five Safety snapshots now shipped. Updated differentiators and
   the "several files" FAQ row.
