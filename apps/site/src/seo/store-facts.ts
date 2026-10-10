@@ -1,5 +1,5 @@
 /**
- * Facts shown on the store listing, read on 2026-10-05
+ * Facts shown on the store listing, read on 2026-10-10
  * (see `docs/landing/content.md`). Re-check before launch.
  */
 export const STORE_FACTS = {
