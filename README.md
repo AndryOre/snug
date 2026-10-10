@@ -66,8 +66,8 @@ why.
 
 ## Documentation
 
-- [`docs/usage.md`](docs/usage.md) — exporting, importing, duplicates, and
-  Auto-export.
+- [`docs/usage.md`](docs/usage.md) — opening the app, with a guide page each for
+  exporting, importing, duplicates, settings, and Auto-export (`docs/guide/`).
 - [`docs/development.md`](docs/development.md) — scripts, git hooks,
   commit/branch conventions, and how `fakeBrowser` testing works.
 - [`docs/architecture.md`](docs/architecture.md) — a code map of the codebase's
