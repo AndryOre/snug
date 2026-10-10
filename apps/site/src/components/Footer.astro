@@ -6,6 +6,7 @@ import {
   resolveHref,
 } from '../i18n/landing'
 import { Separator } from '@workspace/ui/components/separator'
+import { DOCS_UI } from '../i18n/docs-ui'
 
 import {
   languageTag,
@@ -32,9 +33,14 @@ const links = [
     label: footer.privacy,
   },
   {
+    key: 'guide',
+    href: resolveHref(FOOTER_LINK_HREFS.guide, locale),
+    label: DOCS_UI.guide,
+  },
+  {
     key: 'changelog',
-    href: FOOTER_LINK_HREFS.changelog,
-    label: footer.changelog,
+    href: resolveHref(FOOTER_LINK_HREFS.changelog, locale),
+    label: DOCS_UI.whatsNew,
   },
   { key: 'listing', href: installHref('footer'), label: footer.listing },
 ]

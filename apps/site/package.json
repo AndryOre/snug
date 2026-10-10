@@ -19,6 +19,7 @@
     "test:container": "playwright test -c playwright.container.config.ts --grep-invert @visual",
     "test:visual": "bash scripts/visual.sh test",
     "test:visual:update": "bash scripts/visual.sh update",
+    "i18n:status": "bun src/docs/i18n-status.ts",
     "lighthouse": "bash scripts/lighthouse-budget.sh"
   },
   "dependencies": {

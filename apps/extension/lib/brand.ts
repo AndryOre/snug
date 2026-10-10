@@ -91,6 +91,24 @@ export function getSitePrivacyUrl(): string {
 }
 
 /**
+ * The landing site's Guide in the active UI language: the localized site URL
+ * plus `guide/` (`/guide/`, `/de/guide/`, ...).
+ * @returns The localized Guide URL.
+ */
+export function getSiteGuideUrl(): string {
+  return `${getSiteUrl()}guide/`
+}
+
+/**
+ * The landing site's full release notes in the active UI language: the
+ * localized site URL plus `changelog/` (`/changelog/`, `/de/changelog/`, ...).
+ * @returns The localized release notes URL.
+ */
+export function getSiteChangelogUrl(): string {
+  return `${getSiteUrl()}changelog/`
+}
+
+/**
  * The project's GitHub repository URL.
  */
 export const GITHUB_URL = 'https://github.com/AndryOre/snug'

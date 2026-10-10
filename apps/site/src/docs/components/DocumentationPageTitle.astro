@@ -1,0 +1,29 @@
+---
+import StarlightPageTitle from '@astrojs/starlight/components/PageTitle.astro'
+
+import CopyMarkdownButton from '../../components/CopyMarkdownButton'
+import { getContent } from '../../i18n/content'
+import { resolveDocumentationLocale } from '../locale'
+import { markdownTwinPath } from '../markdown-twin'
+
+import DocumentationTranslationNotice from './DocumentationTranslationNotice.astro'
+
+const { lang } = Astro.locals.starlightRoute
+const { copyMarkdown, copied, copyFailed } = getContent(
+  resolveDocumentationLocale(lang),
+).docs
+const twinHref = markdownTwinPath(Astro.url.pathname)
+---
+
+<div
+  data-page-title-row
+  class="flex flex-wrap items-start justify-between gap-3"
+>
+  <StarlightPageTitle />
+  <CopyMarkdownButton
+    client:idle
+    twinHref={twinHref}
+    copy={{ copyMarkdown, copied, copyFailed }}
+  />
+</div>
+<DocumentationTranslationNotice />

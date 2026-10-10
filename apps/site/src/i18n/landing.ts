@@ -1,6 +1,7 @@
 import { STORE_FACTS } from '../seo/store-facts'
 import { getContent, type SiteContent } from './content'
-import { languageTag, type Locale } from './locales'
+import { DOCS_PATHS } from './docs-ui'
+import { languageTag, type Locale, localePath } from './locales'
 import { privacyPath } from './privacy'
 import { formatRatingsSentence } from './proof'
 
@@ -209,5 +210,6 @@ export function getClosingCopy(locale: Locale): {
 export const FOOTER_LINK_HREFS = {
   source: TRUST_LINK_HREFS.source,
   privacy: TRUST_LINK_HREFS.privacy,
-  changelog: 'https://github.com/AndryOre/snug/blob/main/CHANGELOG.md',
+  guide: (locale: Locale) => localePath(locale, DOCS_PATHS.guide),
+  changelog: (locale: Locale) => localePath(locale, DOCS_PATHS.whatsNew),
 } as const

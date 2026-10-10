@@ -167,7 +167,6 @@
     "source": "Codice su GitHub",
     "privacy": "Informativa sulla privacy",
     "listing": "Scheda del Chrome Web Store",
-    "changelog": "Registro delle modifiche",
     "note": "Snug è open source con licenza MIT.",
     "navLabel": "Piè di pagina"
   },
@@ -221,7 +220,15 @@
     "duplicates": "Duplicates",
     "settings": "Settings",
     "autoExport": "Auto-export",
-    "whatsNew": "What's new"
+    "whatsNew": "What's new",
+    "notice": {
+      "stale": "This translation is out of date, so the English text is shown.",
+      "missing": "This page is not translated yet, so the English text is shown.",
+      "readEnglish": "Read this page in English"
+    },
+    "copyMarkdown": "Copy Markdown",
+    "copied": "Copied",
+    "copyFailed": "Could not copy"
   },
   "docsSearch": {
     "noResults": "Nessun risultato per {query}.",

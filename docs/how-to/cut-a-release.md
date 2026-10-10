@@ -18,10 +18,19 @@
    every locale to carry the same top-level key set as `en.json`, so a new
    changelog entry with keys missing from either file fails that test.
 
-4. Run `bun run check` and `bun run test` to confirm the version bump, changelog
+4. Update the website translations of anything the release changed in the
+   English Guide or `CHANGELOG.md`. Run `bun run i18n:status`: every page listed
+   as `stale` has a translation under
+   `apps/site/src/content/translations/<locale>/` whose `sourceHash` no longer
+   matches its English source. Retranslate it and set the new `sourceHash` (the
+   first 16 hex characters of the SHA-256 of the English file), or delete the
+   translation so the page falls back to English with a notice. The drift test
+   in `bun run test` fails on a stale translation.
+
+5. Run `bun run check` and `bun run test` to confirm the version bump, changelog
    entry, and locale keys are all consistent.
 
-5. Run `bun run zip` (the root `zip` script, which runs `wxt zip` in
+6. Run `bun run zip` (the root `zip` script, which runs `wxt zip` in
    `apps/extension`) to produce the distributable extension archive and the
    sources archive for the new version, both in `apps/extension/.output/`:
    `snug-X.Y.Z-chrome.zip`, `snug-X.Y.Z-edge.zip` (built with
@@ -33,7 +42,7 @@
    `bun install --frozen-lockfile && bun run build`. If a root file the build
    needs is added later, add it to that allowlist.
 
-6. After the release PR merges, tag the merge commit with a **signed** tag and
+7. After the release PR merges, tag the merge commit with a **signed** tag and
    push it: `git tag -s vX.Y.Z <merge-commit-sha> && git push origin vX.Y.Z`.
    Release tags must be signed (`-s`, GPG or SSH per your `git config`) — an
    unsigned `git tag vX.Y.Z` is not acceptable. Verify a tag's signature at any
@@ -44,7 +53,7 @@
    build provenance, and publishes the GitHub Release — no manual
    `gh release create` needed.
 
-7. Once the GitHub Release job finishes, a second job,
+8. Once the GitHub Release job finishes, a second job,
    `publish-chrome-web-store`, submits the same zip to the Chrome Web Store via
    `wxt submit` (the `publish-browser-extension` package), using Chrome Web
    Store API v2 and a service account. This job runs in the `chrome-web-store`
@@ -70,7 +79,7 @@
    [pre-publish checklist](../store/README.md#pre-publish-checklist) before
    pushing the tag.
 
-8. In parallel with the Chrome Web Store job, a third job,
+9. In parallel with the Chrome Web Store job, a third job,
    `publish-edge-add-ons`, submits the Edge zip (`snug-X.Y.Z-edge.zip`) to
    Microsoft Edge Add-ons via `wxt submit`, using the Edge Add-ons API v1.1 with
    API key authentication. It depends only on the `release` job, never on

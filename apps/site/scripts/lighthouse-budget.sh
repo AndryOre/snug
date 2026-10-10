@@ -18,7 +18,7 @@ median_score() {
     sort -g | awk '{ scores[NR] = $1 } END { print scores[int((NR + 1) / 2)] }'
 }
 
-for path in / /ru/ /ja/ /privacy/; do
+for path in / /ru/ /ja/ /privacy/ /guide/; do
   reports=()
   for run in $(seq 1 "$runs"); do
     report="$out/report-$run.json"

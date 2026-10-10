@@ -476,3 +476,64 @@ test.describe('font requests', () => {
     })
   }
 })
+
+test.describe('Markdown twins', () => {
+  for (const locale of LOCALES) {
+    test(`${locale} serves the exporting page as Markdown`, () => {
+      const twin = readBuilt(
+        `${localePath(locale, '/guide/exporting').slice(1)}.md`,
+      )
+      expect(twin).toMatch(/^# Exporting bookmarks\n\n\S/)
+    })
+  }
+
+  test('serves What is new and the Guide overview as Markdown', () => {
+    expect(readBuilt('changelog.md')).toMatch(/^# What's new\n/)
+    expect(readBuilt('es/guide.md')).toMatch(/^# Usage\n/)
+  })
+})
+
+test.describe('Copy Markdown button', () => {
+  test('copies the page Markdown and shows Copied for two seconds', async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+    await page.goto('/guide/exporting/')
+    const button = page.getByRole('button', { name: 'Copy Markdown' })
+    await expect(
+      page.locator('astro-island:has([data-copy-markdown])'),
+    ).not.toHaveAttribute('ssr', '')
+    await expect(button).toHaveCSS('min-height', '44px')
+    await button.click()
+    await expect(page.getByRole('button', { name: 'Copied' })).toBeVisible()
+    const clipboard = await page.evaluate(() =>
+      globalThis.navigator.clipboard.readText(),
+    )
+    expect(clipboard).toBe(readBuilt('guide/exporting.md'))
+    await expect(
+      page.getByRole('button', { name: 'Copy Markdown' }),
+    ).toBeVisible({ timeout: 4000 })
+  })
+
+  test('shows the error label and stays usable when the clipboard is blocked', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'clipboard', {
+        value: { writeText: () => Promise.reject(new Error('blocked')) },
+      })
+    })
+    await page.goto('/es/guide/exporting/')
+    await expect(
+      page.locator('astro-island:has([data-copy-markdown])'),
+    ).not.toHaveAttribute('ssr', '')
+    await page.getByRole('button', { name: 'Copy Markdown' }).click()
+    await expect(
+      page.getByRole('button', { name: 'Could not copy' }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole('button', { name: 'Copy Markdown' }),
+    ).toBeEnabled({ timeout: 4000 })
+  })
+})

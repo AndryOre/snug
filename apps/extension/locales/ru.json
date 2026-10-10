@@ -838,6 +838,10 @@
     "message": "Оставить отзыв",
     "description": "What's new screen string"
   },
+  "whatsNew_fullNotesLink": {
+    "message": "Полные примечания к выпуску",
+    "description": "What's new screen link to the full release notes on the website"
+  },
   "exportPage_title": {
     "message": "Экспорт закладок",
     "description": "Export page heading"
@@ -1332,6 +1336,10 @@
   "shell_privacyLink": {
     "message": "Конфиденциальность",
     "description": "App sidebar footer link to the privacy policy"
+  },
+  "shell_guideLink": {
+    "message": "Руководство",
+    "description": "App sidebar footer link to the Guide on the website"
   },
   "changelog_2_0_2_1": {
     "message": "У Snug теперь есть сайт."

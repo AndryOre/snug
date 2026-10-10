@@ -1,8 +1,8 @@
 import type { Loader, LoaderContext } from 'astro/loaders'
 import path from 'node:path'
 
-import { loadCatalog } from './catalog'
-import { REPOSITORY_ROOT } from './paths'
+import { loadLocalizedCatalog } from './catalog'
+import { REPOSITORY_ROOT, TRANSLATIONS_DIRECTORY } from './paths'
 import { PUBLISHED_SOURCES } from './published'
 
 const DOCS_DIRECTORY = path.join(REPOSITORY_ROOT, 'docs')
@@ -13,30 +13,39 @@ const WATCHED_FILES = new Set(
 )
 
 async function fillStore(context: LoaderContext): Promise<void> {
-  const entries = loadCatalog()
+  const entries = loadLocalizedCatalog()
   context.store.clear()
   for (const entry of entries) {
     const data = await context.parseData({
       id: entry.id,
-      data: { title: entry.title, editUrl: entry.editUrl },
+      data: {
+        title: entry.title,
+        editUrl: entry.editUrl,
+        translationStatus: entry.status,
+        englishPath: entry.englishPath,
+      },
     })
     context.store.set({
       id: entry.id,
       data,
       body: entry.body,
-      digest: context.generateDigest(entry.body),
+      digest: context.generateDigest(`${entry.status}:${entry.body}`),
       rendered: await context.renderMarkdown(entry.body),
     })
   }
 }
 
 function isWatchedFile(file: string): boolean {
-  return WATCHED_FILES.has(file) || file.startsWith(DOCS_DIRECTORY)
+  return (
+    WATCHED_FILES.has(file) ||
+    file.startsWith(DOCS_DIRECTORY) ||
+    file.startsWith(TRANSLATIONS_DIRECTORY)
+  )
 }
 
 /**
  * Content loader for the Starlight `docs` collection: one entry per published
- * source, read from the repository at build time and never copied into the
+ * source and locale, read from the repository at build time and never copied into the
  * site. In dev it watches the docs folder and `CHANGELOG.md` and refills the
  * store on every change.
  * @returns A loader that fills the store on every build and file change.
@@ -48,7 +57,7 @@ export function catalogLoader(): Loader {
       await fillStore(context)
       const { watcher } = context
       if (!watcher) return
-      watcher.add([DOCS_DIRECTORY, ...WATCHED_FILES])
+      watcher.add([DOCS_DIRECTORY, TRANSLATIONS_DIRECTORY, ...WATCHED_FILES])
       const refresh = async (file: string) => {
         if (!isWatchedFile(file)) return
         try {
