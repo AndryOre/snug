@@ -1,7 +1,19 @@
 ---
 title: Novidades
-sourceHash: 6cb093a38ee10dfc
+sourceHash: 8d640827463373eb
 ---
+
+## 2.2.0
+
+2026-10-10
+
+- A exportação automática agora pode salvar em uma Pasta personalizada que você
+  escolher, em qualquer lugar do computador.
+- O Snug agora avisa com antecedência quando o acesso à pasta é necessário, e a
+  página de Exportação automática tem um botão Permitir acesso para concedê-lo
+  de novo.
+- A Retenção mantém só as execuções mais recentes, contadas entre Downloads e a
+  Pasta personalizada.
 
 ## 2.1.0
 
