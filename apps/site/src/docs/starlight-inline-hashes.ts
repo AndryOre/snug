@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
+import { createRequire } from 'node:module'
+
+const requireFromHere = createRequire(import.meta.url)
 
 const COMPONENTS_WITH_INLINE_SCRIPTS = [
   '@astrojs/starlight/components/SidebarPersister.astro',
@@ -16,10 +18,7 @@ const INLINE_SCRIPT = /<script is:inline[^>]*>(?<body>[\s\S]*?)<\/script>/g
  */
 export function collectStarlightInlineScriptHashes(): `sha256-${string}`[] {
   const hashes = COMPONENTS_WITH_INLINE_SCRIPTS.flatMap((specifier) => {
-    const source = readFileSync(
-      fileURLToPath(import.meta.resolve(specifier)),
-      'utf8',
-    )
+    const source = readFileSync(requireFromHere.resolve(specifier), 'utf8')
     return source
       .matchAll(INLINE_SCRIPT)
       .map(
