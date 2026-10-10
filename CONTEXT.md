@@ -17,8 +17,9 @@ title, brand text.
 **App** The extension's single full-page UI (`app.html`, also the options page),
 hash-routed with a sidebar: Export, Import, Duplicates, Auto-export, Settings,
 What's new and Welcome. The popup is separate and compact; anything that needs
-more room opens the App. _Avoid_: dashboard, options page, advanced page, full
-page.
+more room opens the App. Its What's new page lists the highlights of each
+release and links to the full Release notes on the Website. _Avoid_: dashboard,
+options page, advanced page, full page.
 
 **Bookmark node** A single entry in a bookmark tree: either a bookmark (has a
 title and a URL) or a folder (has a title and children, no URL). Trees are built
@@ -131,10 +132,23 @@ the user's first successful export or Auto-export run. Once acted on or
 dismissed, it never returns. _Avoid_: rating prompt, review nag, review request,
 feedback prompt.
 
-**Landing page** The marketing site at snug.andryore.dev: a static, multilingual
-page whose one job is to send visitors to the store listing for the browser in
-use. It is separate from the App and the popup, which live inside the extension.
-_Avoid_: website, homepage, marketing site, promo page.
+**Website** snug.andryore.dev as a whole: the Landing page, the Guide, What's
+new and the Privacy policy, all multilingual. It is separate from the App and
+the popup, which live inside the extension. _Avoid_: site, web app, portal.
+
+**Landing page** The Website's home page: a static, multilingual page whose one
+job is to send visitors to the store listing for the browser in use. _Avoid_:
+website, homepage, marketing site, promo page.
+
+**Guide** The user documentation on the Website, one page per area of the App
+(exporting, importing, duplicates, settings, Auto-export). The English text
+prevails; every other locale shows a translation that says so when it lags the
+English. _Avoid_: docs, manual, usage docs, help center.
+
+**Release notes** The full list of changes per version, kept in `CHANGELOG.md`
+and reused as the GitHub Release body. The Website's What's new page shows them
+in full; the App's What's new page shows only the highlights. _Avoid_: changelog
+(as a label shown to users), patch notes, release log.
 
 **Privacy policy** The legal text describing what Snug and the Landing page
 collect. The English version prevails; every other locale shows a translation
