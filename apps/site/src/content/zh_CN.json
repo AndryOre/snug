@@ -213,22 +213,22 @@
     "theme": "你选择的主题只存储在你的浏览器中。"
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "guide": "指南",
+    "overview": "概览",
+    "exporting": "导出",
+    "importing": "导入",
+    "duplicates": "重复项",
+    "settings": "设置",
+    "autoExport": "自动导出",
+    "whatsNew": "新功能",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "此翻译已过期，因此显示的是英文内容。",
+      "missing": "此页面尚未翻译，因此显示的是英文内容。",
+      "readEnglish": "阅读此页面的英文版"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "复制 Markdown",
+    "copied": "已复制",
+    "copyFailed": "无法复制"
   },
   "docsSearch": {
     "noResults": "没有找到与 {query} 相关的结果。",
