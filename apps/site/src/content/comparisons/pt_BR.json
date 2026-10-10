@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "alternatives": {
+      "title": "Alternativas para exportar favoritos no Chrome | Snug",
+      "description": "Compare o Snug com outras três extensões do Chrome para exportar e fazer backup de favoritos: formatos, importação, agendamento, idiomas e dados declarados. Verificado em {date}."
+    },
+    "selective-bookmarks-export-tool": {
+      "title": "Snug vs Selective Bookmarks Export Tool | Snug",
+      "description": "Snug e Selective Bookmarks Export Tool comparados em formatos de exportação, importação, agendamento e dados declarados, de acordo com as páginas atuais da loja. Verificado em {date}."
+    },
+    "maple-backup": {
+      "title": "Snug vs Maple Backup | Snug",
+      "description": "Snug e Maple Backup comparados em instantâneos, cópias opcionais em armazenamento online, idiomas e dados declarados, de acordo com as páginas atuais da loja. Verificado em {date}."
+    },
+    "101-export": {
+      "title": "Snug vs 101 Export History/Bookmarks | Snug",
+      "description": "Snug e 101 Export History/Bookmarks comparados em formatos de exportação, exportação de histórico e dados declarados, de acordo com as páginas atuais da loja. Verificado em {date}."
+    }
+  },
+  "shared": {
+    "breadcrumb": {
+      "label": "Navegação estrutural",
+      "home": "Snug",
+      "alternatives": "Alternativas"
+    },
+    "tldr": "Resumo",
+    "atAGlance": "Visão geral",
+    "asOf": "Em {date}",
+    "notListed": "Não consta",
+    "criteria": {
+      "exportFormats": "Formatos de exportação",
+      "import": "Importação",
+      "chooseFolders": "Escolher quais pastas exportar",
+      "schedule": "Exportação agendada",
+      "cloudCopies": "Cópias em armazenamento online",
+      "browsers": "Navegadores",
+      "languages": "Idiomas",
+      "usersRating": "Usuários e avaliação",
+      "dataDisclosure": "Dados declarados na página da loja"
+    },
+    "compareWithSnug": "Comparar com o Snug",
+    "pickSnug": "Escolha o Snug se",
+    "pickOther": "Escolha {name} se",
+    "switching": "Migrar para o Snug",
+    "checkedNote": "Verificado em cada página da Chrome Web Store em {date}. As páginas mudam, então confirme na própria página antes de decidir.",
+    "ctaTitle": "Experimente o Snug nos seus próprios favoritos",
+    "ctaBody": "Grátis e de código aberto. Sem conta, sem chamadas de rede.",
+    "install": "Adicionar ao Chrome"
+  },
+  "alternatives": {
+    "eyebrow": "Alternativas",
+    "title": "Extensões para exportar favoritos no Chrome, comparadas",
+    "lede": "Esta tabela coloca o Snug ao lado de outras três extensões que exportam ou fazem backup de favoritos do Chrome, usando apenas o que cada página da Chrome Web Store diz em {date}. Quando uma página não menciona algo, a tabela indica Não consta.",
+    "whatToLookFor": {
+      "title": "O que observar",
+      "items": [
+        "Formatos de exportação. Confira se o tipo de arquivo de que você precisa está na lista e o que a extensão diz que não exporta.",
+        "Importação. Uma exportação só ajuda se você puder lê-la de volta ou se outra ferramenta a abrir.",
+        "Escolha de pastas. Decida se você precisa da árvore inteira ou só de algumas pastas.",
+        "Agendamento. Decida se quer que as exportações rodem sozinhas ou só quando você clicar.",
+        "Para onde vão as cópias. Algumas extensões mantêm tudo no dispositivo, e outras oferecem cópias opcionais em armazenamento online depois do login.",
+        "Os dados declarados. Toda página tem uma seção que informa quais dados o desenvolvedor declara tratar. Leia antes de instalar."
+      ]
+    },
+    "builtIn": {
+      "name": "A exportação integrada do Chrome",
+      "summary": "O gerenciador de favoritos do Chrome exporta todos os seus favoritos para um único arquivo HTML, sem instalar nada. Basta quando você precisa disso e de mais nada."
+    },
+    "cards": {
+      "selective-bookmarks-export-tool": {
+        "pickWhen": "Escolha-a se você também usa o Firefox ou se HTML é o único formato de que precisa."
+      },
+      "maple-backup": {
+        "pickWhen": "Escolha-a se quiser cópias opcionais no Google Drive, OneDrive ou Dropbox, ou uma interface em um de {languages} idiomas."
+      },
+      "101-export": {
+        "pickWhen": "Escolha-a se precisar exportar o histórico de navegação além dos favoritos."
+      }
+    }
+  },
+  "pages": {
+    "selective-bookmarks-export-tool": {
+      "eyebrow": "Comparação",
+      "title": "Snug vs Selective Bookmarks Export Tool",
+      "tldr": "O Selective Bookmarks Export Tool exporta favoritos escolhidos para HTML e também está disponível para Firefox e Edge. O Snug exporta para mais formatos além de HTML, importa com pré-visualização e executa a exportação automática em um agendamento. Em {date}, a página dele mostra {users} usuários e avaliação {rating}, e não lista importação nem agendamento.",
+      "whyLook": {
+        "title": "Por que as pessoas buscam uma alternativa",
+        "body": "A página descreve a exportação para HTML. Importação e agendamento não constam em {date}. Quem precisa de outro formato de arquivo, ou de exportações que rodem sozinhas, vai precisar de outra ferramenta para essas partes."
+      },
+      "pickSnug": [
+        "Você precisa de um formato diferente de HTML, como JSON.",
+        "Você quer importar um arquivo de volta, com pré-visualização e a escolha entre Mesclar, Substituir ou Pasta nova.",
+        "Você quer que a exportação automática rode em um agendamento, para Downloads ou para uma pasta que você escolher.",
+        "Você quer uma página Duplicados para encontrar favoritos repetidos.",
+        "Você quer uma extensão que não faz chamadas de rede e não exige conta."
+      ],
+      "pickOther": [
+        "Você também usa o Firefox, porque a extensão está disponível lá.",
+        "HTML é o único formato de que você precisa.",
+        "Você quer um filtro por palavra-chave ou um modo escuro na própria ferramenta de exportação."
+      ],
+      "switching": {
+        "steps": [
+          "Instale o Snug pela Chrome Web Store.",
+          "Abra o Snug e exporte no formato de que precisa. O Snug lê os favoritos que já estão no seu navegador, então não há nada para converter.",
+          "Se você tem arquivos HTML de exportações anteriores, escolha Importar e selecione o arquivo.",
+          "Confira a pré-visualização e escolha Mesclar, Substituir ou Pasta nova. Uma substituição pode ser desfeita pelo instantâneo de segurança.",
+          "Ative a exportação automática se quiser exportações em um agendamento."
+        ]
+      }
+    },
+    "maple-backup": {
+      "eyebrow": "Comparação",
+      "title": "Snug vs Maple Backup",
+      "tldr": "O Maple Backup faz instantâneos automáticos diários ou agendados, guardados no dispositivo, com cópias opcionais no Google Drive, OneDrive ou Dropbox depois do login. O Snug exporta para arquivos que ficam com você, importa com pré-visualização e não faz chamadas de rede. Em {date}, a página dele mostra {users} usuários e avaliação {rating}.",
+      "whyLook": {
+        "title": "Por que as pessoas buscam uma alternativa",
+        "body": "Em {date}, a página do Maple Backup declara que ele trata informações de identificação pessoal, informações de autenticação e conteúdo de sites, e suas cópias opcionais exigem login. Quem quer uma ferramenta sem conta e sem chamadas de rede pode procurar em outro lugar."
+      },
+      "pickSnug": [
+        "Você quer uma ferramenta sem conta e sem chamadas de rede.",
+        "Você quer arquivos de exportação em vários formatos que outros navegadores e ferramentas consigam abrir.",
+        "Você quer importar com pré-visualização e escolher entre Mesclar, Substituir ou Pasta nova.",
+        "Você quer uma extensão de código aberto cujo código você possa ler."
+      ],
+      "pickOther": [
+        "Você quer cópias opcionais no Google Drive, OneDrive ou Dropbox.",
+        "Você quer restaurar a partir de qualquer instantâneo guardado.",
+        "Você quer uma interface em um de {languages} idiomas.",
+        "Você quer instantâneos diários automáticos sem definir um destino."
+      ],
+      "switching": {
+        "steps": [
+          "Instale o Snug pela Chrome Web Store.",
+          "Abra o Snug e exporte seus favoritos no formato de que precisa. O Snug lê os favoritos que já estão no seu navegador, então não há nada para converter.",
+          "Ative a exportação automática para receber arquivos em um agendamento, em Downloads ou em uma pasta que você escolher.",
+          "Remova o Maple Backup na página de extensões quando não precisar mais dele."
+        ]
+      }
+    },
+    "101-export": {
+      "eyebrow": "Comparação",
+      "title": "Snug vs 101 Export History/Bookmarks",
+      "tldr": "O 101 Export exporta o histórico e os favoritos do Chrome como JSON. O próprio aviso dele diz que não exporta para CSV nem XLS. O Snug exporta só favoritos, em mais formatos, e também importa. Em {date}, a página dele mostra {users} usuários e avaliação {rating}.",
+      "whyLook": {
+        "title": "Por que as pessoas buscam uma alternativa",
+        "body": "O título na loja menciona CSV e XLS, e o aviso da própria extensão diz que ela não exporta para nenhum dos dois. Para converter, é preciso o aplicativo de desktop 101editor. O Chrome limita o histórico a {historyMonths} meses. Em {date}, a página está apenas em inglês."
+      },
+      "pickSnug": [
+        "Você precisa dos favoritos em um formato diferente de JSON, sem um aplicativo de desktop.",
+        "Você quer importar um arquivo de volta, com pré-visualização e a escolha entre Mesclar, Substituir ou Pasta nova.",
+        "Você quer exportação automática em um agendamento.",
+        "Você quer a interface em um idioma diferente do inglês."
+      ],
+      "pickOther": [
+        "Você precisa exportar o histórico de navegação além dos favoritos.",
+        "JSON é o único formato de que você precisa.",
+        "Você quer uma única extensão para histórico e favoritos."
+      ],
+      "switching": {
+        "steps": [
+          "Instale o Snug pela Chrome Web Store.",
+          "Abra o Snug e exporte seus favoritos no formato de que precisa. O Snug lê os favoritos que já estão no seu navegador, então não há nada para converter.",
+          "Mantenha o 101 Export instalado se ainda precisar exportar o histórico, porque o Snug exporta só favoritos.",
+          "Ative a exportação automática se quiser exportações em um agendamento."
+        ]
+      }
+    }
+  }
+}
