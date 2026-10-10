@@ -741,6 +741,23 @@
     "message": "Auto-Export öffnen und prüfen",
     "description": "Popup status item description when the last auto-export failed"
   },
+  "popup_statusFolderAccessTitle": {
+    "message": "Ordnerzugriff erforderlich",
+    "description": "Popup status item title when the Custom folder needs Folder access again"
+  },
+  "popup_statusFolderAccessDescription": {
+    "message": "Erlaube den Zugriff auf \"$FOLDER$\", damit weiter gesichert wird",
+    "description": "Popup status item description when the Custom folder needs Folder access again; $FOLDER$ is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_statusFolderAccessAction": {
+    "message": "Zugriff erlauben",
+    "description": "Popup status item button that opens the Auto-export page to allow Folder access"
+  },
   "popup_openApp": {
     "message": "App öffnen",
     "description": "Popup footer button that opens the full-page app"
@@ -1431,5 +1448,42 @@
   "import_skippedFilesTitle": {
     "message": "Nicht importierte Dateien",
     "description": "Heading above the files an Import batch left out, each with its reason"
+  },
+  "autoExportPage_saveTo": {
+    "message": "Speichern unter",
+    "description": "Label of the Save to group choosing the Export destination"
+  },
+  "autoExportPage_destinationDownloads": {
+    "message": "Downloads",
+    "description": "Save to option: the browser Downloads folder"
+  },
+  "autoExportPage_destinationFolder": {
+    "message": "Eigener Ordner",
+    "description": "Save to option: a folder the user picks anywhere on the computer"
+  },
+  "autoExportPage_chooseFolder": {
+    "message": "Ordner auswählen…",
+    "description": "Button that opens the folder picker when no Custom folder is chosen yet"
+  },
+  "autoExportPage_changeFolder": {
+    "message": "Ordner ändern",
+    "description": "Button that replaces the chosen Custom folder"
+  },
+  "autoExportPage_chooseFolderDescription": {
+    "message": "Wähle den Ordner, in dem Snug speichert. Er kann sich an einem beliebigen Ort auf deinem Computer befinden.",
+    "description": "Help text shown while Custom folder has no folder yet"
+  },
+  "autoExportPage_folderChosenDescription": {
+    "message": "In „$FOLDER$“.",
+    "description": "Description under the subfolder field once a Custom folder is chosen; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_folderRestartHint": {
+    "message": "Nach einem Neustart von Chrome bittet Snug einmalig darum, den Zugriff auf diesen Ordner zu bestätigen. Wähle „Bei jedem Besuch zulassen“, damit der automatische Export weiterläuft.",
+    "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
   }
 }

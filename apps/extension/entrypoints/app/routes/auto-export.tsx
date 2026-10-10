@@ -31,6 +31,13 @@ import {
   InputGroupText,
 } from '@workspace/ui/components/input-group'
 import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemMedia,
+  ItemTitle,
+} from '@workspace/ui/components/item'
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -45,7 +52,13 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from '@workspace/ui/components/toggle-group'
-import { CircleAlertIcon, CircleCheckIcon, DownloadIcon } from 'lucide-react'
+import {
+  CircleAlertIcon,
+  CircleCheckIcon,
+  DownloadIcon,
+  FolderIcon,
+  InfoIcon,
+} from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { TimePicker } from '@/components/time-picker'
@@ -57,6 +70,7 @@ import {
 } from '@/lib/auto-export'
 import {
   parseKeepLast,
+  resolveEffectiveDestination,
   resolveFolder,
   resolveFormats,
 } from '@/lib/auto-export-form'
@@ -65,6 +79,12 @@ import {
   EXPORT_FORMATS,
   type ExportFormat,
 } from '@/lib/export-formats'
+import {
+  canPickFolder,
+  clearFolderHandle,
+  pickFolder,
+  saveFolderHandle,
+} from '@/lib/folder-handle'
 import { resolveNextRunStatus } from '@/lib/next-run-status'
 import {
   autoExportConfigStore,
@@ -77,6 +97,7 @@ import type {
   AutoExportInterval,
   AutoExportLastRun,
   DayOfWeek,
+  ExportDestination,
 } from '@/lib/types'
 import { useStorageItem } from '@/lib/use-storage-item'
 
@@ -148,18 +169,28 @@ function notifySaved(): void {
 interface StatusCardProperties {
   config: AutoExportConfig
   folder: string
+  destination: ExportDestination
+  isFolderMissing: boolean
 }
 
 /**
  * The status card: last-run badge, failure details, next run, and the
- * "Export now" button. Export now uses the on-screen formats and folder and
- * never moves the schedule.
+ * "Export now" button. Export now uses the on-screen formats, destination and
+ * folder and never moves the schedule.
  * @param properties The persisted config and the on-screen folder text.
  * @param properties.config The persisted auto-export config.
  * @param properties.folder The folder text currently on screen.
+ * @param properties.destination The Export destination in effect on screen.
+ * @param properties.isFolderMissing Whether Custom folder is selected without
+ *   a chosen folder, which blocks Export now.
  * @returns The status card element.
  */
-function StatusCard({ config, folder }: StatusCardProperties) {
+function StatusCard({
+  config,
+  folder,
+  destination,
+  isFolderMissing,
+}: StatusCardProperties) {
   const [nextRun] = useStorageItem(autoExportNextRunStore)
   const lastRun = useLastRun()
   const [isRunning, setIsRunning] = useState(false)
@@ -170,6 +201,7 @@ function StatusCard({ config, folder }: StatusCardProperties) {
       type: RUN_MANUAL_EXPORT_MESSAGE_TYPE,
       formats: config.formats,
       path: resolveFolder(folder, config.path),
+      destination,
     }
     try {
       const response = (await browser.runtime.sendMessage(message)) as
@@ -271,7 +303,7 @@ function StatusCard({ config, folder }: StatusCardProperties) {
         <Button
           variant="outline"
           onClick={handleExportNow}
-          disabled={isRunning}
+          disabled={isRunning || isFolderMissing}
         >
           {isRunning ? (
             <Spinner data-icon="inline-start" />
@@ -301,6 +333,13 @@ export function AutoExportRoute() {
   const [keepLastDraft, setKeepLastDraft] = useState<string | null>(null)
 
   const folder = folderDraft ?? config.path
+  const isPickerAvailable = canPickFolder()
+  const destination = resolveEffectiveDestination(
+    config.destination,
+    isPickerAvailable,
+  )
+  const folderName = destination === 'folder' ? config.folderName : null
+  const isFolderMissing = destination === 'folder' && folderName === null
   const keepLast = config.keepLast ?? 10
   const keepLastText = keepLastDraft ?? String(keepLast)
   const isKeepLastInvalid = parseKeepLast(keepLastText) === null
@@ -315,6 +354,33 @@ export function AutoExportRoute() {
   const save = async (patch: Partial<AutoExportConfig>) => {
     await setConfig({ ...(await autoExportConfigStore.getValue()), ...patch })
     notifySaved()
+  }
+
+  const changeDestination = async (next: ExportDestination) => {
+    if (next === destination) return
+    if (next === 'downloads') {
+      await clearFolderHandle()
+      await save({ destination: 'downloads', folderName: null })
+      return
+    }
+    await save({ destination: 'folder' })
+  }
+
+  const chooseFolder = async () => {
+    let handle: FileSystemDirectoryHandle
+    try {
+      handle = await pickFolder()
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') return
+      toast.add({
+        title: i18n.t('exportNowFailed'),
+        description: error instanceof Error ? error.message : String(error),
+        type: 'error',
+      })
+      return
+    }
+    await saveFolderHandle(handle)
+    await save({ destination: 'folder', folderName: handle.name })
   }
 
   const commitFolder = async () => {
@@ -332,7 +398,12 @@ export function AutoExportRoute() {
 
   return (
     <div className="flex w-full max-w-2xl flex-col gap-4">
-      <StatusCard config={config} folder={folder} />
+      <StatusCard
+        config={config}
+        folder={folder}
+        destination={destination}
+        isFolderMissing={isFolderMissing}
+      />
       <Card>
         <CardHeader>
           <CardTitle>{i18n.t('autoExportPage_settingsTitle')}</CardTitle>
@@ -429,31 +500,112 @@ export function AutoExportRoute() {
               )}
             </Field>
 
-            <Field data-disabled={isOff || undefined}>
-              <FieldLabel htmlFor="auto-export-folder">
-                {i18n.t('exportPath')}
-              </FieldLabel>
-              <InputGroup>
-                <InputGroupAddon>
-                  <InputGroupText>
-                    {i18n.t('autoExportPage_downloadsPrefix')}
-                  </InputGroupText>
-                </InputGroupAddon>
-                <InputGroupInput
-                  id="auto-export-folder"
-                  value={folder}
+            {isPickerAvailable && (
+              <FieldSet data-disabled={isOff || undefined} disabled={isOff}>
+                <FieldLegend variant="label">
+                  {i18n.t('autoExportPage_saveTo')}
+                </FieldLegend>
+                <ToggleGroup
+                  variant="outline"
+                  aria-label={i18n.t('autoExportPage_saveTo')}
+                  value={[destination]}
                   disabled={isOff}
-                  onChange={(event) => setFolderDraft(event.target.value)}
-                  onBlur={() => void commitFolder()}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') event.currentTarget.blur()
+                  onValueChange={(value) => {
+                    const [next] = value as ExportDestination[]
+                    if (next) void changeDestination(next)
                   }}
-                />
-              </InputGroup>
-              <FieldDescription>
-                {i18n.t('autoExportPage_folderDescription')}
-              </FieldDescription>
-            </Field>
+                >
+                  <ToggleGroupItem value="downloads">
+                    {i18n.t('autoExportPage_destinationDownloads')}
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="folder">
+                    {i18n.t('autoExportPage_destinationFolder')}
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </FieldSet>
+            )}
+
+            {isFolderMissing && (
+              <Field data-disabled={isOff || undefined}>
+                <FieldDescription>
+                  {i18n.t('autoExportPage_chooseFolderDescription')}
+                </FieldDescription>
+                <div>
+                  <Button
+                    variant="outline"
+                    disabled={isOff}
+                    onClick={() => void chooseFolder()}
+                  >
+                    <FolderIcon data-icon="inline-start" />
+                    {i18n.t('autoExportPage_chooseFolder')}
+                  </Button>
+                </div>
+              </Field>
+            )}
+
+            {folderName !== null && (
+              <Item variant="outline" size="sm">
+                <ItemMedia variant="icon">
+                  <FolderIcon />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle>{folderName}</ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={isOff}
+                    onClick={() => void chooseFolder()}
+                  >
+                    {i18n.t('autoExportPage_changeFolder')}
+                  </Button>
+                </ItemActions>
+              </Item>
+            )}
+
+            {!isFolderMissing && (
+              <Field data-disabled={isOff || undefined}>
+                <FieldLabel htmlFor="auto-export-folder">
+                  {i18n.t('exportPath')}
+                </FieldLabel>
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>
+                      {folderName === null
+                        ? i18n.t('autoExportPage_downloadsPrefix')
+                        : `${folderName}/`}
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    id="auto-export-folder"
+                    value={folder}
+                    disabled={isOff}
+                    onChange={(event) => setFolderDraft(event.target.value)}
+                    onBlur={() => void commitFolder()}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') event.currentTarget.blur()
+                    }}
+                  />
+                </InputGroup>
+                <FieldDescription>
+                  {folderName === null
+                    ? i18n.t('autoExportPage_folderDescription')
+                    : i18n.t('autoExportPage_folderChosenDescription', [
+                        folderName,
+                      ])}
+                </FieldDescription>
+              </Field>
+            )}
+
+            {folderName !== null && (
+              <Alert>
+                <InfoIcon />
+                <AlertDescription>
+                  {i18n.t('autoExportPage_folderRestartHint')}
+                </AlertDescription>
+              </Alert>
+            )}
 
             <FieldSet data-disabled={isOff || undefined} disabled={isOff}>
               <FieldLegend variant="label">

@@ -1,4 +1,5 @@
 import { EXPORT_FORMATS, type ExportFormat } from '@/lib/export-formats'
+import type { ExportDestination } from '@/lib/types'
 
 /**
  * Normalizes a formats selection coming from the Auto-export page's
@@ -39,4 +40,19 @@ export function parseKeepLast(typed: string): number | null {
   if (!/^\d+$/.test(trimmed)) return null
   const value = Number(trimmed)
   return Number.isSafeInteger(value) ? value : null
+}
+
+/**
+ * Resolves the Export destination that actually applies in this browser. A
+ * stored Custom folder behaves as Downloads when the browser has no directory
+ * picker.
+ * @param stored The destination persisted in the config.
+ * @param canPickFolder Whether `showDirectoryPicker` exists in this browser.
+ * @returns The destination the page shows and Export now uses.
+ */
+export function resolveEffectiveDestination(
+  stored: ExportDestination,
+  canPickFolder: boolean,
+): ExportDestination {
+  return stored === 'folder' && !canPickFolder ? 'downloads' : stored
 }

@@ -11,6 +11,7 @@ import {
   type SyncAlarmTrigger,
 } from '@/lib/auto-export'
 import { handleNotificationClick } from '@/lib/auto-export-notification'
+import { checkFolderAccessAtStartup } from '@/lib/folder-access-startup'
 import {
   autoExportConfigStore,
   autoExportNextRunStore,
@@ -77,6 +78,7 @@ async function runManualExport(
     await runAutoExport('manual', {
       formats: message.formats,
       path: message.path,
+      destination: message.destination,
     })
     return { ok: true }
   } catch (error) {
@@ -113,7 +115,8 @@ async function restoreMissingAlarm(): Promise<void> {
  * open nothing), leaving the version unseen so the sidebar shows its dot
  * until that route is visited. It also keeps the `auto-export` alarm
  * and {@link autoExportNextRunStore} in sync via `syncAlarm`: once on
- * browser startup and on every `onInstalled` reason (both may need to arm a
+ * browser startup, with a Folder access check that warns early when a Custom
+ * folder needs the user's permission again, and on every `onInstalled` reason (both may need to arm a
  * catch-up run for a due time that passed while the browser/extension was
  * unavailable), and again whenever the auto-export config changes in a way
  * that affects scheduling (see {@link isScheduleRelevantChange}).
@@ -153,6 +156,7 @@ export default defineBackground(() => {
 
   browser.runtime.onStartup.addListener(() => {
     void syncAlarmSafely('startup')
+    void checkFolderAccessAtStartup()
   })
 
   autoExportConfigStore.watch((next, previous) => {

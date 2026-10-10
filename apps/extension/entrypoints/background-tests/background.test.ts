@@ -24,7 +24,13 @@ vi.mock('@/lib/auto-export', async () => {
   }
 })
 
+vi.mock('@/lib/folder-access-startup', () => ({
+  checkFolderAccessAtStartup: vi.fn(async () => {}),
+}))
+
 const { syncAlarm, runAutoExport } = await import('@/lib/auto-export')
+const { checkFolderAccessAtStartup } =
+  await import('@/lib/folder-access-startup')
 
 type OnMessageListener = (
   message: unknown,
@@ -283,6 +289,14 @@ describe('onStartup', () => {
 
     await vi.waitFor(() => {
       expect(syncAlarm).toHaveBeenCalledWith('startup')
+    })
+  })
+
+  it('runs the Folder access startup check', async () => {
+    await fakeBrowser.runtime.onStartup.trigger()
+
+    await vi.waitFor(() => {
+      expect(checkFolderAccessAtStartup).toHaveBeenCalled()
     })
   })
 

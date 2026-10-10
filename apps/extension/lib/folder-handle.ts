@@ -98,3 +98,35 @@ export async function queryStoredFolderAccess(): Promise<FolderAccess> {
   const handle = await loadFolderHandle()
   return handle ? queryFolderAccess(handle) : 'missing'
 }
+
+/**
+ * `showDirectoryPicker` is not part of the DOM typings yet.
+ */
+interface DirectoryPickerWindow {
+  showDirectoryPicker?: (options: {
+    mode: 'readwrite'
+  }) => Promise<FileSystemDirectoryHandle>
+}
+
+/**
+ * @returns Whether this browser exposes `showDirectoryPicker`, so a Custom
+ *   folder can be chosen at all.
+ */
+export function canPickFolder(): boolean {
+  return (
+    typeof (globalThis as DirectoryPickerWindow).showDirectoryPicker ===
+    'function'
+  )
+}
+
+/**
+ * Opens the browser's directory picker for a read/write Custom folder. Must be
+ * called inside a user gesture.
+ * @returns The chosen directory handle.
+ * @throws {DOMException} `AbortError` when the user dismisses the picker.
+ */
+export async function pickFolder(): Promise<FileSystemDirectoryHandle> {
+  const picker = (globalThis as DirectoryPickerWindow).showDirectoryPicker
+  if (!picker) throw new Error('showDirectoryPicker is not available')
+  return picker.call(globalThis, { mode: 'readwrite' })
+}

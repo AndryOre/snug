@@ -738,6 +738,23 @@
     "message": "Откройте автоэкспорт, чтобы разобраться",
     "description": "Popup status item description when the last auto-export failed"
   },
+  "popup_statusFolderAccessTitle": {
+    "message": "Требуется доступ к папке",
+    "description": "Popup status item title when the Custom folder needs Folder access again"
+  },
+  "popup_statusFolderAccessDescription": {
+    "message": "Разрешите доступ к «$FOLDER$», чтобы резервное копирование продолжилось",
+    "description": "Popup status item description when the Custom folder needs Folder access again; $FOLDER$ is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_statusFolderAccessAction": {
+    "message": "Разрешить доступ",
+    "description": "Popup status item button that opens the Auto-export page to allow Folder access"
+  },
   "popup_openApp": {
     "message": "Открыть приложение",
     "description": "Popup footer button that opens the full-page app"
@@ -1422,5 +1439,42 @@
   "import_skippedFilesTitle": {
     "message": "Файлы не импортированы",
     "description": "Heading above the files an Import batch left out, each with its reason"
+  },
+  "autoExportPage_saveTo": {
+    "message": "Сохранять в",
+    "description": "Label of the Save to group choosing the Export destination"
+  },
+  "autoExportPage_destinationDownloads": {
+    "message": "Загрузки",
+    "description": "Save to option: the browser Downloads folder"
+  },
+  "autoExportPage_destinationFolder": {
+    "message": "Своя папка",
+    "description": "Save to option: a folder the user picks anywhere on the computer"
+  },
+  "autoExportPage_chooseFolder": {
+    "message": "Выбрать папку…",
+    "description": "Button that opens the folder picker when no Custom folder is chosen yet"
+  },
+  "autoExportPage_changeFolder": {
+    "message": "Изменить папку",
+    "description": "Button that replaces the chosen Custom folder"
+  },
+  "autoExportPage_chooseFolderDescription": {
+    "message": "Выберите папку, в которую Snug сохраняет файлы. Она может находиться в любом месте на вашем компьютере.",
+    "description": "Help text shown while Custom folder has no folder yet"
+  },
+  "autoExportPage_folderChosenDescription": {
+    "message": "Внутри «$FOLDER$».",
+    "description": "Description under the subfolder field once a Custom folder is chosen; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
+  "autoExportPage_folderRestartHint": {
+    "message": "После перезапуска Chrome Snug один раз попросит подтвердить доступ к этой папке. Выберите «Разрешать при каждом посещении», чтобы автоэкспорт продолжал работать.",
+    "description": "Info shown once a Custom folder is chosen: Chrome asks to confirm access after a restart"
   }
 }

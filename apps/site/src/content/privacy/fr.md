@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 6, 2026
+englishLastUpdated: October 10, 2026
 ---
 
 # Politique de confidentialité de Snug
 
-Dernière mise à jour : 6 octobre 2026
+Dernière mise à jour : 10 octobre 2026
 
 ## Introduction
 
@@ -44,17 +44,24 @@ et n'envoie aucune donnée à des serveurs externes.
 
 - Vous pouvez activer, si vous le souhaitez, l'exportation automatique planifiée
   de vos favoris. Une fois activée, l'extension exporte vos favoris à
-  l'intervalle que vous configurez et écrit les fichiers obtenus directement
-  dans le dossier Téléchargements de votre appareil à l'aide de la fonction de
-  téléchargement du navigateur, sans afficher de fenêtre de choix de
-  l'emplacement d'enregistrement.
+  l'intervalle que vous configurez et enregistre les fichiers obtenus sans
+  afficher de fenêtre de choix de l'emplacement d'enregistrement. Par défaut,
+  ils sont écrits directement dans le dossier Téléchargements de votre appareil
+  à l'aide de la fonction de téléchargement du navigateur. Si vous choisissez un
+  dossier personnalisé, ils sont écrits à la place dans un dossier que vous avez
+  sélectionné sur votre ordinateur, via l'API File System Access du navigateur.
 - Cela n'a lieu que si vous activez explicitement l'exportation automatique et
   configurez une planification ; elle est désactivée par défaut.
 - Conservation : après chaque exportation automatique réussie, Snug supprime ses
   propres fichiers exportés les plus anciens au-delà du nombre que vous
   définissez (10 par défaut ; 0 conserve tout). Il ne supprime que les fichiers
-  qu'il a lui-même enregistrés et ne touche jamais aux autres fichiers de votre
-  dossier Téléchargements.
+  qu'il a lui-même enregistrés, dans le dossier Téléchargements ou dans votre
+  dossier personnalisé, et ne touche jamais aux autres fichiers.
+- Dossier personnalisé : le dossier que vous choisissez est mémorisé sur votre
+  appareil afin que les exportations automatiques puissent continuer à y écrire.
+  Le navigateur peut vous demander de confirmer à nouveau l'accès. Les fichiers
+  ne sont jamais envoyés à un serveur, et le choix d'un dossier ne nécessite
+  aucune autorisation supplémentaire.
 - Notifications : si une exportation automatique échoue, Snug affiche une
   notification système sur votre appareil avec le motif. Vous pouvez la
   désactiver sur la page Exportation automatique. Les exportations réussies ne
@@ -66,8 +73,10 @@ et n'envoie aucune donnée à des serveurs externes.
 - Snug ne stocke aucune donnée utilisateur, y compris les favoris, sur des
   serveurs externes.
 - Les fichiers créés lors de l'export (manuel ou automatique) sont enregistrés
-  directement sur votre appareil local via la fonction de téléchargement de
-  votre navigateur. Les exports manuels utilisent un lien standard
+  directement sur votre appareil local : dans votre dossier Téléchargements via
+  la fonction de téléchargement de votre navigateur ou, pour les exports
+  automatiques, dans le dossier personnalisé que vous avez choisi via l'API File
+  System Access du navigateur. Les exports manuels utilisent un lien standard
   `<a download>` et n'ont pas besoin de l'autorisation `downloads` ; les exports
   automatiques et le fichier d'instantané de sécurité utilisent l'autorisation
   `downloads`.
@@ -76,6 +85,11 @@ et n'envoie aucune donnée à des serveurs externes.
   votre configuration d'exportation automatique — dans le stockage local du
   navigateur (`storage.local`). Ces données restent sur votre appareil et ne
   sont jamais transmises nulle part.
+- Si vous choisissez un dossier personnalisé pour les exportations automatiques,
+  Snug conserve la référence du navigateur vers ce dossier (un descripteur de
+  dossier, et non vos favoris ni le contenu du dossier) dans le stockage local
+  du navigateur de l'extension (IndexedDB). Elle reste sur votre appareil et
+  n'est jamais transmise nulle part.
 - Snug peut afficher dans la fenêtre contextuelle une carte unique et masquable
   vous invitant à évaluer l'extension sur la boutique d'où elle a été installée
   (Chrome Web Store ou Microsoft Edge Add-ons) après votre première exportation

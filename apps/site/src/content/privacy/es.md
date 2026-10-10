@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 6, 2026
+englishLastUpdated: October 10, 2026
 ---
 
 # Política de privacidad de Snug
 
-Última actualización: 6 de octubre de 2026
+Última actualización: 10 de octubre de 2026
 
 ## Introducción
 
@@ -43,15 +43,24 @@ dato a servidores externos.
 
 - Puedes activar, si quieres, la exportación automática programada de tus
   marcadores. Una vez activada, la extensión exporta tus marcadores con el
-  intervalo que configures y escribe los archivos resultantes directamente en la
-  carpeta Descargas de tu dispositivo mediante la función de descargas del
-  navegador, sin mostrar un cuadro para elegir la ubicación.
+  intervalo que configures y guarda los archivos resultantes sin mostrar un
+  cuadro para elegir la ubicación. De forma predeterminada se escriben
+  directamente en la carpeta Descargas de tu dispositivo mediante la función de
+  descargas del navegador. Si eliges una carpeta personalizada, se escriben en
+  su lugar en una carpeta que hayas seleccionado en tu equipo mediante la API
+  File System Access del navegador.
 - Esto solo ocurre si activas de forma explícita la exportación automática y
   configuras una programación; está desactivada por defecto.
 - Retención: tras cada exportación automática correcta, Snug elimina sus propios
   archivos exportados más antiguos que superen el número que establezcas (10 por
-  defecto; 0 los conserva todos). Solo elimina los archivos que él mismo guardó
-  y nunca toca otros archivos de tu carpeta Descargas.
+  defecto; 0 los conserva todos). Solo elimina los archivos que él mismo guardó,
+  en la carpeta Descargas o en tu carpeta personalizada, y nunca toca otros
+  archivos.
+- Carpeta personalizada: la carpeta que eliges se recuerda en tu dispositivo
+  para que las exportaciones automáticas puedan seguir escribiendo en ella. Es
+  posible que el navegador te pida confirmar de nuevo el acceso. Los archivos
+  nunca se envían a ningún servidor y elegir una carpeta no requiere ningún
+  permiso adicional.
 - Notificaciones: si una exportación automática falla, Snug muestra una
   notificación del sistema en tu dispositivo con el motivo. Puedes desactivarla
   en la página de Exportación automática. Las exportaciones correctas nunca
@@ -62,7 +71,9 @@ dato a servidores externos.
 - Snug no almacena ningún dato de usuario, incluidos los marcadores, en
   servidores externos.
 - Los archivos creados durante la exportación (manual o automática) se guardan
-  directamente en tu dispositivo local mediante la función de descargas de tu
+  directamente en tu dispositivo local: en tu carpeta Descargas mediante la
+  función de descargas del navegador o, en las exportaciones automáticas, en la
+  carpeta personalizada que elegiste mediante la API File System Access del
   navegador. Las exportaciones manuales usan un enlace estándar `<a download>` y
   no necesitan el permiso `downloads`; las exportaciones automáticas y el
   archivo de instantánea de seguridad sí usan el permiso `downloads`.
@@ -71,6 +82,11 @@ dato a servidores externos.
   nombre de archivo y tu configuración de exportación automática, mediante el
   almacenamiento local del navegador (`storage.local`). Estos datos permanecen
   en tu dispositivo y nunca se transmiten a ningún sitio.
+- Si eliges una carpeta personalizada para las exportaciones automáticas, Snug
+  guarda la referencia del navegador a esa carpeta (un identificador de carpeta,
+  no tus marcadores ni el contenido de la carpeta) en el almacenamiento local
+  del navegador de la extensión (IndexedDB). Permanece en tu dispositivo y nunca
+  se transmite a ningún sitio.
 - Snug puede mostrar en la ventana emergente una tarjeta única y descartable que
   te invita a valorar la extensión en la tienda desde la que se instaló (Chrome
   Web Store o Microsoft Edge Add-ons) después de tu primera exportación

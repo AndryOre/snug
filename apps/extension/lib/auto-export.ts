@@ -4,11 +4,13 @@ import { notifyAutoExportFailure } from '@/lib/auto-export-notification'
 import {
   applyRetention,
   recordSavedDownload,
+  recordSavedFolderFile,
 } from '@/lib/auto-export-retention'
 import { writeToCustomFolder } from '@/lib/custom-folder-writer'
 import { EXPORT_FORMAT_INFO, type ExportFormat } from '@/lib/export-formats'
 import { formatFilenameTemplate } from '@/lib/filename-template'
 import { loadFolderHandle, queryFolderAccess } from '@/lib/folder-handle'
+import { registerFolderIdentity } from '@/lib/folder-run-identity'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
 import { sanitizePathSegment } from '@/lib/path-segment'
 import { renderExport } from '@/lib/render-export'
@@ -31,6 +33,7 @@ import type {
   AutoExportLastRun,
   AutoExportTrigger,
   DayOfWeek,
+  ExportDestination,
 } from '@/lib/types'
 
 /**
@@ -54,6 +57,7 @@ export interface RunManualExportMessage {
   type: typeof RUN_MANUAL_EXPORT_MESSAGE_TYPE
   formats: ExportFormat[]
   path: string
+  destination?: ExportDestination
 }
 
 /**
@@ -371,7 +375,7 @@ async function clearFailureBadge(): Promise<void> {
  * UI that triggered it (a later ticket), not on the toolbar icon.
  * @returns Resolves once the badge text and color are set.
  */
-async function setFailureBadge(): Promise<void> {
+export async function setFailureBadge(): Promise<void> {
   await browser.action.setBadgeText({ text: '!' })
   await browser.action.setBadgeBackgroundColor({ color: FAILURE_BADGE_COLOR })
 }
@@ -448,7 +452,8 @@ async function requireGrantedFolder(
  * With the `folder` Export destination, files are written into the Custom
  * folder (see {@link writeToCustomFolder}) instead of being downloaded; a
  * missing handle or Folder access other than `granted` fails the run, with no
- * fallback to Downloads.
+ * fallback to Downloads. Each file written is recorded so retention covers
+ * both destinations.
  *
  * {@link autoExportLastRunStore} is updated only after every selected
  * download has completed (or has failed), recording `trigger` and, on
@@ -466,13 +471,20 @@ async function requireGrantedFolder(
  * skip above — "Export now" works regardless of the Enable switch or of
  * unsaved changes.
  * @param trigger What caused this run.
- * @param overrides `formats`/`path` to use instead of the stored config.
+ * @param overrides `formats`/`path`/`destination` to use instead of the
+ *   stored config.
  * @param overrides.formats The formats to export, overriding the stored config.
  * @param overrides.path The output path, overriding the stored config.
+ * @param overrides.destination The Export destination, overriding the stored
+ *   one.
  */
 export async function runAutoExport(
   trigger: AutoExportTrigger,
-  overrides?: { formats: ExportFormat[]; path: string },
+  overrides?: {
+    formats: ExportFormat[]
+    path: string
+    destination?: ExportDestination
+  },
 ): Promise<void> {
   const config = await autoExportConfigStore.getValue()
   if (!overrides && (!config.enabled || config.formats.length === 0)) return
@@ -480,7 +492,8 @@ export async function runAutoExport(
   const formats = overrides?.formats ?? config.formats
   const path = overrides?.path ?? config.path
 
-  const isFolderDestination = config.destination === 'folder'
+  const destination = overrides?.destination ?? config.destination
+  const isFolderDestination = destination === 'folder'
   const runAt = Date.now()
   const isTrackedRun = trigger !== 'manual'
   if (isTrackedRun) {
@@ -532,16 +545,25 @@ export async function runAutoExport(
       ? await requireGrantedFolder(config.folderName)
       : null
 
+    const folderId = folderHandle
+      ? await registerFolderIdentity(folderHandle)
+      : null
+
     const downloads = formats.map(async (format) => {
       const { extension, mimeType } = EXPORT_FORMAT_INFO[format]
       const content = await renderExport(format, baseOptions)
-      if (folderHandle) {
-        await writeToCustomFolder(
+      if (folderHandle && folderId) {
+        const writtenName = await writeToCustomFolder(
           folderHandle,
           sanitized,
           baseName,
           extension,
           content,
+        )
+        await recordSavedFolderFile(
+          folderId,
+          [...sanitized.split('/').filter(Boolean), writtenName].join('/'),
+          runAt,
         )
         return
       }
@@ -557,9 +579,7 @@ export async function runAutoExport(
     await autoExportLastRunStore.setValue({ at: Date.now(), ok: true, trigger })
     await markReviewPromptEligible(Date.now())
     await clearFailureBadge()
-    if (!isFolderDestination) {
-      await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
-    }
+    await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     await autoExportLastRunStore.setValue({

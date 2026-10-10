@@ -1,4 +1,5 @@
 import { i18n } from '#i18n'
+import { Button } from '@workspace/ui/components/button'
 import {
   Item,
   ItemActions,
@@ -11,11 +12,14 @@ import {
   CalendarClockIcon,
   ChevronRightIcon,
   CircleAlertIcon,
+  TriangleAlertIcon,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { readAutoExportLastRun } from '@/lib/auto-export'
+import { queryStoredFolderAccess } from '@/lib/folder-handle'
+import type { FolderAccess } from '@/lib/folder-handle'
 import { resolvePopupStatus } from '@/lib/popup-status'
 import {
   autoExportConfigStore,
@@ -51,6 +55,35 @@ export function useAutoExportLastRun(): AutoExportLastRun | null {
   return lastRun
 }
 
+/**
+ * Reads the Custom folder's Folder access once, only when the destination is a
+ * Custom folder.
+ * @param isFolderDestination Whether the Export destination is a Custom folder.
+ * @returns The Folder access, or `null` while unknown or not applicable.
+ */
+function useFolderAccess(isFolderDestination: boolean): FolderAccess | null {
+  const [folderAccess, setFolderAccess] = useState<FolderAccess | null>(null)
+
+  useEffect(() => {
+    if (!isFolderDestination) return
+    let isMounted = true
+    const load = async () => {
+      try {
+        const access = await queryStoredFolderAccess()
+        if (isMounted) setFolderAccess(access)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    void load()
+    return () => {
+      isMounted = false
+    }
+  }, [isFolderDestination])
+
+  return isFolderDestination ? folderAccess : null
+}
+
 function formatShortDateTime(at: number): string {
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: 'short',
@@ -59,8 +92,9 @@ function formatShortDateTime(at: number): string {
 }
 
 /**
- * Popup status item reporting auto-export's state (next run, off, or last
- * run failed) as a muted `Item` that opens the App's Auto-export route in a
+ * Popup status item reporting auto-export's state (next run, off, last
+ * run failed, or Folder access needed) as a muted `Item`. Except for the
+ * Folder access row, whose button opens the Auto-export route, it opens the App's Auto-export route in a
  * new tab.
  * @returns The status item link.
  */
@@ -68,7 +102,40 @@ export function AutoExportStatusItem() {
   const [config] = useStorageItem(autoExportConfigStore)
   const [nextRun] = useStorageItem(autoExportNextRunStore)
   const lastRun = useAutoExportLastRun()
-  const status = resolvePopupStatus({ config, nextRun, lastRun })
+  const folderAccess = useFolderAccess(config.destination === 'folder')
+  const status = resolvePopupStatus({ config, nextRun, lastRun, folderAccess })
+
+  if (status.kind === 'folder-access') {
+    return (
+      <Item variant="muted" size="sm">
+        <ItemMedia variant="icon">
+          <TriangleAlertIcon className="text-destructive" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{i18n.t('popup_statusFolderAccessTitle')}</ItemTitle>
+          <ItemDescription>
+            {i18n.t('popup_statusFolderAccessDescription', [status.folderName])}
+          </ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button
+            variant="outline"
+            size="sm"
+            render={
+              // eslint-disable-next-line jsx-a11y/anchor-has-content -- Button's render prop injects the children into this anchor
+              <a
+                href={getAppUrl(APP_ROUTES.autoExport)}
+                target="_blank"
+                rel="noreferrer"
+              />
+            }
+          >
+            {i18n.t('popup_statusFolderAccessAction')}
+          </Button>
+        </ItemActions>
+      </Item>
+    )
+  }
 
   let title: string
   let description: string
