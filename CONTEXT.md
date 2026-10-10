@@ -146,8 +146,9 @@ dismissed, it never returns. _Avoid_: rating prompt, review nag, review request,
 feedback prompt.
 
 **Website** snug.andryore.dev as a whole: the Landing page, the Guide, What's
-new and the Privacy policy, all multilingual. It is separate from the App and
-the popup, which live inside the extension. _Avoid_: site, web app, portal.
+new, the Privacy policy, the Alternatives page and the Comparison pages, all
+multilingual. It is separate from the App and the popup, which live inside the
+extension. _Avoid_: site, web app, portal.
 
 **Landing page** The Website's home page: a static, multilingual page whose one
 job is to send visitors to the store listing for the browser in use. _Avoid_:
@@ -157,6 +158,15 @@ website, homepage, marketing site, promo page.
 (exporting, importing, duplicates, settings, Auto-export). The English text
 prevails; every other locale shows a translation that says so when it lags the
 English. _Avoid_: docs, manual, usage docs, help center.
+
+**Alternatives page** The Website page that lists Snug, the browser's built-in
+export and the other bookmark export or backup extensions side by side, and
+links to each Comparison page. _Avoid_: hub, comparison index, directory.
+
+**Comparison page** A Website page that sets Snug beside one named alternative,
+using only facts checked on that alternative's live store listing, each with an
+as-of date. It says who should pick the alternative instead. _Avoid_: vs page,
+competitor page, alternative page.
 
 **Release notes** The full list of changes per version, kept in `CHANGELOG.md`
 and reused as the GitHub Release body. The Website's What's new page shows them

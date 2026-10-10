@@ -67,3 +67,20 @@ New since the snapshot:
   that data.
 - **EverSync** (cloud sync and backup service, about 200k users per a search
   snippet, not verified on the store). Indirect competitor.
+
+## Verified 2026-10-10
+
+Re-checked on the live Chrome Web Store listings. The site reads these facts
+from `apps/site/src/content/competitors.ts`, which is the source of truth for
+the Alternatives and Comparison pages. Update that file first, then this note.
+"Not listed" means the listing shows no evidence either way.
+
+| Listing                         | Users | Rating   | Version / updated  | Change vs 2026-10-05                                                     |
+| ------------------------------- | ----- | -------- | ------------------ | ------------------------------------------------------------------------ |
+| Selective Bookmarks Export Tool | 10k   | 4.8 (48) | 1.7.0 / 2026-10-03 | No change; 3 languages (EN, zh-CN, zh-TW)                                |
+| Maple Backup                    | 7k    | 4.0 (57) | 5.2 / 2026-09-21   | Lists 15 languages                                                       |
+| 101 Export History/Bookmarks    | 30k   | 3.1 (71) | 3.2 / 2026-10-07   | Updated to 3.2 on 2026-10-07; still JSON only                            |
+| Export Selective Bookmarks      | 5k    | 4.2 (48) | 2.1 / 2026-06-30   | No change                                                                |
+| Bookmark Folder Import & Export | 487   | 5.0 (1)  | 3.4.0 / 2026-04-21 | Users 408 to 487                                                         |
+| Bookmarks Exporter (oneryx)     | 2k    | 5.0 (7)  | 0.0.1 / 2022-08-22 | No change                                                                |
+| Snug (our listing)              | 5k    | 4.8 (20) | 2.2.0 / 2026-10-10 | 10 languages; six export formats (HTML, JSON, CSV, Markdown, OPML, XBEL) |
