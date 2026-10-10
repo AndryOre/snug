@@ -34,7 +34,7 @@ describe('social proof', () => {
       expect(proof.numbers).not.toContain('{date}')
       expect(proof.numbers).toMatch(/2026|26/)
       expect(proof.renameNote).toContain('Bookmark')
-      expect(Object.keys(faq.items)).toHaveLength(11)
+      expect(Object.keys(faq.items)).toHaveLength(12)
       expect(final.button.length).toBeGreaterThan(0)
       expect(footer.listing.length).toBeGreaterThan(0)
     }

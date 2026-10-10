@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Sauvegardez selon un horaire",
-        "body": "L'exportation automatique enregistre vos favoris dans le dossier Téléchargements selon l'horaire que vous définissez. La Rétention ne garde que les fichiers les plus récents, et vous pouvez recevoir une notification si une exécution échoue."
+        "body": "L'exportation automatique enregistre vos favoris dans le dossier Téléchargements ou dans un dossier de votre choix, selon l'horaire que vous définissez. La Rétention ne garde que les fichiers les plus récents, et vous pouvez recevoir une notification si une exécution échoue."
       },
       "works": {
         "title": "Fonctionne où vous êtes",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "Est-il sûr d'installer l'extension d'un développeur indépendant ?",
         "answer": "Le code source est public, CodeQL l'analyse, le projet a les badges OpenSSF Scorecard et Best Practices, et la CI utilise des versions épinglées. Jugez par vous-même sur GitHub."
+      },
+      "folder": {
+        "question": "Les sauvegardes peuvent-elles aller dans un autre dossier que Téléchargements ?",
+        "answer": "Oui. Sur la page d'exportation automatique, choisissez un Dossier personnalisé. Après un redémarrage, Chrome demande une fois de confirmer l'accès ; choisissez « Autoriser à chaque visite » pour que les exécutions sans surveillance continuent. Si l'accès manque, Snug vous avertit et l'exécution échoue au lieu d'enregistrer ailleurs."
       },
       "cost": {
         "question": "Snug est-il payant ?",

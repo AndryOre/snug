@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Respalda con un horario",
-        "body": "La exportación automática guarda tus marcadores en la carpeta de Descargas con el horario que definas. La retención conserva solo los archivos más recientes, y puedes recibir una notificación si una ejecución falla."
+        "body": "La exportación automática guarda tus marcadores en la carpeta de Descargas o en una carpeta que elijas, con el horario que definas. La retención conserva solo los archivos más recientes, y puedes recibir una notificación si una ejecución falla."
       },
       "works": {
         "title": "Funciona donde estés",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "¿Es seguro instalar la extensión de un desarrollador independiente?",
         "answer": "El código fuente es público, CodeQL lo analiza, el proyecto tiene las insignias OpenSSF Scorecard y Best Practices, y el CI usa versiones fijadas. Júzgalo tú mismo en GitHub."
+      },
+      "folder": {
+        "question": "¿Las copias de seguridad pueden ir a una carpeta distinta de Descargas?",
+        "answer": "Sí. En la página de exportación automática, elige una carpeta personalizada. Después de reiniciar Chrome, te pide una vez que confirmes el acceso; elige “Permitir en cada visita” para que las ejecuciones sin supervisión sigan funcionando. Si falta el acceso, Snug te avisa y la ejecución falla en lugar de guardar en otro lugar."
       },
       "cost": {
         "question": "¿Snug cuesta algo?",

@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Faça backup com agendamento",
-        "body": "A exportação automática salva seus favoritos na pasta Downloads no agendamento que você definir. A Retenção mantém só os arquivos mais recentes, e você pode receber um aviso se uma execução falhar."
+        "body": "A exportação automática salva seus favoritos na pasta Downloads ou em uma pasta que você escolher, no agendamento que você definir. A Retenção mantém só os arquivos mais recentes, e você pode receber um aviso se uma execução falhar."
       },
       "works": {
         "title": "Funciona onde você está",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "É seguro instalar a extensão de um desenvolvedor independente?",
         "answer": "O código-fonte é público, o CodeQL faz a varredura, o projeto tem os selos OpenSSF Scorecard e Best Practices, e a CI usa versões fixadas. Julgue você mesmo no GitHub."
+      },
+      "folder": {
+        "question": "Os backups podem ir para uma pasta diferente de Downloads?",
+        "answer": "Sim. Na página de exportação automática, escolha uma Pasta personalizada. Depois que o Chrome reiniciar, ele pede uma vez que você confirme o acesso; escolha “Permitir em todas as visitas” para que as execuções sem supervisão continuem funcionando. Se faltar acesso, o Snug avisa e a execução falha em vez de salvar em outro lugar."
       },
       "cost": {
         "question": "O Snug custa algo?",

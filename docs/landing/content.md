@@ -370,9 +370,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
    - A Duplicates page finds repeated bookmarks. On import, Skip duplicates
      leaves out URLs you already have.
 5. **Back up on a schedule**
-   - Auto-export saves your bookmarks to the Downloads folder on a schedule you
-     set. Retention keeps only the newest files, and you can get a notification
-     if a run fails.
+   - Auto-export saves your bookmarks to the Downloads folder or a folder you
+     choose, on a schedule you set. Retention keeps only the newest files, and
+     you can get a notification if a run fails.
 6. **Works where you are**
    - Chrome, Edge, Brave, Opera and other Chromium browsers. The interface comes
      in 10 languages and follows your browser's theme and language.
@@ -400,8 +400,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      Omitir duplicados deja fuera las URL que ya tienes.
 5. **Respalda con un horario**
    - La exportación automática guarda tus marcadores en la carpeta de Descargas
-     con el horario que definas. La retención conserva solo los archivos más
-     recientes, y puedes recibir una notificación si una ejecución falla.
+     o en una carpeta que elijas, con el horario que definas. La retención
+     conserva solo los archivos más recientes, y puedes recibir una notificación
+     si una ejecución falla.
 6. **Funciona donde estés**
    - Chrome, Edge, Brave, Opera y otros navegadores Chromium. La interfaz está
      en 10 idiomas y sigue el tema y el idioma de tu navegador.
@@ -431,9 +432,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      Duplikate überspringen die URLs aus, die du schon hast.
 5. **Nach Zeitplan sichern**
    - Auto-Export speichert deine Lesezeichen nach einem Zeitplan, den du
-     festlegst, im Download-Ordner. Aufbewahrung behält nur die neuesten
-     Dateien, und bei einem fehlgeschlagenen Lauf kannst du dich benachrichtigen
-     lassen.
+     festlegst, im Download-Ordner oder in einem Ordner deiner Wahl.
+     Aufbewahrung behält nur die neuesten Dateien, und bei einem
+     fehlgeschlagenen Lauf kannst du dich benachrichtigen lassen.
 6. **Funktioniert, wo du bist**
    - Chrome, Edge, Brave, Opera und andere Chromium-Browser. Die Oberfläche gibt
      es in 10 Sprachen, und sie folgt dem Design und der Sprache deines
@@ -464,9 +465,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
      doublons laisse de côté les URL que vous avez déjà.
 5. **Sauvegardez selon un horaire**
    - L'exportation automatique enregistre vos favoris dans le dossier
-     Téléchargements selon l'horaire que vous définissez. La Rétention ne garde
-     que les fichiers les plus récents, et vous pouvez recevoir une notification
-     si une exécution échoue.
+     Téléchargements ou dans un dossier de votre choix, selon l'horaire que vous
+     définissez. La Rétention ne garde que les fichiers les plus récents, et
+     vous pouvez recevoir une notification si une exécution échoue.
 6. **Fonctionne où vous êtes**
    - Chrome, Edge, Brave, Opera et d'autres navigateurs Chromium. L'interface
      existe en 10 langues et suit le thème et la langue de votre navigateur.
@@ -493,9 +494,10 @@ Four themes from Context: Proof Points, Value themes. One idea each.
    - Una pagina Duplicati trova i segnalibri ripetuti. In importazione, Salta i
      duplicati lascia fuori gli URL che hai già.
 5. **Backup programmato**
-   - L'esportazione automatica salva i tuoi segnalibri nella cartella Download
-     con la pianificazione che imposti. La Conservazione tiene solo i file più
-     recenti e puoi ricevere una notifica se un'esecuzione fallisce.
+   - L'esportazione automatica salva i tuoi segnalibri nella cartella Download o
+     in una cartella a tua scelta, con la pianificazione che imposti. La
+     Conservazione tiene solo i file più recenti e puoi ricevere una notifica se
+     un'esecuzione fallisce.
 6. **Funziona dove sei**
    - Chrome, Edge, Brave, Opera e altri browser Chromium. L'interfaccia è in 10
      lingue e segue il tema e la lingua del tuo browser.
@@ -514,7 +516,7 @@ Four themes from Context: Proof Points, Value themes. One idea each.
 4. **重複を整理する**
    - 「重複」ページで、重複したブックマークを見つけられます。読み込み時は「重複をスキップ」で、すでにある URL を除外します。
 5. **スケジュールでバックアップ**
-   - 自動書き出しは、設定したスケジュールでブックマークをダウンロードフォルダーに保存します。保持設定で最新のファイルだけを残し、実行が失敗したときは通知を受け取れます。
+   - 自動書き出しは、設定したスケジュールでブックマークをダウンロードフォルダーまたは選んだフォルダーに保存します。保持設定で最新のファイルだけを残し、実行が失敗したときは通知を受け取れます。
 6. **使っている環境で動く**
    - Chrome、Edge、Brave、Opera、そのほかの Chromium ベースのブラウザーで使えます。画面は 10 言語に対応し、ブラウザーのテーマと言語に従います。
 
@@ -539,8 +541,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
    - 중복 페이지에서 반복된 북마크를 찾아요. 가져올 때 중복 건너뛰기를 켜면 이미
      있는 URL은 제외해요.
 5. **일정에 맞춰 백업하기**
-   - 자동 내보내기는 정한 일정에 따라 북마크를 다운로드 폴더에 저장해요. 보존
-     설정은 최신 파일만 남기고, 실행이 실패하면 알림을 받을 수 있어요.
+   - 자동 내보내기는 정한 일정에 따라 북마크를 다운로드 폴더나 직접 고른 폴더에
+     저장해요. 보존 설정은 최신 파일만 남기고, 실행이 실패하면 알림을 받을 수
+     있어요.
 6. **어디서든 작동해요**
    - Chrome, Edge, Brave, Opera와 다른 Chromium 기반 브라우저에서 작동해요.
      인터페이스는 10개 언어를 지원하고 브라우저의 테마와 언어를 따라요.
@@ -567,9 +570,10 @@ Four themes from Context: Proof Points, Value themes. One idea each.
    - Uma página Duplicados encontra favoritos repetidos. Na importação, Ignorar
      duplicados deixa de fora as URLs que você já tem.
 5. **Faça backup com agendamento**
-   - A exportação automática salva seus favoritos na pasta Downloads no
-     agendamento que você definir. A Retenção mantém só os arquivos mais
-     recentes, e você pode receber um aviso se uma execução falhar.
+   - A exportação automática salva seus favoritos na pasta Downloads ou em uma
+     pasta que você escolher, no agendamento que você definir. A Retenção mantém
+     só os arquivos mais recentes, e você pode receber um aviso se uma execução
+     falhar.
 6. **Funciona onde você está**
    - Chrome, Edge, Brave, Opera e outros navegadores baseados em Chromium. A
      interface está em 10 idiomas e segue o tema e o idioma do seu navegador.
@@ -596,9 +600,9 @@ Four themes from Context: Proof Points, Value themes. One idea each.
    - Страница «Дубликаты» находит повторяющиеся закладки. При импорте
      «Пропускать дубликаты» не добавляет URL, которые у вас уже есть.
 5. **Резервные копии по расписанию**
-   - Автоэкспорт сохраняет закладки в папку «Загрузки» по заданному вами
-     расписанию. Хранение оставляет только самые новые файлы, а при сбое запуска
-     можно получить уведомление.
+   - Автоэкспорт сохраняет закладки в папку «Загрузки» или в выбранную вами
+     папку по заданному вами расписанию. Хранение оставляет только самые новые
+     файлы, а при сбое запуска можно получить уведомление.
 6. **Работает там, где вы**
    - Chrome, Edge, Brave, Opera и другие браузеры на Chromium. Интерфейс
      доступен на 10 языках и следует теме и языку вашего браузера.
@@ -617,7 +621,7 @@ Four themes from Context: Proof Points, Value themes. One idea each.
 4. **清理重复项**
    - “重复项”页面可找出重复的书签。导入时，“跳过重复项”会略过你已有的 URL。
 5. **定时备份**
-   - 自动导出会按你设定的计划，把书签保存到下载文件夹。保留设置只留下最新的文件，某次运行失败时你可以收到通知。
+   - 自动导出会按你设定的计划，把书签保存到下载文件夹或你选择的文件夹。保留设置只留下最新的文件，某次运行失败时你可以收到通知。
 6. **随处可用**
    - 适用于 Chrome、Edge、Brave、Opera 和其他基于 Chromium 的浏览器。界面支持 10 种语言，并跟随浏览器的主题和语言。
 
@@ -983,6 +987,12 @@ Includes what Snug does not do. Each answer is plain and short.
 
 ### EN
 
+**Can backups go to a folder other than Downloads?** Yes. On the Auto-export
+page, choose a Custom folder. After a restart, Chrome asks once to confirm
+access to it; choose “Allow on every visit” so unattended runs keep working. If
+access is missing, Snug warns you and the run fails instead of saving somewhere
+else.
+
 **Does Snug send my bookmarks anywhere?** No. Snug makes no network calls. It
 reads and writes your browser's bookmarks on your device, and the source code is
 public so you can check.
@@ -1059,6 +1069,13 @@ código fuente es público, CodeQL lo analiza, el proyecto tiene las insignias
 OpenSSF Scorecard y Best Practices, y el CI usa versiones fijadas. Júzgalo tú
 mismo en GitHub.
 
+**¿Las copias de seguridad pueden ir a una carpeta distinta de Descargas?** Sí.
+En la página de exportación automática, elige una carpeta personalizada. Después
+de reiniciar Chrome, te pide una vez que confirmes el acceso; elige "Permitir en
+cada visita" para que las ejecuciones sin supervisión sigan funcionando. Si
+falta el acceso, Snug te avisa y la ejecución falla en lugar de guardar en otro
+lugar.
+
 **¿Snug cuesta algo?** No. Es gratis.
 
 ### DE
@@ -1103,6 +1120,12 @@ Quellcode ist öffentlich, CodeQL scannt ihn, das Projekt hat OpenSSF-Scorecard-
 und Best-Practices-Badges, und die CI läuft mit festgelegten Versionen. Urteile
 selbst auf GitHub.
 
+**Können Backups in einem anderen Ordner als Downloads landen?** Ja. Wähle auf
+der Seite Auto-Export einen Eigenen Ordner. Nach einem Neustart bittet Chrome
+einmalig darum, den Zugriff zu bestätigen; wähle „Bei jedem Besuch zulassen“,
+damit unbeaufsichtigte Läufe weiterlaufen. Fehlt der Zugriff, warnt Snug dich,
+und der Lauf schlägt fehl, statt woanders zu speichern.
+
 **Kostet Snug etwas?** Nein. Es ist kostenlos.
 
 ### FR
@@ -1143,6 +1166,13 @@ Chromium comme Edge, Brave et Opera.
 source est public, CodeQL l'analyse, le projet a les badges OpenSSF Scorecard et
 Best Practices, et la CI utilise des versions épinglées. Jugez par vous-même sur
 GitHub.
+
+**Les sauvegardes peuvent-elles aller dans un autre dossier que Téléchargements
+?** Oui. Sur la page d'exportation automatique, choisissez un Dossier
+personnalisé. Après un redémarrage, Chrome demande une fois de confirmer l'accès
+; choisissez « Autoriser à chaque visite » pour que les exécutions sans
+surveillance continuent. Si l'accès manque, Snug vous avertit et l'exécution
+échoue au lieu d'enregistrer ailleurs.
 
 **Snug est-il payant ?** Non. Il est gratuit.
 
@@ -1186,6 +1216,13 @@ sorgente è pubblico, CodeQL lo analizza, il progetto ha i badge OpenSSF
 Scorecard e Best Practices e la CI usa versioni bloccate. Giudica tu stesso su
 GitHub.
 
+**I backup possono andare in una cartella diversa da Download?** Sì. Nella
+pagina di esportazione automatica scegli una Cartella personalizzata. Dopo un
+riavvio, Chrome chiede una sola volta di confermare l'accesso; scegli "Consenti
+a ogni visita" così le esecuzioni non presidiate continuano a funzionare. Se
+manca l'accesso, Snug ti avvisa e l'esecuzione fallisce invece di salvare
+altrove.
+
 **Snug costa qualcosa?** No. È gratis.
 
 ### JA
@@ -1221,6 +1258,9 @@ Chrome と、Edge、Brave、Opera などの Chromium ベースのブラウザー
 ソースコードは公開され、CodeQL がスキャンし、プロジェクトには OpenSSF
 Scorecard と Best
 Practices のバッジがあり、CI はバージョンを固定して実行されます。GitHub でご自身でご確認ください。
+
+**バックアップをダウンロード以外のフォルダーに保存できますか？**
+はい。自動書き出しのページで「カスタムフォルダ」を選びます。Chrome の再起動後、アクセスの確認が一度だけ求められます。「毎回許可」を選ぶと、無人の実行も続けて動きます。アクセスが得られない場合、Snug は警告を表示し、別の場所には保存せず実行は失敗します。
 
 **Snug は有料ですか？** いいえ。無料です。
 
@@ -1260,6 +1300,11 @@ HTML, JSON, CSV, XBEL, Chrome 프로필의 `Bookmarks` 파일, Safari 내보내�
 **1인 개발자의 확장 프로그램을 설치해도 안전한가요?** 소스 코드가 공개되어 있고,
 CodeQL이 검사하고, 프로젝트에 OpenSSF Scorecard와 Best Practices 배지가 있고,
 CI는 버전을 고정해 실행해요. GitHub에서 직접 판단해 보세요.
+
+**백업을 다운로드 외의 다른 폴더에 저장할 수 있나요?** 네. 자동 내보내기
+페이지에서 사용자 지정 폴더를 고르세요. Chrome을 다시 시작하면 접근 권한을 한 번
+확인하는데, “방문할 때마다 허용”을 선택해야 사용자가 없을 때도 실행이 이어져요.
+접근 권한이 없으면 Snug가 경고하고, 다른 곳에 저장하지 않고 실행이 실패해요.
 
 **Snug는 유료인가요?** 아니요. 무료예요.
 
@@ -1302,6 +1347,12 @@ código-fonte é público, o CodeQL faz a varredura, o projeto tem os selos Open
 Scorecard e Best Practices, e a CI usa versões fixadas. Julgue você mesmo no
 GitHub.
 
+**Os backups podem ir para uma pasta diferente de Downloads?** Sim. Na página de
+exportação automática, escolha uma Pasta personalizada. Depois que o Chrome
+reiniciar, ele pede uma vez que você confirme o acesso; escolha "Permitir em
+todas as visitas" para que as execuções sem supervisão continuem funcionando. Se
+faltar acesso, o Snug avisa e a execução falha em vez de salvar em outro lugar.
+
 **O Snug custa algo?** Não. É grátis.
 
 ### RU
@@ -1343,6 +1394,12 @@ XBEL. Импорт HTML, JSON, CSV или XBEL, файла `Bookmarks` проф�
 открыт, его проверяет CodeQL, у проекта есть значки OpenSSF Scorecard и Best
 Practices, а CI работает с закреплёнными версиями. Оцените сами на GitHub.
 
+**Можно ли сохранять резервные копии не в «Загрузки», а в другую папку?** Да. На
+странице автоэкспорта выберите «Своя папка». После перезапуска Chrome один раз
+попросит подтвердить доступ; выберите «Разрешать при каждом посещении», чтобы
+запуски без присмотра продолжали работать. Если доступа нет, Snug предупредит, а
+запуск завершится ошибкой вместо сохранения в другое место.
+
 **Сколько стоит Snug?** Ничего. Он бесплатный.
 
 ### ZH_CN
@@ -1377,6 +1434,9 @@ Chrome 以及 Edge、Brave、Opera 等其他基于 Chromium 的浏览器。
 **安装独立开发者的扩展程序安全吗？**
 源代码是公开的，CodeQL 会对其扫描，项目有 OpenSSF Scorecard 和 Best
 Practices 徽章，CI 使用固定版本运行。请到 GitHub 上自行判断。
+
+**备份可以保存到下载文件夹以外的文件夹吗？**
+可以。在自动导出页面选择“自定义文件夹”。Chrome 重启后会请你确认一次访问权限；选择“每次访问时都允许”，无人值守的运行才能继续工作。如果缺少访问权限，Snug 会发出警告，运行会失败，而不会保存到别处。
 
 **Snug 收费吗？** 不收费。它是免费的。
 

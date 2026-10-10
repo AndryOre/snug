@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Back up on a schedule",
-        "body": "Auto-export saves your bookmarks to the Downloads folder on a schedule you set. Retention keeps only the newest files, and you can get a notification if a run fails."
+        "body": "Auto-export saves your bookmarks to the Downloads folder or a folder you choose, on a schedule you set. Retention keeps only the newest files, and you can get a notification if a run fails."
       },
       "works": {
         "title": "Works where you are",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "Is it safe to install a solo developer's extension?",
         "answer": "The source is public, CodeQL scans it, the project has OpenSSF Scorecard and Best Practices badges, and CI runs pinned. Judge it yourself on GitHub."
+      },
+      "folder": {
+        "question": "Can backups go to a folder other than Downloads?",
+        "answer": "Yes. On the Auto-export page, choose a Custom folder. After a restart, Chrome asks once to confirm access to it; choose “Allow on every visit” so unattended runs keep working. If access is missing, Snug warns you and the run fails instead of saving somewhere else."
       },
       "cost": {
         "question": "Does Snug cost anything?",
