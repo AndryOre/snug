@@ -92,6 +92,15 @@ describe('landing copy', () => {
     }
   })
 
+  it("resolves the Guide and What's new footer links per locale", () => {
+    expect(resolveHref(FOOTER_LINK_HREFS.guide, 'en')).toBe('/guide/')
+    expect(resolveHref(FOOTER_LINK_HREFS.guide, 'pt_BR')).toBe('/pt-br/guide/')
+    expect(resolveHref(FOOTER_LINK_HREFS.changelog, 'en')).toBe('/changelog/')
+    expect(resolveHref(FOOTER_LINK_HREFS.changelog, 'ja')).toBe(
+      '/ja/changelog/',
+    )
+  })
+
   it('leaves fixed hrefs untouched', () => {
     expect(resolveHref(TRUST_LINK_HREFS.source, 'es')).toBe(
       TRUST_LINK_HREFS.source,

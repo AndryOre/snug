@@ -1,4 +1,5 @@
 ---
+import { DOCS_PATHS, DOCS_UI } from '../i18n/docs-ui'
 import { getClosingCopy } from '../i18n/landing'
 import { buttonVariants } from '@workspace/ui/components/button'
 
@@ -25,6 +26,18 @@ const {
   skipLink = true,
 } = Astro.props
 const { header } = getClosingCopy(locale)
+const siteLinks = [
+  {
+    key: 'guide',
+    href: localePath(locale, DOCS_PATHS.guide),
+    label: DOCS_UI.guide,
+  },
+  {
+    key: 'whats-new',
+    href: localePath(locale, DOCS_PATHS.whatsNew),
+    label: DOCS_UI.whatsNew,
+  },
+]
 const options = LOCALES.map((code) => ({
   code,
   href: pageHref(code),
@@ -72,7 +85,22 @@ const options = LOCALES.map((code) => ({
         Snug
       </span>
     </a>
-    <slot name="nav" />
+    <nav
+      aria-label={DOCS_UI.navLabel}
+      data-header-nav
+      class="ms-6 hidden items-center gap-1 md:flex"
+    >
+      {siteLinks.map((link) => (
+        <a
+          href={link.href}
+          data-header-link={link.key}
+          aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
+          class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground outline-hidden hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring aria-[current=page]:text-foreground"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
     <slot name="search" />
     <HeaderMenus
       client:idle

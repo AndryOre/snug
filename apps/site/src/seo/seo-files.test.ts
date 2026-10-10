@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
+import { loadCatalog } from '../docs/catalog'
+import { PUBLISHED_SOURCES, publishedRoute } from '../docs/published'
 import { getContent } from '../i18n/content'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
@@ -68,6 +70,20 @@ describe('buildLlmsTxt', () => {
 
   it('points at llms-full.txt', () => {
     expect(buildLlmsTxt('d', pages)).toContain(`${SITE_ORIGIN}/llms-full.txt`)
+  })
+
+  it('lists every documentation page under its own heading', () => {
+    const body = buildLlmsTxt('d', pages, [
+      {
+        languageTag: 'es',
+        title: 'Exporting',
+        url: `${SITE_ORIGIN}/es/guide/exporting/`,
+      },
+    ])
+    expect(body).toContain("## Guide and What's new")
+    expect(body).toContain(
+      `[Exporting](${SITE_ORIGIN}/es/guide/exporting/): es`,
+    )
   })
 })
 
@@ -285,6 +301,16 @@ describe('root file routes', () => {
       expect(text).toContain(`(${SITE_ORIGIN}${localePath(locale)})`)
     }
     expect(text).toContain(`${SITE_ORIGIN}/privacy/`)
+    for (const source of PUBLISHED_SOURCES) {
+      for (const locale of LOCALES) {
+        expect(text).toContain(
+          `(${SITE_ORIGIN}${publishedRoute(source, locale)})`,
+        )
+      }
+    }
+    for (const entry of loadCatalog()) {
+      expect(text).toContain(`[${entry.title}](`)
+    }
   })
 
   it('serves llms-full.txt as plain text', async () => {
@@ -293,12 +319,14 @@ describe('root file routes', () => {
     expect(await response.text()).toBe(buildLlmsFullTxt(getContent('en')))
   })
 
-  it('serves a sitemap with one url per locale plus the privacy pages', async () => {
+  it("serves a sitemap with one url per locale, privacy page, guide page and What's new", async () => {
     const response = getSitemapXml()
     expect(response.headers.get('Content-Type')).toContain('application/xml')
     const xml = await response.text()
     expect(xml.match(/<url>/g)).toHaveLength(
-      LOCALES.length + PRIVACY_PAGE_LOCALES.length,
+      LOCALES.length +
+        PRIVACY_PAGE_LOCALES.length +
+        PUBLISHED_SOURCES.length * LOCALES.length,
     )
     for (const locale of LOCALES) {
       const expected = lastCommitDate([`src/content/${locale}.json`])
@@ -323,7 +351,25 @@ describe('root file routes', () => {
     expect(xml).toContain(`${SITE_ORIGIN}/de/privacy/`)
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       LOCALES.length * hreflangAlternates().length +
-        PRIVACY_PAGE_LOCALES.length * privacyAlternates.length,
+        PRIVACY_PAGE_LOCALES.length * privacyAlternates.length +
+        PUBLISHED_SOURCES.length *
+          LOCALES.length *
+          hreflangAlternates('/guide/').length,
+    )
+    for (const source of PUBLISHED_SOURCES) {
+      const expected = lastCommitDate([`../../${source.sourcePath}`])
+      expect(expected).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      for (const locale of LOCALES) {
+        expect(xml).toContain(
+          `<loc>${SITE_ORIGIN}${publishedRoute(source, locale)}</loc>\n    <lastmod>${expected}</lastmod>`,
+        )
+      }
+    }
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="ja" href="${SITE_ORIGIN}/ja/changelog/"/>`,
+    )
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/guide/exporting/"/>`,
     )
     const privacyBlock = xml.slice(xml.indexOf(`<loc>${SITE_ORIGIN}/privacy/`))
     expect(privacyBlock).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)

@@ -36,7 +36,7 @@ describe('social proof', () => {
       expect(proof.renameNote).toContain('Bookmark')
       expect(Object.keys(faq.items)).toHaveLength(11)
       expect(final.button.length).toBeGreaterThan(0)
-      expect(footer.changelog.length).toBeGreaterThan(0)
+      expect(footer.listing.length).toBeGreaterThan(0)
     }
   })
 })
