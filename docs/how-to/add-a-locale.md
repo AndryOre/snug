@@ -47,5 +47,17 @@
    `apps/video/public/screenshots/<locale>/` slides are copied automatically by
    `bun run store:screenshots`. Skip this step if the locale is extension-only.
 
-5. Run `bun run check` and `bun run test` to confirm the new locale doesn't
+5. Translate the Guide and What's new on the website. Each page lives at
+   `apps/site/src/content/translations/<locale>/<path of its English source>.md`
+   (for example `.../es/docs/guide/exporting.md` and `.../es/CHANGELOG.md`),
+   with a `title` and a `sourceHash` in the frontmatter. `sourceHash` is the
+   first 16 hex characters of the SHA-256 of the English source file, which
+   `bun run i18n:status` lists per locale. Keep the heading count of the English
+   page; a drift test fails when a translation's hash no longer matches or its
+   headings differ. A page you have not translated yet renders the English text
+   with a notice, so the locale never lacks a page. Also add the locale to the
+   site (`apps/site/src/i18n/locales.ts` and
+   `apps/site/src/content/<locale>.json`, including the `docs.notice` keys).
+
+6. Run `bun run check` and `bun run test` to confirm the new locale doesn't
    break type generation or parity.
