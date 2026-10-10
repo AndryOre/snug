@@ -107,8 +107,21 @@ any manual export action. _Avoid_: scheduled export, automatic backup,
 background export.
 
 **Retention** How many Auto-export files Snug keeps: after a successful run it
-deletes the oldest files it created itself beyond the user's limit, and never
-touches files it did not create. _Avoid_: cleanup, rotation, pruning.
+deletes the oldest files it created itself beyond the user's limit, in Downloads
+or the current Custom folder, and never touches files it did not create.
+_Avoid_: cleanup, rotation, pruning.
+
+**Export destination** Where Auto-export saves its files: the browser's
+Downloads folder or a Custom folder. _Avoid_: save location, output path,
+target.
+
+**Custom folder** A folder anywhere on the user's computer, picked by the user,
+that Auto-export saves into instead of Downloads. _Avoid_: chosen folder, local
+folder, directory.
+
+**Folder access** The user's permission for Snug to write to the Custom folder.
+The browser can withdraw it (always once, after the first restart), and the user
+then allows it again. _Avoid_: folder permission, grant, authorization.
 
 **Filename template** A user-configurable pattern for naming exported files,
 made of placeholders that get replaced with parts of the current date and time
