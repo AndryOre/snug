@@ -48,6 +48,8 @@ describe('storage items', () => {
       path: 'bookmarks-backup/',
       formats: ['html'],
       keepLast: 10,
+      destination: 'downloads',
+      folderName: null,
     })
   })
 
@@ -73,6 +75,8 @@ describe('storage items', () => {
       path: 'backups/',
       formats: ['json', 'csv'],
       keepLast: 10,
+      destination: 'downloads',
+      folderName: null,
     })
   })
 

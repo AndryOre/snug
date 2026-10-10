@@ -82,13 +82,15 @@ const DEFAULT_AUTO_EXPORT_CONFIG: AutoExportConfig = {
   path: 'bookmarks-backup/',
   formats: ['html'],
   keepLast: 10,
+  destination: 'downloads',
+  folderName: null,
 }
 
 export const autoExportConfigStore = storage.defineItem<AutoExportConfig>(
   'local:autoExportConfig',
   {
     fallback: DEFAULT_AUTO_EXPORT_CONFIG,
-    version: 3,
+    version: 4,
     migrations: {
       2: (stored: Omit<AutoExportConfig, 'dayOfWeek'>): AutoExportConfig => ({
         ...stored,
@@ -97,6 +99,13 @@ export const autoExportConfigStore = storage.defineItem<AutoExportConfig>(
       3: (stored: Omit<AutoExportConfig, 'keepLast'>): AutoExportConfig => ({
         ...stored,
         keepLast: DEFAULT_AUTO_EXPORT_CONFIG.keepLast,
+      }),
+      4: (
+        stored: Omit<AutoExportConfig, 'destination' | 'folderName'>,
+      ): AutoExportConfig => ({
+        ...stored,
+        destination: DEFAULT_AUTO_EXPORT_CONFIG.destination,
+        folderName: DEFAULT_AUTO_EXPORT_CONFIG.folderName,
       }),
     },
   },

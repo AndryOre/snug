@@ -43,6 +43,15 @@ do not need `downloads`. No `host_permissions` are declared, and there is no
 pages, and opens its own pages without it. The manifest also sets
 `minimum_chrome_version` to 119.
 
+**File System Access.** When the Export destination is a Custom folder,
+Auto-export writes through a `FileSystemDirectoryHandle` the user picked (see
+[ADR 0020](adr/0020-custom-folder-via-file-system-access.md)). This needs no
+manifest permission: access is a per-folder grant the browser itself asks for.
+The handle is stored in the extension's own IndexedDB and never leaves the
+device. A run checks Folder access first and fails with a Failure reason when it
+is not `granted`; it never falls back to Downloads and never overwrites an
+existing file.
+
 ## Threat model and trust boundaries
 
 The extension has two categories of input:

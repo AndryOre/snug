@@ -96,6 +96,8 @@ function baseConfig(
     path: 'bookmarks-backup/',
     formats: ['html'],
     keepLast: 10,
+    destination: 'downloads',
+    folderName: null,
     ...overrides,
   }
 }

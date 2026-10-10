@@ -1249,6 +1249,15 @@
       }
     }
   },
+  "autoExportFailure_folderAccessNeeded": {
+    "message": "\"$FOLDER$\" 폴더에 대한 접근 권한이 필요합니다",
+    "description": "Failure reason when the Custom folder cannot be written; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
   "autoExportPage_notifyOnFailure": {
     "message": "내보내기 실패 시 알림 받기",
     "description": "Label of the switch that turns the Failure notification on or off"

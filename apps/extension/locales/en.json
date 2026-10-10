@@ -1265,6 +1265,15 @@
       }
     }
   },
+  "autoExportFailure_folderAccessNeeded": {
+    "message": "Folder access needed for \"$FOLDER$\"",
+    "description": "Failure reason when the Custom folder cannot be written; $1 is the folder name",
+    "placeholders": {
+      "folder": {
+        "content": "$1"
+      }
+    }
+  },
   "autoExportPage_notifyOnFailure": {
     "message": "Notify me when an export fails",
     "description": "Label of the switch that turns the Failure notification on or off"

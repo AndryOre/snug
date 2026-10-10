@@ -1,10 +1,14 @@
+import { i18n } from '#i18n'
+
 import { notifyAutoExportFailure } from '@/lib/auto-export-notification'
 import {
   applyRetention,
   recordSavedDownload,
 } from '@/lib/auto-export-retention'
+import { writeToCustomFolder } from '@/lib/custom-folder-writer'
 import { EXPORT_FORMAT_INFO, type ExportFormat } from '@/lib/export-formats'
 import { formatFilenameTemplate } from '@/lib/filename-template'
+import { loadFolderHandle, queryFolderAccess } from '@/lib/folder-handle'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
 import { sanitizePathSegment } from '@/lib/path-segment'
 import { renderExport } from '@/lib/render-export'
@@ -403,6 +407,25 @@ async function saveDownload(
 }
 
 /**
+ * Loads the Custom folder handle and checks its Folder access, so a run
+ * fails loudly instead of falling back to Downloads when the grant went
+ * missing (for example after a browser restart).
+ * @param configuredName The folder display name stored in the config.
+ * @returns The handle, with Folder access `granted`.
+ * @throws {Error} Whose message is the localized Failure reason when no handle
+ *   is stored or access is not `granted`.
+ */
+async function requireGrantedFolder(
+  configuredName: string | null,
+): Promise<FileSystemDirectoryHandle> {
+  const handle = await loadFolderHandle()
+  const access = handle ? await queryFolderAccess(handle) : 'missing'
+  if (handle && access === 'granted') return handle
+  const folderName = handle?.name ?? configuredName ?? ''
+  throw new Error(i18n.t('autoExportFailure_folderAccessNeeded', [folderName]))
+}
+
+/**
  * Runs an auto-export: reads the current export settings, generates each
  * selected format, and downloads it to the configured folder via
  * {@link downloadViaOffscreenDocument} (an offscreen-document blob URL,
@@ -421,6 +444,11 @@ async function saveDownload(
  * After a fully successful run, retention removes Snug's own oldest files
  * beyond `keepLast` (see {@link applyRetention}); a failed run never deletes
  * anything.
+ *
+ * With the `folder` Export destination, files are written into the Custom
+ * folder (see {@link writeToCustomFolder}) instead of being downloaded; a
+ * missing handle or Folder access other than `granted` fails the run, with no
+ * fallback to Downloads.
  *
  * {@link autoExportLastRunStore} is updated only after every selected
  * download has completed (or has failed), recording `trigger` and, on
@@ -452,6 +480,7 @@ export async function runAutoExport(
   const formats = overrides?.formats ?? config.formats
   const path = overrides?.path ?? config.path
 
+  const isFolderDestination = config.destination === 'folder'
   const runAt = Date.now()
   const isTrackedRun = trigger !== 'manual'
   if (isTrackedRun) {
@@ -499,9 +528,23 @@ export async function runAutoExport(
       ? `${sanitized}${sanitized.endsWith('/') ? '' : '/'}`
       : ''
 
+    const folderHandle = isFolderDestination
+      ? await requireGrantedFolder(config.folderName)
+      : null
+
     const downloads = formats.map(async (format) => {
       const { extension, mimeType } = EXPORT_FORMAT_INFO[format]
       const content = await renderExport(format, baseOptions)
+      if (folderHandle) {
+        await writeToCustomFolder(
+          folderHandle,
+          sanitized,
+          baseName,
+          extension,
+          content,
+        )
+        return
+      }
       await saveDownload(
         content,
         mimeType,
@@ -514,7 +557,9 @@ export async function runAutoExport(
     await autoExportLastRunStore.setValue({ at: Date.now(), ok: true, trigger })
     await markReviewPromptEligible(Date.now())
     await clearFailureBadge()
-    await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
+    if (!isFolderDestination) {
+      await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     await autoExportLastRunStore.setValue({
