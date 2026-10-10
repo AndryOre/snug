@@ -10,7 +10,7 @@ import {
 } from '@workspace/ui/components/item'
 import { ExternalLinkIcon } from 'lucide-react'
 
-import { getStoreListingUrl } from '@/lib/brand'
+import { getSiteChangelogUrl, getStoreListingUrl } from '@/lib/brand'
 import {
   formatChangelogDate,
   getChangelog,
@@ -94,6 +94,16 @@ export function WhatsNewRoute() {
           )
         })}
       </ol>
+
+      <a
+        href={getSiteChangelogUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 self-start text-sm text-foreground underline hover:no-underline"
+      >
+        {i18n.t('whatsNew_fullNotesLink')}
+        <ExternalLinkIcon aria-hidden="true" className="size-3" />
+      </a>
 
       <Item variant="muted">
         <ItemContent>

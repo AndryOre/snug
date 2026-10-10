@@ -845,6 +845,10 @@
     "message": "Lascia una recensione",
     "description": "What's new screen string"
   },
+  "whatsNew_fullNotesLink": {
+    "message": "Note di rilascio complete",
+    "description": "What's new screen link to the full release notes on the website"
+  },
   "exportPage_title": {
     "message": "Esporta segnalibri",
     "description": "Export page heading"
@@ -1349,6 +1353,10 @@
   "shell_privacyLink": {
     "message": "Privacy",
     "description": "App sidebar footer link to the privacy policy"
+  },
+  "shell_guideLink": {
+    "message": "Guida",
+    "description": "App sidebar footer link to the Guide on the website"
   },
   "changelog_2_0_2_1": {
     "message": "Snug ora ha un sito web."

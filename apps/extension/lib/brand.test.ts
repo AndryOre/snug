@@ -8,6 +8,8 @@ import {
   CHROME_WEB_STORE_URL,
   EDGE_ADD_ONS_EXTENSION_ID,
   EDGE_ADD_ONS_URL,
+  getSiteChangelogUrl,
+  getSiteGuideUrl,
   getSitePrivacyUrl,
   getSiteUrl,
   getStoreListingUrl,
@@ -144,5 +146,37 @@ describe('getSitePrivacyUrl', () => {
   it('is the localized privacy page for a non-English locale', () => {
     resetFakeI18n('de')
     expect(getSitePrivacyUrl()).toBe('https://snug.andryore.dev/de/privacy/')
+  })
+})
+
+describe('getSiteGuideUrl', () => {
+  beforeEach(() => {
+    resetFakeI18n()
+  })
+
+  it('is the English guide page for English', () => {
+    expect(getSiteGuideUrl()).toBe('https://snug.andryore.dev/guide/')
+  })
+
+  it('is the localized guide page for a non-English locale', () => {
+    resetFakeI18n('pt_BR')
+    expect(getSiteGuideUrl()).toBe('https://snug.andryore.dev/pt-br/guide/')
+  })
+})
+
+describe('getSiteChangelogUrl', () => {
+  beforeEach(() => {
+    resetFakeI18n()
+  })
+
+  it('is the English changelog page for English', () => {
+    expect(getSiteChangelogUrl()).toBe('https://snug.andryore.dev/changelog/')
+  })
+
+  it('is the localized changelog page for a non-English locale', () => {
+    resetFakeI18n('de')
+    expect(getSiteChangelogUrl()).toBe(
+      'https://snug.andryore.dev/de/changelog/',
+    )
   })
 })
