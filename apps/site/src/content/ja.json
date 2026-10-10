@@ -213,22 +213,22 @@
     "theme": "テーマの選択は、お使いのブラウザー内にのみ保存されます。"
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "guide": "ガイド",
+    "overview": "概要",
+    "exporting": "書き出し",
+    "importing": "読み込み",
+    "duplicates": "重複",
+    "settings": "設定",
+    "autoExport": "自動書き出し",
+    "whatsNew": "新機能",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "この翻訳は最新ではないため、英語の文章を表示しています。",
+      "missing": "このページはまだ翻訳されていないため、英語の文章を表示しています。",
+      "readEnglish": "このページを英語で読む"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Markdown をコピー",
+    "copied": "コピーしました",
+    "copyFailed": "コピーできませんでした"
   },
   "docsSearch": {
     "noResults": "{query} に一致する結果はありません。",
