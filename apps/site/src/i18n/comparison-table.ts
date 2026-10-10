@@ -53,6 +53,7 @@ export type FactCell =
   | { kind: 'text'; text: string; isEnglish: boolean }
   | { kind: 'yes' }
   | { kind: 'none' }
+  | { kind: 'none-declared' }
   | { kind: 'not-listed' }
 
 function listCell(
@@ -123,7 +124,7 @@ export function factCell(
     }
     case 'dataDisclosure': {
       return facts.dataDisclosure === 'none-declared'
-        ? { kind: 'none' }
+        ? { kind: 'none-declared' }
         : listCell(facts.dataDisclosure, true)
     }
   }

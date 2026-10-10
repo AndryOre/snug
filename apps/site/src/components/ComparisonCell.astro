@@ -6,9 +6,11 @@ interface Props {
   cell: FactCell
   locale: Locale
   notListed: string
+  none: string
+  noneDeclared: string
 }
 
-const { cell, locale, notListed } = Astro.props
+const { cell, locale, notListed, none, noneDeclared } = Astro.props
 const isEnglishText =
   cell.kind === 'text' && cell.isEnglish === true && locale !== DEFAULT_LOCALE
 ---
@@ -17,7 +19,15 @@ const isEnglishText =
   <span class="text-muted-foreground italic">{notListed}</span>
 )}
 {cell.kind === 'yes' && <span translate="no">✓</span>}
-{cell.kind === 'none' && <span translate="no">—</span>}
+{cell.kind === 'none' && (
+  <>
+    <span aria-hidden="true" translate="no">
+      —
+    </span>
+    <span class="sr-only">{none}</span>
+  </>
+)}
+{cell.kind === 'none-declared' && <span>{noneDeclared}</span>}
 {cell.kind === 'text' && (
   <span lang={isEnglishText ? languageTag(DEFAULT_LOCALE) : undefined}>
     {cell.text}

@@ -47,7 +47,7 @@ describe('factCell', () => {
     expect(factCell('schedule', SNUG_FACTS, 'en')).toEqual({ kind: 'yes' })
     expect(factCell('cloudCopies', SNUG_FACTS, 'en')).toEqual({ kind: 'none' })
     expect(factCell('dataDisclosure', COMPETITORS['101-export'], 'en')).toEqual(
-      { kind: 'none' },
+      { kind: 'none-declared' },
     )
   })
 

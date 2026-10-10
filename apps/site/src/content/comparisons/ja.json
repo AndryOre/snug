@@ -27,6 +27,8 @@
     "atAGlance": "ひと目でわかる比較",
     "asOf": "{date}時点",
     "notListed": "記載なし",
+    "none": "なし",
+    "noneDeclared": "データを収集しない（開発者の申告）",
     "criteria": {
       "exportFormats": "書き出し形式",
       "import": "読み込み",

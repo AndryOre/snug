@@ -27,6 +27,8 @@
     "atAGlance": "At a glance",
     "asOf": "As of {date}",
     "notListed": "Not listed",
+    "none": "None",
+    "noneDeclared": "No data collected, per the developer's declaration",
     "criteria": {
       "exportFormats": "Export formats",
       "import": "Import",

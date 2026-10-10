@@ -27,6 +27,8 @@
     "atAGlance": "한눈에 비교",
     "asOf": "{date} 기준",
     "notListed": "기재되지 않음",
+    "none": "없음",
+    "noneDeclared": "데이터를 수집하지 않음(개발자 신고 기준)",
     "criteria": {
       "exportFormats": "내보내기 형식",
       "import": "가져오기",

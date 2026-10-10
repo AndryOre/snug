@@ -20,7 +20,8 @@ interface Props {
 }
 
 const { locale, subjects, variant, caption, id } = Astro.props
-const { criteria, notListed } = getComparisonContent(locale).shared
+const { criteria, notListed, none, noneDeclared } =
+  getComparisonContent(locale).shared
 const cellClass =
   'border-t border-border px-3.5 py-3 text-left align-top wrap-anywhere'
 const headClass =
@@ -61,6 +62,8 @@ const captionClass =
                   cell={factCell(key, subject.facts, locale)}
                   locale={locale}
                   notListed={notListed}
+                  none={none}
+                  noneDeclared={noneDeclared}
                 />
               </td>
             ))}
@@ -112,6 +115,8 @@ const captionClass =
                     cell={factCell(key, subject.facts, locale)}
                     locale={locale}
                     notListed={notListed}
+                    none={none}
+                    noneDeclared={noneDeclared}
                   />
                 </td>
               ))}
@@ -145,6 +150,8 @@ const captionClass =
                       cell={factCell(key, subject.facts, locale)}
                       locale={locale}
                       notListed={notListed}
+                      none={none}
+                      noneDeclared={noneDeclared}
                     />
                   </dd>
                 </div>

@@ -27,6 +27,8 @@
     "atAGlance": "Visão geral",
     "asOf": "Em {date}",
     "notListed": "Não consta",
+    "none": "Nenhuma",
+    "noneDeclared": "Nenhum dado coletado, segundo a declaração do desenvolvedor",
     "criteria": {
       "exportFormats": "Formatos de exportação",
       "import": "Importação",

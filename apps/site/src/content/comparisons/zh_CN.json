@@ -27,6 +27,8 @@
     "atAGlance": "一览",
     "asOf": "截至 {date}",
     "notListed": "未列出",
+    "none": "无",
+    "noneDeclared": "不收集数据（开发者声明）",
     "criteria": {
       "exportFormats": "导出格式",
       "import": "导入",

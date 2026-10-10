@@ -27,6 +27,8 @@
     "atAGlance": "С первого взгляда",
     "asOf": "На {date}",
     "notListed": "Не указано",
+    "none": "Нет",
+    "noneDeclared": "Данные не собираются, по заявлению разработчика",
     "criteria": {
       "exportFormats": "Форматы экспорта",
       "import": "Импорт",
