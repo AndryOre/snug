@@ -214,21 +214,21 @@
   },
   "docs": {
     "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "overview": "Présentation",
+    "exporting": "Exportation",
+    "importing": "Importation",
+    "duplicates": "Doublons",
+    "settings": "Paramètres",
+    "autoExport": "Exportation automatique",
+    "whatsNew": "Nouveautés",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "Cette traduction n'est plus à jour, le texte anglais est donc affiché.",
+      "missing": "Cette page n'est pas encore traduite, le texte anglais est donc affiché.",
+      "readEnglish": "Lire cette page en anglais"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Copier le Markdown",
+    "copied": "Copié",
+    "copyFailed": "Copie impossible"
   },
   "docsSearch": {
     "noResults": "Aucun résultat pour {query}.",
