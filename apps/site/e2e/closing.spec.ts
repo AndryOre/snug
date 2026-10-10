@@ -44,7 +44,7 @@ for (const path of PATHS) {
       'href',
       '/install?c=footer',
     )
-    await expect(page.locator('a[data-footer-link]')).toHaveCount(5)
+    await expect(page.locator('a[data-footer-link]')).toHaveCount(6)
   })
 }
 

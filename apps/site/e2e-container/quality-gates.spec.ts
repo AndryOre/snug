@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
+import { COMPARISON_PATHS } from '../e2e/comparison-paths'
 import { hydratedFaq } from '../e2e/faq-helpers'
 import { blockUmami, UMAMI_ORIGINS } from '../e2e/umami-helpers'
 import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
@@ -149,7 +150,7 @@ for (const path of LOCALE_PATHS) {
   })
 }
 
-for (const path of ['/', '/privacy/']) {
+for (const path of ['/', '/privacy/', ...COMPARISON_PATHS]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
@@ -228,6 +229,7 @@ test('every inline script in the built page is hash-allowed by the header', asyn
 const CSP_PAGES = [
   ...LOCALE_PATHS.map((path) => ({ path, interactive: true })),
   { path: '/privacy/', interactive: false },
+  ...COMPARISON_PATHS.map((path) => ({ path, interactive: false })),
   { path: '/nope/', interactive: false },
 ]
 

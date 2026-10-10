@@ -1,0 +1,29 @@
+---
+import ComparisonPage from '../../../components/ComparisonPage.astro'
+import {
+  COMPARISON_PAGE_LOCALES,
+  COMPARISON_SLUGS,
+} from '../../../i18n/comparisons'
+import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../../i18n/locales'
+
+export function getStaticPaths() {
+  return COMPARISON_PAGE_LOCALES.filter(
+    (locale) => locale !== DEFAULT_LOCALE,
+  ).flatMap((locale) =>
+    COMPARISON_SLUGS.map((slug) => ({
+      params: { locale: languageTag(locale).toLowerCase(), slug },
+    })),
+  )
+}
+
+const { locale: segment, slug: slugParameter } = Astro.params
+const locale = LOCALES.find(
+  (candidate) => languageTag(candidate).toLowerCase() === segment,
+)
+const slug = COMPARISON_SLUGS.find((candidate) => candidate === slugParameter)
+if (!locale || !slug) {
+  throw new Error(`Unknown comparison "${segment}/${slugParameter}"`)
+}
+---
+
+<ComparisonPage locale={locale} slug={slug} />

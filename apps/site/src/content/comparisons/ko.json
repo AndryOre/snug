@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "alternatives": {
+      "title": "북마크 내보내기 확장 프로그램 비교 | Snug",
+      "description": "Snug와 Chrome에서 북마크를 내보내고 백업하는 다른 확장 프로그램 3개를 형식, 가져오기, 일정, 언어, 데이터 공개 항목으로 비교해요. 확인일 {date}."
+    },
+    "selective-bookmarks-export-tool": {
+      "title": "Snug vs Selective Bookmarks Export Tool | Snug",
+      "description": "Snug와 Selective Bookmarks Export Tool을 내보내기 형식, 가져오기, 일정, 데이터 공개 항목으로 비교해요. 현재 스토어 등록 정보를 기준으로 해요. 확인일 {date}."
+    },
+    "maple-backup": {
+      "title": "Snug vs Maple Backup | Snug",
+      "description": "Snug와 Maple Backup을 스냅샷, 온라인 저장소로의 선택적 복사본, 언어, 데이터 공개 항목으로 비교해요. 현재 스토어 등록 정보를 기준으로 해요. 확인일 {date}."
+    },
+    "101-export": {
+      "title": "Snug vs 101 Export History/Bookmarks | Snug",
+      "description": "Snug와 101 Export History/Bookmarks를 내보내기 형식, 방문 기록 내보내기, 데이터 공개 항목으로 비교해요. 현재 스토어 등록 정보를 기준으로 해요. 확인일 {date}."
+    }
+  },
+  "shared": {
+    "breadcrumb": {
+      "label": "탐색 경로",
+      "home": "Snug",
+      "alternatives": "대안"
+    },
+    "tldr": "한눈에 보기",
+    "atAGlance": "한눈에 비교",
+    "asOf": "{date} 기준",
+    "notListed": "기재되지 않음",
+    "none": "없음",
+    "noneDeclared": "데이터를 수집하지 않음(개발자 신고 기준)",
+    "criteria": {
+      "exportFormats": "내보내기 형식",
+      "import": "가져오기",
+      "chooseFolders": "내보낼 폴더 선택",
+      "schedule": "예약 내보내기",
+      "cloudCopies": "온라인 저장소로 복사",
+      "browsers": "브라우저",
+      "languages": "언어",
+      "usersRating": "사용자 수와 평점",
+      "dataDisclosure": "스토어 등록 정보의 데이터 공개 항목"
+    },
+    "compareWithSnug": "Snug와 비교하기",
+    "pickSnug": "이럴 때는 Snug",
+    "pickOther": "이럴 때는 {name}",
+    "switching": "Snug로 옮기기",
+    "checkedNote": "{date}에 Chrome 웹 스토어의 각 등록 정보를 기준으로 확인했어요. 등록 정보는 바뀔 수 있으니 결정하기 전에 등록 정보에서 직접 확인해 주세요.",
+    "ctaTitle": "내 북마크로 Snug를 써 보세요",
+    "ctaBody": "무료 오픈 소스예요. 계정이 필요 없고 네트워크 호출도 하지 않아요.",
+    "install": "Chrome에 추가"
+  },
+  "alternatives": {
+    "eyebrow": "대안",
+    "title": "Chrome 북마크 내보내기 확장 프로그램 비교",
+    "lede": "이 표는 Chrome 북마크를 내보내거나 백업하는 다른 확장 프로그램 3개를 Snug와 나란히 놓은 거예요. 내용은 {date} 기준으로 각 Chrome 웹 스토어 등록 정보에 적힌 것만 바탕으로 해요. 등록 정보에 언급이 없는 항목은 표에 '기재되지 않음'으로 표시해요.",
+    "whatToLookFor": {
+      "title": "살펴볼 점",
+      "items": [
+        "내보내기 형식. 필요한 파일 형식이 목록에 있는지, 확장 프로그램이 스스로 내보내지 않는다고 밝힌 것은 무엇인지 확인해요.",
+        "가져오기. 내보낸 파일은 다시 가져오거나 다른 도구에서 열 수 있어야 쓸모가 있어요.",
+        "폴더 선택. 전체 트리가 필요한지, 일부 폴더만 필요한지 정해요.",
+        "일정. 내보내기가 저절로 실행되길 원하는지, 클릭할 때만 실행돼도 되는지 정해요.",
+        "복사본이 가는 곳. 모든 것을 기기에만 두는 확장 프로그램도 있고, 로그인한 뒤 온라인 저장소에 선택적 복사본을 만드는 것도 있어요.",
+        "데이터 공개 항목. 모든 등록 정보에는 개발자가 어떤 데이터를 처리한다고 밝혔는지 보여 주는 항목이 있어요. 설치하기 전에 읽어 보세요."
+      ]
+    },
+    "builtIn": {
+      "name": "Chrome 기본 내보내기",
+      "summary": "Chrome 북마크 관리자는 모든 북마크를 HTML 파일 하나로 내보내요. 설치할 것이 없어요. 필요한 게 그것뿐이라면 충분해요."
+    },
+    "cards": {
+      "selective-bookmarks-export-tool": {
+        "pickWhen": "Firefox도 쓰거나, 필요한 형식이 HTML뿐일 때 어울려요."
+      },
+      "maple-backup": {
+        "pickWhen": "Google Drive, OneDrive, Dropbox에 선택적 복사본을 두고 싶거나, {languages}개 언어 중 하나로 된 화면이 필요할 때 어울려요."
+      },
+      "101-export": {
+        "pickWhen": "북마크뿐 아니라 방문 기록도 내보내야 할 때 어울려요."
+      }
+    }
+  },
+  "pages": {
+    "selective-bookmarks-export-tool": {
+      "eyebrow": "비교",
+      "title": "Snug vs Selective Bookmarks Export Tool",
+      "tldr": "Selective Bookmarks Export Tool은 고른 북마크를 HTML로 내보내고, Firefox와 Edge용으로도 나와 있어요. Snug는 HTML 외에 더 많은 형식으로 내보내고, 미리보기와 함께 가져오고, 자동 내보내기를 일정에 따라 실행해요. {date} 기준으로 이 확장 프로그램의 등록 정보에는 사용자 {users}명과 평점 {rating}이 표시되어 있고, 가져오기와 일정은 기재되어 있지 않아요.",
+      "whyLook": {
+        "title": "대안을 찾는 이유",
+        "body": "등록 정보에는 HTML로 내보내기가 설명되어 있어요. 가져오기와 일정은 {date} 기준으로 기재되어 있지 않아요. 다른 파일 형식이나 저절로 실행되는 내보내기가 필요하다면 그 부분은 다른 도구가 필요해요."
+      },
+      "pickSnug": [
+        "JSON처럼 HTML이 아닌 형식이 필요해요.",
+        "파일을 미리보기와 함께 다시 가져오고, 병합, 교체, 새 폴더 중에서 고르고 싶어요.",
+        "자동 내보내기를 일정에 따라 실행해서 다운로드 폴더나 직접 고른 폴더에 저장하고 싶어요.",
+        "중복 페이지에서 반복된 북마크를 찾고 싶어요.",
+        "네트워크 호출을 하지 않고 계정도 필요 없는 확장 프로그램을 원해요."
+      ],
+      "pickOther": [
+        "Firefox도 써요. 그쪽에서도 쓸 수 있는 확장 프로그램이에요.",
+        "필요한 형식이 HTML뿐이에요.",
+        "내보내기 도구 안에서 키워드 필터나 다크 모드를 쓰고 싶어요."
+      ],
+      "switching": {
+        "steps": [
+          "Chrome 웹 스토어에서 Snug를 설치해요.",
+          "Snug를 열고 필요한 형식으로 내보내요. Snug는 브라우저에 이미 있는 북마크를 읽으므로 따로 변환할 필요가 없어요.",
+          "이전에 내보낸 HTML 파일이 있다면 가져오기를 선택하고 파일을 골라요.",
+          "미리보기를 확인한 다음 병합, 교체, 새 폴더 중에서 골라요. 교체는 안전 스냅샷으로 되돌릴 수 있어요.",
+          "일정에 따라 내보내려면 자동 내보내기를 켜요."
+        ]
+      }
+    },
+    "maple-backup": {
+      "eyebrow": "비교",
+      "title": "Snug vs Maple Backup",
+      "tldr": "Maple Backup은 매일 또는 정한 일정에 따라 스냅샷을 기기에 자동으로 저장하고, 로그인하면 Google Drive, OneDrive, Dropbox에 선택적 복사본도 만들어요. Snug는 직접 보관하는 파일로 내보내고, 미리보기와 함께 가져오고, 네트워크 호출을 하지 않아요. {date} 기준으로 이 확장 프로그램의 등록 정보에는 사용자 {users}명과 평점 {rating}이 표시되어 있어요.",
+      "whyLook": {
+        "title": "대안을 찾는 이유",
+        "body": "{date} 기준으로 Maple Backup 등록 정보는 개인 식별 정보, 인증 정보, 웹사이트 콘텐츠를 처리한다고 밝히고 있고, 선택적 복사본에는 로그인이 필요해요. 계정과 네트워크 호출이 없는 도구를 원한다면 다른 곳을 찾을 수 있어요."
+      },
+      "pickSnug": [
+        "계정과 네트워크 호출이 없는 도구를 원해요.",
+        "다른 브라우저와 도구에서 열 수 있는 여러 형식의 내보내기 파일을 원해요.",
+        "미리보기와 함께 가져오고, 병합, 교체, 새 폴더 중에서 고르고 싶어요.",
+        "코드를 직접 읽을 수 있는 오픈 소스 확장 프로그램을 원해요."
+      ],
+      "pickOther": [
+        "Google Drive, OneDrive, Dropbox에 선택적 복사본을 두고 싶어요.",
+        "저장된 스냅샷 중 어느 것으로든 복원하고 싶어요.",
+        "{languages}개 언어 중 하나로 된 화면을 원해요.",
+        "저장 위치를 정하지 않고 매일 자동으로 스냅샷을 만들고 싶어요."
+      ],
+      "switching": {
+        "steps": [
+          "Chrome 웹 스토어에서 Snug를 설치해요.",
+          "Snug를 열고 필요한 형식으로 북마크를 내보내요. Snug는 브라우저에 이미 있는 북마크를 읽으므로 따로 변환할 필요가 없어요.",
+          "일정에 따라 파일을 받으려면 자동 내보내기를 켜고 다운로드 폴더나 직접 고른 폴더에 저장해요.",
+          "더 이상 필요 없어지면 확장 프로그램 페이지에서 Maple Backup을 제거해요."
+        ]
+      }
+    },
+    "101-export": {
+      "eyebrow": "비교",
+      "title": "Snug vs 101 Export History/Bookmarks",
+      "tldr": "101 Export는 Chrome 방문 기록과 북마크를 JSON으로 내보내요. 확장 프로그램 자체의 안내에 따르면 CSV나 XLS로는 내보내지 않아요. Snug는 북마크만 내보내는 대신 더 많은 형식을 지원하고, 가져오기도 해요. {date} 기준으로 이 확장 프로그램의 등록 정보에는 사용자 {users}명과 평점 {rating}이 표시되어 있어요.",
+      "whyLook": {
+        "title": "대안을 찾는 이유",
+        "body": "스토어 제목에는 CSV와 XLS가 나오지만, 확장 프로그램 자체의 안내에는 둘 다 내보내지 않는다고 적혀 있어요. 변환하려면 데스크톱 앱인 101editor가 필요해요. Chrome은 방문 기록을 {historyMonths}개월까지만 보관해요. {date} 기준으로 등록 정보는 영어로만 되어 있어요."
+      },
+      "pickSnug": [
+        "데스크톱 앱 없이 JSON이 아닌 형식으로 북마크가 필요해요.",
+        "파일을 미리보기와 함께 다시 가져오고, 병합, 교체, 새 폴더 중에서 고르고 싶어요.",
+        "일정에 따른 자동 내보내기를 원해요.",
+        "영어가 아닌 다른 언어로 된 화면을 원해요."
+      ],
+      "pickOther": [
+        "북마크뿐 아니라 방문 기록도 내보내야 해요.",
+        "필요한 형식이 JSON뿐이에요.",
+        "방문 기록과 북마크를 확장 프로그램 하나로 처리하고 싶어요."
+      ],
+      "switching": {
+        "steps": [
+          "Chrome 웹 스토어에서 Snug를 설치해요.",
+          "Snug를 열고 필요한 형식으로 북마크를 내보내요. Snug는 브라우저에 이미 있는 북마크를 읽으므로 따로 변환할 필요가 없어요.",
+          "Snug는 북마크만 내보내므로, 방문 기록을 계속 내보내야 한다면 101 Export는 설치해 두세요.",
+          "일정에 따라 내보내려면 자동 내보내기를 켜요."
+        ]
+      }
+    }
+  }
+}

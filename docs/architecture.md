@@ -46,6 +46,15 @@ relative to `apps/extension/` unless it starts with `packages/`.
   superseding
   [ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
   video it has no runtime link to the extension. Rules: `apps/site/AGENTS.md`.
+  - Site map: the landing page (`/`, `/<locale>/`), `/privacy/`, the Guide and
+    What's new (`/guide/`, `/changelog/`), and the Alternatives page
+    (`/alternatives/`) with one Comparison page per competitor in
+    `src/content/competitors.ts` (`/alternatives/<slug>/`), each also under
+    `/<locale>/` for every locale with a file in `src/content/comparisons/`.
+    Routes in `src/pages/alternatives/` and `src/pages/[locale]/alternatives/`
+    render `AlternativesPage.astro` and `ComparisonPage.astro`; table rows come
+    from `src/i18n/comparison-table.ts`, metadata and JSON-LD from
+    `src/seo/comparison-descriptor.ts`. The footer links the Alternatives page.
 - **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
   thumbnails. It has no runtime link to the extension: it reads
   `apps/extension/locales/*.json` and `apps/extension/e2e-store/captions.ts` by

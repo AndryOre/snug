@@ -1,0 +1,153 @@
+---
+import { Card, CardHeader, CardTitle } from '@workspace/ui/components/card'
+
+import { COMPETITORS, SNUG_FACTS } from '../content/competitors'
+import { comparisonSubjects } from '../i18n/comparison-table'
+import {
+  alternativesPath,
+  COMPARISON_SLUGS,
+  getComparisonContent,
+  interpolateComparison,
+} from '../i18n/comparisons'
+import { type Locale, localePath } from '../i18n/locales'
+import Layout from '../layouts/Layout.astro'
+import { comparisonPageDescriptor } from '../seo/comparison-descriptor'
+import ComparisonBreadcrumb from './ComparisonBreadcrumb.astro'
+import ComparisonTable from './ComparisonTable.astro'
+import Eyebrow from './Eyebrow.astro'
+import FinalCta from './FinalCta.astro'
+import SectionHeading from './SectionHeading.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { shared, alternatives } = getComparisonContent(locale)
+const page = comparisonPageDescriptor(locale)
+const date = [
+  SNUG_FACTS.verifiedOn,
+  ...COMPARISON_SLUGS.map((slug) => COMPETITORS[slug].verifiedOn),
+]
+  .toSorted((a, b) => a.localeCompare(b))
+  .at(-1)
+const values = { date }
+const lede = interpolateComparison(alternatives.lede, locale, values)
+const caption = interpolateComparison(shared.checkedNote, locale, values)
+const crumbs = [
+  { name: shared.breadcrumb.home, href: localePath(locale) },
+  { name: shared.breadcrumb.alternatives },
+]
+const cards = COMPARISON_SLUGS.map((slug) => {
+  const facts = COMPETITORS[slug]
+  const languages =
+    facts.languageCount === 'not-listed' ? undefined : facts.languageCount
+  return {
+    slug,
+    name: facts.shortName,
+    href: alternativesPath(locale, slug),
+    pickWhen: interpolateComparison(alternatives.cards[slug].pickWhen, locale, {
+      languages,
+    }),
+  }
+})
+---
+
+<Layout locale={locale} page={page}>
+  <main id="main">
+    <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+      <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
+      <header class="mt-8">
+        <Eyebrow>{alternatives.eyebrow}</Eyebrow>
+        <SectionHeading as="h1" class="mt-3 hyphens-manual">
+          {alternatives.title}
+        </SectionHeading>
+        <p class="mt-5 max-w-2xl text-lead text-muted-foreground">{lede}</p>
+      </header>
+      <section
+        data-section="criteria-table"
+        aria-labelledby="criteria-table-heading"
+        class="mt-12"
+      >
+        <h2 id="criteria-table-heading" class="sr-only">
+          {shared.atAGlance}
+        </h2>
+        <ComparisonTable
+          locale={locale}
+          subjects={comparisonSubjects()}
+          variant="matrix"
+          caption={caption}
+          id="alternatives-table"
+        />
+        <p class="mt-6 max-w-2xl leading-prose">
+          <strong class="font-medium">{alternatives.builtIn.name}.</strong>{' '}
+          {alternatives.builtIn.summary}
+        </p>
+      </section>
+      <section
+        data-section="comparison-cards"
+        aria-labelledby="comparison-cards-heading"
+        class="mt-12"
+      >
+        <h2
+          id="comparison-cards-heading"
+          class="font-heading text-2xl font-bold md:text-3xl"
+        >
+          {shared.compareWithSnug}
+        </h2>
+        <ul class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {cards.map((card) => (
+            <li class="flex">
+              <Card size="lg" className="w-full">
+                <CardHeader>
+                  <CardTitle>
+                    <h3
+                      id={`card-${card.slug}`}
+                      class="text-xl leading-tight break-words"
+                    >
+                      {card.name}
+                    </h3>
+                  </CardTitle>
+                  <p class="mt-3 text-base text-muted-foreground">
+                    {card.pickWhen}
+                  </p>
+                  <TextLink
+                    href={card.href}
+                    aria-describedby={`card-${card.slug}`}
+                    class="mt-3 text-primary-text"
+                  >
+                    {shared.compareWithSnug}
+                  </TextLink>
+                </CardHeader>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section
+        data-section="what-to-look-for"
+        aria-labelledby="what-to-look-for-heading"
+        class="mt-12"
+      >
+        <h2
+          id="what-to-look-for-heading"
+          class="font-heading text-2xl font-bold md:text-3xl"
+        >
+          {alternatives.whatToLookFor.title}
+        </h2>
+        <ul class="mt-6 max-w-2xl list-disc space-y-2 pl-6 leading-prose">
+          {alternatives.whatToLookFor.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </section>
+    </div>
+    <FinalCta
+      locale={locale}
+      heading={shared.ctaTitle}
+      line={shared.ctaBody}
+      button={shared.install}
+    />
+  </main>
+</Layout>

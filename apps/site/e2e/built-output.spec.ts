@@ -21,6 +21,11 @@ import {
   UMAMI_SCRIPT_URL,
   UMAMI_WEBSITE_ID,
 } from '../src/seo/umami'
+import {
+  COMPARISON_LOCALES,
+  COMPARISON_PAGES,
+  comparisonPath,
+} from './comparison-paths'
 import { docsString, translatedTitle } from './translated-guide'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -412,6 +417,88 @@ test.describe('privacy page', () => {
       expect(html.split(link).length - 1).toBeGreaterThanOrEqual(2)
     })
   }
+})
+
+test.describe('comparison pages', () => {
+  const titles = new Map<string, string>()
+  const descriptions = new Map<string, string>()
+
+  for (const { locale, slug, path: pagePath } of COMPARISON_PAGES) {
+    test(`${pagePath} has its own metadata, hreflang and JSON-LD`, () => {
+      const html = readBuilt(`${pagePath.slice(1)}index.html`)
+      const title = /<title>([^<]*)<\/title>/.exec(html)?.[1] ?? ''
+      const description = metaContent(html, 'name', 'description')
+      expect(title.length).toBeGreaterThan(0)
+      expect(description.length).toBeGreaterThan(0)
+      expect(
+        titles.get(`${locale}:${title}`),
+        `duplicate title "${title}"`,
+      ).toBeUndefined()
+      expect(
+        descriptions.get(`${locale}:${description}`),
+        `duplicate description "${description}"`,
+      ).toBeUndefined()
+      titles.set(`${locale}:${title}`, pagePath)
+      descriptions.set(`${locale}:${description}`, pagePath)
+
+      expect(html).toContain(`<html lang="${languageTag(locale)}"`)
+      expect(html).toContain(
+        `<link rel="canonical" href="${SITE_ORIGIN}${pagePath}"`,
+      )
+
+      const englishPath = comparisonPath(DEFAULT_LOCALE, slug)
+      const hreflangs = html
+        .matchAll(/<link rel="alternate" hreflang="([^"]+)"/g)
+        .map((match) => match[1] ?? '')
+        .toArray()
+      expect(hreflangs.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        [
+          ...COMPARISON_LOCALES.map((code) => languageTag(code)),
+          'x-default',
+        ].toSorted((a, b) => a.localeCompare(b)),
+      )
+      for (const { hreflang, href } of hreflangAlternates(
+        englishPath,
+        COMPARISON_LOCALES,
+      )) {
+        expect(html).toContain(
+          `<link rel="alternate" hreflang="${hreflang}" href="${href}"`,
+        )
+      }
+
+      const graph = jsonLdGraph(html)
+      expect(graph.map((node) => String(node['@type']))).toEqual([
+        'WebPage',
+        'BreadcrumbList',
+      ])
+      expect(html).not.toMatch(/aggregateRating/i)
+    })
+
+    test(`${pagePath} renders text only, with the install CTA and a captioned table`, () => {
+      const html = readBuilt(`${pagePath.slice(1)}index.html`)
+      const main = /<main[\s\S]*<\/main>/.exec(html)?.[0] ?? ''
+      expect(main).not.toContain('<img')
+      expect(main).toContain('data-install="final"')
+      expect(html).toContain('<table')
+      expect(html).toContain('<caption')
+      if (!slug) return
+      expect(html).toContain('rel="noopener nofollow"')
+      expect(html).toContain('href="https://chromewebstore.google.com/detail/')
+    })
+  }
+
+  test('lists every comparison page in the sitemap and no untranslated locale', () => {
+    const sitemap = readBuilt('sitemap.xml')
+    for (const { path: pagePath } of COMPARISON_PAGES) {
+      expect(sitemap).toContain(`<loc>${SITE_ORIGIN}${pagePath}</loc>`)
+    }
+    for (const locale of LOCALES) {
+      if (COMPARISON_LOCALES.includes(locale)) continue
+      expect(sitemap).not.toContain(
+        `${SITE_ORIGIN}${localePath(locale, '/alternatives/')}`,
+      )
+    }
+  })
 })
 
 test.describe('site stylesheet', () => {
