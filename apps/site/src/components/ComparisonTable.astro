@@ -1,0 +1,159 @@
+---
+import { cn } from '@workspace/ui/lib/utils'
+
+import {
+  type ComparisonSubject,
+  CRITERION_KEYS,
+  factCell,
+} from '../i18n/comparison-table'
+import { getComparisonContent } from '../i18n/comparisons'
+import type { Locale } from '../i18n/locales'
+import ComparisonCell from './ComparisonCell.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+  subjects: readonly ComparisonSubject[]
+  variant: 'matrix' | 'pair'
+  caption: string
+  id: string
+}
+
+const { locale, subjects, variant, caption, id } = Astro.props
+const { criteria, notListed } = getComparisonContent(locale).shared
+const cellClass =
+  'border-t border-border px-3.5 py-3 text-left align-top wrap-anywhere'
+const headClass =
+  'bg-muted px-3.5 py-3 text-left align-top text-xs font-medium tracking-eyebrow text-muted-foreground uppercase wrap-break-word'
+const captionClass =
+  'caption-bottom px-3.5 py-3 text-left text-sm text-muted-foreground'
+---
+
+{variant === 'pair' ? (
+  <div class="overflow-hidden rounded-xl bg-card ring-1 ring-card-border">
+    <table class="w-full border-collapse text-sm" data-comparison-table={id}>
+      <caption class={captionClass}>{caption}</caption>
+      <thead>
+        <tr>
+          <td class={headClass} />
+          {subjects.map((subject) => (
+            <th scope="col" class={headClass}>
+              {subject.shortName}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {CRITERION_KEYS.map((key) => (
+          <tr>
+            <th
+              scope="row"
+              class={cn(
+                cellClass,
+                'w-1/3 font-medium wrap-break-word hyphens-auto',
+              )}
+            >
+              {criteria[key]}
+            </th>
+            {subjects.map((subject) => (
+              <td class={cn(cellClass, subject.isSnug && 'bg-primary/8')}>
+                <ComparisonCell
+                  cell={factCell(key, subject.facts, locale)}
+                  locale={locale}
+                  notListed={notListed}
+                />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+) : (
+  <>
+    <div class="hidden overflow-x-auto rounded-xl bg-card ring-1 ring-card-border md:block">
+      <table
+        class="w-full border-collapse text-xs lg:text-sm"
+        data-comparison-table={id}
+      >
+        <caption class={captionClass}>{caption}</caption>
+        <thead>
+          <tr>
+            <td class={headClass} />
+            {CRITERION_KEYS.map((key) => (
+              <th scope="col" class={headClass}>
+                {criteria[key]}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {subjects.map((subject) => (
+            <tr class={cn(subject.isSnug && 'bg-primary/8')}>
+              <th
+                scope="row"
+                class={cn(cellClass, 'font-medium wrap-break-word')}
+              >
+                {subject.isSnug ? (
+                  <span translate="no">{subject.shortName}</span>
+                ) : (
+                  <TextLink
+                    href={subject.storeUrl}
+                    rel="noopener nofollow"
+                    class="min-h-0 text-left"
+                  >
+                    {subject.shortName}
+                  </TextLink>
+                )}
+              </th>
+              {CRITERION_KEYS.map((key) => (
+                <td class={cellClass}>
+                  <ComparisonCell
+                    cell={factCell(key, subject.facts, locale)}
+                    locale={locale}
+                    notListed={notListed}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <ul class="grid gap-3 md:hidden" data-comparison-cards={id}>
+      {subjects.map((subject) => (
+        <li>
+          <div
+            class={cn(
+              'rounded-xl p-4 ring-1',
+              subject.isSnug
+                ? 'bg-primary/8 ring-primary/50'
+                : 'bg-card ring-card-border',
+            )}
+          >
+            <h3 class="font-heading text-lg font-medium break-words">
+              {subject.shortName}
+            </h3>
+            <dl class="mt-3 grid gap-2 text-sm">
+              {CRITERION_KEYS.map((key) => (
+                <div class="flex gap-3">
+                  <dt class="w-36 shrink-0 text-muted-foreground">
+                    {criteria[key]}
+                  </dt>
+                  <dd class="min-w-0 wrap-anywhere">
+                    <ComparisonCell
+                      cell={factCell(key, subject.facts, locale)}
+                      locale={locale}
+                      notListed={notListed}
+                    />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-3 text-sm text-muted-foreground md:hidden">{caption}</p>
+  </>
+)}

@@ -12,6 +12,7 @@ type Listed<T> = T | 'not-listed'
  */
 export interface CompetitorFacts {
   name: string
+  shortName: string
   developer: Listed<string>
   storeUrl: string
   verifiedOn: string
@@ -49,6 +50,7 @@ const CWS_DETAIL_URL = 'https://chromewebstore.google.com/detail/'
 export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   'selective-bookmarks-export-tool': {
     name: 'Selective Bookmarks Export Tool',
+    shortName: 'Selective Bookmarks Export Tool',
     developer: 'no.web.developer',
     storeUrl: `${CWS_DETAIL_URL}dkbihgadoohejmlhpffffbmbhmkhjbfi`,
     verifiedOn: '2026-10-10',
@@ -69,6 +71,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   },
   'maple-backup': {
     name: 'Maple Backup — Bookmark Snapshots',
+    shortName: 'Maple Backup',
     developer: 'The Maple Project',
     storeUrl: `${CWS_DETAIL_URL}eocfcfklbhdgkilphhkcpcgaollminlf`,
     verifiedOn: '2026-10-10',
@@ -93,6 +96,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   },
   '101-export': {
     name: '101 Export History/Bookmarks to JSON/CSV*/XLS*',
+    shortName: '101 Export History/Bookmarks',
     developer: 'json-xls.com',
     storeUrl: `${CWS_DETAIL_URL}dcoegfodcnjofhjfbhegcgjgapeichlf`,
     verifiedOn: '2026-10-10',
@@ -114,6 +118,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   },
   'export-selective-bookmarks': {
     name: 'Export Selective Bookmarks',
+    shortName: 'Export Selective Bookmarks',
     developer: 'aninymous',
     storeUrl: `${CWS_DETAIL_URL}ahgbiciilcpclcekhegbhofljoolnfei`,
     verifiedOn: '2026-10-10',
@@ -134,6 +139,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   },
   'bookmarks-exporter': {
     name: 'Bookmarks Exporter',
+    shortName: 'Bookmarks Exporter',
     developer: 'oneryx',
     storeUrl: `${CWS_DETAIL_URL}kagpmnfgpdecdkbhongbgkgppnpimime`,
     verifiedOn: '2026-10-10',
@@ -154,6 +160,7 @@ export const COMPETITORS: Record<CompetitorSlug, CompetitorFacts> = {
   },
   'bookmark-folder-import-export': {
     name: 'Bookmark Folder Import & Export',
+    shortName: 'Bookmark Folder Import & Export',
     developer: 'not-listed',
     storeUrl: `${CWS_DETAIL_URL}hlekobkphkpjboojcnppegljiepgoaao`,
     verifiedOn: '2026-10-10',
@@ -208,6 +215,9 @@ export const SNUG_FACTS = {
   ],
   chooseFolders: true,
   schedule: true,
+  cloudCopies: 'none',
+  browsers: ['Chrome', 'Edge', 'Brave', 'Opera'],
+  dataDisclosure: 'none-declared',
 } as const
 
 /**

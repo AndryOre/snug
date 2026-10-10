@@ -1,0 +1,40 @@
+---
+import { cn } from '@workspace/ui/lib/utils'
+
+import TextLink from './TextLink.astro'
+
+interface Crumb {
+  name: string
+  href?: string
+}
+
+interface Props {
+  label: string
+  crumbs: readonly Crumb[]
+  class?: string
+}
+
+const { label, crumbs, class: className } = Astro.props
+---
+
+<nav aria-label={label} class={cn(className)}>
+  <ol class="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+    {crumbs.map((crumb, index) => (
+      <li class="flex items-center gap-x-2">
+        {index > 0 && <span aria-hidden="true">›</span>}
+        {crumb.href ? (
+          <TextLink
+            href={crumb.href}
+            class="min-w-0 text-muted-foreground wrap-anywhere"
+          >
+            {crumb.name}
+          </TextLink>
+        ) : (
+          <span aria-current="page" class="text-foreground wrap-anywhere">
+            {crumb.name}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,0 +1,15 @@
+---
+import ComparisonPage from '../../components/ComparisonPage.astro'
+import { COMPARISON_SLUGS } from '../../i18n/comparisons'
+
+export function getStaticPaths() {
+  return COMPARISON_SLUGS.map((slug) => ({ params: { slug } }))
+}
+
+const slug = COMPARISON_SLUGS.find(
+  (candidate) => candidate === Astro.params.slug,
+)
+if (!slug) throw new Error(`Unknown comparison "${Astro.params.slug}"`)
+---
+
+<ComparisonPage locale="en" slug={slug} />

@@ -1,0 +1,25 @@
+---
+import type { FactCell } from '../i18n/comparison-table'
+import { DEFAULT_LOCALE, languageTag, type Locale } from '../i18n/locales'
+
+interface Props {
+  cell: FactCell
+  locale: Locale
+  notListed: string
+}
+
+const { cell, locale, notListed } = Astro.props
+const isEnglishText =
+  cell.kind === 'text' && cell.isEnglish === true && locale !== DEFAULT_LOCALE
+---
+
+{cell.kind === 'not-listed' && (
+  <span class="text-muted-foreground italic">{notListed}</span>
+)}
+{cell.kind === 'yes' && <span translate="no">✓</span>}
+{cell.kind === 'none' && <span translate="no">—</span>}
+{cell.kind === 'text' && (
+  <span lang={isEnglishText ? languageTag(DEFAULT_LOCALE) : undefined}>
+    {cell.text}
+  </span>
+)}

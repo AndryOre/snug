@@ -6,18 +6,22 @@ import Section from './Section.astro'
 
 interface Props {
   locale: Locale
+  heading?: string
+  line?: string
+  button?: string
 }
 
-const { final } = getClosingCopy(Astro.props.locale)
+const { locale, heading, line, button } = Astro.props
+const { final } = getClosingCopy(locale)
 ---
 
 <Section
   section="final"
-  heading={final.heading}
-  lead={final.line}
+  heading={heading ?? final.heading}
+  lead={line ?? final.line}
   class="bg-final-cta-glow"
 >
   <div class="mt-8">
-    <InstallButton placement="final" label={final.button} />
+    <InstallButton placement="final" label={button ?? final.button} />
   </div>
 </Section>
