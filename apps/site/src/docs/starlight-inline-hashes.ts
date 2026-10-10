@@ -4,15 +4,13 @@ import { fileURLToPath } from 'node:url'
 
 const COMPONENTS_WITH_INLINE_SCRIPTS = [
   '@astrojs/starlight/components/SidebarPersister.astro',
-  '@astrojs/starlight/components/Search.astro',
 ] as const
 
 const INLINE_SCRIPT = /<script is:inline[^>]*>(?<body>[\s\S]*?)<\/script>/g
 
 /**
  * CSP hash sources (without quotes) for the inline scripts Starlight ships in
- * the components the Guide keeps: the sidebar state persister and the search
- * button. Astro does not hash them into the policy itself, and they are read
+ * the components the Guide keeps: the sidebar state persister. Astro does not hash them into the policy itself, and they are read
  * from the installed package so a Starlight upgrade cannot leave them stale.
  * @returns One `sha256-...` source per `is:inline` script, without duplicates.
  */

@@ -78,7 +78,7 @@ describe('nginx header template', () => {
 
   it('allows the Umami script and collect origins and nothing inline', () => {
     expect(template).toContain(
-      `script-src 'self' 'wasm-unsafe-eval' ${UMAMI_SCRIPT_ORIGIN} ${SCRIPT_HASHES_PLACEHOLDER};`,
+      `script-src 'self' ${UMAMI_SCRIPT_ORIGIN} ${SCRIPT_HASHES_PLACEHOLDER};`,
     )
     expect(template).toContain(`connect-src 'self' ${UMAMI_COLLECT_ORIGIN};`)
     expect(template).toContain("require-trusted-types-for 'script'")

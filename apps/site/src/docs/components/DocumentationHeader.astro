@@ -1,6 +1,4 @@
 ---
-import Search from '@astrojs/starlight/components/Search.astro'
-
 import Header from '../../components/Header.astro'
 import { DOCS_PATHS, DOCS_UI } from '../../i18n/docs-ui'
 import { localePath } from '../../i18n/locales'
@@ -33,7 +31,4 @@ const links = [
       </a>
     ))}
   </nav>
-  <div slot="search" class="ms-auto me-1 flex items-center">
-    <Search />
-  </div>
 </Header>

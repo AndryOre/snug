@@ -23,7 +23,7 @@ export default defineConfig({
   security: {
     csp: {
       scriptDirective: {
-        resources: ["'self'", "'wasm-unsafe-eval'", UMAMI_SCRIPT_ORIGIN],
+        resources: ["'self'", UMAMI_SCRIPT_ORIGIN],
         hashes: [THEME_INIT_HASH, ...collectStarlightInlineScriptHashes()],
       },
       directives: [`connect-src 'self' ${UMAMI_COLLECT_ORIGIN}`],
@@ -35,6 +35,7 @@ export default defineConfig({
     starlight({
       title: 'Snug',
       disable404Route: true,
+      pagefind: false,
       defaultLocale: 'root',
       locales: starlightLocales,
       customCss: ['./src/styles/docs.css'],

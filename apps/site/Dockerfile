@@ -13,6 +13,9 @@ RUN bun install --frozen-lockfile --filter @snug/site --ignore-scripts
 COPY packages/ui packages/ui
 COPY apps/site apps/site
 COPY PRIVACY_POLICY.md PRIVACY_POLICY.md
+COPY CHANGELOG.md CHANGELOG.md
+COPY docs/usage.md docs/usage.md
+COPY docs/guide docs/guide
 ARG LAST_MODIFIED_DATES=""
 RUN bun run --cwd apps/site build
 RUN bun run --cwd apps/site src/scripts/render-security-headers.ts dist docker/security-headers.conf dist-security-headers.conf
