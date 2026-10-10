@@ -1,5 +1,6 @@
 import { getContent, getPageMeta } from '../i18n/content'
 import { languageTag, localePath, LOCALES, SITE_ORIGIN } from '../i18n/locales'
+import { comparisonLlmsPages } from '../seo/comparison-pages'
 import { buildLlmsTxt } from '../seo/crawlers'
 import { documentationLlmsPages } from '../seo/documentation-pages'
 
@@ -14,6 +15,7 @@ export function GET() {
       getPageMeta('en').description,
       localePages,
       documentationLlmsPages(),
+      comparisonLlmsPages(),
     ),
     { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
   )

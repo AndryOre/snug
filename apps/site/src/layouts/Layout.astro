@@ -9,6 +9,7 @@ import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import { getContent, getPageMeta } from '../i18n/content'
 import {
+  DEFAULT_LOCALE,
   hreflangAlternates,
   LOCALE_CONFIG,
   languageTag,
@@ -18,12 +19,8 @@ import {
   type FontPreload,
   type Locale,
 } from '../i18n/locales'
-import {
-  ENGLISH_PRIVACY_PATH,
-  PRIVACY_PAGE_LOCALES,
-  privacyPath,
-} from '../i18n/privacy'
 import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
+import type { PageDescriptor } from '../seo/page-descriptor'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import { buildStructuredData } from '../seo/structured-data'
 import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
@@ -37,40 +34,37 @@ const FONT_PRELOAD_URLS: Record<FontPreload, string> = {
 interface Props {
   locale: Locale
   notFound?: boolean
-  privacy?: boolean
-  standalone?: { title: string; description: string; path: string }
+  page?: PageDescriptor
 }
 
-const { locale, notFound = false, privacy = false, standalone } = Astro.props
+const { locale, notFound = false, page } = Astro.props
 const content = getContent(locale)
-const meta =
-  standalone ?? (privacy ? content.privacy.meta : getPageMeta(locale))
-const alternates = standalone
-  ? []
-  : privacy
-    ? hreflangAlternates(ENGLISH_PRIVACY_PATH, PRIVACY_PAGE_LOCALES)
-    : hreflangAlternates()
-const pagePath =
-  standalone?.path ?? (privacy ? privacyPath(locale) : localePath(locale))
+const meta = page?.meta ?? getPageMeta(locale)
+const hasAlternates = page === undefined || page.alternateLocales.length > 0
+const pagePath = page ? page.path(locale) : localePath(locale)
 const canonical = `${SITE_ORIGIN}${pagePath}`
-const ogAlternates = standalone
-  ? []
-  : ogLocaleAlternates(locale, privacy ? PRIVACY_PAGE_LOCALES : undefined)
+const alternates = hasAlternates
+  ? hreflangAlternates(page?.path(DEFAULT_LOCALE), page?.alternateLocales)
+  : []
+const ogAlternates = hasAlternates
+  ? ogLocaleAlternates(locale, page?.alternateLocales)
+  : []
 const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
 const ogImageAlt = content.seo.ogImageAlt
 const featureTitles = Object.values(content.features.items).map(
   (item) => item.title,
 )
-const jsonLd =
-  standalone || privacy
-    ? null
-    : JSON.stringify(
-        buildStructuredData(locale, meta.description, featureTitles, {
-          title: meta.title,
-          videoId: PROMO_VIDEO_IDS[locale],
-          videoDescription: content.video.caption,
-        }),
-      ).replaceAll('<', String.raw`\u003c`)
+const structuredData = page
+  ? page.jsonLd
+  : buildStructuredData(locale, meta.description, featureTitles, {
+      title: meta.title,
+      videoId: PROMO_VIDEO_IDS[locale],
+      videoDescription: content.video.caption,
+    })
+const jsonLd = structuredData
+  ? JSON.stringify(structuredData).replaceAll('<', String.raw`\u003c`)
+  : null
+const switcherHref = page && hasAlternates ? page.path : undefined
 ---
 
 <html lang={languageTag(locale)} dir={LOCALE_CONFIG[locale].dir}>
@@ -152,14 +146,14 @@ const jsonLd =
   >
     <Header
       locale={locale}
-      markCurrent={!standalone}
-      pageHref={privacy ? privacyPath : undefined}
+      markCurrent={hasAlternates}
+      pageHref={switcherHref}
     />
     <slot />
     <Footer
       locale={locale}
-      markCurrent={!standalone}
-      pageHref={privacy ? privacyPath : undefined}
+      markCurrent={hasAlternates}
+      pageHref={switcherHref}
     />
   </body>
 </html>

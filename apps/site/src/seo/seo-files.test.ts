@@ -2,6 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import { loadCatalog } from '../docs/catalog'
 import { PUBLISHED_SOURCES, publishedRoute } from '../docs/published'
+import {
+  alternativesPath,
+  COMPARISON_PAGE_LOCALES,
+  COMPARISON_SLUGS,
+  getComparisonMeta,
+} from '../i18n/comparisons'
 import { getContent } from '../i18n/content'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
@@ -25,7 +31,10 @@ import {
 } from './crawlers'
 import { lastCommitDate } from './last-modified'
 import { STORE_FACTS } from './store-facts'
-import { buildStructuredData } from './structured-data'
+import {
+  buildComparisonStructuredData,
+  buildStructuredData,
+} from './structured-data'
 
 describe('buildRobotsTxt', () => {
   it('keeps search crawlers and training crawlers in separate groups', () => {
@@ -84,6 +93,36 @@ describe('buildLlmsTxt', () => {
     expect(body).toContain(
       `[Exporting](${SITE_ORIGIN}/es/guide/exporting/): es`,
     )
+  })
+})
+
+describe('buildLlmsTxt comparisons', () => {
+  const pages = [
+    { languageTag: 'en', title: 'Snug EN', url: `${SITE_ORIGIN}/` },
+  ]
+
+  it('lists each comparison page with its description under its own heading', () => {
+    const body = buildLlmsTxt(
+      'd',
+      pages,
+      [],
+      [
+        {
+          title: 'Snug vs Maple',
+          description: 'Compared on snapshots.',
+          url: `${SITE_ORIGIN}/alternatives/maple-backup/`,
+        },
+      ],
+    )
+
+    expect(body).toContain('## Comparisons')
+    expect(body).toContain(
+      `- [Snug vs Maple](${SITE_ORIGIN}/alternatives/maple-backup/): Compared on snapshots.`,
+    )
+  })
+
+  it('omits the section when there are no comparison pages', () => {
+    expect(buildLlmsTxt('d', pages)).not.toContain('## Comparisons')
   })
 })
 
@@ -266,6 +305,68 @@ describe('buildStructuredData', () => {
   })
 })
 
+describe('buildComparisonStructuredData', () => {
+  const page = {
+    title: 'Snug vs Maple Backup | Snug',
+    description: 'Compared.',
+    path: '/alternatives/maple-backup/',
+    breadcrumbs: [
+      { name: 'Snug', path: '/' },
+      { name: 'Alternatives', path: '/alternatives/' },
+      { name: 'Snug vs Maple Backup', path: '/alternatives/maple-backup/' },
+    ],
+  }
+  const data = buildComparisonStructuredData('en', page)
+  const [webPage, breadcrumb] = data['@graph']
+
+  it('emits a WebPage and a BreadcrumbList', () => {
+    expect(data['@context']).toBe('https://schema.org')
+    expect(data['@graph'].map((node) => node['@type'])).toEqual([
+      'WebPage',
+      'BreadcrumbList',
+    ])
+  })
+
+  it('points about at the shared SoftwareApplication id', () => {
+    expect(webPage).toMatchObject({
+      url: `${SITE_ORIGIN}/alternatives/maple-backup/`,
+      inLanguage: 'en',
+      about: { '@id': `${SITE_ORIGIN}/#software` },
+      isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+      breadcrumb: { '@id': breadcrumb?.['@id'] },
+    })
+  })
+
+  it('numbers breadcrumb items from one with absolute URLs', () => {
+    expect(breadcrumb).toMatchObject({
+      itemListElement: [
+        { position: 1, name: 'Snug', item: `${SITE_ORIGIN}/` },
+        {
+          position: 2,
+          name: 'Alternatives',
+          item: `${SITE_ORIGIN}/alternatives/`,
+        },
+        {
+          position: 3,
+          item: `${SITE_ORIGIN}/alternatives/maple-backup/`,
+        },
+      ],
+    })
+  })
+
+  it('never carries a rating, review or product', () => {
+    const serialized = JSON.stringify(data)
+
+    expect(serialized).not.toMatch(/AggregateRating|Review|Product/)
+  })
+
+  it('tags a translated locale with its BCP 47 tag', () => {
+    const translated = buildComparisonStructuredData('pt_BR', page)
+
+    expect(translated['@graph'][0]).toMatchObject({ inLanguage: 'pt-BR' })
+  })
+})
+
 describe('buildSitemapXml lastmod', () => {
   it('stamps every url that has a date', () => {
     const xml = buildSitemapXml([
@@ -311,6 +412,17 @@ describe('root file routes', () => {
     for (const entry of loadCatalog()) {
       expect(text).toContain(`[${entry.title}](`)
     }
+    expect(text).toContain('## Comparisons')
+    for (const slug of [undefined, ...COMPARISON_SLUGS]) {
+      const { title, description } = getComparisonMeta(
+        'en',
+        slug ?? 'alternatives',
+      )
+      expect(text).toContain(
+        `- [${title}](${SITE_ORIGIN}${alternativesPath('en', slug)}): ${description}`,
+      )
+    }
+    expect(text).not.toContain('{date}')
   })
 
   it('serves llms-full.txt as plain text', async () => {
@@ -326,6 +438,7 @@ describe('root file routes', () => {
     expect(xml.match(/<url>/g)).toHaveLength(
       LOCALES.length +
         PRIVACY_PAGE_LOCALES.length +
+        (COMPARISON_SLUGS.length + 1) * COMPARISON_PAGE_LOCALES.length +
         PUBLISHED_SOURCES.length * LOCALES.length,
     )
     for (const locale of LOCALES) {
@@ -352,6 +465,9 @@ describe('root file routes', () => {
     expect(xml.match(/<xhtml:link /g)).toHaveLength(
       LOCALES.length * hreflangAlternates().length +
         PRIVACY_PAGE_LOCALES.length * privacyAlternates.length +
+        (COMPARISON_SLUGS.length + 1) *
+          COMPARISON_PAGE_LOCALES.length *
+          (COMPARISON_PAGE_LOCALES.length + 1) +
         PUBLISHED_SOURCES.length *
           LOCALES.length *
           hreflangAlternates('/guide/').length,
@@ -371,6 +487,16 @@ describe('root file routes', () => {
     expect(xml).toContain(
       `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/guide/exporting/"/>`,
     )
+    for (const slug of [undefined, ...COMPARISON_SLUGS]) {
+      for (const locale of COMPARISON_PAGE_LOCALES) {
+        expect(xml).toContain(
+          `<loc>${SITE_ORIGIN}${alternativesPath(locale, slug)}</loc>\n    <lastmod>`,
+        )
+      }
+      expect(xml).toContain(
+        `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${alternativesPath('en', slug)}"/>`,
+      )
+    }
     const privacyBlock = xml.slice(xml.indexOf(`<loc>${SITE_ORIGIN}/privacy/`))
     expect(privacyBlock).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
   })
