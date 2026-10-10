@@ -68,6 +68,7 @@ export default defineConfig({
         Footer: './src/docs/components/DocumentationFooter.astro',
         Header: './src/docs/components/DocumentationHeader.astro',
         Pagination: './src/docs/components/DocumentationPagination.astro',
+        PageTitle: './src/docs/components/DocumentationPageTitle.astro',
         ThemeProvider: './src/docs/components/DocumentationThemeProvider.astro',
         ThemeSelect: './src/docs/components/DocumentationThemeSelect.astro',
       },

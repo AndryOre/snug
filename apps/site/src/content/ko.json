@@ -221,7 +221,10 @@
     "duplicates": "Duplicates",
     "settings": "Settings",
     "autoExport": "Auto-export",
-    "whatsNew": "What's new"
+    "whatsNew": "What's new",
+    "copyMarkdown": "Copy Markdown",
+    "copied": "Copied",
+    "copyFailed": "Could not copy"
   },
   "docsSearch": {
     "noResults": "{query}에 대한 결과가 없습니다.",

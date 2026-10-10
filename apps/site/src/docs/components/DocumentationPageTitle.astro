@@ -1,0 +1,27 @@
+---
+import CopyMarkdownButton from '../../components/CopyMarkdownButton'
+import { getContent } from '../../i18n/content'
+import { markdownTwinPath } from '../markdown-twin'
+import { resolveDocumentationLocale } from '../locale'
+
+const PAGE_TITLE_ID = '_top'
+const { entry, lang } = Astro.locals.starlightRoute
+const { copyMarkdown, copied, copyFailed } = getContent(
+  resolveDocumentationLocale(lang),
+).docs
+const twinHref = markdownTwinPath(Astro.url.pathname)
+---
+
+<div class="flex flex-wrap items-center justify-between gap-4">
+  <h1
+    id={PAGE_TITLE_ID}
+    class="text-3xl leading-tight font-semibold text-balance text-foreground"
+  >
+    {entry.data.title}
+  </h1>
+  <CopyMarkdownButton
+    client:idle
+    twinHref={twinHref}
+    copy={{ copyMarkdown, copied, copyFailed }}
+  />
+</div>
