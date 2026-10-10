@@ -1,0 +1,17 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro'
+---
+
+<Search />
+
+<script>
+  import {
+    installSearchTrustedTypesPolicy,
+    type TrustedTypesFactory,
+  } from '../search-trusted-types'
+
+  installSearchTrustedTypesPolicy(
+    (window as Window & { trustedTypes?: TrustedTypesFactory }).trustedTypes,
+    window.location.origin,
+  )
+</script>

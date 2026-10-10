@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
+import { buildSidebar } from './src/docs/sidebar'
 import { collectStarlightInlineScriptHashes } from './src/docs/starlight-inline-hashes'
 import { languageTag, LOCALE_NAMES, LOCALES } from './src/i18n/locales'
 import { hiddenUntilFound } from './src/scripts/hidden-until-found'
@@ -23,7 +24,7 @@ export default defineConfig({
   security: {
     csp: {
       scriptDirective: {
-        resources: ["'self'", UMAMI_SCRIPT_ORIGIN],
+        resources: ["'self'", UMAMI_SCRIPT_ORIGIN, "'wasm-unsafe-eval'"],
         hashes: [THEME_INIT_HASH, ...collectStarlightInlineScriptHashes()],
       },
       directives: [`connect-src 'self' ${UMAMI_COLLECT_ORIGIN}`],
@@ -35,7 +36,6 @@ export default defineConfig({
     starlight({
       title: 'Snug',
       disable404Route: true,
-      pagefind: false,
       defaultLocale: 'root',
       locales: starlightLocales,
       customCss: ['./src/styles/docs.css'],
@@ -47,7 +47,7 @@ export default defineConfig({
         useStarlightDarkModeSwitch: false,
         useStarlightUiThemeColors: false,
       },
-      sidebar: [{ label: 'Guide', slug: 'guide' }],
+      sidebar: buildSidebar(),
       lastUpdated: false,
       favicon: '/favicon.svg',
       head: [
@@ -61,6 +61,10 @@ export default defineConfig({
         },
       ],
       components: {
+        MobileMenuToggle:
+          './src/docs/components/DocumentationMobileMenuToggle.astro',
+        MobileMenuFooter:
+          './src/docs/components/DocumentationMobileMenuFooter.astro',
         Footer: './src/docs/components/DocumentationFooter.astro',
         Header: './src/docs/components/DocumentationHeader.astro',
         Pagination: './src/docs/components/DocumentationPagination.astro',

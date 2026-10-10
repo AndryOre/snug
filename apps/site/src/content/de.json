@@ -212,5 +212,19 @@
       "logs": "Der Webserver führt außerdem ein Zugriffsprotokoll mit Uhrzeit, aufgerufener Seite, Status, Referer und dem User-Agent deines Browsers. IP-Adressen werden in diesem Protokoll maskiert, und es wird offline ausgewertet."
     },
     "theme": "Deine Designauswahl wird nur in deinem Browser gespeichert."
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
+  },
+  "docsSearch": {
+    "noResults": "Keine Ergebnisse für {query}.",
+    "hint": "Versuche es mit einem anderen oder kürzeren Wort."
   }
 }

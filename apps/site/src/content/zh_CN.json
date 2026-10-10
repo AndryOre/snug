@@ -212,5 +212,19 @@
       "logs": "网络服务器还会保留一份访问日志，记录时间、请求的页面、状态、来源页（referer）和你浏览器的 user-agent。日志中的 IP 地址已被屏蔽，并且只在离线状态下查看。"
     },
     "theme": "你选择的主题只存储在你的浏览器中。"
+  },
+  "docs": {
+    "guide": "Guide",
+    "overview": "Overview",
+    "exporting": "Exporting",
+    "importing": "Importing",
+    "duplicates": "Duplicates",
+    "settings": "Settings",
+    "autoExport": "Auto-export",
+    "whatsNew": "What's new"
+  },
+  "docsSearch": {
+    "noResults": "没有找到与 {query} 相关的结果。",
+    "hint": "请尝试其他词语或更短的词语。"
   }
 }
