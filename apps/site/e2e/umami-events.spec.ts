@@ -11,6 +11,7 @@ const TRUST_TARGETS = [
 ]
 const FOOTER_TARGETS = [
   'footer-source',
+  'footer-alternatives',
   'footer-privacy',
   'footer-guide',
   'footer-changelog',
