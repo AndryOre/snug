@@ -14,11 +14,11 @@ accordingly.
 
 A Chrome (MV3) browser extension for exporting and importing bookmarks — whole
 tree or chosen folders, HTML/JSON/CSV output, preview-then-restore import (merge
-or replace, or into a new folder), scheduled automatic backups to the Downloads
-folder, cross-browser (any Chromium browser, not just Chrome). No backend, no
-account, no network call: every operation reads and writes the browser's own
-bookmarks tree, on-device. First of a planned family of small, focused
-developer/power-user tools released under the AndryOre endorsed brand.
+or replace, or into a new folder), scheduled automatic backups to Downloads or a
+folder you choose, cross-browser (any Chromium browser, not just Chrome). No
+backend, no account, no network call: every operation reads and writes the
+browser's own bookmarks tree, on-device. First of a planned family of small,
+focused developer/power-user tools released under the AndryOre endorsed brand.
 
 **Correction (2026-10-01):** earlier drafts of this brief undersold the actual
 feature set as "HTML/JSON output" only — the live product already ships CSV

@@ -1408,6 +1408,18 @@
   "changelog_2_1_0_1": {
     "message": "L'import a beaucoup évolué : choisissez ou déposez plusieurs fichiers à la fois, prévisualisez-les sous forme d'arborescence et décidez précisément ce qui est importé. La fenêtre de la barre d'outils accepte aussi les fichiers déposés."
   },
+  "changelog_2_2_0_1": {
+    "message": "L'export automatique peut désormais enregistrer dans un Dossier personnalisé de votre choix, n'importe où sur votre ordinateur."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Lire le guide de l'export automatique"
+  },
+  "changelog_2_2_0_2": {
+    "message": "Snug vous prévient désormais à l'avance lorsque l'accès au dossier est requis, et la page d'export automatique propose un bouton Autoriser l'accès pour l'accorder de nouveau."
+  },
+  "changelog_2_2_0_3": {
+    "message": "La Rétention ne garde que les exécutions les plus récentes, comptées sur l'ensemble des Téléchargements et du Dossier personnalisé."
+  },
   "reviewPrompt_title": {
     "message": "Snug vous convient-il ?",
     "description": "Popup Review prompt card title (also its accessible name)"

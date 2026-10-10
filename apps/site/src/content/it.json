@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Backup programmato",
-        "body": "L'esportazione automatica salva i tuoi segnalibri nella cartella Download con la pianificazione che imposti. La Conservazione tiene solo i file più recenti e puoi ricevere una notifica se un'esecuzione fallisce."
+        "body": "L'esportazione automatica salva i tuoi segnalibri nella cartella Download o in una cartella a tua scelta, con la pianificazione che imposti. La Conservazione tiene solo i file più recenti e puoi ricevere una notifica se un'esecuzione fallisce."
       },
       "works": {
         "title": "Funziona dove sei",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "È sicuro installare l'estensione di uno sviluppatore indipendente?",
         "answer": "Il codice sorgente è pubblico, CodeQL lo analizza, il progetto ha i badge OpenSSF Scorecard e Best Practices e la CI usa versioni bloccate. Giudica tu stesso su GitHub."
+      },
+      "folder": {
+        "question": "I backup possono andare in una cartella diversa da Download?",
+        "answer": "Sì. Nella pagina di esportazione automatica scegli una Cartella personalizzata. Dopo un riavvio, Chrome chiede una sola volta di confermare l'accesso; scegli “Consenti a ogni visita” così le esecuzioni non presidiate continuano a funzionare. Se manca l'accesso, Snug ti avvisa e l'esecuzione fallisce invece di salvare altrove."
       },
       "cost": {
         "question": "Snug costa qualcosa?",

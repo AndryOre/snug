@@ -36,7 +36,7 @@ const REMOVAL_TO = 152
 const CAMERA: CameraKeyframe[] = [
   { frame: 0, x: 760, y: 430, zoom: 0.68 },
   { frame: 22, x: 760, y: 330, zoom: 0.95 },
-  { frame: 112, x: 760, y: 360, zoom: 1 },
+  { frame: 112, x: 760, y: 380, zoom: 1 },
 ]
 
 const fitSize = (
@@ -151,95 +151,19 @@ const BackupRow = ({
   )
 }
 
-const DownloadsCard = ({ locale }: { locale: Locale }) => {
-  const frame = useCurrentFrame()
-  const fonts = fontStackFor(locale)
-  const removal = progressBetween(frame, REMOVAL_FROM, REMOVAL_TO, EASE.settle)
-  const keepLabel = message(locale, 'autoExportPage_keepLast')
-  const labelSize = useMemo(
-    () => fitSize(keepLabel, fonts.body, 500, 300, 24),
-    [keepLabel, fonts.body],
-  )
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        left: 690,
-        top: 0,
-        width: 442,
-        boxSizing: 'border-box',
-        padding: 24,
-        borderRadius: 18,
-        background: theme.ui.surface,
-        border: `1.5px solid ${theme.ui.border}`,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 20,
-      }}
-    >
-      <div
-        style={{
-          fontFamily: needsBodyFont(locale) ? fonts.body : fonts.mono,
-          fontSize: 28,
-          fontWeight: 600,
-          color: theme.colors.accent,
-        }}
-      >
-        {message(locale, 'autoExportPage_downloadsPrefix')}
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <div
-          style={{
-            flex: 1,
-            fontSize: labelSize,
-            fontWeight: 500,
-            color: theme.colors.secondary,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {keepLabel}
-        </div>
-        <div
-          style={{
-            width: 64,
-            height: 48,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 10,
-            background: theme.ui.surfaceMuted,
-            border: `1.5px solid ${theme.ui.borderStrong}`,
-            fontFamily: fonts.mono,
-            fontSize: 26,
-            fontWeight: 600,
-          }}
-        >
-          {VISIBLE_BACKUPS}
-        </div>
-      </div>
-      <div
-        style={{ position: 'relative', height: ROW_HEIGHT * VISIBLE_BACKUPS }}
-      >
-        {ARRIVALS.map((_, index) => (
-          <BackupRow
-            key={index}
-            index={index}
-            shift={removal}
-            locale={locale}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 const SCHEDULE_SEGMENT_WIDTH = 210
 const backupFileName = (index: number): string =>
   `snug-backup-${String(index + 1).padStart(4, '0')}.json`
 
+const DESTINATION_SEGMENT_WIDTH = 186
+const DESTINATION_FOLDER = 'Bookmarks backups'
+const DESTINATION_FROM = 30
+const DESTINATION_TO = 54
+
 const scheduleFontSize = (
   labels: readonly string[],
   family: string,
+  segmentWidth: number = SCHEDULE_SEGMENT_WIDTH,
 ): number => {
   const widest = Math.max(
     ...labels.map(
@@ -253,7 +177,7 @@ const scheduleFontSize = (
         }).width,
     ),
   )
-  const available = SCHEDULE_SEGMENT_WIDTH - 28
+  const available = segmentWidth - 28
   return widest > available ? Math.floor((20 * available) / widest) : 20
 }
 
@@ -298,6 +222,142 @@ const ScheduleColumn = ({ locale }: { locale: Locale }) => {
   )
 }
 
+const DestinationCard = ({ locale }: { locale: Locale }) => {
+  const frame = useCurrentFrame()
+  const fonts = fontStackFor(locale)
+  const removal = progressBetween(frame, REMOVAL_FROM, REMOVAL_TO, EASE.settle)
+  const destination = progressBetween(
+    frame,
+    DESTINATION_FROM,
+    DESTINATION_TO,
+    EASE.standard,
+  )
+  const keepLabel = message(locale, 'autoExportPage_keepLast')
+  const saveToLabel = message(locale, 'autoExportPage_saveTo')
+  const destinationLabels = [
+    message(locale, 'autoExportPage_destinationDownloads'),
+    message(locale, 'autoExportPage_destinationFolder'),
+  ]
+  const destinationLabelsKey = JSON.stringify(destinationLabels)
+  const destinationSize = useMemo(
+    () =>
+      scheduleFontSize(
+        JSON.parse(destinationLabelsKey) as string[],
+        fonts.body,
+        DESTINATION_SEGMENT_WIDTH,
+      ),
+    [destinationLabelsKey, fonts.body],
+  )
+  const labelSize = useMemo(
+    () => fitSize(keepLabel, fonts.body, 500, 300, 24),
+    [keepLabel, fonts.body],
+  )
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 690,
+        top: 0,
+        width: 442,
+        boxSizing: 'border-box',
+        padding: 24,
+        borderRadius: 18,
+        background: theme.ui.surface,
+        border: `1.5px solid ${theme.ui.border}`,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 14,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          gap: 16,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: fonts.body,
+            fontSize: 24,
+            fontWeight: 600,
+            color: theme.colors.secondary,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {saveToLabel}
+        </div>
+        <div
+          style={{
+            minWidth: 0,
+            fontFamily: needsBodyFont(locale) ? fonts.body : fonts.mono,
+            fontSize: 24,
+            fontWeight: 600,
+            color: theme.colors.accent,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {destination > 0.5
+            ? DESTINATION_FOLDER
+            : message(locale, 'autoExportPage_downloadsPrefix')}
+        </div>
+      </div>
+      <SegmentedControl
+        options={destinationLabels}
+        position={destination}
+        segmentWidth={DESTINATION_SEGMENT_WIDTH}
+        fontSize={destinationSize}
+      />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div
+          style={{
+            flex: 1,
+            fontSize: labelSize,
+            fontWeight: 500,
+            color: theme.colors.secondary,
+            whiteSpace: 'nowrap',
+            fontFamily: fonts.body,
+          }}
+        >
+          {keepLabel}
+        </div>
+        <div
+          style={{
+            width: 64,
+            height: 48,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 10,
+            background: theme.ui.surfaceMuted,
+            border: `1.5px solid ${theme.ui.borderStrong}`,
+            fontFamily: fonts.mono,
+            fontSize: 26,
+            fontWeight: 600,
+          }}
+        >
+          {VISIBLE_BACKUPS}
+        </div>
+      </div>
+      <div
+        style={{ position: 'relative', height: ROW_HEIGHT * VISIBLE_BACKUPS }}
+      >
+        {ARRIVALS.map((_, index) => (
+          <BackupRow
+            key={index}
+            index={index}
+            shift={removal}
+            locale={locale}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const Subtitle = ({ text, locale }: { text: string; locale: Locale }) => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -328,8 +388,9 @@ const Subtitle = ({ text, locale }: { text: string; locale: Locale }) => {
 }
 
 /**
- * Auto-export scene: the schedule sweeps hourly to weekly while backups pile
- * into Downloads and retention retires the oldest.
+ * Auto-export scene: the schedule sweeps hourly to weekly while the Save to
+ * choice slides from Downloads to a Custom folder, backups land in that folder
+ * and retention retires the oldest.
  */
 export const AutoExportScene = ({ locale }: SceneProps) => {
   const frame = useCurrentFrame()
@@ -384,7 +445,7 @@ export const AutoExportScene = ({ locale }: SceneProps) => {
         >
           <AppWindow locale={locale} active="autoExport">
             <ScheduleColumn locale={locale} />
-            <DownloadsCard locale={locale} />
+            <DestinationCard locale={locale} />
           </AppWindow>
         </Camera>
       </div>

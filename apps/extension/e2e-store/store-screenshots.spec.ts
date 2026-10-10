@@ -251,7 +251,10 @@ test('composes the five store screenshots', async ({
       path: 'bookmarks-backup/',
       formats: ['html', 'json', 'markdown'],
       keepLast: 10,
+      destination: 'folder',
+      folderName: 'Bookmarks backups',
     },
+    autoExportConfig$: { v: 4 },
     autoExportNextRun: Date.now() + 8 * hourInMilliseconds,
     autoExportLastRun: {
       at: Date.now() - 16 * hourInMilliseconds,
@@ -259,6 +262,29 @@ test('composes the five store screenshots', async ({
       trigger: 'scheduled',
     },
   })
+  const seedPage = await openExtensionPage('app.html#/auto-export')
+  await seedPage.evaluate(async () => {
+    const root = await navigator.storage.getDirectory()
+    const handle = await root.getDirectoryHandle('Bookmarks backups', {
+      create: true,
+    })
+    const database = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open('snug-custom-folder', 1)
+      request.onupgradeneeded = () => {
+        request.result.createObjectStore('handles')
+      }
+      request.onsuccess = () => resolve(request.result)
+      request.addEventListener('error', () => reject(request.error))
+    })
+    await new Promise<void>((resolve, reject) => {
+      const transaction = database.transaction('handles', 'readwrite')
+      transaction.objectStore('handles').put(handle, 'custom-folder')
+      transaction.oncomplete = () => resolve()
+      transaction.addEventListener('error', () => reject(transaction.error))
+    })
+    database.close()
+  })
+  await seedPage.close()
   const autoExportPage = await openExtensionPage('app.html#/auto-export')
   await expect(
     autoExportPage.getByRole('heading', {
@@ -270,6 +296,12 @@ test('composes the five store screenshots', async ({
     autoExportPage.getByText(message('autoExportPage_nextRun')),
   ).toBeVisible()
   await expect(autoExportPage.getByRole('switch').first()).toBeChecked()
+  await expect(
+    autoExportPage.getByText('Bookmarks backups', { exact: true }),
+  ).toBeVisible()
+  await expect(
+    autoExportPage.getByText(message('autoExportPage_folderAccessTitle')),
+  ).toHaveCount(0)
   const autoExportShot = await captureRaw(
     autoExportPage,
     'body',

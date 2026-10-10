@@ -31,7 +31,7 @@ Snug is a Chrome extension to export, import and back up bookmarks, all on your 
 
 Get it on the Chrome Web Store: https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn
 
-This channel posts product demos, release walkthroughs and short how-tos: exporting a folder as HTML, JSON or CSV, importing with a preview, and scheduling automatic backups to your Downloads folder.
+This channel posts product demos, release walkthroughs and short how-tos: exporting a folder as HTML, JSON or CSV, importing with a preview, and scheduling automatic backups to Downloads or a folder you choose.
 
 Everything runs locally. There is no account, no cloud and no server, and your bookmarks never leave your browser.
 
@@ -45,7 +45,7 @@ Snug es una extensión de Chrome para exportar, importar y respaldar marcadores,
 
 Instálala desde la Chrome Web Store: https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn
 
-Este canal publica demos del producto, recorridos por cada versión y tutoriales breves: exportar una carpeta como HTML, JSON o CSV, importar con vista previa y programar copias de seguridad automáticas en tu carpeta de Descargas.
+Este canal publica demos del producto, recorridos por cada versión y tutoriales breves: exportar una carpeta como HTML, JSON o CSV, importar con vista previa y programar copias de seguridad automáticas en Descargas o en una carpeta que elijas.
 
 Todo ocurre en local. No hay cuenta, ni nube, ni servidor, y tus marcadores nunca salen del navegador.
 
@@ -129,7 +129,7 @@ O Snug é uma extensão do Chrome para exportar, importar e fazer backup de favo
 
 Instale pela Chrome Web Store: https://chromewebstore.google.com/detail/gdhpeilfkeeajillmcncaelnppiakjhn
 
-Este canal publica demonstrações do produto, apresentações de cada versão e tutoriais curtos: exportar uma pasta em HTML, JSON ou CSV, importar com pré-visualização e agendar backups automáticos na sua pasta Downloads.
+Este canal publica demonstrações do produto, apresentações de cada versão e tutoriais curtos: exportar uma pasta em HTML, JSON ou CSV, importar com pré-visualização e agendar backups automáticos em Downloads ou em uma pasta que você escolher.
 
 Tudo acontece localmente. Sem conta, sem nuvem, sem servidor, e seus favoritos nunca saem do navegador.
 

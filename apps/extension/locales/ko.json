@@ -1379,6 +1379,18 @@
   "changelog_2_1_0_1": {
     "message": "가져오기가 크게 좋아졌어요. 여러 파일을 한 번에 선택하거나 끌어다 놓고, 트리로 미리 본 다음 가져올 항목을 정확히 고를 수 있어요. 도구 모음 팝업에서도 파일을 끌어다 놓을 수 있어요."
   },
+  "changelog_2_2_0_1": {
+    "message": "자동 내보내기가 이제 컴퓨터의 원하는 위치에 있는 사용자 지정 폴더에 저장할 수 있어요."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "자동 내보내기 가이드 읽기"
+  },
+  "changelog_2_2_0_2": {
+    "message": "폴더 접근 권한이 필요할 때 Snug가 미리 알려 주고, 자동 내보내기 페이지의 접근 허용 버튼으로 다시 허용할 수 있어요."
+  },
+  "changelog_2_2_0_3": {
+    "message": "보존 설정은 다운로드와 사용자 지정 폴더를 합산해 최신 실행분만 남겨요."
+  },
   "reviewPrompt_title": {
     "message": "Snug가 잘 작동하나요?",
     "description": "Popup Review prompt card title (also its accessible name)"

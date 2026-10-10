@@ -18,7 +18,7 @@ as you left them. Export your whole tree or just a folder, in six formats.
 Import back with a preview, then merge, replace, or drop everything into a new
 folder, and undo a replace if you change your mind. Find and remove duplicate
 bookmarks, and set a schedule once so Snug exports your bookmarks to your
-Downloads folder on its own.
+Downloads or a folder you choose on its own.
 
 Snug makes no network calls. Every operation reads and writes your browser's own
 bookmarks tree, locally — no account, no cloud, no server to trust. See the
@@ -44,8 +44,8 @@ bookmarks tree, locally — no account, no cloud, no server to trust. See the
 - Duplicates page to find bookmarks that share a URL and delete the extra
   copies, and Skip duplicates to leave them out of an import.
 - Scheduled Auto-export (hourly, every 12 hours, daily, every 3 days, or weekly
-  on a day you pick) to your Downloads folder, with Retention to keep only the
-  newest files and an optional notification if a run fails.
+  on a day you pick) to Downloads or a folder you choose, with Retention to keep
+  only the newest files and an optional notification if a run fails.
 - Progress and Cancel for long imports and exports.
 - Follows your browser's theme and language, in 10 languages.
 

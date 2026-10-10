@@ -26,16 +26,16 @@ claim.
 **Manifest permissions**, as declared in `wxt.config.ts`, and why each one is
 needed:
 
-| Permission         | Why it's needed                                                                                                                                                                                                           |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Core functionality: read the bookmark tree for export, and create/remove nodes in it for import.                                                                                                                          |
-| `favicon`          | Reads a bookmark's favicon through Chrome's internal `_favicon` API, which serves the browser's own cached icon for a page. This never makes a network request to the bookmarked site.                                    |
-| `storage`          | Persists settings (default import mode, auto-export config, last-run status) via `local:`-prefixed `storage.defineItem` keys — never `sync:`-scoped, so settings stay on-device.                                          |
-| `alarms`           | Schedules auto-export runs (a single one-shot `chrome.alarms` alarm, recomputed after each run) without needing the service worker to stay alive between them.                                                            |
-| `downloads`        | Saves auto-export files and the Safety snapshot file to the Downloads folder (`browser.downloads.download`), and lets Retention delete Snug's own old auto-export files (`downloads.removeFile`, `erase`).                |
-| `notifications`    | Shows the Failure notification when an Auto-export run fails. Nothing else is ever notified, and the user can turn it off.                                                                                                |
-| `unlimitedStorage` | Lifts the `storage.local` quota so the latest five Safety snapshots (copies of the bookmarks bar and other bookmarks, taken before every Restore-replace or on demand) fit even for very large libraries. On-device only. |
-| `offscreen`        | Creates a hidden, unlisted document so the service worker — which has no `document` or `Blob`/URL registry — can turn an in-memory export into a downloadable object URL during auto-export.                              |
+| Permission         | Why it's needed                                                                                                                                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Core functionality: read the bookmark tree for export, and create/remove nodes in it for import.                                                                                                                                               |
+| `favicon`          | Reads a bookmark's favicon through Chrome's internal `_favicon` API, which serves the browser's own cached icon for a page. This never makes a network request to the bookmarked site.                                                         |
+| `storage`          | Persists settings (default import mode, auto-export config, last-run status) via `local:`-prefixed `storage.defineItem` keys — never `sync:`-scoped, so settings stay on-device.                                                               |
+| `alarms`           | Schedules auto-export runs (a single one-shot `chrome.alarms` alarm, recomputed after each run) without needing the service worker to stay alive between them.                                                                                 |
+| `downloads`        | Saves auto-export files (when the destination is Downloads) and the Safety snapshot file to the Downloads folder (`browser.downloads.download`), and lets Retention delete Snug's own old auto-export files (`downloads.removeFile`, `erase`). |
+| `notifications`    | Shows the Failure notification when an Auto-export run fails. Nothing else is ever notified, and the user can turn it off.                                                                                                                     |
+| `unlimitedStorage` | Lifts the `storage.local` quota so the latest five Safety snapshots (copies of the bookmarks bar and other bookmarks, taken before every Restore-replace or on demand) fit even for very large libraries. On-device only.                      |
+| `offscreen`        | Creates a hidden, unlisted document so the service worker — which has no `document` or `Blob`/URL registry — can turn an in-memory export into a downloadable object URL during auto-export.                                                   |
 
 Manual exports from the popup and the Export page use an `<a download>` link and
 do not need `downloads`. No `host_permissions` are declared, and there is no
@@ -50,7 +50,9 @@ manifest permission: access is a per-folder grant the browser itself asks for.
 The handle is stored in the extension's own IndexedDB and never leaves the
 device. A run checks Folder access first and fails with a Failure reason when it
 is not `granted`; it never falls back to Downloads and never overwrites an
-existing file.
+existing file. Retention also deletes inside the chosen folder (`removeEntry`),
+but only files Snug itself created there, recorded by path, and only while that
+folder is still the current Custom folder.
 
 ## Threat model and trust boundaries
 
@@ -105,8 +107,9 @@ split. Both run the extension's own code exclusively.
   - Deleting duplicates on the Duplicates page removes only the copies marked
     Delete, after a confirmation. It is not undoable and takes no snapshot.
   - Retention deletes old auto-export files, but only downloads Snug itself
-    recorded and re-verified as its own (`byExtensionId`), only after a
-    successful run, and never when set to 0.
+    recorded and re-verified as its own (`byExtensionId`), and, in a Custom
+    folder, only files Snug recorded there and only in the current folder. It
+    runs only after a successful run, and never when set to 0.
 - **On-device storage only.** Settings use `local:`-scoped storage exclusively
   (see the `storage` permission above); nothing syncs to a Google account or any
   remote store.

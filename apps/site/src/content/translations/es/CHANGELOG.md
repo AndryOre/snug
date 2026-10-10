@@ -1,7 +1,19 @@
 ---
 title: Novedades
-sourceHash: 6cb093a38ee10dfc
+sourceHash: 8d640827463373eb
 ---
+
+## 2.2.0
+
+2026-10-10
+
+- Auto-exportar ahora puede guardar en una Carpeta personalizada que elijas, en
+  cualquier lugar de tu computadora.
+- Snug ahora te avisa con anticipación cuando se necesita acceso a la carpeta, y
+  la página de Auto-exportar tiene un botón Permitir acceso para concederlo de
+  nuevo.
+- Retención conserva solo las ejecuciones más recientes, contadas entre
+  Descargas y la Carpeta personalizada.
 
 ## 2.1.0
 

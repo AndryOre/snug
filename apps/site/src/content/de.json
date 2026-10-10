@@ -72,7 +72,7 @@
       },
       "backup": {
         "title": "Nach Zeitplan sichern",
-        "body": "Auto-Export speichert deine Lesezeichen nach einem Zeitplan, den du festlegst, im Download-Ordner. Aufbewahrung behält nur die neuesten Dateien, und bei einem fehlgeschlagenen Lauf kannst du dich benachrichtigen lassen."
+        "body": "Auto-Export speichert deine Lesezeichen nach einem Zeitplan, den du festlegst, im Download-Ordner oder in einem Ordner deiner Wahl. Aufbewahrung behält nur die neuesten Dateien, und bei einem fehlgeschlagenen Lauf kannst du dich benachrichtigen lassen."
       },
       "works": {
         "title": "Funktioniert, wo du bist",
@@ -151,6 +151,10 @@
       "safe": {
         "question": "Ist es sicher, die Erweiterung eines Einzelentwicklers zu installieren?",
         "answer": "Der Quellcode ist öffentlich, CodeQL scannt ihn, das Projekt hat OpenSSF-Scorecard- und Best-Practices-Badges, und die CI läuft mit festgelegten Versionen. Urteile selbst auf GitHub."
+      },
+      "folder": {
+        "question": "Können Backups in einem anderen Ordner als Downloads landen?",
+        "answer": "Ja. Wähle auf der Seite Auto-Export einen Eigenen Ordner. Nach einem Neustart bittet Chrome einmalig darum, den Zugriff zu bestätigen; wähle „Bei jedem Besuch zulassen“, damit unbeaufsichtigte Läufe weiterlaufen. Fehlt der Zugriff, warnt Snug dich, und der Lauf schlägt fehl, statt woanders zu speichern."
       },
       "cost": {
         "question": "Kostet Snug etwas?",

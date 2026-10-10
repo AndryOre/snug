@@ -283,12 +283,12 @@ browser-extension product, not a sales motion.
 
 ### Must-Use Terms
 
-| Term                             | Usage                                     | Instead Of                                                            | Example                                                           |
-| -------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| export / import                  | the core actions, always named exactly    | "transfer," "migrate" (vaguer)                                        | "Export the selected folder as HTML, JSON, or CSV."               |
-| local / on-device                | whenever stating the trust promise        | "private," "secure" (imply a security mechanism that isn't the point) | "Everything happens locally — nothing is uploaded."               |
-| folder                           | the unit of selective scope               | "collection," "set"                                                   | "Choose a folder to export."                                      |
-| backup (scheduled, to Downloads) | a real, shipped feature — name it plainly | "sync," "cloud backup" (imply a server)                               | "Scheduled backups land in your Downloads folder — nothing else." |
+| Term                                                    | Usage                                     | Instead Of                                                            | Example                                                                      |
+| ------------------------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| export / import                                         | the core actions, always named exactly    | "transfer," "migrate" (vaguer)                                        | "Export the selected folder as HTML, JSON, or CSV."                          |
+| local / on-device                                       | whenever stating the trust promise        | "private," "secure" (imply a security mechanism that isn't the point) | "Everything happens locally — nothing is uploaded."                          |
+| folder                                                  | the unit of selective scope               | "collection," "set"                                                   | "Choose a folder to export."                                                 |
+| backup (scheduled, to Downloads or a folder you choose) | a real, shipped feature — name it plainly | "sync," "cloud backup" (imply a server)                               | "Scheduled backups land in Downloads or a folder you choose — nothing else." |
 
 ### Preferred Terms
 
@@ -307,9 +307,10 @@ browser-extension product, not a sales motion.
 
 **Correction (2026-10-01):** "backup" was listed here in version 1 of this guide
 as a term to avoid, on the assumption it was a future-only feature. It isn't —
-the live product already ships **scheduled automatic backups to the Downloads
-folder** today. "Backup" is a real, must-use term when describing that feature;
-only "cloud backup" or "synced backup" (implying a server) stays banned.
+the live product already ships **scheduled automatic backups to Downloads or a
+folder you choose** today. "Backup" is a real, must-use term when describing
+that feature; only "cloud backup" or "synced backup" (implying a server) stays
+banned.
 
 ### Never-Use Terms
 
@@ -363,9 +364,9 @@ language; Spanish is **adapted for meaning and tone, not a literal mirror**
   as claims about the product (e.g. "sin cuenta ni nube" is fine — it's a
   _negation_, not a claim). **Correction (2026-10-01):** "respaldo" was wrongly
   banned here in version 1 — the product ships real scheduled backups, so
-  "respaldo" (singular, to Downloads) is a must-use term, same as "backup" in
-  English. Only "respaldo en la nube" or "respaldo sincronizado" (implying a
-  server) stays banned.
+  "respaldo" (singular, to Downloads or a chosen folder) is a must-use term,
+  same as "backup" in English. Only "respaldo en la nube" or "respaldo
+  sincronizado" (implying a server) stays banned.
 
 ---
 

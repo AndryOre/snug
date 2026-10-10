@@ -20,17 +20,18 @@ the `en/` set.
 
 ## Shot list (English captions)
 
-| Order | File                 | Headline                          | What it shows                                                                        |
-| ----- | -------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
-| 1     | `01-export.png`      | Export exactly what you choose    | Export page: folder tree with Development checked, six format chips, Export button   |
-| 2     | `02-import.png`      | Preview every import first        | Import preview of a bookmarks file with the three import modes                       |
-| 3     | `03-auto-export.png` | Scheduled backups, hands-free     | Auto-export on (daily, HTML, JSON and Markdown), with the last and next run          |
-| 4     | `04-popup.png`       | Export or import from the toolbar | The toolbar popup, centered, with the drop-to-import overlay over the Import section |
-| 5     | `05-local.png`       | Everything stays on your device   | No app UI: the store icon and four local-only claims                                 |
+| Order | File                 | Headline                          | What it shows                                                                                                |
+| ----- | -------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 1     | `01-export.png`      | Export exactly what you choose    | Export page: folder tree with Development checked, six format chips, Export button                           |
+| 2     | `02-import.png`      | Preview every import first        | Import preview of a bookmarks file with the three import modes                                               |
+| 3     | `03-auto-export.png` | Scheduled backups, hands-free     | Auto-export on (daily, HTML, JSON and Markdown) saving to a chosen Custom folder, with the last and next run |
+| 4     | `04-popup.png`       | Export or import from the toolbar | The toolbar popup, centered, with the drop-to-import overlay over the Import section                         |
+| 5     | `05-local.png`       | Everything stays on your device   | No app UI: the store icon and four local-only claims                                                         |
 
 Captions live in `e2e-store/captions.ts` (one entry per locale: five headlines,
 four subtitles, four slide-5 claims). Slide 1's subtitle names all six export
-formats and slide 3's names the hourly-to-weekly schedules. The copy follows
+formats and slide 3's names the hourly-to-weekly schedules and the Downloads or
+Custom folder destination. The copy follows
 [`docs/brand/voice.md`](../brand/voice.md). Every slide-5 claim is backed by
 [`PRIVACY_POLICY.md`](../../PRIVACY_POLICY.md) (no data collected, no external
 servers, no third-party analytics) and by the repository itself (MIT licensed,

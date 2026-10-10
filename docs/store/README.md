@@ -1,7 +1,7 @@
-# Chrome Web Store listing pack for Snug v2.1.0
+# Chrome Web Store listing pack for Snug v2.2.0
 
 A field-by-field mirror of the Chrome Web Store Developer Dashboard for Snug
-v2.1.0. Every field is a plain-text block you can copy straight into the
+v2.2.0. Every field is a plain-text block you can copy straight into the
 dashboard, with a character count next to each limited field. Nothing in this
 pack has been uploaded or submitted.
 
@@ -83,7 +83,7 @@ Export, import and back up your bookmarks in common formats, from Chrome or Safa
 ```
 
 Detailed description, from the English listing (copy.md section 1 holds the
-original short form; 1453 chars):
+original short form; 1468 chars):
 
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
@@ -92,7 +92,7 @@ Export your whole bookmark tree or just the folder you choose, in common formats
 
 Before any replace, Snug saves a safety snapshot of your bookmarks, so you can Undo it. The latest five are kept on your device. A Duplicates page finds repeated bookmarks and deletes only the ones you pick, and imports can skip duplicates.
 
-Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks straight to your Downloads folder on its own, in the formats you pick. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
+Set up a schedule once — hourly, daily, weekly, and more — and Snug backs up your bookmarks on its own, in the formats you pick, to your Downloads folder or a folder you choose. Retention keeps only the latest backups, and a notification tells you if one fails. Filenames can include the date and time automatically.
 
 Snug runs entirely on your device — no account, no cloud, no server. Every operation reads and writes your browser's own bookmarks tree, and that's the whole trust story. The bookmark tree works fully with the keyboard and screen readers, and Snug speaks 10 languages. Works on Chrome and any other Chromium-based browser (Edge, Opera, Brave) from the same listing.
 ```
@@ -120,7 +120,7 @@ Exporta, importa y respalda tus marcadores en formatos comunes, desde Chrome o S
 The locale file is the source of truth for the Spanish summary. The earlier
 134-character `copy.md` variant was over the limit and is retired.
 
-Detailed description (1650 chars):
+Detailed description (1687 chars):
 
 ```text
 Snug mueve tus marcadores entre navegadores, tal como los dejaste — no se envían a ningún lado, y no necesitas cuenta.
@@ -129,7 +129,7 @@ Exporta todo tu árbol de marcadores o solo la carpeta que elijas, en formatos c
 
 Antes de cualquier reemplazo, Snug guarda una copia de seguridad de tus marcadores para que puedas deshacerlo. Se conservan las últimas cinco en tu dispositivo. Una página de Duplicados encuentra marcadores repetidos y elimina solo los que elijas, y al importar puedes omitir duplicados.
 
-Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores directo a tu carpeta de Descargas, en los formatos que elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
+Configura un horario una sola vez — cada hora, a diario, cada semana y más — y Snug respalda tus marcadores por su cuenta, en los formatos que elijas, a tu carpeta de Descargas o a una carpeta que tú elijas. La Retención conserva solo los respaldos más recientes, y un aviso te dice si alguno falla. Los nombres de archivo pueden incluir la fecha y hora automáticamente.
 
 Snug funciona completamente en tu dispositivo — sin cuenta, sin nube, sin servidor. Cada operación lee y escribe directamente en los marcadores de tu navegador, y esa es toda la historia de confianza. El árbol de marcadores funciona por completo con el teclado y lectores de pantalla, y Snug habla 10 idiomas. Funciona en Chrome y en cualquier navegador basado en Chromium (Edge, Opera, Brave) desde el mismo listado.
 ```
@@ -224,10 +224,10 @@ localized slides from `assets/screenshots/<locale>/` on each locale's tab.
 
 ### Single purpose
 
-Single purpose description (409 chars, limit 1000):
+Single purpose description (438 chars, limit 1000):
 
 ```text
-Snug helps people keep their bookmarks portable and safe: export, import, back up and clean up. It exports bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL files, imports them from HTML, JSON, CSV, XBEL, Chrome profile and Safari files, undoes a replace with a safety snapshot, removes duplicates the user picks, and runs scheduled backups to the Downloads folder. Everything happens on the user's device.
+Snug helps people keep their bookmarks portable and safe: export, import, back up and clean up. It exports bookmarks to HTML, JSON, CSV, Markdown, OPML or XBEL files, imports them from HTML, JSON, CSV, XBEL, Chrome profile and Safari files, undoes a replace with a safety snapshot, removes duplicates the user picks, and runs scheduled backups to the Downloads folder or a folder the user chooses. Everything happens on the user's device.
 ```
 
 ### Permission justifications
@@ -262,10 +262,10 @@ resolves base64 data (`getFaviconBase64`); it is used by
 `components/export/bookmark-tree.tsx` and the three exporters in
 `lib/exporters/`.
 
-`storage` (506 chars):
+`storage` (641 chars):
 
 ```text
-Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, and the backup schedule with its last and next run times, and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import, or when the user asks for one in Settings, it also keeps the latest five safety snapshots of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
+Snug stores the user's own settings on their device: theme, export options, the filename template, the last export format, the backup schedule with its last and next run times, the handle of the backup folder the user chose (kept in IndexedDB on the device), and two timestamps for a one-time review prompt (when it became available and when it was dismissed). Before a "Restore — replace" import, or when the user asks for one in Settings, it also keeps the latest five safety snapshots of the bookmarks bar and other bookmarks, so the import can be undone. That is bookmark content, stored locally only. Nothing is synced or sent anywhere.
 ```
 
 Code: `lib/storage.ts` defines every setting with `storage.defineItem` under a
@@ -285,10 +285,10 @@ Code: `lib/safety-snapshot.ts` saves the snapshot with
 before every Restore-replace. See
 [ADR 0008](../adr/0008-safety-snapshot-in-extension-storage.md).
 
-`alarms` (267 chars):
+`alarms` (296 chars):
 
 ```text
-Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder. There is no alarm unless the user turns scheduled backups on.
+Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder or the folder the user chose. There is no alarm unless the user turns scheduled backups on.
 ```
 
 Code: `lib/auto-export.ts` creates and clears the `auto-export` alarm
@@ -296,10 +296,10 @@ Code: `lib/auto-export.ts` creates and clears the `auto-export` alarm
 `browser.alarms.onAlarm` and also re-syncs the alarm on install, startup and
 config changes.
 
-`downloads` (373 chars):
+`downloads` (475 chars):
 
 ```text
-Snug uses the downloads API to save scheduled backups and "Export now" runs to the user's Downloads folder, in a configurable subfolder. When the user turns on Retention, it also removes the oldest backup files that Snug itself saved, and nothing else, so only the latest ones remain. It only downloads files that Snug generated on the device from the user's own bookmarks.
+Snug uses the downloads API to save scheduled backups and "Export now" runs to the user's Downloads folder, in a configurable subfolder. When the user turns on Retention, it also removes the oldest backup files that Snug itself saved, and nothing else, so only the latest ones remain. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. It only downloads files that Snug generated on the device from the user's own bookmarks.
 ```
 
 Code: `lib/offscreen-download.ts` calls `browser.downloads.download` and watches

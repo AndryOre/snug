@@ -108,7 +108,7 @@ Description of functionality, target audience and use cases (997 chars, about
 ```text
 Snug moves your bookmarks between browsers, exactly as you left them — nothing sent anywhere, no account required.
 
-What it does: export your whole bookmark tree or one folder as HTML, JSON, CSV, Markdown, OPML or XBEL. Import HTML, JSON, CSV or XBEL files, a Chrome profile Bookmarks file or Safari bookmarks, with a preview first, then merge, replace or drop everything into a new folder. A safety snapshot lets you undo any replace, a Duplicates page deletes only the copies you pick, and scheduled backups save to your Downloads folder with retention and a failure notification.
+What it does: export your whole bookmark tree or one folder as HTML, JSON, CSV, Markdown, OPML or XBEL. Import HTML, JSON, CSV or XBEL files, a Chrome profile Bookmarks file or Safari bookmarks, with a preview first, then merge, replace or drop everything into a new folder. A safety snapshot lets you undo any replace, a Duplicates page deletes only the copies you pick, and scheduled backups save to your Downloads folder or a folder you choose, with retention and a failure notification.
 
 Who it is for: anyone switching browsers, anyone who wants a safety net before a cleanup, and anyone with a large bookmark library who wants regular local backups.
 

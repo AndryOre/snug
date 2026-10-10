@@ -30,7 +30,7 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: 'Scheduled backups, hands-free',
-      subtitle: 'Hourly to weekly, straight to your Downloads folder.',
+      subtitle: 'Hourly to weekly, to Downloads or a folder you choose.',
     },
     popup: {
       headline: 'Export or import from the toolbar',
@@ -58,7 +58,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: 'Copias programadas, sin esfuerzo',
-      subtitle: 'De cada hora a semanal, directo a tu carpeta de Descargas.',
+      subtitle:
+        'De cada hora a semanal, a Descargas o a una carpeta que elijas.',
     },
     popup: {
       headline: 'Exporta o importa desde la barra',
@@ -88,7 +89,7 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     autoExport: {
       headline: 'Sicherungen nach Zeitplan',
       subtitle:
-        'Von stündlich bis wöchentlich, direkt in deinen Download-Ordner.',
+        'Von stündlich bis wöchentlich, in Downloads oder einen Ordner deiner Wahl.',
     },
     popup: {
       headline: 'Export und Import per Symbolleiste',
@@ -119,7 +120,7 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     autoExport: {
       headline: 'Sauvegardes planifiées',
       subtitle:
-        'Chaque heure ou chaque semaine, directement dans Téléchargements.',
+        'Chaque heure ou chaque semaine, dans Téléchargements ou un dossier de votre choix.',
     },
     popup: {
       headline: 'Exporter ou importer depuis la barre',
@@ -148,7 +149,7 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     autoExport: {
       headline: 'Backup programmati',
       subtitle:
-        'Da ogni ora a ogni settimana, direttamente nella cartella Download.',
+        'Da ogni ora a ogni settimana, in Download o in una cartella a scelta.',
     },
     popup: {
       headline: 'Esporta o importa dalla barra',
@@ -176,7 +177,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: 'スケジュールで自動バックアップ',
-      subtitle: '毎時から毎週まで、ダウンロードフォルダへ直接保存します。',
+      subtitle:
+        '毎時から毎週まで、ダウンロードフォルダか選んだフォルダへ保存します。',
     },
     popup: {
       headline: 'ツールバーから書き出しも読み込みも',
@@ -203,7 +205,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: '일정에 따른 자동 백업',
-      subtitle: '매시간부터 매주까지, 다운로드 폴더에 바로 저장돼요.',
+      subtitle:
+        '매시간부터 매주까지, 다운로드 폴더나 직접 고른 폴더에 저장돼요.',
     },
     popup: {
       headline: '툴바에서 내보내기와 가져오기',
@@ -231,7 +234,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: 'Backups agendados e automáticos',
-      subtitle: 'De hora em hora a semanalmente, direto na pasta Downloads.',
+      subtitle:
+        'De hora em hora a semanalmente, em Downloads ou em uma pasta à sua escolha.',
     },
     popup: {
       headline: 'Exporte ou importe pela barra',
@@ -259,7 +263,8 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: 'Копии по расписанию',
-      subtitle: 'От ежечасных до еженедельных, сразу в папку «Загрузки».',
+      subtitle:
+        'От ежечасных до еженедельных, в «Загрузки» или в выбранную папку.',
     },
     popup: {
       headline: 'Экспорт и импорт с панели',
@@ -287,7 +292,7 @@ export const STORE_CAPTIONS: Record<string, StoreCaptions> = {
     },
     autoExport: {
       headline: '按计划自动备份',
-      subtitle: '从每小时到每周，直接保存到下载文件夹。',
+      subtitle: '从每小时到每周，保存到下载文件夹或你选择的文件夹。',
     },
     popup: {
       headline: '在工具栏中导出或导入',

@@ -1388,6 +1388,18 @@
   "changelog_2_1_0_1": {
     "message": "Der Import wurde deutlich verbessert: Wähle mehrere Dateien aus oder ziehe sie hinein, sieh sie dir vorab als Baum an und entscheide genau, was übernommen wird. Auch das Popup in der Symbolleiste nimmt abgelegte Dateien an."
   },
+  "changelog_2_2_0_1": {
+    "message": "Auto-Export kann jetzt in einen Eigenen Ordner speichern, den du frei auf deinem Computer auswählst."
+  },
+  "changelog_2_2_0_1_link": {
+    "message": "Auto-Export-Anleitung lesen"
+  },
+  "changelog_2_2_0_2": {
+    "message": "Snug warnt dich jetzt frühzeitig, wenn Ordnerzugriff erforderlich ist, und die Auto-Export-Seite hat eine Schaltfläche „Zugriff erlauben“, um ihn erneut zu gewähren."
+  },
+  "changelog_2_2_0_3": {
+    "message": "Aufbewahrung behält nur die neuesten Durchläufe, gezählt über Downloads und den Eigenen Ordner hinweg."
+  },
   "reviewPrompt_title": {
     "message": "Funktioniert Snug für dich?",
     "description": "Popup Review prompt card title (also its accessible name)"

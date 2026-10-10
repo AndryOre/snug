@@ -28,10 +28,11 @@ appareil. Une page Doublons repère les favoris en double et supprime uniquement
 ceux que vous choisissez, et l'import peut ignorer les doublons.
 
 Configurez un horaire une seule fois — toutes les heures, chaque jour, chaque
-semaine, et plus — et Snug sauvegarde vos favoris directement dans votre dossier
-Téléchargements, dans les formats de votre choix. La Rétention ne conserve que
-les sauvegardes les plus récentes, et une notification vous prévient en cas
-d'échec. Les noms de fichier peuvent inclure automatiquement la date et l'heure.
+semaine, et plus — et Snug sauvegarde vos favoris dans les formats de votre
+choix, dans votre dossier Téléchargements ou dans un dossier de votre choix. La
+Rétention ne conserve que les sauvegardes les plus récentes, et une notification
+vous prévient en cas d'échec. Les noms de fichier peuvent inclure
+automatiquement la date et l'heure.
 
 Snug fonctionne entièrement sur votre appareil — pas de compte, pas de cloud,
 pas de serveur. Chaque opération lit et écrit directement dans l'arborescence de
