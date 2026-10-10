@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 6, 2026
+englishLastUpdated: October 10, 2026
 ---
 
 # Datenschutzerklärung von Snug
 
-Zuletzt aktualisiert: 6. Oktober 2026
+Zuletzt aktualisiert: 10. Oktober 2026
 
 ## Einleitung
 
@@ -44,16 +44,24 @@ Daten an externe Server.
 
 - Du kannst optional den geplanten automatischen Export deiner Lesezeichen
   aktivieren. Ist er aktiviert, exportiert die Erweiterung deine Lesezeichen im
-  von dir festgelegten Intervall und schreibt die entstandenen Dateien über die
-  Download-Funktion des Browsers direkt in den Download-Ordner deines Geräts,
-  ohne einen Dialog zur Wahl des Speicherorts anzuzeigen.
+  von dir festgelegten Intervall und speichert die entstandenen Dateien, ohne
+  einen Dialog zur Wahl des Speicherorts anzuzeigen. Standardmäßig landen sie
+  über die Download-Funktion des Browsers direkt im Download-Ordner deines
+  Geräts. Wenn du einen benutzerdefinierten Ordner wählst, werden sie
+  stattdessen über die File System Access API des Browsers in einen Ordner
+  geschrieben, den du auf deinem Computer ausgewählt hast.
 - Das geschieht nur, wenn du den automatischen Export ausdrücklich aktivierst
   und einen Zeitplan festlegst; standardmäßig ist er deaktiviert.
 - Aufbewahrung: Nach jedem erfolgreichen automatischen Export löscht Snug seine
   eigenen ältesten exportierten Dateien, die über die von dir festgelegte Anzahl
   hinausgehen (standardmäßig 10; 0 behält alle). Es löscht nur Dateien, die es
-  selbst gespeichert hat, und berührt nie andere Dateien in deinem
-  Download-Ordner.
+  selbst gespeichert hat, im Download-Ordner oder in deinem benutzerdefinierten
+  Ordner, und berührt nie andere Dateien.
+- Benutzerdefinierter Ordner: Der Ordner, den du auswählst, wird auf deinem
+  Gerät gespeichert, damit automatische Exporte weiter dorthin schreiben können.
+  Der Browser kann dich bitten, den Zugriff erneut zu bestätigen. Dateien werden
+  nie an einen Server gesendet, und die Wahl eines Ordners erfordert keine
+  zusätzliche Berechtigung.
 - Benachrichtigungen: Schlägt ein automatischer Export fehl, zeigt Snug auf
   deinem Gerät eine Systembenachrichtigung mit dem Grund an. Du kannst sie auf
   der Seite Auto-Export deaktivieren. Erfolgreiche Exporte benachrichtigen nie,
@@ -63,16 +71,24 @@ Daten an externe Server.
 
 - Snug speichert keine Nutzerdaten, einschließlich Lesezeichen, auf externen
   Servern.
-- Dateien, die beim Export entstehen (manuell oder automatisch), werden über die
-  Download-Funktion deines Browsers direkt auf deinem lokalen Gerät gespeichert.
-  Manuelle Exporte verwenden einen Standard-Link `<a download>` und benötigen
-  die Berechtigung `downloads` nicht; automatische Exporte und die
-  Sicherheits-Snapshot-Datei verwenden die Berechtigung `downloads`.
+- Dateien, die beim Export entstehen (manuell oder automatisch), werden direkt
+  auf deinem lokalen Gerät gespeichert: in deinem Download-Ordner über die
+  Download-Funktion deines Browsers oder, bei automatischen Exporten, in dem
+  benutzerdefinierten Ordner, den du gewählt hast, über die File System Access
+  API des Browsers. Manuelle Exporte verwenden einen Standard-Link
+  `<a download>` und benötigen die Berechtigung `downloads` nicht; automatische
+  Exporte und die Sicherheits-Snapshot-Datei verwenden die Berechtigung
+  `downloads`.
 - Die Erweiterung speichert deine lokalen Einstellungen und Präferenzen, etwa
   das Design, Anzeigeoptionen, Exportoptionen, die Dateinamenvorlage und deine
   Einstellungen für den automatischen Export, im lokalen Speicher des Browsers
   (`storage.local`). Diese Daten bleiben auf deinem Gerät und werden
   nirgendwohin übertragen.
+- Wenn du für automatische Exporte einen benutzerdefinierten Ordner wählst,
+  speichert Snug den Verweis des Browsers auf diesen Ordner (ein Ordner-Handle,
+  nicht deine Lesezeichen oder den Inhalt des Ordners) im lokalen
+  Browser-Speicher der Erweiterung (IndexedDB). Er bleibt auf deinem Gerät und
+  wird nie an irgendeine Stelle übertragen.
 - Snug kann im Popup nach deinem ersten erfolgreichen Export einmalig eine Karte
   anzeigen, die du schließen kannst und die dich einlädt, die Erweiterung in dem
   Store zu bewerten, aus dem sie installiert wurde (Chrome Web Store oder

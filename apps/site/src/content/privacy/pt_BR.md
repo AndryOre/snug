@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 6, 2026
+englishLastUpdated: October 10, 2026
 ---
 
 # Política de Privacidade do Snug
 
-Última atualização: 6 de outubro de 2026
+Última atualização: 10 de outubro de 2026
 
 ## Introdução
 
@@ -43,15 +43,24 @@ envia nenhum dado a servidores externos.
 
 - Você pode ativar, se quiser, a exportação automática agendada dos seus
   favoritos. Quando ativada, a extensão exporta seus favoritos no intervalo que
-  você configurar e grava os arquivos resultantes diretamente na pasta Downloads
-  do seu dispositivo usando o recurso de download do navegador, sem exibir uma
-  caixa para escolher o local de salvamento.
+  você configurar e salva os arquivos resultantes sem exibir uma caixa para
+  escolher o local de salvamento. Por padrão, eles são gravados diretamente na
+  pasta Downloads do seu dispositivo usando o recurso de download do navegador.
+  Se você escolher uma pasta personalizada, eles são gravados, em vez disso, em
+  uma pasta que você selecionou no seu computador, por meio da File System
+  Access API do navegador.
 - Isso só acontece se você ativar explicitamente a exportação automática e
   configurar um agendamento; ela vem desativada por padrão.
 - Retenção: após cada exportação automática bem-sucedida, o Snug exclui os seus
   próprios arquivos exportados mais antigos que excedam o número que você
   definir (10 por padrão; 0 mantém tudo). Ele só remove arquivos que ele mesmo
-  salvou e nunca toca em outros arquivos da sua pasta Downloads.
+  salvou, na pasta Downloads ou na sua pasta personalizada, e nunca toca em
+  outros arquivos.
+- Pasta personalizada: a pasta que você escolhe fica guardada no seu dispositivo
+  para que as exportações automáticas possam continuar gravando nela. O
+  navegador pode pedir que você confirme o acesso novamente. Os arquivos nunca
+  são enviados a nenhum servidor, e escolher uma pasta não exige nenhuma
+  permissão adicional.
 - Notificações: se uma exportação automática falhar, o Snug mostra uma
   notificação do sistema no seu dispositivo com o motivo. Você pode desativá-la
   na página Exportação automática. Exportações bem-sucedidas nunca notificam, e
@@ -62,7 +71,9 @@ envia nenhum dado a servidores externos.
 - O Snug não armazena nenhum dado do usuário, incluindo favoritos, em servidores
   externos.
 - Todos os arquivos criados durante a exportação (manual ou automática) são
-  salvos diretamente no seu dispositivo local por meio do recurso de download do
+  salvos diretamente no seu dispositivo local: na pasta Downloads, por meio do
+  recurso de download do navegador, ou, nas exportações automáticas, na pasta
+  personalizada que você escolheu, por meio da File System Access API do
   navegador. As exportações manuais usam um link `<a download>` padrão e não
   precisam da permissão `downloads`; as exportações automáticas e o arquivo de
   instantâneo de segurança usam a permissão `downloads`.
@@ -71,6 +82,11 @@ envia nenhum dado a servidores externos.
   configuração da exportação automática — usando o armazenamento local do
   navegador (`storage.local`). Esses dados ficam no seu dispositivo e nunca são
   transmitidos para lugar nenhum.
+- Se você escolher uma pasta personalizada para as exportações automáticas, o
+  Snug mantém a referência do navegador a essa pasta (um identificador de pasta,
+  não seus favoritos nem o conteúdo da pasta) no armazenamento local do
+  navegador da extensão (IndexedDB). Ela fica no seu dispositivo e nunca é
+  transmitida para lugar nenhum.
 - O Snug pode mostrar no popup um cartão único e dispensável que convida você a
   avaliar a extensão na loja em que ela foi instalada (Chrome Web Store ou
   Microsoft Edge Add-ons) após a sua primeira exportação bem-sucedida. Para

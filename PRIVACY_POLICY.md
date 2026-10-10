@@ -1,6 +1,6 @@
 # Privacy Policy for Snug
 
-Last updated: October 6, 2026
+Last updated: October 10, 2026
 
 ## Introduction
 
@@ -38,15 +38,21 @@ data to external servers.
 
 - You can optionally enable scheduled automatic export of your bookmarks. When
   enabled, the extension exports your bookmarks on the interval you configure
-  and writes the resulting files directly to your device's Downloads folder
-  using the browser's download functionality, without showing a save-location
-  prompt.
+  and saves the resulting files without showing a save-location prompt. By
+  default they go directly to your device's Downloads folder using the browser's
+  download functionality. If you choose a Custom folder, they are written into a
+  folder you picked on your computer through the browser's File System Access
+  API instead.
 - This only happens if you explicitly enable automatic export and configure a
   schedule; it is disabled by default.
 - Retention: after each successful automatic export, Snug deletes its own oldest
   exported files beyond the number you set (10 by default; 0 keeps everything).
-  It only removes files it saved itself and never touches other files in your
-  Downloads folder.
+  It only removes files it saved itself, in the Downloads folder or in your
+  Custom folder, and never touches other files.
+- Custom folder: the folder you pick is remembered on your device so automatic
+  exports can keep writing to it. The browser may ask you to confirm access to
+  it again. Files are never sent to any server, and choosing a folder does not
+  require any additional permission.
 - Notifications: if an automatic export fails, Snug shows a system notification
   on your device with the reason. You can turn this off on the Auto-export page.
   Successful exports never notify, and no notification content leaves your
@@ -56,14 +62,19 @@ data to external servers.
 
 - Snug does not store any user data, including bookmarks, on external servers.
 - Any files created during export (manual or automatic) are saved directly to
-  your local device through your browser's download functionality. Manual
-  exports use a standard `<a download>` link and do not need the `downloads`
-  permission; automatic exports and the safety snapshot file use the `downloads`
-  permission.
+  your local device: to your Downloads folder through your browser's download
+  functionality, or, for automatic exports, to the Custom folder you chose
+  through the browser's File System Access API. Manual exports use a standard
+  `<a download>` link and do not need the `downloads` permission; automatic
+  exports and the safety snapshot file use the `downloads` permission.
 - The extension stores your local preferences and settings — such as theme,
   display options, export options, the filename template, and your automatic
   export configuration — using the browser's local storage (`storage.local`).
   This data stays on your device and is never transmitted anywhere.
+- If you choose a Custom folder for automatic exports, Snug keeps the browser's
+  reference to that folder (a folder handle, not your bookmarks or the folder's
+  contents) in the extension's local browser storage (IndexedDB). It stays on
+  your device and is never transmitted anywhere.
 - Snug may show a one-time, dismissible card in the popup inviting you to review
   the extension on the store it was installed from (Chrome Web Store or
   Microsoft Edge Add-ons) after your first successful export. To show it only
