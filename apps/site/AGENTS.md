@@ -45,6 +45,11 @@ tokens of its own. The code map is
 - Page copy lives in per-locale content files, never inline in components, and
   every locale carries the same keys. The source copy and voice are in
   [`docs/landing/content.md`](../../docs/landing/content.md).
+- The Guide (`/guide/`, Starlight) lives in `src/docs/` and is styled by
+  `src/styles/docs.css`, which maps every Starlight variable to the shared UI
+  tokens. Starlight's inline scripts reach the CSP through
+  `collectStarlightInlineScriptHashes`, `prefetch` stays off and Starlight's 404
+  route stays disabled, so the Guide adds no third-party request.
 - Never run `bun run build`. Verify with `bun run check` from the repo root.
 - E2E specs build their locale paths with `LOCALES.map` from `src/i18n/locales`,
   never a copied list. Build-output assertions live in

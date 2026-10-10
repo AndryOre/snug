@@ -1,0 +1,33 @@
+---
+const { dir, pagination } = Astro.locals.starlightRoute
+const { prev, next } = pagination
+---
+
+{(prev || next) && (
+  <nav class="grid gap-4 sm:grid-cols-2 print:hidden" dir={dir}>
+    {prev && (
+      <a
+        href={prev.href}
+        rel="prev"
+        class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 text-card-foreground outline-hidden hover:border-primary focus-visible:ring-3 focus-visible:ring-ring"
+      >
+        <span class="text-sm text-muted-foreground">
+          {Astro.locals.t('page.previousLink')}
+        </span>
+        <span class="font-medium">{prev.label}</span>
+      </a>
+    )}
+    {next && (
+      <a
+        href={next.href}
+        rel="next"
+        class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 text-card-foreground outline-hidden hover:border-primary focus-visible:ring-3 focus-visible:ring-ring sm:col-start-2 sm:text-end"
+      >
+        <span class="text-sm text-muted-foreground">
+          {Astro.locals.t('page.nextLink')}
+        </span>
+        <span class="font-medium">{next.label}</span>
+      </a>
+    )}
+  </nav>
+)}
