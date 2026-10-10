@@ -111,6 +111,10 @@ branch naming, and commit/PR conventions. Agent instructions live in
 
 [![Contributors](https://contrib.rocks/image?repo=AndryOre/snug)](https://github.com/AndryOre/snug/graphs/contributors)
 
+## Testing
+
+This project is tested with BrowserStack.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
