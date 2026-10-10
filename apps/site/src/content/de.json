@@ -213,22 +213,22 @@
     "theme": "Deine Designauswahl wird nur in deinem Browser gespeichert."
   },
   "docs": {
-    "guide": "Guide",
-    "overview": "Overview",
-    "exporting": "Exporting",
-    "importing": "Importing",
-    "duplicates": "Duplicates",
-    "settings": "Settings",
-    "autoExport": "Auto-export",
-    "whatsNew": "What's new",
+    "guide": "Anleitung",
+    "overview": "Überblick",
+    "exporting": "Exportieren",
+    "importing": "Importieren",
+    "duplicates": "Duplikate",
+    "settings": "Einstellungen",
+    "autoExport": "Auto-Export",
+    "whatsNew": "Neuigkeiten",
     "notice": {
-      "stale": "This translation is out of date, so the English text is shown.",
-      "missing": "This page is not translated yet, so the English text is shown.",
-      "readEnglish": "Read this page in English"
+      "stale": "Diese Übersetzung ist veraltet, deshalb wird der englische Text angezeigt.",
+      "missing": "Diese Seite ist noch nicht übersetzt, deshalb wird der englische Text angezeigt.",
+      "readEnglish": "Diese Seite auf Englisch lesen"
     },
-    "copyMarkdown": "Copy Markdown",
-    "copied": "Copied",
-    "copyFailed": "Could not copy"
+    "copyMarkdown": "Markdown kopieren",
+    "copied": "Kopiert",
+    "copyFailed": "Kopieren fehlgeschlagen"
   },
   "docsSearch": {
     "noResults": "Keine Ergebnisse für {query}.",
