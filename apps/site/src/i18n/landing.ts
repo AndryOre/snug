@@ -1,4 +1,5 @@
 import { STORE_FACTS } from '../seo/store-facts'
+import { alternativesPath } from './comparisons'
 import { getContent, type SiteContent } from './content'
 import { DOCS_PATHS } from './docs-ui'
 import { languageTag, type Locale, localePath } from './locales'
@@ -212,4 +213,5 @@ export const FOOTER_LINK_HREFS = {
   privacy: TRUST_LINK_HREFS.privacy,
   guide: (locale: Locale) => localePath(locale, DOCS_PATHS.guide),
   changelog: (locale: Locale) => localePath(locale, DOCS_PATHS.whatsNew),
+  alternatives: (locale: Locale) => alternativesPath(locale),
 } as const
