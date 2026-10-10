@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "alternatives": {
+      "title": "Alternative per esportare i segnalibri | Snug",
+      "description": "Confronta Snug con altre tre estensioni di Chrome per esportare e salvare i segnalibri: formati, importazione, pianificazione, lingue e dichiarazioni sui dati. Verificato il {date}."
+    },
+    "selective-bookmarks-export-tool": {
+      "title": "Snug o Selective Bookmarks Export Tool | Snug",
+      "description": "Snug e Selective Bookmarks Export Tool a confronto su formati di esportazione, importazione, pianificazione e dichiarazione sui dati, dalle schede dello store. Verificato il {date}."
+    },
+    "maple-backup": {
+      "title": "Snug o Maple Backup | Snug",
+      "description": "Snug e Maple Backup a confronto su istantanee, copie facoltative nell'archiviazione online, lingue e dichiarazione sui dati, dalle schede dello store. Verificato il {date}."
+    },
+    "101-export": {
+      "title": "Snug o 101 Export History/Bookmarks | Snug",
+      "description": "Snug e 101 Export History/Bookmarks a confronto su formati di esportazione, esportazione della cronologia e dichiarazione sui dati, dalle schede dello store. Verificato il {date}."
+    }
+  },
+  "shared": {
+    "breadcrumb": {
+      "label": "Briciole di pane",
+      "home": "Snug",
+      "alternatives": "Alternative"
+    },
+    "tldr": "In breve",
+    "atAGlance": "A colpo d'occhio",
+    "asOf": "Al {date}",
+    "notListed": "Non indicato",
+    "criteria": {
+      "exportFormats": "Formati di esportazione",
+      "import": "Importazione",
+      "chooseFolders": "Scelta delle cartelle da esportare",
+      "schedule": "Esportazione pianificata",
+      "cloudCopies": "Copie nell'archiviazione online",
+      "browsers": "Browser",
+      "languages": "Lingue",
+      "usersRating": "Utenti e valutazione",
+      "dataDisclosure": "Dichiarazione sui dati nella scheda dello store"
+    },
+    "compareWithSnug": "Confronta con Snug",
+    "pickSnug": "Scegli Snug se",
+    "pickOther": "Scegli {name} se",
+    "switching": "Passare a Snug",
+    "checkedNote": "Verificato sulla scheda di ciascuna estensione nel Chrome Web Store il {date}. Le schede cambiano: controlla la scheda prima di decidere.",
+    "ctaTitle": "Prova Snug sui tuoi segnalibri",
+    "ctaBody": "Gratis e open source. Nessun account, nessuna chiamata di rete.",
+    "install": "Aggiungi a Chrome"
+  },
+  "alternatives": {
+    "eyebrow": "Alternative",
+    "title": "Estensioni per esportare i segnalibri in Chrome, a confronto",
+    "lede": "Questa tabella affianca Snug ad altre tre estensioni che esportano o salvano i segnalibri di Chrome, usando solo ciò che dice la scheda di ciascuna nel Chrome Web Store il {date}. Dove una scheda non menziona qualcosa, la tabella riporta Non indicato.",
+    "whatToLookFor": {
+      "title": "Cosa guardare",
+      "items": [
+        "Formati di esportazione. Controlla che il tipo di file che ti serve sia nell'elenco e cosa l'estensione dichiara di non esportare.",
+        "Importazione. Un'esportazione serve solo se puoi rileggerla o aprirla con un altro strumento.",
+        "Scelta delle cartelle. Decidi se ti serve l'intero albero o solo alcune cartelle.",
+        "Pianificazione. Decidi se vuoi esportazioni automatiche o solo quando fai clic.",
+        "Dove vanno le copie. Alcune estensioni tengono tutto sul dispositivo, altre offrono copie facoltative nell'archiviazione online dopo l'accesso.",
+        "La dichiarazione sui dati. Ogni scheda ha una sezione in cui lo sviluppatore dichiara quali dati tratta. Leggila prima di installare."
+      ]
+    },
+    "builtIn": {
+      "name": "L'esportazione integrata di Chrome",
+      "summary": "Il gestore dei segnalibri di Chrome esporta tutti i tuoi segnalibri in un unico file HTML, senza installare nulla. Basta, se ti serve solo questo."
+    },
+    "cards": {
+      "selective-bookmarks-export-tool": {
+        "pickWhen": "Sceglilo se usi anche Firefox, o se HTML è l'unico formato che ti serve."
+      },
+      "maple-backup": {
+        "pickWhen": "Sceglilo se vuoi copie facoltative su Google Drive, OneDrive o Dropbox, o un'interfaccia in una delle {languages} lingue."
+      },
+      "101-export": {
+        "pickWhen": "Sceglilo se oltre ai segnalibri devi esportare la cronologia di navigazione."
+      }
+    }
+  },
+  "pages": {
+    "selective-bookmarks-export-tool": {
+      "eyebrow": "Confronto",
+      "title": "Snug o Selective Bookmarks Export Tool",
+      "tldr": "Selective Bookmarks Export Tool esporta in HTML i segnalibri scelti ed è disponibile anche per Firefox e Edge. Snug esporta in più formati oltre a HTML, importa con un'anteprima ed esegue l'esportazione automatica con una pianificazione. Al {date} la sua scheda riporta {users} utenti e una valutazione di {rating}, e non indica importazione né pianificazione.",
+      "whyLook": {
+        "title": "Perché si cerca un'alternativa",
+        "body": "La scheda descrive l'esportazione in HTML. Importazione e pianificazione non sono indicate al {date}. Chi ha bisogno di un altro formato di file, o di esportazioni che partono da sole, dovrà usare un altro strumento per queste parti."
+      },
+      "pickSnug": [
+        "Ti serve un formato diverso da HTML, come JSON.",
+        "Vuoi reimportare un file con un'anteprima e scegliere tra Unisci, Sostituisci o Nuova cartella.",
+        "Vuoi l'esportazione automatica con una pianificazione, nella cartella Download o in una cartella a tua scelta.",
+        "Vuoi una pagina Duplicati per trovare i segnalibri ripetuti.",
+        "Vuoi un'estensione che non effettua chiamate di rete e non richiede un account."
+      ],
+      "pickOther": [
+        "Usi anche Firefox, dove l'estensione è disponibile.",
+        "HTML è l'unico formato che ti serve.",
+        "Vuoi un filtro per parola chiave o la modalità scura nello strumento di esportazione stesso."
+      ],
+      "switching": {
+        "steps": [
+          "Installa Snug dal Chrome Web Store.",
+          "Apri Snug ed esporta nel formato che ti serve. Snug legge i segnalibri già presenti nel tuo browser, quindi non c'è nulla da convertire.",
+          "Se hai file HTML di esportazioni precedenti, scegli Importa e seleziona il file.",
+          "Controlla l'anteprima, poi scegli Unisci, Sostituisci o Nuova cartella. Una sostituzione si annulla dall'istantanea di sicurezza.",
+          "Attiva l'esportazione automatica se vuoi esportare con una pianificazione."
+        ]
+      }
+    },
+    "maple-backup": {
+      "eyebrow": "Confronto",
+      "title": "Snug o Maple Backup",
+      "tldr": "Maple Backup crea istantanee automatiche giornaliere o pianificate, salvate sul dispositivo, con copie facoltative su Google Drive, OneDrive o Dropbox dopo l'accesso. Snug esporta in file che conservi tu, importa con un'anteprima e non effettua chiamate di rete. Al {date} la sua scheda riporta {users} utenti e una valutazione di {rating}.",
+      "whyLook": {
+        "title": "Perché si cerca un'alternativa",
+        "body": "Al {date}, la scheda di Maple Backup dichiara che tratta informazioni personali identificabili, informazioni di autenticazione e contenuti dei siti web, e le sue copie facoltative richiedono un accesso. Chi vuole uno strumento senza account e senza chiamate di rete può guardare altrove."
+      },
+      "pickSnug": [
+        "Vuoi uno strumento senza account e senza chiamate di rete.",
+        "Vuoi file di esportazione in più formati, che altri browser e strumenti sanno aprire.",
+        "Vuoi importare con un'anteprima e scegliere tra Unisci, Sostituisci o Nuova cartella.",
+        "Vuoi un'estensione open source di cui puoi leggere il codice."
+      ],
+      "pickOther": [
+        "Vuoi copie facoltative su Google Drive, OneDrive o Dropbox.",
+        "Vuoi ripristinare da una qualsiasi istantanea salvata.",
+        "Vuoi un'interfaccia in una delle {languages} lingue.",
+        "Vuoi istantanee giornaliere automatiche senza impostare una destinazione."
+      ],
+      "switching": {
+        "steps": [
+          "Installa Snug dal Chrome Web Store.",
+          "Apri Snug ed esporta i tuoi segnalibri nel formato che ti serve. Snug legge i segnalibri già presenti nel tuo browser, quindi non c'è nulla da convertire.",
+          "Attiva l'esportazione automatica per ricevere file con una pianificazione, nella cartella Download o in una cartella a tua scelta.",
+          "Rimuovi Maple Backup dalla pagina delle estensioni quando non ti serve più."
+        ]
+      }
+    },
+    "101-export": {
+      "eyebrow": "Confronto",
+      "title": "Snug o 101 Export History/Bookmarks",
+      "tldr": "101 Export esporta cronologia e segnalibri di Chrome in JSON. Il suo stesso avviso dice che non esporta in CSV né in XLS. Snug esporta solo i segnalibri, in più formati, e importa anche. Al {date} la sua scheda riporta {users} utenti e una valutazione di {rating}.",
+      "whyLook": {
+        "title": "Perché si cerca un'alternativa",
+        "body": "Il titolo nello store cita CSV e XLS, e l'avviso dell'estensione dice che non esporta in nessuno dei due. Per convertire serve l'app desktop 101editor. Chrome limita la cronologia a {historyMonths} mesi. Al {date} la scheda è solo in inglese."
+      },
+      "pickSnug": [
+        "Ti servono i segnalibri in un formato diverso da JSON, senza un'app desktop.",
+        "Vuoi reimportare un file con un'anteprima e scegliere tra Unisci, Sostituisci o Nuova cartella.",
+        "Vuoi l'esportazione automatica con una pianificazione.",
+        "Vuoi l'interfaccia in una lingua diversa dall'inglese."
+      ],
+      "pickOther": [
+        "Oltre ai segnalibri devi esportare la cronologia di navigazione.",
+        "JSON è l'unico formato che ti serve.",
+        "Vuoi una sola estensione per cronologia e segnalibri."
+      ],
+      "switching": {
+        "steps": [
+          "Installa Snug dal Chrome Web Store.",
+          "Apri Snug ed esporta i tuoi segnalibri nel formato che ti serve. Snug legge i segnalibri già presenti nel tuo browser, quindi non c'è nulla da convertire.",
+          "Tieni installato 101 Export se ti serve ancora esportare la cronologia, perché Snug esporta solo i segnalibri.",
+          "Attiva l'esportazione automatica se vuoi esportare con una pianificazione."
+        ]
+      }
+    }
+  }
+}
