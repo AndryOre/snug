@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { translatedTitle } from './translated-guide'
 
-const GUIDE_PATHS = LOCALES.map((locale) => localePath(locale, '/guide/'))
-
-for (const guidePath of GUIDE_PATHS) {
+for (const locale of LOCALES) {
+  const guidePath = localePath(locale, '/guide/')
   test(`${guidePath} renders with the site header and footer`, async ({
     page,
   }) => {
@@ -12,7 +12,9 @@ for (const guidePath of GUIDE_PATHS) {
     expect(response?.status()).toBe(200)
     await expect(page.locator('[data-section="header"]')).toHaveCount(1)
     await expect(page.locator('[data-section="footer"]')).toHaveCount(1)
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Usage')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+      translatedTitle(locale, 'docs/usage.md') ?? 'Usage',
+    )
   })
 }
 
