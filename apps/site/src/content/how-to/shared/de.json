@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "Brotkrumennavigation",
+    "home": "Snug",
+    "howTo": "Anleitungen"
+  },
+  "eyebrow": "Anleitung",
+  "shortAnswer": "Kurze Antwort",
+  "asOf": "Stand {date}",
+  "verifiedOn": "Geprüft am {date}",
+  "notListed": "Nicht angegeben",
+  "menuNote": "Menünamen stehen so, wie sie in der englischen Oberfläche des Browsers lauten. In deinem Browser können sie übersetzt sein.",
+  "sourcesTitle": "Quellen",
+  "relatedGuideTitle": "Im Leitfaden",
+  "relatedHowToTitle": "Verwandte Anleitungen",
+  "groups": {
+    "move": "Lesezeichen übertragen",
+    "backup": "Sichern und wiederherstellen",
+    "formats": "Exportformate",
+    "duplicates": "Duplikate entfernen"
+  },
+  "ctaTitle": "Probiere Snug mit deinen eigenen Lesezeichen aus",
+  "ctaBody": "Kostenlos und Open Source. Kein Konto, keine Netzwerkaufrufe.",
+  "install": "Zu Chrome hinzufügen",
+  "placements": {
+    "importedFolderOrBar": "einem Ordner namens „Imported“, wenn du schon Lesezeichen hast, sonst direkt in der Lesezeichenleiste",
+    "favoritesBarFolder": "einem Ordner in der Favoritenleiste, der Imported heißen kann",
+    "sidebarDatedFolder": "einem Ordner in der Seitenleiste, dessen Name mit Imported beginnt und mit dem Datum endet"
+  }
+}

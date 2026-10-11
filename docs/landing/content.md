@@ -27,7 +27,7 @@ document is content only: it does not decide layout, visuals or components.
 
 Section order: 1 Hero, 2 Trust proof, 3 Features, 4 Real interface, 5 Video, 6
 Social proof, 7 FAQ, 8 Final call to action and footer, 9 Search metadata, 10
-Comparison pages.
+Comparison pages, 11 How-to pages.
 
 ---
 
@@ -1816,6 +1816,111 @@ Chrome Web Store listing, checked 2026-10-10.
 
 ---
 
+## 11. How-to pages
+
+Copy for the How-to pages (`/how-to/<slug>/`). Source:
+`apps/site/src/content/how-to/<slug>/<locale>.json` for each page and
+`apps/site/src/content/how-to/shared/<locale>.json` for the shared strings. This
+section holds the rules every How-to page follows and mirrors the English copy
+of the first page. Browser facts are never written in the copy.
+`{fromExportPath}`, `{fromExportFile}`, `{toImportPath}`, `{toImportPlacement}`,
+`{fromHtmlKeeps}`, `{fromHtmlDrops}`, `{fromName}`, `{toName}` and `{date}` are
+filled from `apps/site/src/content/browser-facts.ts`, where each fact has an
+official source URL, a verified date and the browser version checked. A fact the
+help pages do not state is written as "Not listed".
+
+### Rules
+
+- **Order:** the browser's built-in method comes first and carries the page.
+  Snug appears only after it, where Snug adds something: Preview, choosing
+  folders, an import mode, Skip duplicates, Safety snapshot.
+- **Direct answer first:** the first paragraph after the question answers it in
+  one to three sentences, with the verified date, so it can be quoted alone.
+- **H1:** a question in the reader's words ("How do I move my bookmarks from
+  Firefox to Chrome?"). It ends with a question mark.
+- **Meta title:** keyword first, at most 60 visual columns, ending with " |
+  Snug", never starting with "Snug". Names the task and both browsers.
+- **Meta description:** 140 to 160 characters for Latin scripts, names Chrome,
+  ends with the verified date through `{date}`. No "free", no "best".
+- **Product terms:** the labels in `apps/extension/locales/<locale>.json`
+  (Create folder, Restore — merge, Restore — replace, Skip duplicates, Preview,
+  Safety snapshot, Duplicates). Never "Merge" alone, which is not a label.
+- **Snug runs on Chromium only:** a migration page's destination is a Chromium
+  browser. Snug is never offered as a way to run inside Firefox or Safari.
+- **Never imply:** cloud, sync, an account, pricing, or a format or capability
+  Snug does not ship. Snug imports HTML, JSON, CSV, XBEL, a Chrome profile
+  `Bookmarks` file and a Safari export.
+- **Sources:** every browser claim links to the official help page. Third-party
+  tutorials are never a source. A missing fact stays "Not listed".
+- **Voice:** calm and precise, as in `docs/brand/voice.md`. Steps are numbered
+  and each does one thing. No exclamation points, no urgency.
+
+### EN: Move bookmarks from Firefox to Chrome
+
+- **Title:** Move Firefox Bookmarks to Chrome | Snug
+- **Description:** Export Firefox bookmarks to an HTML file and import it into
+  Chrome, step by step, with what to check afterwards. Menu paths verified
+  {date}.
+- **Headline:** How do I move my bookmarks from Firefox to Chrome?
+- **Direct answer:** Export your bookmarks from Firefox to an HTML file with
+  {fromExportPath}. Then import that file into Chrome with {toImportPath}.
+  Chrome puts them in {toImportPlacement}. Menu paths checked {date}.
+- **The built-in method:** Both browsers do this on their own. You need the HTML
+  file and nothing else.
+  1. In Firefox, open {fromExportPath}.
+  2. Save the file. Firefox names it {fromExportFile} by default.
+  3. In Chrome, open {toImportPath}.
+  4. Choose the HTML file you saved and confirm.
+- **What carries over:** The HTML file is the only thing that moves. Kept in the
+  file, per {fromName}: {fromHtmlKeeps}. Left out of the file, per {fromName}:
+  {fromHtmlDrops}. Where a help page does not say, this page says Not listed
+  instead of guessing.
+- **With Snug:** Snug runs in Chrome and other Chromium browsers, not in
+  Firefox. Export the HTML file from Firefox as above, then use Snug in Chrome
+  for the import. It adds a preview, a choice of what to bring in and a way
+  back.
+  1. Install Snug from the Chrome Web Store.
+  2. Open Snug's Import page and choose the HTML file there, or drop it on the
+     page. Do not use the popup for this: it imports at once, without a preview.
+  3. The Preview shows the detected format, the bookmark count and the folder
+     tree before anything changes.
+  4. Use the checkboxes to pick single bookmarks or whole folders. Snug imports
+     only what you select.
+  5. Choose an import mode. Create folder adds everything to a new Imported
+     Bookmarks folder. Restore — merge places bookmarks in their original
+     locations next to your existing ones, when the file carries them.
+  6. Leave Skip duplicates on. It leaves out any bookmark whose address is
+     already in Chrome, and tells you how many it skipped.
+  - Create folder and Restore — merge never clear your bookmarks. Before a
+    Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps
+    a copy in Settings, so you can undo the import.
+- **If something goes wrong:**
+  - You cannot find the bookmarks after importing. Chrome places them in
+    {toImportPlacement}.
+  - Chrome does not accept the file. Check that you chose the HTML file Firefox
+    saved, named {fromExportFile} by default, and not another file type.
+  - A bookmark appears twice. Open Duplicates in Snug: it groups copies by
+    address and removes only the copies you mark Delete.
+  - Snug says nothing was imported. Every bookmark in the file is already in
+    your browser. Turn off Skip duplicates to import them again.
+- **Verified note:** Menu paths and file names were read from the official help
+  pages of {fromName} and {toName} on {date}. Browser menus change between
+  versions, so check the source if a path differs on your screen.
+
+The other nine locales carry the same sections, claims and placeholders in
+`apps/site/src/content/how-to/move-bookmarks-from-firefox-to-chrome/`, using the
+product labels of each locale's extension file.
+
+Sources: Product: Positioning, Capabilities and Constraints;
+`docs/guide/importing.md`, `docs/guide/duplicates.md`; Firefox export help
+(`support.mozilla.org/kb/export-firefox-bookmarks-to-backup-or-transfer`) and
+Chrome bookmarks help (`support.google.com/chrome/answer/96816`), read
+2026-10-11. Firefox's page did not load for automated reads, so its menu path
+was taken from the search summary of the official page and should be
+re-confirmed in a browser before launch.
+
+---
+
 ## Claim sweep
 
 - No sync, cloud, account or pricing claim anywhere, checked against Product:
@@ -1828,3 +1933,8 @@ Chrome Web Store listing, checked 2026-10-10.
 - The eight added locales carry the same sections, claims and figures as the
   English source, with the real figures (5,000 users, 4.8 stars from 20 ratings)
   written in each locale's number format.
+- How-to pages: no menu path, file name or placement written in the copy, only
+  placeholders from `browser-facts.ts`. No cloud, sync, account or pricing
+  wording. Snug is never described as running in Firefox or Safari. Product
+  labels match the extension locale files. A browser fact with no official
+  source is "Not listed".

@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Lesezeichen von Firefox nach Chrome übertragen | Snug",
+    "description": "Exportiere deine Firefox-Lesezeichen als HTML und importiere sie in Chrome, mit allen Schritten und Kontrolle. Menüpfade geprüft am {date}."
+  },
+  "title": "Wie übertrage ich meine Lesezeichen von Firefox nach Chrome?",
+  "directAnswer": "Exportiere deine Lesezeichen in Firefox über {fromExportPath} als HTML-Datei. Importiere diese Datei danach in Chrome über {toImportPath}. Chrome legt sie in {toImportPlacement} ab. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Beide Browser erledigen das allein. Du brauchst nur die HTML-Datei.",
+    "steps": [
+      "Öffne in Firefox {fromExportPath}.",
+      "Speichere die Datei. Firefox nennt sie standardmäßig {fromExportFile}.",
+      "Öffne in Chrome {toImportPath}.",
+      "Wähle die gespeicherte HTML-Datei und bestätige."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was übernommen wird",
+    "intro": "Übertragen wird nur die HTML-Datei.",
+    "items": [
+      "In der Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "Nicht in der Datei, laut {fromName}: {fromHtmlDrops}.",
+      "Wo eine Hilfeseite nichts dazu sagt, steht hier Nicht angegeben statt einer Vermutung."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und anderen Chromium-Browsern, nicht in Firefox. Exportiere die HTML-Datei wie oben aus Firefox und nutze Snug in Chrome für den Import. Snug bietet eine Vorschau, die Auswahl dessen, was übernommen wird, und einen Weg zurück.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store.",
+      "Öffne in Snug die Seite Import und wähle dort die HTML-Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert.",
+      "Wähle mit den Kontrollkästchen einzelne Lesezeichen oder ganze Ordner. Snug importiert nur deine Auswahl.",
+      "Wähle einen Importmodus. Ordner erstellen legt alles in einen neuen Ordner namens Importierte Lesezeichen. Wiederherstellen – zusammenführen legt Lesezeichen an ihren ursprünglichen Orten neben den vorhandenen ab, sofern die Datei diese enthält.",
+      "Lass Duplikate überspringen aktiviert. Die Option lässt jedes Lesezeichen aus, dessen Adresse schon in Chrome ist, und zeigt, wie viele es übersprungen hat."
+    ],
+    "snapshot": "Ordner erstellen und Wiederherstellen – zusammenführen leeren deine Lesezeichen nie. Vor einem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in den Einstellungen, damit du den Import rückgängig machen kannst."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import nicht. Chrome legt sie in {toImportPlacement} ab.",
+      "Chrome akzeptiert die Datei nicht. Prüfe, ob du die von Firefox gespeicherte HTML-Datei gewählt hast, standardmäßig {fromExportFile}, und keinen anderen Dateityp.",
+      "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt.",
+      "Snug meldet, dass nichts importiert wurde. Alle Lesezeichen der Datei sind schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} und {toName} gelesen. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

@@ -12,6 +12,7 @@ import {
 import { comparisonSitemapEntries } from '../seo/comparison-pages'
 import { buildSitemapXml } from '../seo/crawlers'
 import { documentationSitemapEntries } from '../seo/documentation-pages'
+import { howToSitemapEntries } from '../seo/how-to-pages'
 import { lastCommitDate } from '../seo/last-modified'
 
 export function GET() {
@@ -39,6 +40,7 @@ export function GET() {
     ...homeEntries,
     ...privacyEntries,
     ...comparisonSitemapEntries(),
+    ...howToSitemapEntries(),
     ...documentationSitemapEntries(),
   ]
   return new Response(buildSitemapXml(entries), {

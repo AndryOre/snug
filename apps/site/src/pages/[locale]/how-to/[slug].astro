@@ -1,0 +1,26 @@
+---
+import HowToPage from '../../../components/HowToPage.astro'
+import { HOW_TO_SLUGS, howToPageLocales } from '../../../i18n/how-to'
+import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../../i18n/locales'
+
+export function getStaticPaths() {
+  return HOW_TO_SLUGS.flatMap((slug) =>
+    howToPageLocales(slug)
+      .filter((locale) => locale !== DEFAULT_LOCALE)
+      .map((locale) => ({
+        params: { locale: languageTag(locale).toLowerCase(), slug },
+      })),
+  )
+}
+
+const { locale: segment, slug: slugParameter } = Astro.params
+const locale = LOCALES.find(
+  (candidate) => languageTag(candidate).toLowerCase() === segment,
+)
+const slug = HOW_TO_SLUGS.find((candidate) => candidate === slugParameter)
+if (!locale || !slug) {
+  throw new Error(`Unknown How-to page "${segment}/${slugParameter}"`)
+}
+---
+
+<HowToPage locale={locale} slug={slug} />

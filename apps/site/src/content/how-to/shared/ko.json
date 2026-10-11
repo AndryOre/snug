@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "탐색 경로",
+    "home": "Snug",
+    "howTo": "사용 가이드"
+  },
+  "eyebrow": "사용 가이드",
+  "shortAnswer": "짧은 답",
+  "asOf": "{date} 기준",
+  "verifiedOn": "{date} 확인",
+  "notListed": "표시 없음",
+  "menuNote": "메뉴 이름은 브라우저의 영어 화면 기준이에요. 사용 중인 브라우저에서는 번역되어 있을 수 있어요.",
+  "sourcesTitle": "출처",
+  "relatedGuideTitle": "가이드에서 보기",
+  "relatedHowToTitle": "관련 사용 가이드",
+  "groups": {
+    "move": "북마크 옮기기",
+    "backup": "백업과 복원",
+    "formats": "내보내기 형식",
+    "duplicates": "중복 지우기"
+  },
+  "ctaTitle": "내 북마크로 Snug를 써 보세요",
+  "ctaBody": "무료 오픈 소스예요. 계정이 필요 없고 네트워크 호출도 하지 않아요.",
+  "install": "Chrome에 추가",
+  "placements": {
+    "importedFolderOrBar": "이미 북마크가 있으면 'Imported'라는 폴더, 없으면 북마크바 바로 아래",
+    "favoritesBarFolder": "즐겨찾기 모음의 폴더(이름이 Imported일 수 있어요)",
+    "sidebarDatedFolder": "이름이 Imported로 시작해 날짜로 끝나는 사이드바 폴더"
+  }
+}

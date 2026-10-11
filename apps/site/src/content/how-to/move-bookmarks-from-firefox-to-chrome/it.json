@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Spostare i segnalibri da Firefox a Chrome | Snug",
+    "description": "Esporta i segnalibri di Firefox in un file HTML e importalo in Chrome, passo dopo passo, con i controlli da fare dopo. Percorsi verificati il {date}."
+  },
+  "title": "Come sposto i miei segnalibri da Firefox a Chrome?",
+  "directAnswer": "Esporta i segnalibri da Firefox in un file HTML con {fromExportPath}. Poi importa quel file in Chrome con {toImportPath}. Chrome li mette in {toImportPlacement}. Percorsi dei menu verificati il {date}.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "Entrambi i browser lo fanno da soli. Ti serve solo il file HTML.",
+    "steps": [
+      "In Firefox, apri {fromExportPath}.",
+      "Salva il file. Firefox lo chiama {fromExportFile} per impostazione predefinita.",
+      "In Chrome, apri {toImportPath}.",
+      "Scegli il file HTML che hai salvato e conferma."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa viene mantenuto",
+    "intro": "Si sposta solo il file HTML.",
+    "items": [
+      "Incluso nel file, secondo {fromName}: {fromHtmlKeeps}.",
+      "Escluso dal file, secondo {fromName}: {fromHtmlDrops}.",
+      "Dove una pagina di aiuto non lo indica, questa pagina scrive Non indicato invece di tirare a indovinare."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome e negli altri browser Chromium, non in Firefox. Esporta il file HTML da Firefox come sopra, poi usa Snug in Chrome per importarlo. Aggiunge un'anteprima, la scelta di cosa portare e un modo per tornare indietro.",
+    "steps": [
+      "Installa Snug dal Chrome Web Store.",
+      "Apri la pagina Importa di Snug e scegli lì il file HTML, oppure trascinalo sulla pagina. Non usare il popup per questo: importa subito, senza anteprima.",
+      "L'Anteprima mostra il formato rilevato, il numero di segnalibri e l'albero delle cartelle, prima che cambi qualcosa.",
+      "Usa le caselle per scegliere singoli segnalibri o intere cartelle. Snug importa solo la tua selezione.",
+      "Scegli una modalità di importazione. Crea cartella aggiunge tutto a una nuova cartella Segnalibri importati. Ripristina — unisci inserisce i segnalibri nelle posizioni originali, insieme a quelli esistenti, quando il file le contiene.",
+      "Lascia attivo Salta i duplicati. Esclude ogni segnalibro il cui indirizzo è già in Chrome e ti dice quanti ne ha saltati."
+    ],
+    "snapshot": "Crea cartella e Ripristina — unisci non svuotano mai i tuoi segnalibri. Prima di un Ripristina — sostituisci, Snug salva un'istantanea di sicurezza nei Download e ne tiene una copia nelle Impostazioni, così puoi annullare l'importazione."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Non trovi i segnalibri dopo l'importazione. Chrome li mette in {toImportPlacement}.",
+      "Chrome non accetta il file. Controlla di aver scelto il file HTML salvato da Firefox, chiamato {fromExportFile} per impostazione predefinita, e non un altro tipo di file.",
+      "Un segnalibro compare due volte. Apri Duplicati in Snug: raggruppa le copie per indirizzo e rimuove solo quelle che contrassegni come Elimina.",
+      "Snug dice che non è stato importato nulla. Tutti i segnalibri del file sono già nel browser. Disattiva Salta i duplicati per importarli di nuovo."
+    ]
+  },
+  "verified": "I percorsi dei menu e i nomi dei file sono stati letti nelle pagine di aiuto ufficiali di {fromName} e {toName} il {date}. I menu dei browser cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo."
+}

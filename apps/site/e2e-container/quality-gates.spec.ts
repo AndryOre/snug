@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 import { COMPARISON_PATHS } from '../e2e/comparison-paths'
 import { hydratedFaq } from '../e2e/faq-helpers'
+import { HOW_TO_PATHS } from '../e2e/how-to-paths'
 import { blockUmami, UMAMI_ORIGINS } from '../e2e/umami-helpers'
 import { languageTag, localePath, LOCALES } from '../src/i18n/locales'
 import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from '../src/seo/umami'
@@ -150,7 +151,7 @@ for (const path of LOCALE_PATHS) {
   })
 }
 
-for (const path of ['/', '/privacy/', ...COMPARISON_PATHS]) {
+for (const path of ['/', '/privacy/', ...COMPARISON_PATHS, ...HOW_TO_PATHS]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
@@ -230,6 +231,7 @@ const CSP_PAGES = [
   ...LOCALE_PATHS.map((path) => ({ path, interactive: true })),
   { path: '/privacy/', interactive: false },
   ...COMPARISON_PATHS.map((path) => ({ path, interactive: false })),
+  ...HOW_TO_PATHS.map((path) => ({ path, interactive: false })),
   { path: '/nope/', interactive: false },
 ]
 

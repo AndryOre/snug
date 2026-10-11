@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "面包屑导航",
+    "home": "Snug",
+    "howTo": "操作指南"
+  },
+  "eyebrow": "操作指南",
+  "shortAnswer": "简短回答",
+  "asOf": "截至{date}",
+  "verifiedOn": "{date}核实",
+  "notListed": "未说明",
+  "menuNote": "菜单名称按浏览器的英文界面显示。你的浏览器中可能已被翻译。",
+  "sourcesTitle": "出处",
+  "relatedGuideTitle": "在使用指南中",
+  "relatedHowToTitle": "相关操作指南",
+  "groups": {
+    "move": "迁移书签",
+    "backup": "备份与恢复",
+    "formats": "导出格式",
+    "duplicates": "删除重复项"
+  },
+  "ctaTitle": "用你自己的书签试试 Snug",
+  "ctaBody": "免费开源。无需账号，不发起任何网络请求。",
+  "install": "添加到 Chrome",
+  "placements": {
+    "importedFolderOrBar": "名为“Imported”的文件夹（已有书签时），或直接放在书签栏（没有书签时）",
+    "favoritesBarFolder": "收藏夹栏中的文件夹，名称可能是 Imported",
+    "sidebarDatedFolder": "侧边栏中名称以 Imported 开头、以日期结尾的文件夹"
+  }
+}

@@ -1,0 +1,13 @@
+---
+import HowToPage from '../../components/HowToPage.astro'
+import { HOW_TO_SLUGS } from '../../i18n/how-to'
+
+export function getStaticPaths() {
+  return HOW_TO_SLUGS.map((slug) => ({ params: { slug } }))
+}
+
+const slug = HOW_TO_SLUGS.find((candidate) => candidate === Astro.params.slug)
+if (!slug) throw new Error(`Unknown How-to page "${Astro.params.slug}"`)
+---
+
+<HowToPage locale="en" slug={slug} />

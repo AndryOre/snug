@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Pasar marcadores de Firefox a Chrome | Snug",
+    "description": "Exporta tus marcadores de Firefox a HTML e impórtalos en Chrome, con los pasos y qué revisar después. Rutas verificadas el {date}."
+  },
+  "title": "¿Cómo paso mis marcadores de Firefox a Chrome?",
+  "directAnswer": "Exporta tus marcadores de Firefox a un archivo HTML con {fromExportPath}. Luego importa ese archivo en Chrome con {toImportPath}. Chrome los coloca en {toImportPlacement}. Rutas de menú verificadas el {date}.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "Ambos navegadores lo hacen por sí solos. Solo necesitas el archivo HTML.",
+    "steps": [
+      "En Firefox, abre {fromExportPath}.",
+      "Guarda el archivo. Firefox lo llama {fromExportFile} de forma predeterminada.",
+      "En Chrome, abre {toImportPath}.",
+      "Elige el archivo HTML que guardaste y confirma."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué se conserva",
+    "intro": "Lo único que se traslada es el archivo HTML.",
+    "items": [
+      "Incluido en el archivo, según {fromName}: {fromHtmlKeeps}.",
+      "Fuera del archivo, según {fromName}: {fromHtmlDrops}.",
+      "Cuando una página de ayuda no lo indica, esta página escribe No indicado en lugar de adivinar."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome y otros navegadores basados en Chromium, no en Firefox. Exporta el archivo HTML desde Firefox como arriba y usa Snug en Chrome para importarlo. Añade una vista previa, la opción de elegir qué traer y una forma de deshacer.",
+    "steps": [
+      "Instala Snug desde Chrome Web Store.",
+      "Abre la página Importar de Snug y elige allí el archivo HTML, o suéltalo en la página. No uses la ventana emergente para esto: importa de inmediato y sin vista previa.",
+      "La Vista previa muestra el formato detectado, el número de marcadores y el árbol de carpetas, antes de que cambie nada.",
+      "Usa las casillas para elegir marcadores sueltos o carpetas enteras. Snug importa solo lo que seleccionas.",
+      "Elige un modo de importación. Crear carpeta añade todo a una carpeta nueva llamada Marcadores importados. Restaurar — combinar coloca los marcadores en sus ubicaciones originales junto a los existentes, cuando el archivo las incluye.",
+      "Deja Omitir duplicados activado. Deja fuera cualquier marcador cuya dirección ya esté en Chrome e indica cuántos omitió."
+    ],
+    "snapshot": "Crear carpeta y Restaurar — combinar nunca vacían tus marcadores. Antes de Restaurar — reemplazar, Snug guarda una instantánea de seguridad en tus Descargas y conserva una copia en Ajustes, para que puedas deshacer la importación."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "No encuentras los marcadores después de importar. Chrome los coloca en {toImportPlacement}.",
+      "Chrome no acepta el archivo. Comprueba que elegiste el archivo HTML que guardó Firefox, llamado {fromExportFile} de forma predeterminada, y no otro tipo de archivo.",
+      "Un marcador aparece dos veces. Abre Duplicados en Snug: agrupa las copias por dirección y elimina solo las copias que marques como Eliminar.",
+      "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en tu navegador. Desactiva Omitir duplicados para importarlos de nuevo."
+    ]
+  },
+  "verified": "Las rutas de menú y los nombres de archivo se leyeron en las páginas de ayuda oficiales de {fromName} y {toName} el {date}. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+}

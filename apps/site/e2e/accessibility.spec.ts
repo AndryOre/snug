@@ -4,6 +4,7 @@ import { expect, type Page, test } from '@playwright/test'
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { COMPARISON_PATHS } from './comparison-paths'
 import { firstFaqTrigger } from './faq-helpers'
+import { HOW_TO_PATHS } from './how-to-paths'
 import { expectNoHorizontalOverflow } from './layout-helpers'
 
 const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
@@ -12,6 +13,7 @@ const PAGES = [
   ...LOCALES.map((locale) => localePath(locale)),
   '/privacy/',
   ...COMPARISON_PATHS,
+  ...HOW_TO_PATHS,
 ]
 
 const AXE_PAGES = [...PAGES, '/guide/']
@@ -43,7 +45,7 @@ test('/privacy/ has no accessibility violations at 320px', async ({ page }) => {
   await expectNoViolations(page)
 })
 
-for (const path of COMPARISON_PATHS) {
+for (const path of [...COMPARISON_PATHS, ...HOW_TO_PATHS]) {
   test(`${path} has no accessibility violations or horizontal scroll at 320px`, async ({
     page,
   }) => {

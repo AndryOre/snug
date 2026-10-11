@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "Trilha de navegação",
+    "home": "Snug",
+    "howTo": "Guias práticos"
+  },
+  "eyebrow": "Guia prático",
+  "shortAnswer": "Resposta curta",
+  "asOf": "Em {date}",
+  "verifiedOn": "Verificado em {date}",
+  "notListed": "Não informado",
+  "menuNote": "Os nomes de menu aparecem como na interface em inglês do navegador. No seu, podem estar traduzidos.",
+  "sourcesTitle": "Fontes",
+  "relatedGuideTitle": "No Guia",
+  "relatedHowToTitle": "Guias práticos relacionados",
+  "groups": {
+    "move": "Mover favoritos",
+    "backup": "Backup e restauração",
+    "formats": "Formatos de exportação",
+    "duplicates": "Remover duplicados"
+  },
+  "ctaTitle": "Experimente o Snug com seus próprios favoritos",
+  "ctaBody": "Grátis e de código aberto. Sem conta, sem chamadas de rede.",
+  "install": "Adicionar ao Chrome",
+  "placements": {
+    "importedFolderOrBar": "uma pasta chamada \"Imported\" se você já tem favoritos, ou direto na barra de favoritos se não tem",
+    "favoritesBarFolder": "uma pasta na barra de favoritos, que pode se chamar Imported",
+    "sidebarDatedFolder": "uma pasta da barra lateral cujo nome começa com Imported e termina com a data"
+  }
+}
