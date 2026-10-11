@@ -2,13 +2,26 @@
 import Footer from '../../components/Footer.astro'
 import TextLink from '../../components/TextLink.astro'
 import { DOCS_PATHS, DOCS_UI } from '../../i18n/docs-ui'
+import {
+  getHowToContent,
+  getHowToSharedContent,
+  howToPageLocales,
+  howToPath,
+  howToSlugsForGuideEntry,
+} from '../../i18n/how-to'
 import { DEFAULT_LOCALE, localePath } from '../../i18n/locales'
 import { resolveDocumentationLocale } from '../locale'
 import DocumentationPagination from './DocumentationPagination.astro'
 
-const { lang, dir, editUrl } = Astro.locals.starlightRoute
+const { lang, dir, editUrl, entry } = Astro.locals.starlightRoute
 const locale = resolveDocumentationLocale(lang)
 const hasEditLink = locale === DEFAULT_LOCALE && Boolean(editUrl)
+const relatedHowTos = howToSlugsForGuideEntry(entry.id).map((slug) => ({
+  href: howToPath(locale, slug),
+  title: getHowToContent(locale, slug).title,
+  lang: howToPageLocales(slug).includes(locale) ? undefined : DEFAULT_LOCALE,
+}))
+const relatedLabel = getHowToSharedContent(locale).relatedHowToTitle
 ---
 
 <div class="mt-12 flex flex-col gap-8" lang={lang} dir={dir}>
@@ -18,6 +31,29 @@ const hasEditLink = locale === DEFAULT_LOCALE && Boolean(editUrl)
     </TextLink>
   )}
   <DocumentationPagination />
+  {relatedHowTos.length > 0 && (
+    <section
+      data-section="related-how-to"
+      aria-labelledby="related-how-to-label"
+    >
+      <h2 id="related-how-to-label" class="font-heading text-xl font-bold">
+        {relatedLabel}
+      </h2>
+      <ul class="mt-2 flex flex-col">
+        {relatedHowTos.map((related) => (
+          <li>
+            <TextLink
+              href={related.href}
+              lang={related.lang}
+              class="wrap-anywhere py-2"
+            >
+              {related.title}
+            </TextLink>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </div>
 <div class="mt-12">
   <Footer

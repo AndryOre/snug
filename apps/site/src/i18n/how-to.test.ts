@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { HOW_TO_PAGES } from '../content/how-to-pages'
+import { HOW_TO_PAGES, type HowToPageDefinition } from '../content/how-to-pages'
 import { PUBLISHED_SOURCES } from '../docs/published'
 import { flattenKeys } from './content'
 import {
@@ -13,6 +13,7 @@ import {
   type HowToFiles,
   howToPageLocales,
   howToPath,
+  howToSlugsForGuideEntry,
   howToSources,
   howToValues,
   interpolateHowTo,
@@ -258,5 +259,42 @@ describe('paths and sources', () => {
       expect(urls.length).toBeGreaterThan(0)
       for (const url of urls) expect(url).toMatch(/^https:\/\//)
     }
+  })
+})
+
+describe('howToSlugsForGuideEntry', () => {
+  const pages: Record<string, HowToPageDefinition> = {
+    a: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide/importing'] },
+    b: {
+      ...HOW_TO_PAGES[SLUG]!,
+      relatedGuide: ['guide/importing', 'guide/duplicates'],
+    },
+    c: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide'] },
+  }
+
+  it('inverts the related Guide pages in registry order', () => {
+    expect(howToSlugsForGuideEntry('guide/importing', pages)).toEqual([
+      'a',
+      'b',
+    ])
+    expect(howToSlugsForGuideEntry('guide/duplicates', pages)).toEqual(['b'])
+  })
+
+  it('ignores the locale prefix of a translated entry', () => {
+    expect(howToSlugsForGuideEntry('pt-br/guide/importing', pages)).toEqual([
+      'a',
+      'b',
+    ])
+    expect(howToSlugsForGuideEntry('es/guide', pages)).toEqual(['c'])
+  })
+
+  it('returns nothing for a page without related How-to pages', () => {
+    expect(howToSlugsForGuideEntry('guide/settings', pages)).toEqual([])
+    expect(howToSlugsForGuideEntry('es/changelog', pages)).toEqual([])
+    expect(howToSlugsForGuideEntry('guide/exporting', pages)).toEqual([])
+  })
+
+  it('maps the bundled registry to the Firefox to Chrome page', () => {
+    expect(howToSlugsForGuideEntry('de/guide/importing')).toContain(SLUG)
   })
 })
