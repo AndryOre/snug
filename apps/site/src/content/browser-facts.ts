@@ -34,6 +34,7 @@ export interface BrowserFacts {
   verifiedOn: string
   versionChecked: Listed<string>
   exportPath: Listed<SourcedFact<readonly string[]>>
+  bookmarkManagerPath: Listed<SourcedFact<readonly string[]>>
   importPath: Listed<SourcedFact<readonly string[]>>
   importSources: Listed<SourcedFact<readonly string[]>>
   exportFormats: Listed<SourcedFact<readonly string[]>>
@@ -89,6 +90,10 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       ],
       sourceUrl: CHROME_BOOKMARKS_HELP,
     },
+    bookmarkManagerPath: {
+      value: ['More', 'Bookmarks and lists', 'Bookmark manager'],
+      sourceUrl: CHROME_BOOKMARKS_HELP,
+    },
     importPath: {
       value: ['More', 'Bookmarks and lists', 'Import bookmarks and settings'],
       sourceUrl: CHROME_BOOKMARKS_HELP,
@@ -135,6 +140,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
     verifiedOn: '2026-10-11',
     versionChecked: 'not-listed',
     exportPath: 'not-listed',
+    bookmarkManagerPath: 'not-listed',
     importPath: {
       value: [
         'Settings and more',
@@ -164,6 +170,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
     verifiedOn: '2026-10-11',
     versionChecked: 'not-listed',
     exportPath: 'not-listed',
+    bookmarkManagerPath: 'not-listed',
     importPath: {
       value: ['Main menu', 'Bookmarks', 'Import Bookmarks and Settings'],
       sourceUrl: BRAVE_IMPORT_HELP,
@@ -188,6 +195,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Bookmarks', 'import/export button', 'export'],
       sourceUrl: OPERA_FEATURES_HELP,
     },
+    bookmarkManagerPath: 'not-listed',
     importPath: {
       value: ['Bookmarks', 'import/export button', 'import'],
       sourceUrl: OPERA_FEATURES_HELP,
@@ -214,6 +222,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       ],
       sourceUrl: FIREFOX_EXPORT_HELP,
     },
+    bookmarkManagerPath: 'not-listed',
     importPath: 'not-listed',
     importSources: 'not-listed',
     exportFormats: 'not-listed',
@@ -232,6 +241,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['File', 'Export Bookmarks'],
       sourceUrl: SAFARI_BOOKMARKS_HELP,
     },
+    bookmarkManagerPath: 'not-listed',
     importPath: {
       value: ['File', 'Import From', 'Bookmarks HTML File'],
       sourceUrl: SAFARI_BOOKMARKS_HELP,
@@ -272,6 +282,7 @@ export function sourcedFacts(
 ): { label: string; fact: SourcedFact<unknown> }[] {
   const entries: [string, Listed<SourcedFact<unknown>>][] = [
     ['exportPath', facts.exportPath],
+    ['bookmarkManagerPath', facts.bookmarkManagerPath],
     ['importPath', facts.importPath],
     ['importSources', facts.importSources],
     ['exportFormats', facts.exportFormats],

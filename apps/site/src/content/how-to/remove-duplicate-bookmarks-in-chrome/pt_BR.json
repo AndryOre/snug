@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Remover favoritos duplicados no Chrome | Snug",
+    "description": "A ajuda do Chrome não lista um localizador de duplicados. Exclua cópias à mão no Gerenciador de favoritos ou deixe o Snug agrupá-las. {date}."
+  },
+  "title": "Como removo favoritos duplicados no Chrome?",
+  "directAnswer": "As páginas de ajuda do Chrome não listam um localizador de duplicados, então você exclui as cópias à mão no Gerenciador de favoritos, aberto com {toBookmarkManagerPath}. A página Duplicados do Snug faz a busca por você: agrupa os favoritos que compartilham um endereço e exclui as cópias que você marcar. Verificado em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "O Chrome remove favoritos um de cada vez. Nada nele compara dois favoritos por você, então a comparação é sua.",
+    "steps": [
+      "No Chrome, abra {toBookmarkManagerPath}.",
+      "Percorra suas pastas e procure o mesmo site salvo mais de uma vez.",
+      "Exclua as cópias que você não quer.",
+      "Repita em cada pasta, incluindo a barra de favoritos e Outros favoritos."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que conta como duplicado",
+    "intro": "O Snug trata dois favoritos como duplicados quando os endereços coincidem depois de normalizados. O título e a pasta não importam.",
+    "items": [
+      "O esquema e o host são convertidos para minúsculas, e http e https contam como o mesmo endereço.",
+      "Um www. inicial, uma barra final e um #fragmento simples são ignorados.",
+      "A string de consulta é mantida, então dois endereços com consultas diferentes são dois favoritos.",
+      "Um fragmento de rota como #/ ou #! é mantido, assim como qualquer fragmento em um caminho no estilo de pasta sem consulta.",
+      "Pastas nunca são duplicadas, mesmo quando duas têm o mesmo nome."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome e em outros navegadores baseados em Chromium. A página Duplicados encontra cada grupo de cópias, e Ignorar duplicados evita que novas cheguem na importação.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store.",
+      "Abra Duplicados. Cada grupo mostra suas cópias, da mais antiga para a mais recente.",
+      "Por padrão, o Snug mantém a cópia mais antiga e marca o resto como Excluir. Escolha Manter em outra cópia para mudar qual fica.",
+      "Clique no botão de excluir e confirme. Apenas as cópias marcadas como Excluir são removidas.",
+      "Escolha Verificar novamente para atualizar a lista. Quando nada coincide, a página informa que não há duplicados.",
+      "Ao importar um arquivo, deixe Ignorar duplicados ativado. Ele deixa de fora qualquer favorito cujo endereço já esteja no Chrome, ou antes no mesmo arquivo, e informa quantos ignorou. Vale para Criar pasta e Restaurar — mesclar, não para Restaurar — substituir."
+    ],
+    "snapshot": "Excluir na página Duplicados não cria um instantâneo de segurança e não tem Desfazer, então a exclusão não pode ser revertida. O instantâneo de segurança e o Desfazer importação pertencem a Restaurar — substituir. Se quiser uma cópia para voltar, exporte seus favoritos antes com {fromExportPath}."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Dois favoritos do mesmo site não aparecem agrupados. Os endereços diferem depois de normalizados, por exemplo no caminho ou na string de consulta. O Snug os deixa como estão de propósito.",
+      "A cópia errada está marcada como Excluir. Escolha Manter na cópia que você quer antes de confirmar.",
+      "Uma cópia nunca é marcada como Excluir. Favoritos gerenciados pela sua organização não podem ser removidos, então o Snug nunca os marca.",
+      "Você excluiu um favorito de que precisava. Importe com {toImportPath} o arquivo HTML exportado antes, com Ignorar duplicados ativado, para que só voltem os favoritos que faltam. O Chrome os coloca em {toImportPlacement}.",
+      "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no Chrome. Desative Ignorar duplicados para importá-los de novo."
+    ]
+  },
+  "verified": "O caminho do Gerenciador de favoritos foi lido na página de ajuda oficial de {toName} em {date}, e essa página não lista um localizador de duplicados. As regras de duplicados vêm das páginas Duplicados e Importação do Guia do Snug. Os menus dos navegadores mudam entre versões, então confira a fonte se um caminho for diferente na sua tela."
+}

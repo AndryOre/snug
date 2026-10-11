@@ -139,4 +139,11 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
     relatedHowTo: ['export-chrome-bookmarks-to-csv'],
     sample: 'json',
   },
+  'remove-duplicate-bookmarks-in-chrome': {
+    group: 'duplicates',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/duplicates', 'guide/importing'],
+    relatedHowTo: [],
+  },
 }

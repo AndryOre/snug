@@ -369,6 +369,7 @@ export interface HowToValues {
   fromExportPath: string
   fromExportFile: string
   toImportPath: string
+  toBookmarkManagerPath: string
   toImportPlacement: string
   toImportSources: string
   fromExportFormats: string
@@ -435,6 +436,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     fromExportPath: listed(source.exportPath, menuPath, notListed),
     fromExportFile: listed(source.exportFileName, String, notListed),
     toImportPath: listed(target.importPath, menuPath, notListed),
+    toBookmarkManagerPath: listed(
+      target.bookmarkManagerPath,
+      menuPath,
+      notListed,
+    ),
     toImportPlacement: listed(
       target.importPlacement,
       (placement) => shared.placements[placement],
