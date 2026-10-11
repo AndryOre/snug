@@ -50,6 +50,8 @@ const NOT_LISTED_PROFILE: BrowserFacts['profileFolder'] = {
 }
 
 const CHROME_BOOKMARKS_HELP = 'https://support.google.com/chrome/answer/96816'
+const CHROMIUM_EXPORT_FILE_NAME =
+  'https://chromium.googlesource.com/chromium/src/+/main/chrome/app/generated_resources.grd'
 const CHROMIUM_USER_DATA_DIR =
   'https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md'
 const FIREFOX_EXPORT_HELP =
@@ -91,7 +93,10 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Bookmarks HTML file'],
       sourceUrl: CHROME_BOOKMARKS_HELP,
     },
-    exportFileName: 'not-listed',
+    exportFileName: {
+      value: 'bookmarks_<date>.html',
+      sourceUrl: CHROMIUM_EXPORT_FILE_NAME,
+    },
     importPlacement: {
       value: 'importedFolderOrBar',
       sourceUrl: CHROME_BOOKMARKS_HELP,
