@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Chrome-Lesezeichen als Markdown exportieren | Snug",
+    "description": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}. Exportiere mit Snug als Markdown: Ordner wählen, Dateinamen setzen. Geprüft am {date}."
+  },
+  "title": "Wie exportiere ich meine Chrome-Lesezeichen als Markdown?",
+  "directAnswer": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}: Öffne {fromExportPath}, dann speichert Chrome {fromExportFile}. Für Markdown nutzt du die Seite Exportieren von Snug: Wähle Markdown und exportiere, dann speichert Snug eine .md-Datei mit deinen Ordnern als verschachtelte Liste. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Der eigene Export von Chrome",
+    "intro": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}, deshalb erzeugen die integrierten Schritte unten {fromExportFormats}. Die Markdown-Datei kommt von Snug.",
+    "steps": [
+      "Öffne in Chrome {fromExportPath}.",
+      "Speichere die Datei. Chrome nennt sie {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "Wie die Markdown-Datei aussieht",
+    "intro": "Snug schreibt Titel, Adressen und Ordnerstruktur als verschachtelte Aufzählung. Mehr steht nicht in der Datei.",
+    "items": [
+      "Ein Lesezeichen wird zu einem Aufzählungspunkt mit Link, geschrieben als - [Titel](Adresse).",
+      "Ein Ordner wird zu einem einfachen Aufzählungspunkt. Sein Inhalt steht darunter, pro Ebene um zwei Leerzeichen eingerückt, und leere Ordner bleiben erhalten.",
+      "Ein vollständiger Export beginnt mit den Ordnern Lesezeichenleiste und Weitere Lesezeichen, so benannt, wie Chrome sie zeigt. Ein Export gewählter Ordner beginnt mit den Ordnern, die du gewählt hast.",
+      "Beispiel: Ein Lesezeichen Docs in einem Ordner Dev auf der Lesezeichenleiste wird zu drei Zeilen: - Lesezeichenleiste, dann - Dev, dann - [Docs](https://example.com/docs), jeweils zwei Leerzeichen tiefer als die Zeile darüber.",
+      "Daten werden nie in Markdown geschrieben. Zeichen, die Markdown falsch lesen würde, etwa eckige Klammern, Sternchen, Unterstriche und Backticks, bekommen einen Backslash. Zeilenumbrüche im Titel werden zu Leerzeichen, und ein Lesezeichen ohne Titel nutzt seine Adresse als Linktext.",
+      "Snug exportiert Markdown, importiert es aber nicht. Behalte zusätzlich einen HTML- oder JSON-Export, wenn du später wiederherstellen willst."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome, einem Chromium-Browser. Die Seite Exportieren schreibt die Markdown-Datei aus den Ordnern, die du markierst.",
+    "steps": [
+      "Installiere Snug in Chrome.",
+      "Öffne die Seite Exportieren von Snug. Wähle die gewünschten Ordner oder einzelne Lesezeichen, oder nutze Alle Lesezeichen auswählen für alles.",
+      "Stelle Exportformat auf Markdown.",
+      "Bearbeite unter Exportoptionen die Dateinamenvorlage. Die Zeile Vorschau darunter zeigt den Namen, den Snug verwendet. Standard ist Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, und %yyyy, %yy, %mm, %dd, %hh, %min und %sec werden durch Datum und Uhrzeit des Exports ersetzt.",
+      "Optional: Aktiviere Weitere Lesezeichen ausblenden, um deren Inhalt ohne diesen Ordnerpunkt aufzulisten, oder Übergeordneten Ordner ausblenden, um Lesezeichen ohne ihre Ordnerpunkte aufzulisten, außer den beiden obersten Ordnern.",
+      "Klicke auf die Export-Schaltfläche. Snug speichert über den Download deines Browsers eine Datei mit der Endung .md."
+    ],
+    "snapshot": "Der Export liest deine Lesezeichen nur und ändert nichts. Am Ende zeigt Snug, wie viele Lesezeichen es exportiert hat, und den Dateinamen."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Die Datei hat keine Daten. Markdown trägt sie nie. Exportiere HTML oder JSON, dort gelten die Datumsoptionen.",
+      "Ein Ordner fehlt. Exportiert werden nur die Ordner und Lesezeichen, die du markiert hast. Prüfe die Anzahl der Auswahl vor dem Export.",
+      "Ein Titel sieht anders aus. Snug setzt einen Backslash vor Zeichen, die Markdown falsch lesen würde, und ein Markdown-Viewer zeigt sie als normale Zeichen.",
+      "Der Dateiname enthält Unterstriche, die du nicht getippt hast. Zeichen, die Dateisysteme ablehnen, etwa / : * ? und |, werden zu Unterstrichen."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} gelesen. Die Dateiform stammt aus dem Markdown-Exporter von Snug. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

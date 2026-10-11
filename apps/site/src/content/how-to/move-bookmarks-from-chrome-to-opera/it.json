@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Spostare i segnalibri da Chrome a Opera | Snug",
+    "description": "Sposta i segnalibri da Chrome a Opera con la sua importazione o un file HTML: cosa dice l'aiuto e cosa aggiunge Snug. Controllato il {date}."
+  },
+  "title": "Come sposto i miei segnalibri da Chrome a Opera?",
+  "directAnswer": "In Opera, apri {toImportPath}. Origini di importazione secondo l'aiuto di Opera: {toImportSources}. Per usare un file, esportalo prima da Chrome con {fromExportPath}. Percorsi dei menu controllati il {date}.",
+  "builtIn": {
+    "title": "I metodi integrati",
+    "intro": "Opera ha una propria importazione e Chrome salva un file, quindi le strade sono due. Questa pagina riporta solo ciò che dicono le pagine di aiuto.",
+    "steps": [
+      "Importazione di Opera: in Opera, apri {toImportPath} e segui le opzioni di importazione mostrate.",
+      "Con un file: in Chrome, apri {fromExportPath}.",
+      "Con un file: salva il file. Chrome lo chiama {fromExportFile}.",
+      "Con un file: in Opera, apri {toImportPath} e scegli il file salvato, se l'importazione lo offre."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa importa Opera e cosa lascia fuori",
+    "intro": "Ogni riga qui sotto viene dalle pagine di aiuto, con la fonte in fondo a questa pagina.",
+    "items": [
+      "Origini di importazione, secondo l'aiuto di Opera: {toImportSources}.",
+      "Dove Opera mette i segnalibri importati: {toImportPlacement}.",
+      "Incluso nel file di Chrome, secondo {fromName}: {fromHtmlKeeps}.",
+      "Escluso dal file di Chrome, secondo {fromName}: {fromHtmlDrops}.",
+      "Dove una pagina di aiuto non lo indica, questa pagina scrive Non indicato invece di tirare a indovinare."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome e in Opera, entrambi browser Chromium. Usalo in Chrome per esportare solo le cartelle che scegli e in Opera per importare con un'anteprima.",
+    "steps": [
+      "Installa Snug in Chrome e in Opera.",
+      "In Chrome, apri la pagina Esporta di Snug e usa le caselle per scegliere le cartelle che vuoi, o singoli segnalibri.",
+      "Scegli HTML come formato e fai clic su Esporta. Snug scarica il file.",
+      "In Opera, apri la pagina Importa di Snug e scegli lì il file, oppure trascinalo sulla pagina. Non usare il popup per questo: importa subito, senza anteprima.",
+      "L'Anteprima mostra il formato rilevato, il numero di segnalibri e l'albero delle cartelle, prima che cambi qualcosa. I segnalibri che Salta i duplicati escluderebbe sono contrassegnati.",
+      "Scegli una modalità di importazione. Crea cartella aggiunge tutto a una nuova cartella Segnalibri importati. Ripristina — unisci inserisce i segnalibri nelle posizioni originali, insieme a quelli esistenti, quando il file le contiene.",
+      "Lascia attivo Salta i duplicati. Esclude ogni segnalibro il cui indirizzo è già in Opera e ti dice quanti ne ha saltati."
+    ],
+    "snapshot": "Crea cartella e Ripristina — unisci non svuotano mai i tuoi segnalibri. Prima di un Ripristina — sostituisci, Snug salva un'istantanea di sicurezza nei Download e ne tiene una copia nelle Impostazioni, così puoi annullare l'importazione."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Non trovi i segnalibri dopo l'importazione. Cerca un segnalibro che sai essere nel file.",
+      "L'importazione di Opera non offre il file. Usa invece la pagina Importa di Snug: legge da sola il file HTML.",
+      "Un segnalibro compare due volte. Apri Duplicati in Snug: raggruppa le copie per indirizzo e rimuove solo quelle che contrassegni come Elimina.",
+      "Snug dice che non è stato importato nulla. Tutti i segnalibri del file sono già nel browser. Disattiva Salta i duplicati per importarli di nuovo."
+    ]
+  },
+  "verified": "I percorsi dei menu e i nomi dei file sono stati letti nelle pagine di aiuto ufficiali di {fromName} e {toName} il {date}. I menu dei browser cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo."
+}

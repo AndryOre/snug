@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Supprimer les favoris en double dans Chrome | Snug",
+    "description": "Supprimez les copies à la main dans le Gestionnaire de favoris de Chrome ou laissez Snug les grouper par adresse et supprimer. Vérifié le {date}."
+  },
+  "title": "Comment supprimer les favoris en double dans Chrome ?",
+  "directAnswer": "Dans Chrome, vous supprimez les copies en trop à la main dans le Gestionnaire de favoris, ouvert avec {toBookmarkManagerPath}. La page Doublons de Snug fait la recherche à votre place : elle groupe les favoris qui partagent une adresse et supprime les copies que vous marquez. Vérifié le {date}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "Dans Chrome, vous rapprochez les copies vous-même : parcourez vos dossiers, puis supprimez celles dont vous ne voulez pas.",
+    "steps": [
+      "Dans Chrome, ouvrez {toBookmarkManagerPath}.",
+      "Parcourez vos dossiers et repérez le même site enregistré plusieurs fois.",
+      "Supprimez les copies dont vous n'avez pas besoin.",
+      "Recommencez dans chaque dossier, y compris la barre de favoris et Autres favoris."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qui compte comme un doublon",
+    "intro": "Snug traite deux favoris comme des doublons lorsque leurs adresses sont identiques une fois normalisées. Le titre et le dossier n'ont pas d'importance.",
+    "items": [
+      "Le schéma et l'hôte sont mis en minuscules, et http et https comptent comme la même adresse.",
+      "Un www. initial, une barre oblique finale et un simple #fragment sont ignorés.",
+      "La chaîne de requête est conservée : deux adresses avec des requêtes différentes font deux favoris.",
+      "Un fragment de type route, comme #/ ou #!, est conservé, tout comme n'importe quel fragment sur un chemin de type dossier sans requête.",
+      "Les dossiers ne sont jamais des doublons, même quand deux portent le même nom."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome et dans d'autres navigateurs Chromium. Sa page Doublons trouve chaque groupe de copies, et Ignorer les doublons empêche les nouvelles d'arriver à l'import.",
+    "steps": [
+      "Installez Snug depuis le Chrome Web Store.",
+      "Ouvrez Doublons. Chaque groupe affiche ses copies, la plus ancienne en premier.",
+      "Par défaut, Snug conserve la copie la plus ancienne et marque les autres Supprimer. Choisissez Conserver sur une autre copie pour changer celle qui reste.",
+      "Cliquez sur le bouton de suppression et confirmez. Seules les copies marquées Supprimer sont retirées.",
+      "Choisissez Analyser à nouveau pour actualiser la liste. Si rien ne correspond, la page indique qu'il n'y a aucun doublon.",
+      "Quand vous importez un fichier, laissez Ignorer les doublons activé. Il écarte tout favori dont l'adresse est déjà dans Chrome, ou plus haut dans le même fichier, et indique combien il en a ignoré. Il s'applique à Créer un dossier et à Restaurer — fusionner, pas à Restaurer — remplacer."
+    ],
+    "snapshot": "La suppression depuis la page Doublons ne crée aucun instantané de sécurité et n'a pas d'annulation, elle ne peut donc pas être inversée. L'instantané de sécurité et l'annulation de l'import appartiennent à Restaurer — remplacer. Exportez d'abord vos favoris avec {fromExportPath} si vous voulez une copie à laquelle revenir."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Deux favoris du même site ne sont pas groupés. Leurs adresses diffèrent après normalisation, par exemple dans le chemin ou la chaîne de requête. Snug les laisse volontairement tels quels.",
+      "La mauvaise copie est marquée Supprimer. Choisissez Conserver sur la copie voulue avant de confirmer.",
+      "Une copie n'est jamais marquée Supprimer. Les favoris gérés par votre organisation ne peuvent pas être supprimés, donc Snug ne les marque jamais.",
+      "Vous avez supprimé un favori dont vous aviez besoin. Importez le fichier HTML exporté plus tôt depuis la page Importer de Snug, avec Ignorer les doublons activé, pour ne récupérer que les favoris manquants.",
+      "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans Chrome. Désactivez Ignorer les doublons pour les importer de nouveau."
+    ]
+  },
+  "verified": "Le chemin du Gestionnaire de favoris a été lu sur la page d'aide officielle de {toName} le {date}. Les règles de doublons viennent des pages Doublons et Importer du Guide de Snug. Les menus des navigateurs changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

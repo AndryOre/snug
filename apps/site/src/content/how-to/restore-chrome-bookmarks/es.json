@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Restaurar marcadores de Chrome desde una copia | Snug",
+    "description": "Restaura marcadores de Chrome de una copia HTML con la importación de Chrome o con Snug: vista previa, combinar, reemplazar. Verificado {date}."
+  },
+  "title": "¿Cómo restauro mis marcadores de Chrome desde una copia de seguridad?",
+  "directAnswer": "En Chrome, abre {toImportPath} y elige tu archivo HTML de marcadores. Chrome añade los marcadores a {toImportPlacement}.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "Chrome importa un archivo HTML de marcadores, como el que guardaste al hacer la copia.",
+    "steps": [
+      "Busca el archivo de la copia. Una exportación de Chrome se llama {fromExportFile}.",
+      "En Chrome, abre {toImportPath}.",
+      "Elige {toImportSources} como origen y selecciona tu archivo.",
+      "Busca los marcadores en {toImportPlacement} y muévelos adonde quieras."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué recupera una restauración",
+    "intro": "Una restauración recupera los marcadores que contiene el archivo, y solo esos.",
+    "items": [
+      "Se conserva en el archivo HTML, según {fromName}: {fromHtmlKeeps}.",
+      "Queda fuera del archivo HTML, según {fromName}: {fromHtmlDrops}.",
+      "Chrome coloca los marcadores del archivo en {toImportPlacement}, así que los marcadores que ya tienes pueden aparecer dos veces.",
+      "El archivo de perfil {fromProfileFile} no es un archivo HTML. La importación de Chrome indica estos orígenes: {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome. Restaura desde los archivos que guardó la Auto-export o desde cualquier archivo de marcadores, y muestra una vista previa antes de cambiar nada.",
+    "steps": [
+      "En Chrome, abre la página Importar de Snug y elige allí el archivo, o suéltalo en la página. No uses la ventana emergente para esto: importa de inmediato y sin vista previa.",
+      "La Vista previa muestra el formato detectado, el número de marcadores y el árbol de carpetas, antes de que cambie nada. Los marcadores que Omitir duplicados dejaría fuera aparecen marcados.",
+      "Elige un modo. Restaurar — combinar coloca los marcadores en sus ubicaciones originales junto a los que ya tienes. Restaurar — reemplazar vacía primero tu Barra de marcadores y Otros marcadores, y luego restaura los del archivo en sus ubicaciones originales. Ambos necesitan un archivo con datos de ubicación.",
+      "Con Restaurar — combinar puedes marcar marcadores sueltos o carpetas enteras e importar solo esa selección. Restaurar — reemplazar siempre importa todo y admite un archivo cada vez.",
+      "Restaurar — reemplazar muestra cuántos marcadores quitará y añadirá, enumera los que borrará y te pide confirmar antes de ejecutarse.",
+      "Tras un reemplazo, pulsa Deshacer importación en el resultado para recuperar tus marcadores anteriores."
+    ],
+    "snapshot": "Antes de cada Restaurar — reemplazar, Snug guarda una instantánea de seguridad en tus Descargas y conserva una copia dentro de la extensión. Si no se puede guardar la instantánea, no se borra nada. Ajustes enumera las cinco últimas instantáneas, que puedes restaurar o descargar, y una sexta reemplaza la más antigua. Todo queda en tu dispositivo y Snug no hace solicitudes de red."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "No encuentras los marcadores tras la importación de Chrome. Chrome los coloca en {toImportPlacement}.",
+      "Chrome no acepta el archivo. Su importación indica estos orígenes: {toImportSources}. Comprueba que el archivo sea un HTML de marcadores.",
+      "Restaurar — reemplazar no está disponible. Necesita un archivo con datos de ubicación y un solo archivo a la vez. Usa Restaurar — combinar o Crear carpeta, que funciona con cualquier archivo.",
+      "Reemplazaste y quieres recuperar tus marcadores anteriores. Pulsa Deshacer importación o restaura una instantánea de seguridad en Ajustes.",
+      "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en tu navegador. Desactiva Omitir duplicados para importarlos de nuevo."
+    ]
+  },
+  "verified": "Las rutas de menú, los nombres de archivo y las carpetas de perfil se leyeron en las páginas de ayuda de {fromName} y en los documentos propios de Chromium el {date}. Los menús del navegador cambian entre versiones, así que revisa la fuente si una ruta difiere en tu pantalla. El comportamiento de Snug procede de su guía de Importación."
+}

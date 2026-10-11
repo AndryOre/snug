@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Export Chrome Bookmarks to Markdown | Snug",
+    "description": "Chrome's help describes one export format, {fromExportFormats}. Export to Markdown with Snug: pick folders, set a filename template and see the file. Checked {date}."
+  },
+  "title": "How do I export my Chrome bookmarks to Markdown?",
+  "directAnswer": "Chrome's help describes one export format, {fromExportFormats}: open {fromExportPath} and Chrome saves {fromExportFile}. For Markdown, use Snug's Export page: choose Markdown and export, and Snug saves one .md file with your folders as a nested bullet list. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "Chrome's own export",
+    "intro": "Chrome's help describes one export format, {fromExportFormats}, so the built-in steps below produce {fromExportFormats}. Snug adds the Markdown file.",
+    "steps": [
+      "In Chrome, open {fromExportPath}.",
+      "Save the file. Chrome names it {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "What the Markdown file looks like",
+    "intro": "Snug writes titles, addresses and folder structure as a nested bullet list. Nothing else goes into the file.",
+    "items": [
+      "A bookmark becomes one bullet with a link, written as - [Title](address).",
+      "A folder becomes a plain bullet. Its contents sit beneath it, indented two spaces per level, and empty folders are kept.",
+      "A full export starts with your Bookmarks bar and Other bookmarks folders, named as Chrome shows them. An export of selected folders starts with the folders you picked.",
+      "Example: a Docs bookmark inside a Dev folder on the Bookmarks bar becomes three lines: - Bookmarks bar, then - Dev, then - [Docs](https://example.com/docs), each indented two spaces deeper than the one above.",
+      "Dates are never written to Markdown. Characters Markdown would misread, such as brackets, asterisks, underscores and backticks, get a backslash. Line breaks in a title become spaces, and a bookmark without a title uses its address as the link text.",
+      "Snug exports Markdown but does not import it. Keep an HTML or JSON export too if you want to restore later."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome, a Chromium browser. Its Export page writes the Markdown file from the folders you check.",
+    "steps": [
+      "Install Snug in Chrome.",
+      "Open Snug's Export page. Check the folders or single bookmarks you want, or use Select all bookmarks for everything.",
+      "Set Export format to Markdown.",
+      "Under Export options, edit Filename template. The Preview line under it shows the name Snug will use. The default is Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, and %yyyy, %yy, %mm, %dd, %hh, %min and %sec are replaced by the date and time of the export.",
+      "Optional: switch on Hide other bookmarks to list the Other bookmarks contents without that folder bullet, or Hide parent folder to list bookmarks without their folder bullets, except the two top folders.",
+      "Click the Export button. Snug saves one file with the .md extension through your browser's download."
+    ],
+    "snapshot": "Export only reads your bookmarks and changes nothing. When it finishes, Snug shows how many bookmarks it exported and the file name."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "The file has no dates. Markdown never carries them. Export HTML or JSON, where the date options apply.",
+      "A folder is missing. Only the folders and bookmarks you checked are exported. Check the selection count before you export.",
+      "A title looks different. Snug puts a backslash before characters Markdown would misread, and a Markdown viewer shows them as plain characters.",
+      "The file name has underscores you did not type. Characters file systems reject, such as / : * ? and |, become underscores."
+    ]
+  },
+  "verified": "Menu paths and file names were read from the official help pages of {fromName} on {date}. The file shape comes from Snug's Markdown exporter. Browser menus change between versions, so check the source if a path differs on your screen."
+}

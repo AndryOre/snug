@@ -27,7 +27,9 @@ import {
  * Shape of every locale's copy for a How-to page, taken from the English file.
  * Every page shares the shape, so one file's type stands for all of them.
  */
-export type HowToPageContent = typeof enMoveFirefoxToChrome
+export type HowToPageContent = typeof enMoveFirefoxToChrome & {
+  sample?: { title: string; intro: string }
+}
 
 /**
  * Shape of every locale's shared How-to strings.
@@ -367,10 +369,16 @@ export interface HowToValues {
   fromExportPath: string
   fromExportFile: string
   toImportPath: string
+  toBookmarkManagerPath: string
   toImportPlacement: string
   toImportSources: string
+  fromExportFormats: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
+  fromProfileFile: string
+  fromProfileFolderWindows: string
+  fromProfileFolderMacos: string
+  fromProfileFolderLinux: string
 }
 
 const MENU_SEPARATOR = ' > '
@@ -428,6 +436,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     fromExportPath: listed(source.exportPath, menuPath, notListed),
     fromExportFile: listed(source.exportFileName, String, notListed),
     toImportPath: listed(target.importPath, menuPath, notListed),
+    toBookmarkManagerPath: listed(
+      target.bookmarkManagerPath,
+      menuPath,
+      notListed,
+    ),
     toImportPlacement: listed(
       target.importPlacement,
       (placement) => shared.placements[placement],
@@ -435,6 +448,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     ),
     toImportSources: listed(
       target.importSources,
+      (items) => sentenceList(items, tag),
+      notListed,
+    ),
+    fromExportFormats: listed(
+      source.exportFormats,
       (items) => sentenceList(items, tag),
       notListed,
     ),
@@ -446,6 +464,22 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     fromHtmlDrops: listed(
       source.htmlExportDrops,
       (items) => sentenceList(items, tag),
+      notListed,
+    ),
+    fromProfileFile: listed(source.profileBookmarksFile, String, notListed),
+    fromProfileFolderWindows: listed(
+      source.profileFolder.windows,
+      String,
+      notListed,
+    ),
+    fromProfileFolderMacos: listed(
+      source.profileFolder.macos,
+      String,
+      notListed,
+    ),
+    fromProfileFolderLinux: listed(
+      source.profileFolder.linux,
+      String,
       notListed,
     ),
   }
@@ -514,7 +548,7 @@ export function howToSources(
   slug: string,
 ): { browser: string; urls: readonly string[] }[] {
   const { from, to } = getHowToPage(slug)
-  return [from, to].map((browser) => {
+  return [...new Set([from, to])].map((browser) => {
     const facts = BROWSER_FACTS[browser]
     const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }

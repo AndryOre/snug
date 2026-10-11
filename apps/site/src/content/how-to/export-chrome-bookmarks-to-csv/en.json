@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Export Chrome Bookmarks to CSV | Snug",
+    "description": "Export Chrome bookmarks to CSV with Snug: one row per bookmark, columns title, url and folder, and how a spreadsheet reads them. Checked {date}."
+  },
+  "title": "How do I export my Chrome bookmarks to CSV?",
+  "directAnswer": "Chrome's help describes one export format, {fromExportFormats}, reached through {fromExportPath}. For CSV, use Snug's Export page: it writes one row per bookmark with title, url and folder columns, for only the folders you pick. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "Chrome's help describes one export format, {fromExportFormats}, so the browser has no CSV or JSON option of its own. Its export is still the right choice when the file goes to another browser.",
+    "steps": [
+      "In Chrome, open {fromExportPath}.",
+      "Save the file. Chrome names it {fromExportFile} by default.",
+      "For rows in a spreadsheet, continue with Snug below."
+    ]
+  },
+  "carriesOver": {
+    "title": "What the CSV contains",
+    "intro": "The first row names the columns. Each bookmark then gets one row, and folders get no row of their own.",
+    "items": [
+      "Columns: title, url and folder. Date added, Date last used and Include favicons add dateAdded, dateLastUsed and iconData after them.",
+      "Folders: the folder column holds the full path, joined by /, starting with the top folder such as Bookmarks bar. Hide parent folder keeps only that top folder.",
+      "Quoting: every field is in double quotes, and a quote inside a field is doubled. A / or \\ in a folder name gets a backslash, so Q3/Q4 appears as Q3\\/Q4.",
+      "Spreadsheets: a field that starts with =, +, - or @ gets a leading apostrophe, so a spreadsheet does not run it as a formula.",
+      "Dates: dateAdded and dateLastUsed are whole seconds since 1970, not milliseconds."
+    ]
+  },
+  "withSnug": {
+    "title": "Export CSV with Snug",
+    "intro": "Snug runs in Chrome and other Chromium browsers. Its Export page lets you choose what goes into the file and how it is named.",
+    "steps": [
+      "Install Snug from the Chrome Web Store.",
+      "Open Snug's Export page. Search for bookmarks, then tick single bookmarks or whole folders, or use Select all bookmarks.",
+      "Under Export format, choose CSV.",
+      "Open Export options to add Date added, Date last used or Include favicons as extra columns, or to turn on Hide parent folder.",
+      "Edit Filename template to name the file. For example, %yyyy%mm%dd myPc gives a name such as 20260930 myPc.csv.",
+      "Click Export N bookmarks, where N is the count of what you ticked. Snug downloads the file."
+    ],
+    "snapshot": "The popup exports the whole tree in one click. Without a template, Snug names the file Bookmarks_<date>_<time>, for example Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "A real sample",
+    "intro": "This is the exporter's own output for a small test tree: folders named Dev, \"Tools\" and Q3/Q4 on the Bookmarks bar, and one bookmark in Other bookmarks."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "Commas or quotes split a title across cells. Snug quotes every field, so import the file as CSV with the double quote as the text qualifier and Comma, and \"quotes\" stays in one cell.",
+      "The folder column shows a backslash. A / inside a folder name is written \\/ so that / stays the path separator.",
+      "A cell begins with an apostrophe. Snug adds it to values starting with =, +, - or @ so they are not run as formulas.",
+      "Only some folders should be in the file. The popup exports the whole tree. Use the Export page and tick the folders you want.",
+      "You need the rows back in a browser. Snug's Import page reads CSV and uses the folder column to rebuild folders. For another browser's import, use the HTML file from Chrome's built-in export."
+    ]
+  },
+  "verified": "The menu path and export format were read from the official help pages of {fromName} on {date}. Menus change between versions, so check the source if a path differs on your screen. Column names and escaping come from Snug's CSV exporter and its tests."
+}

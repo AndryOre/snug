@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Remove Duplicate Bookmarks in Chrome | Snug",
+    "description": "Delete extra copies by hand in Chrome's Bookmark Manager, or let Snug group them by address and delete the copies you mark. Verified {date}."
+  },
+  "title": "How do I remove duplicate bookmarks in Chrome?",
+  "directAnswer": "In Chrome you delete extra copies by hand in the Bookmark Manager, opened with {toBookmarkManagerPath}. Snug's Duplicates page does the finding for you: it groups bookmarks that share an address and deletes the copies you mark. Checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "In Chrome you match copies yourself: look through your folders, then delete the ones you do not want.",
+    "steps": [
+      "In Chrome, open {toBookmarkManagerPath}.",
+      "Go through your folders and look for the same site saved more than once.",
+      "Delete the copies you do not want.",
+      "Repeat for every folder, including the bookmarks bar and Other bookmarks."
+    ]
+  },
+  "carriesOver": {
+    "title": "What counts as a duplicate",
+    "intro": "Snug treats two bookmarks as duplicates when their addresses match once normalized. The title and the folder do not matter.",
+    "items": [
+      "The scheme and host are lowercased, and http and https count as the same address.",
+      "A leading www., a trailing slash and a plain #fragment are ignored.",
+      "The query string is kept, so two addresses with different queries are two bookmarks.",
+      "A route-like fragment such as #/ or #! is kept, and so is any fragment on a folder-style path without a query.",
+      "Folders are never duplicates, even when two have the same name."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome and other Chromium browsers. Its Duplicates page finds every group of copies, and Skip duplicates stops new ones from arriving when you import.",
+    "steps": [
+      "Install Snug from the Chrome Web Store.",
+      "Open Duplicates. Each group shows its copies, oldest first.",
+      "By default Snug keeps the oldest copy and marks the rest Delete. Choose Keep on another copy to change which one stays.",
+      "Click the delete button and confirm. Only the copies marked Delete are removed.",
+      "Choose Scan again to refresh the list. When nothing matches, the page says there are no duplicates.",
+      "When you import a file, leave Skip duplicates on. It leaves out any bookmark whose address is already in Chrome, or earlier in the same file, and tells you how many it skipped. It applies to Create folder and Restore — merge, not to Restore — replace."
+    ],
+    "snapshot": "Deleting on the Duplicates page takes no Safety snapshot and has no Undo, so the deletion cannot be reversed. The Safety snapshot and Undo import belong to Restore — replace. Export your bookmarks first with {fromExportPath} if you want a copy to go back to."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "Two bookmarks of the same site are not grouped. Their addresses differ after normalizing, for example in the path or the query string. Snug leaves them alone on purpose.",
+      "The wrong copy is marked Delete. Choose Keep on the copy you want before you confirm.",
+      "A copy is never marked Delete. Bookmarks that your organization manages cannot be removed, so Snug never marks them for deletion.",
+      "You deleted a bookmark you needed. Import the HTML file you exported earlier on Snug's Import page with Skip duplicates on, so only the missing bookmarks come back.",
+      "Snug says nothing was imported. Every bookmark in the file is already in Chrome. Turn off Skip duplicates to import them again."
+    ]
+  },
+  "verified": "The Bookmark Manager path was read from the official help page of {toName} on {date}. The duplicate rules come from Snug's Duplicates and Importing Guide pages. Browser menus change between versions, so check the source if a path differs on your screen."
+}

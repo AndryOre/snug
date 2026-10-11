@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Mover marcadores de Chrome a Opera | Snug",
+    "description": "Mueve marcadores de Chrome a Opera con su importación o un archivo HTML, lo que dice la ayuda y lo que añade Snug. Comprobado el {date}."
+  },
+  "title": "¿Cómo muevo mis marcadores de Chrome a Opera?",
+  "directAnswer": "En Opera, abre {toImportPath}. Orígenes de importación según la ayuda de Opera: {toImportSources}. Para usar un archivo, expórtalo antes desde Chrome con {fromExportPath}. Rutas de menú comprobadas el {date}.",
+  "builtIn": {
+    "title": "Los métodos integrados",
+    "intro": "Opera tiene su propia importación y Chrome guarda un archivo, así que hay dos vías. Esta página solo recoge lo que dicen las páginas de ayuda.",
+    "steps": [
+      "Importación de Opera: en Opera, abre {toImportPath} y sigue las opciones de importación que muestra.",
+      "Con archivo: en Chrome, abre {fromExportPath}.",
+      "Con archivo: guarda el archivo. Chrome lo llama {fromExportFile}.",
+      "Con archivo: en Opera, abre {toImportPath} y elige el archivo guardado, si la importación lo ofrece."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué importa Opera y qué deja fuera",
+    "intro": "Cada línea siguiente sale de las páginas de ayuda, con la fuente al final de esta página.",
+    "items": [
+      "Orígenes de importación, según la ayuda de Opera: {toImportSources}.",
+      "Dónde coloca Opera los marcadores importados: {toImportPlacement}.",
+      "Incluido en el archivo de Chrome, según {fromName}: {fromHtmlKeeps}.",
+      "Fuera del archivo de Chrome, según {fromName}: {fromHtmlDrops}.",
+      "Cuando una página de ayuda no lo indica, esta página escribe No indicado en lugar de adivinar."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome y Opera, ambos basados en Chromium. Úsalo en Chrome para exportar solo las carpetas que elijas y en Opera para importar con vista previa.",
+    "steps": [
+      "Instala Snug en Chrome y en Opera.",
+      "En Chrome, abre la página Exportar de Snug y usa las casillas para elegir las carpetas que quieres, o marcadores sueltos.",
+      "Elige HTML como formato y haz clic en Exportar. Snug descarga el archivo.",
+      "En Opera, abre la página Importar de Snug y elige allí el archivo, o suéltalo en la página. No uses la ventana emergente para esto: importa de inmediato y sin vista previa.",
+      "La Vista previa muestra el formato detectado, el número de marcadores y el árbol de carpetas, antes de que cambie nada. Los marcadores que Omitir duplicados dejaría fuera aparecen marcados.",
+      "Elige un modo de importación. Crear carpeta añade todo a una carpeta nueva llamada Marcadores importados. Restaurar — combinar coloca los marcadores en sus ubicaciones originales junto a los existentes, cuando el archivo las incluye.",
+      "Deja Omitir duplicados activado. Deja fuera cualquier marcador cuya dirección ya esté en Opera e indica cuántos omitió."
+    ],
+    "snapshot": "Crear carpeta y Restaurar — combinar nunca vacían tus marcadores. Antes de Restaurar — reemplazar, Snug guarda una instantánea de seguridad en tus Descargas y conserva una copia en Ajustes, para que puedas deshacer la importación."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "No encuentras los marcadores tras importar. Busca un marcador que sepas que estaba en el archivo.",
+      "La importación de Opera no ofrece el archivo. Usa en su lugar la página Importar de Snug: lee el archivo HTML por sí misma.",
+      "Un marcador aparece dos veces. Abre Duplicados en Snug: agrupa las copias por dirección y elimina solo las copias que marques como Eliminar.",
+      "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en tu navegador. Desactiva Omitir duplicados para importarlos de nuevo."
+    ]
+  },
+  "verified": "Las rutas de menú y los nombres de archivo se leyeron en las páginas de ayuda oficiales de {fromName} y {toName} el {date}. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+}

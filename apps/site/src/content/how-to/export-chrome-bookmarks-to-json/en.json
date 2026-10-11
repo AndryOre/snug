@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Export Chrome Bookmarks to JSON | Snug",
+    "description": "Export Chrome bookmarks to JSON with Snug: the folder tree as nested data, real field names, choosing folders and re-import. Checked {date}."
+  },
+  "title": "How do I export my Chrome bookmarks to JSON?",
+  "directAnswer": "Chrome's help describes one export format, {fromExportFormats}, reached through {fromExportPath}. For JSON, use Snug's Export page: it writes the folder tree as nested data that Snug can import back with folders in place. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "Chrome's help describes one export format, {fromExportFormats}, so the browser has no CSV or JSON option of its own. Its export is still the right choice when the file goes to another browser.",
+    "steps": [
+      "In Chrome, open {fromExportPath}.",
+      "Save the file. Chrome names it {fromExportFile} by default.",
+      "For the folder tree as data, continue with Snug below."
+    ]
+  },
+  "carriesOver": {
+    "title": "What the JSON contains",
+    "intro": "The file is a one-item array holding a root node with id 0. Bookmarks bar and Other bookmarks sit under it, and folders nest through children arrays.",
+    "items": [
+      "Bookmarks: id, parentId, title, url and syncing.",
+      "Folders: id, title, syncing and children, with no parentId because nesting gives their place. The two top folders also carry folderType, bookmarks-bar or other.",
+      "Optional fields: Date added adds dateAdded, Date last used adds dateLastUsed, Folder modified dates adds dateGroupModified and Include favicons adds iconData. Dates are whole seconds since 1970.",
+      "Choosing folders: only what you tick on the Export page is written. Hide other bookmarks moves the contents of Other bookmarks up to the top level, and Hide parent folder drops regular folders and keeps their bookmarks.",
+      "Text: titles and addresses keep their characters as they are, for example Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Export JSON with Snug",
+    "intro": "Snug runs in Chrome and other Chromium browsers. JSON is the format that restores into Snug with folders and root locations intact.",
+    "steps": [
+      "Install Snug from the Chrome Web Store.",
+      "Open Snug's Export page. Search for bookmarks, then tick single bookmarks or whole folders, or use Select all bookmarks.",
+      "Under Export format, choose JSON.",
+      "Open Export options to add Date added, Date last used, Folder modified dates or Include favicons, or to turn on Hide other bookmarks or Hide parent folder.",
+      "Edit Filename template to name the file. For example, %yyyy%mm%dd myPc gives a name such as 20260930 myPc.json.",
+      "Click Export N bookmarks, where N is the count of what you ticked. Snug downloads the file."
+    ],
+    "snapshot": "To bring the file back, open Snug's Import page and choose the JSON file. Preview shows the folder tree first. Create folder and Restore — merge keep your existing bookmarks, and Restore — replace saves a Safety snapshot first."
+  },
+  "sample": {
+    "title": "A real sample",
+    "intro": "This is the exporter's own output for a small test tree: a folder named Dev, \"Tools\" on the Bookmarks bar and one bookmark in Other bookmarks."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "A bookmark is missing. Only what you ticked on the Export page is written. Tick its folder, or use Select all bookmarks.",
+      "The root has an empty title. That is the real root node, id 0, and it keeps the file importable by Snug.",
+      "Dates are missing. They appear only when Date added, Date last used or Folder modified dates is on in Export options.",
+      "Another browser will not take the file. This JSON is meant for Snug and your own scripts. For another browser's import, use the HTML file from Chrome's built-in export."
+    ]
+  },
+  "verified": "The menu path and export format were read from the official help pages of {fromName} on {date}. Menus change between versions, so check the source if a path differs on your screen. Field names and nesting come from Snug's JSON exporter and its tests."
+}

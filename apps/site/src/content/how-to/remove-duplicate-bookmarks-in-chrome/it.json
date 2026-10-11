@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Rimuovere i segnalibri duplicati in Chrome | Snug",
+    "description": "Elimina le copie a mano nella Gestione segnalibri di Chrome o lascia che Snug le raggruppi per indirizzo ed elimini. Verificato il {date}."
+  },
+  "title": "Come rimuovo i segnalibri duplicati in Chrome?",
+  "directAnswer": "In Chrome elimini le copie in più a mano nella Gestione segnalibri, che si apre con {toBookmarkManagerPath}. La pagina Duplicati di Snug fa la ricerca al posto tuo: raggruppa i segnalibri che condividono un indirizzo ed elimina le copie che contrassegni. Verificato il {date}.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "In Chrome confronti le copie tu stesso: scorri le cartelle ed elimina quelle che non vuoi.",
+    "steps": [
+      "In Chrome, apri {toBookmarkManagerPath}.",
+      "Scorri le cartelle e cerca lo stesso sito salvato più volte.",
+      "Elimina le copie che non vuoi.",
+      "Ripeti per ogni cartella, compresa la barra dei segnalibri e Altri segnalibri."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa conta come duplicato",
+    "intro": "Snug considera duplicati due segnalibri quando i loro indirizzi coincidono dopo la normalizzazione. Titolo e cartella non contano.",
+    "items": [
+      "Schema e host vengono messi in minuscolo, e http e https contano come lo stesso indirizzo.",
+      "Un www. iniziale, una barra finale e un semplice #frammento vengono ignorati.",
+      "La stringa di query viene mantenuta, quindi due indirizzi con query diverse sono due segnalibri.",
+      "Un frammento simile a una route come #/ o #! viene mantenuto, così come qualsiasi frammento su un percorso in stile cartella senza query.",
+      "Le cartelle non sono mai duplicati, anche quando due hanno lo stesso nome."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome e in altri browser basati su Chromium. La pagina Duplicati trova ogni gruppo di copie, e Salta i duplicati impedisce che ne arrivino di nuove durante l'importazione.",
+    "steps": [
+      "Installa Snug dal Chrome Web Store.",
+      "Apri Duplicati. Ogni gruppo mostra le sue copie, dalla più vecchia.",
+      "Per impostazione predefinita Snug mantiene la copia più vecchia e contrassegna le altre come Elimina. Scegli Mantieni su un'altra copia per cambiare quale resta.",
+      "Fai clic sul pulsante di eliminazione e conferma. Vengono rimosse solo le copie contrassegnate come Elimina.",
+      "Scegli Scansiona di nuovo per aggiornare l'elenco. Se non c'è nessuna corrispondenza, la pagina indica che non ci sono duplicati.",
+      "Quando importi un file, lascia attivo Salta i duplicati. Lascia fuori ogni segnalibro il cui indirizzo è già in Chrome, o prima nello stesso file, e ti dice quanti ne ha saltati. Si applica a Crea cartella e Ripristina — unisci, non a Ripristina — sostituisci."
+    ],
+    "snapshot": "L'eliminazione dalla pagina Duplicati non crea un'istantanea di sicurezza e non ha Annulla, quindi non si può invertire. L'istantanea di sicurezza e Annulla importazione appartengono a Ripristina — sostituisci. Se vuoi una copia a cui tornare, esporta prima i segnalibri con {fromExportPath}."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Due segnalibri dello stesso sito non sono raggruppati. I loro indirizzi differiscono dopo la normalizzazione, per esempio nel percorso o nella query. Snug li lascia stare di proposito.",
+      "La copia sbagliata è contrassegnata come Elimina. Scegli Mantieni sulla copia che vuoi prima di confermare.",
+      "Una copia non viene mai contrassegnata come Elimina. I segnalibri gestiti dalla tua organizzazione non si possono rimuovere, quindi Snug non li contrassegna mai.",
+      "Hai eliminato un segnalibro che ti serviva. Importa il file HTML esportato in precedenza dalla pagina Importa di Snug con Salta duplicati attivo, così tornano solo i segnalibri mancanti.",
+      "Snug dice che non è stato importato nulla. Ogni segnalibro del file è già in Chrome. Disattiva Salta i duplicati per importarli di nuovo."
+    ]
+  },
+  "verified": "Il percorso della Gestione segnalibri è stato letto dalla pagina di aiuto ufficiale di {toName} il {date}. Le regole sui duplicati vengono dalle pagine Duplicati e Importazione della Guida di Snug. I menu dei browser cambiano tra le versioni, quindi controlla la fonte se un percorso è diverso sul tuo schermo."
+}

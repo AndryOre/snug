@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Exporter les favoris Chrome en CSV | Snug",
+    "description": "Exportez les favoris Chrome en CSV avec Snug : une ligne par favori, colonnes title, url et folder, et ce qu'en lit un tableur. Vérifié le {date}."
+  },
+  "title": "Comment exporter mes favoris Chrome en CSV ?",
+  "directAnswer": "L'aide de Chrome décrit un seul format d'exportation, {fromExportFormats}, accessible par {fromExportPath}. Pour le CSV, utilisez la page Exporter de Snug : elle écrit une ligne par favori avec title, url et folder, pour les seuls dossiers que vous choisissez. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "L'aide de Chrome décrit un seul format d'exportation, {fromExportFormats}. Le navigateur n'a donc pas d'option CSV ou JSON propre. Son exportation reste le bon choix quand le fichier est destiné à un autre navigateur.",
+    "steps": [
+      "Dans Chrome, ouvrez {fromExportPath}.",
+      "Enregistrez le fichier. Chrome le nomme {fromExportFile} par défaut.",
+      "Pour obtenir des lignes dans un tableur, continuez ci-dessous avec Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce que contient le CSV",
+    "intro": "La première ligne nomme les colonnes. Chaque favori occupe ensuite une ligne, et les dossiers n'ont pas de ligne propre.",
+    "items": [
+      "Colonnes : title, url et folder. Date d'ajout, Date de dernière utilisation et Inclure les favicons ajoutent ensuite dateAdded, dateLastUsed et iconData.",
+      "Dossiers : la colonne folder contient le chemin complet, joint par /, en commençant par le dossier de premier niveau comme Bookmarks bar. Masquer le dossier parent ne garde que ce dossier de premier niveau.",
+      "Guillemets : chaque champ est entre guillemets doubles, et un guillemet à l'intérieur d'un champ est doublé. Un / ou un \\ dans le nom d'un dossier reçoit une barre oblique inverse, donc Q3/Q4 apparaît sous la forme Q3\\/Q4.",
+      "Tableurs : un champ qui commence par =, +, - ou @ reçoit une apostrophe initiale, pour qu'un tableur ne l'exécute pas comme une formule.",
+      "Dates : dateAdded et dateLastUsed sont des secondes entières depuis 1970, pas des millisecondes."
+    ]
+  },
+  "withSnug": {
+    "title": "Exporter en CSV avec Snug",
+    "intro": "Snug fonctionne dans Chrome et les autres navigateurs Chromium. Sa page Exporter vous laisse choisir ce qui entre dans le fichier et comment il se nomme.",
+    "steps": [
+      "Installez Snug depuis le Chrome Web Store.",
+      "Ouvrez la page Exporter de Snug. Recherchez des favoris, puis cochez des favoris isolés ou des dossiers entiers, ou utilisez Sélectionner tous les favoris.",
+      "Sous Format d'exportation, choisissez CSV.",
+      "Ouvrez Options d'exportation pour ajouter Date d'ajout, Date de dernière utilisation ou Inclure les favicons comme colonnes supplémentaires, ou pour activer Masquer le dossier parent.",
+      "Modifiez Modèle de nom de fichier pour nommer le fichier. Par exemple, %yyyy%mm%dd myPc donne un nom comme 20260930 myPc.csv.",
+      "Cliquez sur Exporter N favoris, où N est le nombre d'éléments cochés. Snug télécharge le fichier."
+    ],
+    "snapshot": "La fenêtre contextuelle exporte toute l'arborescence en un clic. Sans modèle, Snug nomme le fichier Bookmarks_<date>_<time>, par exemple Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "Un exemple réel",
+    "intro": "Voici la sortie réelle de l'exporteur pour une petite arborescence de test : des dossiers nommés Dev, \"Tools\" et Q3/Q4 dans la barre de favoris (Bookmarks bar), et un favori dans Autres favoris (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Si quelque chose ne va pas",
+    "items": [
+      "Des virgules ou des guillemets coupent un titre sur plusieurs cellules. Snug met chaque champ entre guillemets : importez le fichier en CSV avec le guillemet double comme délimiteur de texte, et Comma, and \"quotes\" reste dans une seule cellule.",
+      "La colonne folder affiche une barre oblique inverse. Un / dans le nom d'un dossier s'écrit \\/ pour que / reste le séparateur de chemin.",
+      "Une cellule commence par une apostrophe. Snug l'ajoute aux valeurs qui commencent par =, +, - ou @ pour qu'elles ne soient pas exécutées comme des formules.",
+      "Seuls certains dossiers doivent figurer dans le fichier. La fenêtre contextuelle exporte toute l'arborescence. Utilisez la page Exporter et cochez les dossiers voulus.",
+      "Vous avez besoin des lignes de retour dans un navigateur. La page Importer de Snug lit le CSV et se sert de la colonne folder pour reconstruire les dossiers. Pour l'importation d'un autre navigateur, utilisez le fichier HTML de l'exportation intégrée de Chrome."
+    ]
+  },
+  "verified": "Le chemin de menu et le format d'exportation ont été lus sur les pages d'aide officielles de {fromName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran. Les noms de colonnes et l'échappement proviennent de l'exporteur CSV de Snug et de ses tests."
+}

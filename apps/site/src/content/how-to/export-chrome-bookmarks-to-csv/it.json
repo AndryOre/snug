@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Esportare i segnalibri di Chrome in CSV | Snug",
+    "description": "Esporta i segnalibri di Chrome in CSV con Snug: una riga per segnalibro, colonne title, url e folder, e come le legge un foglio. Verificato il {date}."
+  },
+  "title": "Come esporto i miei segnalibri di Chrome in CSV?",
+  "directAnswer": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, raggiungibile da {fromExportPath}. Per il CSV, usa la pagina Esporta di Snug: scrive una riga per segnalibro con title, url e folder, solo per le cartelle che scegli. Percorsi dei menu verificati il {date}.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, quindi il browser non ha un'opzione CSV o JSON propria. La sua esportazione resta la scelta giusta quando il file va a un altro browser.",
+    "steps": [
+      "In Chrome, apri {fromExportPath}.",
+      "Salva il file. Chrome lo chiama {fromExportFile} per impostazione predefinita.",
+      "Per avere righe in un foglio di calcolo, continua qui sotto con Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa contiene il CSV",
+    "intro": "La prima riga nomina le colonne. Ogni segnalibro occupa poi una riga, e le cartelle non hanno una riga propria.",
+    "items": [
+      "Colonne: title, url e folder. Data di aggiunta, Data dell'ultimo utilizzo e Includi le favicon aggiungono dopo dateAdded, dateLastUsed e iconData.",
+      "Cartelle: la colonna folder contiene il percorso completo, unito con /, a partire dalla cartella principale come Bookmarks bar. Nascondi la cartella principale mantiene solo quella cartella di primo livello.",
+      "Virgolette: ogni campo è tra virgolette doppie e una virgoletta dentro il campo viene raddoppiata. Una / o una \\ nel nome di una cartella riceve una barra rovesciata, quindi Q3/Q4 appare come Q3\\/Q4.",
+      "Fogli di calcolo: un campo che inizia con =, +, - o @ riceve un apostrofo iniziale, così un foglio di calcolo non lo esegue come formula.",
+      "Date: dateAdded e dateLastUsed sono secondi interi dal 1970, non millisecondi."
+    ]
+  },
+  "withSnug": {
+    "title": "Esportare in CSV con Snug",
+    "intro": "Snug funziona in Chrome e negli altri browser Chromium. Nella sua pagina Esporta scegli cosa entra nel file e come si chiama.",
+    "steps": [
+      "Installa Snug dal Chrome Web Store.",
+      "Apri la pagina Esporta di Snug. Cerca i segnalibri, poi spunta singoli segnalibri o intere cartelle, oppure usa Seleziona tutti i segnalibri.",
+      "In Formato di esportazione, scegli CSV.",
+      "Apri Opzioni di esportazione per aggiungere Data di aggiunta, Data dell'ultimo utilizzo o Includi le favicon come colonne extra, oppure per attivare Nascondi la cartella principale.",
+      "Modifica Modello del nome file per dare un nome al file. Per esempio, %yyyy%mm%dd myPc dà un nome come 20260930 myPc.csv.",
+      "Fai clic su Esporta N segnalibri, dove N è il numero di elementi spuntati. Snug scarica il file."
+    ],
+    "snapshot": "Il popup esporta l'intero albero con un clic. Senza modello, Snug chiama il file Bookmarks_<date>_<time>, per esempio Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "Un esempio reale",
+    "intro": "Questo è l'output reale dell'esportatore per un piccolo albero di prova: cartelle chiamate Dev, \"Tools\" e Q3/Q4 nella barra dei segnalibri (Bookmarks bar) e un segnalibro in Altri segnalibri (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Virgole o virgolette spezzano un titolo su più celle. Snug mette ogni campo tra virgolette, quindi importa il file come CSV con la virgoletta doppia come delimitatore di testo e Comma, and \"quotes\" resta in una sola cella.",
+      "La colonna folder mostra una barra rovesciata. Una / dentro il nome di una cartella si scrive \\/ perché / resti il separatore del percorso.",
+      "Una cella inizia con un apostrofo. Snug lo aggiunge ai valori che iniziano con =, +, - o @ perché non vengano eseguiti come formule.",
+      "Nel file devono entrare solo alcune cartelle. Il popup esporta l'intero albero. Usa la pagina Esporta e spunta le cartelle che vuoi.",
+      "Ti servono di nuovo le righe in un browser. La pagina Importa di Snug legge il CSV e usa la colonna folder per ricostruire le cartelle. Per l'importazione di un altro browser, usa il file HTML dell'esportazione integrata di Chrome."
+    ]
+  },
+  "verified": "Il percorso del menu e il formato di esportazione sono stati letti nelle pagine di aiuto ufficiali di {fromName} il {date}. I menu cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo. I nomi delle colonne e l'escape provengono dall'esportatore CSV di Snug e dai suoi test."
+}

@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "将 Chrome 书签导出为 JSON | Snug",
+    "description": "用 Snug 将 Chrome 书签导出为 JSON：以嵌套数据保存文件夹树，使用真实字段名，可选择文件夹并重新导入 Snug。核实日期：{date}。"
+  },
+  "title": "如何把 Chrome 书签导出为 JSON？",
+  "directAnswer": "Chrome 的帮助页面只介绍了一种导出格式，即{fromExportFormats}，通过 {fromExportPath} 导出。需要 JSON 时，请使用 Snug 的“导出”页面：它把文件夹树写成嵌套数据，Snug 可以把这个文件连同文件夹原样导入回来。菜单路径核实日期：{date}。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "Chrome 的帮助页面只介绍了一种导出格式，即{fromExportFormats}，所以浏览器本身没有 CSV 或 JSON 选项。文件要交给其他浏览器时，用它自带的导出仍然合适。",
+    "steps": [
+      "在 Chrome 中打开 {fromExportPath}。",
+      "保存文件。Chrome 默认将它命名为 {fromExportFile}。",
+      "如果想把文件夹树当作数据使用，请继续看下面的 Snug 方法。"
+    ]
+  },
+  "carriesOver": {
+    "title": "JSON 包含什么",
+    "intro": "文件是一个只含一项的数组，其中是 id 为 0 的根节点。Bookmarks bar 和 Other bookmarks 位于它之下，文件夹通过 children 数组嵌套。",
+    "items": [
+      "书签：id、parentId、title、url 和 syncing。",
+      "文件夹：id、title、syncing 和 children，没有 parentId，因为嵌套关系就确定了位置。两个顶层文件夹还带有 folderType，取值为 bookmarks-bar 或 other。",
+      "可选字段：“添加日期”加入 dateAdded，“最近使用日期”加入 dateLastUsed，“文件夹修改日期”加入 dateGroupModified，“包含网站图标”加入 iconData。日期是自 1970 年起的整数秒。",
+      "选择文件夹：只写入你在“导出”页面勾选的内容。“隐藏其他书签”会把 Other bookmarks 的内容上移到顶层，“隐藏上级文件夹”会去掉普通文件夹并保留其中的书签。",
+      "文本：标题和地址的字符保持原样，例如 Café <résumé>。"
+    ]
+  },
+  "withSnug": {
+    "title": "用 Snug 导出 JSON",
+    "intro": "Snug 可在 Chrome 和其他基于 Chromium 的浏览器中运行。JSON 是可以连同文件夹和根位置一起原样恢复到 Snug 的格式。",
+    "steps": [
+      "从 Chrome 应用商店安装 Snug。",
+      "打开 Snug 的“导出”页面。搜索书签，然后勾选单个书签或整个文件夹，也可以使用“选择所有书签”。",
+      "在“导出格式”中选择 JSON。",
+      "打开“导出选项”，可以加入“添加日期”“最近使用日期”“文件夹修改日期”“包含网站图标”，或打开“隐藏其他书签”或“隐藏上级文件夹”。",
+      "编辑“文件名模板”来给文件命名。例如，%yyyy%mm%dd myPc 会得到类似 20260930 myPc.json 的名称。",
+      "点击“导出 N 个书签”，其中 N 是你勾选的数量。Snug 会下载文件。"
+    ],
+    "snapshot": "要把文件带回来，请打开 Snug 的“导入”页面并选择 JSON 文件。“预览”会先显示文件夹树。“创建文件夹”和“恢复——合并”会保留你现有的书签，在“恢复——替换”之前，Snug 会先保存安全快照。"
+  },
+  "sample": {
+    "title": "真实示例",
+    "intro": "这是导出器对一棵小型测试树的真实输出：书签栏（Bookmarks bar）中有一个名为 Dev, \"Tools\" 的文件夹，其他书签（Other bookmarks）中有一个书签。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "少了一个书签。只会写入你在“导出”页面勾选的内容。请勾选它所在的文件夹，或使用“选择所有书签”。",
+      "根节点的标题是空的。那是 id 为 0 的真正根节点，它让文件可以被 Snug 导入。",
+      "没有日期。只有在“导出选项”中打开“添加日期”“最近使用日期”或“文件夹修改日期”之一时才会出现。",
+      "其他浏览器不接受这个文件。这份 JSON 是给 Snug 和你自己的脚本使用的。要导入到其他浏览器，请使用 Chrome 自带导出得到的 HTML 文件。"
+    ]
+  },
+  "verified": "菜单路径和导出格式于{date}取自 {fromName} 的官方帮助页面。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。字段名和嵌套结构取自 Snug 的 JSON 导出器及其测试。"
+}

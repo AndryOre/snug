@@ -16,6 +16,11 @@ export const HOW_TO_GROUPS = [
 export type HowToGroup = (typeof HOW_TO_GROUPS)[number]
 
 /**
+ * Export formats a How-to page can show a real sample of.
+ */
+export type HowToSampleFormat = 'csv' | 'json'
+
+/**
  * What a How-to page declares about itself. Copy lives in
  * `src/content/how-to/<slug>/<locale>.json`.
  */
@@ -34,6 +39,11 @@ export interface HowToPageDefinition {
    * Slugs of other How-to pages.
    */
   relatedHowTo: readonly string[]
+  /**
+   * Format of the real exporter output shown as a sample on the page, taken
+   * from `src/content/how-to-samples/`.
+   */
+  sample?: HowToSampleFormat
 }
 
 /**
@@ -81,5 +91,59 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
       'move-bookmarks-from-edge-to-chrome',
       'move-bookmarks-from-firefox-to-chrome',
     ],
+  },
+  'move-bookmarks-from-chrome-to-opera': {
+    group: 'move',
+    from: 'chrome',
+    to: 'opera',
+    relatedGuide: ['guide/exporting', 'guide/importing', 'guide/duplicates'],
+    relatedHowTo: [
+      'move-bookmarks-from-chrome-to-edge',
+      'move-bookmarks-from-chrome-to-brave',
+    ],
+  },
+  'export-chrome-bookmarks-to-markdown': {
+    group: 'formats',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/exporting'],
+    relatedHowTo: ['move-bookmarks-from-chrome-to-edge'],
+  },
+  'back-up-chrome-bookmarks': {
+    group: 'backup',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/auto-export', 'guide/exporting'],
+    relatedHowTo: ['restore-chrome-bookmarks'],
+  },
+  'restore-chrome-bookmarks': {
+    group: 'backup',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/importing', 'guide/auto-export'],
+    relatedHowTo: ['back-up-chrome-bookmarks'],
+  },
+  'export-chrome-bookmarks-to-csv': {
+    group: 'formats',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/exporting'],
+    relatedHowTo: ['export-chrome-bookmarks-to-json'],
+    sample: 'csv',
+  },
+  'export-chrome-bookmarks-to-json': {
+    group: 'formats',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/exporting', 'guide/importing'],
+    relatedHowTo: ['export-chrome-bookmarks-to-csv'],
+    sample: 'json',
+  },
+  'remove-duplicate-bookmarks-in-chrome': {
+    group: 'duplicates',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/duplicates', 'guide/importing'],
+    relatedHowTo: [],
   },
 }

@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Déplacer ses favoris de Chrome vers Opera | Snug",
+    "description": "Déplacez vos favoris de Chrome vers Opera avec son import ou un fichier HTML : ce que dit l'aide et ce qu'ajoute Snug. Vérifié le {date}."
+  },
+  "title": "Comment déplacer mes favoris de Chrome vers Opera ?",
+  "directAnswer": "Dans Opera, ouvrez {toImportPath}. Sources d'import selon l'aide d'Opera : {toImportSources}. Pour utiliser un fichier, exportez-le d'abord depuis Chrome avec {fromExportPath}. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "Les méthodes intégrées",
+    "intro": "Opera a son propre import et Chrome enregistre un fichier : il y a donc deux voies. Cette page ne reprend que ce que disent les pages d'aide.",
+    "steps": [
+      "Import d'Opera : dans Opera, ouvrez {toImportPath} et suivez les options d'import affichées.",
+      "Avec un fichier : dans Chrome, ouvrez {fromExportPath}.",
+      "Avec un fichier : enregistrez le fichier. Chrome le nomme {fromExportFile}.",
+      "Avec un fichier : dans Opera, ouvrez {toImportPath} et choisissez le fichier enregistré, si l'import le propose."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qu'Opera importe et ce qu'il laisse de côté",
+    "intro": "Chaque ligne ci-dessous vient des pages d'aide, avec la source en bas de cette page.",
+    "items": [
+      "Sources d'import, selon l'aide d'Opera : {toImportSources}.",
+      "Où Opera place les favoris importés : {toImportPlacement}.",
+      "Conservé dans le fichier de Chrome, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier de Chrome, selon {fromName} : {fromHtmlDrops}.",
+      "Quand une page d'aide ne le précise pas, cette page écrit Non indiqué plutôt que de deviner."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome et Opera, deux navigateurs Chromium. Utilisez-le dans Chrome pour n'exporter que les dossiers choisis, puis dans Opera pour importer avec un aperçu.",
+    "steps": [
+      "Installez Snug dans Chrome et dans Opera.",
+      "Dans Chrome, ouvrez la page Exporter de Snug et utilisez les cases à cocher pour choisir les dossiers voulus, ou des favoris isolés.",
+      "Choisissez HTML comme format et cliquez sur Exporter. Snug télécharge le fichier.",
+      "Dans Opera, ouvrez la page Importer de Snug et choisissez-y le fichier, ou déposez-le sur la page. N'utilisez pas la fenêtre contextuelle pour cela : elle importe tout de suite, sans aperçu.",
+      "L'Aperçu montre le format détecté, le nombre de favoris et l'arborescence des dossiers, avant que rien ne change. Les favoris que Ignorer les doublons laisserait de côté sont signalés.",
+      "Choisissez un mode d'importation. Créer un dossier ajoute tout dans un nouveau dossier Favoris importés. Restaurer — fusionner place les favoris à leur emplacement d'origine, à côté des favoris existants, quand le fichier les contient.",
+      "Laissez Ignorer les doublons activé. L'option laisse de côté tout favori dont l'adresse est déjà dans Opera et indique combien elle en a ignoré."
+    ],
+    "snapshot": "Créer un dossier et Restaurer — fusionner ne vident jamais vos favoris. Avant un Restaurer — remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements et en garde une copie dans les Paramètres, pour que vous puissiez annuler l'importation."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Vous ne trouvez pas les favoris après l'import. Cherchez un favori que vous savez présent dans le fichier.",
+      "L'import d'Opera ne propose pas le fichier. Utilisez plutôt la page Importer de Snug : elle lit le fichier HTML par elle-même.",
+      "Un favori apparaît en double. Ouvrez Doublons dans Snug : il regroupe les copies par adresse et ne supprime que celles que vous marquez Supprimer.",
+      "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans votre navigateur. Désactivez Ignorer les doublons pour les importer de nouveau."
+    ]
+  },
+  "verified": "Les chemins de menu et les noms de fichier ont été lus sur les pages d'aide officielles de {fromName} et de {toName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

@@ -172,6 +172,8 @@ describe('bundled copy', () => {
   it.each([
     'move-bookmarks-from-edge-to-chrome',
     'move-bookmarks-from-chrome-to-brave',
+    'back-up-chrome-bookmarks',
+    'restore-chrome-bookmarks',
   ])('has %s in every locale with key parity', (slug) => {
     expect(howToPageLocales(slug)).toEqual([...LOCALES])
     for (const locale of LOCALES) {
@@ -286,6 +288,21 @@ describe('howToValues and interpolateHowTo', () => {
     expect(edge.fromExportPath).toBe('Not listed')
   })
 
+  it('resolves the Chrome profile Bookmarks file from the facts', () => {
+    const values = howToValues('en', 'back-up-chrome-bookmarks')
+
+    expect(values.fromProfileFile).toBe('Bookmarks')
+    expect(values.fromProfileFolderWindows).toBe(
+      String.raw`%LOCALAPPDATA%\Google\Chrome\User Data\Default`,
+    )
+    expect(values.fromProfileFolderMacos).toBe(
+      '~/Library/Application Support/Google/Chrome/Default',
+    )
+    expect(values.fromProfileFolderLinux).toBe(
+      '~/.config/google-chrome/Default',
+    )
+  })
+
   it('writes a fact that is not listed as the locale string', () => {
     expect(howToValues('en', SLUG).fromHtmlKeeps).toBe('Not listed')
     expect(howToValues('de', SLUG).fromHtmlKeeps).toBe(
@@ -318,6 +335,74 @@ describe('paths and sources', () => {
       expect(urls.length).toBeGreaterThan(0)
       for (const url of urls) expect(url).toMatch(/^https:\/\//)
     }
+  })
+})
+
+describe('sources of a same-browser page', () => {
+  it('lists the browser once when the page is about one browser', () => {
+    const slug = 'export-chrome-bookmarks-to-markdown'
+    expect(HOW_TO_PAGES[slug]?.from).toBe(HOW_TO_PAGES[slug]?.to)
+    expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
+  })
+
+  it('lists the browser once for a backup page', () => {
+    expect(
+      howToSources('back-up-chrome-bookmarks').map(({ browser }) => browser),
+    ).toEqual(['Chrome'])
+  })
+})
+
+describe('export pages', () => {
+  const exportSlugs = [
+    'export-chrome-bookmarks-to-csv',
+    'export-chrome-bookmarks-to-json',
+  ]
+
+  it.each(exportSlugs)(
+    'has %s in every locale with key parity and a sample',
+    (slug) => {
+      expect(howToPageLocales(slug)).toEqual([...LOCALES])
+      expect(getHowToPage(slug).sample).toBe(
+        slug.endsWith('csv') ? 'csv' : 'json',
+      )
+      for (const locale of LOCALES) {
+        expect(flattenKeys(getHowToContent(locale, slug) as never)).toEqual(
+          flattenKeys(getHowToContent('en', slug) as never),
+        )
+      }
+    },
+  )
+
+  it.each(exportSlugs)('sources Chrome once for %s', (slug) => {
+    expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
+    expect(howToValues('en', slug).fromExportFormats).toBe('HTML')
+  })
+})
+
+describe('remove-duplicate-bookmarks-in-chrome', () => {
+  const duplicatesSlug = 'remove-duplicate-bookmarks-in-chrome'
+
+  it('resolves the Bookmark Manager path from the facts module', () => {
+    expect(howToValues('en', duplicatesSlug).toBookmarkManagerPath).toBe(
+      'More > Bookmarks and lists > Bookmark manager',
+    )
+    expect(howToValues('en', SLUG).toBookmarkManagerPath).toBe(
+      'More > Bookmarks and lists > Bookmark manager',
+    )
+  })
+
+  it('lists a browser once in the sources', () => {
+    expect(howToSources(duplicatesSlug).map(({ browser }) => browser)).toEqual([
+      'Chrome',
+    ])
+  })
+
+  it('relates to the Duplicates and Importing Guide pages', () => {
+    expect(getHowToPage(duplicatesSlug).group).toBe('duplicates')
+    expect(getHowToPage(duplicatesSlug).relatedGuide).toEqual([
+      'guide/duplicates',
+      'guide/importing',
+    ])
   })
 })
 

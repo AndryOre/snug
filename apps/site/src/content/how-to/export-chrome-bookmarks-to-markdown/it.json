@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Esportare i segnalibri di Chrome in Markdown | Snug",
+    "description": "L'aiuto di Chrome descrive un solo formato, {fromExportFormats}. Esporta in Markdown con Snug: scegli le cartelle e imposta il nome. Controllato il {date}."
+  },
+  "title": "Come esporto i miei segnalibri di Chrome in Markdown?",
+  "directAnswer": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}: apri {fromExportPath} e Chrome salva {fromExportFile}. Per il Markdown, usa la pagina Esporta di Snug: scegli Markdown ed esporta, e Snug salva un file .md con le tue cartelle come elenco annidato. Percorsi dei menu controllati il {date}.",
+  "builtIn": {
+    "title": "L'esportazione propria di Chrome",
+    "intro": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, quindi i passaggi integrati qui sotto producono {fromExportFormats}. Il file Markdown lo aggiunge Snug.",
+    "steps": [
+      "In Chrome, apri {fromExportPath}.",
+      "Salva il file. Chrome lo chiama {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "Com'è fatto il file Markdown",
+    "intro": "Snug scrive titoli, indirizzi e struttura delle cartelle come elenco puntato annidato. Nel file non entra nient'altro.",
+    "items": [
+      "Un segnalibro diventa un punto elenco con un link, scritto come - [Titolo](indirizzo).",
+      "Una cartella diventa un semplice punto elenco. Il suo contenuto sta sotto, rientrato di due spazi per livello, e le cartelle vuote vengono mantenute.",
+      "Un'esportazione completa inizia con le cartelle Barra dei segnalibri e Altri segnalibri, con i nomi che Chrome mostra. Un'esportazione di cartelle selezionate inizia con le cartelle che hai scelto.",
+      "Esempio: un segnalibro Docs in una cartella Dev sulla barra dei segnalibri diventa tre righe: - Barra dei segnalibri, poi - Dev, poi - [Docs](https://example.com/docs), ciascuna rientrata di due spazi in più della precedente.",
+      "Le date non vengono mai scritte nel Markdown. I caratteri che il Markdown leggerebbe male, come parentesi quadre, asterischi, trattini bassi e apici inversi, ricevono una barra rovesciata. Gli a capo in un titolo diventano spazi, e un segnalibro senza titolo usa il proprio indirizzo come testo del link.",
+      "Snug esporta il Markdown ma non lo importa. Tieni anche un'esportazione HTML o JSON se vuoi ripristinare in seguito."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome, un browser Chromium. La sua pagina Esporta scrive il file Markdown dalle cartelle che selezioni.",
+    "steps": [
+      "Installa Snug in Chrome.",
+      "Apri la pagina Esporta di Snug. Seleziona le cartelle o i singoli segnalibri che vuoi, oppure usa Seleziona tutti i segnalibri per prendere tutto.",
+      "Imposta Formato di esportazione su Markdown.",
+      "In Opzioni di esportazione, modifica Modello del nome file. La riga Anteprima sotto mostra il nome che Snug userà. Il valore predefinito è Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, e %yyyy, %yy, %mm, %dd, %hh, %min e %sec vengono sostituiti da data e ora dell'esportazione.",
+      "Facoltativo: attiva Nascondi Altri segnalibri per elencare il contenuto di Altri segnalibri senza quel punto elenco di cartella, oppure Nascondi la cartella principale per elencare i segnalibri senza i punti elenco delle loro cartelle, tranne le due cartelle in alto.",
+      "Fai clic sul pulsante Esporta. Snug salva un file con estensione .md tramite il download del browser."
+    ],
+    "snapshot": "L'esportazione legge soltanto i tuoi segnalibri e non cambia nulla. Al termine, Snug mostra quanti segnalibri ha esportato e il nome del file."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Il file non ha date. Il Markdown non le contiene mai. Esporta in HTML o JSON, dove valgono le opzioni sulle date.",
+      "Manca una cartella. Vengono esportati solo le cartelle e i segnalibri che hai selezionato. Controlla il conteggio della selezione prima di esportare.",
+      "Un titolo appare diverso. Snug mette una barra rovesciata davanti ai caratteri che il Markdown leggerebbe male, e un visualizzatore Markdown li mostra come caratteri normali.",
+      "Il nome del file contiene trattini bassi che non hai scritto. I caratteri che i file system rifiutano, come / : * ? e |, diventano trattini bassi."
+    ]
+  },
+  "verified": "I percorsi dei menu e i nomi dei file sono stati letti nelle pagine di aiuto ufficiali di {fromName} il {date}. La forma del file deriva dall'esportatore Markdown di Snug. I menu dei browser cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo."
+}

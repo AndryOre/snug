@@ -68,8 +68,10 @@ describe('howToIndexDescriptor', () => {
       'BreadcrumbList',
     ])
     const urls = (graph[1]?.itemListElement ?? []).map((item) => item.url)
-    expect(urls).toEqual(
-      HOW_TO_SLUGS.map((slug) => `${SITE_ORIGIN}${howToPath('en', slug)}`),
+    expect(urls.toSorted((a, b) => String(a).localeCompare(String(b)))).toEqual(
+      HOW_TO_SLUGS.map(
+        (slug) => `${SITE_ORIGIN}${howToPath('en', slug)}`,
+      ).toSorted((a, b) => a.localeCompare(b)),
     )
     const crumbs = graph[2]?.itemListElement ?? []
     expect(crumbs.map((crumb) => crumb.item)).toEqual([

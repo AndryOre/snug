@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Exportar marcadores de Chrome a Markdown | Snug",
+    "description": "La ayuda de Chrome describe un solo formato, {fromExportFormats}. Exporta a Markdown con Snug: elige carpetas y define el nombre. Comprobado el {date}."
+  },
+  "title": "¿Cómo exporto mis marcadores de Chrome a Markdown?",
+  "directAnswer": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}: abre {fromExportPath} y Chrome guarda {fromExportFile}. Para Markdown, usa la página Exportar de Snug: elige Markdown y exporta, y Snug guarda un archivo .md con tus carpetas como lista anidada. Rutas de menú comprobadas el {date}.",
+  "builtIn": {
+    "title": "La exportación propia de Chrome",
+    "intro": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, así que los pasos integrados de abajo producen {fromExportFormats}. El archivo Markdown lo añade Snug.",
+    "steps": [
+      "En Chrome, abre {fromExportPath}.",
+      "Guarda el archivo. Chrome lo llama {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cómo es el archivo Markdown",
+    "intro": "Snug escribe títulos, direcciones y estructura de carpetas como una lista de viñetas anidada. Nada más entra en el archivo.",
+    "items": [
+      "Un marcador se convierte en una viñeta con un enlace, escrito como - [Título](dirección).",
+      "Una carpeta se convierte en una viñeta simple. Su contenido queda debajo, con dos espacios de sangría por nivel, y las carpetas vacías se conservan.",
+      "Una exportación completa empieza con las carpetas Barra de marcadores y Otros marcadores, con los nombres que muestra Chrome. Una exportación de carpetas seleccionadas empieza con las carpetas que elegiste.",
+      "Ejemplo: un marcador Docs dentro de una carpeta Dev en la barra de marcadores se convierte en tres líneas: - Barra de marcadores, luego - Dev, luego - [Docs](https://example.com/docs), cada una con dos espacios más de sangría que la anterior.",
+      "Las fechas nunca se escriben en Markdown. Los caracteres que Markdown leería mal, como corchetes, asteriscos, guiones bajos y comillas invertidas, llevan una barra invertida. Los saltos de línea de un título pasan a espacios, y un marcador sin título usa su dirección como texto del enlace.",
+      "Snug exporta Markdown pero no lo importa. Conserva también una exportación HTML o JSON si quieres restaurar más adelante."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome, un navegador Chromium. Su página Exportar escribe el archivo Markdown con las carpetas que marcas.",
+    "steps": [
+      "Instala Snug en Chrome.",
+      "Abre la página Exportar de Snug. Marca las carpetas o marcadores sueltos que quieras, o usa Seleccionar todos los marcadores para todo.",
+      "Cambia Formato de exportación a Markdown.",
+      "En Opciones de exportación, edita Plantilla de nombre de archivo. La línea Vista previa que hay debajo muestra el nombre que usará Snug. El valor por defecto es Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, y %yyyy, %yy, %mm, %dd, %hh, %min y %sec se sustituyen por la fecha y la hora de la exportación.",
+      "Opcional: activa Ocultar otros marcadores para listar el contenido de Otros marcadores sin esa viñeta de carpeta, o Ocultar carpeta superior para listar los marcadores sin las viñetas de sus carpetas, salvo las dos carpetas principales.",
+      "Haz clic en el botón Exportar. Snug guarda un archivo con extensión .md mediante la descarga de tu navegador."
+    ],
+    "snapshot": "Exportar solo lee tus marcadores y no cambia nada. Al terminar, Snug muestra cuántos marcadores exportó y el nombre del archivo."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "El archivo no tiene fechas. Markdown nunca las incluye. Exporta HTML o JSON, donde se aplican las opciones de fecha.",
+      "Falta una carpeta. Solo se exportan las carpetas y los marcadores que marcaste. Revisa el recuento de la selección antes de exportar.",
+      "Un título se ve distinto. Snug pone una barra invertida antes de los caracteres que Markdown leería mal, y un visor de Markdown los muestra como caracteres normales.",
+      "El nombre del archivo tiene guiones bajos que no escribiste. Los caracteres que los sistemas de archivos rechazan, como / : * ? y |, se convierten en guiones bajos."
+    ]
+  },
+  "verified": "Las rutas de menú y los nombres de archivo se leyeron en las páginas de ayuda oficiales de {fromName} el {date}. La forma del archivo sale del exportador Markdown de Snug. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+}

@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Exporter ses favoris Chrome en Markdown | Snug",
+    "description": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats}. Exportez en Markdown avec Snug : dossiers, nom et forme du fichier. Vérifié le {date}."
+  },
+  "title": "Comment exporter mes favoris Chrome en Markdown ?",
+  "directAnswer": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats} : ouvrez {fromExportPath} et Chrome enregistre {fromExportFile}. Pour du Markdown, utilisez la page Exporter de Snug : choisissez Markdown et exportez, et Snug enregistre un fichier .md avec vos dossiers sous forme de liste imbriquée. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "L'export propre à Chrome",
+    "intro": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats} : les étapes intégrées ci-dessous produisent donc du {fromExportFormats}. Le fichier Markdown vient de Snug.",
+    "steps": [
+      "Dans Chrome, ouvrez {fromExportPath}.",
+      "Enregistrez le fichier. Chrome le nomme {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "À quoi ressemble le fichier Markdown",
+    "intro": "Snug écrit les titres, les adresses et la structure des dossiers sous forme de liste à puces imbriquée. Rien d'autre n'entre dans le fichier.",
+    "items": [
+      "Un favori devient une puce avec un lien, écrite - [Titre](adresse).",
+      "Un dossier devient une puce simple. Son contenu se place dessous, indenté de deux espaces par niveau, et les dossiers vides sont conservés.",
+      "Un export complet commence par les dossiers Barre de favoris et Autres favoris, nommés comme Chrome les affiche. Un export de dossiers sélectionnés commence par les dossiers choisis.",
+      "Exemple : un favori Docs dans un dossier Dev de la barre de favoris donne trois lignes : - Barre de favoris, puis - Dev, puis - [Docs](https://example.com/docs), chacune indentée de deux espaces de plus que la précédente.",
+      "Les dates ne sont jamais écrites dans le Markdown. Les caractères que Markdown lirait mal, comme les crochets, les astérisques, les tirets bas et les accents graves, reçoivent une barre oblique inverse. Les sauts de ligne d'un titre deviennent des espaces, et un favori sans titre utilise son adresse comme texte du lien.",
+      "Snug exporte le Markdown mais ne l'importe pas. Gardez aussi un export HTML ou JSON si vous voulez restaurer plus tard."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome, un navigateur Chromium. Sa page Exporter écrit le fichier Markdown à partir des dossiers que vous cochez.",
+    "steps": [
+      "Installez Snug dans Chrome.",
+      "Ouvrez la page Exporter de Snug. Cochez les dossiers ou les favoris isolés voulus, ou utilisez Sélectionner tous les favoris pour tout prendre.",
+      "Réglez Format d'exportation sur Markdown.",
+      "Dans Options d'exportation, modifiez Modèle de nom de fichier. La ligne Aperçu en dessous montre le nom que Snug utilisera. La valeur par défaut est Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, et %yyyy, %yy, %mm, %dd, %hh, %min et %sec sont remplacés par la date et l'heure de l'export.",
+      "Facultatif : activez Masquer les autres favoris pour lister le contenu d'Autres favoris sans cette puce de dossier, ou Masquer le dossier parent pour lister les favoris sans les puces de leurs dossiers, sauf les deux dossiers du haut.",
+      "Cliquez sur le bouton Exporter. Snug enregistre un fichier d'extension .md via le téléchargement de votre navigateur."
+    ],
+    "snapshot": "L'export lit seulement vos favoris et ne change rien. À la fin, Snug indique combien de favoris il a exportés et le nom du fichier."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Le fichier n'a pas de dates. Le Markdown n'en porte jamais. Exportez en HTML ou en JSON, où les options de date s'appliquent.",
+      "Un dossier manque. Seuls les dossiers et favoris que vous avez cochés sont exportés. Vérifiez le nombre de la sélection avant d'exporter.",
+      "Un titre a l'air différent. Snug place une barre oblique inverse devant les caractères que Markdown lirait mal, et un lecteur Markdown les affiche comme des caractères ordinaires.",
+      "Le nom du fichier contient des tirets bas que vous n'avez pas saisis. Les caractères que les systèmes de fichiers refusent, comme / : * ? et |, deviennent des tirets bas."
+    ]
+  },
+  "verified": "Les chemins de menu et les noms de fichier ont été lus sur les pages d'aide officielles de {fromName} le {date}. La forme du fichier vient de l'exporteur Markdown de Snug. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

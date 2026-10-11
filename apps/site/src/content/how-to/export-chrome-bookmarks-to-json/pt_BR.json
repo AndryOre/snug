@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Exportar favoritos do Chrome para JSON | Snug",
+    "description": "Exporte favoritos do Chrome para JSON com o Snug: a árvore de pastas como dados aninhados, campos reais e reimportação. Verificado em {date}."
+  },
+  "title": "Como exporto meus favoritos do Chrome para JSON?",
+  "directAnswer": "A ajuda do Chrome descreve um único formato de exportação, {fromExportFormats}, acessível por {fromExportPath}. Para JSON, use a página Exportar do Snug: ela grava a árvore de pastas como dados aninhados que o Snug pode importar de volta com as pastas no lugar. Caminhos de menu verificados em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "A ajuda do Chrome descreve um único formato de exportação, {fromExportFormats}, então o navegador não tem opção própria de CSV nem de JSON. A exportação dele continua sendo a escolha certa quando o arquivo vai para outro navegador.",
+    "steps": [
+      "No Chrome, abra {fromExportPath}.",
+      "Salve o arquivo. O Chrome o chama de {fromExportFile} por padrão.",
+      "Para ter a árvore de pastas como dados, continue abaixo com o Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que o JSON contém",
+    "intro": "O arquivo é uma lista de um item que contém um nó raiz com id 0. Bookmarks bar e Other bookmarks ficam sob ele, e as pastas se aninham por listas children.",
+    "items": [
+      "Favoritos: id, parentId, title, url e syncing.",
+      "Pastas: id, title, syncing e children, sem parentId porque o aninhamento indica o lugar delas. As duas pastas de nível superior também levam folderType, bookmarks-bar ou other.",
+      "Campos opcionais: Data de criação acrescenta dateAdded, Data do último uso acrescenta dateLastUsed, Datas de modificação das pastas acrescenta dateGroupModified e Incluir favicons acrescenta iconData. As datas são segundos inteiros desde 1970.",
+      "Escolher pastas: só é gravado o que você marca na página Exportar. Ocultar Outros favoritos sobe o conteúdo de Other bookmarks para o nível superior, e Ocultar pasta principal remove as pastas comuns e mantém os favoritos delas.",
+      "Texto: títulos e endereços mantêm os caracteres como estão, por exemplo Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Exportar JSON com o Snug",
+    "intro": "O Snug funciona no Chrome e em outros navegadores Chromium. JSON é o formato que se restaura no Snug com as pastas e os locais raiz intactos.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store.",
+      "Abra a página Exportar do Snug. Pesquise favoritos e marque favoritos soltos ou pastas inteiras, ou use Selecionar todos os favoritos.",
+      "Em Formato de exportação, escolha JSON.",
+      "Abra Opções de exportação para adicionar Data de criação, Data do último uso, Datas de modificação das pastas ou Incluir favicons, ou para ativar Ocultar Outros favoritos ou Ocultar pasta principal.",
+      "Edite Modelo de nome de arquivo para nomear o arquivo. Por exemplo, %yyyy%mm%dd myPc gera um nome como 20260930 myPc.json.",
+      "Clique em Exportar N favoritos, em que N é a quantidade marcada. O Snug baixa o arquivo."
+    ],
+    "snapshot": "Para trazer o arquivo de volta, abra a página Importar do Snug e escolha o arquivo JSON. A pré-visualização mostra primeiro a árvore de pastas. Criar pasta e Restaurar — mesclar mantêm seus favoritos atuais, e antes de Restaurar — substituir o Snug salva um instantâneo de segurança."
+  },
+  "sample": {
+    "title": "Um exemplo real",
+    "intro": "Esta é a saída real do exportador para uma pequena árvore de teste: uma pasta chamada Dev, \"Tools\" na barra de favoritos (Bookmarks bar) e um favorito em Outros favoritos (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Falta um favorito. Só é gravado o que você marcou na página Exportar. Marque a pasta dele ou use Selecionar todos os favoritos.",
+      "A raiz tem um título vazio. É o nó raiz de verdade, com id 0, e ele mantém o arquivo importável pelo Snug.",
+      "Faltam as datas. Elas só aparecem quando Data de criação, Data do último uso ou Datas de modificação das pastas está ativada em Opções de exportação.",
+      "Outro navegador não aceita o arquivo. Este JSON é feito para o Snug e para seus próprios scripts. Para a importação de outro navegador, use o arquivo HTML da exportação integrada do Chrome."
+    ]
+  },
+  "verified": "O caminho de menu e o formato de exportação foram lidos nas páginas de ajuda oficiais de {fromName} em {date}. Os menus mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela. Os nomes dos campos e o aninhamento vêm do exportador JSON do Snug e dos testes dele."
+}

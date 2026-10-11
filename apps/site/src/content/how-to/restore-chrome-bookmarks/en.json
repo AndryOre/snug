@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Restore Chrome Bookmarks From a Backup | Snug",
+    "description": "Restore Chrome bookmarks from an HTML backup with Chrome's import, or with Snug's preview, Merge or Replace, and Undo. Menu paths verified {date}."
+  },
+  "title": "How do I restore my Chrome bookmarks from a backup?",
+  "directAnswer": "In Chrome, open {toImportPath} and choose your bookmarks HTML file. Chrome adds the bookmarks to {toImportPlacement}.",
+  "builtIn": {
+    "title": "The built-in way",
+    "intro": "Chrome imports a bookmarks HTML file, such as the one you saved when you backed up.",
+    "steps": [
+      "Find the backup file. A Chrome export is named {fromExportFile}.",
+      "In Chrome, open {toImportPath}.",
+      "Choose {toImportSources} as the source and select your file.",
+      "Look for the bookmarks in {toImportPlacement}, then move them where you want them."
+    ]
+  },
+  "carriesOver": {
+    "title": "What a restore brings back",
+    "intro": "A restore brings back the bookmarks the file holds, and only those.",
+    "items": [
+      "Kept in the HTML file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of the HTML file, per {fromName}: {fromHtmlDrops}.",
+      "Chrome puts the file's bookmarks in {toImportPlacement}, so bookmarks you already have can appear twice.",
+      "The profile file {fromProfileFile} is not an HTML file. Chrome's import lists these sources: {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome. It restores from the files Auto-export saved or from any bookmarks file, and shows a preview before anything changes.",
+    "steps": [
+      "In Chrome, open Snug's Import page and choose the file there, or drop it on the page. Do not use the popup for this: it imports at once, without a preview.",
+      "The Preview shows the detected format, the bookmark count and the folder tree before anything changes. Bookmarks that Skip duplicates would leave out are marked.",
+      "Choose a mode. Restore — merge places bookmarks in their original locations next to the ones you have. Restore — replace clears your Bookmarks Bar and Other Bookmarks first, then restores the file's bookmarks to their original locations. Both need a file that carries location data.",
+      "With Restore — merge you can check single bookmarks or whole folders and import only that selection. Restore — replace always imports everything and takes one file at a time.",
+      "Restore — replace shows how many bookmarks it will remove and add, lists the ones it will delete, and asks you to confirm before it runs.",
+      "After a replace, click Undo import on the result to put your earlier bookmarks back."
+    ],
+    "snapshot": "Before every Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps a copy inside the extension. If the snapshot cannot be saved, nothing is deleted. Settings lists the latest five snapshots, which you can restore or download, and a sixth replaces the oldest. Everything stays on your device and Snug makes no network requests."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "You cannot find the bookmarks after Chrome's import. Chrome places them in {toImportPlacement}.",
+      "Chrome does not accept the file. Its import lists these sources: {toImportSources}. Check that the file is a bookmarks HTML file.",
+      "Restore — replace is unavailable. It needs a file with location data and one file at a time. Use Restore — merge, or Create folder, which works for any file.",
+      "You replaced and want your old bookmarks back. Click Undo import, or restore a Safety snapshot in Settings.",
+      "Snug says nothing was imported. Every bookmark in the file is already in your browser. Turn off Skip duplicates to import them again."
+    ]
+  },
+  "verified": "Menu paths, file names and profile folders were read from {fromName}'s help pages and Chromium's own documents on {date}. Browser menus change between versions, so check the source if a path differs on your screen. Snug's behavior comes from its Importing guide."
+}

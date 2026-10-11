@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Restaurar favoritos do Chrome de um backup | Snug",
+    "description": "Restaure favoritos do Chrome de um backup HTML com a importação do Chrome ou com o Snug: prévia, mesclar, substituir. Verificado em {date}."
+  },
+  "title": "Como restauro meus favoritos do Chrome de um backup?",
+  "directAnswer": "No Chrome, abra {toImportPath} e escolha seu arquivo HTML de favoritos. O Chrome adiciona os favoritos em {toImportPlacement}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "O Chrome importa um arquivo HTML de favoritos, como o que você salvou ao fazer o backup.",
+    "steps": [
+      "Encontre o arquivo de backup. Uma exportação do Chrome se chama {fromExportFile}.",
+      "No Chrome, abra {toImportPath}.",
+      "Escolha {toImportSources} como origem e selecione seu arquivo.",
+      "Procure os favoritos em {toImportPlacement} e mova-os para onde quiser."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que uma restauração traz de volta",
+    "intro": "Uma restauração traz de volta os favoritos que o arquivo contém, e só esses.",
+    "items": [
+      "Mantido no arquivo HTML, segundo {fromName}: {fromHtmlKeeps}.",
+      "Deixado de fora do arquivo HTML, segundo {fromName}: {fromHtmlDrops}.",
+      "O Chrome coloca os favoritos do arquivo em {toImportPlacement}, então favoritos que você já tem podem aparecer duas vezes.",
+      "O arquivo de perfil {fromProfileFile} não é um arquivo HTML. A importação do Chrome lista estas origens: {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome. Ele restaura a partir dos arquivos que a exportação automática salvou ou de qualquer arquivo de favoritos, e mostra uma pré-visualização antes de mudar qualquer coisa.",
+    "steps": [
+      "No Chrome, abra a página Importar do Snug e escolha lá o arquivo, ou solte-o na página. Não use o pop-up para isso: ele importa na hora, sem pré-visualização.",
+      "A Pré-visualização mostra o formato detectado, a quantidade de favoritos e a árvore de pastas, antes de qualquer mudança. Os favoritos que Ignorar duplicados deixaria de fora aparecem marcados.",
+      "Escolha um modo. Restaurar — mesclar coloca os favoritos em seus locais originais ao lado dos que você já tem. Restaurar — substituir esvazia primeiro sua Barra de favoritos e Outros favoritos e depois restaura os do arquivo em seus locais originais. Os dois exigem um arquivo com dados de localização.",
+      "Com Restaurar — mesclar você pode marcar favoritos avulsos ou pastas inteiras e importar só essa seleção. Restaurar — substituir sempre importa tudo e aceita um arquivo por vez.",
+      "Restaurar — substituir mostra quantos favoritos serão removidos e adicionados, lista os que serão apagados e pede confirmação antes de rodar.",
+      "Depois de uma substituição, clique em Desfazer importação no resultado para recuperar seus favoritos anteriores."
+    ],
+    "snapshot": "Antes de cada Restaurar — substituir, o Snug salva um instantâneo de segurança em Downloads e guarda uma cópia dentro da extensão. Se o instantâneo não puder ser salvo, nada é apagado. As Configurações listam os cinco últimos instantâneos, que você pode restaurar ou baixar, e um sexto substitui o mais antigo. Tudo fica no seu dispositivo e o Snug não faz requisições de rede."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Você não encontra os favoritos depois da importação do Chrome. O Chrome os coloca em {toImportPlacement}.",
+      "O Chrome não aceita o arquivo. A importação dele lista estas origens: {toImportSources}. Confira se o arquivo é um HTML de favoritos.",
+      "Restaurar — substituir não está disponível. Ele exige um arquivo com dados de localização e um arquivo por vez. Use Restaurar — mesclar ou Criar pasta, que funciona com qualquer arquivo.",
+      "Você substituiu e quer seus favoritos antigos de volta. Clique em Desfazer importação ou restaure um instantâneo de segurança nas Configurações.",
+      "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no seu navegador. Desative Ignorar duplicados para importá-los de novo."
+    ]
+  },
+  "verified": "Caminhos de menu, nomes de arquivo e pastas de perfil foram lidos nas páginas de ajuda de {fromName} e nos documentos do Chromium em {date}. Os menus do navegador mudam entre versões, então confira a fonte se um caminho for diferente na sua tela. O comportamento do Snug vem do seu guia de importação."
+}

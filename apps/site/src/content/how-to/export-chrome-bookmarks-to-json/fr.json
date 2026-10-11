@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Exporter les favoris Chrome en JSON | Snug",
+    "description": "Exportez les favoris Chrome en JSON avec Snug : l'arborescence en données imbriquées, vrais noms de champs, choix des dossiers. Vérifié le {date}."
+  },
+  "title": "Comment exporter mes favoris Chrome en JSON ?",
+  "directAnswer": "L'aide de Chrome décrit un seul format d'exportation, {fromExportFormats}, accessible par {fromExportPath}. Pour le JSON, utilisez la page Exporter de Snug : elle écrit l'arborescence en données imbriquées que Snug peut réimporter avec les dossiers en place. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "L'aide de Chrome décrit un seul format d'exportation, {fromExportFormats}. Le navigateur n'a donc pas d'option CSV ou JSON propre. Son exportation reste le bon choix quand le fichier est destiné à un autre navigateur.",
+    "steps": [
+      "Dans Chrome, ouvrez {fromExportPath}.",
+      "Enregistrez le fichier. Chrome le nomme {fromExportFile} par défaut.",
+      "Pour obtenir l'arborescence des dossiers sous forme de données, continuez ci-dessous avec Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce que contient le JSON",
+    "intro": "Le fichier est un tableau d'un élément contenant un nœud racine d'id 0. Bookmarks bar et Other bookmarks s'y trouvent, et les dossiers s'imbriquent par des tableaux children.",
+    "items": [
+      "Favoris : id, parentId, title, url et syncing.",
+      "Dossiers : id, title, syncing et children, sans parentId puisque l'imbrication donne leur place. Les deux dossiers de premier niveau portent aussi folderType, bookmarks-bar ou other.",
+      "Champs facultatifs : Date d'ajout ajoute dateAdded, Date de dernière utilisation ajoute dateLastUsed, Dates de modification des dossiers ajoute dateGroupModified et Inclure les favicons ajoute iconData. Les dates sont des secondes entières depuis 1970.",
+      "Choisir les dossiers : seul ce que vous cochez sur la page Exporter est écrit. Masquer les autres favoris remonte le contenu de Other bookmarks au premier niveau, et Masquer le dossier parent supprime les dossiers ordinaires en gardant leurs favoris.",
+      "Texte : les titres et les adresses gardent leurs caractères tels quels, par exemple Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Exporter en JSON avec Snug",
+    "intro": "Snug fonctionne dans Chrome et les autres navigateurs Chromium. Le JSON est le format qui se restaure dans Snug avec les dossiers et les emplacements racine intacts.",
+    "steps": [
+      "Installez Snug depuis le Chrome Web Store.",
+      "Ouvrez la page Exporter de Snug. Recherchez des favoris, puis cochez des favoris isolés ou des dossiers entiers, ou utilisez Sélectionner tous les favoris.",
+      "Sous Format d'exportation, choisissez JSON.",
+      "Ouvrez Options d'exportation pour ajouter Date d'ajout, Date de dernière utilisation, Dates de modification des dossiers ou Inclure les favicons, ou pour activer Masquer les autres favoris ou Masquer le dossier parent.",
+      "Modifiez Modèle de nom de fichier pour nommer le fichier. Par exemple, %yyyy%mm%dd myPc donne un nom comme 20260930 myPc.json.",
+      "Cliquez sur Exporter N favoris, où N est le nombre d'éléments cochés. Snug télécharge le fichier."
+    ],
+    "snapshot": "Pour récupérer le fichier, ouvrez la page Importer de Snug et choisissez le fichier JSON. L'aperçu montre d'abord l'arborescence. Créer un dossier et Restaurer — fusionner conservent vos favoris actuels, et avant Restaurer — remplacer, Snug enregistre un instantané de sécurité."
+  },
+  "sample": {
+    "title": "Un exemple réel",
+    "intro": "Voici la sortie réelle de l'exporteur pour une petite arborescence de test : un dossier nommé Dev, \"Tools\" dans la barre de favoris (Bookmarks bar) et un favori dans Autres favoris (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Si quelque chose ne va pas",
+    "items": [
+      "Un favori manque. Seul ce que vous avez coché sur la page Exporter est écrit. Cochez son dossier, ou utilisez Sélectionner tous les favoris.",
+      "La racine a un titre vide. C'est le vrai nœud racine, d'id 0, et il garde le fichier importable par Snug.",
+      "Les dates manquent. Elles n'apparaissent que si Date d'ajout, Date de dernière utilisation ou Dates de modification des dossiers est activé dans Options d'exportation.",
+      "Un autre navigateur n'accepte pas le fichier. Ce JSON est prévu pour Snug et vos propres scripts. Pour l'importation d'un autre navigateur, utilisez le fichier HTML de l'exportation intégrée de Chrome."
+    ]
+  },
+  "verified": "Le chemin de menu et le format d'exportation ont été lus sur les pages d'aide officielles de {fromName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran. Les noms de champs et l'imbrication proviennent de l'exporteur JSON de Snug et de ses tests."
+}

@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Chrome-Lesezeichen aus Sicherung wiederherstellen | Snug",
+    "description": "Chrome-Lesezeichen aus HTML-Sicherung wiederherstellen: mit Chromes Import oder mit Snug samt Vorschau, Zusammenführen, Ersetzen. Stand {date}."
+  },
+  "title": "Wie stelle ich meine Chrome-Lesezeichen aus einer Sicherung wieder her?",
+  "directAnswer": "Öffne in Chrome {toImportPath} und wähle deine HTML-Datei mit Lesezeichen. Chrome legt die Lesezeichen in {toImportPlacement} ab.",
+  "builtIn": {
+    "title": "Der integrierte Weg",
+    "intro": "Chrome importiert eine HTML-Datei mit Lesezeichen, etwa die, die du bei der Sicherung gespeichert hast.",
+    "steps": [
+      "Suche die Sicherungsdatei. Ein Chrome-Export heißt {fromExportFile}.",
+      "Öffne in Chrome {toImportPath}.",
+      "Wähle {toImportSources} als Quelle und wähle deine Datei aus.",
+      "Suche die Lesezeichen in {toImportPlacement} und verschiebe sie dorthin, wo du sie haben willst."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was eine Wiederherstellung zurückbringt",
+    "intro": "Eine Wiederherstellung bringt die Lesezeichen zurück, die in der Datei stehen, und nur diese.",
+    "items": [
+      "In der HTML-Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "In der HTML-Datei nicht enthalten, laut {fromName}: {fromHtmlDrops}.",
+      "Chrome legt die Lesezeichen der Datei in {toImportPlacement} ab, daher können Lesezeichen, die du schon hast, doppelt erscheinen.",
+      "Die Profildatei {fromProfileFile} ist keine HTML-Datei. Der Import von Chrome nennt diese Quellen: {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome. Es stellt aus den Dateien des Auto-Exports oder aus jeder Lesezeichen-Datei wieder her und zeigt eine Vorschau, bevor sich etwas ändert.",
+    "steps": [
+      "Öffne in Chrome die Seite Import von Snug und wähle dort die Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert. Lesezeichen, die Duplikate überspringen auslassen würde, sind markiert.",
+      "Wähle einen Modus. Wiederherstellen – zusammenführen legt Lesezeichen an ihren ursprünglichen Orten neben deinen vorhandenen ab. Wiederherstellen – ersetzen leert zuerst deine Lesezeichenleiste und die weiteren Lesezeichen und stellt dann die Lesezeichen der Datei an ihren ursprünglichen Orten wieder her. Beide brauchen eine Datei mit Ortsangaben.",
+      "Bei Wiederherstellen – zusammenführen kannst du einzelne Lesezeichen oder ganze Ordner anhaken und nur diese Auswahl importieren. Wiederherstellen – ersetzen importiert immer alles und nimmt eine Datei auf einmal.",
+      "Wiederherstellen – ersetzen zeigt, wie viele Lesezeichen entfernt und hinzugefügt werden, listet die zu löschenden auf und verlangt eine Bestätigung, bevor es läuft.",
+      "Klicke nach einem Ersetzen im Ergebnis auf Import rückgängig machen, um deine früheren Lesezeichen zurückzuholen."
+    ],
+    "snapshot": "Vor jedem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in der Erweiterung. Lässt sich der Snapshot nicht speichern, wird nichts gelöscht. Die Einstellungen listen die letzten fünf Snapshots, die du wiederherstellen oder herunterladen kannst; ein sechster ersetzt den ältesten. Alles bleibt auf deinem Gerät und Snug stellt keine Netzwerkanfragen."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import von Chrome nicht. Chrome legt sie in {toImportPlacement} ab.",
+      "Chrome nimmt die Datei nicht an. Der Import nennt diese Quellen: {toImportSources}. Prüfe, ob die Datei eine HTML-Datei mit Lesezeichen ist.",
+      "Wiederherstellen – ersetzen ist nicht verfügbar. Es braucht eine Datei mit Ortsangaben und nur eine Datei auf einmal. Nutze Wiederherstellen – zusammenführen oder Ordner erstellen, das mit jeder Datei funktioniert.",
+      "Du hast ersetzt und willst deine alten Lesezeichen zurück. Klicke auf Import rückgängig machen oder stelle in den Einstellungen einen Sicherheits-Snapshot wieder her.",
+      "Snug meldet, dass nichts importiert wurde. Jedes Lesezeichen der Datei ist schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Menüpfade, Dateinamen und Profilordner stammen aus den Hilfeseiten von {fromName} und aus Chromiums eigenen Dokumenten, gelesen am {date}. Browsermenüs ändern sich zwischen Versionen, prüfe also die Quelle, falls ein Pfad auf deinem Bildschirm abweicht. Das Verhalten von Snug stammt aus seinem Guide zum Importieren."
+}
