@@ -45,7 +45,7 @@
       "Due segnalibri dello stesso sito non sono raggruppati. I loro indirizzi differiscono dopo la normalizzazione, per esempio nel percorso o nella query. Snug li lascia stare di proposito.",
       "La copia sbagliata è contrassegnata come Elimina. Scegli Mantieni sulla copia che vuoi prima di confermare.",
       "Una copia non viene mai contrassegnata come Elimina. I segnalibri gestiti dalla tua organizzazione non si possono rimuovere, quindi Snug non li contrassegna mai.",
-      "Hai eliminato un segnalibro che ti serviva. Importa con {toImportPath} il file HTML esportato in precedenza, con Salta i duplicati attivo, così tornano solo i segnalibri mancanti. Chrome li inserisce in {toImportPlacement}.",
+      "Hai eliminato un segnalibro che ti serviva. Importa il file HTML esportato in precedenza dalla pagina Importa di Snug con Salta duplicati attivo, così tornano solo i segnalibri mancanti.",
       "Snug dice che non è stato importato nulla. Ogni segnalibro del file è già in Chrome. Disattiva Salta i duplicati per importarli di nuovo."
     ]
   },

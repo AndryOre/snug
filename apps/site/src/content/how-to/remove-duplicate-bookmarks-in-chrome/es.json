@@ -45,7 +45,7 @@
       "Dos marcadores del mismo sitio no aparecen agrupados. Sus direcciones difieren tras normalizarlas, por ejemplo en la ruta o en la cadena de consulta. Snug los deja como están a propósito.",
       "La copia equivocada está marcada como Eliminar. Elige Conservar en la copia que quieres antes de confirmar.",
       "Una copia nunca se marca como Eliminar. Los marcadores que administra tu organización no se pueden eliminar, así que Snug nunca los marca.",
-      "Eliminaste un marcador que necesitabas. Importa con {toImportPath} el archivo HTML que exportaste antes, con Omitir duplicados activado, para que solo vuelvan los marcadores que faltan. Chrome los coloca en {toImportPlacement}.",
+      "Eliminaste un marcador que necesitabas. Importa el archivo HTML que exportaste antes en la página Importar de Snug con Omitir duplicados activado, para que solo vuelvan los marcadores que faltan.",
       "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en Chrome. Desactiva Omitir duplicados para importarlos de nuevo."
     ]
   },

@@ -45,7 +45,7 @@
       "Two bookmarks of the same site are not grouped. Their addresses differ after normalizing, for example in the path or the query string. Snug leaves them alone on purpose.",
       "The wrong copy is marked Delete. Choose Keep on the copy you want before you confirm.",
       "A copy is never marked Delete. Bookmarks that your organization manages cannot be removed, so Snug never marks them for deletion.",
-      "You deleted a bookmark you needed. Import the HTML file you exported earlier with {toImportPath}, with Skip duplicates on, so only the missing bookmarks come back. Chrome places them in {toImportPlacement}.",
+      "You deleted a bookmark you needed. Import the HTML file you exported earlier on Snug's Import page with Skip duplicates on, so only the missing bookmarks come back.",
       "Snug says nothing was imported. Every bookmark in the file is already in Chrome. Turn off Skip duplicates to import them again."
     ]
   },

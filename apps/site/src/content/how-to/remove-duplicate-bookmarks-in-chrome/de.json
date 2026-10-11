@@ -45,7 +45,7 @@
       "Zwei Lesezeichen derselben Seite werden nicht gruppiert. Ihre Adressen unterscheiden sich nach der Normalisierung, etwa im Pfad oder in der Query-Zeichenfolge. Snug lässt sie absichtlich in Ruhe.",
       "Die falsche Kopie ist mit Löschen markiert. Wähle Behalten bei der gewünschten Kopie, bevor du bestätigst.",
       "Eine Kopie wird nie mit Löschen markiert. Lesezeichen, die deine Organisation verwaltet, lassen sich nicht entfernen, daher markiert Snug sie nie zum Löschen.",
-      "Du hast ein Lesezeichen gelöscht, das du brauchst. Importiere die früher exportierte HTML-Datei mit {toImportPath} und eingeschaltetem Duplikate überspringen, damit nur die fehlenden Lesezeichen zurückkommen. Chrome legt sie in {toImportPlacement} ab.",
+      "Du hast ein Lesezeichen gelöscht, das du brauchst. Importiere die zuvor exportierte HTML-Datei auf der Import-Seite von Snug mit aktiviertem Duplikate überspringen, damit nur die fehlenden Lesezeichen zurückkommen.",
       "Snug meldet, dass nichts importiert wurde. Jedes Lesezeichen der Datei ist schon in Chrome. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
     ]
   },

@@ -45,7 +45,7 @@
       "Dois favoritos do mesmo site não aparecem agrupados. Os endereços diferem depois de normalizados, por exemplo no caminho ou na string de consulta. O Snug os deixa como estão de propósito.",
       "A cópia errada está marcada como Excluir. Escolha Manter na cópia que você quer antes de confirmar.",
       "Uma cópia nunca é marcada como Excluir. Favoritos gerenciados pela sua organização não podem ser removidos, então o Snug nunca os marca.",
-      "Você excluiu um favorito de que precisava. Importe com {toImportPath} o arquivo HTML exportado antes, com Ignorar duplicados ativado, para que só voltem os favoritos que faltam. O Chrome os coloca em {toImportPlacement}.",
+      "Você excluiu um favorito de que precisava. Importe o arquivo HTML exportado antes na página Importar do Snug com Ignorar duplicatas ativado, para que só os favoritos que faltam voltem.",
       "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no Chrome. Desative Ignorar duplicados para importá-los de novo."
     ]
   },

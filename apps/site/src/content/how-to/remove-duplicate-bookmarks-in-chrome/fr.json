@@ -45,7 +45,7 @@
       "Deux favoris du même site ne sont pas groupés. Leurs adresses diffèrent après normalisation, par exemple dans le chemin ou la chaîne de requête. Snug les laisse volontairement tels quels.",
       "La mauvaise copie est marquée Supprimer. Choisissez Conserver sur la copie voulue avant de confirmer.",
       "Une copie n'est jamais marquée Supprimer. Les favoris gérés par votre organisation ne peuvent pas être supprimés, donc Snug ne les marque jamais.",
-      "Vous avez supprimé un favori dont vous aviez besoin. Importez avec {toImportPath} le fichier HTML exporté plus tôt, avec Ignorer les doublons activé, pour que seuls les favoris manquants reviennent. Chrome les place dans {toImportPlacement}.",
+      "Vous avez supprimé un favori dont vous aviez besoin. Importez le fichier HTML exporté plus tôt depuis la page Importer de Snug, avec Ignorer les doublons activé, pour ne récupérer que les favoris manquants.",
       "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans Chrome. Désactivez Ignorer les doublons pour les importer de nouveau."
     ]
   },
