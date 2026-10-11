@@ -1,0 +1,223 @@
+---
+import { loadCatalog } from '../docs/catalog'
+import {
+  getHowToContent,
+  getHowToPage,
+  getHowToSharedContent,
+  howToPath,
+  howToSources,
+  howToValues,
+  interpolateHowTo,
+} from '../i18n/how-to'
+import { type Locale, localePath } from '../i18n/locales'
+import Layout from '../layouts/Layout.astro'
+import { howToCrumbs, howToPageDescriptor } from '../seo/how-to-descriptor'
+import ComparisonBreadcrumb from './ComparisonBreadcrumb.astro'
+import Eyebrow from './Eyebrow.astro'
+import FinalCta from './FinalCta.astro'
+import SectionHeading from './SectionHeading.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+  slug: string
+}
+
+const { locale, slug } = Astro.props
+const shared = getHowToSharedContent(locale)
+const copy = getHowToContent(locale, slug)
+const definition = getHowToPage(slug)
+const page = howToPageDescriptor(locale, slug)
+const values = howToValues(locale, slug) as unknown as Record<string, string>
+const fill = (template: string) => interpolateHowTo(template, locale, values)
+const crumbs = howToCrumbs(locale, slug).map((crumb, index, all) => ({
+  name: crumb.name,
+  href: index < all.length - 1 ? crumb.path : undefined,
+}))
+const guideTitles = new Map(
+  loadCatalog().map((entry) => [entry.id, entry.title]),
+)
+const relatedGuides = definition.relatedGuide.map((id) => ({
+  href: localePath(locale, `/${id}/`),
+  title: guideTitles.get(id) ?? id,
+}))
+const relatedHowTos = definition.relatedHowTo.map((related) => ({
+  href: howToPath(locale, related),
+  title: getHowToContent(locale, related).title,
+}))
+const sources = howToSources(slug)
+const snug = 'withSnug' in copy ? copy.withSnug : undefined
+const headingClass = 'font-heading text-2xl font-bold md:text-3xl'
+const stepsClass = 'mt-4 list-decimal space-y-2 pl-6 leading-prose'
+const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
+---
+
+<Layout locale={locale} page={page}>
+  <main id="main">
+    <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+      <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
+      <header class="mt-8">
+        <Eyebrow>{shared.eyebrow}</Eyebrow>
+        <SectionHeading as="h1" class="mt-3 hyphens-manual wrap-anywhere">
+          {copy.title}
+        </SectionHeading>
+      </header>
+      <section
+        data-section="in-short"
+        aria-labelledby="in-short-heading"
+        class="mt-10 max-w-3xl rounded-xl bg-card"
+      >
+        <div class="rounded-xl border border-primary/50 bg-primary/8 p-4 md:p-5">
+          <Eyebrow as="p" id="in-short-heading">
+            {shared.shortAnswer}
+          </Eyebrow>
+          <p class="mt-1 text-base leading-prose wrap-anywhere">
+            {fill(copy.directAnswer)}
+          </p>
+        </div>
+      </section>
+      <section
+        data-section="built-in"
+        aria-labelledby="built-in-heading"
+        class="mt-12 max-w-3xl"
+      >
+        <h2 id="built-in-heading" class={headingClass}>
+          {copy.builtIn.title}
+        </h2>
+        <p class="mt-4 leading-prose">{fill(copy.builtIn.intro)}</p>
+        <ol class={stepsClass}>
+          {copy.builtIn.steps.map((step) => (
+            <li>{fill(step)}</li>
+          ))}
+        </ol>
+        <p class="mt-4 text-sm text-muted-foreground">{shared.menuNote}</p>
+      </section>
+      <section
+        data-section="carries-over"
+        aria-labelledby="carries-over-heading"
+        class="mt-12 max-w-3xl"
+      >
+        <h2 id="carries-over-heading" class={headingClass}>
+          {copy.carriesOver.title}
+        </h2>
+        <p class="mt-4 leading-prose">{fill(copy.carriesOver.intro)}</p>
+        <ul class={listClass}>
+          {copy.carriesOver.items.map((item) => (
+            <li>{fill(item)}</li>
+          ))}
+        </ul>
+      </section>
+      {snug && (
+        <section
+          data-section="with-snug"
+          aria-labelledby="with-snug-heading"
+          class="mt-12 max-w-3xl"
+        >
+          <h2 id="with-snug-heading" class={headingClass}>
+            {snug.title}
+          </h2>
+          <p class="mt-4 leading-prose">{fill(snug.intro)}</p>
+          <ol class={stepsClass}>
+            {snug.steps.map((step) => (
+              <li>{fill(step)}</li>
+            ))}
+          </ol>
+          <p class="mt-4 leading-prose text-muted-foreground">
+            {fill(snug.snapshot)}
+          </p>
+        </section>
+      )}
+      <section
+        data-section="goes-wrong"
+        aria-labelledby="goes-wrong-heading"
+        class="mt-12 max-w-3xl"
+      >
+        <h2 id="goes-wrong-heading" class={headingClass}>
+          {copy.goesWrong.title}
+        </h2>
+        <ul class={listClass}>
+          {copy.goesWrong.items.map((item) => (
+            <li>{fill(item)}</li>
+          ))}
+        </ul>
+      </section>
+      {(relatedHowTos.length > 0 || relatedGuides.length > 0) && (
+        <section
+          data-section="related"
+          aria-label={shared.relatedGuideTitle}
+          class="mt-12 max-w-3xl"
+        >
+          {relatedHowTos.length > 0 && (
+            <>
+              <h2 id="related-how-to-heading" class={headingClass}>
+                {shared.relatedHowToTitle}
+              </h2>
+              <ul class={listClass}>
+                {relatedHowTos.map((related) => (
+                  <li>
+                    <TextLink href={related.href} class="min-h-0 wrap-anywhere">
+                      {related.title}
+                    </TextLink>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {relatedGuides.length > 0 && (
+            <>
+              <h2
+                id="related-guide-heading"
+                class={`${headingClass} ${relatedHowTos.length > 0 ? 'mt-10' : ''}`}
+              >
+                {shared.relatedGuideTitle}
+              </h2>
+              <ul class={listClass}>
+                {relatedGuides.map((related) => (
+                  <li>
+                    <TextLink href={related.href} class="min-h-0 wrap-anywhere">
+                      {related.title}
+                    </TextLink>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </section>
+      )}
+      <section
+        data-section="verified"
+        class="mt-12 max-w-3xl border-t border-border pt-4 text-sm text-muted-foreground"
+      >
+        <p>
+          <strong class="font-medium text-foreground">
+            {fill(shared.verifiedOn)}.
+          </strong>{' '}
+          {fill(copy.verified)}
+        </p>
+        <p class="mt-3">{shared.sourcesTitle}</p>
+        <ul class="mt-1 space-y-1">
+          {sources.flatMap(({ browser, urls }) =>
+            urls.map((url) => (
+              <li>
+                <TextLink
+                  href={url}
+                  rel="noopener nofollow"
+                  class="min-h-0 text-foreground wrap-anywhere"
+                  lang="en"
+                >
+                  {browser}: {new URL(url).hostname}
+                </TextLink>
+              </li>
+            )),
+          )}
+        </ul>
+      </section>
+    </div>
+    <FinalCta
+      locale={locale}
+      heading={shared.ctaTitle}
+      line={shared.ctaBody}
+      button={shared.install}
+    />
+  </main>
+</Layout>

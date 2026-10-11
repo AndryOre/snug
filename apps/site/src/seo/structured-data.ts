@@ -131,6 +131,14 @@ export interface ComparisonStructuredDataPage {
   description: string
   path: string
   breadcrumbs: readonly ComparisonBreadcrumb[]
+  /**
+   * Drops the `about` link to the shared `SoftwareApplication`.
+   */
+  omitAbout?: boolean
+  /**
+   * `YYYY-MM-DD` date of the last commit behind the page, when known.
+   */
+  dateModified?: string | undefined
 }
 
 /**
@@ -158,7 +166,10 @@ export function buildComparisonStructuredData(
         description: page.description,
         inLanguage: languageTag(locale),
         isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
-        about: { '@id': `${SITE_ORIGIN}/#software` },
+        ...(!page.omitAbout && {
+          about: { '@id': `${SITE_ORIGIN}/#software` },
+        }),
+        ...(page.dateModified && { dateModified: page.dateModified }),
         breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
       },
       {
@@ -173,4 +184,35 @@ export function buildComparisonStructuredData(
       },
     ],
   }
+}
+
+/**
+ * Facts that feed a How-to page's `WebPage` and `BreadcrumbList` nodes.
+ */
+export interface HowToStructuredDataPage extends ComparisonStructuredDataPage {
+  /**
+   * Whether the page has a With Snug section, which is what makes it `about`
+   * the shared `SoftwareApplication`.
+   */
+  hasSnugSection: boolean
+}
+
+/**
+ * One schema.org `@graph` for a How-to page: a `WebPage` (`about` the shared
+ * `SoftwareApplication` only when the page has a Snug section) and a
+ * `BreadcrumbList`. It never carries `HowTo`, `FAQPage`, `AggregateRating` or
+ * `Review` data.
+ * @param locale - A supported locale code.
+ * @param page - The page's title, description, path, breadcrumb trail and
+ * whether it has a Snug section.
+ * @returns A JSON-LD object ready to serialize.
+ */
+export function buildHowToStructuredData(
+  locale: Locale,
+  page: HowToStructuredDataPage,
+) {
+  return buildComparisonStructuredData(locale, {
+    ...page,
+    omitAbout: !page.hasSnugSection,
+  })
 }

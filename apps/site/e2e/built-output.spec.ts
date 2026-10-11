@@ -26,6 +26,7 @@ import {
   COMPARISON_PAGES,
   comparisonPath,
 } from './comparison-paths'
+import { HOW_TO_PAGE_LIST, howToLocales } from './how-to-paths'
 import { docsString, translatedTitle } from './translated-guide'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -497,6 +498,99 @@ test.describe('comparison pages', () => {
       expect(sitemap).not.toContain(
         `${SITE_ORIGIN}${localePath(locale, '/alternatives/')}`,
       )
+    }
+  })
+})
+
+test.describe('how-to pages', () => {
+  const titles = new Map<string, string>()
+  const descriptions = new Map<string, string>()
+
+  for (const { locale, slug, path: pagePath } of HOW_TO_PAGE_LIST) {
+    test(`${pagePath} has its own metadata, hreflang and JSON-LD`, () => {
+      const html = readBuilt(`${pagePath.slice(1)}index.html`)
+      const title = /<title>([^<]*)<\/title>/.exec(html)?.[1] ?? ''
+      const description = metaContent(html, 'name', 'description')
+      expect(title.length).toBeGreaterThan(0)
+      expect(description.length).toBeGreaterThan(0)
+      expect(
+        titles.get(`${locale}:${title}`),
+        `duplicate title "${title}"`,
+      ).toBeUndefined()
+      expect(
+        descriptions.get(`${locale}:${description}`),
+        `duplicate description "${description}"`,
+      ).toBeUndefined()
+      titles.set(`${locale}:${title}`, pagePath)
+      descriptions.set(`${locale}:${description}`, pagePath)
+
+      expect(html).toContain(`<html lang="${languageTag(locale)}"`)
+      expect(html).toContain(
+        `<link rel="canonical" href="${SITE_ORIGIN}${pagePath}"`,
+      )
+
+      const carrying = howToLocales(slug)
+      const hreflangs = html
+        .matchAll(/<link rel="alternate" hreflang="([^"]+)"/g)
+        .map((match) => match[1] ?? '')
+        .toArray()
+      expect(hreflangs.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        [...carrying.map((code) => languageTag(code)), 'x-default'].toSorted(
+          (a, b) => a.localeCompare(b),
+        ),
+      )
+      for (const { hreflang, href } of hreflangAlternates(
+        `/how-to/${slug}/`,
+        carrying,
+      )) {
+        expect(html).toContain(
+          `<link rel="alternate" hreflang="${hreflang}" href="${href}"`,
+        )
+      }
+
+      const graph = jsonLdGraph(html)
+      expect(graph.map((node) => String(node['@type']))).toEqual([
+        'WebPage',
+        'BreadcrumbList',
+      ])
+      expect(html).not.toMatch(/aggregateRating|"FAQPage"|"HowTo"/i)
+    })
+
+    test(`${pagePath} renders text only, with steps, the verified note and the install CTA`, () => {
+      const html = readBuilt(`${pagePath.slice(1)}index.html`)
+      const main = /<main[\s\S]*<\/main>/.exec(html)?.[0] ?? ''
+      expect(main).not.toContain('<img')
+      expect(main).toContain('<ol')
+      expect(main).toContain('data-section="verified"')
+      expect(main).toContain('rel="noopener nofollow"')
+      expect(main).toContain('data-install="final"')
+      expect(main).toContain('href="/install?c=final"')
+    })
+  }
+
+  test('lists every How-to page in the sitemap and no uncarried locale', () => {
+    const sitemap = readBuilt('sitemap.xml')
+    for (const { path: pagePath } of HOW_TO_PAGE_LIST) {
+      expect(sitemap).toContain(`<loc>${SITE_ORIGIN}${pagePath}</loc>`)
+    }
+    const slugs = new Set(HOW_TO_PAGE_LIST.map((page) => page.slug))
+    for (const slug of slugs) {
+      const carrying = howToLocales(slug)
+      for (const locale of LOCALES) {
+        if (carrying.includes(locale)) continue
+        expect(sitemap).not.toContain(
+          `<loc>${SITE_ORIGIN}${localePath(locale, `/how-to/${slug}/`)}</loc>`,
+        )
+      }
+    }
+  })
+
+  test('lists the English pages in llms.txt', () => {
+    const llms = readBuilt('llms.txt')
+    expect(llms).toContain('## How-to')
+    for (const { locale, path: pagePath } of HOW_TO_PAGE_LIST) {
+      if (locale !== DEFAULT_LOCALE) continue
+      expect(llms).toContain(`(${SITE_ORIGIN}${pagePath})`)
     }
   })
 })

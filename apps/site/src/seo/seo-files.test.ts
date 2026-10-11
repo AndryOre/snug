@@ -9,6 +9,12 @@ import {
   getComparisonMeta,
 } from '../i18n/comparisons'
 import { getContent } from '../i18n/content'
+import {
+  getHowToMeta,
+  HOW_TO_SLUGS,
+  howToPageLocales,
+  howToPath,
+} from '../i18n/how-to'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
   hreflangAlternates,
@@ -33,8 +39,18 @@ import { lastCommitDate } from './last-modified'
 import { STORE_FACTS } from './store-facts'
 import {
   buildComparisonStructuredData,
+  buildHowToStructuredData,
   buildStructuredData,
 } from './structured-data'
+
+const HOW_TO_PAGE_COUNT = HOW_TO_SLUGS.flatMap((slug) =>
+  howToPageLocales(slug),
+).length
+let HOW_TO_ALTERNATE_COUNT = 0
+for (const slug of HOW_TO_SLUGS) {
+  const carrying = howToPageLocales(slug).length
+  HOW_TO_ALTERNATE_COUNT += carrying * (carrying + 1)
+}
 
 describe('buildRobotsTxt', () => {
   it('keeps search crawlers and training crawlers in separate groups', () => {
@@ -367,6 +383,53 @@ describe('buildComparisonStructuredData', () => {
   })
 })
 
+describe('buildHowToStructuredData', () => {
+  const page = {
+    title: 'Move Firefox bookmarks to Chrome',
+    description: 'Export from Firefox, import into Chrome.',
+    path: '/how-to/move-bookmarks-from-firefox-to-chrome/',
+    breadcrumbs: [
+      { name: 'Snug', path: '/' },
+      { name: 'How-to', path: '/how-to/' },
+      {
+        name: 'Move Firefox bookmarks to Chrome',
+        path: '/how-to/move-bookmarks-from-firefox-to-chrome/',
+      },
+    ],
+    dateModified: '2026-10-11',
+  }
+
+  it('emits only a WebPage and a BreadcrumbList', () => {
+    const data = buildHowToStructuredData('en', {
+      ...page,
+      hasSnugSection: true,
+    })
+    expect(data['@graph'].map((node) => node['@type'])).toEqual([
+      'WebPage',
+      'BreadcrumbList',
+    ])
+    expect(JSON.stringify(data)).not.toMatch(
+      /HowTo"|FAQPage|AggregateRating|Review/,
+    )
+  })
+
+  it('is about the software only when the page has a Snug section', () => {
+    const withSnug = buildHowToStructuredData('en', {
+      ...page,
+      hasSnugSection: true,
+    })
+    const withoutSnug = buildHowToStructuredData('en', {
+      ...page,
+      hasSnugSection: false,
+    })
+    expect(withSnug['@graph'][0]).toMatchObject({
+      about: { '@id': `${SITE_ORIGIN}/#software` },
+      dateModified: '2026-10-11',
+    })
+    expect(withoutSnug['@graph'][0]).not.toHaveProperty('about')
+  })
+})
+
 describe('buildSitemapXml lastmod', () => {
   it('stamps every url that has a date', () => {
     const xml = buildSitemapXml([
@@ -422,6 +485,13 @@ describe('root file routes', () => {
         `- [${title}](${SITE_ORIGIN}${alternativesPath('en', slug)}): ${description}`,
       )
     }
+    expect(text).toContain('## How-to')
+    for (const slug of HOW_TO_SLUGS) {
+      const { title, description } = getHowToMeta('en', slug)
+      expect(text).toContain(
+        `- [${title}](${SITE_ORIGIN}${howToPath('en', slug)}): ${description}`,
+      )
+    }
     expect(text).not.toContain('{date}')
   })
 
@@ -439,6 +509,7 @@ describe('root file routes', () => {
       LOCALES.length +
         PRIVACY_PAGE_LOCALES.length +
         (COMPARISON_SLUGS.length + 1) * COMPARISON_PAGE_LOCALES.length +
+        HOW_TO_PAGE_COUNT +
         PUBLISHED_SOURCES.length * LOCALES.length,
     )
     for (const locale of LOCALES) {
@@ -468,6 +539,7 @@ describe('root file routes', () => {
         (COMPARISON_SLUGS.length + 1) *
           COMPARISON_PAGE_LOCALES.length *
           (COMPARISON_PAGE_LOCALES.length + 1) +
+        HOW_TO_ALTERNATE_COUNT +
         PUBLISHED_SOURCES.length *
           LOCALES.length *
           hreflangAlternates('/guide/').length,
@@ -496,6 +568,23 @@ describe('root file routes', () => {
       expect(xml).toContain(
         `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${alternativesPath('en', slug)}"/>`,
       )
+    }
+    for (const slug of HOW_TO_SLUGS) {
+      const locales = howToPageLocales(slug)
+      for (const locale of locales) {
+        expect(xml).toContain(
+          `<loc>${SITE_ORIGIN}${howToPath(locale, slug)}</loc>\n    <lastmod>`,
+        )
+      }
+      expect(xml).toContain(
+        `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${howToPath('en', slug)}"/>`,
+      )
+      for (const locale of LOCALES) {
+        if (locales.includes(locale)) continue
+        expect(xml).not.toContain(
+          `<loc>${SITE_ORIGIN}${localePath(locale, `/how-to/${slug}/`)}</loc>`,
+        )
+      }
     }
     const privacyBlock = xml.slice(xml.indexOf(`<loc>${SITE_ORIGIN}/privacy/`))
     expect(privacyBlock).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)

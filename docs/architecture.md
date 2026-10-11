@@ -55,6 +55,12 @@ relative to `apps/extension/` unless it starts with `packages/`.
     render `AlternativesPage.astro` and `ComparisonPage.astro`; table rows come
     from `src/i18n/comparison-table.ts`, metadata and JSON-LD from
     `src/seo/comparison-descriptor.ts`. The footer links the Alternatives page.
+    How-to pages (`/how-to/<slug>/`, also under `/<locale>/` for every locale
+    that carries the page) come from the registry in
+    `src/content/how-to-pages.ts`; routes in `src/pages/how-to/` and
+    `src/pages/[locale]/how-to/` render `HowToPage.astro`, with metadata and
+    JSON-LD from `src/seo/how-to-descriptor.ts` and sitemap and `llms.txt`
+    entries from `src/seo/how-to-pages.ts`.
 - **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
   thumbnails. It has no runtime link to the extension: it reads
   `apps/extension/locales/*.json` and `apps/extension/e2e-store/captions.ts` by
