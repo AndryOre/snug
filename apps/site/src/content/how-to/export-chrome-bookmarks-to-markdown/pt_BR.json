@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Exportar favoritos do Chrome para Markdown | Snug",
+    "description": "O Chrome salva favoritos em HTML. Exporte para Markdown com o Snug: escolha pastas, defina o nome e veja o arquivo. Conferido em {date}."
+  },
+  "title": "Como exporto meus favoritos do Chrome para Markdown?",
+  "directAnswer": "A ajuda do Chrome descreve uma só exportação, um arquivo HTML de favoritos: abra {fromExportPath} e o Chrome salva {fromExportFile}. Para Markdown, use a página Exportar do Snug: escolha Markdown e exporte, e o Snug salva um arquivo .md com suas pastas em uma lista aninhada. Caminhos de menu conferidos em {date}.",
+  "builtIn": {
+    "title": "A exportação própria do Chrome",
+    "intro": "A ajuda do Chrome descreve uma exportação HTML e não cita Markdown, então os passos integrados abaixo geram HTML. O arquivo Markdown vem do Snug.",
+    "steps": [
+      "No Chrome, abra {fromExportPath}.",
+      "Salve o arquivo. O Chrome o chama de {fromExportFile}."
+    ]
+  },
+  "carriesOver": {
+    "title": "Como é o arquivo Markdown",
+    "intro": "O Snug escreve títulos, endereços e a estrutura de pastas como uma lista de marcadores aninhada. Nada mais entra no arquivo.",
+    "items": [
+      "Um favorito vira um marcador com um link, escrito como - [Título](endereço).",
+      "Uma pasta vira um marcador simples. O conteúdo fica abaixo dela, recuado em dois espaços por nível, e as pastas vazias são mantidas.",
+      "Uma exportação completa começa com as pastas Barra de favoritos e Outros favoritos, com os nomes que o Chrome mostra. Uma exportação de pastas selecionadas começa com as pastas que você escolheu.",
+      "Exemplo: um favorito Docs dentro de uma pasta Dev na barra de favoritos vira três linhas: - Barra de favoritos, depois - Dev, depois - [Docs](https://example.com/docs), cada uma com dois espaços de recuo a mais que a anterior.",
+      "Datas nunca são escritas no Markdown. Caracteres que o Markdown leria errado, como colchetes, asteriscos, sublinhados e crases, recebem uma barra invertida. Quebras de linha em um título viram espaços, e um favorito sem título usa o endereço como texto do link.",
+      "O Snug exporta Markdown, mas não o importa. Guarde também uma exportação em HTML ou JSON se quiser restaurar depois."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome, um navegador Chromium. A página Exportar escreve o arquivo Markdown com as pastas que você marcar.",
+    "steps": [
+      "Instale o Snug no Chrome.",
+      "Abra a página Exportar do Snug. Marque as pastas ou favoritos avulsos que quiser, ou use Selecionar todos os favoritos para pegar tudo.",
+      "Defina Formato de exportação como Markdown.",
+      "Em Opções de exportação, edite Modelo de nome de arquivo. A linha Pré-visualização abaixo mostra o nome que o Snug vai usar. O padrão é Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec, e %yyyy, %yy, %mm, %dd, %hh, %min e %sec são trocados pela data e hora da exportação.",
+      "Opcional: ative Ocultar Outros favoritos para listar o conteúdo de Outros favoritos sem o marcador dessa pasta, ou Ocultar pasta principal para listar os favoritos sem os marcadores de suas pastas, exceto as duas pastas do topo.",
+      "Clique no botão Exportar. O Snug salva um arquivo com extensão .md pelo download do navegador."
+    ],
+    "snapshot": "Exportar apenas lê seus favoritos e não muda nada. Ao terminar, o Snug mostra quantos favoritos exportou e o nome do arquivo."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "O arquivo não tem datas. O Markdown nunca as inclui. Exporte em HTML ou JSON, onde as opções de data se aplicam.",
+      "Falta uma pasta. Só as pastas e os favoritos que você marcou são exportados. Confira a contagem da seleção antes de exportar.",
+      "Um título parece diferente. O Snug coloca uma barra invertida antes dos caracteres que o Markdown leria errado, e um visualizador de Markdown os mostra como caracteres normais.",
+      "O nome do arquivo tem sublinhados que você não digitou. Caracteres que os sistemas de arquivos recusam, como / : * ? e |, viram sublinhados."
+    ]
+  },
+  "verified": "Os caminhos de menu e os nomes de arquivo foram lidos nas páginas de ajuda oficiais de {fromName} em {date}. O formato do arquivo vem do exportador Markdown do Snug. Os menus dos navegadores mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela."
+}

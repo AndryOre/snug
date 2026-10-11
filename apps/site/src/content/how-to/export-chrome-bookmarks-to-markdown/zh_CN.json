@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "把 Chrome 书签导出为 Markdown | Snug",
+    "description": "Chrome 把书签保存为 HTML。用 Snug 选择文件夹、设置文件名模板，把 Chrome 书签导出为 Markdown，并查看文件的确切格式。核实日期 {date}。"
+  },
+  "title": "如何把 Chrome 书签导出为 Markdown？",
+  "directAnswer": "Chrome 帮助中描述的导出只有一种，即书签 HTML 文件：打开 {fromExportPath}，Chrome 会保存 {fromExportFile}。要得到 Markdown，请使用 Snug 的“导出”页面：选择 Markdown 并导出，Snug 会保存一个 .md 文件，把你的文件夹写成嵌套列表。菜单路径核实日期：{date}。",
+  "builtIn": {
+    "title": "Chrome 自带的导出",
+    "intro": "Chrome 的帮助描述的是 HTML 导出，没有提到 Markdown，所以下面的内置步骤得到的是 HTML。Markdown 文件由 Snug 生成。",
+    "steps": [
+      "在 Chrome 中打开 {fromExportPath}。",
+      "保存文件。Chrome 将其命名为 {fromExportFile}。"
+    ]
+  },
+  "carriesOver": {
+    "title": "Markdown 文件长什么样",
+    "intro": "Snug 把标题、地址和文件夹结构写成嵌套的项目符号列表。文件里不会有其他内容。",
+    "items": [
+      "一个书签变成一行带链接的项目符号，写法是 - [标题](地址)。",
+      "一个文件夹变成一行普通项目符号。它的内容排在下面，每一级缩进两个空格，空文件夹也会保留。",
+      "完整导出以“书签栏”和“其他书签”文件夹开头，名称与 Chrome 中显示的一致。导出选中文件夹时，以你选中的文件夹开头。",
+      "示例：书签栏上 Dev 文件夹里的 Docs 书签会变成三行：- 书签栏，然后是 - Dev，再然后是 - [Docs](https://example.com/docs)，每一行比上一行多缩进两个空格。",
+      "Markdown 中从不写入日期。Markdown 可能误读的字符，如方括号、星号、下划线和反引号，会加上反斜杠。标题中的换行会变成空格，没有标题的书签用地址作为链接文字。",
+      "Snug 只能导出 Markdown，不能导入。如果以后想恢复，请同时保留一份 HTML 或 JSON 导出。"
+    ]
+  },
+  "withSnug": {
+    "title": "使用 Snug",
+    "intro": "Snug 在基于 Chromium 的 Chrome 中运行。它的“导出”页面会根据你勾选的文件夹写出 Markdown 文件。",
+    "steps": [
+      "在 Chrome 中安装 Snug。",
+      "打开 Snug 的“导出”页面。勾选需要的文件夹或单个书签，要导出全部就用“选择所有书签”。",
+      "把“导出格式”设为 Markdown。",
+      "在“导出选项”中编辑“文件名模板”。下方的“预览”行会显示 Snug 将使用的名称。默认值是 Bookmarks_%yyyy-%mm-%dd_%hh-%min-%sec，其中 %yyyy、%yy、%mm、%dd、%hh、%min 和 %sec 会被替换为导出时的日期和时间。",
+      "可选：开启“隐藏其他书签”，会在不显示该文件夹项目符号的情况下列出其他书签的内容；开启“隐藏上级文件夹”，会在不显示文件夹项目符号的情况下列出书签，最上面的两个文件夹除外。",
+      "点击导出按钮。Snug 会通过浏览器下载保存一个扩展名为 .md 的文件。"
+    ],
+    "snapshot": "导出只读取你的书签，不会改动任何内容。完成后，Snug 会显示导出的书签数量和文件名。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "文件里没有日期。Markdown 从不包含日期。请导出为 HTML 或 JSON，日期选项在那里生效。",
+      "少了一个文件夹。只会导出你勾选的文件夹和书签。导出前请检查已选数量。",
+      "标题看起来不一样。Snug 会在 Markdown 可能误读的字符前加反斜杠，Markdown 查看器会把它们显示为普通字符。",
+      "文件名里有你没输入过的下划线。文件系统不接受的字符，如 / : * ? 和 |，会变成下划线。"
+    ]
+  },
+  "verified": "菜单路径和文件名取自 {fromName} 的官方帮助页面，核实日期为{date}。文件格式来自 Snug 的 Markdown 导出器。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。"
+}

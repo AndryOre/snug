@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Move Chrome Bookmarks to Opera | Snug",
+    "description": "Move Chrome bookmarks to Opera with Opera's import or an exported HTML file, what the help pages list, and how Snug adds a preview. Verified {date}."
+  },
+  "title": "How do I move my bookmarks from Chrome to Opera?",
+  "directAnswer": "In Opera, open {toImportPath}. Import sources in Opera's help: {toImportSources}. To use a file, export it from Chrome first with {fromExportPath}. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in methods",
+    "intro": "Opera has its own import and Chrome saves a file, so there are two routes. This page lists only what the help pages say.",
+    "steps": [
+      "Opera's import: in Opera, open {toImportPath} and follow the import options it shows.",
+      "With a file: in Chrome, open {fromExportPath}.",
+      "With a file: save the file. Chrome names it {fromExportFile}.",
+      "With a file: in Opera, open {toImportPath} and choose the file you saved, if the import offers it."
+    ]
+  },
+  "carriesOver": {
+    "title": "What Opera imports and what it drops",
+    "intro": "Each line below comes from the help pages, with a source at the end of this page.",
+    "items": [
+      "Import sources, per Opera's help: {toImportSources}.",
+      "Where Opera puts imported bookmarks: {toImportPlacement}.",
+      "Kept in Chrome's file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of Chrome's file, per {fromName}: {fromHtmlDrops}.",
+      "Where a help page does not say, this page says Not listed instead of guessing."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome and Opera, both Chromium browsers. Use it in Chrome to export only the folders you pick, then in Opera to import with a preview.",
+    "steps": [
+      "Install Snug in Chrome and in Opera.",
+      "In Chrome, open Snug's Export page and use the checkboxes to select the folders you want, or single bookmarks.",
+      "Choose HTML as the format and click Export. Snug downloads the file.",
+      "In Opera, open Snug's Import page and choose the file there, or drop it on the page. Do not use the popup for this: it imports at once, without a preview.",
+      "The Preview shows the detected format, the bookmark count and the folder tree before anything changes. Bookmarks that Skip duplicates would leave out are marked.",
+      "Choose an import mode. Create folder adds everything to a new Imported Bookmarks folder. Restore — merge places bookmarks in their original locations next to your existing ones, when the file carries them.",
+      "Leave Skip duplicates on. It leaves out any bookmark whose address is already in Opera, and tells you how many it skipped."
+    ],
+    "snapshot": "Create folder and Restore — merge never clear your bookmarks. Before a Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps a copy in Settings, so you can undo the import."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "You cannot find the bookmarks after importing. Search for a bookmark you know was in the file.",
+      "Opera's import does not offer the file. Use Snug's Import page instead: it reads the HTML file on its own.",
+      "A bookmark appears twice. Open Duplicates in Snug: it groups copies by address and removes only the copies you mark Delete.",
+      "Snug says nothing was imported. Every bookmark in the file is already in your browser. Turn off Skip duplicates to import them again."
+    ]
+  },
+  "verified": "Menu paths and file names were read from the official help pages of {fromName} and {toName} on {date}. Browser menus change between versions, so check the source if a path differs on your screen."
+}

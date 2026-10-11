@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "把 Chrome 书签移到 Opera | Snug",
+    "description": "用 Opera 自带的导入功能或导出的 HTML 文件，把 Chrome 书签移到 Opera。说明帮助页面写了什么，以及 Snug 如何增加预览。核实日期 {date}。"
+  },
+  "title": "如何把书签从 Chrome 移到 Opera？",
+  "directAnswer": "在 Opera 中打开 {toImportPath}。Opera 帮助中列出的导入来源：{toImportSources}。如果要用文件，先在 Chrome 中通过 {fromExportPath} 导出。菜单路径核实日期：{date}。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "Opera 有自己的导入功能，Chrome 可以保存文件，所以有两条路径。本页只写帮助页面中说明的内容。",
+    "steps": [
+      "Opera 的导入：在 Opera 中打开 {toImportPath}，按显示的导入选项操作。",
+      "用文件：在 Chrome 中打开 {fromExportPath}。",
+      "用文件：保存文件。Chrome 将其命名为 {fromExportFile}。",
+      "用文件：在 Opera 中打开 {toImportPath}，如果导入提供该选项，就选择保存的文件。"
+    ]
+  },
+  "carriesOver": {
+    "title": "Opera 会导入什么，会略去什么",
+    "intro": "下面每一行都来自帮助页面，出处列在本页末尾。",
+    "items": [
+      "Opera 帮助中的导入来源：{toImportSources}。",
+      "Opera 把导入的书签放在哪里：{toImportPlacement}。",
+      "据 {fromName}，Chrome 文件中包含：{fromHtmlKeeps}。",
+      "据 {fromName}，Chrome 文件中不包含：{fromHtmlDrops}。",
+      "帮助页面没有说明的地方，本页写“未说明”，不做猜测。"
+    ]
+  },
+  "withSnug": {
+    "title": "使用 Snug",
+    "intro": "Snug 在 Chrome 和 Opera 中都能运行，两者都是基于 Chromium 的浏览器。在 Chrome 中只导出你选中的文件夹，在 Opera 中带预览导入。",
+    "steps": [
+      "在 Chrome 和 Opera 中都安装 Snug。",
+      "在 Chrome 中打开 Snug 的“导出”页面，用复选框选择需要的文件夹或单个书签。",
+      "选择 HTML 格式并点击“导出”。Snug 会下载这个文件。",
+      "在 Opera 中打开 Snug 的“导入”页面，在页面上选取文件，或把文件拖到页面上。不要用弹出窗口：它会立即导入，没有预览。",
+      "在任何内容改动之前，预览会显示检测到的格式、书签数量和文件夹结构。“跳过重复项”会略过的书签带有标记。",
+      "选择导入模式。“创建文件夹”会把所有书签添加到新的“导入的书签”文件夹。“恢复——合并”在文件包含原始位置时，会把书签放回原位置，与现有书签并存。",
+      "保持“跳过重复项”开启。它会略过地址已在 Opera 中的书签，并告诉你跳过了多少个。"
+    ],
+    "snapshot": "“创建文件夹”和“恢复——合并”不会清空你的书签。在“恢复——替换”之前，Snug 会把安全快照保存到下载文件夹，并在设置中保留一份副本，方便你撤销导入。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "导入后找不到书签。搜索一个你确定在文件里的书签。",
+      "Opera 的导入不提供文件选项。改用 Snug 的“导入”页面：它可以自行读取 HTML 文件。",
+      "同一个书签出现了两次。在 Snug 中打开“重复项”：它按地址把副本分组，只删除你标记为“删除”的副本。",
+      "Snug 提示没有导入任何内容。文件里的书签都已在浏览器中。关闭“跳过重复项”即可重新导入。"
+    ]
+  },
+  "verified": "菜单路径和文件名取自 {fromName} 和 {toName} 的官方帮助页面，核实日期为{date}。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。"
+}

@@ -514,7 +514,7 @@ export function howToSources(
   slug: string,
 ): { browser: string; urls: readonly string[] }[] {
   const { from, to } = getHowToPage(slug)
-  return [from, to].map((browser) => {
+  return [...new Set([from, to])].map((browser) => {
     const facts = BROWSER_FACTS[browser]
     const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }

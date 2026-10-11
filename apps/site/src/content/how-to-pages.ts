@@ -82,4 +82,21 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
       'move-bookmarks-from-firefox-to-chrome',
     ],
   },
+  'move-bookmarks-from-chrome-to-opera': {
+    group: 'move',
+    from: 'chrome',
+    to: 'opera',
+    relatedGuide: ['guide/exporting', 'guide/importing', 'guide/duplicates'],
+    relatedHowTo: [
+      'move-bookmarks-from-chrome-to-edge',
+      'move-bookmarks-from-chrome-to-brave',
+    ],
+  },
+  'export-chrome-bookmarks-to-markdown': {
+    group: 'formats',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/exporting'],
+    relatedHowTo: ['move-bookmarks-from-chrome-to-edge'],
+  },
 }
