@@ -187,6 +187,76 @@ export function buildComparisonStructuredData(
 }
 
 /**
+ * One page listed on the How-to index.
+ */
+interface HowToIndexItem {
+  name: string
+  path: string
+}
+
+/**
+ * Facts that feed the How-to index's `CollectionPage`, `ItemList` and
+ * `BreadcrumbList` nodes.
+ */
+export interface HowToIndexStructuredDataPage extends ComparisonStructuredDataPage {
+  items: readonly HowToIndexItem[]
+}
+
+/**
+ * One schema.org `@graph` for the How-to index: a `CollectionPage` whose main
+ * entity is an `ItemList` of every How-to page, plus a `BreadcrumbList`. It
+ * never carries `HowTo`, `FAQPage`, `AggregateRating` or `Review` data.
+ * @param locale - A supported locale code.
+ * @param page - The index's title, description, path, breadcrumb trail and
+ * listed pages.
+ * @returns A JSON-LD object ready to serialize.
+ */
+export function buildHowToIndexStructuredData(
+  locale: Locale,
+  page: HowToIndexStructuredDataPage,
+) {
+  const pageUrl = `${SITE_ORIGIN}${page.path}`
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: page.title,
+        description: page.description,
+        inLanguage: languageTag(locale),
+        isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+        ...(page.dateModified && { dateModified: page.dateModified }),
+        breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+        mainEntity: { '@id': `${pageUrl}#list` },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#list`,
+        numberOfItems: page.items.length,
+        itemListElement: page.items.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          url: `${SITE_ORIGIN}${item.path}`,
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${pageUrl}#breadcrumb`,
+        itemListElement: page.breadcrumbs.map((crumb, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: crumb.name,
+          item: `${SITE_ORIGIN}${crumb.path}`,
+        })),
+      },
+    ],
+  }
+}
+
+/**
  * Facts that feed a How-to page's `WebPage` and `BreadcrumbList` nodes.
  */
 export interface HowToStructuredDataPage extends ComparisonStructuredDataPage {

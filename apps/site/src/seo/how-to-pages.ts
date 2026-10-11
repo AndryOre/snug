@@ -1,6 +1,9 @@
 import {
+  getHowToIndexMeta,
   getHowToMeta,
+  HOW_TO_INDEX_LOCALES,
   HOW_TO_SLUGS,
+  howToIndexPath,
   howToPageLocales,
   howToPath,
 } from '../i18n/how-to'
@@ -29,7 +32,16 @@ export const HOW_TO_SOURCES: readonly string[] = [
  */
 export function howToSitemapEntries(): SitemapEntry[] {
   const lastmod = lastCommitDate(HOW_TO_SOURCES)
-  return HOW_TO_SLUGS.flatMap((slug) => {
+  const indexAlternates = hreflangAlternates(
+    howToIndexPath(DEFAULT_LOCALE),
+    HOW_TO_INDEX_LOCALES,
+  )
+  const indexEntries = HOW_TO_INDEX_LOCALES.map((locale) => ({
+    loc: `${SITE_ORIGIN}${howToIndexPath(locale)}`,
+    lastmod,
+    alternates: indexAlternates,
+  }))
+  const pageEntries = HOW_TO_SLUGS.flatMap((slug) => {
     const locales = howToPageLocales(slug)
     const alternates = hreflangAlternates(
       howToPath(DEFAULT_LOCALE, slug),
@@ -41,14 +53,21 @@ export function howToSitemapEntries(): SitemapEntry[] {
       alternates,
     }))
   })
+  return [...indexEntries, ...pageEntries]
 }
 
 /**
- * One `llms.txt` line per English How-to page.
- * @returns The pages, in registry order.
+ * One `llms.txt` line for the English How-to index, then one per English
+ * How-to page.
+ * @returns The index, then the pages in registry order.
  */
 export function howToLlmsPages(): LlmsHowToPage[] {
-  return HOW_TO_SLUGS.map((slug) => {
+  const index = getHowToIndexMeta(DEFAULT_LOCALE)
+  const indexPage = {
+    ...index,
+    url: `${SITE_ORIGIN}${howToIndexPath(DEFAULT_LOCALE)}`,
+  }
+  const pages = HOW_TO_SLUGS.map((slug) => {
     const { title, description } = getHowToMeta(DEFAULT_LOCALE, slug)
     return {
       title,
@@ -56,4 +75,5 @@ export function howToLlmsPages(): LlmsHowToPage[] {
       url: `${SITE_ORIGIN}${howToPath(DEFAULT_LOCALE, slug)}`,
     }
   })
+  return [indexPage, ...pages]
 }

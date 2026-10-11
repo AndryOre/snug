@@ -10,8 +10,11 @@ import {
 } from '../i18n/comparisons'
 import { getContent } from '../i18n/content'
 import {
+  getHowToIndexMeta,
   getHowToMeta,
+  HOW_TO_INDEX_LOCALES,
   HOW_TO_SLUGS,
+  howToIndexPath,
   howToPageLocales,
   howToPath,
 } from '../i18n/how-to'
@@ -43,10 +46,11 @@ import {
   buildStructuredData,
 } from './structured-data'
 
-const HOW_TO_PAGE_COUNT = HOW_TO_SLUGS.flatMap((slug) =>
-  howToPageLocales(slug),
-).length
-let HOW_TO_ALTERNATE_COUNT = 0
+const HOW_TO_PAGE_COUNT =
+  HOW_TO_SLUGS.flatMap((slug) => howToPageLocales(slug)).length +
+  HOW_TO_INDEX_LOCALES.length
+let HOW_TO_ALTERNATE_COUNT =
+  HOW_TO_INDEX_LOCALES.length * (HOW_TO_INDEX_LOCALES.length + 1)
 for (const slug of HOW_TO_SLUGS) {
   const carrying = howToPageLocales(slug).length
   HOW_TO_ALTERNATE_COUNT += carrying * (carrying + 1)
@@ -486,6 +490,10 @@ describe('root file routes', () => {
       )
     }
     expect(text).toContain('## How-to')
+    const indexMeta = getHowToIndexMeta('en')
+    expect(text).toContain(
+      `- [${indexMeta.title}](${SITE_ORIGIN}${howToIndexPath('en')}): ${indexMeta.description}`,
+    )
     for (const slug of HOW_TO_SLUGS) {
       const { title, description } = getHowToMeta('en', slug)
       expect(text).toContain(
@@ -569,6 +577,14 @@ describe('root file routes', () => {
         `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${alternativesPath('en', slug)}"/>`,
       )
     }
+    for (const locale of HOW_TO_INDEX_LOCALES) {
+      expect(xml).toContain(
+        `<loc>${SITE_ORIGIN}${howToIndexPath(locale)}</loc>\n    <lastmod>`,
+      )
+    }
+    expect(xml).toContain(
+      `<xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/how-to/"/>`,
+    )
     for (const slug of HOW_TO_SLUGS) {
       const locales = howToPageLocales(slug)
       for (const locale of locales) {

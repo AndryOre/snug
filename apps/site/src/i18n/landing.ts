@@ -2,6 +2,7 @@ import { STORE_FACTS } from '../seo/store-facts'
 import { alternativesPath } from './comparisons'
 import { getContent, type SiteContent } from './content'
 import { DOCS_PATHS } from './docs-ui'
+import { howToIndexPath } from './how-to'
 import { languageTag, type Locale, localePath } from './locales'
 import { privacyPath } from './privacy'
 import { formatRatingsSentence } from './proof'
@@ -214,4 +215,5 @@ export const FOOTER_LINK_HREFS = {
   guide: (locale: Locale) => localePath(locale, DOCS_PATHS.guide),
   changelog: (locale: Locale) => localePath(locale, DOCS_PATHS.whatsNew),
   alternatives: (locale: Locale) => alternativesPath(locale),
+  howTo: (locale: Locale) => howToIndexPath(locale),
 } as const

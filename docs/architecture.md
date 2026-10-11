@@ -60,7 +60,10 @@ relative to `apps/extension/` unless it starts with `packages/`.
     `src/content/how-to-pages.ts`; routes in `src/pages/how-to/` and
     `src/pages/[locale]/how-to/` render `HowToPage.astro`, with metadata and
     JSON-LD from `src/seo/how-to-descriptor.ts` and sitemap and `llms.txt`
-    entries from `src/seo/how-to-pages.ts`.
+    entries from `src/seo/how-to-pages.ts`. The How-to index (`/how-to/`, every
+    locale) renders `HowToIndexPage.astro` from the registry's groups, with a
+    `CollectionPage` plus `ItemList` graph from `howToIndexDescriptor`, and the
+    footer links it.
 - **`apps/video`** (`@snug/video`) — the Remotion promo video and YouTube
   thumbnails. It has no runtime link to the extension: it reads
   `apps/extension/locales/*.json` and `apps/extension/e2e-store/captions.ts` by
