@@ -344,13 +344,38 @@ describe('sources of a same-browser page', () => {
     expect(HOW_TO_PAGES[slug]?.from).toBe(HOW_TO_PAGES[slug]?.to)
     expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
   })
-})
 
-describe('howToSources for a same-browser page', () => {
-  it('lists the browser once', () => {
+  it('lists the browser once for a backup page', () => {
     expect(
       howToSources('back-up-chrome-bookmarks').map(({ browser }) => browser),
     ).toEqual(['Chrome'])
+  })
+})
+
+describe('export pages', () => {
+  const exportSlugs = [
+    'export-chrome-bookmarks-to-csv',
+    'export-chrome-bookmarks-to-json',
+  ]
+
+  it.each(exportSlugs)(
+    'has %s in every locale with key parity and a sample',
+    (slug) => {
+      expect(howToPageLocales(slug)).toEqual([...LOCALES])
+      expect(getHowToPage(slug).sample).toBe(
+        slug.endsWith('csv') ? 'csv' : 'json',
+      )
+      for (const locale of LOCALES) {
+        expect(flattenKeys(getHowToContent(locale, slug) as never)).toEqual(
+          flattenKeys(getHowToContent('en', slug) as never),
+        )
+      }
+    },
+  )
+
+  it.each(exportSlugs)('sources Chrome once for %s', (slug) => {
+    expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
+    expect(howToValues('en', slug).fromExportFormats).toBe('HTML')
   })
 })
 

@@ -51,4 +51,11 @@ describe('BROWSER_FACTS', () => {
       }
     }
   })
+
+  it('sources the HTML export format of Chrome', () => {
+    expect(BROWSER_FACTS.chrome.exportFormats).toEqual({
+      value: ['HTML'],
+      sourceUrl: 'https://support.google.com/chrome/answer/96816',
+    })
+  })
 })

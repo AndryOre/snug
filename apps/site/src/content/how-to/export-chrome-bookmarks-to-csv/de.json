@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Chrome-Lesezeichen als CSV exportieren | Snug",
+    "description": "Chrome-Lesezeichen mit Snug als CSV exportieren: eine Zeile pro Lesezeichen, Spalten title, url und folder, so liest sie eine Tabelle. Stand: {date}."
+  },
+  "title": "Wie exportiere ich meine Chrome-Lesezeichen als CSV?",
+  "directAnswer": "Die Chrome-Hilfe beschreibt ein einziges Exportformat, {fromExportFormats}, erreichbar über {fromExportPath}. Für CSV nutze die Seite Export von Snug: Sie schreibt pro Lesezeichen eine Zeile mit title, url und folder, nur für die Ordner, die du wählst. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Die Chrome-Hilfe beschreibt ein einziges Exportformat, {fromExportFormats}. Der Browser hat also keine eigene CSV- oder JSON-Option. Sein Export ist trotzdem die richtige Wahl, wenn die Datei in einen anderen Browser soll.",
+    "steps": [
+      "Öffne in Chrome {fromExportPath}.",
+      "Speichere die Datei. Chrome nennt sie standardmäßig {fromExportFile}.",
+      "Für Zeilen in einer Tabellenkalkulation geht es unten mit Snug weiter."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was die CSV-Datei enthält",
+    "intro": "Die erste Zeile benennt die Spalten. Danach bekommt jedes Lesezeichen eine Zeile, Ordner bekommen keine eigene Zeile.",
+    "items": [
+      "Spalten: title, url und folder. Hinzugefügt am, Zuletzt verwendet am und Favicons einbeziehen fügen dateAdded, dateLastUsed und iconData danach an.",
+      "Ordner: Die Spalte folder enthält den vollständigen Pfad, getrennt durch /, beginnend mit dem obersten Ordner wie Bookmarks bar. Übergeordneten Ordner ausblenden behält nur diesen obersten Ordner.",
+      "Anführungszeichen: Jedes Feld steht in doppelten Anführungszeichen, und ein Anführungszeichen im Feld wird verdoppelt. Ein / oder \\ in einem Ordnernamen erhält einen Backslash, sodass Q3/Q4 als Q3\\/Q4 erscheint.",
+      "Tabellenkalkulationen: Ein Feld, das mit =, +, - oder @ beginnt, erhält einen vorangestellten Apostroph, damit eine Tabellenkalkulation es nicht als Formel ausführt.",
+      "Datumswerte: dateAdded und dateLastUsed sind ganze Sekunden seit 1970, keine Millisekunden."
+    ]
+  },
+  "withSnug": {
+    "title": "CSV mit Snug exportieren",
+    "intro": "Snug läuft in Chrome und anderen Chromium-Browsern. Auf der Seite Export legst du fest, was in die Datei kommt und wie sie heißt.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store.",
+      "Öffne die Seite Export von Snug. Suche nach Lesezeichen und hake einzelne Lesezeichen oder ganze Ordner an, oder nutze Alle Lesezeichen auswählen.",
+      "Wähle unter Exportformat die Option CSV.",
+      "Öffne Exportoptionen, um Hinzugefügt am, Zuletzt verwendet am oder Favicons einbeziehen als zusätzliche Spalten aufzunehmen oder Übergeordneten Ordner ausblenden einzuschalten.",
+      "Lege mit Dateinamenvorlage den Dateinamen fest. Zum Beispiel ergibt %yyyy%mm%dd myPc einen Namen wie 20260930 myPc.csv.",
+      "Klicke auf N Lesezeichen exportieren, wobei N die Anzahl der angehakten Lesezeichen ist. Snug lädt die Datei herunter."
+    ],
+    "snapshot": "Das Popup exportiert den ganzen Baum mit einem Klick. Ohne Vorlage nennt Snug die Datei Bookmarks_<date>_<time>, zum Beispiel Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "Ein echtes Beispiel",
+    "intro": "Das ist die echte Ausgabe des Exporters für einen kleinen Testbaum: Ordner namens Dev, \"Tools\" und Q3/Q4 in der Lesezeichenleiste (Bookmarks bar) sowie ein Lesezeichen unter Weitere Lesezeichen (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Kommas oder Anführungszeichen teilen einen Titel auf mehrere Zellen. Snug setzt jedes Feld in Anführungszeichen. Importiere die Datei daher als CSV mit dem doppelten Anführungszeichen als Textbegrenzer, dann bleibt Comma, and \"quotes\" in einer Zelle.",
+      "Die Spalte folder zeigt einen Backslash. Ein / in einem Ordnernamen wird als \\/ geschrieben, damit / das Pfadtrennzeichen bleibt.",
+      "Eine Zelle beginnt mit einem Apostroph. Snug stellt ihn Werten voran, die mit =, +, - oder @ beginnen, damit sie nicht als Formeln ausgeführt werden.",
+      "Nur einige Ordner sollen in die Datei. Das Popup exportiert den ganzen Baum. Nutze die Seite Export und hake die gewünschten Ordner an.",
+      "Du brauchst die Zeilen wieder in einem Browser. Die Seite Import von Snug liest CSV und baut die Ordner aus der Spalte folder wieder auf. Für den Import eines anderen Browsers nimm die HTML-Datei aus dem integrierten Export von Chrome."
+    ]
+  },
+  "verified": "Menüpfad und Exportformat wurden am {date} auf den offiziellen Hilfeseiten von {fromName} gelesen. Menüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht. Spaltennamen und Maskierung stammen aus dem CSV-Exporter von Snug und seinen Tests."
+}

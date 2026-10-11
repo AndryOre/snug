@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Esportare i segnalibri di Chrome in JSON | Snug",
+    "description": "Esporta i segnalibri di Chrome in JSON con Snug: l'albero delle cartelle come dati annidati, campi reali e reimportazione. Verificato il {date}."
+  },
+  "title": "Come esporto i miei segnalibri di Chrome in JSON?",
+  "directAnswer": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, raggiungibile da {fromExportPath}. Per il JSON, usa la pagina Esporta di Snug: scrive l'albero delle cartelle come dati annidati che Snug può reimportare con le cartelle al loro posto. Percorsi dei menu verificati il {date}.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, quindi il browser non ha un'opzione CSV o JSON propria. La sua esportazione resta la scelta giusta quando il file va a un altro browser.",
+    "steps": [
+      "In Chrome, apri {fromExportPath}.",
+      "Salva il file. Chrome lo chiama {fromExportFile} per impostazione predefinita.",
+      "Per avere l'albero delle cartelle come dati, continua qui sotto con Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa contiene il JSON",
+    "intro": "Il file è un array di un elemento che contiene un nodo radice con id 0. Sotto di esso ci sono Bookmarks bar e Other bookmarks, e le cartelle si annidano tramite array children.",
+    "items": [
+      "Segnalibri: id, parentId, title, url e syncing.",
+      "Cartelle: id, title, syncing e children, senza parentId perché l'annidamento ne indica la posizione. Le due cartelle principali portano anche folderType, bookmarks-bar o other.",
+      "Campi opzionali: Data di aggiunta aggiunge dateAdded, Data dell'ultimo utilizzo aggiunge dateLastUsed, Date di modifica delle cartelle aggiunge dateGroupModified e Includi le favicon aggiunge iconData. Le date sono secondi interi dal 1970.",
+      "Scegliere le cartelle: viene scritto solo ciò che spunti nella pagina Esporta. Nascondi Altri segnalibri porta il contenuto di Other bookmarks al livello superiore, e Nascondi la cartella principale elimina le cartelle normali mantenendone i segnalibri.",
+      "Testo: titoli e indirizzi mantengono i loro caratteri così come sono, per esempio Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Esportare in JSON con Snug",
+    "intro": "Snug funziona in Chrome e negli altri browser Chromium. Il JSON è il formato che si ripristina in Snug con cartelle e posizioni radice intatte.",
+    "steps": [
+      "Installa Snug dal Chrome Web Store.",
+      "Apri la pagina Esporta di Snug. Cerca i segnalibri, poi spunta singoli segnalibri o intere cartelle, oppure usa Seleziona tutti i segnalibri.",
+      "In Formato di esportazione, scegli JSON.",
+      "Apri Opzioni di esportazione per aggiungere Data di aggiunta, Data dell'ultimo utilizzo, Date di modifica delle cartelle o Includi le favicon, oppure per attivare Nascondi Altri segnalibri o Nascondi la cartella principale.",
+      "Modifica Modello del nome file per dare un nome al file. Per esempio, %yyyy%mm%dd myPc dà un nome come 20260930 myPc.json.",
+      "Fai clic su Esporta N segnalibri, dove N è il numero di elementi spuntati. Snug scarica il file."
+    ],
+    "snapshot": "Per riportare indietro il file, apri la pagina Importa di Snug e scegli il file JSON. L'anteprima mostra prima l'albero delle cartelle. Crea cartella e Ripristina — unisci mantengono i tuoi segnalibri attuali, e prima di Ripristina — sostituisci Snug salva un'istantanea di sicurezza."
+  },
+  "sample": {
+    "title": "Un esempio reale",
+    "intro": "Questo è l'output reale dell'esportatore per un piccolo albero di prova: una cartella chiamata Dev, \"Tools\" nella barra dei segnalibri (Bookmarks bar) e un segnalibro in Altri segnalibri (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Manca un segnalibro. Viene scritto solo ciò che hai spuntato nella pagina Esporta. Spunta la sua cartella, oppure usa Seleziona tutti i segnalibri.",
+      "La radice ha un titolo vuoto. È il vero nodo radice, con id 0, e mantiene il file importabile da Snug.",
+      "Mancano le date. Compaiono solo quando Data di aggiunta, Data dell'ultimo utilizzo o Date di modifica delle cartelle è attivo in Opzioni di esportazione.",
+      "Un altro browser non accetta il file. Questo JSON è pensato per Snug e per i tuoi script. Per l'importazione di un altro browser, usa il file HTML dell'esportazione integrata di Chrome."
+    ]
+  },
+  "verified": "Il percorso del menu e il formato di esportazione sono stati letti nelle pagine di aiuto ufficiali di {fromName} il {date}. I menu cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo. I nomi dei campi e l'annidamento provengono dall'esportatore JSON di Snug e dai suoi test."
+}

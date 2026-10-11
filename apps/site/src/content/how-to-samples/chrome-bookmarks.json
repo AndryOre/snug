@@ -1,0 +1,46 @@
+[
+  {
+    "id": "0",
+    "title": "",
+    "syncing": false,
+    "children": [
+      {
+        "id": "1",
+        "title": "Bookmarks bar",
+        "folderType": "bookmarks-bar",
+        "syncing": false,
+        "children": [
+          {
+            "id": "10",
+            "title": "Dev, \"Tools\"",
+            "syncing": false,
+            "children": [
+              {
+                "id": "11",
+                "parentId": "10",
+                "title": "Comma, and \"quotes\"",
+                "url": "https://example.com/a,b",
+                "syncing": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Other bookmarks",
+        "folderType": "other",
+        "syncing": false,
+        "children": [
+          {
+            "id": "20",
+            "parentId": "2",
+            "title": "Loose",
+            "url": "https://example.org",
+            "syncing": false
+          }
+        ]
+      }
+    ]
+  }
+]
