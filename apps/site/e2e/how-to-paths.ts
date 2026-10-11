@@ -35,6 +35,35 @@ export function howToLocales(slug: string): readonly Locale[] {
 }
 
 /**
+ * Locales that carry the How-to index: English plus every locale with shared
+ * strings.
+ */
+export const HOW_TO_INDEX_LOCALES: readonly Locale[] = LOCALES.filter(
+  (locale) =>
+    locale === DEFAULT_LOCALE ||
+    existsSync(path.join(contentRoot, 'shared', `${locale}.json`)),
+)
+
+/**
+ * Site-relative path of the How-to index in a locale that carries it.
+ * @param locale - A supported locale code.
+ * @returns The path with a trailing slash.
+ */
+export function howToIndexPath(locale: Locale): string {
+  return localePath(
+    HOW_TO_INDEX_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE,
+    '/how-to/',
+  )
+}
+
+/**
+ * The How-to index in every locale that carries it.
+ */
+export const HOW_TO_INDEX_PATHS = HOW_TO_INDEX_LOCALES.map((locale) =>
+  howToIndexPath(locale),
+)
+
+/**
  * Site-relative path of a How-to page in a locale that carries it.
  * @param locale - A supported locale code.
  * @param slug - A How-to page slug.

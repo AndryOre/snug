@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Move Edge Bookmarks to Chrome | Snug",
+    "description": "Export your Edge favorites to an HTML file and import it into Chrome, step by step, with what to check afterwards. Menu paths verified {date}."
+  },
+  "title": "How do I move my bookmarks from Edge to Chrome?",
+  "directAnswer": "Export your Edge favorites to an HTML file. Then import the file into Chrome with {toImportPath}. Chrome puts imported bookmarks in {toImportPlacement}. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "Chrome's help lists these import sources: {toImportSources}. This page follows that documented route. Edge calls bookmarks favorites.",
+    "steps": [
+      "In Edge, export your favorites to an HTML file.",
+      "In Chrome, open {toImportPath}.",
+      "Choose the HTML file you saved and confirm."
+    ]
+  },
+  "carriesOver": {
+    "title": "What carries over",
+    "intro": "The HTML file is the only thing that moves.",
+    "items": [
+      "Kept in the file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of the file, per {fromName}: {fromHtmlDrops}.",
+      "Where a help page does not say, this page says Not listed instead of guessing."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Edge and in Chrome, so the whole move happens inside the two browsers. It adds a preview, a choice of what to bring in and a way back.",
+    "steps": [
+      "Install Snug from the Chrome Web Store in both Edge and Chrome.",
+      "In Edge, open Snug's Export page. Check the bookmarks or folders you want to move, choose HTML and export.",
+      "Open Snug's Import page and choose the HTML file there, or drop it on the page. Do not use the popup for this: it imports at once, without a preview.",
+      "The Preview shows the detected format, the bookmark count and the folder tree before anything changes.",
+      "Use the checkboxes to pick single bookmarks or whole folders. Snug imports only what you select.",
+      "Choose an import mode. Create folder adds everything to a new Imported Bookmarks folder. Restore — merge places bookmarks in their original locations next to your existing ones, when the file carries them.",
+      "Leave Skip duplicates on. It leaves out any bookmark whose address is already in Chrome, and tells you how many it skipped."
+    ],
+    "snapshot": "Create folder and Restore — merge never clear your bookmarks. Before a Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps a copy in Settings, so you can undo the import."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "You cannot find the bookmarks after importing. Chrome places them in {toImportPlacement}.",
+      "Chrome does not accept the file. Chrome's own import takes a bookmarks HTML file, so choose the HTML file you exported and not another file type.",
+      "A bookmark appears twice. Open Duplicates in Snug: it groups copies by address and removes only the copies you mark Delete.",
+      "Snug says nothing was imported. Every bookmark in the file is already in your browser. Turn off Skip duplicates to import them again."
+    ]
+  },
+  "verified": "Menu paths and file names were read from the official help pages of {fromName} and {toName} on {date}. Browser menus change between versions, so check the source if a path differs on your screen."
+}

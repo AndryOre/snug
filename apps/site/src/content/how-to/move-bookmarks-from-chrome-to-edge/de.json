@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Lesezeichen von Chrome nach Edge übertragen | Snug",
+    "description": "Übertrage Chrome-Lesezeichen mit dem Import von Edge oder einer exportierten HTML-Datei und erfahre, wann die Datei sicherer ist. Geprüft am {date}."
+  },
+  "title": "Wie übertrage ich meine Lesezeichen von Chrome nach Edge?",
+  "directAnswer": "Öffne in Edge {toImportPath}. Edge nennt diese Quellen: {toImportSources}. Wähle Chrome für den direkten Import, oder exportiere in Chrome über {fromExportPath} eine Datei und importiere sie. Edge legt importierte Lesezeichen in {toImportPlacement} ab. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierten Methoden",
+    "intro": "Edge kann Chrome direkt lesen oder eine Datei, die du aus Chrome exportierst. Beides ist eingebaut.",
+    "steps": [
+      "Direkter Import: Öffne in Edge {toImportPath}, wähle Chrome als Quelle und bestätige.",
+      "Mit Datei: Öffne in Chrome {fromExportPath}.",
+      "Mit Datei: Speichere die Datei. Chrome nennt sie {fromExportFile}.",
+      "Mit Datei: Öffne in Edge {toImportPath}, wähle die gespeicherte HTML-Datei und bestätige."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was übernommen wird und wann eine Datei sicherer ist",
+    "intro": "Die Hilfe von Edge nennt beide Quellen, beide Wege funktionieren. Eine Datei ist sicherer, wenn du vorher eine Kopie behalten willst.",
+    "items": [
+      "In der Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "Nicht in der Datei, laut {fromName}: {fromHtmlDrops}.",
+      "Wo eine Hilfeseite nichts dazu sagt, steht hier Nicht angegeben statt einer Vermutung.",
+      "Eine Datei kannst du vor dem Import öffnen und prüfen und später erneut importieren. Ein direkter Import hinterlässt keine Datei."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und Edge, beides Chromium-Browser. Exportiere in Chrome nur die Ordner deiner Wahl und importiere sie in Edge mit Vorschau.",
+    "steps": [
+      "Installiere Snug in Chrome und in Edge.",
+      "Öffne in Chrome die Seite Exportieren von Snug und wähle mit den Kontrollkästchen die gewünschten Ordner oder einzelne Lesezeichen.",
+      "Wähle HTML als Format und klicke auf Exportieren. Snug lädt die Datei herunter.",
+      "Öffne in Edge die Seite Import von Snug und wähle dort die Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert. Lesezeichen, die Duplikate überspringen auslassen würde, sind markiert.",
+      "Wähle einen Importmodus. Ordner erstellen legt alles in einen neuen Ordner namens Importierte Lesezeichen. Wiederherstellen – zusammenführen legt Lesezeichen an ihren ursprünglichen Orten neben den vorhandenen ab, sofern die Datei diese enthält.",
+      "Lass Duplikate überspringen aktiviert. Die Option lässt jedes Lesezeichen aus, dessen Adresse schon in Edge ist, und zeigt, wie viele es übersprungen hat."
+    ],
+    "snapshot": "Ordner erstellen und Wiederherstellen – zusammenführen leeren deine Lesezeichen nie. Vor einem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in den Einstellungen, damit du den Import rückgängig machen kannst."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import nicht. Edge legt sie in {toImportPlacement} ab.",
+      "Edge bietet Chrome nicht als Quelle an. Edge nennt diese Quellen: {toImportSources}. Nimm stattdessen den Weg über die Datei.",
+      "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt.",
+      "Snug meldet, dass nichts importiert wurde. Alle Lesezeichen der Datei sind schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} und {toName} gelesen. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

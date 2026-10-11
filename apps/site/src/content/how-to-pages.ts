@@ -1,9 +1,19 @@
 import type { BrowserSlug } from './browser-facts'
 
 /**
+ * Task groups of the How-to index, in display order.
+ */
+export const HOW_TO_GROUPS = [
+  'move',
+  'backup',
+  'formats',
+  'duplicates',
+] as const
+
+/**
  * Task group a How-to page belongs to on the How-to index.
  */
-type HowToGroup = 'move' | 'backup' | 'formats' | 'duplicates'
+export type HowToGroup = (typeof HOW_TO_GROUPS)[number]
 
 /**
  * What a How-to page declares about itself. Copy lives in
@@ -37,5 +47,39 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
     to: 'chrome',
     relatedGuide: ['guide/importing', 'guide/duplicates'],
     relatedHowTo: [],
+  },
+  'move-bookmarks-from-safari-to-chrome': {
+    group: 'move',
+    from: 'safari',
+    to: 'chrome',
+    relatedGuide: ['guide/importing', 'guide/duplicates'],
+    relatedHowTo: ['move-bookmarks-from-firefox-to-chrome'],
+  },
+  'move-bookmarks-from-chrome-to-edge': {
+    group: 'move',
+    from: 'chrome',
+    to: 'edge',
+    relatedGuide: ['guide/exporting', 'guide/importing'],
+    relatedHowTo: ['move-bookmarks-from-firefox-to-chrome'],
+  },
+  'move-bookmarks-from-edge-to-chrome': {
+    group: 'move',
+    from: 'edge',
+    to: 'chrome',
+    relatedGuide: ['guide/exporting', 'guide/importing', 'guide/duplicates'],
+    relatedHowTo: [
+      'move-bookmarks-from-firefox-to-chrome',
+      'move-bookmarks-from-chrome-to-brave',
+    ],
+  },
+  'move-bookmarks-from-chrome-to-brave': {
+    group: 'move',
+    from: 'chrome',
+    to: 'brave',
+    relatedGuide: ['guide/exporting', 'guide/importing', 'guide/duplicates'],
+    relatedHowTo: [
+      'move-bookmarks-from-edge-to-chrome',
+      'move-bookmarks-from-firefox-to-chrome',
+    ],
   },
 }

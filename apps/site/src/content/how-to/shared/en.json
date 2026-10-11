@@ -5,6 +5,14 @@
     "howTo": "How-to"
   },
   "eyebrow": "How-to",
+  "index": {
+    "meta": {
+      "title": "Bookmark how-to guides: move, back up, export | Snug",
+      "description": "Step-by-step guides for moving bookmarks between browsers, backing them up, exporting them and removing duplicates, using each browser's built-in tools."
+    },
+    "title": "Bookmark how-to guides",
+    "lede": "Short answers to the bookmark tasks people look up most. Each guide uses the browser's built-in steps, says what carries over and what does not, and shows where Snug adds something."
+  },
   "shortAnswer": "Short answer",
   "asOf": "As of {date}",
   "verifiedOn": "Verified on {date}",

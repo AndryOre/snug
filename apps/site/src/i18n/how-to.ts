@@ -5,7 +5,12 @@ import {
   type SourcedFact,
   sourcedFacts,
 } from '../content/browser-facts'
-import { HOW_TO_PAGES, type HowToPageDefinition } from '../content/how-to-pages'
+import {
+  HOW_TO_GROUPS,
+  HOW_TO_PAGES,
+  type HowToGroup,
+  type HowToPageDefinition,
+} from '../content/how-to-pages'
 import type enMoveFirefoxToChrome from '../content/how-to/move-bookmarks-from-firefox-to-chrome/en.json'
 import type enShared from '../content/how-to/shared/en.json'
 import { PUBLISHED_SOURCES } from '../docs/published'
@@ -218,6 +223,100 @@ export function howToPath(locale: Locale, slug: string): string {
 }
 
 /**
+ * The How-to pages that list a Guide page as related, found by inverting each
+ * page's `relatedGuide`.
+ * @param entryId - Starlight entry id of a Guide page, with a lowercase
+ * language tag prefix for translated routes, e.g. `pt-br/guide/importing`.
+ * @param pages - Page definitions, defaulting to the registry.
+ * @returns Slugs in registry order, empty when no page relates to the Guide page.
+ */
+export function howToSlugsForGuideEntry(
+  entryId: string,
+  pages: Record<string, HowToPageDefinition> = HOW_TO_PAGES,
+): string[] {
+  return Object.entries(pages)
+    .filter(([, page]) =>
+      page.relatedGuide.some(
+        (id) => entryId === id || entryId.endsWith(`/${id}`),
+      ),
+    )
+    .map(([slug]) => slug)
+}
+
+/**
+ * Locales that carry the How-to index: English plus every locale with shared
+ * strings. These are the index's hreflang alternates.
+ */
+export const HOW_TO_INDEX_LOCALES: readonly Locale[] = LOCALES.filter(
+  (locale) => locale === DEFAULT_LOCALE || loaded.shared[locale] !== undefined,
+)
+
+/**
+ * Site-relative path of the How-to index, always with a trailing slash. A
+ * locale without the index falls back to the English path.
+ * @param locale - A supported locale code.
+ * @returns The path, e.g. `/de/how-to/`.
+ */
+export function howToIndexPath(locale: Locale): string {
+  return HOW_TO_INDEX_LOCALES.includes(locale)
+    ? localePath(locale, '/how-to/')
+    : '/how-to/'
+}
+
+/**
+ * Title and description of the How-to index, falling back to English.
+ * @param locale - A supported locale code.
+ * @returns The index's `title` and `description`.
+ */
+export function getHowToIndexMeta(locale: Locale): {
+  title: string
+  description: string
+} {
+  return getHowToSharedContent(locale).index.meta
+}
+
+/**
+ * One card of the How-to index.
+ */
+interface HowToIndexCard {
+  slug: string
+  title: string
+  description: string
+  href: string
+}
+
+/**
+ * One task group of the How-to index with its cards.
+ */
+export interface HowToIndexGroup {
+  group: HowToGroup
+  label: string
+  pages: HowToIndexCard[]
+}
+
+/**
+ * The index sections for a locale: groups in `HOW_TO_GROUPS` order, cards in
+ * registry order, empty groups left out. Each page appears exactly once.
+ * @param locale - A supported locale code.
+ * @returns The non-empty groups with their cards.
+ */
+export function howToIndexGroups(locale: Locale): HowToIndexGroup[] {
+  const { groups } = getHowToSharedContent(locale)
+  return HOW_TO_GROUPS.map((group) => ({
+    group,
+    label: groups[group],
+    pages: HOW_TO_SLUGS.filter(
+      (slug) => getHowToPage(slug).group === group,
+    ).map((slug) => ({
+      slug,
+      title: getHowToContent(locale, slug).title,
+      description: getHowToMeta(locale, slug).description,
+      href: howToPath(locale, slug),
+    })),
+  })).filter((entry) => entry.pages.length > 0)
+}
+
+/**
  * Whether a page carries a With Snug section. Pages that only describe the
  * built-in method leave the `withSnug` key out of every locale's copy.
  * @param slug - A How-to page slug.
@@ -269,6 +368,7 @@ export interface HowToValues {
   fromExportFile: string
   toImportPath: string
   toImportPlacement: string
+  toImportSources: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
 }
@@ -331,6 +431,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     toImportPlacement: listed(
       target.importPlacement,
       (placement) => shared.placements[placement],
+      notListed,
+    ),
+    toImportSources: listed(
+      target.importSources,
+      (items) => sentenceList(items, tag),
       notListed,
     ),
     fromHtmlKeeps: listed(

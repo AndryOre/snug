@@ -5,6 +5,14 @@
     "howTo": "Guide pratiche"
   },
   "eyebrow": "Guida pratica",
+  "index": {
+    "meta": {
+      "title": "Guide pratiche sui segnalibri: sposta, salva, esporta | Snug",
+      "description": "Guide passo passo per spostare i segnalibri tra browser, salvarli, esportarli e rimuovere i duplicati con gli strumenti integrati di ogni browser."
+    },
+    "title": "Guide pratiche sui segnalibri",
+    "lede": "Risposte brevi alle operazioni sui segnalibri più cercate. Ogni guida usa i passaggi integrati nel browser, indica cosa viene mantenuto e cosa no, e mostra dove Snug aggiunge qualcosa."
+  },
   "shortAnswer": "Risposta breve",
   "asOf": "Al {date}",
   "verifiedOn": "Verificato il {date}",

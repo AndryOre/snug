@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Pasar marcadores de Chrome a Edge | Snug",
+    "description": "Pasa marcadores de Chrome a Edge con la importación de Edge o un archivo HTML, y cuándo conviene el archivo. Rutas verificadas el {date}."
+  },
+  "title": "¿Cómo paso mis marcadores de Chrome a Edge?",
+  "directAnswer": "En Edge, abre {toImportPath}. Edge enumera estas fuentes: {toImportSources}. Elige Chrome para importar directamente, o exporta un archivo desde Chrome con {fromExportPath} e impórtalo. Edge coloca los marcadores importados en {toImportPlacement}. Rutas de menú verificadas el {date}.",
+  "builtIn": {
+    "title": "Los métodos integrados",
+    "intro": "Edge puede leer Chrome directamente o leer un archivo que exportes desde Chrome. Ambos vienen incluidos.",
+    "steps": [
+      "Importación directa: en Edge, abre {toImportPath}, elige Chrome como fuente y confirma.",
+      "Con archivo: en Chrome, abre {fromExportPath}.",
+      "Con archivo: guarda el archivo. Chrome lo llama {fromExportFile}.",
+      "Con archivo: en Edge, abre {toImportPath}, elige el archivo HTML que guardaste y confirma."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué se conserva y cuándo es más seguro un archivo",
+    "intro": "La ayuda de Edge enumera ambas fuentes, así que sirven los dos caminos. Un archivo es más seguro cuando quieres conservar una copia antes de que cambie nada.",
+    "items": [
+      "Incluido en el archivo, según {fromName}: {fromHtmlKeeps}.",
+      "Fuera del archivo, según {fromName}: {fromHtmlDrops}.",
+      "Cuando una página de ayuda no lo indica, esta página escribe No indicado en lugar de adivinar.",
+      "Un archivo se puede abrir y revisar antes de importarlo, y volver a importar después. Una importación directa no deja ningún archivo."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome y Edge, ambos basados en Chromium. Úsalo en Chrome para exportar solo las carpetas que elijas y en Edge para importar con vista previa.",
+    "steps": [
+      "Instala Snug en Chrome y en Edge.",
+      "En Chrome, abre la página Exportar de Snug y usa las casillas para elegir las carpetas que quieres, o marcadores sueltos.",
+      "Elige HTML como formato y haz clic en Exportar. Snug descarga el archivo.",
+      "En Edge, abre la página Importar de Snug y elige allí el archivo, o suéltalo en la página. No uses la ventana emergente para esto: importa de inmediato y sin vista previa.",
+      "La Vista previa muestra el formato detectado, el número de marcadores y el árbol de carpetas, antes de que cambie nada. Los marcadores que Omitir duplicados dejaría fuera aparecen marcados.",
+      "Elige un modo de importación. Crear carpeta añade todo a una carpeta nueva llamada Marcadores importados. Restaurar — combinar coloca los marcadores en sus ubicaciones originales junto a los existentes, cuando el archivo las incluye.",
+      "Deja Omitir duplicados activado. Deja fuera cualquier marcador cuya dirección ya esté en Edge e indica cuántos omitió."
+    ],
+    "snapshot": "Crear carpeta y Restaurar — combinar nunca vacían tus marcadores. Antes de Restaurar — reemplazar, Snug guarda una instantánea de seguridad en tus Descargas y conserva una copia en Ajustes, para que puedas deshacer la importación."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "No encuentras los marcadores después de importar. Edge los coloca en {toImportPlacement}.",
+      "Edge no ofrece Chrome como fuente. Edge enumera estas fuentes: {toImportSources}. Usa el camino del archivo.",
+      "Un marcador aparece dos veces. Abre Duplicados en Snug: agrupa las copias por dirección y elimina solo las copias que marques como Eliminar.",
+      "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en tu navegador. Desactiva Omitir duplicados para importarlos de nuevo."
+    ]
+  },
+  "verified": "Las rutas de menú y los nombres de archivo se leyeron en las páginas de ayuda oficiales de {fromName} y {toName} el {date}. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+}

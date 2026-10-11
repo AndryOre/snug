@@ -5,6 +5,14 @@
     "howTo": "Guías prácticas"
   },
   "eyebrow": "Guía práctica",
+  "index": {
+    "meta": {
+      "title": "Guías de marcadores: mover, respaldar y exportar | Snug",
+      "description": "Guías paso a paso para mover marcadores entre navegadores, respaldarlos, exportarlos y quitar duplicados con las herramientas integradas de cada navegador."
+    },
+    "title": "Guías prácticas de marcadores",
+    "lede": "Respuestas breves a las tareas de marcadores que más se buscan. Cada guía usa los pasos integrados del navegador, indica qué se conserva y qué no, y muestra dónde Snug aporta algo más."
+  },
   "shortAnswer": "Respuesta corta",
   "asOf": "A fecha de {date}",
   "verifiedOn": "Verificado el {date}",

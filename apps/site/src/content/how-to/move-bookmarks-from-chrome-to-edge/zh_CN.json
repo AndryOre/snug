@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "把 Chrome 书签迁移到 Edge 的方法 | Snug",
+    "description": "用 Edge 自带的导入或导出的 HTML 文件，把 Chrome 书签迁移到 Edge，并说明什么时候用文件更稳妥。菜单路径已于{date}核实。"
+  },
+  "title": "如何把 Chrome 的书签迁移到 Edge？",
+  "directAnswer": "在 Edge 中打开{toImportPath}。Edge 列出的导入来源有：{toImportSources}。选择 Chrome 可直接导入，也可以先在 Chrome 中用{fromExportPath}导出文件，再导入这个文件。Edge 会把导入的书签放在{toImportPlacement}。菜单路径已于{date}核实。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "Edge 可以直接读取 Chrome，也可以读取你从 Chrome 导出的文件。两种都是内置功能。",
+    "steps": [
+      "直接导入：在 Edge 中打开{toImportPath}，选择 Chrome 作为来源并确认。",
+      "使用文件：在 Chrome 中打开{fromExportPath}。",
+      "使用文件：保存文件。Chrome 默认把它命名为 {fromExportFile}。",
+      "使用文件：在 Edge 中打开{toImportPath}，选择你保存的 HTML 文件并确认。"
+    ]
+  },
+  "carriesOver": {
+    "title": "会带过去什么，什么时候用文件更稳妥",
+    "intro": "Edge 的帮助页面列出了这两种来源，所以哪种方式都行。如果想在改动发生之前先留一份副本，用文件更稳妥。",
+    "items": [
+      "据 {fromName}，文件包含：{fromHtmlKeeps}。",
+      "据 {fromName}，文件不包含：{fromHtmlDrops}。",
+      "帮助页面没有说明的地方，本页写“未说明”，不做猜测。",
+      "文件可以在导入前打开检查，之后也能再次导入。直接导入不会留下文件。"
+    ]
+  },
+  "withSnug": {
+    "title": "使用 Snug",
+    "intro": "Snug 在 Chrome 和 Edge 中都能运行，两者都是基于 Chromium 的浏览器。在 Chrome 中只导出你选中的文件夹，在 Edge 中带预览导入。",
+    "steps": [
+      "在 Chrome 和 Edge 中都安装 Snug。",
+      "在 Chrome 中打开 Snug 的“导出”页面，用复选框选择需要的文件夹或单个书签。",
+      "选择 HTML 格式并点击“导出”。Snug 会下载这个文件。",
+      "在 Edge 中打开 Snug 的“导入”页面，在页面上选取文件，或把文件拖到页面上。不要用弹出窗口：它会立即导入，没有预览。",
+      "在任何内容改动之前，预览会显示检测到的格式、书签数量和文件夹结构。“跳过重复项”会略过的书签带有标记。",
+      "选择导入模式。“创建文件夹”会把所有书签添加到新的“导入的书签”文件夹。“恢复——合并”在文件包含原始位置时，会把书签放回原位置，与现有书签并存。",
+      "保持“跳过重复项”开启。它会略过地址已在 Edge 中的书签，并告诉你跳过了多少个。"
+    ],
+    "snapshot": "“创建文件夹”和“恢复——合并”不会清空你的书签。在“恢复——替换”之前，Snug 会把安全快照保存到下载文件夹，并在设置中保留一份副本，方便你撤销导入。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "导入后找不到书签。Edge 会把它们放在{toImportPlacement}。",
+      "Edge 的来源里没有 Chrome。Edge 列出的导入来源有：{toImportSources}。请改用文件的方式。",
+      "同一个书签出现了两次。在 Snug 中打开“重复项”：它按地址把副本分组，只删除你标记为“删除”的副本。",
+      "Snug 提示没有导入任何内容。文件里的书签都已在浏览器中。关闭“跳过重复项”即可重新导入。"
+    ]
+  },
+  "verified": "菜单路径和文件名取自 {fromName} 和 {toName} 的官方帮助页面，核实日期为{date}。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。"
+}

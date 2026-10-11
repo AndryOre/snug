@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Déplacer les favoris d'Edge vers Chrome | Snug",
+    "description": "Exportez vos favoris Edge en HTML et importez-les dans Chrome, étape par étape, avec ce qu'il faut vérifier. Chemins de menu vérifiés le {date}."
+  },
+  "title": "Comment déplacer mes favoris d'Edge vers Chrome ?",
+  "directAnswer": "Exportez vos favoris Edge dans un fichier HTML. Importez ensuite le fichier dans Chrome avec {toImportPath}. Chrome place les favoris importés dans {toImportPlacement}. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "L'aide de Chrome liste ces sources d'importation : {toImportSources}. Cette page suit cette voie documentée. Edge appelle les favoris des favoris.",
+    "steps": [
+      "Dans Edge, exportez vos favoris dans un fichier HTML.",
+      "Dans Chrome, ouvrez {toImportPath}.",
+      "Choisissez le fichier HTML enregistré et confirmez."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qui est conservé",
+    "intro": "Seul le fichier HTML est transféré.",
+    "items": [
+      "Présent dans le fichier, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier, selon {fromName} : {fromHtmlDrops}.",
+      "Quand une page d'aide ne le précise pas, cette page écrit Non indiqué plutôt que de deviner."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Edge et dans Chrome : tout le déplacement se fait dans les deux navigateurs. Il ajoute un aperçu, le choix de ce qu'on importe et un moyen de revenir en arrière.",
+    "steps": [
+      "Installez Snug depuis le Chrome Web Store dans Edge et dans Chrome.",
+      "Dans Edge, ouvrez la page Exporter de Snug. Cochez les favoris ou les dossiers à déplacer, choisissez HTML et exportez.",
+      "Ouvrez la page Importer de Snug et choisissez-y le fichier HTML, ou déposez-le sur la page. N'utilisez pas la fenêtre contextuelle pour cela : elle importe tout de suite, sans aperçu.",
+      "L'Aperçu montre le format détecté, le nombre de favoris et l'arborescence des dossiers, avant que rien ne change.",
+      "Utilisez les cases à cocher pour choisir des favoris isolés ou des dossiers entiers. Snug n'importe que votre sélection.",
+      "Choisissez un mode d'importation. Créer un dossier ajoute tout dans un nouveau dossier Favoris importés. Restaurer — fusionner place les favoris à leur emplacement d'origine, à côté des favoris existants, quand le fichier les contient.",
+      "Laissez Ignorer les doublons activé. L'option laisse de côté tout favori dont l'adresse est déjà dans Chrome et indique combien elle en a ignoré."
+    ],
+    "snapshot": "Créer un dossier et Restaurer — fusionner ne vident jamais vos favoris. Avant un Restaurer — remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements et en garde une copie dans les Paramètres, pour que vous puissiez annuler l'importation."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Vous ne retrouvez pas les favoris après l'importation. Chrome les place dans {toImportPlacement}.",
+      "Chrome n'accepte pas le fichier. L'importation de Chrome prend un fichier HTML de favoris : choisissez le fichier HTML que vous avez exporté, et non un autre type de fichier.",
+      "Un favori apparaît en double. Ouvrez Doublons dans Snug : il regroupe les copies par adresse et ne supprime que celles que vous marquez Supprimer.",
+      "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans votre navigateur. Désactivez Ignorer les doublons pour les importer de nouveau."
+    ]
+  },
+  "verified": "Les chemins de menu et les noms de fichier ont été lus sur les pages d'aide officielles de {fromName} et de {toName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

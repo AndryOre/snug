@@ -1,18 +1,23 @@
 import { describe, expect, it } from 'vitest'
 
-import { HOW_TO_PAGES } from '../content/how-to-pages'
+import { HOW_TO_PAGES, type HowToPageDefinition } from '../content/how-to-pages'
 import { PUBLISHED_SOURCES } from '../docs/published'
 import { flattenKeys } from './content'
 import {
   getHowToContent,
+  getHowToIndexMeta,
   getHowToMeta,
   getHowToPage,
   getHowToSharedContent,
+  HOW_TO_INDEX_LOCALES,
   HOW_TO_LOCALES,
   HOW_TO_SLUGS,
   type HowToFiles,
+  howToIndexGroups,
+  howToIndexPath,
   howToPageLocales,
   howToPath,
+  howToSlugsForGuideEntry,
   howToSources,
   howToValues,
   interpolateHowTo,
@@ -49,9 +54,11 @@ function files(entries: Record<string, Record<string, unknown>>): HowToFiles {
   )
 }
 
+const firstPageOnly = { [SLUG]: HOW_TO_PAGES[SLUG] as HowToPageDefinition }
+
 function load(
   entries: Record<string, Record<string, unknown>>,
-  pages: typeof HOW_TO_PAGES = HOW_TO_PAGES,
+  pages: typeof HOW_TO_PAGES = firstPageOnly,
 ) {
   return () =>
     loadHowToContent({
@@ -162,6 +169,18 @@ describe('bundled copy', () => {
     }
   })
 
+  it.each([
+    'move-bookmarks-from-edge-to-chrome',
+    'move-bookmarks-from-chrome-to-brave',
+  ])('has %s in every locale with key parity', (slug) => {
+    expect(howToPageLocales(slug)).toEqual([...LOCALES])
+    for (const locale of LOCALES) {
+      expect(flattenKeys(getHowToContent(locale, slug) as never)).toEqual(
+        flattenKeys(getHowToContent('en', slug) as never),
+      )
+    }
+  })
+
   it('registers every page and lists English first', () => {
     expect(HOW_TO_SLUGS).toEqual(Object.keys(HOW_TO_PAGES))
     expect(HOW_TO_LOCALES[0]).toBe('en')
@@ -183,32 +202,53 @@ describe('bundled copy', () => {
   })
 
   it('keeps every meta title and description within the content rules', () => {
-    for (const locale of LOCALES) {
-      const { title, description } = getHowToMeta(locale, SLUG)
-
-      expect(title).toMatch(/ \| Snug$/u)
-      expect(title.startsWith('Snug')).toBe(false)
-      expect(visualWidth(title)).toBeLessThanOrEqual(60)
-      expect(description).toContain('Chrome')
-      expect(description).not.toContain('{')
-      if (CJK_LOCALES.has(locale)) continue
-      expect([...description].length).toBeGreaterThanOrEqual(140)
-      expect([...description].length).toBeLessThanOrEqual(160)
+    const violations: string[] = []
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const { title, description } = getHowToMeta(locale, slug)
+        const label = `${locale}/${slug}`
+        const length = [...description].length
+        const checks: [string, boolean][] = [
+          ['title suffix', / \| Snug$/u.test(title)],
+          ['title starts with Snug', !title.startsWith('Snug')],
+          ['title width', visualWidth(title) <= 60],
+          [
+            'description names the destination',
+            description.includes(howToValues('en', slug).toName),
+          ],
+          ['description placeholder', !description.includes('{')],
+          [
+            'description length',
+            CJK_LOCALES.has(locale) || (length >= 140 && length <= 160),
+          ],
+        ]
+        for (const [rule, passed] of checks) {
+          if (!passed) violations.push(`${label}: ${rule}`)
+        }
+      }
     }
+
+    expect(violations).toEqual([])
   })
 
-  it('writes the page title as a question', () => {
-    for (const locale of LOCALES) {
-      expect(getHowToContent(locale, SLUG).title).toMatch(/[?？]$/u)
+  it('writes every page title as a question', () => {
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        expect(getHowToContent(locale, slug).title).toMatch(/[?？]$/u)
+      }
     }
   })
 
   it('never states a menu path or file name inline', () => {
-    for (const locale of LOCALES) {
-      const text = JSON.stringify(getHowToContent(locale, SLUG))
-      expect(text).not.toContain('bookmarks.html')
-      expect(text).not.toContain('Import and Backup')
-      expect(text).not.toContain('Import bookmarks and settings')
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const text = JSON.stringify(getHowToContent(locale, slug))
+        expect(text).not.toContain('bookmarks.html')
+        expect(text).not.toContain('bookmarks_<date>.html')
+        expect(text).not.toContain('Import and Backup')
+        expect(text).not.toContain('Import bookmarks and settings')
+        expect(text).not.toContain('Import browser data')
+      }
     }
   })
 })
@@ -224,6 +264,26 @@ describe('howToValues and interpolateHowTo', () => {
     expect(values.toImportPath).toBe(
       'More > Bookmarks and lists > Import bookmarks and settings',
     )
+  })
+
+  it('lists the import sources of the destination browser', () => {
+    expect(
+      howToValues('en', 'move-bookmarks-from-chrome-to-edge').toImportSources,
+    ).toBe('Google Chrome, IE11, and Favorites or bookmarks HTML file')
+  })
+
+  it('resolves import sources and the Edge export from the facts', () => {
+    const brave = howToValues('en', 'move-bookmarks-from-chrome-to-brave')
+    const edge = howToValues('en', 'move-bookmarks-from-edge-to-chrome')
+
+    expect(brave.toImportSources).toBe(
+      'Browsers detected on this computer and Bookmarks HTML file',
+    )
+    expect(brave.toImportPath).toBe(
+      'Main menu > Bookmarks > Import Bookmarks and Settings',
+    )
+    expect(edge.toImportSources).toBe('Bookmarks HTML file')
+    expect(edge.fromExportPath).toBe('Not listed')
   })
 
   it('writes a fact that is not listed as the locale string', () => {
@@ -257,6 +317,86 @@ describe('paths and sources', () => {
     for (const { urls } of howToSources(SLUG)) {
       expect(urls.length).toBeGreaterThan(0)
       for (const url of urls) expect(url).toMatch(/^https:\/\//)
+    }
+  })
+})
+
+describe('howToSlugsForGuideEntry', () => {
+  const pages: Record<string, HowToPageDefinition> = {
+    a: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide/importing'] },
+    b: {
+      ...HOW_TO_PAGES[SLUG]!,
+      relatedGuide: ['guide/importing', 'guide/duplicates'],
+    },
+    c: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide'] },
+  }
+
+  it('inverts the related Guide pages in registry order', () => {
+    expect(howToSlugsForGuideEntry('guide/importing', pages)).toEqual([
+      'a',
+      'b',
+    ])
+    expect(howToSlugsForGuideEntry('guide/duplicates', pages)).toEqual(['b'])
+  })
+
+  it('ignores the locale prefix of a translated entry', () => {
+    expect(howToSlugsForGuideEntry('pt-br/guide/importing', pages)).toEqual([
+      'a',
+      'b',
+    ])
+    expect(howToSlugsForGuideEntry('es/guide', pages)).toEqual(['c'])
+  })
+
+  it('returns nothing for a page without related How-to pages', () => {
+    expect(howToSlugsForGuideEntry('guide/settings', pages)).toEqual([])
+    expect(howToSlugsForGuideEntry('es/changelog', pages)).toEqual([])
+    expect(howToSlugsForGuideEntry('guide/exporting', pages)).toEqual([])
+  })
+
+  it('maps the bundled registry to the Firefox to Chrome page', () => {
+    expect(howToSlugsForGuideEntry('de/guide/importing')).toContain(SLUG)
+  })
+})
+
+function compareNames(a: string, b: string): number {
+  return a.localeCompare(b)
+}
+
+describe('How-to index', () => {
+  it('is carried by every locale with shared strings, English first', () => {
+    expect(HOW_TO_INDEX_LOCALES).toEqual([...LOCALES])
+    expect(howToIndexPath('en')).toBe('/how-to/')
+    expect(howToIndexPath('pt_BR')).toBe('/pt-br/how-to/')
+  })
+
+  it('lists every registered page exactly once, grouped', () => {
+    for (const locale of LOCALES) {
+      const groups = howToIndexGroups(locale)
+      const slugs = groups.flatMap((group) =>
+        group.pages.map((page) => page.slug),
+      )
+      expect(slugs.toSorted(compareNames)).toEqual(
+        HOW_TO_SLUGS.toSorted(compareNames),
+      )
+      for (const group of groups) {
+        expect(group.pages.length).toBeGreaterThan(0)
+        expect(group.label).toBe(
+          getHowToSharedContent(locale).groups[group.group],
+        )
+      }
+    }
+  })
+
+  it('links each card to the locale page path', () => {
+    const [group] = howToIndexGroups('de')
+    expect(group?.pages[0]?.href).toBe(howToPath('de', SLUG))
+  })
+
+  it('carries localized index meta with no placeholders', () => {
+    for (const locale of LOCALES) {
+      const { title, description } = getHowToIndexMeta(locale)
+      expect(title.length).toBeGreaterThan(0)
+      expect(description).not.toMatch(/\{\w+\}/)
     }
   })
 })

@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "把书签从 Chrome 移到 Brave | Snug",
+    "description": "从其他浏览器或 HTML 文件把 Chrome 书签导入 Brave，附带每一步和导入后要检查的内容。菜单路径核实日期为{date}。"
+  },
+  "title": "如何把书签从 Chrome 移到 Brave？",
+  "directAnswer": "在 Brave 中打开 {toImportPath}。Brave 帮助页面列出的导入来源是：{toImportSources}。若要使用文件，请先在 Chrome 中通过 {fromExportPath} 导出。菜单路径核实日期为{date}。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "选择本机上检测到的浏览器，可以直接从 Chrome 导入；也可以使用文件。Chrome 在另一台电脑上时，文件方式同样可用。以下步骤是文件方式。",
+    "steps": [
+      "在 Chrome 中打开 {fromExportPath}。",
+      "保存文件。Chrome 默认把它命名为 {fromExportFile}。",
+      "在 Brave 中打开 {toImportPath}。",
+      "选择你保存的 HTML 文件并确认。"
+    ]
+  },
+  "carriesOver": {
+    "title": "会带过去什么",
+    "intro": "迁移的只有这个 HTML 文件。",
+    "items": [
+      "据 {fromName}，文件包含：{fromHtmlKeeps}。",
+      "据 {fromName}，文件不包含：{fromHtmlDrops}。",
+      "帮助页面没有说明的地方，本页写“未说明”，不做猜测。"
+    ]
+  },
+  "withSnug": {
+    "title": "使用 Snug",
+    "intro": "Snug 在 Chrome 和 Brave 中都能运行。在 Chrome 中用它只导出你选的文件夹，在 Brave 中用它预览导入并撤销替换。",
+    "steps": [
+      "从 Chrome 应用商店分别在 Chrome 和 Brave 中安装 Snug。",
+      "在 Chrome 中打开 Snug 的“导出”页面。勾选要移动的文件夹或单个书签，选择 HTML 并导出。",
+      "打开 Snug 的“导入”页面，在页面上选取 HTML 文件，或把文件拖到页面上。不要用弹出窗口：它会立即导入，没有预览。",
+      "在任何内容改动之前，预览会显示检测到的格式、书签数量和文件夹结构。",
+      "用复选框选择单个书签或整个文件夹。Snug 只导入你选中的内容。",
+      "选择导入模式。“创建文件夹”会把所有书签添加到新的“导入的书签”文件夹。“恢复——合并”在文件包含原始位置时，会把书签放回原位置，与现有书签并存。",
+      "“恢复——替换”会先清空书签栏和“其他书签”中的书签。Snug 会显示将移除和添加的书签数量，要求你确认，并且一次只处理一个文件。",
+      "保持“跳过重复项”开启。它会略过地址已在 Brave 中的书签，并告诉你跳过了多少个。"
+    ],
+    "snapshot": "“创建文件夹”和“恢复——合并”不会清空你的书签。在“恢复——替换”之前，Snug 会把安全快照保存到下载文件夹，并在设置中保留一份副本，方便你撤销导入。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "导入后找不到书签。请搜索一个你确定在文件中的书签。",
+      "Brave 不接受这个文件。请确认你选的是 Chrome 保存的 HTML 文件（默认名为 {fromExportFile}），而不是其他类型的文件。",
+      "同一个书签出现了两次。在 Snug 中打开“重复项”：它按地址把副本分组，只删除你标记为“删除”的副本。",
+      "Snug 提示没有导入任何内容。文件里的书签都已在浏览器中。关闭“跳过重复项”即可重新导入。"
+    ]
+  },
+  "verified": "菜单路径和文件名取自 {fromName} 和 {toName} 的官方帮助页面，核实日期为{date}。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。"
+}

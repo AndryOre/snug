@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Transférer ses favoris de Chrome vers Edge | Snug",
+    "description": "Transférez vos favoris Chrome vers Edge avec l'import d'Edge ou un fichier HTML, et voyez quand le fichier est plus sûr. Vérifié le {date}."
+  },
+  "title": "Comment transférer mes favoris de Chrome vers Edge ?",
+  "directAnswer": "Dans Edge, ouvrez {toImportPath}. Edge liste ces sources : {toImportSources}. Choisissez Chrome pour importer directement, ou exportez un fichier depuis Chrome avec {fromExportPath} et importez-le. Edge place les favoris importés dans {toImportPlacement}. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "Les méthodes intégrées",
+    "intro": "Edge peut lire Chrome directement, ou lire un fichier que vous exportez depuis Chrome. Les deux sont intégrés.",
+    "steps": [
+      "Import direct : dans Edge, ouvrez {toImportPath}, choisissez Chrome comme source et confirmez.",
+      "Avec un fichier : dans Chrome, ouvrez {fromExportPath}.",
+      "Avec un fichier : enregistrez le fichier. Chrome le nomme {fromExportFile}.",
+      "Avec un fichier : dans Edge, ouvrez {toImportPath}, choisissez le fichier HTML enregistré et confirmez."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qui est conservé et quand un fichier est plus sûr",
+    "intro": "L'aide d'Edge liste les deux sources, donc les deux voies fonctionnent. Un fichier est plus sûr quand vous voulez garder une copie avant que rien ne change.",
+    "items": [
+      "Présent dans le fichier, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier, selon {fromName} : {fromHtmlDrops}.",
+      "Quand une page d'aide ne le précise pas, cette page écrit Non indiqué plutôt que de deviner.",
+      "Un fichier peut être ouvert et vérifié avant l'import, puis réimporté plus tard. Un import direct ne laisse aucun fichier."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome et Edge, deux navigateurs Chromium. Utilisez-le dans Chrome pour n'exporter que les dossiers choisis, puis dans Edge pour importer avec un aperçu.",
+    "steps": [
+      "Installez Snug dans Chrome et dans Edge.",
+      "Dans Chrome, ouvrez la page Exporter de Snug et utilisez les cases à cocher pour choisir les dossiers voulus, ou des favoris isolés.",
+      "Choisissez HTML comme format et cliquez sur Exporter. Snug télécharge le fichier.",
+      "Dans Edge, ouvrez la page Importer de Snug et choisissez-y le fichier, ou déposez-le sur la page. N'utilisez pas la fenêtre contextuelle pour cela : elle importe tout de suite, sans aperçu.",
+      "L'Aperçu montre le format détecté, le nombre de favoris et l'arborescence des dossiers, avant que rien ne change. Les favoris que Ignorer les doublons laisserait de côté sont signalés.",
+      "Choisissez un mode d'importation. Créer un dossier ajoute tout dans un nouveau dossier Favoris importés. Restaurer — fusionner place les favoris à leur emplacement d'origine, à côté des favoris existants, quand le fichier les contient.",
+      "Laissez Ignorer les doublons activé. L'option laisse de côté tout favori dont l'adresse est déjà dans Edge et indique combien elle en a ignoré."
+    ],
+    "snapshot": "Créer un dossier et Restaurer — fusionner ne vident jamais vos favoris. Avant un Restaurer — remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements et en garde une copie dans les Paramètres, pour que vous puissiez annuler l'importation."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Vous ne retrouvez pas les favoris après l'importation. Edge les place dans {toImportPlacement}.",
+      "Edge ne propose pas Chrome comme source. Edge liste ces sources : {toImportSources}. Passez par le fichier.",
+      "Un favori apparaît en double. Ouvrez Doublons dans Snug : il regroupe les copies par adresse et ne supprime que celles que vous marquez Supprimer.",
+      "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans votre navigateur. Désactivez Ignorer les doublons pour les importer de nouveau."
+    ]
+  },
+  "verified": "Les chemins de menu et les noms de fichier ont été lus sur les pages d'aide officielles de {fromName} et de {toName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

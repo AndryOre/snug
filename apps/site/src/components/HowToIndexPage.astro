@@ -1,0 +1,90 @@
+---
+import { Card, CardHeader, CardTitle } from '@workspace/ui/components/card'
+
+import { getHowToSharedContent, howToIndexGroups } from '../i18n/how-to'
+import { type Locale } from '../i18n/locales'
+import Layout from '../layouts/Layout.astro'
+import {
+  howToIndexCrumbs,
+  howToIndexDescriptor,
+} from '../seo/how-to-descriptor'
+import ComparisonBreadcrumb from './ComparisonBreadcrumb.astro'
+import Eyebrow from './Eyebrow.astro'
+import FinalCta from './FinalCta.astro'
+import SectionHeading from './SectionHeading.astro'
+import TextLink from './TextLink.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const shared = getHowToSharedContent(locale)
+const page = howToIndexDescriptor(locale)
+const groups = howToIndexGroups(locale)
+const crumbs = howToIndexCrumbs(locale).map((crumb, index, all) => ({
+  name: crumb.name,
+  href: index < all.length - 1 ? crumb.path : undefined,
+}))
+---
+
+<Layout locale={locale} page={page}>
+  <main id="main">
+    <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+      <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
+      <header class="mt-8">
+        <Eyebrow>{shared.eyebrow}</Eyebrow>
+        <SectionHeading as="h1" class="mt-3 hyphens-manual wrap-anywhere">
+          {shared.index.title}
+        </SectionHeading>
+        <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
+          {shared.index.lede}
+        </p>
+      </header>
+      {groups.map((group) => (
+        <section
+          data-section="how-to-group"
+          data-group={group.group}
+          aria-labelledby={`group-${group.group}-heading`}
+          class="mt-12"
+        >
+          <h2
+            id={`group-${group.group}-heading`}
+            class="font-heading text-2xl font-bold md:text-3xl"
+          >
+            {group.label}
+          </h2>
+          <ul class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {group.pages.map((card) => (
+              <li class="flex">
+                <Card size="lg" className="w-full">
+                  <CardHeader>
+                    <CardTitle>
+                      <h3 class="text-xl leading-tight break-words">
+                        <TextLink
+                          href={card.href}
+                          class="min-h-0 text-foreground wrap-anywhere"
+                        >
+                          {card.title}
+                        </TextLink>
+                      </h3>
+                    </CardTitle>
+                    <p class="mt-3 text-base text-muted-foreground">
+                      {card.description}
+                    </p>
+                  </CardHeader>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+    <FinalCta
+      locale={locale}
+      heading={shared.ctaTitle}
+      line={shared.ctaBody}
+      button={shared.install}
+    />
+  </main>
+</Layout>

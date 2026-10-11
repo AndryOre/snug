@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Mover favoritos do Chrome para o Brave | Snug",
+    "description": "Importe seus favoritos do Chrome no Brave de outro navegador ou de um arquivo HTML, com o que conferir. Caminhos de menu verificados em {date}."
+  },
+  "title": "Como movo meus favoritos do Chrome para o Brave?",
+  "directAnswer": "No Brave, abra {toImportPath}. A ajuda do Brave lista estas fontes de importação: {toImportSources}. Para usar um arquivo, exporte-o antes do Chrome em {fromExportPath}. Caminhos de menu conferidos em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "Escolha um navegador detectado neste computador para importar direto do Chrome, ou use um arquivo. O caminho do arquivo também funciona quando o Chrome está em outro computador. Estes passos cobrem o caminho do arquivo.",
+    "steps": [
+      "No Chrome, abra {fromExportPath}.",
+      "Salve o arquivo. O Chrome o chama de {fromExportFile} por padrão.",
+      "No Brave, abra {toImportPath}.",
+      "Escolha o arquivo HTML que você salvou e confirme."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que é mantido",
+    "intro": "Só o arquivo HTML é transferido.",
+    "items": [
+      "Incluído no arquivo, segundo {fromName}: {fromHtmlKeeps}.",
+      "Fora do arquivo, segundo {fromName}: {fromHtmlDrops}.",
+      "Quando uma página de ajuda não informa, esta página escreve Não informado em vez de adivinhar."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome e no Brave. Use-o no Chrome para exportar só as pastas que escolher, e no Brave para ver a pré-visualização da importação e desfazer uma substituição.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store no Chrome e no Brave.",
+      "No Chrome, abra a página Exportar do Snug. Marque as pastas ou os favoritos avulsos que quer mover, escolha HTML e exporte.",
+      "Abra a página Importar do Snug e escolha lá o arquivo HTML, ou solte-o na página. Não use o pop-up para isso: ele importa na hora, sem pré-visualização.",
+      "A Pré-visualização mostra o formato detectado, a quantidade de favoritos e a árvore de pastas, antes de qualquer mudança.",
+      "Use as caixas de seleção para escolher favoritos avulsos ou pastas inteiras. O Snug importa só o que você selecionar.",
+      "Escolha um modo de importação. Criar pasta adiciona tudo a uma nova pasta Favoritos importados. Restaurar — mesclar coloca os favoritos nos locais originais, junto com os existentes, quando o arquivo os contém.",
+      "Restaurar — substituir esvazia primeiro os favoritos da Barra de favoritos e de Outros favoritos. O Snug mostra quantos favoritos vai remover e adicionar, pede confirmação e trabalha com um arquivo por vez.",
+      "Deixe Ignorar duplicados ativado. Ele deixa de fora qualquer favorito cujo endereço já esteja no Brave e informa quantos ignorou."
+    ],
+    "snapshot": "Criar pasta e Restaurar — mesclar nunca esvaziam seus favoritos. Antes de um Restaurar — substituir, o Snug salva um instantâneo de segurança em Downloads e guarda uma cópia em Configurações, para você desfazer a importação."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Você não encontra os favoritos depois de importar. Busque um favorito que você sabe que estava no arquivo.",
+      "O Brave não aceita o arquivo. Confira se você escolheu o arquivo HTML salvo pelo Chrome, chamado {fromExportFile} por padrão, e não outro tipo de arquivo.",
+      "Um favorito aparece duas vezes. Abra Duplicados no Snug: ele agrupa as cópias por endereço e remove só as que você marcar como Excluir.",
+      "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no navegador. Desative Ignorar duplicados para importá-los de novo."
+    ]
+  },
+  "verified": "Os caminhos de menu e os nomes de arquivo foram lidos nas páginas de ajuda oficiais de {fromName} e {toName} em {date}. Os menus dos navegadores mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela."
+}

@@ -5,6 +5,14 @@
     "howTo": "Anleitungen"
   },
   "eyebrow": "Anleitung",
+  "index": {
+    "meta": {
+      "title": "Lesezeichen-Anleitungen: verschieben, sichern, exportieren | Snug",
+      "description": "Schritt-für-Schritt-Anleitungen, um Lesezeichen zwischen Browsern zu verschieben, zu sichern, zu exportieren und Duplikate zu entfernen, mit den eingebauten Werkzeugen jedes Browsers."
+    },
+    "title": "Anleitungen für Lesezeichen",
+    "lede": "Kurze Antworten auf die Lesezeichen-Aufgaben, nach denen am häufigsten gesucht wird. Jede Anleitung nutzt die eingebauten Schritte des Browsers, nennt, was übernommen wird und was nicht, und zeigt, wo Snug etwas ergänzt."
+  },
   "shortAnswer": "Kurze Antwort",
   "asOf": "Stand {date}",
   "verifiedOn": "Geprüft am {date}",
