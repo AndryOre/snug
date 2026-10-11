@@ -82,4 +82,11 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
       'move-bookmarks-from-firefox-to-chrome',
     ],
   },
+  'remove-duplicate-bookmarks-in-chrome': {
+    group: 'duplicates',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/duplicates', 'guide/importing'],
+    relatedHowTo: [],
+  },
 }

@@ -367,6 +367,7 @@ export interface HowToValues {
   fromExportPath: string
   fromExportFile: string
   toImportPath: string
+  toBookmarkManagerPath: string
   toImportPlacement: string
   toImportSources: string
   fromHtmlKeeps: string
@@ -428,6 +429,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     fromExportPath: listed(source.exportPath, menuPath, notListed),
     fromExportFile: listed(source.exportFileName, String, notListed),
     toImportPath: listed(target.importPath, menuPath, notListed),
+    toBookmarkManagerPath: listed(
+      target.bookmarkManagerPath,
+      menuPath,
+      notListed,
+    ),
     toImportPlacement: listed(
       target.importPlacement,
       (placement) => shared.placements[placement],
@@ -514,7 +520,7 @@ export function howToSources(
   slug: string,
 ): { browser: string; urls: readonly string[] }[] {
   const { from, to } = getHowToPage(slug)
-  return [from, to].map((browser) => {
+  return [...new Set([from, to])].map((browser) => {
     const facts = BROWSER_FACTS[browser]
     const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }

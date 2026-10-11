@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Doppelte Lesezeichen in Chrome entfernen | Snug",
+    "description": "Chrome listet in seiner Hilfe keine Duplikatsuche. Lösche Kopien von Hand im Lesezeichen-Manager oder lass Snug sie gruppieren. Geprüft am {date}."
+  },
+  "title": "Wie entferne ich doppelte Lesezeichen in Chrome?",
+  "directAnswer": "Die Hilfeseiten von Chrome listen keine Duplikatsuche, also löschst du überzählige Kopien von Hand im Lesezeichen-Manager, den du mit {toBookmarkManagerPath} öffnest. Die Duplikate-Seite von Snug übernimmt das Suchen: Sie gruppiert Lesezeichen mit derselben Adresse und löscht die Kopien, die du markierst. Geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Chrome entfernt Lesezeichen einzeln. Nichts darin vergleicht zwei Lesezeichen für dich, also gleichst du sie selbst ab.",
+    "steps": [
+      "Öffne in Chrome {toBookmarkManagerPath}.",
+      "Gehe deine Ordner durch und suche nach derselben Seite, die mehrfach gespeichert ist.",
+      "Lösche die Kopien, die du nicht brauchst.",
+      "Wiederhole das für jeden Ordner, auch für die Lesezeichenleiste und Weitere Lesezeichen."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was als Duplikat zählt",
+    "intro": "Snug behandelt zwei Lesezeichen als Duplikate, wenn ihre Adressen nach der Normalisierung übereinstimmen. Titel und Ordner spielen keine Rolle.",
+    "items": [
+      "Schema und Host werden kleingeschrieben, und http und https zählen als dieselbe Adresse.",
+      "Ein führendes www., ein abschließender Schrägstrich und ein einfaches #Fragment werden ignoriert.",
+      "Die Query-Zeichenfolge bleibt erhalten, zwei Adressen mit unterschiedlicher Query sind also zwei Lesezeichen.",
+      "Ein routenartiges Fragment wie #/ oder #! bleibt erhalten, ebenso jedes Fragment an einem ordnerartigen Pfad ohne Query.",
+      "Ordner sind nie Duplikate, auch wenn zwei denselben Namen tragen."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und anderen Chromium-Browsern. Die Duplikate-Seite findet jede Gruppe von Kopien, und Duplikate überspringen verhindert beim Import, dass neue dazukommen.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store.",
+      "Öffne Duplikate. Jede Gruppe zeigt ihre Kopien, die älteste zuerst.",
+      "Standardmäßig behält Snug die älteste Kopie und markiert den Rest mit Löschen. Wähle Behalten bei einer anderen Kopie, um zu ändern, welche bleibt.",
+      "Klicke auf die Löschen-Schaltfläche und bestätige. Nur die mit Löschen markierten Kopien werden entfernt.",
+      "Wähle Erneut scannen, um die Liste zu aktualisieren. Wenn nichts übereinstimmt, steht auf der Seite, dass es keine Duplikate gibt.",
+      "Lass beim Import einer Datei Duplikate überspringen eingeschaltet. Es lässt jedes Lesezeichen aus, dessen Adresse schon in Chrome oder weiter oben in derselben Datei vorkommt, und sagt dir, wie viele es übersprungen hat. Es gilt für Ordner erstellen und Wiederherstellen — zusammenführen, nicht für Wiederherstellen — ersetzen."
+    ],
+    "snapshot": "Das Löschen auf der Duplikate-Seite legt keinen Sicherheits-Snapshot an und hat kein Rückgängig, die Löschung lässt sich also nicht umkehren. Sicherheits-Snapshot und Import rückgängig gehören zu Wiederherstellen — ersetzen. Exportiere deine Lesezeichen vorher mit {fromExportPath}, wenn du eine Kopie zum Zurückkehren möchtest."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Zwei Lesezeichen derselben Seite werden nicht gruppiert. Ihre Adressen unterscheiden sich nach der Normalisierung, etwa im Pfad oder in der Query-Zeichenfolge. Snug lässt sie absichtlich in Ruhe.",
+      "Die falsche Kopie ist mit Löschen markiert. Wähle Behalten bei der gewünschten Kopie, bevor du bestätigst.",
+      "Eine Kopie wird nie mit Löschen markiert. Lesezeichen, die deine Organisation verwaltet, lassen sich nicht entfernen, daher markiert Snug sie nie zum Löschen.",
+      "Du hast ein Lesezeichen gelöscht, das du brauchst. Importiere die früher exportierte HTML-Datei mit {toImportPath} und eingeschaltetem Duplikate überspringen, damit nur die fehlenden Lesezeichen zurückkommen. Chrome legt sie in {toImportPlacement} ab.",
+      "Snug meldet, dass nichts importiert wurde. Jedes Lesezeichen der Datei ist schon in Chrome. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Der Pfad zum Lesezeichen-Manager wurde am {date} auf der offiziellen Hilfeseite von {toName} gelesen, und diese Seite listet keine Duplikatsuche. Die Duplikatregeln stammen aus den Guide-Seiten Duplikate und Importieren von Snug. Browser-Menüs ändern sich zwischen Versionen, prüfe also die Quelle, falls ein Pfad auf deinem Bildschirm abweicht."
+}

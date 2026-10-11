@@ -321,6 +321,33 @@ describe('paths and sources', () => {
   })
 })
 
+describe('remove-duplicate-bookmarks-in-chrome', () => {
+  const duplicatesSlug = 'remove-duplicate-bookmarks-in-chrome'
+
+  it('resolves the Bookmark Manager path from the facts module', () => {
+    expect(howToValues('en', duplicatesSlug).toBookmarkManagerPath).toBe(
+      'More > Bookmarks and lists > Bookmark manager',
+    )
+    expect(howToValues('en', SLUG).toBookmarkManagerPath).toBe(
+      'More > Bookmarks and lists > Bookmark manager',
+    )
+  })
+
+  it('lists a browser once in the sources', () => {
+    expect(howToSources(duplicatesSlug).map(({ browser }) => browser)).toEqual([
+      'Chrome',
+    ])
+  })
+
+  it('relates to the Duplicates and Importing Guide pages', () => {
+    expect(getHowToPage(duplicatesSlug).group).toBe('duplicates')
+    expect(getHowToPage(duplicatesSlug).relatedGuide).toEqual([
+      'guide/duplicates',
+      'guide/importing',
+    ])
+  })
+})
+
 describe('howToSlugsForGuideEntry', () => {
   const pages: Record<string, HowToPageDefinition> = {
     a: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide/importing'] },

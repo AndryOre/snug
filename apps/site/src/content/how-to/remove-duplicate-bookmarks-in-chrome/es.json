@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Eliminar marcadores duplicados en Chrome | Snug",
+    "description": "La ayuda de Chrome no lista buscador de duplicados. Elimina copias a mano en el Administrador de marcadores o deja que Snug las agrupe. {date}."
+  },
+  "title": "¿Cómo elimino marcadores duplicados en Chrome?",
+  "directAnswer": "Las páginas de ayuda de Chrome no listan un buscador de duplicados, así que eliminas las copias a mano en el Administrador de marcadores, que se abre con {toBookmarkManagerPath}. La página Duplicados de Snug hace la búsqueda por ti: agrupa los marcadores que comparten dirección y elimina las copias que marques. Comprobado el {date}.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "Chrome elimina los marcadores de uno en uno. Nada en él compara dos marcadores por ti, así que haces la comparación tú mismo.",
+    "steps": [
+      "En Chrome, abre {toBookmarkManagerPath}.",
+      "Recorre tus carpetas y busca el mismo sitio guardado más de una vez.",
+      "Elimina las copias que no quieras.",
+      "Repite en cada carpeta, incluidas la barra de marcadores y Otros marcadores."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué cuenta como duplicado",
+    "intro": "Snug trata dos marcadores como duplicados cuando sus direcciones coinciden una vez normalizadas. El título y la carpeta no importan.",
+    "items": [
+      "El esquema y el host se pasan a minúsculas, y http y https cuentan como la misma dirección.",
+      "Se ignoran un www. inicial, una barra final y un #fragmento simple.",
+      "La cadena de consulta se conserva, así que dos direcciones con consultas distintas son dos marcadores.",
+      "Un fragmento de ruta como #/ o #! se conserva, igual que cualquier fragmento en una ruta de tipo carpeta sin consulta.",
+      "Las carpetas nunca son duplicados, aunque dos tengan el mismo nombre."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funciona en Chrome y otros navegadores basados en Chromium. Su página Duplicados encuentra cada grupo de copias, y Omitir duplicados evita que lleguen otras nuevas al importar.",
+    "steps": [
+      "Instala Snug desde Chrome Web Store.",
+      "Abre Duplicados. Cada grupo muestra sus copias, de la más antigua a la más reciente.",
+      "De forma predeterminada, Snug conserva la copia más antigua y marca el resto como Eliminar. Elige Conservar en otra copia para cambiar cuál se queda.",
+      "Haz clic en el botón de eliminar y confirma. Solo se eliminan las copias marcadas como Eliminar.",
+      "Elige Escanear de nuevo para actualizar la lista. Si nada coincide, la página indica que no hay duplicados.",
+      "Al importar un archivo, deja Omitir duplicados activado. Deja fuera cualquier marcador cuya dirección ya esté en Chrome, o antes en el mismo archivo, e indica cuántos omitió. Se aplica a Crear carpeta y Restaurar — combinar, no a Restaurar — reemplazar."
+    ],
+    "snapshot": "Eliminar en la página Duplicados no crea una instantánea de seguridad y no tiene Deshacer, así que la eliminación no se puede revertir. La instantánea de seguridad y Deshacer importación pertenecen a Restaurar — reemplazar. Si quieres una copia a la que volver, exporta antes tus marcadores con {fromExportPath}."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "Dos marcadores del mismo sitio no aparecen agrupados. Sus direcciones difieren tras normalizarlas, por ejemplo en la ruta o en la cadena de consulta. Snug los deja como están a propósito.",
+      "La copia equivocada está marcada como Eliminar. Elige Conservar en la copia que quieres antes de confirmar.",
+      "Una copia nunca se marca como Eliminar. Los marcadores que administra tu organización no se pueden eliminar, así que Snug nunca los marca.",
+      "Eliminaste un marcador que necesitabas. Importa con {toImportPath} el archivo HTML que exportaste antes, con Omitir duplicados activado, para que solo vuelvan los marcadores que faltan. Chrome los coloca en {toImportPlacement}.",
+      "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en Chrome. Desactiva Omitir duplicados para importarlos de nuevo."
+    ]
+  },
+  "verified": "La ruta del Administrador de marcadores se leyó en la página de ayuda oficial de {toName} el {date}, y esa página no lista un buscador de duplicados. Las reglas de duplicados salen de las páginas Duplicados e Importar de la Guía de Snug. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+}
