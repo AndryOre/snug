@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Export Chrome Bookmarks to Markdown | Snug",
-    "description": "Chrome saves bookmarks as HTML. Export them to Markdown with Snug: pick folders, set a filename template and see the exact file shape. Checked {date}."
+    "description": "Chrome's help describes one export format, {fromExportFormats}. Export to Markdown with Snug: pick folders, set a filename template and see the file. Checked {date}."
   },
   "title": "How do I export my Chrome bookmarks to Markdown?",
-  "directAnswer": "Chrome's help describes one export, a bookmarks HTML file: open {fromExportPath} and Chrome saves {fromExportFile}. For Markdown, use Snug's Export page: choose Markdown and export, and Snug saves one .md file with your folders as a nested bullet list. Menu paths checked {date}.",
+  "directAnswer": "Chrome's help describes one export format, {fromExportFormats}: open {fromExportPath} and Chrome saves {fromExportFile}. For Markdown, use Snug's Export page: choose Markdown and export, and Snug saves one .md file with your folders as a nested bullet list. Menu paths checked {date}.",
   "builtIn": {
     "title": "Chrome's own export",
-    "intro": "Chrome's help describes an HTML export and does not list Markdown, so the built-in steps below produce HTML. Snug adds the Markdown file.",
+    "intro": "Chrome's help describes one export format, {fromExportFormats}, so the built-in steps below produce {fromExportFormats}. Snug adds the Markdown file.",
     "steps": [
       "In Chrome, open {fromExportPath}.",
       "Save the file. Chrome names it {fromExportFile}."

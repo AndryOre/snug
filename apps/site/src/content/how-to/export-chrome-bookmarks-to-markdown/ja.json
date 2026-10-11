@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "ChromeのブックマークをMarkdownで書き出す方法 | Snug",
-    "description": "ChromeはブックマークをHTMLで保存します。Snugでフォルダを選び、ファイル名テンプレートを設定して、Markdownで書き出す手順と実際のファイルの形を紹介します。確認日 {date}。"
+    "description": "Chromeのヘルプに載っている書き出し形式は{fromExportFormats}だけです。Snugでフォルダを選び、ファイル名テンプレートを設定して、Markdownで書き出す手順と実際のファイルの形を紹介します。確認日 {date}。"
   },
   "title": "ChromeのブックマークをMarkdownで書き出すには？",
-  "directAnswer": "Chromeのヘルプに載っている書き出しは、ブックマークのHTMLファイルだけです。{fromExportPath}を開くと、Chromeが{fromExportFile}を保存します。Markdownにする場合はSnugの［書き出し］ページでMarkdownを選んで書き出すと、フォルダを入れ子の箇条書きにした.mdファイルが1つ保存されます。メニューの場所は{date}に確認しました。",
+  "directAnswer": "Chromeのヘルプに載っている書き出し形式は{fromExportFormats}だけです。{fromExportPath}を開くと、Chromeが{fromExportFile}を保存します。Markdownにする場合はSnugの［書き出し］ページでMarkdownを選んで書き出すと、フォルダを入れ子の箇条書きにした.mdファイルが1つ保存されます。メニューの場所は{date}に確認しました。",
   "builtIn": {
     "title": "Chrome自身の書き出し",
-    "intro": "ChromeのヘルプにはHTMLの書き出しが載っていて、Markdownは載っていません。そのため、下の標準の手順で作られるのはHTMLです。Markdownファイルを作るのはSnugです。",
+    "intro": "Chromeのヘルプに載っている書き出し形式は{fromExportFormats}だけなので、下の標準の手順で作られるのは{fromExportFormats}です。Markdownファイルを作るのはSnugです。",
     "steps": [
       "Chromeで{fromExportPath}を開きます。",
       "ファイルを保存します。Chromeでは{fromExportFile}という名前になります。"

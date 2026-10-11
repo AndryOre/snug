@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Exportar favoritos do Chrome para Markdown | Snug",
-    "description": "O Chrome salva favoritos em HTML. Exporte para Markdown com o Snug: escolha pastas, defina o nome e veja o arquivo. Conferido em {date}."
+    "description": "A ajuda do Chrome descreve um só formato, {fromExportFormats}. Exporte para Markdown com o Snug: escolha pastas e defina o nome. Conferido em {date}."
   },
   "title": "Como exporto meus favoritos do Chrome para Markdown?",
-  "directAnswer": "A ajuda do Chrome descreve uma só exportação, um arquivo HTML de favoritos: abra {fromExportPath} e o Chrome salva {fromExportFile}. Para Markdown, use a página Exportar do Snug: escolha Markdown e exporte, e o Snug salva um arquivo .md com suas pastas em uma lista aninhada. Caminhos de menu conferidos em {date}.",
+  "directAnswer": "A ajuda do Chrome descreve um só formato de exportação, {fromExportFormats}: abra {fromExportPath} e o Chrome salva {fromExportFile}. Para Markdown, use a página Exportar do Snug: escolha Markdown e exporte, e o Snug salva um arquivo .md com suas pastas em uma lista aninhada. Caminhos de menu conferidos em {date}.",
   "builtIn": {
     "title": "A exportação própria do Chrome",
-    "intro": "A ajuda do Chrome descreve uma exportação HTML e não cita Markdown, então os passos integrados abaixo geram HTML. O arquivo Markdown vem do Snug.",
+    "intro": "A ajuda do Chrome descreve um só formato de exportação, {fromExportFormats}, então os passos integrados abaixo geram {fromExportFormats}. O arquivo Markdown vem do Snug.",
     "steps": [
       "No Chrome, abra {fromExportPath}.",
       "Salve o arquivo. O Chrome o chama de {fromExportFile}."

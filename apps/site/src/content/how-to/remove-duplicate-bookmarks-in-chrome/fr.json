@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Supprimer les favoris en double dans Chrome | Snug",
-    "description": "L'aide de Chrome ne liste aucun outil de doublons. Supprimez les copies à la main dans le Gestionnaire de favoris ou laissez Snug les grouper. {date}."
+    "description": "Supprimez les copies à la main dans le Gestionnaire de favoris de Chrome ou laissez Snug les grouper par adresse et supprimer. Vérifié le {date}."
   },
   "title": "Comment supprimer les favoris en double dans Chrome ?",
-  "directAnswer": "Les pages d'aide de Chrome ne listent aucun outil de recherche de doublons : vous supprimez donc les copies à la main dans le Gestionnaire de favoris, ouvert avec {toBookmarkManagerPath}. La page Doublons de Snug fait la recherche à votre place : elle groupe les favoris qui partagent une adresse et supprime les copies que vous marquez. Vérifié le {date}.",
+  "directAnswer": "Dans Chrome, vous supprimez les copies en trop à la main dans le Gestionnaire de favoris, ouvert avec {toBookmarkManagerPath}. La page Doublons de Snug fait la recherche à votre place : elle groupe les favoris qui partagent une adresse et supprime les copies que vous marquez. Vérifié le {date}.",
   "builtIn": {
     "title": "La méthode intégrée",
-    "intro": "Chrome supprime les favoris un par un. Rien dans le navigateur ne compare deux favoris pour vous, vous faites donc le rapprochement vous-même.",
+    "intro": "Dans Chrome, vous rapprochez les copies vous-même : parcourez vos dossiers, puis supprimez celles dont vous ne voulez pas.",
     "steps": [
       "Dans Chrome, ouvrez {toBookmarkManagerPath}.",
       "Parcourez vos dossiers et repérez le même site enregistré plusieurs fois.",
@@ -49,5 +49,5 @@
       "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans Chrome. Désactivez Ignorer les doublons pour les importer de nouveau."
     ]
   },
-  "verified": "Le chemin du Gestionnaire de favoris a été lu sur la page d'aide officielle de {toName} le {date}, et cette page ne liste aucun outil de recherche de doublons. Les règles de doublons viennent des pages Doublons et Importer du Guide de Snug. Les menus des navigateurs changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+  "verified": "Le chemin du Gestionnaire de favoris a été lu sur la page d'aide officielle de {toName} le {date}. Les règles de doublons viennent des pages Doublons et Importer du Guide de Snug. Les menus des navigateurs changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
 }

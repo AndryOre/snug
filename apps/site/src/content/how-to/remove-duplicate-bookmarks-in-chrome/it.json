@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Rimuovere i segnalibri duplicati in Chrome | Snug",
-    "description": "La guida di Chrome non elenca un cercatore di duplicati. Elimina le copie a mano nella Gestione segnalibri o lascia che Snug le raggruppi. {date}."
+    "description": "Elimina le copie a mano nella Gestione segnalibri di Chrome o lascia che Snug le raggruppi per indirizzo ed elimini. Verificato il {date}."
   },
   "title": "Come rimuovo i segnalibri duplicati in Chrome?",
-  "directAnswer": "Le pagine di aiuto di Chrome non elencano un cercatore di duplicati, quindi elimini le copie a mano nella Gestione segnalibri, che si apre con {toBookmarkManagerPath}. La pagina Duplicati di Snug fa la ricerca al posto tuo: raggruppa i segnalibri che condividono un indirizzo ed elimina le copie che contrassegni. Verificato il {date}.",
+  "directAnswer": "In Chrome elimini le copie in più a mano nella Gestione segnalibri, che si apre con {toBookmarkManagerPath}. La pagina Duplicati di Snug fa la ricerca al posto tuo: raggruppa i segnalibri che condividono un indirizzo ed elimina le copie che contrassegni. Verificato il {date}.",
   "builtIn": {
     "title": "Il metodo integrato",
-    "intro": "Chrome rimuove i segnalibri uno alla volta. Nulla al suo interno confronta due segnalibri per te, quindi il confronto lo fai tu.",
+    "intro": "In Chrome confronti le copie tu stesso: scorri le cartelle ed elimina quelle che non vuoi.",
     "steps": [
       "In Chrome, apri {toBookmarkManagerPath}.",
       "Scorri le cartelle e cerca lo stesso sito salvato più volte.",
@@ -49,5 +49,5 @@
       "Snug dice che non è stato importato nulla. Ogni segnalibro del file è già in Chrome. Disattiva Salta i duplicati per importarli di nuovo."
     ]
   },
-  "verified": "Il percorso della Gestione segnalibri è stato letto dalla pagina di aiuto ufficiale di {toName} il {date}, e quella pagina non elenca un cercatore di duplicati. Le regole sui duplicati vengono dalle pagine Duplicati e Importazione della Guida di Snug. I menu dei browser cambiano tra le versioni, quindi controlla la fonte se un percorso è diverso sul tuo schermo."
+  "verified": "Il percorso della Gestione segnalibri è stato letto dalla pagina di aiuto ufficiale di {toName} il {date}. Le regole sui duplicati vengono dalle pagine Duplicati e Importazione della Guida di Snug. I menu dei browser cambiano tra le versioni, quindi controlla la fonte se un percorso è diverso sul tuo schermo."
 }

@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Remover favoritos duplicados no Chrome | Snug",
-    "description": "A ajuda do Chrome não lista um localizador de duplicados. Exclua cópias à mão no Gerenciador de favoritos ou deixe o Snug agrupá-las. {date}."
+    "description": "Exclua cópias à mão no Gerenciador de favoritos do Chrome ou deixe o Snug agrupá-las por endereço e excluir. Verificado em {date}."
   },
   "title": "Como removo favoritos duplicados no Chrome?",
-  "directAnswer": "As páginas de ajuda do Chrome não listam um localizador de duplicados, então você exclui as cópias à mão no Gerenciador de favoritos, aberto com {toBookmarkManagerPath}. A página Duplicados do Snug faz a busca por você: agrupa os favoritos que compartilham um endereço e exclui as cópias que você marcar. Verificado em {date}.",
+  "directAnswer": "No Chrome, você exclui as cópias extras à mão no Gerenciador de favoritos, aberto com {toBookmarkManagerPath}. A página Duplicados do Snug faz a busca por você: agrupa os favoritos que compartilham um endereço e exclui as cópias que você marcar. Verificado em {date}.",
   "builtIn": {
     "title": "O método integrado",
-    "intro": "O Chrome remove favoritos um de cada vez. Nada nele compara dois favoritos por você, então a comparação é sua.",
+    "intro": "No Chrome, você compara as cópias por conta própria: percorra suas pastas e exclua as que não quer.",
     "steps": [
       "No Chrome, abra {toBookmarkManagerPath}.",
       "Percorra suas pastas e procure o mesmo site salvo mais de uma vez.",
@@ -49,5 +49,5 @@
       "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no Chrome. Desative Ignorar duplicados para importá-los de novo."
     ]
   },
-  "verified": "O caminho do Gerenciador de favoritos foi lido na página de ajuda oficial de {toName} em {date}, e essa página não lista um localizador de duplicados. As regras de duplicados vêm das páginas Duplicados e Importação do Guia do Snug. Os menus dos navegadores mudam entre versões, então confira a fonte se um caminho for diferente na sua tela."
+  "verified": "O caminho do Gerenciador de favoritos foi lido na página de ajuda oficial de {toName} em {date}. As regras de duplicados vêm das páginas Duplicados e Importação do Guia do Snug. Os menus dos navegadores mudam entre versões, então confira a fonte se um caminho for diferente na sua tela."
 }

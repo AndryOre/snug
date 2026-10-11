@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Doppelte Lesezeichen in Chrome entfernen | Snug",
-    "description": "Chrome listet in seiner Hilfe keine Duplikatsuche. Lösche Kopien von Hand im Lesezeichen-Manager oder lass Snug sie gruppieren. Geprüft am {date}."
+    "description": "Lösche überzählige Kopien von Hand im Lesezeichen-Manager von Chrome oder lass Snug sie nach Adresse gruppieren und löschen. Geprüft am {date}."
   },
   "title": "Wie entferne ich doppelte Lesezeichen in Chrome?",
-  "directAnswer": "Die Hilfeseiten von Chrome listen keine Duplikatsuche, also löschst du überzählige Kopien von Hand im Lesezeichen-Manager, den du mit {toBookmarkManagerPath} öffnest. Die Duplikate-Seite von Snug übernimmt das Suchen: Sie gruppiert Lesezeichen mit derselben Adresse und löscht die Kopien, die du markierst. Geprüft am {date}.",
+  "directAnswer": "In Chrome löschst du überzählige Kopien von Hand im Lesezeichen-Manager, den du mit {toBookmarkManagerPath} öffnest. Die Duplikate-Seite von Snug übernimmt das Suchen: Sie gruppiert Lesezeichen mit derselben Adresse und löscht die Kopien, die du markierst. Geprüft am {date}.",
   "builtIn": {
     "title": "Die integrierte Methode",
-    "intro": "Chrome entfernt Lesezeichen einzeln. Nichts darin vergleicht zwei Lesezeichen für dich, also gleichst du sie selbst ab.",
+    "intro": "In Chrome gleichst du Kopien selbst ab: Geh deine Ordner durch und lösche dann die, die du nicht willst.",
     "steps": [
       "Öffne in Chrome {toBookmarkManagerPath}.",
       "Gehe deine Ordner durch und suche nach derselben Seite, die mehrfach gespeichert ist.",
@@ -49,5 +49,5 @@
       "Snug meldet, dass nichts importiert wurde. Jedes Lesezeichen der Datei ist schon in Chrome. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
     ]
   },
-  "verified": "Der Pfad zum Lesezeichen-Manager wurde am {date} auf der offiziellen Hilfeseite von {toName} gelesen, und diese Seite listet keine Duplikatsuche. Die Duplikatregeln stammen aus den Guide-Seiten Duplikate und Importieren von Snug. Browser-Menüs ändern sich zwischen Versionen, prüfe also die Quelle, falls ein Pfad auf deinem Bildschirm abweicht."
+  "verified": "Der Pfad zum Lesezeichen-Manager wurde am {date} auf der offiziellen Hilfeseite von {toName} gelesen. Die Duplikatregeln stammen aus den Guide-Seiten Duplikate und Importieren von Snug. Browser-Menüs ändern sich zwischen Versionen, prüfe also die Quelle, falls ein Pfad auf deinem Bildschirm abweicht."
 }

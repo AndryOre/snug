@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Экспорт закладок Chrome в Markdown | Snug",
-    "description": "Chrome сохраняет закладки в HTML. Экспортируйте их в Markdown через Snug: выберите папки, задайте имя файла и увидьте вид файла. Проверено {date}."
+    "description": "В справке Chrome описан один формат экспорта, {fromExportFormats}. Экспортируйте в Markdown через Snug: выберите папки и задайте имя. Проверено {date}."
   },
   "title": "Как экспортировать закладки Chrome в Markdown?",
-  "directAnswer": "В справке Chrome описан один экспорт, файл закладок HTML: откройте {fromExportPath}, и Chrome сохранит {fromExportFile}. Для Markdown используйте страницу «Экспорт» в Snug: выберите Markdown и экспортируйте, и Snug сохранит один файл .md с вашими папками в виде вложенного списка. Пути меню проверены {date}.",
+  "directAnswer": "В справке Chrome описан один формат экспорта, {fromExportFormats}: откройте {fromExportPath}, и Chrome сохранит {fromExportFile}. Для Markdown используйте страницу «Экспорт» в Snug: выберите Markdown и экспортируйте, и Snug сохранит один файл .md с вашими папками в виде вложенного списка. Пути меню проверены {date}.",
   "builtIn": {
     "title": "Собственный экспорт Chrome",
-    "intro": "В справке Chrome описан экспорт в HTML, а Markdown не упомянут, поэтому встроенные шаги ниже дают HTML. Файл Markdown создаёт Snug.",
+    "intro": "В справке Chrome описан один формат экспорта, {fromExportFormats}, поэтому встроенные шаги ниже дают {fromExportFormats}. Файл Markdown создаёт Snug.",
     "steps": [
       "В Chrome откройте {fromExportPath}.",
       "Сохраните файл. Chrome называет его {fromExportFile}."

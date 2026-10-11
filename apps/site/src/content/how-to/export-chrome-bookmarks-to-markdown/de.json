@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Chrome-Lesezeichen als Markdown exportieren | Snug",
-    "description": "Chrome speichert Lesezeichen als HTML. Exportiere sie mit Snug als Markdown: Ordner wählen, Dateinamen setzen, Dateiform sehen. Geprüft am {date}."
+    "description": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}. Exportiere mit Snug als Markdown: Ordner wählen, Dateinamen setzen. Geprüft am {date}."
   },
   "title": "Wie exportiere ich meine Chrome-Lesezeichen als Markdown?",
-  "directAnswer": "Die Hilfe von Chrome beschreibt einen Export, eine HTML-Datei mit Lesezeichen: Öffne {fromExportPath}, dann speichert Chrome {fromExportFile}. Für Markdown nutzt du die Seite Exportieren von Snug: Wähle Markdown und exportiere, dann speichert Snug eine .md-Datei mit deinen Ordnern als verschachtelte Liste. Menüpfade geprüft am {date}.",
+  "directAnswer": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}: Öffne {fromExportPath}, dann speichert Chrome {fromExportFile}. Für Markdown nutzt du die Seite Exportieren von Snug: Wähle Markdown und exportiere, dann speichert Snug eine .md-Datei mit deinen Ordnern als verschachtelte Liste. Menüpfade geprüft am {date}.",
   "builtIn": {
     "title": "Der eigene Export von Chrome",
-    "intro": "Die Hilfe von Chrome beschreibt einen HTML-Export und nennt kein Markdown, deshalb erzeugen die integrierten Schritte unten HTML. Die Markdown-Datei kommt von Snug.",
+    "intro": "Die Hilfe von Chrome beschreibt ein Exportformat, {fromExportFormats}, deshalb erzeugen die integrierten Schritte unten {fromExportFormats}. Die Markdown-Datei kommt von Snug.",
     "steps": [
       "Öffne in Chrome {fromExportPath}.",
       "Speichere die Datei. Chrome nennt sie {fromExportFile}."

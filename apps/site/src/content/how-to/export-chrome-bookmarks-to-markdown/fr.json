@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Exporter ses favoris Chrome en Markdown | Snug",
-    "description": "Chrome enregistre les favoris en HTML. Exportez-les en Markdown avec Snug : dossiers, nom du fichier et forme du fichier. Vérifié le {date}."
+    "description": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats}. Exportez en Markdown avec Snug : dossiers, nom et forme du fichier. Vérifié le {date}."
   },
   "title": "Comment exporter mes favoris Chrome en Markdown ?",
-  "directAnswer": "L'aide de Chrome décrit un seul export, un fichier HTML de favoris : ouvrez {fromExportPath} et Chrome enregistre {fromExportFile}. Pour du Markdown, utilisez la page Exporter de Snug : choisissez Markdown et exportez, et Snug enregistre un fichier .md avec vos dossiers sous forme de liste imbriquée. Chemins de menu vérifiés le {date}.",
+  "directAnswer": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats} : ouvrez {fromExportPath} et Chrome enregistre {fromExportFile}. Pour du Markdown, utilisez la page Exporter de Snug : choisissez Markdown et exportez, et Snug enregistre un fichier .md avec vos dossiers sous forme de liste imbriquée. Chemins de menu vérifiés le {date}.",
   "builtIn": {
     "title": "L'export propre à Chrome",
-    "intro": "L'aide de Chrome décrit un export HTML et ne mentionne pas Markdown : les étapes intégrées ci-dessous produisent donc du HTML. Le fichier Markdown vient de Snug.",
+    "intro": "L'aide de Chrome décrit un seul format d'export, {fromExportFormats} : les étapes intégrées ci-dessous produisent donc du {fromExportFormats}. Le fichier Markdown vient de Snug.",
     "steps": [
       "Dans Chrome, ouvrez {fromExportPath}.",
       "Enregistrez le fichier. Chrome le nomme {fromExportFile}."

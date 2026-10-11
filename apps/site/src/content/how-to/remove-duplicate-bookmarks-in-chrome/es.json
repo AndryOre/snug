@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Eliminar marcadores duplicados en Chrome | Snug",
-    "description": "La ayuda de Chrome no lista buscador de duplicados. Elimina copias a mano en el Administrador de marcadores o deja que Snug las agrupe. {date}."
+    "description": "Elimina copias a mano en el Administrador de marcadores de Chrome o deja que Snug las agrupe por dirección y elimine. Comprobado el {date}."
   },
   "title": "¿Cómo elimino marcadores duplicados en Chrome?",
-  "directAnswer": "Las páginas de ayuda de Chrome no listan un buscador de duplicados, así que eliminas las copias a mano en el Administrador de marcadores, que se abre con {toBookmarkManagerPath}. La página Duplicados de Snug hace la búsqueda por ti: agrupa los marcadores que comparten dirección y elimina las copias que marques. Comprobado el {date}.",
+  "directAnswer": "En Chrome eliminas las copias sobrantes a mano en el Administrador de marcadores, que se abre con {toBookmarkManagerPath}. La página Duplicados de Snug hace la búsqueda por ti: agrupa los marcadores que comparten dirección y elimina las copias que marques. Comprobado el {date}.",
   "builtIn": {
     "title": "El método integrado",
-    "intro": "Chrome elimina los marcadores de uno en uno. Nada en él compara dos marcadores por ti, así que haces la comparación tú mismo.",
+    "intro": "En Chrome comparas las copias tú mismo: recorre tus carpetas y elimina las que no quieras.",
     "steps": [
       "En Chrome, abre {toBookmarkManagerPath}.",
       "Recorre tus carpetas y busca el mismo sitio guardado más de una vez.",
@@ -49,5 +49,5 @@
       "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en Chrome. Desactiva Omitir duplicados para importarlos de nuevo."
     ]
   },
-  "verified": "La ruta del Administrador de marcadores se leyó en la página de ayuda oficial de {toName} el {date}, y esa página no lista un buscador de duplicados. Las reglas de duplicados salen de las páginas Duplicados e Importar de la Guía de Snug. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
+  "verified": "La ruta del Administrador de marcadores se leyó en la página de ayuda oficial de {toName} el {date}. Las reglas de duplicados salen de las páginas Duplicados e Importar de la Guía de Snug. Los menús de los navegadores cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla."
 }

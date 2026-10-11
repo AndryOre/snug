@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Chrome 북마크를 Markdown으로 내보내기 | Snug",
-    "description": "Chrome은 북마크를 HTML로 저장해요. Snug로 폴더를 고르고 파일 이름 템플릿을 정해 Markdown으로 내보내는 방법과 실제 파일 모양을 알려드려요. 확인일 {date}."
+    "description": "Chrome 도움말에 나온 내보내기 형식은 {fromExportFormats} 하나예요. Snug로 폴더를 고르고 파일 이름 템플릿을 정해 Markdown으로 내보내는 방법과 실제 파일 모양을 알려드려요. 확인일 {date}."
   },
   "title": "Chrome 북마크를 Markdown으로 어떻게 내보내나요?",
-  "directAnswer": "Chrome 도움말에 나온 내보내기는 북마크 HTML 파일 하나예요. {fromExportPath}를 열면 Chrome이 {fromExportFile}를 저장해요. Markdown이 필요하면 Snug의 내보내기 페이지에서 Markdown을 고르고 내보내요. 폴더가 중첩 목록으로 담긴 .md 파일 하나가 저장돼요. 메뉴 경로는 {date}에 확인했어요.",
+  "directAnswer": "Chrome 도움말에 나온 내보내기 형식은 {fromExportFormats} 하나예요. {fromExportPath}를 열면 Chrome이 {fromExportFile}를 저장해요. Markdown이 필요하면 Snug의 내보내기 페이지에서 Markdown을 고르고 내보내요. 폴더가 중첩 목록으로 담긴 .md 파일 하나가 저장돼요. 메뉴 경로는 {date}에 확인했어요.",
   "builtIn": {
     "title": "Chrome 자체 내보내기",
-    "intro": "Chrome 도움말에는 HTML 내보내기만 나오고 Markdown은 없어요. 그래서 아래 기본 단계로는 HTML이 만들어져요. Markdown 파일은 Snug가 만들어요.",
+    "intro": "Chrome 도움말에 나온 내보내기 형식은 {fromExportFormats} 하나예요. 그래서 아래 기본 단계로는 {fromExportFormats}이 만들어져요. Markdown 파일은 Snug가 만들어요.",
     "steps": [
       "Chrome에서 {fromExportPath}를 열어요.",
       "파일을 저장해요. Chrome은 {fromExportFile}라는 이름을 붙여요."

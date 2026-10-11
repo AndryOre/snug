@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Exportar marcadores de Chrome a Markdown | Snug",
-    "description": "Chrome guarda marcadores como HTML. Expórtalos a Markdown con Snug: elige carpetas, define el nombre y mira el archivo. Comprobado el {date}."
+    "description": "La ayuda de Chrome describe un solo formato, {fromExportFormats}. Exporta a Markdown con Snug: elige carpetas y define el nombre. Comprobado el {date}."
   },
   "title": "¿Cómo exporto mis marcadores de Chrome a Markdown?",
-  "directAnswer": "La ayuda de Chrome describe una exportación, un archivo HTML de marcadores: abre {fromExportPath} y Chrome guarda {fromExportFile}. Para Markdown, usa la página Exportar de Snug: elige Markdown y exporta, y Snug guarda un archivo .md con tus carpetas como lista anidada. Rutas de menú comprobadas el {date}.",
+  "directAnswer": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}: abre {fromExportPath} y Chrome guarda {fromExportFile}. Para Markdown, usa la página Exportar de Snug: elige Markdown y exporta, y Snug guarda un archivo .md con tus carpetas como lista anidada. Rutas de menú comprobadas el {date}.",
   "builtIn": {
     "title": "La exportación propia de Chrome",
-    "intro": "La ayuda de Chrome describe una exportación HTML y no menciona Markdown, así que los pasos integrados de abajo producen HTML. El archivo Markdown lo añade Snug.",
+    "intro": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, así que los pasos integrados de abajo producen {fromExportFormats}. El archivo Markdown lo añade Snug.",
     "steps": [
       "En Chrome, abre {fromExportPath}.",
       "Guarda el archivo. Chrome lo llama {fromExportFile}."

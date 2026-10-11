@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Remove Duplicate Bookmarks in Chrome | Snug",
-    "description": "Chrome's help pages list no duplicate finder. Delete copies by hand in the Bookmark Manager, or let Snug group them by address. Verified {date}."
+    "description": "Delete extra copies by hand in Chrome's Bookmark Manager, or let Snug group them by address and delete the copies you mark. Verified {date}."
   },
   "title": "How do I remove duplicate bookmarks in Chrome?",
-  "directAnswer": "Chrome's help pages list no duplicate finder, so you delete extra copies by hand in the Bookmark Manager, opened with {toBookmarkManagerPath}. Snug's Duplicates page does the finding for you: it groups bookmarks that share an address and deletes the copies you mark. Checked {date}.",
+  "directAnswer": "In Chrome you delete extra copies by hand in the Bookmark Manager, opened with {toBookmarkManagerPath}. Snug's Duplicates page does the finding for you: it groups bookmarks that share an address and deletes the copies you mark. Checked {date}.",
   "builtIn": {
     "title": "The built-in method",
-    "intro": "Chrome removes bookmarks one at a time. Nothing in it compares two bookmarks for you, so you do the matching yourself.",
+    "intro": "In Chrome you match copies yourself: look through your folders, then delete the ones you do not want.",
     "steps": [
       "In Chrome, open {toBookmarkManagerPath}.",
       "Go through your folders and look for the same site saved more than once.",
@@ -49,5 +49,5 @@
       "Snug says nothing was imported. Every bookmark in the file is already in Chrome. Turn off Skip duplicates to import them again."
     ]
   },
-  "verified": "The Bookmark Manager path was read from the official help page of {toName} on {date}, and that page lists no duplicate finder. The duplicate rules come from Snug's Duplicates and Importing Guide pages. Browser menus change between versions, so check the source if a path differs on your screen."
+  "verified": "The Bookmark Manager path was read from the official help page of {toName} on {date}. The duplicate rules come from Snug's Duplicates and Importing Guide pages. Browser menus change between versions, so check the source if a path differs on your screen."
 }

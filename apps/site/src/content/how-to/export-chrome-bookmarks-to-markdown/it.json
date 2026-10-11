@@ -1,13 +1,13 @@
 {
   "meta": {
     "title": "Esportare i segnalibri di Chrome in Markdown | Snug",
-    "description": "Chrome salva i segnalibri in HTML. Esportali in Markdown con Snug: scegli le cartelle, imposta il nome e vedi la forma del file. Controllato il {date}."
+    "description": "L'aiuto di Chrome descrive un solo formato, {fromExportFormats}. Esporta in Markdown con Snug: scegli le cartelle e imposta il nome. Controllato il {date}."
   },
   "title": "Come esporto i miei segnalibri di Chrome in Markdown?",
-  "directAnswer": "L'aiuto di Chrome descrive una sola esportazione, un file HTML di segnalibri: apri {fromExportPath} e Chrome salva {fromExportFile}. Per il Markdown, usa la pagina Esporta di Snug: scegli Markdown ed esporta, e Snug salva un file .md con le tue cartelle come elenco annidato. Percorsi dei menu controllati il {date}.",
+  "directAnswer": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}: apri {fromExportPath} e Chrome salva {fromExportFile}. Per il Markdown, usa la pagina Esporta di Snug: scegli Markdown ed esporta, e Snug salva un file .md con le tue cartelle come elenco annidato. Percorsi dei menu controllati il {date}.",
   "builtIn": {
     "title": "L'esportazione propria di Chrome",
-    "intro": "L'aiuto di Chrome descrive un'esportazione HTML e non cita il Markdown, quindi i passaggi integrati qui sotto producono HTML. Il file Markdown lo aggiunge Snug.",
+    "intro": "L'aiuto di Chrome descrive un solo formato di esportazione, {fromExportFormats}, quindi i passaggi integrati qui sotto producono {fromExportFormats}. Il file Markdown lo aggiunge Snug.",
     "steps": [
       "In Chrome, apri {fromExportPath}.",
       "Salva il file. Chrome lo chiama {fromExportFile}."
