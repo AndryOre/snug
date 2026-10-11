@@ -5,6 +5,14 @@
     "howTo": "Guias práticos"
   },
   "eyebrow": "Guia prático",
+  "index": {
+    "meta": {
+      "title": "Guias de favoritos: mover, fazer backup e exportar | Snug",
+      "description": "Guias passo a passo para mover favoritos entre navegadores, fazer backup, exportar e remover duplicados com as ferramentas integradas de cada navegador."
+    },
+    "title": "Guias práticos de favoritos",
+    "lede": "Respostas curtas para as tarefas de favoritos mais procuradas. Cada guia usa os passos integrados do navegador, diz o que é mantido e o que não é, e mostra onde o Snug acrescenta algo."
+  },
   "shortAnswer": "Resposta curta",
   "asOf": "Em {date}",
   "verifiedOn": "Verificado em {date}",

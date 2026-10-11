@@ -26,7 +26,13 @@ import {
   COMPARISON_PAGES,
   comparisonPath,
 } from './comparison-paths'
-import { HOW_TO_PAGE_LIST, howToLocales } from './how-to-paths'
+import {
+  HOW_TO_INDEX_LOCALES,
+  HOW_TO_INDEX_PATHS,
+  HOW_TO_PAGE_LIST,
+  howToIndexPath,
+  howToLocales,
+} from './how-to-paths'
 import { docsString, translatedTitle } from './translated-guide'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -567,6 +573,72 @@ test.describe('how-to pages', () => {
       expect(main).toContain('href="/install?c=final"')
     })
   }
+
+  for (const locale of HOW_TO_INDEX_LOCALES) {
+    const indexPath = howToIndexPath(locale)
+    test(`${indexPath} has its own metadata, hreflang, JSON-LD and every page once`, () => {
+      const html = readBuilt(`${indexPath.slice(1)}index.html`)
+      const title = /<title>([^<]*)<\/title>/.exec(html)?.[1] ?? ''
+      expect(title.length).toBeGreaterThan(0)
+      expect(metaContent(html, 'name', 'description').length).toBeGreaterThan(0)
+      expect(html).toContain(`<html lang="${languageTag(locale)}"`)
+      expect(html).toContain(
+        `<link rel="canonical" href="${SITE_ORIGIN}${indexPath}"`,
+      )
+      const hreflangs = html
+        .matchAll(/<link rel="alternate" hreflang="([^"]+)"/g)
+        .map((match) => match[1] ?? '')
+        .toArray()
+      expect(hreflangs.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        [
+          ...HOW_TO_INDEX_LOCALES.map((code) => languageTag(code)),
+          'x-default',
+        ].toSorted((a, b) => a.localeCompare(b)),
+      )
+      for (const { hreflang, href } of hreflangAlternates(
+        '/how-to/',
+        HOW_TO_INDEX_LOCALES,
+      )) {
+        expect(html).toContain(
+          `<link rel="alternate" hreflang="${hreflang}" href="${href}"`,
+        )
+      }
+      const graph = jsonLdGraph(html)
+      expect(graph.map((node) => String(node['@type']))).toEqual([
+        'CollectionPage',
+        'ItemList',
+        'BreadcrumbList',
+      ])
+      expect(html).not.toMatch(/aggregateRating|"FAQPage"|"HowTo"/i)
+
+      const main = /<main[\s\S]*<\/main>/.exec(html)?.[0] ?? ''
+      expect(main).not.toContain('<img')
+      expect(main).toContain('data-install="final"')
+      const cardHrefs = main
+        .matchAll(/<h3[^>]*>\s*<a[^>]*href="([^"]+)"/g)
+        .map((match) => match[1] ?? '')
+        .toArray()
+      const slugs = [...new Set(HOW_TO_PAGE_LIST.map((page) => page.slug))]
+      expect(cardHrefs.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        slugs
+          .map((slug) =>
+            localePath(
+              howToLocales(slug).includes(locale) ? locale : DEFAULT_LOCALE,
+              `/how-to/${slug}/`,
+            ),
+          )
+          .toSorted((a, b) => a.localeCompare(b)),
+      )
+    })
+  }
+
+  test('lists the How-to index in the sitemap and llms.txt', () => {
+    const sitemap = readBuilt('sitemap.xml')
+    for (const indexPath of HOW_TO_INDEX_PATHS) {
+      expect(sitemap).toContain(`<loc>${SITE_ORIGIN}${indexPath}</loc>`)
+    }
+    expect(readBuilt('llms.txt')).toContain(`(${SITE_ORIGIN}/how-to/)`)
+  })
 
   test('lists every How-to page in the sitemap and no uncarried locale', () => {
     const sitemap = readBuilt('sitemap.xml')

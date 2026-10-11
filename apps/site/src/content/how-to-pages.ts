@@ -1,9 +1,19 @@
 import type { BrowserSlug } from './browser-facts'
 
 /**
+ * Task groups of the How-to index, in display order.
+ */
+export const HOW_TO_GROUPS = [
+  'move',
+  'backup',
+  'formats',
+  'duplicates',
+] as const
+
+/**
  * Task group a How-to page belongs to on the How-to index.
  */
-type HowToGroup = 'move' | 'backup' | 'formats' | 'duplicates'
+export type HowToGroup = (typeof HOW_TO_GROUPS)[number]
 
 /**
  * What a How-to page declares about itself. Copy lives in

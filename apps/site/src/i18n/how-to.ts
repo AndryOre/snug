@@ -5,7 +5,12 @@ import {
   type SourcedFact,
   sourcedFacts,
 } from '../content/browser-facts'
-import { HOW_TO_PAGES, type HowToPageDefinition } from '../content/how-to-pages'
+import {
+  HOW_TO_GROUPS,
+  HOW_TO_PAGES,
+  type HowToGroup,
+  type HowToPageDefinition,
+} from '../content/how-to-pages'
 import type enMoveFirefoxToChrome from '../content/how-to/move-bookmarks-from-firefox-to-chrome/en.json'
 import type enShared from '../content/how-to/shared/en.json'
 import { PUBLISHED_SOURCES } from '../docs/published'
@@ -236,6 +241,79 @@ export function howToSlugsForGuideEntry(
       ),
     )
     .map(([slug]) => slug)
+}
+
+/**
+ * Locales that carry the How-to index: English plus every locale with shared
+ * strings. These are the index's hreflang alternates.
+ */
+export const HOW_TO_INDEX_LOCALES: readonly Locale[] = LOCALES.filter(
+  (locale) => locale === DEFAULT_LOCALE || loaded.shared[locale] !== undefined,
+)
+
+/**
+ * Site-relative path of the How-to index, always with a trailing slash. A
+ * locale without the index falls back to the English path.
+ * @param locale - A supported locale code.
+ * @returns The path, e.g. `/de/how-to/`.
+ */
+export function howToIndexPath(locale: Locale): string {
+  return HOW_TO_INDEX_LOCALES.includes(locale)
+    ? localePath(locale, '/how-to/')
+    : '/how-to/'
+}
+
+/**
+ * Title and description of the How-to index, falling back to English.
+ * @param locale - A supported locale code.
+ * @returns The index's `title` and `description`.
+ */
+export function getHowToIndexMeta(locale: Locale): {
+  title: string
+  description: string
+} {
+  return getHowToSharedContent(locale).index.meta
+}
+
+/**
+ * One card of the How-to index.
+ */
+interface HowToIndexCard {
+  slug: string
+  title: string
+  description: string
+  href: string
+}
+
+/**
+ * One task group of the How-to index with its cards.
+ */
+export interface HowToIndexGroup {
+  group: HowToGroup
+  label: string
+  pages: HowToIndexCard[]
+}
+
+/**
+ * The index sections for a locale: groups in `HOW_TO_GROUPS` order, cards in
+ * registry order, empty groups left out. Each page appears exactly once.
+ * @param locale - A supported locale code.
+ * @returns The non-empty groups with their cards.
+ */
+export function howToIndexGroups(locale: Locale): HowToIndexGroup[] {
+  const { groups } = getHowToSharedContent(locale)
+  return HOW_TO_GROUPS.map((group) => ({
+    group,
+    label: groups[group],
+    pages: HOW_TO_SLUGS.filter(
+      (slug) => getHowToPage(slug).group === group,
+    ).map((slug) => ({
+      slug,
+      title: getHowToContent(locale, slug).title,
+      description: getHowToMeta(locale, slug).description,
+      href: howToPath(locale, slug),
+    })),
+  })).filter((entry) => entry.pages.length > 0)
 }
 
 /**

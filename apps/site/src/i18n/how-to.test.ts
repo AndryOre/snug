@@ -5,12 +5,16 @@ import { PUBLISHED_SOURCES } from '../docs/published'
 import { flattenKeys } from './content'
 import {
   getHowToContent,
+  getHowToIndexMeta,
   getHowToMeta,
   getHowToPage,
   getHowToSharedContent,
+  HOW_TO_INDEX_LOCALES,
   HOW_TO_LOCALES,
   HOW_TO_SLUGS,
   type HowToFiles,
+  howToIndexGroups,
+  howToIndexPath,
   howToPageLocales,
   howToPath,
   howToSlugsForGuideEntry,
@@ -351,5 +355,48 @@ describe('howToSlugsForGuideEntry', () => {
 
   it('maps the bundled registry to the Firefox to Chrome page', () => {
     expect(howToSlugsForGuideEntry('de/guide/importing')).toContain(SLUG)
+  })
+})
+
+function compareNames(a: string, b: string): number {
+  return a.localeCompare(b)
+}
+
+describe('How-to index', () => {
+  it('is carried by every locale with shared strings, English first', () => {
+    expect(HOW_TO_INDEX_LOCALES).toEqual([...LOCALES])
+    expect(howToIndexPath('en')).toBe('/how-to/')
+    expect(howToIndexPath('pt_BR')).toBe('/pt-br/how-to/')
+  })
+
+  it('lists every registered page exactly once, grouped', () => {
+    for (const locale of LOCALES) {
+      const groups = howToIndexGroups(locale)
+      const slugs = groups.flatMap((group) =>
+        group.pages.map((page) => page.slug),
+      )
+      expect(slugs.toSorted(compareNames)).toEqual(
+        HOW_TO_SLUGS.toSorted(compareNames),
+      )
+      for (const group of groups) {
+        expect(group.pages.length).toBeGreaterThan(0)
+        expect(group.label).toBe(
+          getHowToSharedContent(locale).groups[group.group],
+        )
+      }
+    }
+  })
+
+  it('links each card to the locale page path', () => {
+    const [group] = howToIndexGroups('de')
+    expect(group?.pages[0]?.href).toBe(howToPath('de', SLUG))
+  })
+
+  it('carries localized index meta with no placeholders', () => {
+    for (const locale of LOCALES) {
+      const { title, description } = getHowToIndexMeta(locale)
+      expect(title.length).toBeGreaterThan(0)
+      expect(description).not.toMatch(/\{\w+\}/)
+    }
   })
 })

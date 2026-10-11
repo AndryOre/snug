@@ -5,6 +5,14 @@
     "howTo": "Guides pratiques"
   },
   "eyebrow": "Guide pratique",
+  "index": {
+    "meta": {
+      "title": "Guides pratiques des favoris : déplacer, sauvegarder | Snug",
+      "description": "Guides pas à pas pour déplacer des favoris entre navigateurs, les sauvegarder, les exporter et supprimer les doublons avec les outils intégrés de chaque navigateur."
+    },
+    "title": "Guides pratiques pour vos favoris",
+    "lede": "Des réponses courtes aux tâches de favoris les plus recherchées. Chaque guide suit les étapes intégrées au navigateur, indique ce qui est conservé et ce qui ne l'est pas, et montre ce que Snug ajoute."
+  },
   "shortAnswer": "Réponse courte",
   "asOf": "Au {date}",
   "verifiedOn": "Vérifié le {date}",
