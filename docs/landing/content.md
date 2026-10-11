@@ -1870,7 +1870,7 @@ help pages do not state is written as "Not listed".
   1. In Firefox, open {fromExportPath}.
   2. Save the file. Firefox names it {fromExportFile} by default.
   3. In Chrome, open {toImportPath}.
-  4. Choose the HTML file you saved, then select Open and Done.
+  4. Choose the HTML file you saved and confirm.
 - **What carries over:** The HTML file is the only thing that moves. Kept in the
   file, per {fromName}: {fromHtmlKeeps}. Left out of the file, per {fromName}:
   {fromHtmlDrops}. Where a help page does not say, this page says Not listed
@@ -1880,10 +1880,10 @@ help pages do not state is written as "Not listed".
   for the import. It adds a preview, a choice of what to bring in and a way
   back.
   1. Install Snug from the Chrome Web Store.
-  2. Open Snug and choose the HTML file with Choose files…, or drop it on the
-     popup.
-  3. Open the Import page to see the Preview: the detected format, the bookmark
-     count and the folder tree, before anything changes.
+  2. Open Snug's Import page and choose the HTML file there, or drop it on the
+     page. Do not use the popup for this: it imports at once, without a preview.
+  3. The Preview shows the detected format, the bookmark count and the folder
+     tree before anything changes.
   4. Use the checkboxes to pick single bookmarks or whole folders. Snug imports
      only what you select.
   5. Choose an import mode. Create folder adds everything to a new Imported

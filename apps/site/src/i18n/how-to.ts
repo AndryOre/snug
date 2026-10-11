@@ -3,6 +3,7 @@ import {
   type BrowserFacts,
   type Listed,
   type SourcedFact,
+  sourcedFacts,
 } from '../content/browser-facts'
 import { HOW_TO_PAGES, type HowToPageDefinition } from '../content/how-to-pages'
 import type enMoveFirefoxToChrome from '../content/how-to/move-bookmarks-from-firefox-to-chrome/en.json'
@@ -400,16 +401,7 @@ export function howToSources(
   const { from, to } = getHowToPage(slug)
   return [from, to].map((browser) => {
     const facts = BROWSER_FACTS[browser]
-    const urls = new Set<string>()
-    for (const fact of [
-      facts.exportPath,
-      facts.importPath,
-      facts.importSources,
-      facts.exportFileName,
-      facts.importPlacement,
-    ]) {
-      if (fact !== 'not-listed') urls.add(fact.sourceUrl)
-    }
+    const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }
   })
 }
