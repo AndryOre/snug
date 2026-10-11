@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Spostare i segnalibri da Chrome a Edge | Snug",
+    "description": "Sposta i segnalibri di Chrome in Edge con l'importazione di Edge o un file HTML, e quando il file è più sicuro. Verificato il {date}."
+  },
+  "title": "Come sposto i miei segnalibri da Chrome a Edge?",
+  "directAnswer": "In Edge, apri {toImportPath}. Edge elenca queste fonti: {toImportSources}. Scegli Chrome per importare direttamente, oppure esporta un file da Chrome con {fromExportPath} e importalo. Edge mette i segnalibri importati in {toImportPlacement}. Percorsi dei menu verificati il {date}.",
+  "builtIn": {
+    "title": "I metodi integrati",
+    "intro": "Edge può leggere Chrome direttamente, oppure leggere un file che esporti da Chrome. Entrambi sono integrati.",
+    "steps": [
+      "Importazione diretta: in Edge, apri {toImportPath}, scegli Chrome come fonte e conferma.",
+      "Con un file: in Chrome, apri {fromExportPath}.",
+      "Con un file: salva il file. Chrome lo chiama {fromExportFile}.",
+      "Con un file: in Edge, apri {toImportPath}, scegli il file HTML che hai salvato e conferma."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa viene mantenuto e quando un file è più sicuro",
+    "intro": "L'aiuto di Edge elenca entrambe le fonti, quindi vanno bene tutte e due le strade. Un file è più sicuro quando vuoi tenere una copia prima che cambi qualcosa.",
+    "items": [
+      "Incluso nel file, secondo {fromName}: {fromHtmlKeeps}.",
+      "Escluso dal file, secondo {fromName}: {fromHtmlDrops}.",
+      "Dove una pagina di aiuto non lo indica, questa pagina scrive Non indicato invece di tirare a indovinare.",
+      "Un file si può aprire e controllare prima di importarlo e importare di nuovo in seguito. Un'importazione diretta non lascia alcun file."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome e in Edge, entrambi browser Chromium. Usalo in Chrome per esportare solo le cartelle che scegli e in Edge per importare con un'anteprima.",
+    "steps": [
+      "Installa Snug in Chrome e in Edge.",
+      "In Chrome, apri la pagina Esporta di Snug e usa le caselle per scegliere le cartelle che vuoi, o singoli segnalibri.",
+      "Scegli HTML come formato e fai clic su Esporta. Snug scarica il file.",
+      "In Edge, apri la pagina Importa di Snug e scegli lì il file, oppure trascinalo sulla pagina. Non usare il popup per questo: importa subito, senza anteprima.",
+      "L'Anteprima mostra il formato rilevato, il numero di segnalibri e l'albero delle cartelle, prima che cambi qualcosa. I segnalibri che Salta i duplicati escluderebbe sono contrassegnati.",
+      "Scegli una modalità di importazione. Crea cartella aggiunge tutto a una nuova cartella Segnalibri importati. Ripristina — unisci inserisce i segnalibri nelle posizioni originali, insieme a quelli esistenti, quando il file le contiene.",
+      "Lascia attivo Salta i duplicati. Esclude ogni segnalibro il cui indirizzo è già in Edge e ti dice quanti ne ha saltati."
+    ],
+    "snapshot": "Crea cartella e Ripristina — unisci non svuotano mai i tuoi segnalibri. Prima di un Ripristina — sostituisci, Snug salva un'istantanea di sicurezza nei Download e ne tiene una copia nelle Impostazioni, così puoi annullare l'importazione."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Non trovi i segnalibri dopo l'importazione. Edge li mette in {toImportPlacement}.",
+      "Edge non offre Chrome come fonte. Edge elenca queste fonti: {toImportSources}. Usa invece la strada del file.",
+      "Un segnalibro compare due volte. Apri Duplicati in Snug: raggruppa le copie per indirizzo e rimuove solo quelle che contrassegni come Elimina.",
+      "Snug dice che non è stato importato nulla. Tutti i segnalibri del file sono già nel browser. Disattiva Salta i duplicati per importarli di nuovo."
+    ]
+  },
+  "verified": "I percorsi dei menu e i nomi dei file sono stati letti nelle pagine di aiuto ufficiali di {fromName} e {toName} il {date}. I menu dei browser cambiano tra le versioni: controlla la fonte se un percorso è diverso sul tuo schermo."
+}

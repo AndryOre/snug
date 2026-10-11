@@ -50,9 +50,11 @@ function files(entries: Record<string, Record<string, unknown>>): HowToFiles {
   )
 }
 
+const firstPageOnly = { [SLUG]: HOW_TO_PAGES[SLUG] as HowToPageDefinition }
+
 function load(
   entries: Record<string, Record<string, unknown>>,
-  pages: typeof HOW_TO_PAGES = HOW_TO_PAGES,
+  pages: typeof HOW_TO_PAGES = firstPageOnly,
 ) {
   return () =>
     loadHowToContent({
@@ -184,23 +186,40 @@ describe('bundled copy', () => {
   })
 
   it('keeps every meta title and description within the content rules', () => {
-    for (const locale of LOCALES) {
-      const { title, description } = getHowToMeta(locale, SLUG)
-
-      expect(title).toMatch(/ \| Snug$/u)
-      expect(title.startsWith('Snug')).toBe(false)
-      expect(visualWidth(title)).toBeLessThanOrEqual(60)
-      expect(description).toContain('Chrome')
-      expect(description).not.toContain('{')
-      if (CJK_LOCALES.has(locale)) continue
-      expect([...description].length).toBeGreaterThanOrEqual(140)
-      expect([...description].length).toBeLessThanOrEqual(160)
+    const violations: string[] = []
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const { title, description } = getHowToMeta(locale, slug)
+        const label = `${locale}/${slug}`
+        const length = [...description].length
+        const checks: [string, boolean][] = [
+          ['title suffix', / \| Snug$/u.test(title)],
+          ['title starts with Snug', !title.startsWith('Snug')],
+          ['title width', visualWidth(title) <= 60],
+          [
+            'description names the destination',
+            description.includes(howToValues('en', slug).toName),
+          ],
+          ['description placeholder', !description.includes('{')],
+          [
+            'description length',
+            CJK_LOCALES.has(locale) || (length >= 140 && length <= 160),
+          ],
+        ]
+        for (const [rule, passed] of checks) {
+          if (!passed) violations.push(`${label}: ${rule}`)
+        }
+      }
     }
+
+    expect(violations).toEqual([])
   })
 
-  it('writes the page title as a question', () => {
-    for (const locale of LOCALES) {
-      expect(getHowToContent(locale, SLUG).title).toMatch(/[?？]$/u)
+  it('writes every page title as a question', () => {
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        expect(getHowToContent(locale, slug).title).toMatch(/[?？]$/u)
+      }
     }
   })
 
@@ -225,6 +244,12 @@ describe('howToValues and interpolateHowTo', () => {
     expect(values.toImportPath).toBe(
       'More > Bookmarks and lists > Import bookmarks and settings',
     )
+  })
+
+  it('lists the import sources of the destination browser', () => {
+    expect(
+      howToValues('en', 'move-bookmarks-from-chrome-to-edge').toImportSources,
+    ).toBe('Google Chrome, IE11, and Favorites or bookmarks HTML file')
   })
 
   it('writes a fact that is not listed as the locale string', () => {

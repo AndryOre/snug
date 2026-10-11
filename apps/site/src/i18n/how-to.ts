@@ -290,6 +290,7 @@ export interface HowToValues {
   fromExportFile: string
   toImportPath: string
   toImportPlacement: string
+  toImportSources: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
 }
@@ -352,6 +353,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     toImportPlacement: listed(
       target.importPlacement,
       (placement) => shared.placements[placement],
+      notListed,
+    ),
+    toImportSources: listed(
+      target.importSources,
+      (items) => sentenceList(items, tag),
       notListed,
     ),
     fromHtmlKeeps: listed(

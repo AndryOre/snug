@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Mover favoritos do Safari para o Chrome | Snug",
+    "description": "Exporte os favoritos do Safari para HTML e importe no Chrome, com o que acontece com Favoritos e Lista de Leitura. Verificado em {date}."
+  },
+  "title": "Como movo meus favoritos do Safari para o Chrome?",
+  "directAnswer": "Exporte seus favoritos do Safari para um arquivo HTML com {fromExportPath}. Depois importe esse arquivo no Chrome com {toImportPath}. O Chrome os coloca em {toImportPlacement}. Caminhos de menu verificados em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "Os dois navegadores fazem isso sozinhos. Você só precisa do arquivo HTML.",
+    "steps": [
+      "No Safari, abra {fromExportPath}.",
+      "Salve o arquivo. O Safari o chama de {fromExportFile}.",
+      "Se o Chrome estiver em outro computador, copie o arquivo para lá.",
+      "No Chrome, abra {toImportPath}.",
+      "Escolha o arquivo HTML que você salvou e confirme."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que é mantido e o que se perde",
+    "intro": "Só o arquivo HTML é transferido. O que o Snug faz com Favoritos e Lista de Leitura de uma exportação do Safari está logo abaixo.",
+    "items": [
+      "Incluído no arquivo, segundo {fromName}: {fromHtmlKeeps}.",
+      "Fora do arquivo, segundo {fromName}: {fromHtmlDrops}.",
+      "Quando uma página de ajuda não informa, esta página escreve Não informado em vez de adivinhar."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome e em outros navegadores Chromium, não no Safari. Exporte o arquivo HTML do Safari como acima e use o Snug no Chrome para importar. O Snug reconhece sozinho uma exportação do Safari e mantém Favoritos e Lista de Leitura separados.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store.",
+      "Abra a página Importar do Snug e escolha lá o arquivo HTML, ou solte-o na página. Não use o pop-up para isso: ele importa na hora, sem pré-visualização.",
+      "A Pré-visualização mostra o formato detectado, a quantidade de favoritos e a árvore de pastas, antes de qualquer mudança.",
+      "Use as caixas de seleção para escolher favoritos avulsos ou pastas inteiras, como Favoritos ou Lista de Leitura. O Snug importa só o que você selecionar.",
+      "Escolha um modo de importação. Criar pasta adiciona tudo a uma nova pasta Favoritos importados. Restaurar — mesclar coloca Favoritos na sua Barra de favoritos e a Lista de Leitura em uma pasta própria dentro de Outros favoritos, junto com os favoritos existentes.",
+      "Deixe Ignorar duplicados ativado. Ele deixa de fora qualquer favorito cujo endereço já esteja no Chrome e informa quantos ignorou."
+    ],
+    "snapshot": "Criar pasta e Restaurar — mesclar nunca esvaziam seus favoritos. Antes de um Restaurar — substituir, o Snug salva um instantâneo de segurança em Downloads e guarda uma cópia em Configurações, para você desfazer a importação."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Você não encontra os favoritos depois de importar. O Chrome os coloca em {toImportPlacement}.",
+      "O Chrome não aceita o arquivo. Confira se você escolheu o arquivo HTML salvo pelo Safari, chamado {fromExportFile} por padrão, e não outro tipo de arquivo.",
+      "A Lista de Leitura não está na sua Barra de favoritos. Com Restaurar — mesclar, o Snug a coloca em uma pasta própria dentro de Outros favoritos.",
+      "Um favorito aparece duas vezes. Abra Duplicados no Snug: ele agrupa as cópias por endereço e remove só as que você marcar como Excluir."
+    ]
+  },
+  "verified": "Os caminhos de menu e os nomes de arquivo foram lidos nas páginas de ajuda oficiais de {fromName} e {toName} em {date}. Os menus dos navegadores mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela."
+}

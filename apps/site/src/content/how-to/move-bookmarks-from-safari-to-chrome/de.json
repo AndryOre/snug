@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Lesezeichen von Safari nach Chrome übertragen | Snug",
+    "description": "Exportiere Safari-Lesezeichen als HTML-Datei und importiere sie in Chrome, samt Favoriten und Leseliste. Menüpfade geprüft am {date}."
+  },
+  "title": "Wie übertrage ich meine Lesezeichen von Safari nach Chrome?",
+  "directAnswer": "Exportiere deine Lesezeichen in Safari über {fromExportPath} als HTML-Datei. Importiere diese Datei danach in Chrome über {toImportPath}. Chrome legt sie in {toImportPlacement} ab. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Beide Browser erledigen das allein. Du brauchst nur die HTML-Datei.",
+    "steps": [
+      "Öffne in Safari {fromExportPath}.",
+      "Speichere die Datei. Safari nennt sie {fromExportFile}.",
+      "Läuft Chrome auf einem anderen Computer, kopiere die Datei dorthin.",
+      "Öffne in Chrome {toImportPath}.",
+      "Wähle die gespeicherte HTML-Datei und bestätige."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was übernommen wird und was verloren geht",
+    "intro": "Übertragen wird nur die HTML-Datei. Was Snug mit Favoriten und Leseliste eines Safari-Exports macht, steht weiter unten.",
+    "items": [
+      "In der Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "Nicht in der Datei, laut {fromName}: {fromHtmlDrops}.",
+      "Wo eine Hilfeseite nichts dazu sagt, steht hier Nicht angegeben statt einer Vermutung."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und anderen Chromium-Browsern, nicht in Safari. Exportiere die HTML-Datei wie oben aus Safari und nutze Snug in Chrome für den Import. Snug erkennt einen Safari-Export selbst und hält Favoriten und Leseliste getrennt.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store.",
+      "Öffne in Snug die Seite Import und wähle dort die HTML-Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert.",
+      "Wähle mit den Kontrollkästchen einzelne Lesezeichen oder ganze Ordner, etwa Favoriten oder Leseliste. Snug importiert nur deine Auswahl.",
+      "Wähle einen Importmodus. Ordner erstellen legt alles in einen neuen Ordner namens Importierte Lesezeichen. Wiederherstellen – zusammenführen legt Favoriten in deine Lesezeichenleiste und die Leseliste in einen eigenen Ordner unter Weitere Lesezeichen, neben deinen vorhandenen Lesezeichen.",
+      "Lass Duplikate überspringen aktiviert. Die Option lässt jedes Lesezeichen aus, dessen Adresse schon in Chrome ist, und zeigt, wie viele es übersprungen hat."
+    ],
+    "snapshot": "Ordner erstellen und Wiederherstellen – zusammenführen leeren deine Lesezeichen nie. Vor einem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in den Einstellungen, damit du den Import rückgängig machen kannst."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import nicht. Chrome legt sie in {toImportPlacement} ab.",
+      "Chrome akzeptiert die Datei nicht. Prüfe, ob du die von Safari gespeicherte HTML-Datei gewählt hast, standardmäßig {fromExportFile}, und keinen anderen Dateityp.",
+      "Die Leseliste liegt nicht in deiner Lesezeichenleiste. Mit Wiederherstellen – zusammenführen legt Snug die Leseliste in einen eigenen Ordner unter Weitere Lesezeichen.",
+      "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} und {toName} gelesen. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

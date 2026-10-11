@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "把 Safari 书签迁移到 Chrome 的方法 | Snug",
+    "description": "把 Safari 书签导出为 HTML 文件，再导入 Chrome，并说明个人收藏和阅读列表的去向。菜单路径已于{date}核实。"
+  },
+  "title": "如何把 Safari 的书签迁移到 Chrome？",
+  "directAnswer": "在 Safari 中打开{fromExportPath}，把书签导出为 HTML 文件。然后在 Chrome 中打开{toImportPath}，导入这个文件。Chrome 会把导入的书签放在{toImportPlacement}。菜单路径已于{date}核实。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "两个浏览器都能自行完成。你只需要这个 HTML 文件。",
+    "steps": [
+      "在 Safari 中打开{fromExportPath}。",
+      "保存文件。Safari 把它命名为 {fromExportFile}。",
+      "如果 Chrome 在另一台电脑上，把文件复制过去。",
+      "在 Chrome 中打开{toImportPath}。",
+      "选择你保存的 HTML 文件并确认。"
+    ]
+  },
+  "carriesOver": {
+    "title": "会带过去什么，会丢失什么",
+    "intro": "迁移的只有这个 HTML 文件。Snug 如何处理 Safari 导出文件里的个人收藏和阅读列表，见下文。",
+    "items": [
+      "据 {fromName}，文件包含：{fromHtmlKeeps}。",
+      "据 {fromName}，文件不包含：{fromHtmlDrops}。",
+      "帮助页面没有说明的地方，本页写“未说明”，不做猜测。"
+    ]
+  },
+  "withSnug": {
+    "title": "使用 Snug",
+    "intro": "Snug 可在 Chrome 和其他基于 Chromium 的浏览器中运行，不能在 Safari 中运行。按上面的方法从 Safari 导出 HTML 文件，再在 Chrome 中用 Snug 导入。Snug 能自动识别 Safari 导出文件，并把个人收藏和阅读列表分开放置。",
+    "steps": [
+      "从 Chrome 应用商店安装 Snug。",
+      "打开 Snug 的“导入”页面，在页面上选取 HTML 文件，或把文件拖到页面上。不要用弹出窗口：它会立即导入，没有预览。",
+      "在任何内容改动之前，预览会显示检测到的格式、书签数量和文件夹结构。",
+      "用复选框选择单个书签或整个文件夹，例如“个人收藏”或“阅读列表”。Snug 只导入你选中的内容。",
+      "选择导入模式。“创建文件夹”会把所有书签添加到新的“导入的书签”文件夹。“恢复——合并”会把个人收藏放进书签栏，把阅读列表放进“其他书签”下的独立文件夹，与现有书签并存。",
+      "保持“跳过重复项”开启。它会略过地址已在 Chrome 中的书签，并告诉你跳过了多少个。"
+    ],
+    "snapshot": "“创建文件夹”和“恢复——合并”不会清空你的书签。在“恢复——替换”之前，Snug 会把安全快照保存到下载文件夹，并在设置中保留一份副本，方便你撤销导入。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "导入后找不到书签。Chrome 会把它们放在{toImportPlacement}。",
+      "Chrome 不接受这个文件。请确认你选的是 Safari 保存的 HTML 文件（默认名为 {fromExportFile}），而不是其他类型的文件。",
+      "阅读列表不在书签栏里。使用“恢复——合并”时，Snug 会把阅读列表放进“其他书签”下的独立文件夹。",
+      "同一个书签出现了两次。在 Snug 中打开“重复项”：它按地址把副本分组，只删除你标记为“删除”的副本。"
+    ]
+  },
+  "verified": "菜单路径和文件名取自 {fromName} 和 {toName} 的官方帮助页面，核实日期为{date}。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。"
+}

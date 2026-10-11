@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Transférer ses favoris de Safari vers Chrome | Snug",
+    "description": "Exportez vos favoris Safari en HTML et importez-les dans Chrome, avec le sort des Favoris et de la Liste de lecture. Menus vérifiés le {date}."
+  },
+  "title": "Comment transférer mes favoris de Safari vers Chrome ?",
+  "directAnswer": "Exportez vos favoris depuis Safari dans un fichier HTML avec {fromExportPath}. Importez ensuite ce fichier dans Chrome avec {toImportPath}. Chrome les place dans {toImportPlacement}. Chemins de menu vérifiés le {date}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "Les deux navigateurs le font seuls. Il vous suffit du fichier HTML.",
+    "steps": [
+      "Dans Safari, ouvrez {fromExportPath}.",
+      "Enregistrez le fichier. Safari le nomme {fromExportFile}.",
+      "Si Chrome tourne sur un autre ordinateur, copiez-y le fichier.",
+      "Dans Chrome, ouvrez {toImportPath}.",
+      "Choisissez le fichier HTML enregistré et confirmez."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qui est conservé et ce qui est perdu",
+    "intro": "Seul le fichier HTML est transféré. Ce que Snug fait des Favoris et de la Liste de lecture d'un export Safari est décrit plus bas.",
+    "items": [
+      "Présent dans le fichier, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier, selon {fromName} : {fromHtmlDrops}.",
+      "Quand une page d'aide ne le précise pas, cette page écrit Non indiqué plutôt que de deviner."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome et les autres navigateurs Chromium, pas dans Safari. Exportez le fichier HTML depuis Safari comme ci-dessus, puis utilisez Snug dans Chrome pour l'importer. Snug reconnaît seul un export Safari et garde les Favoris et la Liste de lecture séparés.",
+    "steps": [
+      "Installez Snug depuis le Chrome Web Store.",
+      "Ouvrez la page Importer de Snug et choisissez-y le fichier HTML, ou déposez-le sur la page. N'utilisez pas la fenêtre contextuelle pour cela : elle importe tout de suite, sans aperçu.",
+      "L'Aperçu montre le format détecté, le nombre de favoris et l'arborescence des dossiers, avant que rien ne change.",
+      "Utilisez les cases à cocher pour choisir des favoris isolés ou des dossiers entiers, comme Favoris ou Liste de lecture. Snug n'importe que votre sélection.",
+      "Choisissez un mode d'importation. Créer un dossier ajoute tout dans un nouveau dossier Favoris importés. Restaurer — fusionner place les Favoris dans votre Barre de favoris et la Liste de lecture dans son propre dossier sous Autres favoris, à côté de vos favoris existants.",
+      "Laissez Ignorer les doublons activé. L'option laisse de côté tout favori dont l'adresse est déjà dans Chrome et indique combien elle en a ignoré."
+    ],
+    "snapshot": "Créer un dossier et Restaurer — fusionner ne vident jamais vos favoris. Avant un Restaurer — remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements et en garde une copie dans les Paramètres, pour que vous puissiez annuler l'importation."
+  },
+  "goesWrong": {
+    "title": "En cas de problème",
+    "items": [
+      "Vous ne retrouvez pas les favoris après l'importation. Chrome les place dans {toImportPlacement}.",
+      "Chrome n'accepte pas le fichier. Vérifiez que vous avez choisi le fichier HTML enregistré par Safari, nommé {fromExportFile} par défaut, et non un autre type de fichier.",
+      "La Liste de lecture n'est pas dans votre Barre de favoris. Avec Restaurer — fusionner, Snug la place dans son propre dossier sous Autres favoris.",
+      "Un favori apparaît en double. Ouvrez Doublons dans Snug : il regroupe les copies par adresse et ne supprime que celles que vous marquez Supprimer."
+    ]
+  },
+  "verified": "Les chemins de menu et les noms de fichier ont été lus sur les pages d'aide officielles de {fromName} et de {toName} le {date}. Les menus changent d'une version à l'autre : consultez la source si un chemin diffère sur votre écran."
+}

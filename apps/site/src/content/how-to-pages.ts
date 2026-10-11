@@ -38,4 +38,18 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
     relatedGuide: ['guide/importing', 'guide/duplicates'],
     relatedHowTo: [],
   },
+  'move-bookmarks-from-safari-to-chrome': {
+    group: 'move',
+    from: 'safari',
+    to: 'chrome',
+    relatedGuide: ['guide/importing', 'guide/duplicates'],
+    relatedHowTo: ['move-bookmarks-from-firefox-to-chrome'],
+  },
+  'move-bookmarks-from-chrome-to-edge': {
+    group: 'move',
+    from: 'chrome',
+    to: 'edge',
+    relatedGuide: ['guide/exporting', 'guide/importing'],
+    relatedHowTo: ['move-bookmarks-from-firefox-to-chrome'],
+  },
 }
