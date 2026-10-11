@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Ripristinare i segnalibri di Chrome da un backup | Snug",
+    "description": "Ripristina i segnalibri di Chrome da un backup HTML con l'importazione di Chrome o con Snug: anteprima, unisci, sostituisci. Verificato {date}."
+  },
+  "title": "Come ripristino i miei segnalibri di Chrome da un backup?",
+  "directAnswer": "In Chrome apri {toImportPath} e scegli il tuo file HTML di segnalibri. Chrome aggiunge i segnalibri in {toImportPlacement}.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "Chrome importa un file HTML di segnalibri, come quello che hai salvato facendo il backup.",
+    "steps": [
+      "Trova il file di backup. Un'esportazione di Chrome si chiama {fromExportFile}.",
+      "In Chrome apri {toImportPath}.",
+      "Scegli {toImportSources} come origine e seleziona il tuo file.",
+      "Cerca i segnalibri in {toImportPlacement}, poi spostali dove vuoi."
+    ]
+  },
+  "carriesOver": {
+    "title": "Cosa riporta un ripristino",
+    "intro": "Un ripristino riporta i segnalibri contenuti nel file, e solo quelli.",
+    "items": [
+      "Conservato nel file HTML, secondo {fromName}: {fromHtmlKeeps}.",
+      "Escluso dal file HTML, secondo {fromName}: {fromHtmlDrops}.",
+      "Chrome mette i segnalibri del file in {toImportPlacement}, quindi i segnalibri che hai già possono comparire due volte.",
+      "Il file del profilo {fromProfileFile} non è un file HTML. L'importazione di Chrome elenca queste origini: {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "Con Snug",
+    "intro": "Snug funziona in Chrome. Ripristina dai file salvati dall'esportazione automatica o da qualsiasi file di segnalibri, e mostra un'anteprima prima di cambiare qualcosa.",
+    "steps": [
+      "In Chrome apri la pagina Importa di Snug e scegli lì il file, oppure trascinalo sulla pagina. Non usare il popup per questo: importa subito, senza anteprima.",
+      "L'Anteprima mostra il formato rilevato, il numero di segnalibri e l'albero delle cartelle, prima che cambi qualcosa. I segnalibri che Salta i duplicati escluderebbe sono contrassegnati.",
+      "Scegli una modalità. Ripristina — unisci mette i segnalibri nelle loro posizioni originali accanto a quelli che hai. Ripristina — sostituisci svuota prima la tua Barra dei segnalibri e Altri segnalibri, poi ripristina quelli del file nelle posizioni originali. Entrambe richiedono un file con i dati di posizione.",
+      "Con Ripristina — unisci puoi spuntare singoli segnalibri o intere cartelle e importare solo quella selezione. Ripristina — sostituisci importa sempre tutto e accetta un file alla volta.",
+      "Ripristina — sostituisci mostra quanti segnalibri verranno rimossi e aggiunti, elenca quelli che verranno eliminati e chiede conferma prima di partire.",
+      "Dopo una sostituzione, fai clic su Annulla importazione nel risultato per riavere i tuoi segnalibri precedenti."
+    ],
+    "snapshot": "Prima di ogni Ripristina — sostituisci, Snug salva un'istantanea di sicurezza nei Download e ne tiene una copia nell'estensione. Se l'istantanea non può essere salvata, non viene eliminato nulla. Le Impostazioni elencano le ultime cinque istantanee, che puoi ripristinare o scaricare, e una sesta sostituisce la più vecchia. Tutto resta sul tuo dispositivo e Snug non effettua richieste di rete."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Non trovi i segnalibri dopo l'importazione di Chrome. Chrome li mette in {toImportPlacement}.",
+      "Chrome non accetta il file. La sua importazione elenca queste origini: {toImportSources}. Controlla che il file sia un HTML di segnalibri.",
+      "Ripristina — sostituisci non è disponibile. Richiede un file con i dati di posizione e un solo file alla volta. Usa Ripristina — unisci o Crea cartella, che funziona con qualsiasi file.",
+      "Hai sostituito e vuoi riavere i vecchi segnalibri. Fai clic su Annulla importazione, oppure ripristina un'istantanea di sicurezza nelle Impostazioni.",
+      "Snug dice che non è stato importato nulla. Ogni segnalibro del file è già nel tuo browser. Disattiva Salta i duplicati per importarli di nuovo."
+    ]
+  },
+  "verified": "Percorsi dei menu, nomi dei file e cartelle del profilo sono stati letti dalle pagine di aiuto di {fromName} e dai documenti di Chromium il {date}. I menu dei browser cambiano da una versione all'altra, quindi controlla la fonte se un percorso sul tuo schermo è diverso. Il comportamento di Snug deriva dalla sua guida all'importazione."
+}

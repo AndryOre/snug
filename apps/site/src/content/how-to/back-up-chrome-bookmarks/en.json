@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Back Up Chrome Bookmarks | Snug",
+    "description": "Back up Chrome bookmarks by exporting an HTML file by hand, or schedule exports with Snug's Auto-export. Menu paths verified {date}."
+  },
+  "title": "How do I back up my Chrome bookmarks?",
+  "directAnswer": "In Chrome, open {fromExportPath} and save the file, which Chrome names {fromExportFile}. To repeat that on a schedule, turn on Snug's Auto-export, which saves exports to Downloads or a folder you choose.",
+  "builtIn": {
+    "title": "The built-in way",
+    "intro": "Chrome exports your bookmarks to an HTML file. Do it by hand whenever you want a fresh copy.",
+    "steps": [
+      "In Chrome, open {fromExportPath}.",
+      "Save the file. Chrome names it {fromExportFile}.",
+      "Copy the file to a second place, such as a USB drive. A backup that lives only on this computer is lost with it.",
+      "To check the backup, open the file in a text editor or drag it into a browser tab. It lists your folders and bookmarks."
+    ]
+  },
+  "carriesOver": {
+    "title": "The profile file and what the export holds",
+    "intro": "Chrome also keeps your bookmarks in a file called {fromProfileFile} inside the profile folder. Close Chrome before you copy it as a raw backup.",
+    "items": [
+      "Windows: {fromProfileFolderWindows}",
+      "macOS: {fromProfileFolderMacos}",
+      "Linux: {fromProfileFolderLinux}",
+      "The profile folder is often named Default. Other profiles use other folder names.",
+      "Kept in the HTML file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of the HTML file, per {fromName}: {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug's Auto-export",
+    "intro": "Snug runs in Chrome. Auto-export saves your bookmarks to files on this computer on a schedule. It does not upload them anywhere and does not sync them between browsers or devices.",
+    "steps": [
+      "Install Snug in Chrome and open its Auto-export page.",
+      "Turn on Enable Auto-export and choose one or more of the six formats. HTML is one of them.",
+      "Choose how often it runs: hourly, every 12 hours, daily, every 3 days or weekly. Daily, every-3-days and weekly runs happen at a preferred time, and weekly runs also let you pick the day.",
+      "Under Save to, choose Downloads, or choose Custom folder and select Choose folder… to pick any folder on your computer.",
+      "Set Keep the last N runs. The default is 10, and 0 keeps everything. After each successful run, Snug deletes only the files of its own older runs.",
+      "Click Export now to test the setup. It exports with the settings on screen and does not change your schedule."
+    ],
+    "snapshot": "Files are saved without a save dialog. If a file with the same name exists, Snug adds a (1) suffix and never overwrites it. After a browser restart, Chrome asks once to confirm access to a Custom folder: choose \"Allow on every visit\". If the browser was closed when a run was due, Snug catches up shortly after the next start."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "No files appear. Open the Auto-export page: the status card shows the last run and its outcome, with the error message when it failed.",
+      "The page shows Folder access needed. Click Allow access. Until you do, runs fail and nothing is saved to Downloads instead.",
+      "Older backups disappeared. Retention deletes only files Snug itself saved, beyond the number you set to keep. Set it to 0 to keep everything.",
+      "You expected a copy on another device. Auto-export writes files on this computer only. Copy the folder to another disk or device yourself."
+    ]
+  },
+  "verified": "Menu paths, file names and profile folders were read from {fromName}'s help pages and Chromium's own documents on {date}. Browser menus change between versions, so check the source if a path differs on your screen. Snug's behavior comes from its Auto-export guide."
+}

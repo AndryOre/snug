@@ -371,6 +371,10 @@ export interface HowToValues {
   toImportSources: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
+  fromProfileFile: string
+  fromProfileFolderWindows: string
+  fromProfileFolderMacos: string
+  fromProfileFolderLinux: string
 }
 
 const MENU_SEPARATOR = ' > '
@@ -448,6 +452,22 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
       (items) => sentenceList(items, tag),
       notListed,
     ),
+    fromProfileFile: listed(source.profileBookmarksFile, String, notListed),
+    fromProfileFolderWindows: listed(
+      source.profileFolder.windows,
+      String,
+      notListed,
+    ),
+    fromProfileFolderMacos: listed(
+      source.profileFolder.macos,
+      String,
+      notListed,
+    ),
+    fromProfileFolderLinux: listed(
+      source.profileFolder.linux,
+      String,
+      notListed,
+    ),
   }
 }
 
@@ -514,7 +534,7 @@ export function howToSources(
   slug: string,
 ): { browser: string; urls: readonly string[] }[] {
   const { from, to } = getHowToPage(slug)
-  return [from, to].map((browser) => {
+  return [...new Set([from, to])].map((browser) => {
     const facts = BROWSER_FACTS[browser]
     const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }

@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Chrome-Lesezeichen sichern | Snug",
+    "description": "Chrome-Lesezeichen sichern: per Hand als HTML-Datei exportieren oder mit dem Auto-Export von Snug planen. Menüpfade und Dateiorte geprüft am {date}."
+  },
+  "title": "Wie sichere ich meine Chrome-Lesezeichen?",
+  "directAnswer": "Öffne in Chrome {fromExportPath} und speichere die Datei, die Chrome {fromExportFile} nennt. Um das nach Zeitplan zu wiederholen, aktiviere den Auto-Export von Snug, der die Exporte in Downloads oder einem Ordner deiner Wahl speichert.",
+  "builtIn": {
+    "title": "Der integrierte Weg",
+    "intro": "Chrome exportiert deine Lesezeichen in eine HTML-Datei. Mach das von Hand, wann immer du eine frische Kopie willst.",
+    "steps": [
+      "Öffne in Chrome {fromExportPath}.",
+      "Speichere die Datei. Chrome nennt sie {fromExportFile}.",
+      "Kopiere die Datei an einen zweiten Ort, zum Beispiel auf einen USB-Stick. Eine Sicherung, die nur auf diesem Computer liegt, geht mit ihm verloren.",
+      "Öffne die Datei zur Kontrolle in einem Texteditor oder ziehe sie in einen Browser-Tab. Sie listet deine Ordner und Lesezeichen auf."
+    ]
+  },
+  "carriesOver": {
+    "title": "Die Profildatei und was der Export enthält",
+    "intro": "Chrome speichert deine Lesezeichen auch in einer Datei namens {fromProfileFile} im Profilordner. Schließe Chrome, bevor du sie als Rohsicherung kopierst.",
+    "items": [
+      "Windows: {fromProfileFolderWindows}",
+      "macOS: {fromProfileFolderMacos}",
+      "Linux: {fromProfileFolderLinux}",
+      "Der Profilordner heißt oft Default. Andere Profile verwenden andere Ordnernamen.",
+      "In der HTML-Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "In der HTML-Datei nicht enthalten, laut {fromName}: {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit dem Auto-Export von Snug",
+    "intro": "Snug läuft in Chrome. Der Auto-Export speichert deine Lesezeichen nach Zeitplan als Dateien auf diesem Computer. Er lädt sie nirgendwohin hoch und synchronisiert sie nicht zwischen Browsern oder Geräten.",
+    "steps": [
+      "Installiere Snug in Chrome und öffne die Seite Auto-Export.",
+      "Aktiviere Auto-Export aktivieren und wähle eines oder mehrere der sechs Formate. HTML ist eines davon.",
+      "Wähle, wie oft er läuft: stündlich, alle 12 Stunden, täglich, alle 3 Tage oder wöchentlich. Tägliche, 3-tägliche und wöchentliche Läufe starten zur bevorzugten Uhrzeit, bei wöchentlichen wählst du auch den Tag.",
+      "Wähle unter Speichern unter entweder Downloads oder Eigener Ordner und tippe auf Ordner auswählen…, um einen beliebigen Ordner auf deinem Computer zu bestimmen.",
+      "Stelle Die letzten N Durchläufe behalten ein. Der Standard ist 10, mit 0 bleibt alles erhalten. Nach jedem erfolgreichen Lauf löscht Snug nur die Dateien seiner eigenen älteren Läufe.",
+      "Klicke auf Jetzt exportieren, um die Einrichtung zu testen. Es exportiert mit den Einstellungen auf dem Bildschirm und ändert deinen Zeitplan nicht."
+    ],
+    "snapshot": "Dateien werden ohne Speichern-Dialog gespeichert. Gibt es schon eine Datei mit demselben Namen, hängt Snug ein (1) an und überschreibt nie. Nach einem Browser-Neustart bittet Chrome einmal um Bestätigung des Zugriffs auf einen Eigenen Ordner: Wähle \"Allow on every visit\". War der Browser zum fälligen Zeitpunkt geschlossen, holt Snug den Lauf kurz nach dem nächsten Start nach."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Es erscheinen keine Dateien. Öffne die Seite Auto-Export: Die Statuskarte zeigt den letzten Lauf und sein Ergebnis, bei einem Fehler mit der Fehlermeldung.",
+      "Die Seite zeigt Ordnerzugriff erforderlich. Klicke auf Zugriff erlauben. Bis dahin schlagen Läufe fehl und stattdessen wird nichts in Downloads gespeichert.",
+      "Ältere Sicherungen sind verschwunden. Die Aufbewahrung löscht nur Dateien, die Snug selbst gespeichert hat, und nur jenseits der eingestellten Anzahl. Mit 0 bleibt alles erhalten.",
+      "Du hast eine Kopie auf einem anderen Gerät erwartet. Der Auto-Export schreibt Dateien nur auf diesen Computer. Kopiere den Ordner selbst auf einen anderen Datenträger oder ein anderes Gerät."
+    ]
+  },
+  "verified": "Menüpfade, Dateinamen und Profilordner stammen aus den Hilfeseiten von {fromName} und aus Chromiums eigenen Dokumenten, gelesen am {date}. Browsermenüs ändern sich zwischen Versionen, prüfe also die Quelle, falls ein Pfad auf deinem Bildschirm abweicht. Das Verhalten von Snug stammt aus seinem Guide zum Auto-Export."
+}

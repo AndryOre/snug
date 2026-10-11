@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Copia de seguridad de marcadores de Chrome | Snug",
+    "description": "Copia de seguridad de tus marcadores de Chrome: exporta un HTML a mano o programa la Auto-export de Snug. Rutas de menú verificadas {date}."
+  },
+  "title": "¿Cómo hago una copia de seguridad de mis marcadores de Chrome?",
+  "directAnswer": "En Chrome, abre {fromExportPath} y guarda el archivo, que Chrome llama {fromExportFile}. Para repetirlo de forma programada, activa la Auto-export de Snug, que guarda las exportaciones en Descargas o en una carpeta que elijas.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "Chrome exporta tus marcadores a un archivo HTML. Hazlo a mano cuando quieras una copia nueva.",
+    "steps": [
+      "En Chrome, abre {fromExportPath}.",
+      "Guarda el archivo. Chrome lo llama {fromExportFile}.",
+      "Copia el archivo a un segundo lugar, como una unidad USB. Una copia que solo está en este equipo se pierde con él.",
+      "Para comprobar la copia, abre el archivo en un editor de texto o arrástralo a una pestaña del navegador. Muestra tus carpetas y marcadores."
+    ]
+  },
+  "carriesOver": {
+    "title": "El archivo del perfil y lo que contiene la exportación",
+    "intro": "Chrome también guarda tus marcadores en un archivo llamado {fromProfileFile} dentro de la carpeta del perfil. Cierra Chrome antes de copiarlo como copia en bruto.",
+    "items": [
+      "Windows: {fromProfileFolderWindows}",
+      "macOS: {fromProfileFolderMacos}",
+      "Linux: {fromProfileFolderLinux}",
+      "La carpeta del perfil suele llamarse Default. Otros perfiles usan otros nombres de carpeta.",
+      "Se conserva en el archivo HTML, según {fromName}: {fromHtmlKeeps}.",
+      "Queda fuera del archivo HTML, según {fromName}: {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "Con la Auto-export de Snug",
+    "intro": "Snug funciona en Chrome. La Auto-export guarda tus marcadores en archivos de este equipo según un horario. No los sube a ningún sitio ni los sincroniza entre navegadores o dispositivos.",
+    "steps": [
+      "Instala Snug en Chrome y abre su página Auto-export.",
+      "Activa Activar exportación automática y elige uno o varios de los seis formatos. HTML es uno de ellos.",
+      "Elige la frecuencia: cada hora, cada 12 horas, a diario, cada 3 días o cada semana. Las ejecuciones diarias, cada 3 días y semanales ocurren a la hora preferida, y en las semanales también eliges el día.",
+      "En Guardar en, elige Descargas, o elige Carpeta personalizada y pulsa Elegir carpeta… para escoger cualquier carpeta de tu equipo.",
+      "Ajusta Conservar las últimas N ejecuciones. El valor predeterminado es 10 y con 0 se conserva todo. Tras cada ejecución correcta, Snug elimina solo los archivos de sus propias ejecuciones anteriores.",
+      "Pulsa Exportar ahora para probar la configuración. Exporta con los ajustes que ves en pantalla y no cambia tu horario."
+    ],
+    "snapshot": "Los archivos se guardan sin diálogo de guardado. Si ya existe un archivo con el mismo nombre, Snug añade el sufijo (1) y nunca lo sobrescribe. Tras reiniciar el navegador, Chrome pide una vez confirmar el acceso a una Carpeta personalizada: elige \"Allow on every visit\". Si el navegador estaba cerrado cuando tocaba una ejecución, Snug la recupera poco después del siguiente inicio."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "No aparece ningún archivo. Abre la página Auto-export: la tarjeta de estado muestra la última ejecución y su resultado, con el mensaje de error si falló.",
+      "La página muestra Se necesita acceso a la carpeta. Pulsa Permitir acceso. Hasta que lo hagas, las ejecuciones fallan y no se guarda nada en Descargas en su lugar.",
+      "Han desaparecido copias antiguas. La retención elimina solo archivos que guardó Snug y solo los que superan el número que fijaste. Ponlo en 0 para conservarlo todo.",
+      "Esperabas una copia en otro dispositivo. La Auto-export escribe archivos solo en este equipo. Copia tú la carpeta a otro disco o dispositivo."
+    ]
+  },
+  "verified": "Las rutas de menú, los nombres de archivo y las carpetas de perfil se leyeron en las páginas de ayuda de {fromName} y en los documentos propios de Chromium el {date}. Los menús del navegador cambian entre versiones, así que revisa la fuente si una ruta difiere en tu pantalla. El comportamiento de Snug procede de su guía de Auto-export."
+}

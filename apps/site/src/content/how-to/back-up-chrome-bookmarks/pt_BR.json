@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Fazer backup dos favoritos do Chrome | Snug",
+    "description": "Faça backup dos favoritos do Chrome exportando um HTML à mão ou agendando a exportação automática do Snug. Caminhos verificados em {date}."
+  },
+  "title": "Como faço backup dos meus favoritos do Chrome?",
+  "directAnswer": "No Chrome, abra {fromExportPath} e salve o arquivo, que o Chrome chama de {fromExportFile}. Para repetir isso em um agendamento, ative a exportação automática do Snug, que salva as exportações em Downloads ou em uma pasta que você escolher.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "O Chrome exporta seus favoritos para um arquivo HTML. Faça isso à mão sempre que quiser uma cópia nova.",
+    "steps": [
+      "No Chrome, abra {fromExportPath}.",
+      "Salve o arquivo. O Chrome o chama de {fromExportFile}.",
+      "Copie o arquivo para um segundo lugar, como um pen drive. Um backup que existe só neste computador se perde junto com ele.",
+      "Para conferir o backup, abra o arquivo em um editor de texto ou arraste-o para uma aba do navegador. Ele lista suas pastas e seus favoritos."
+    ]
+  },
+  "carriesOver": {
+    "title": "O arquivo do perfil e o que a exportação contém",
+    "intro": "O Chrome também guarda seus favoritos em um arquivo chamado {fromProfileFile} dentro da pasta do perfil. Feche o Chrome antes de copiá-lo como backup bruto.",
+    "items": [
+      "Windows: {fromProfileFolderWindows}",
+      "macOS: {fromProfileFolderMacos}",
+      "Linux: {fromProfileFolderLinux}",
+      "A pasta do perfil costuma se chamar Default. Outros perfis usam outros nomes de pasta.",
+      "Mantido no arquivo HTML, segundo {fromName}: {fromHtmlKeeps}.",
+      "Deixado de fora do arquivo HTML, segundo {fromName}: {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "Com a exportação automática do Snug",
+    "intro": "O Snug funciona no Chrome. A exportação automática salva seus favoritos em arquivos neste computador, em um agendamento. Ela não os envia a lugar nenhum e não os sincroniza entre navegadores ou dispositivos.",
+    "steps": [
+      "Instale o Snug no Chrome e abra a página Exportação automática.",
+      "Ative Ativar exportação automática e escolha um ou mais dos seis formatos. HTML é um deles.",
+      "Escolha a frequência: a cada hora, a cada 12 horas, diariamente, a cada 3 dias ou semanalmente. As execuções diárias, a cada 3 dias e semanais acontecem no horário preferido, e nas semanais você também escolhe o dia.",
+      "Em Salvar em, escolha Downloads, ou escolha Pasta personalizada e Escolher pasta… para indicar qualquer pasta do seu computador.",
+      "Defina Manter as últimas N execuções. O padrão é 10, e 0 mantém tudo. Depois de cada execução bem-sucedida, o Snug apaga apenas os arquivos das suas próprias execuções mais antigas.",
+      "Clique em Exportar agora para testar a configuração. Ele exporta com as configurações da tela e não muda seu agendamento."
+    ],
+    "snapshot": "Os arquivos são salvos sem janela de salvamento. Se já existir um arquivo com o mesmo nome, o Snug acrescenta o sufixo (1) e nunca sobrescreve. Depois de reiniciar o navegador, o Chrome pede uma vez para confirmar o acesso a uma Pasta personalizada: escolha \"Allow on every visit\". Se o navegador estava fechado na hora prevista, o Snug recupera a execução pouco depois da próxima inicialização."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Nenhum arquivo aparece. Abra a página Exportação automática: o cartão de status mostra a última execução e o resultado, com a mensagem de erro se ela falhou.",
+      "A página mostra Acesso à pasta necessário. Clique em Permitir acesso. Até você fazer isso, as execuções falham e nada é salvo em Downloads no lugar.",
+      "Backups mais antigos sumiram. A retenção apaga apenas arquivos que o próprio Snug salvou, além do número que você definiu. Defina 0 para manter tudo.",
+      "Você esperava uma cópia em outro dispositivo. A exportação automática grava arquivos só neste computador. Copie você mesmo a pasta para outro disco ou dispositivo."
+    ]
+  },
+  "verified": "Caminhos de menu, nomes de arquivo e pastas de perfil foram lidos nas páginas de ajuda de {fromName} e nos documentos do Chromium em {date}. Os menus do navegador mudam entre versões, então confira a fonte se um caminho for diferente na sua tela. O comportamento do Snug vem do seu guia de exportação automática."
+}
