@@ -1919,6 +1919,90 @@ Chrome bookmarks help (`support.google.com/chrome/answer/96816`), read
 was taken from the search summary of the official page and should be
 re-confirmed in a browser before launch.
 
+### EN: Move bookmarks from Edge to Chrome
+
+- **Title:** Move Edge Bookmarks to Chrome | Snug
+- **Description:** Export your Edge favorites to an HTML file and import it into
+  Chrome, step by step, with what to check afterwards. Menu paths verified
+  {date}.
+- **Headline:** How do I move my bookmarks from Edge to Chrome?
+- **Direct answer:** Export your Edge favorites to an HTML file, using the path
+  Edge's help gives: {fromExportPath}. Then import the file into Chrome with
+  {toImportPath}. Chrome puts imported bookmarks in {toImportPlacement}. Menu
+  paths checked {date}.
+- **The built-in method:** Chrome's help lists these import sources:
+  {toImportSources}. This page follows that documented route. Edge calls
+  bookmarks favorites.
+  1. In Edge, export your favorites to an HTML file. Edge's help gives this
+     path: {fromExportPath}.
+  2. In Chrome, open {toImportPath}.
+  3. Choose the HTML file you saved and confirm.
+- **What carries over:** As on the Firefox page, from the facts module.
+- **With Snug:** Snug runs in Edge and in Chrome, so the whole move happens
+  inside the two browsers. It adds a preview, a choice of what to bring in and a
+  way back.
+  1. Install Snug from the Chrome Web Store in both Edge and Chrome.
+  2. In Edge, open Snug's Export page. Check the bookmarks or folders you want
+     to move, choose HTML and export.
+  3. to 7. The Import page, Preview, selection, import mode and Skip duplicates
+     steps of the Firefox page, with Chrome as the destination.
+- **If something goes wrong:** Placement, a file Chrome does not accept (its own
+  import takes a bookmarks HTML file), duplicates, nothing imported.
+
+### EN: Move bookmarks from Chrome to Brave
+
+- **Title:** Move Chrome Bookmarks to Brave | Snug
+- **Description:** Import Chrome bookmarks into Brave from another browser or
+  from an HTML file, step by step, with what to check afterwards. Menu paths
+  verified {date}.
+- **Headline:** How do I move my bookmarks from Chrome to Brave?
+- **Direct answer:** In Brave, open {toImportPath}. Brave's help lists these
+  import sources: {toImportSources}. To use a file, export it from Chrome first
+  with {fromExportPath}. Menu paths checked {date}.
+- **The built-in method:** Choose a browser detected on this computer to import
+  straight from Chrome, or use a file. The file route also works when Chrome is
+  on another computer. These steps cover the file route.
+  1. In Chrome, open {fromExportPath}.
+  2. Save the file. Chrome names it {fromExportFile} by default.
+  3. In Brave, open {toImportPath}.
+  4. Choose the HTML file you saved and confirm.
+- **What carries over:** As on the Firefox page, from the facts module.
+- **With Snug:** Snug runs in Chrome and in Brave. Use it in Chrome to export
+  only the folders you pick, and in Brave to preview the import and undo a
+  replace.
+  1. Install Snug from the Chrome Web Store in both Chrome and Brave.
+  2. In Chrome, open Snug's Export page. Check the folders or single bookmarks
+     you want to move, choose HTML and export.
+  3. to 5. The Import page, Preview and selection steps of the Firefox page.
+  4. Choose an import mode, as on the Firefox page.
+  5. Restore — replace clears the bookmarks in your Bookmarks Bar and Other
+     Bookmarks first. Snug shows how many bookmarks it will remove and add, asks
+     you to confirm, and works with one file at a time.
+  6. Leave Skip duplicates on. It leaves out any bookmark whose address is
+     already in Brave, and tells you how many it skipped.
+  - Before a Restore — replace, Snug saves a Safety snapshot, as on the Firefox
+    page.
+- **If something goes wrong:** Placement (Brave's help does not list it, so the
+  page says Not listed), a file Brave does not accept, duplicates, nothing
+  imported.
+
+The other nine locales of both pages carry the same sections, claims and
+placeholders in
+`apps/site/src/content/how-to/move-bookmarks-from-edge-to-chrome/` and
+`apps/site/src/content/how-to/move-bookmarks-from-chrome-to-brave/`.
+
+Sources: Product: Positioning, Capabilities and Constraints;
+`docs/guide/importing.md`, `docs/guide/exporting.md`,
+`docs/guide/duplicates.md`; Chrome bookmarks help
+(`support.google.com/chrome/answer/96816`), Edge import help
+(`support.microsoft.com/en-us/topic/eb26f747-ab82-c8fb-ad3b-c227f99ba8a4`) and
+Brave import help
+(`support.brave.app/hc/en-us/articles/360019782291-How-do-I-import-or-export-browsing-data`),
+read 2026-10-11. Edge's help documents import only, so its export path is Not
+listed. Brave's page did not load for automated reads, so its two import sources
+were taken from the search summary of the official page and should be
+re-confirmed in a browser before launch.
+
 ---
 
 ## Claim sweep

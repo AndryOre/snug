@@ -165,6 +165,18 @@ describe('bundled copy', () => {
     }
   })
 
+  it.each([
+    'move-bookmarks-from-edge-to-chrome',
+    'move-bookmarks-from-chrome-to-brave',
+  ])('has %s in every locale with key parity', (slug) => {
+    expect(howToPageLocales(slug)).toEqual([...LOCALES])
+    for (const locale of LOCALES) {
+      expect(flattenKeys(getHowToContent(locale, slug) as never)).toEqual(
+        flattenKeys(getHowToContent('en', slug) as never),
+      )
+    }
+  })
+
   it('registers every page and lists English first', () => {
     expect(HOW_TO_SLUGS).toEqual(Object.keys(HOW_TO_PAGES))
     expect(HOW_TO_LOCALES[0]).toBe('en')
@@ -224,11 +236,15 @@ describe('bundled copy', () => {
   })
 
   it('never states a menu path or file name inline', () => {
-    for (const locale of LOCALES) {
-      const text = JSON.stringify(getHowToContent(locale, SLUG))
-      expect(text).not.toContain('bookmarks.html')
-      expect(text).not.toContain('Import and Backup')
-      expect(text).not.toContain('Import bookmarks and settings')
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const text = JSON.stringify(getHowToContent(locale, slug))
+        expect(text).not.toContain('bookmarks.html')
+        expect(text).not.toContain('bookmarks_<date>.html')
+        expect(text).not.toContain('Import and Backup')
+        expect(text).not.toContain('Import bookmarks and settings')
+        expect(text).not.toContain('Import browser data')
+      }
     }
   })
 })
@@ -250,6 +266,20 @@ describe('howToValues and interpolateHowTo', () => {
     expect(
       howToValues('en', 'move-bookmarks-from-chrome-to-edge').toImportSources,
     ).toBe('Google Chrome, IE11, and Favorites or bookmarks HTML file')
+  })
+
+  it('resolves import sources and the Edge export from the facts', () => {
+    const brave = howToValues('en', 'move-bookmarks-from-chrome-to-brave')
+    const edge = howToValues('en', 'move-bookmarks-from-edge-to-chrome')
+
+    expect(brave.toImportSources).toBe(
+      'Browsers detected on this computer and Bookmarks HTML file',
+    )
+    expect(brave.toImportPath).toBe(
+      'Main menu > Bookmarks > Import Bookmarks and Settings',
+    )
+    expect(edge.toImportSources).toBe('Bookmarks HTML file')
+    expect(edge.fromExportPath).toBe('Not listed')
   })
 
   it('writes a fact that is not listed as the locale string', () => {

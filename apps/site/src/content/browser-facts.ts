@@ -154,7 +154,10 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Main menu', 'Bookmarks', 'Import Bookmarks and Settings'],
       sourceUrl: BRAVE_IMPORT_HELP,
     },
-    importSources: 'not-listed',
+    importSources: {
+      value: ['Browsers detected on this computer', 'Bookmarks HTML file'],
+      sourceUrl: BRAVE_IMPORT_HELP,
+    },
     exportFileName: 'not-listed',
     importPlacement: 'not-listed',
     profileFolder: NOT_LISTED_PROFILE,
