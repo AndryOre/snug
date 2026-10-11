@@ -1,12 +1,14 @@
 name: Deploy Site
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'apps/site/**'
       - 'packages/ui/**'
       - 'PRIVACY_POLICY.md'
+      - '.env'
       - '.github/scripts/deploy-coolify.sh'
       - '.github/workflows/deploy-site.yml'
 
