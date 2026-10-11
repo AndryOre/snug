@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Move Chrome Bookmarks to Brave | Snug",
+    "description": "Import Chrome bookmarks into Brave from another browser or from an HTML file, step by step, with what to check afterwards. Menu paths verified {date}."
+  },
+  "title": "How do I move my bookmarks from Chrome to Brave?",
+  "directAnswer": "In Brave, open {toImportPath}. Brave's help lists these import sources: {toImportSources}. To use a file, export it from Chrome first with {fromExportPath}. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "Choose a browser detected on this computer to import straight from Chrome, or use a file. The file route also works when Chrome is on another computer. These steps cover the file route.",
+    "steps": [
+      "In Chrome, open {fromExportPath}.",
+      "Save the file. Chrome names it {fromExportFile} by default.",
+      "In Brave, open {toImportPath}.",
+      "Choose the HTML file you saved and confirm."
+    ]
+  },
+  "carriesOver": {
+    "title": "What carries over",
+    "intro": "The HTML file is the only thing that moves.",
+    "items": [
+      "Kept in the file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of the file, per {fromName}: {fromHtmlDrops}.",
+      "Where a help page does not say, this page says Not listed instead of guessing."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome and in Brave. Use it in Chrome to export only the folders you pick, and in Brave to preview the import and undo a replace.",
+    "steps": [
+      "Install Snug from the Chrome Web Store in both Chrome and Brave.",
+      "In Chrome, open Snug's Export page. Check the folders or single bookmarks you want to move, choose HTML and export.",
+      "Open Snug's Import page and choose the HTML file there, or drop it on the page. Do not use the popup for this: it imports at once, without a preview.",
+      "The Preview shows the detected format, the bookmark count and the folder tree before anything changes.",
+      "Use the checkboxes to pick single bookmarks or whole folders. Snug imports only what you select.",
+      "Choose an import mode. Create folder adds everything to a new Imported Bookmarks folder. Restore — merge places bookmarks in their original locations next to your existing ones, when the file carries them.",
+      "Restore — replace clears the bookmarks in your Bookmarks Bar and Other Bookmarks first. Snug shows how many bookmarks it will remove and add, asks you to confirm, and works with one file at a time.",
+      "Leave Skip duplicates on. It leaves out any bookmark whose address is already in Brave, and tells you how many it skipped."
+    ],
+    "snapshot": "Create folder and Restore — merge never clear your bookmarks. Before a Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps a copy in Settings, so you can undo the import."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "You cannot find the bookmarks after importing. Brave's help says where imported bookmarks go: {toImportPlacement}. Search for a bookmark you know was in the file.",
+      "Brave does not accept the file. Check that you chose the HTML file Chrome saved, named {fromExportFile} by default, and not another file type.",
+      "A bookmark appears twice. Open Duplicates in Snug: it groups copies by address and removes only the copies you mark Delete.",
+      "Snug says nothing was imported. Every bookmark in the file is already in your browser. Turn off Skip duplicates to import them again."
+    ]
+  },
+  "verified": "Menu paths and file names were read from the official help pages of {fromName} and {toName} on {date}. Browser menus change between versions, so check the source if a path differs on your screen."
+}

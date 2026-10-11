@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Lesezeichen von Chrome nach Brave übertragen | Snug",
+    "description": "Importiere deine Chrome-Lesezeichen in Brave aus einem Browser oder einer HTML-Datei, mit allen Schritten. Menüpfade geprüft am {date}."
+  },
+  "title": "Wie übertrage ich meine Lesezeichen von Chrome nach Brave?",
+  "directAnswer": "Öffne in Brave {toImportPath}. Die Brave-Hilfe nennt diese Importquellen: {toImportSources}. Für eine Datei exportierst du sie zuerst in Chrome über {fromExportPath}. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Wähle einen auf diesem Computer erkannten Browser, um direkt aus Chrome zu importieren, oder nutze eine Datei. Der Weg über die Datei funktioniert auch, wenn Chrome auf einem anderen Computer ist. Diese Schritte beschreiben den Weg über die Datei.",
+    "steps": [
+      "Öffne in Chrome {fromExportPath}.",
+      "Speichere die Datei. Chrome nennt sie standardmäßig {fromExportFile}.",
+      "Öffne in Brave {toImportPath}.",
+      "Wähle die gespeicherte HTML-Datei und bestätige."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was übernommen wird",
+    "intro": "Übertragen wird nur die HTML-Datei.",
+    "items": [
+      "In der Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "Nicht in der Datei, laut {fromName}: {fromHtmlDrops}.",
+      "Wo eine Hilfeseite nichts dazu sagt, steht hier Nicht angegeben statt einer Vermutung."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und in Brave. Nutze es in Chrome, um nur die gewählten Ordner zu exportieren, und in Brave, um den Import in der Vorschau zu prüfen und ein Ersetzen rückgängig zu machen.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store in Chrome und in Brave.",
+      "Öffne in Chrome die Seite Export von Snug. Hake die Ordner oder einzelnen Lesezeichen an, die du übertragen willst, wähle HTML und exportiere.",
+      "Öffne in Snug die Seite Import und wähle dort die HTML-Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert.",
+      "Wähle mit den Kontrollkästchen einzelne Lesezeichen oder ganze Ordner. Snug importiert nur deine Auswahl.",
+      "Wähle einen Importmodus. Ordner erstellen legt alles in einen neuen Ordner namens Importierte Lesezeichen. Wiederherstellen – zusammenführen legt Lesezeichen an ihren ursprünglichen Orten neben den vorhandenen ab, sofern die Datei diese enthält.",
+      "Wiederherstellen – ersetzen leert zuerst die Lesezeichen in deiner Lesezeichenleiste und unter Weitere Lesezeichen. Snug zeigt, wie viele Lesezeichen entfernt und hinzugefügt werden, verlangt eine Bestätigung und arbeitet nur mit einer Datei gleichzeitig.",
+      "Lass Duplikate überspringen aktiviert. Die Option lässt jedes Lesezeichen aus, dessen Adresse schon in Brave ist, und zeigt, wie viele es übersprungen hat."
+    ],
+    "snapshot": "Ordner erstellen und Wiederherstellen – zusammenführen leeren deine Lesezeichen nie. Vor einem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in den Einstellungen, damit du den Import rückgängig machen kannst."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import nicht. Die Brave-Hilfe sagt, wohin importierte Lesezeichen kommen: {toImportPlacement}. Suche nach einem Lesezeichen, von dem du weißt, dass es in der Datei war.",
+      "Brave akzeptiert die Datei nicht. Prüfe, ob du die von Chrome gespeicherte HTML-Datei gewählt hast, standardmäßig {fromExportFile}, und keinen anderen Dateityp.",
+      "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt.",
+      "Snug meldet, dass nichts importiert wurde. Alle Lesezeichen der Datei sind schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} und {toName} gelesen. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

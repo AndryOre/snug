@@ -51,7 +51,9 @@ function files(entries: Record<string, Record<string, unknown>>): HowToFiles {
 
 function load(
   entries: Record<string, Record<string, unknown>>,
-  pages: typeof HOW_TO_PAGES = HOW_TO_PAGES,
+  pages: typeof HOW_TO_PAGES = Object.fromEntries(
+    Object.entries(HOW_TO_PAGES).filter(([slug]) => slug === SLUG),
+  ),
 ) {
   return () =>
     loadHowToContent({
@@ -162,6 +164,18 @@ describe('bundled copy', () => {
     }
   })
 
+  it.each([
+    'move-bookmarks-from-edge-to-chrome',
+    'move-bookmarks-from-chrome-to-brave',
+  ])('has %s in every locale with key parity', (slug) => {
+    expect(howToPageLocales(slug)).toEqual([...LOCALES])
+    for (const locale of LOCALES) {
+      expect(flattenKeys(getHowToContent(locale, slug) as never)).toEqual(
+        flattenKeys(getHowToContent('en', slug) as never),
+      )
+    }
+  })
+
   it('registers every page and lists English first', () => {
     expect(HOW_TO_SLUGS).toEqual(Object.keys(HOW_TO_PAGES))
     expect(HOW_TO_LOCALES[0]).toBe('en')
@@ -183,32 +197,40 @@ describe('bundled copy', () => {
   })
 
   it('keeps every meta title and description within the content rules', () => {
-    for (const locale of LOCALES) {
-      const { title, description } = getHowToMeta(locale, SLUG)
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const { title, description } = getHowToMeta(locale, slug)
 
-      expect(title).toMatch(/ \| Snug$/u)
-      expect(title.startsWith('Snug')).toBe(false)
-      expect(visualWidth(title)).toBeLessThanOrEqual(60)
-      expect(description).toContain('Chrome')
-      expect(description).not.toContain('{')
-      if (CJK_LOCALES.has(locale)) continue
-      expect([...description].length).toBeGreaterThanOrEqual(140)
-      expect([...description].length).toBeLessThanOrEqual(160)
+        expect(title).toMatch(/ \| Snug$/u)
+        expect(title.startsWith('Snug')).toBe(false)
+        expect(visualWidth(title)).toBeLessThanOrEqual(60)
+        expect(description).toContain('Chrome')
+        expect(description).not.toContain('{')
+        if (CJK_LOCALES.has(locale)) continue
+        expect([...description].length).toBeGreaterThanOrEqual(140)
+        expect([...description].length).toBeLessThanOrEqual(160)
+      }
     }
   })
 
   it('writes the page title as a question', () => {
-    for (const locale of LOCALES) {
-      expect(getHowToContent(locale, SLUG).title).toMatch(/[?？]$/u)
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        expect(getHowToContent(locale, slug).title).toMatch(/[?？]$/u)
+      }
     }
   })
 
   it('never states a menu path or file name inline', () => {
-    for (const locale of LOCALES) {
-      const text = JSON.stringify(getHowToContent(locale, SLUG))
-      expect(text).not.toContain('bookmarks.html')
-      expect(text).not.toContain('Import and Backup')
-      expect(text).not.toContain('Import bookmarks and settings')
+    for (const slug of HOW_TO_SLUGS) {
+      for (const locale of LOCALES) {
+        const text = JSON.stringify(getHowToContent(locale, slug))
+        expect(text).not.toContain('bookmarks.html')
+        expect(text).not.toContain('bookmarks_<date>.html')
+        expect(text).not.toContain('Import and Backup')
+        expect(text).not.toContain('Import bookmarks and settings')
+        expect(text).not.toContain('Import browser data')
+      }
     }
   })
 })
@@ -224,6 +246,20 @@ describe('howToValues and interpolateHowTo', () => {
     expect(values.toImportPath).toBe(
       'More > Bookmarks and lists > Import bookmarks and settings',
     )
+  })
+
+  it('resolves import sources and the Edge export from the facts', () => {
+    const brave = howToValues('en', 'move-bookmarks-from-chrome-to-brave')
+    const edge = howToValues('en', 'move-bookmarks-from-edge-to-chrome')
+
+    expect(brave.toImportSources).toBe(
+      'Browsers detected on this computer and Bookmarks HTML file',
+    )
+    expect(brave.toImportPath).toBe(
+      'Main menu > Bookmarks > Import Bookmarks and Settings',
+    )
+    expect(edge.toImportSources).toBe('Bookmarks HTML file')
+    expect(edge.fromExportPath).toBe('Not listed')
   })
 
   it('writes a fact that is not listed as the locale string', () => {
