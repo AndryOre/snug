@@ -61,8 +61,9 @@ const sample =
     ? { ...copy.sample, code: samples[definition.sample] }
     : undefined
 const headingClass = 'font-heading text-2xl font-bold md:text-3xl'
-const stepsClass = 'mt-4 list-decimal space-y-2 pl-6 leading-prose'
-const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
+const stepsClass =
+  'mt-4 list-decimal space-y-2 pl-6 leading-prose wrap-anywhere'
+const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose wrap-anywhere'
 ---
 
 <Layout locale={locale} page={page}>
@@ -151,7 +152,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
           </h2>
           <p class="mt-4 leading-prose">{fill(sample.intro)}</p>
           <pre
-            class="mt-4 overflow-x-auto rounded-xl border border-border bg-card p-4 text-sm leading-relaxed"
+            class="mt-4 rounded-xl border border-border bg-card p-4 text-sm leading-relaxed whitespace-pre-wrap wrap-anywhere"
             lang="en"
             dir="ltr"
           ><code set:text={sample.code} /></pre>
