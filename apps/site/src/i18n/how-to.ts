@@ -217,6 +217,16 @@ export function howToPath(locale: Locale, slug: string): string {
     : page
 }
 
+/**
+ * Whether a page carries a With Snug section. Pages that only describe the
+ * built-in method leave the `withSnug` key out of every locale's copy.
+ * @param slug - A How-to page slug.
+ * @returns `true` when the English copy has a `withSnug` section.
+ */
+export function hasHowToSnugSection(slug: string): boolean {
+  return 'withSnug' in getHowToContent(DEFAULT_LOCALE, slug)
+}
+
 function copyLocale(locale: Locale, slug: string): Locale {
   return howToPageLocales(slug).includes(locale) ? locale : DEFAULT_LOCALE
 }

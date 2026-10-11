@@ -69,11 +69,17 @@ export interface LlmsComparisonPage {
 }
 
 /**
+ * One How-to page, as listed in `llms.txt`.
+ */
+export type LlmsHowToPage = LlmsComparisonPage
+
+/**
  * The `llms.txt` body summarizing the product and linking the key pages.
  * @param description - The English meta description.
  * @param localePages - Every locale's landing page.
  * @param documentationPages - Every Guide page and What's new, per locale.
  * @param comparisonPages - The Alternatives page and each Comparison page.
+ * @param howToPages - Each English How-to page.
  * @returns The file contents.
  */
 export function buildLlmsTxt(
@@ -81,7 +87,15 @@ export function buildLlmsTxt(
   localePages: readonly LlmsLocalePage[],
   documentationPages: readonly LlmsDocumentationPage[] = [],
   comparisonPages: readonly LlmsComparisonPage[] = [],
+  howToPages: readonly LlmsHowToPage[] = [],
 ): string {
+  const howToLines = howToPages
+    .map(
+      ({ title, description: summary, url }) =>
+        `- [${title}](${url}): ${summary}`,
+    )
+    .join('\n')
+  const howToSection = howToLines === '' ? '' : `## How-to\n\n${howToLines}\n\n`
   const comparisonLines = comparisonPages
     .map(
       ({ title, description: summary, url }) =>
@@ -114,7 +128,7 @@ Snug is a free, open-source Chromium browser extension. It makes no network call
 
 ${localeLines}
 
-${comparisonSection}${documentationSection}## Pages
+${comparisonSection}${howToSection}${documentationSection}## Pages
 
 - [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page as Markdown
 - [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store or Microsoft Edge Add-ons listing
