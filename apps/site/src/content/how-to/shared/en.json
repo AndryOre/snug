@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "home": "Snug",
+    "howTo": "How-to"
+  },
+  "eyebrow": "How-to",
+  "shortAnswer": "Short answer",
+  "asOf": "As of {date}",
+  "verifiedOn": "Verified on {date}",
+  "notListed": "Not listed",
+  "menuNote": "Menu names are shown as in the browser's English interface. Yours may be translated.",
+  "sourcesTitle": "Sources",
+  "relatedGuideTitle": "In the Guide",
+  "relatedHowToTitle": "Related how-to pages",
+  "groups": {
+    "move": "Move bookmarks",
+    "backup": "Back up and restore",
+    "formats": "Export formats",
+    "duplicates": "Remove duplicates"
+  },
+  "ctaTitle": "Try Snug on your own bookmarks",
+  "ctaBody": "Free and open source. No account, no network calls.",
+  "install": "Add to Chrome",
+  "placements": {
+    "importedFolderOrBar": "a folder labeled \"Imported\" when you already have bookmarks, or directly in the bookmarks bar when you do not",
+    "favoritesBarFolder": "a folder on the Favorites bar, which may be named Imported",
+    "sidebarDatedFolder": "a sidebar folder whose name begins with Imported and ends with the date"
+  }
+}

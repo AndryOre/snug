@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Mover favoritos do Firefox para o Chrome | Snug",
+    "description": "Exporte os favoritos do Firefox para HTML e importe no Chrome, com os passos e o que conferir depois. Caminhos verificados em {date}."
+  },
+  "title": "Como movo meus favoritos do Firefox para o Chrome?",
+  "directAnswer": "Exporte seus favoritos do Firefox para um arquivo HTML com {fromExportPath}. Depois importe esse arquivo no Chrome com {toImportPath}. O Chrome os coloca em {toImportPlacement}. Caminhos de menu verificados em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "Os dois navegadores fazem isso sozinhos. Você só precisa do arquivo HTML.",
+    "steps": [
+      "No Firefox, abra {fromExportPath}.",
+      "Salve o arquivo. O Firefox o chama de {fromExportFile} por padrão.",
+      "No Chrome, abra {toImportPath}.",
+      "Escolha o arquivo HTML que você salvou e confirme."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que é mantido",
+    "intro": "Só o arquivo HTML é transferido.",
+    "items": [
+      "Incluído no arquivo, segundo {fromName}: {fromHtmlKeeps}.",
+      "Fora do arquivo, segundo {fromName}: {fromHtmlDrops}.",
+      "Quando uma página de ajuda não informa, esta página escreve Não informado em vez de adivinhar."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome e em outros navegadores Chromium, não no Firefox. Exporte o arquivo HTML do Firefox como acima e use o Snug no Chrome para importar. Ele adiciona uma pré-visualização, a escolha do que trazer e um jeito de desfazer.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store.",
+      "Abra a página Importar do Snug e escolha lá o arquivo HTML, ou solte-o na página. Não use o pop-up para isso: ele importa na hora, sem pré-visualização.",
+      "A Pré-visualização mostra o formato detectado, a quantidade de favoritos e a árvore de pastas, antes de qualquer mudança.",
+      "Use as caixas de seleção para escolher favoritos avulsos ou pastas inteiras. O Snug importa só o que você selecionar.",
+      "Escolha um modo de importação. Criar pasta adiciona tudo a uma nova pasta Favoritos importados. Restaurar — mesclar coloca os favoritos nos locais originais, junto com os existentes, quando o arquivo os contém.",
+      "Deixe Ignorar duplicados ativado. Ele deixa de fora qualquer favorito cujo endereço já esteja no Chrome e informa quantos ignorou."
+    ],
+    "snapshot": "Criar pasta e Restaurar — mesclar nunca esvaziam seus favoritos. Antes de um Restaurar — substituir, o Snug salva um instantâneo de segurança em Downloads e guarda uma cópia em Configurações, para você desfazer a importação."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Você não encontra os favoritos depois de importar. O Chrome os coloca em {toImportPlacement}.",
+      "O Chrome não aceita o arquivo. Confira se você escolheu o arquivo HTML salvo pelo Firefox, chamado {fromExportFile} por padrão, e não outro tipo de arquivo.",
+      "Um favorito aparece duas vezes. Abra Duplicados no Snug: ele agrupa as cópias por endereço e remove só as que você marcar como Excluir.",
+      "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no navegador. Desative Ignorar duplicados para importá-los de novo."
+    ]
+  },
+  "verified": "Os caminhos de menu e os nomes de arquivo foram lidos nas páginas de ajuda oficiais de {fromName} e {toName} em {date}. Os menus dos navegadores mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela."
+}
