@@ -1,5 +1,5 @@
 ---
-import { loadCatalog } from '../docs/catalog'
+import { loadLocalizedCatalog } from '../docs/catalog'
 import {
   getHowToContent,
   getHowToPage,
@@ -35,7 +35,9 @@ const crumbs = howToCrumbs(locale, slug).map((crumb, index, all) => ({
   href: index < all.length - 1 ? crumb.path : undefined,
 }))
 const guideTitles = new Map(
-  loadCatalog().map((entry) => [entry.id, entry.title]),
+  loadLocalizedCatalog()
+    .filter((entry) => entry.locale === locale)
+    .map((entry) => [entry.id, entry.title]),
 )
 const relatedGuides = definition.relatedGuide.map((id) => ({
   href: localePath(locale, `/${id}/`),
