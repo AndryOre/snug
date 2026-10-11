@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "Ruta de navegación",
+    "home": "Snug",
+    "howTo": "Guías prácticas"
+  },
+  "eyebrow": "Guía práctica",
+  "shortAnswer": "Respuesta corta",
+  "asOf": "A fecha de {date}",
+  "verifiedOn": "Verificado el {date}",
+  "notListed": "No indicado",
+  "menuNote": "Los nombres de menú aparecen como en la interfaz en inglés del navegador. En el tuyo pueden estar traducidos.",
+  "sourcesTitle": "Fuentes",
+  "relatedGuideTitle": "En la Guía",
+  "relatedHowToTitle": "Guías prácticas relacionadas",
+  "groups": {
+    "move": "Mover marcadores",
+    "backup": "Copia de seguridad y restauración",
+    "formats": "Formatos de exportación",
+    "duplicates": "Eliminar duplicados"
+  },
+  "ctaTitle": "Prueba Snug con tus propios marcadores",
+  "ctaBody": "Gratis y de código abierto. Sin cuenta, sin llamadas de red.",
+  "install": "Añadir a Chrome",
+  "placements": {
+    "importedFolderOrBar": "una carpeta llamada «Imported» si ya tienes marcadores, o directamente en la barra de marcadores si no los tienes",
+    "favoritesBarFolder": "una carpeta en la barra de favoritos, que puede llamarse Imported",
+    "sidebarDatedFolder": "una carpeta de la barra lateral cuyo nombre empieza por Imported y termina con la fecha"
+  }
+}

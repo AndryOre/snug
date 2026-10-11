@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "Fil d'Ariane",
+    "home": "Snug",
+    "howTo": "Guides pratiques"
+  },
+  "eyebrow": "Guide pratique",
+  "shortAnswer": "Réponse courte",
+  "asOf": "Au {date}",
+  "verifiedOn": "Vérifié le {date}",
+  "notListed": "Non indiqué",
+  "menuNote": "Les noms de menu sont donnés comme dans l'interface anglaise du navigateur. Dans le vôtre, ils peuvent être traduits.",
+  "sourcesTitle": "Sources",
+  "relatedGuideTitle": "Dans le Guide",
+  "relatedHowToTitle": "Guides pratiques associés",
+  "groups": {
+    "move": "Transférer des favoris",
+    "backup": "Sauvegarder et restaurer",
+    "formats": "Formats d'exportation",
+    "duplicates": "Supprimer les doublons"
+  },
+  "ctaTitle": "Essayez Snug avec vos propres favoris",
+  "ctaBody": "Gratuit et open source. Aucun compte, aucun appel réseau.",
+  "install": "Ajouter à Chrome",
+  "placements": {
+    "importedFolderOrBar": "un dossier nommé « Imported » si vous avez déjà des favoris, ou directement dans la barre de favoris sinon",
+    "favoritesBarFolder": "un dossier de la barre de favoris, qui peut s'appeler Imported",
+    "sidebarDatedFolder": "un dossier de la barre latérale dont le nom commence par Imported et se termine par la date"
+  }
+}

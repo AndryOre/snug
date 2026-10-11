@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "label": "パンくずリスト",
+    "home": "Snug",
+    "howTo": "使い方ガイド"
+  },
+  "eyebrow": "使い方ガイド",
+  "shortAnswer": "短い答え",
+  "asOf": "{date}時点",
+  "verifiedOn": "{date}に確認",
+  "notListed": "記載なし",
+  "menuNote": "メニュー名はブラウザの英語表示に合わせています。お使いのブラウザでは翻訳されている場合があります。",
+  "sourcesTitle": "出典",
+  "relatedGuideTitle": "ガイドで見る",
+  "relatedHowToTitle": "関連する使い方ガイド",
+  "groups": {
+    "move": "ブックマークを移す",
+    "backup": "バックアップと復元",
+    "formats": "書き出し形式",
+    "duplicates": "重複を削除する"
+  },
+  "ctaTitle": "手持ちのブックマークでSnugを試す",
+  "ctaBody": "無料でオープンソース。アカウントは不要で、ネットワーク通信も行いません。",
+  "install": "Chromeに追加",
+  "placements": {
+    "importedFolderOrBar": "すでにブックマークがある場合は「Imported」というフォルダ、ない場合はブックマークバー",
+    "favoritesBarFolder": "お気に入りバー内の、Importedという名前になることがあるフォルダ",
+    "sidebarDatedFolder": "サイドバーの、名前がImportedで始まり日付で終わるフォルダ"
+  }
+}
