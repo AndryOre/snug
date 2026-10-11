@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Lesezeichen von Chrome nach Opera übertragen | Snug",
+    "description": "Chrome-Lesezeichen nach Opera übertragen: mit dem Import von Opera oder einer HTML-Datei, was die Hilfe nennt und was Snug ergänzt. Geprüft am {date}."
+  },
+  "title": "Wie übertrage ich meine Lesezeichen von Chrome nach Opera?",
+  "directAnswer": "Öffne in Opera {toImportPath}. Importquellen laut Hilfe von Opera: {toImportSources}. Für eine Datei exportierst du sie zuerst in Chrome über {fromExportPath}. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierten Methoden",
+    "intro": "Opera hat einen eigenen Import und Chrome speichert eine Datei, also gibt es zwei Wege. Diese Seite nennt nur, was die Hilfeseiten sagen.",
+    "steps": [
+      "Import von Opera: Öffne in Opera {toImportPath} und folge den angezeigten Importoptionen.",
+      "Mit Datei: Öffne in Chrome {fromExportPath}.",
+      "Mit Datei: Speichere die Datei. Chrome nennt sie {fromExportFile}.",
+      "Mit Datei: Öffne in Opera {toImportPath} und wähle die gespeicherte Datei, falls der Import sie anbietet."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was Opera importiert und was es auslässt",
+    "intro": "Jede Zeile unten stammt aus den Hilfeseiten, die Quellen stehen am Ende der Seite.",
+    "items": [
+      "Importquellen laut Hilfe von Opera: {toImportSources}.",
+      "Wohin Opera importierte Lesezeichen legt: {toImportPlacement}.",
+      "In der Chrome-Datei enthalten, laut {fromName}: {fromHtmlKeeps}.",
+      "Nicht in der Chrome-Datei, laut {fromName}: {fromHtmlDrops}.",
+      "Wo eine Hilfeseite nichts dazu sagt, steht hier Nicht angegeben statt einer Vermutung."
+    ]
+  },
+  "withSnug": {
+    "title": "Mit Snug",
+    "intro": "Snug läuft in Chrome und Opera, beides Chromium-Browser. Exportiere in Chrome nur die Ordner deiner Wahl und importiere sie in Opera mit Vorschau.",
+    "steps": [
+      "Installiere Snug in Chrome und in Opera.",
+      "Öffne in Chrome die Seite Exportieren von Snug und wähle mit den Kontrollkästchen die gewünschten Ordner oder einzelne Lesezeichen.",
+      "Wähle HTML als Format und klicke auf Exportieren. Snug lädt die Datei herunter.",
+      "Öffne in Opera die Seite Import von Snug und wähle dort die Datei aus, oder ziehe sie auf die Seite. Nutze dafür nicht das Popup: Es importiert sofort und ohne Vorschau.",
+      "Die Vorschau zeigt erkanntes Format, Anzahl der Lesezeichen und Ordnerbaum, bevor sich etwas ändert. Lesezeichen, die Duplikate überspringen auslassen würde, sind markiert.",
+      "Wähle einen Importmodus. Ordner erstellen legt alles in einen neuen Ordner namens Importierte Lesezeichen. Wiederherstellen – zusammenführen legt Lesezeichen an ihren ursprünglichen Orten neben den vorhandenen ab, sofern die Datei diese enthält.",
+      "Lass Duplikate überspringen aktiviert. Die Option lässt jedes Lesezeichen aus, dessen Adresse schon in Opera ist, und zeigt, wie viele es übersprungen hat."
+    ],
+    "snapshot": "Ordner erstellen und Wiederherstellen – zusammenführen leeren deine Lesezeichen nie. Vor einem Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot in deinen Downloads und behält eine Kopie in den Einstellungen, damit du den Import rückgängig machen kannst."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Du findest die Lesezeichen nach dem Import nicht. Suche nach einem Lesezeichen, das in der Datei war.",
+      "Der Import von Opera bietet die Datei nicht an. Nutze stattdessen die Seite Import von Snug: Sie liest die HTML-Datei selbst.",
+      "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt.",
+      "Snug meldet, dass nichts importiert wurde. Alle Lesezeichen der Datei sind schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."
+    ]
+  },
+  "verified": "Menüpfade und Dateinamen wurden am {date} auf den offiziellen Hilfeseiten von {fromName} und {toName} gelesen. Browsermenüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht."
+}

@@ -321,6 +321,14 @@ describe('paths and sources', () => {
   })
 })
 
+describe('sources of a same-browser page', () => {
+  it('lists the browser once when the page is about one browser', () => {
+    const slug = 'export-chrome-bookmarks-to-markdown'
+    expect(HOW_TO_PAGES[slug]?.from).toBe(HOW_TO_PAGES[slug]?.to)
+    expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
+  })
+})
+
 describe('howToSlugsForGuideEntry', () => {
   const pages: Record<string, HowToPageDefinition> = {
     a: { ...HOW_TO_PAGES[SLUG]!, relatedGuide: ['guide/importing'] },
