@@ -1926,15 +1926,13 @@ re-confirmed in a browser before launch.
   Chrome, step by step, with what to check afterwards. Menu paths verified
   {date}.
 - **Headline:** How do I move my bookmarks from Edge to Chrome?
-- **Direct answer:** Export your Edge favorites to an HTML file, using the path
-  Edge's help gives: {fromExportPath}. Then import the file into Chrome with
-  {toImportPath}. Chrome puts imported bookmarks in {toImportPlacement}. Menu
-  paths checked {date}.
+- **Direct answer:** Export your Edge favorites to an HTML file. Then import the
+  file into Chrome with {toImportPath}. Chrome puts imported bookmarks in
+  {toImportPlacement}. Menu paths checked {date}.
 - **The built-in method:** Chrome's help lists these import sources:
   {toImportSources}. This page follows that documented route. Edge calls
   bookmarks favorites.
-  1. In Edge, export your favorites to an HTML file. Edge's help gives this
-     path: {fromExportPath}.
+  1. In Edge, export your favorites to an HTML file.
   2. In Chrome, open {toImportPath}.
   3. Choose the HTML file you saved and confirm.
 - **What carries over:** As on the Firefox page, from the facts module.

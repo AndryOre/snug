@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "If something goes wrong",
     "items": [
-      "You cannot find the bookmarks after importing. Brave's help says where imported bookmarks go: {toImportPlacement}. Search for a bookmark you know was in the file.",
+      "You cannot find the bookmarks after importing. Search for a bookmark you know was in the file.",
       "Brave does not accept the file. Check that you chose the HTML file Chrome saved, named {fromExportFile} by default, and not another file type.",
       "A bookmark appears twice. Open Duplicates in Snug: it groups copies by address and removes only the copies you mark Delete.",
       "Snug says nothing was imported. Every bookmark in the file is already in your browser. Turn off Skip duplicates to import them again."

@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "Si algo sale mal",
     "items": [
-      "No encuentras los marcadores después de importar. La ayuda de Brave indica dónde van los marcadores importados: {toImportPlacement}. Busca un marcador que sepas que estaba en el archivo.",
+      "No encuentras los marcadores después de importar. Busca un marcador que sepas que estaba en el archivo.",
       "Brave no acepta el archivo. Comprueba que elegiste el archivo HTML que guardó Chrome, llamado {fromExportFile} de forma predeterminada, y no otro tipo de archivo.",
       "Un marcador aparece dos veces. Abre Duplicados en Snug: agrupa las copias por dirección y elimina solo las copias que marques como Eliminar.",
       "Snug dice que no se importó nada. Todos los marcadores del archivo ya están en tu navegador. Desactiva Omitir duplicados para importarlos de nuevo."

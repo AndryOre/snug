@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "En cas de problème",
     "items": [
-      "Vous ne retrouvez pas les favoris après l'importation. L'aide de Brave indique où vont les favoris importés : {toImportPlacement}. Cherchez un favori dont vous savez qu'il était dans le fichier.",
+      "Vous ne retrouvez pas les favoris après l'importation. Cherchez un favori dont vous savez qu'il était dans le fichier.",
       "Brave n'accepte pas le fichier. Vérifiez que vous avez choisi le fichier HTML enregistré par Chrome, nommé {fromExportFile} par défaut, et non un autre type de fichier.",
       "Un favori apparaît en double. Ouvrez Doublons dans Snug : il regroupe les copies par adresse et ne supprime que celles que vous marquez Supprimer.",
       "Snug indique que rien n'a été importé. Tous les favoris du fichier sont déjà dans votre navigateur. Désactivez Ignorer les doublons pour les importer de nouveau."

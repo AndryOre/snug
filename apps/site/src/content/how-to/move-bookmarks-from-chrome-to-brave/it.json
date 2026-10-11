@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "Se qualcosa va storto",
     "items": [
-      "Non trovi i segnalibri dopo l'importazione. La guida di Brave dice dove vanno i segnalibri importati: {toImportPlacement}. Cerca un segnalibro che sai essere nel file.",
+      "Non trovi i segnalibri dopo l'importazione. Cerca un segnalibro che sai essere nel file.",
       "Brave non accetta il file. Controlla di aver scelto il file HTML salvato da Chrome, chiamato {fromExportFile} per impostazione predefinita, e non un altro tipo di file.",
       "Un segnalibro compare due volte. Apri Duplicati in Snug: raggruppa le copie per indirizzo e rimuove solo quelle che contrassegni come Elimina.",
       "Snug dice che non è stato importato nulla. Tutti i segnalibri del file sono già nel browser. Disattiva Salta i duplicati per importarli di nuovo."

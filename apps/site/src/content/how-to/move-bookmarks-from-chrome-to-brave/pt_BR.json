@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "Se algo der errado",
     "items": [
-      "Você não encontra os favoritos depois de importar. A ajuda do Brave diz para onde vão os favoritos importados: {toImportPlacement}. Busque um favorito que você sabe que estava no arquivo.",
+      "Você não encontra os favoritos depois de importar. Busque um favorito que você sabe que estava no arquivo.",
       "O Brave não aceita o arquivo. Confira se você escolheu o arquivo HTML salvo pelo Chrome, chamado {fromExportFile} por padrão, e não outro tipo de arquivo.",
       "Um favorito aparece duas vezes. Abra Duplicados no Snug: ele agrupa as cópias por endereço e remove só as que você marcar como Excluir.",
       "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no navegador. Desative Ignorar duplicados para importá-los de novo."

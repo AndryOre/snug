@@ -4,12 +4,12 @@
     "description": "Edgeのお気に入りをHTMLファイルに書き出してChromeに読み込む手順と、移行後に確認することをまとめました。メニューの場所は{date}に確認済みです。"
   },
   "title": "EdgeのブックマークをChromeに移すにはどうすればよいですか？",
-  "directAnswer": "Edgeのヘルプにある{fromExportPath}でお気に入りをHTMLファイルに書き出します。次にChromeで{toImportPath}を開き、そのファイルを読み込みます。Chromeは読み込んだブックマークを{toImportPlacement}に追加します。メニューの場所は{date}に確認しました。",
+  "directAnswer": "Edgeでお気に入りをHTMLファイルに書き出します。次にChromeで{toImportPath}を開き、そのファイルを読み込みます。Chromeは読み込んだブックマークを{toImportPlacement}に追加します。メニューの場所は{date}に確認しました。",
   "builtIn": {
     "title": "ブラウザ標準の方法",
     "intro": "Chromeのヘルプには、読み込み元として次が記載されています: {toImportSources}。このページはその手順に沿っています。Edgeではブックマークを「お気に入り」と呼びます。",
     "steps": [
-      "Edgeでお気に入りをHTMLファイルに書き出します。Edgeのヘルプには次の場所が記載されています: {fromExportPath}。",
+      "Edgeでお気に入りをHTMLファイルに書き出します。",
       "Chromeで{toImportPath}を開きます。",
       "保存したHTMLファイルを選び、確定します。"
     ]

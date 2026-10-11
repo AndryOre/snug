@@ -42,7 +42,7 @@
   "goesWrong": {
     "title": "Wenn etwas schiefgeht",
     "items": [
-      "Du findest die Lesezeichen nach dem Import nicht. Die Brave-Hilfe sagt, wohin importierte Lesezeichen kommen: {toImportPlacement}. Suche nach einem Lesezeichen, von dem du weißt, dass es in der Datei war.",
+      "Du findest die Lesezeichen nach dem Import nicht. Suche nach einem Lesezeichen, von dem du weißt, dass es in der Datei war.",
       "Brave akzeptiert die Datei nicht. Prüfe, ob du die von Chrome gespeicherte HTML-Datei gewählt hast, standardmäßig {fromExportFile}, und keinen anderen Dateityp.",
       "Ein Lesezeichen erscheint doppelt. Öffne Duplikate in Snug: Dort sind Kopien nach Adresse gruppiert, und nur die als Löschen markierten Kopien werden entfernt.",
       "Snug meldet, dass nichts importiert wurde. Alle Lesezeichen der Datei sind schon in deinem Browser. Schalte Duplikate überspringen aus, um sie erneut zu importieren."

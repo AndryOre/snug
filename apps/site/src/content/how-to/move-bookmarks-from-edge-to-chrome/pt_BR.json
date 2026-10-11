@@ -4,12 +4,12 @@
     "description": "Exporte seus favoritos do Edge para HTML e importe no Chrome, passo a passo, com o que conferir depois. Caminhos de menu verificados em {date}."
   },
   "title": "Como movo meus favoritos do Edge para o Chrome?",
-  "directAnswer": "Exporte seus favoritos do Edge para um arquivo HTML pelo caminho que a ajuda do Edge indica: {fromExportPath}. Depois importe o arquivo no Chrome em {toImportPath}. O Chrome coloca os favoritos importados em {toImportPlacement}. Caminhos de menu conferidos em {date}.",
+  "directAnswer": "Exporte seus favoritos do Edge para um arquivo HTML. Depois importe o arquivo no Chrome em {toImportPath}. O Chrome coloca os favoritos importados em {toImportPlacement}. Caminhos de menu conferidos em {date}.",
   "builtIn": {
     "title": "O método integrado",
     "intro": "A ajuda do Chrome lista estas fontes de importação: {toImportSources}. Esta página segue esse caminho documentado.",
     "steps": [
-      "No Edge, exporte seus favoritos para um arquivo HTML. A ajuda do Edge indica este caminho: {fromExportPath}.",
+      "No Edge, exporte seus favoritos para um arquivo HTML.",
       "No Chrome, abra {toImportPath}.",
       "Escolha o arquivo HTML que você salvou e confirme."
     ]

@@ -4,12 +4,12 @@
     "description": "Exporta tus favoritos de Edge a HTML e impórtalo en Chrome, paso a paso, con lo que revisar después. Rutas de menú verificadas el {date}."
   },
   "title": "¿Cómo muevo mis marcadores de Edge a Chrome?",
-  "directAnswer": "Exporta tus favoritos de Edge a un archivo HTML con la ruta que indica la ayuda de Edge: {fromExportPath}. Luego importa el archivo en Chrome con {toImportPath}. Chrome coloca los marcadores importados en {toImportPlacement}. Rutas de menú comprobadas el {date}.",
+  "directAnswer": "Exporta tus favoritos de Edge a un archivo HTML. Luego importa el archivo en Chrome con {toImportPath}. Chrome coloca los marcadores importados en {toImportPlacement}. Rutas de menú comprobadas el {date}.",
   "builtIn": {
     "title": "El método integrado",
     "intro": "La ayuda de Chrome enumera estas fuentes de importación: {toImportSources}. Esta página sigue esa ruta documentada. Edge llama favoritos a los marcadores.",
     "steps": [
-      "En Edge, exporta tus favoritos a un archivo HTML. La ayuda de Edge indica esta ruta: {fromExportPath}.",
+      "En Edge, exporta tus favoritos a un archivo HTML.",
       "En Chrome, abre {toImportPath}.",
       "Elige el archivo HTML que guardaste y confirma."
     ]

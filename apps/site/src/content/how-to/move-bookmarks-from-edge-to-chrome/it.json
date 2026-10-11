@@ -4,12 +4,12 @@
     "description": "Esporta i preferiti di Edge in un file HTML e importalo in Chrome, passo per passo, con cosa controllare dopo. Percorsi dei menu verificati il {date}."
   },
   "title": "Come sposto i miei segnalibri da Edge a Chrome?",
-  "directAnswer": "Esporta i preferiti di Edge in un file HTML, seguendo il percorso indicato dalla guida di Edge: {fromExportPath}. Poi importa il file in Chrome con {toImportPath}. Chrome mette i segnalibri importati in {toImportPlacement}. Percorsi dei menu controllati il {date}.",
+  "directAnswer": "Esporta i preferiti di Edge in un file HTML. Poi importa il file in Chrome con {toImportPath}. Chrome mette i segnalibri importati in {toImportPlacement}. Percorsi dei menu controllati il {date}.",
   "builtIn": {
     "title": "Il metodo integrato",
     "intro": "La guida di Chrome elenca queste fonti di importazione: {toImportSources}. Questa pagina segue il percorso documentato. Edge chiama preferiti i segnalibri.",
     "steps": [
-      "In Edge, esporta i tuoi preferiti in un file HTML. La guida di Edge indica questo percorso: {fromExportPath}.",
+      "In Edge, esporta i tuoi preferiti in un file HTML.",
       "In Chrome, apri {toImportPath}.",
       "Scegli il file HTML che hai salvato e conferma."
     ]

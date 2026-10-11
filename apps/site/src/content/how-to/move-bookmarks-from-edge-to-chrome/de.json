@@ -4,12 +4,12 @@
     "description": "Exportiere deine Edge-Favoriten als HTML-Datei und importiere sie in Chrome, mit allen Schritten und Kontrolle. Menüpfade geprüft am {date}."
   },
   "title": "Wie übertrage ich meine Lesezeichen von Edge nach Chrome?",
-  "directAnswer": "Exportiere deine Edge-Favoriten als HTML-Datei über den Pfad aus der Edge-Hilfe: {fromExportPath}. Importiere die Datei danach in Chrome über {toImportPath}. Chrome legt importierte Lesezeichen in {toImportPlacement} ab. Menüpfade geprüft am {date}.",
+  "directAnswer": "Exportiere deine Edge-Favoriten als HTML-Datei. Importiere die Datei danach in Chrome über {toImportPath}. Chrome legt importierte Lesezeichen in {toImportPlacement} ab. Menüpfade geprüft am {date}.",
   "builtIn": {
     "title": "Die integrierte Methode",
     "intro": "Die Chrome-Hilfe nennt diese Importquellen: {toImportSources}. Diese Seite folgt dem dokumentierten Weg. Edge nennt Lesezeichen Favoriten.",
     "steps": [
-      "Exportiere in Edge deine Favoriten als HTML-Datei. Die Edge-Hilfe nennt diesen Pfad: {fromExportPath}.",
+      "Exportiere in Edge deine Favoriten als HTML-Datei.",
       "Öffne in Chrome {toImportPath}.",
       "Wähle die gespeicherte HTML-Datei und bestätige."
     ]

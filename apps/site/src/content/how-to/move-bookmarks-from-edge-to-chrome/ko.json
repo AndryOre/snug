@@ -4,12 +4,12 @@
     "description": "Edge 즐겨찾기를 HTML 파일로 내보내 Chrome으로 가져오는 방법과 옮긴 뒤 확인할 점을 단계별로 정리했어요. 메뉴 경로는 {date}에 확인했어요."
   },
   "title": "Edge 북마크를 Chrome으로 옮기려면 어떻게 하나요?",
-  "directAnswer": "Edge 도움말에 나온 {fromExportPath}로 즐겨찾기를 HTML 파일로 내보내요. 그다음 Chrome에서 {toImportPath}로 그 파일을 가져와요. Chrome은 가져온 북마크를 {toImportPlacement}에 넣어요. 메뉴 경로는 {date}에 확인했어요.",
+  "directAnswer": "Edge에서 즐겨찾기를 HTML 파일로 내보내요. 그다음 Chrome에서 {toImportPath}로 그 파일을 가져와요. Chrome은 가져온 북마크를 {toImportPlacement}에 넣어요. 메뉴 경로는 {date}에 확인했어요.",
   "builtIn": {
     "title": "브라우저 기본 방법",
     "intro": "Chrome 도움말에는 가져오기 소스로 {toImportSources}이(가) 나와 있어요. 이 페이지는 그 문서화된 방법을 따라요. Edge는 북마크를 즐겨찾기라고 불러요.",
     "steps": [
-      "Edge에서 즐겨찾기를 HTML 파일로 내보내요. Edge 도움말에 나온 경로는 {fromExportPath}예요.",
+      "Edge에서 즐겨찾기를 HTML 파일로 내보내요.",
       "Chrome에서 {toImportPath}를 열어요.",
       "저장한 HTML 파일을 선택하고 확인해요."
     ]
