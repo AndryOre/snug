@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Backup dei segnalibri di Chrome | Snug",
+    "description": "Fai il backup dei segnalibri di Chrome esportando un HTML a mano o pianificando l'esportazione automatica di Snug. Percorsi verificati {date}."
+  },
+  "title": "Come faccio il backup dei miei segnalibri di Chrome?",
+  "directAnswer": "In Chrome apri {fromExportPath} e salva il file, che Chrome chiama {fromExportFile}. Per ripeterlo a intervalli, attiva l'esportazione automatica di Snug, che salva le esportazioni in Download o in una cartella a tua scelta.",
+  "builtIn": {
+    "title": "Il metodo integrato",
+    "intro": "Chrome esporta i tuoi segnalibri in un file HTML. Fallo a mano ogni volta che vuoi una copia aggiornata.",
+    "steps": [
+      "In Chrome apri {fromExportPath}.",
+      "Salva il file. Chrome lo chiama {fromExportFile}.",
+      "Copia il file in un secondo posto, per esempio su una chiavetta USB. Un backup che esiste solo su questo computer va perso insieme a lui.",
+      "Per controllare il backup, apri il file in un editor di testo o trascinalo in una scheda del browser. Elenca le tue cartelle e i tuoi segnalibri."
+    ]
+  },
+  "carriesOver": {
+    "title": "Il file del profilo e cosa contiene l'esportazione",
+    "intro": "Chrome tiene i tuoi segnalibri anche in un file chiamato {fromProfileFile} nella cartella del profilo. Chiudi Chrome prima di copiarlo come backup grezzo.",
+    "items": [
+      "Windows: {fromProfileFolderWindows}",
+      "macOS: {fromProfileFolderMacos}",
+      "Linux: {fromProfileFolderLinux}",
+      "La cartella del profilo si chiama spesso Default. Gli altri profili usano altri nomi di cartella.",
+      "Conservato nel file HTML, secondo {fromName}: {fromHtmlKeeps}.",
+      "Escluso dal file HTML, secondo {fromName}: {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "Con l'esportazione automatica di Snug",
+    "intro": "Snug funziona in Chrome. L'esportazione automatica salva i tuoi segnalibri in file su questo computer, a intervalli regolari. Non li carica da nessuna parte e non li sincronizza tra browser o dispositivi.",
+    "steps": [
+      "Installa Snug in Chrome e apri la sua pagina Esportazione automatica.",
+      "Attiva Attiva l'esportazione automatica e scegli uno o più dei sei formati. HTML è uno di questi.",
+      "Scegli la frequenza: ogni ora, ogni 12 ore, ogni giorno, ogni 3 giorni o ogni settimana. Le esecuzioni giornaliere, ogni 3 giorni e settimanali partono all'ora preferita, e per quelle settimanali scegli anche il giorno.",
+      "In Salva in scegli Download, oppure scegli Cartella personalizzata e Scegli cartella… per indicare una cartella qualsiasi del computer.",
+      "Imposta Mantieni le ultime N esecuzioni. Il valore predefinito è 10, e con 0 si conserva tutto. Dopo ogni esecuzione riuscita, Snug elimina solo i file delle proprie esecuzioni più vecchie.",
+      "Fai clic su Esporta ora per provare la configurazione. Esporta con le impostazioni mostrate sullo schermo e non cambia la tua pianificazione."
+    ],
+    "snapshot": "I file vengono salvati senza finestra di salvataggio. Se esiste già un file con lo stesso nome, Snug aggiunge il suffisso (1) e non sovrascrive mai nulla. Dopo un riavvio del browser, Chrome chiede una volta di confermare l'accesso a una Cartella personalizzata: scegli \"Allow on every visit\". Se il browser era chiuso all'ora prevista, Snug recupera l'esecuzione poco dopo l'avvio successivo."
+  },
+  "goesWrong": {
+    "title": "Se qualcosa va storto",
+    "items": [
+      "Non compare nessun file. Apri la pagina Esportazione automatica: la scheda di stato mostra l'ultima esecuzione e il suo esito, con il messaggio di errore se è fallita.",
+      "La pagina mostra Accesso alla cartella necessario. Fai clic su Consenti accesso. Finché non lo fai, le esecuzioni falliscono e non viene salvato nulla in Download al suo posto.",
+      "Backup meno recenti sono spariti. La conservazione elimina solo file salvati da Snug stesso, oltre il numero che hai impostato. Imposta 0 per tenere tutto.",
+      "Ti aspettavi una copia su un altro dispositivo. L'esportazione automatica scrive file solo su questo computer. Copia tu la cartella su un altro disco o dispositivo."
+    ]
+  },
+  "verified": "Percorsi dei menu, nomi dei file e cartelle del profilo sono stati letti dalle pagine di aiuto di {fromName} e dai documenti di Chromium il {date}. I menu dei browser cambiano da una versione all'altra, quindi controlla la fonte se un percorso sul tuo schermo è diverso. Il comportamento di Snug deriva dalla sua guida all'esportazione automatica."
+}

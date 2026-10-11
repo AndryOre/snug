@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "title": "Sauvegarder les favoris Chrome | Snug",
+    "description": "Sauvegardez vos favoris Chrome en exportant un HTML à la main ou en planifiant l'exportation automatique de Snug. Chemins vérifiés le {date}."
+  },
+  "title": "Comment sauvegarder mes favoris Chrome ?",
+  "directAnswer": "Dans Chrome, ouvrez {fromExportPath} et enregistrez le fichier, que Chrome nomme {fromExportFile}. Pour répéter l'opération selon un calendrier, activez l'exportation automatique de Snug, qui enregistre les exports dans Téléchargements ou dans un dossier de votre choix.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "Chrome exporte vos favoris dans un fichier HTML. Faites-le à la main quand vous voulez une copie récente.",
+    "steps": [
+      "Dans Chrome, ouvrez {fromExportPath}.",
+      "Enregistrez le fichier. Chrome le nomme {fromExportFile}.",
+      "Copiez le fichier à un deuxième endroit, par exemple sur une clé USB. Une sauvegarde qui n'existe que sur cet ordinateur disparaît avec lui.",
+      "Pour vérifier la sauvegarde, ouvrez le fichier dans un éditeur de texte ou faites-le glisser dans un onglet du navigateur. Il liste vos dossiers et vos favoris."
+    ]
+  },
+  "carriesOver": {
+    "title": "Le fichier du profil et le contenu de l'export",
+    "intro": "Chrome garde aussi vos favoris dans un fichier nommé {fromProfileFile} dans le dossier du profil. Fermez Chrome avant de le copier comme sauvegarde brute.",
+    "items": [
+      "Windows : {fromProfileFolderWindows}",
+      "macOS : {fromProfileFolderMacos}",
+      "Linux : {fromProfileFolderLinux}",
+      "Le dossier du profil s'appelle souvent Default. Les autres profils utilisent d'autres noms de dossier.",
+      "Conservé dans le fichier HTML, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier HTML, selon {fromName} : {fromHtmlDrops}."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec l'exportation automatique de Snug",
+    "intro": "Snug fonctionne dans Chrome. L'exportation automatique enregistre vos favoris dans des fichiers sur cet ordinateur, selon un calendrier. Elle ne les envoie nulle part et ne les synchronise pas entre navigateurs ou appareils.",
+    "steps": [
+      "Installez Snug dans Chrome et ouvrez sa page Exportation automatique.",
+      "Activez Activer l'exportation automatique et choisissez un ou plusieurs des six formats. HTML en fait partie.",
+      "Choisissez la fréquence : toutes les heures, toutes les 12 heures, tous les jours, tous les 3 jours ou toutes les semaines. Les exécutions quotidiennes, tous les 3 jours et hebdomadaires ont lieu à l'heure préférée, et pour les hebdomadaires vous choisissez aussi le jour.",
+      "Sous Enregistrer dans, choisissez Téléchargements, ou choisissez Dossier personnalisé puis Choisir un dossier… pour désigner n'importe quel dossier de votre ordinateur.",
+      "Réglez Conserver les N dernières exécutions. La valeur par défaut est 10, et 0 conserve tout. Après chaque exécution réussie, Snug supprime uniquement les fichiers de ses propres anciennes exécutions.",
+      "Cliquez sur Exporter maintenant pour tester la configuration. Il exporte avec les réglages affichés à l'écran et ne change pas votre calendrier."
+    ],
+    "snapshot": "Les fichiers sont enregistrés sans boîte de dialogue. Si un fichier du même nom existe déjà, Snug ajoute le suffixe (1) et n'écrase jamais rien. Après un redémarrage du navigateur, Chrome demande une fois de confirmer l'accès à un Dossier personnalisé : choisissez \"Allow on every visit\". Si le navigateur était fermé à l'heure prévue, Snug rattrape l'exécution peu après le démarrage suivant."
+  },
+  "goesWrong": {
+    "title": "Si quelque chose ne va pas",
+    "items": [
+      "Aucun fichier n'apparaît. Ouvrez la page Exportation automatique : la carte d'état montre la dernière exécution et son résultat, avec le message d'erreur en cas d'échec.",
+      "La page affiche Accès au dossier requis. Cliquez sur Autoriser l'accès. Tant que vous ne le faites pas, les exécutions échouent et rien n'est enregistré dans Téléchargements à la place.",
+      "Des sauvegardes anciennes ont disparu. La rétention supprime uniquement des fichiers enregistrés par Snug, au-delà du nombre que vous avez fixé. Mettez 0 pour tout conserver.",
+      "Vous attendiez une copie sur un autre appareil. L'exportation automatique écrit des fichiers sur cet ordinateur uniquement. Copiez vous-même le dossier sur un autre disque ou appareil."
+    ]
+  },
+  "verified": "Les chemins de menu, noms de fichier et dossiers de profil ont été lus dans les pages d'aide de {fromName} et dans les documents de Chromium le {date}. Les menus d'un navigateur changent d'une version à l'autre : vérifiez la source si un chemin diffère sur votre écran. Le comportement de Snug provient de son guide de l'exportation automatique."
+}

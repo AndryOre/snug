@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Restaurer ses favoris Chrome depuis une sauvegarde | Snug",
+    "description": "Restaurez vos favoris Chrome depuis une sauvegarde HTML avec l'import de Chrome ou avec Snug : aperçu, fusion, remplacement. Vérifié le {date}."
+  },
+  "title": "Comment restaurer mes favoris Chrome depuis une sauvegarde ?",
+  "directAnswer": "Dans Chrome, ouvrez {toImportPath} et choisissez votre fichier HTML de favoris. Chrome ajoute les favoris dans {toImportPlacement}.",
+  "builtIn": {
+    "title": "La méthode intégrée",
+    "intro": "Chrome importe un fichier HTML de favoris, comme celui que vous avez enregistré en sauvegardant.",
+    "steps": [
+      "Retrouvez le fichier de sauvegarde. Un export Chrome se nomme {fromExportFile}.",
+      "Dans Chrome, ouvrez {toImportPath}.",
+      "Choisissez {toImportSources} comme source et sélectionnez votre fichier.",
+      "Cherchez les favoris dans {toImportPlacement}, puis déplacez-les où vous voulez."
+    ]
+  },
+  "carriesOver": {
+    "title": "Ce qu'une restauration rapporte",
+    "intro": "Une restauration rapporte les favoris que contient le fichier, et uniquement ceux-là.",
+    "items": [
+      "Conservé dans le fichier HTML, selon {fromName} : {fromHtmlKeeps}.",
+      "Absent du fichier HTML, selon {fromName} : {fromHtmlDrops}.",
+      "Chrome place les favoris du fichier dans {toImportPlacement} : les favoris que vous avez déjà peuvent donc apparaître en double.",
+      "Le fichier de profil {fromProfileFile} n'est pas un fichier HTML. L'import de Chrome indique ces sources : {toImportSources}."
+    ]
+  },
+  "withSnug": {
+    "title": "Avec Snug",
+    "intro": "Snug fonctionne dans Chrome. Il restaure depuis les fichiers de l'exportation automatique ou depuis n'importe quel fichier de favoris, et affiche un aperçu avant de rien changer.",
+    "steps": [
+      "Dans Chrome, ouvrez la page Importer de Snug et choisissez-y le fichier, ou déposez-le sur la page. N'utilisez pas la fenêtre contextuelle pour cela : elle importe tout de suite, sans aperçu.",
+      "L'Aperçu montre le format détecté, le nombre de favoris et l'arborescence des dossiers, avant que rien ne change. Les favoris que Ignorer les doublons laisserait de côté sont signalés.",
+      "Choisissez un mode. Restaurer — fusionner place les favoris à leur emplacement d'origine à côté des vôtres. Restaurer — remplacer vide d'abord votre Barre de favoris et Autres favoris, puis restaure ceux du fichier à leur emplacement d'origine. Les deux exigent un fichier qui contient les emplacements.",
+      "Avec Restaurer — fusionner, vous pouvez cocher des favoris isolés ou des dossiers entiers et n'importer que cette sélection. Restaurer — remplacer importe toujours tout et prend un seul fichier à la fois.",
+      "Restaurer — remplacer indique combien de favoris seront retirés et ajoutés, liste ceux qui seront supprimés et demande une confirmation avant de s'exécuter.",
+      "Après un remplacement, cliquez sur Annuler l'importation dans le résultat pour récupérer vos favoris précédents."
+    ],
+    "snapshot": "Avant chaque Restaurer — remplacer, Snug enregistre un instantané de sécurité dans vos Téléchargements et en garde une copie dans l'extension. Si l'instantané ne peut pas être enregistré, rien n'est supprimé. Les Paramètres listent les cinq derniers instantanés, que vous pouvez restaurer ou télécharger, et un sixième remplace le plus ancien. Tout reste sur votre appareil et Snug n'effectue aucune requête réseau."
+  },
+  "goesWrong": {
+    "title": "Si quelque chose ne va pas",
+    "items": [
+      "Vous ne trouvez pas les favoris après l'import de Chrome. Chrome les place dans {toImportPlacement}.",
+      "Chrome n'accepte pas le fichier. Son import indique ces sources : {toImportSources}. Vérifiez que le fichier est bien un HTML de favoris.",
+      "Restaurer — remplacer est indisponible. Il exige un fichier avec les emplacements et un seul fichier à la fois. Utilisez Restaurer — fusionner ou Créer un dossier, qui fonctionne avec n'importe quel fichier.",
+      "Vous avez remplacé et voulez retrouver vos anciens favoris. Cliquez sur Annuler l'importation, ou restaurez un instantané de sécurité dans les Paramètres.",
+      "Snug indique que rien n'a été importé. Chaque favori du fichier est déjà dans votre navigateur. Désactivez Ignorer les doublons pour les importer à nouveau."
+    ]
+  },
+  "verified": "Les chemins de menu, noms de fichier et dossiers de profil ont été lus dans les pages d'aide de {fromName} et dans les documents de Chromium le {date}. Les menus d'un navigateur changent d'une version à l'autre : vérifiez la source si un chemin diffère sur votre écran. Le comportement de Snug provient de son guide de l'importation."
+}

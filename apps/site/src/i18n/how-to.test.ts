@@ -172,6 +172,8 @@ describe('bundled copy', () => {
   it.each([
     'move-bookmarks-from-edge-to-chrome',
     'move-bookmarks-from-chrome-to-brave',
+    'back-up-chrome-bookmarks',
+    'restore-chrome-bookmarks',
   ])('has %s in every locale with key parity', (slug) => {
     expect(howToPageLocales(slug)).toEqual([...LOCALES])
     for (const locale of LOCALES) {
@@ -286,6 +288,21 @@ describe('howToValues and interpolateHowTo', () => {
     expect(edge.fromExportPath).toBe('Not listed')
   })
 
+  it('resolves the Chrome profile Bookmarks file from the facts', () => {
+    const values = howToValues('en', 'back-up-chrome-bookmarks')
+
+    expect(values.fromProfileFile).toBe('Bookmarks')
+    expect(values.fromProfileFolderWindows).toBe(
+      String.raw`%LOCALAPPDATA%\Google\Chrome\User Data\Default`,
+    )
+    expect(values.fromProfileFolderMacos).toBe(
+      '~/Library/Application Support/Google/Chrome/Default',
+    )
+    expect(values.fromProfileFolderLinux).toBe(
+      '~/.config/google-chrome/Default',
+    )
+  })
+
   it('writes a fact that is not listed as the locale string', () => {
     expect(howToValues('en', SLUG).fromHtmlKeeps).toBe('Not listed')
     expect(howToValues('de', SLUG).fromHtmlKeeps).toBe(
@@ -326,6 +343,14 @@ describe('sources of a same-browser page', () => {
     const slug = 'export-chrome-bookmarks-to-markdown'
     expect(HOW_TO_PAGES[slug]?.from).toBe(HOW_TO_PAGES[slug]?.to)
     expect(howToSources(slug).map(({ browser }) => browser)).toEqual(['Chrome'])
+  })
+})
+
+describe('howToSources for a same-browser page', () => {
+  it('lists the browser once', () => {
+    expect(
+      howToSources('back-up-chrome-bookmarks').map(({ browser }) => browser),
+    ).toEqual(['Chrome'])
   })
 })
 

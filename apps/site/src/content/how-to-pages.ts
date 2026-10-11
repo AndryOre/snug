@@ -99,4 +99,18 @@ export const HOW_TO_PAGES: Record<string, HowToPageDefinition> = {
     relatedGuide: ['guide/exporting'],
     relatedHowTo: ['move-bookmarks-from-chrome-to-edge'],
   },
+  'back-up-chrome-bookmarks': {
+    group: 'backup',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/auto-export', 'guide/exporting'],
+    relatedHowTo: ['restore-chrome-bookmarks'],
+  },
+  'restore-chrome-bookmarks': {
+    group: 'backup',
+    from: 'chrome',
+    to: 'chrome',
+    relatedGuide: ['guide/importing', 'guide/auto-export'],
+    relatedHowTo: ['back-up-chrome-bookmarks'],
+  },
 }

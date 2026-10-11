@@ -371,6 +371,10 @@ export interface HowToValues {
   toImportSources: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
+  fromProfileFile: string
+  fromProfileFolderWindows: string
+  fromProfileFolderMacos: string
+  fromProfileFolderLinux: string
 }
 
 const MENU_SEPARATOR = ' > '
@@ -446,6 +450,22 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     fromHtmlDrops: listed(
       source.htmlExportDrops,
       (items) => sentenceList(items, tag),
+      notListed,
+    ),
+    fromProfileFile: listed(source.profileBookmarksFile, String, notListed),
+    fromProfileFolderWindows: listed(
+      source.profileFolder.windows,
+      String,
+      notListed,
+    ),
+    fromProfileFolderMacos: listed(
+      source.profileFolder.macos,
+      String,
+      notListed,
+    ),
+    fromProfileFolderLinux: listed(
+      source.profileFolder.linux,
+      String,
       notListed,
     ),
   }
