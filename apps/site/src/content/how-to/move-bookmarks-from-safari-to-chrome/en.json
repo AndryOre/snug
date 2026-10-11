@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Move Safari Bookmarks to Chrome | Snug",
+    "description": "Export Safari bookmarks to an HTML file and import it into Chrome, with what happens to Favorites and Reading List. Menu paths verified {date}."
+  },
+  "title": "How do I move my bookmarks from Safari to Chrome?",
+  "directAnswer": "Export your bookmarks from Safari to an HTML file with {fromExportPath}. Then import that file into Chrome with {toImportPath}. Chrome puts them in {toImportPlacement}. Menu paths checked {date}.",
+  "builtIn": {
+    "title": "The built-in method",
+    "intro": "Both browsers do this on their own. You need the HTML file and nothing else.",
+    "steps": [
+      "In Safari, open {fromExportPath}.",
+      "Save the file. Safari names it {fromExportFile}.",
+      "If Chrome runs on another computer, copy the file there.",
+      "In Chrome, open {toImportPath}.",
+      "Choose the HTML file you saved and confirm."
+    ]
+  },
+  "carriesOver": {
+    "title": "What carries over and what is lost",
+    "intro": "The HTML file is the only thing that moves. For Favorites and Reading List, see what Snug does with a Safari export below.",
+    "items": [
+      "Kept in the file, per {fromName}: {fromHtmlKeeps}.",
+      "Left out of the file, per {fromName}: {fromHtmlDrops}.",
+      "Where a help page does not say, this page says Not listed instead of guessing."
+    ]
+  },
+  "withSnug": {
+    "title": "With Snug",
+    "intro": "Snug runs in Chrome and other Chromium browsers, not in Safari. Export the HTML file from Safari as above, then use Snug in Chrome for the import. Snug detects a Safari export on its own and keeps Favorites and Reading List apart.",
+    "steps": [
+      "Install Snug from the Chrome Web Store.",
+      "Open Snug's Import page and choose the HTML file there, or drop it on the page. Do not use the popup for this: it imports at once, without a preview.",
+      "The Preview shows the detected format, the bookmark count and the folder tree before anything changes.",
+      "Use the checkboxes to pick single bookmarks or whole folders, such as Favorites or Reading List. Snug imports only what you select.",
+      "Choose an import mode. Create folder adds everything to a new Imported Bookmarks folder. Restore — merge puts Favorites on your Bookmarks Bar and Reading List in its own folder under Other Bookmarks, next to your existing bookmarks.",
+      "Leave Skip duplicates on. It leaves out any bookmark whose address is already in Chrome, and tells you how many it skipped."
+    ],
+    "snapshot": "Create folder and Restore — merge never clear your bookmarks. Before a Restore — replace, Snug saves a Safety snapshot to your Downloads and keeps a copy in Settings, so you can undo the import."
+  },
+  "goesWrong": {
+    "title": "If something goes wrong",
+    "items": [
+      "You cannot find the bookmarks after importing. Chrome places them in {toImportPlacement}.",
+      "Chrome does not accept the file. Check that you chose the HTML file Safari saved, named {fromExportFile} by default, and not another file type.",
+      "Reading List is not on your Bookmarks Bar. With Restore — merge, Snug keeps Reading List in its own folder under Other Bookmarks.",
+      "A bookmark appears twice. Open Duplicates in Snug: it groups copies by address and removes only the copies you mark Delete."
+    ]
+  },
+  "verified": "Menu paths and file names were read from the official help pages of {fromName} and {toName} on {date}. Browser menus change between versions, so check the source if a path differs on your screen."
+}

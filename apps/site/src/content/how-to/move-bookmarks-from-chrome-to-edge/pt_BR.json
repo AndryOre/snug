@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "title": "Mover favoritos do Chrome para o Edge | Snug",
+    "description": "Mova favoritos do Chrome para o Edge com a importação do Edge ou um arquivo HTML, e quando o arquivo é mais seguro. Verificado em {date}."
+  },
+  "title": "Como movo meus favoritos do Chrome para o Edge?",
+  "directAnswer": "No Edge, abra {toImportPath}. O Edge lista estas fontes: {toImportSources}. Escolha Chrome para importar direto, ou exporte um arquivo do Chrome com {fromExportPath} e importe-o. O Edge coloca os favoritos importados em {toImportPlacement}. Caminhos de menu verificados em {date}.",
+  "builtIn": {
+    "title": "Os métodos integrados",
+    "intro": "O Edge pode ler o Chrome diretamente ou ler um arquivo que você exporta do Chrome. Os dois são integrados.",
+    "steps": [
+      "Importação direta: no Edge, abra {toImportPath}, escolha Chrome como fonte e confirme.",
+      "Com arquivo: no Chrome, abra {fromExportPath}.",
+      "Com arquivo: salve o arquivo. O Chrome o chama de {fromExportFile}.",
+      "Com arquivo: no Edge, abra {toImportPath}, escolha o arquivo HTML que você salvou e confirme."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que é mantido e quando um arquivo é mais seguro",
+    "intro": "A ajuda do Edge lista as duas fontes, então qualquer caminho funciona. Um arquivo é mais seguro quando você quer guardar uma cópia antes que algo mude.",
+    "items": [
+      "Incluído no arquivo, segundo {fromName}: {fromHtmlKeeps}.",
+      "Fora do arquivo, segundo {fromName}: {fromHtmlDrops}.",
+      "Quando uma página de ajuda não informa, esta página escreve Não informado em vez de adivinhar.",
+      "Um arquivo pode ser aberto e conferido antes de importar, e importado de novo depois. Uma importação direta não deixa arquivo nenhum."
+    ]
+  },
+  "withSnug": {
+    "title": "Com o Snug",
+    "intro": "O Snug funciona no Chrome e no Edge, dois navegadores Chromium. Use-o no Chrome para exportar só as pastas que você escolher e no Edge para importar com pré-visualização.",
+    "steps": [
+      "Instale o Snug no Chrome e no Edge.",
+      "No Chrome, abra a página Exportar do Snug e use as caixas de seleção para escolher as pastas que quer, ou favoritos avulsos.",
+      "Escolha HTML como formato e clique em Exportar. O Snug baixa o arquivo.",
+      "No Edge, abra a página Importar do Snug e escolha lá o arquivo, ou solte-o na página. Não use o pop-up para isso: ele importa na hora, sem pré-visualização.",
+      "A Pré-visualização mostra o formato detectado, a quantidade de favoritos e a árvore de pastas, antes de qualquer mudança. Os favoritos que Ignorar duplicados deixaria de fora aparecem marcados.",
+      "Escolha um modo de importação. Criar pasta adiciona tudo a uma nova pasta Favoritos importados. Restaurar — mesclar coloca os favoritos nos locais originais, junto com os existentes, quando o arquivo os contém.",
+      "Deixe Ignorar duplicados ativado. Ele deixa de fora qualquer favorito cujo endereço já esteja no Edge e informa quantos ignorou."
+    ],
+    "snapshot": "Criar pasta e Restaurar — mesclar nunca esvaziam seus favoritos. Antes de um Restaurar — substituir, o Snug salva um instantâneo de segurança em Downloads e guarda uma cópia em Configurações, para você desfazer a importação."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Você não encontra os favoritos depois de importar. O Edge os coloca em {toImportPlacement}.",
+      "O Edge não oferece o Chrome como fonte. O Edge lista estas fontes: {toImportSources}. Use o caminho do arquivo.",
+      "Um favorito aparece duas vezes. Abra Duplicados no Snug: ele agrupa as cópias por endereço e remove só as que você marcar como Excluir.",
+      "O Snug diz que nada foi importado. Todos os favoritos do arquivo já estão no navegador. Desative Ignorar duplicados para importá-los de novo."
+    ]
+  },
+  "verified": "Os caminhos de menu e os nomes de arquivo foram lidos nas páginas de ajuda oficiais de {fromName} e {toName} em {date}. Os menus dos navegadores mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela."
+}
