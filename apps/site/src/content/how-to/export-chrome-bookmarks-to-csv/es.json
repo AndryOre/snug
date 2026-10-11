@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Exportar marcadores de Chrome a CSV | Snug",
+    "description": "Exporta marcadores de Chrome a CSV con Snug: una fila por marcador, columnas title, url y folder, y cómo las lee una hoja. Revisado el {date}."
+  },
+  "title": "¿Cómo exporto mis marcadores de Chrome a CSV?",
+  "directAnswer": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, al que se llega con {fromExportPath}. Para CSV, usa la página Exportar de Snug: escribe una fila por marcador con title, url y folder, solo de las carpetas que elijas. Rutas de menú verificadas el {date}.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, así que el navegador no tiene opción propia de CSV ni de JSON. Su exportación sigue siendo la adecuada cuando el archivo va a otro navegador.",
+    "steps": [
+      "En Chrome, abre {fromExportPath}.",
+      "Guarda el archivo. Chrome lo llama {fromExportFile} de forma predeterminada.",
+      "Para tener filas en una hoja de cálculo, sigue abajo con Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué contiene el CSV",
+    "intro": "La primera fila nombra las columnas. Cada marcador ocupa después una fila, y las carpetas no tienen fila propia.",
+    "items": [
+      "Columnas: title, url y folder. Fecha de creación, Fecha de último uso e Incluir favicons añaden después dateAdded, dateLastUsed e iconData.",
+      "Carpetas: la columna folder contiene la ruta completa, unida con /, empezando por la carpeta superior, como Bookmarks bar. Ocultar carpeta superior conserva solo esa carpeta superior.",
+      "Comillas: cada campo va entre comillas dobles y una comilla dentro del campo se duplica. Una / o una \\ en el nombre de una carpeta lleva una barra invertida, así que Q3/Q4 aparece como Q3\\/Q4.",
+      "Hojas de cálculo: un campo que empieza por =, +, - o @ recibe un apóstrofo inicial, para que la hoja de cálculo no lo ejecute como fórmula.",
+      "Fechas: dateAdded y dateLastUsed son segundos enteros desde 1970, no milisegundos."
+    ]
+  },
+  "withSnug": {
+    "title": "Exportar CSV con Snug",
+    "intro": "Snug funciona en Chrome y otros navegadores basados en Chromium. En su página Exportar eliges qué entra en el archivo y cómo se llama.",
+    "steps": [
+      "Instala Snug desde Chrome Web Store.",
+      "Abre la página Exportar de Snug. Busca marcadores y marca marcadores sueltos o carpetas enteras, o usa Seleccionar todos los marcadores.",
+      "En Formato de exportación, elige CSV.",
+      "Abre Opciones de exportación para añadir Fecha de creación, Fecha de último uso o Incluir favicons como columnas extra, o para activar Ocultar carpeta superior.",
+      "Edita Plantilla de nombre de archivo para nombrar el archivo. Por ejemplo, %yyyy%mm%dd myPc da un nombre como 20260930 myPc.csv.",
+      "Haz clic en Exportar N marcadores, donde N es la cantidad que marcaste. Snug descarga el archivo."
+    ],
+    "snapshot": "La ventana emergente exporta todo el árbol con un clic. Sin plantilla, Snug llama al archivo Bookmarks_<date>_<time>, por ejemplo Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "Un ejemplo real",
+    "intro": "Esta es la salida real del exportador para un árbol de prueba pequeño: carpetas llamadas Dev, \"Tools\" y Q3/Q4 en la barra de marcadores (Bookmarks bar) y un marcador en Otros marcadores (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "Las comas o las comillas dividen un título en varias celdas. Snug pone cada campo entre comillas, así que importa el archivo como CSV con la comilla doble como calificador de texto y Comma, and \"quotes\" queda en una sola celda.",
+      "La columna folder muestra una barra invertida. Una / dentro del nombre de una carpeta se escribe \\/ para que / siga siendo el separador de ruta.",
+      "Una celda empieza con un apóstrofo. Snug lo añade a los valores que empiezan por =, +, - o @ para que no se ejecuten como fórmulas.",
+      "Solo quieres algunas carpetas en el archivo. La ventana emergente exporta todo el árbol. Usa la página Exportar y marca las carpetas que quieras.",
+      "Necesitas las filas de vuelta en un navegador. La página Importar de Snug lee CSV y usa la columna folder para reconstruir las carpetas. Para la importación de otro navegador, usa el archivo HTML de la exportación integrada de Chrome."
+    ]
+  },
+  "verified": "La ruta de menú y el formato de exportación se leyeron en las páginas de ayuda oficiales de {fromName} el {date}. Los menús cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla. Los nombres de columna y el escape provienen del exportador CSV de Snug y sus pruebas."
+}

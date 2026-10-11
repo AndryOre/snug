@@ -1,4 +1,7 @@
 ---
+import type { HowToSampleFormat } from '../content/how-to-pages'
+import csvSample from '../content/how-to-samples/chrome-bookmarks.csv?raw'
+import jsonSample from '../content/how-to-samples/chrome-bookmarks.json?raw'
 import { loadLocalizedCatalog } from '../docs/catalog'
 import {
   getHowToContent,
@@ -49,6 +52,14 @@ const relatedHowTos = definition.relatedHowTo.map((related) => ({
 }))
 const sources = howToSources(slug)
 const snug = 'withSnug' in copy ? copy.withSnug : undefined
+const samples: Record<HowToSampleFormat, string> = {
+  csv: csvSample.trimEnd(),
+  json: jsonSample.trimEnd(),
+}
+const sample =
+  copy.sample && definition.sample
+    ? { ...copy.sample, code: samples[definition.sample] }
+    : undefined
 const headingClass = 'font-heading text-2xl font-bold md:text-3xl'
 const stepsClass = 'mt-4 list-decimal space-y-2 pl-6 leading-prose'
 const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
@@ -127,6 +138,23 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
           <p class="mt-4 leading-prose text-muted-foreground">
             {fill(snug.snapshot)}
           </p>
+        </section>
+      )}
+      {sample && (
+        <section
+          data-section="sample"
+          aria-labelledby="sample-heading"
+          class="mt-12 max-w-3xl"
+        >
+          <h2 id="sample-heading" class={headingClass}>
+            {sample.title}
+          </h2>
+          <p class="mt-4 leading-prose">{fill(sample.intro)}</p>
+          <pre
+            class="mt-4 overflow-x-auto rounded-xl border border-border bg-card p-4 text-sm leading-relaxed"
+            lang="en"
+            dir="ltr"
+          ><code set:text={sample.code} /></pre>
         </section>
       )}
       <section

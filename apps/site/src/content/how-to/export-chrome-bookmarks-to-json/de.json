@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Chrome-Lesezeichen als JSON exportieren | Snug",
+    "description": "Chrome-Lesezeichen mit Snug als JSON exportieren: der Ordnerbaum als verschachtelte Daten, echte Feldnamen, Ordnerwahl, Re-Import. Geprüft am {date}."
+  },
+  "title": "Wie exportiere ich meine Chrome-Lesezeichen als JSON?",
+  "directAnswer": "Die Chrome-Hilfe beschreibt ein einziges Exportformat, {fromExportFormats}, erreichbar über {fromExportPath}. Für JSON nutze die Seite Export von Snug: Sie schreibt den Ordnerbaum als verschachtelte Daten, die Snug mit den Ordnern wieder importieren kann. Menüpfade geprüft am {date}.",
+  "builtIn": {
+    "title": "Die integrierte Methode",
+    "intro": "Die Chrome-Hilfe beschreibt ein einziges Exportformat, {fromExportFormats}. Der Browser hat also keine eigene CSV- oder JSON-Option. Sein Export ist trotzdem die richtige Wahl, wenn die Datei in einen anderen Browser soll.",
+    "steps": [
+      "Öffne in Chrome {fromExportPath}.",
+      "Speichere die Datei. Chrome nennt sie standardmäßig {fromExportFile}.",
+      "Für den Ordnerbaum als Daten geht es unten mit Snug weiter."
+    ]
+  },
+  "carriesOver": {
+    "title": "Was die JSON-Datei enthält",
+    "intro": "Die Datei ist ein Array mit einem Element, das einen Wurzelknoten mit der id 0 enthält. Darunter liegen Bookmarks bar und Other bookmarks, und Ordner verschachteln sich über children-Arrays.",
+    "items": [
+      "Lesezeichen: id, parentId, title, url und syncing.",
+      "Ordner: id, title, syncing und children, ohne parentId, weil die Verschachtelung ihre Position bestimmt. Die beiden obersten Ordner tragen außerdem folderType, bookmarks-bar oder other.",
+      "Optionale Felder: Hinzugefügt am ergänzt dateAdded, Zuletzt verwendet am ergänzt dateLastUsed, Änderungsdatum von Ordnern ergänzt dateGroupModified und Favicons einbeziehen ergänzt iconData. Datumswerte sind ganze Sekunden seit 1970.",
+      "Ordner auswählen: Geschrieben wird nur, was du auf der Seite Export angehakt hast. Weitere Lesezeichen ausblenden hebt den Inhalt von Other bookmarks auf die oberste Ebene, und Übergeordneten Ordner ausblenden entfernt normale Ordner und behält ihre Lesezeichen.",
+      "Text: Titel und Adressen behalten ihre Zeichen unverändert, zum Beispiel Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "JSON mit Snug exportieren",
+    "intro": "Snug läuft in Chrome und anderen Chromium-Browsern. JSON ist das Format, das sich mit Ordnern und Stammpositionen unverändert in Snug wiederherstellen lässt.",
+    "steps": [
+      "Installiere Snug aus dem Chrome Web Store.",
+      "Öffne die Seite Export von Snug. Suche nach Lesezeichen und hake einzelne Lesezeichen oder ganze Ordner an, oder nutze Alle Lesezeichen auswählen.",
+      "Wähle unter Exportformat die Option JSON.",
+      "Öffne Exportoptionen, um Hinzugefügt am, Zuletzt verwendet am, Änderungsdatum von Ordnern oder Favicons einbeziehen aufzunehmen oder Weitere Lesezeichen ausblenden bzw. Übergeordneten Ordner ausblenden einzuschalten.",
+      "Lege mit Dateinamenvorlage den Dateinamen fest. Zum Beispiel ergibt %yyyy%mm%dd myPc einen Namen wie 20260930 myPc.json.",
+      "Klicke auf N Lesezeichen exportieren, wobei N die Anzahl der angehakten Lesezeichen ist. Snug lädt die Datei herunter."
+    ],
+    "snapshot": "Um die Datei zurückzuholen, öffne die Seite Import von Snug und wähle die JSON-Datei. Die Vorschau zeigt zuerst den Ordnerbaum. Ordner erstellen und Wiederherstellen – zusammenführen behalten deine vorhandenen Lesezeichen, und vor Wiederherstellen – ersetzen speichert Snug einen Sicherheits-Snapshot."
+  },
+  "sample": {
+    "title": "Ein echtes Beispiel",
+    "intro": "Das ist die echte Ausgabe des Exporters für einen kleinen Testbaum: ein Ordner namens Dev, \"Tools\" in der Lesezeichenleiste (Bookmarks bar) und ein Lesezeichen unter Weitere Lesezeichen (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Wenn etwas schiefgeht",
+    "items": [
+      "Ein Lesezeichen fehlt. Geschrieben wird nur, was du auf der Seite Export angehakt hast. Hake den zugehörigen Ordner an oder nutze Alle Lesezeichen auswählen.",
+      "Der Wurzelknoten hat einen leeren Titel. Das ist der echte Wurzelknoten mit der id 0, und er hält die Datei für Snug importierbar.",
+      "Datumswerte fehlen. Sie erscheinen nur, wenn in den Exportoptionen Hinzugefügt am, Zuletzt verwendet am oder Änderungsdatum von Ordnern aktiviert ist.",
+      "Ein anderer Browser nimmt die Datei nicht an. Dieses JSON ist für Snug und deine eigenen Skripte gedacht. Für den Import eines anderen Browsers nimm die HTML-Datei aus dem integrierten Export von Chrome."
+    ]
+  },
+  "verified": "Menüpfad und Exportformat wurden am {date} auf den offiziellen Hilfeseiten von {fromName} gelesen. Menüs ändern sich zwischen Versionen. Prüfe die Quelle, wenn ein Pfad auf deinem Bildschirm abweicht. Feldnamen und Verschachtelung stammen aus dem JSON-Exporter von Snug und seinen Tests."
+}

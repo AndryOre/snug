@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "将 Chrome 书签导出为 CSV | Snug",
+    "description": "用 Snug 将 Chrome 书签导出为 CSV：每个书签一行，含 title、url 和 folder 列，说明文件夹与引号的写法以及电子表格中的显示。核实日期：{date}。"
+  },
+  "title": "如何把 Chrome 书签导出为 CSV？",
+  "directAnswer": "Chrome 的帮助页面只介绍了一种导出格式，即{fromExportFormats}，通过 {fromExportPath} 导出。需要 CSV 时，请使用 Snug 的“导出”页面：它为每个书签写一行，含 title、url 和 folder 列，并且只包含你选择的文件夹。菜单路径核实日期：{date}。",
+  "builtIn": {
+    "title": "浏览器自带的方法",
+    "intro": "Chrome 的帮助页面只介绍了一种导出格式，即{fromExportFormats}，所以浏览器本身没有 CSV 或 JSON 选项。文件要交给其他浏览器时，用它自带的导出仍然合适。",
+    "steps": [
+      "在 Chrome 中打开 {fromExportPath}。",
+      "保存文件。Chrome 默认将它命名为 {fromExportFile}。",
+      "如果想在电子表格中按行查看，请继续看下面的 Snug 方法。"
+    ]
+  },
+  "carriesOver": {
+    "title": "CSV 包含什么",
+    "intro": "第一行是列名。之后每个书签占一行，文件夹本身没有行。",
+    "items": [
+      "列：title、url 和 folder。打开“添加日期”“最近使用日期”“包含网站图标”后，会在其后加上 dateAdded、dateLastUsed 和 iconData。",
+      "文件夹：folder 列保存完整路径，用 / 连接，从 Bookmarks bar 这样的顶层文件夹开始。“隐藏上级文件夹”只保留那个顶层文件夹。",
+      "引号：每个字段都放在双引号中，字段内的引号会写成两个。文件夹名称中的 / 或 \\ 前会加反斜杠，所以 Q3/Q4 显示为 Q3\\/Q4。",
+      "电子表格：以 =、+、- 或 @ 开头的字段前会加一个撇号，避免电子表格把它当作公式执行。",
+      "日期：dateAdded 和 dateLastUsed 是自 1970 年起的整数秒，不是毫秒。"
+    ]
+  },
+  "withSnug": {
+    "title": "用 Snug 导出 CSV",
+    "intro": "Snug 可在 Chrome 和其他基于 Chromium 的浏览器中运行。在它的“导出”页面，你可以选择哪些内容进入文件，以及文件叫什么。",
+    "steps": [
+      "从 Chrome 应用商店安装 Snug。",
+      "打开 Snug 的“导出”页面。搜索书签，然后勾选单个书签或整个文件夹，也可以使用“选择所有书签”。",
+      "在“导出格式”中选择 CSV。",
+      "打开“导出选项”，可以把“添加日期”“最近使用日期”“包含网站图标”作为额外的列加入，或打开“隐藏上级文件夹”。",
+      "编辑“文件名模板”来给文件命名。例如，%yyyy%mm%dd myPc 会得到类似 20260930 myPc.csv 的名称。",
+      "点击“导出 N 个书签”，其中 N 是你勾选的数量。Snug 会下载文件。"
+    ],
+    "snapshot": "弹出窗口一次点击就导出整棵书签树。没有模板时，Snug 把文件命名为 Bookmarks_<date>_<time>，例如 Bookmarks_2026-10-03_14-05-09。"
+  },
+  "sample": {
+    "title": "真实示例",
+    "intro": "这是导出器对一棵小型测试树的真实输出：书签栏（Bookmarks bar）中有名为 Dev, \"Tools\" 和 Q3/Q4 的文件夹，其他书签（Other bookmarks）中有一个书签。"
+  },
+  "goesWrong": {
+    "title": "出问题时",
+    "items": [
+      "逗号或引号把标题拆到了多个单元格。Snug 会给每个字段加引号，所以请把文件按 CSV 导入，并把双引号设为文本限定符，这样 Comma, and \"quotes\" 会保持在一个单元格里。",
+      "folder 列里出现了反斜杠。文件夹名称中的 / 会写成 \\/，让 / 始终只作为路径分隔符。",
+      "单元格以撇号开头。Snug 会给以 =、+、- 或 @ 开头的值加上它，避免被当作公式执行。",
+      "只想把部分文件夹放进文件。弹出窗口会导出整棵树。请使用“导出”页面，勾选需要的文件夹。",
+      "需要把这些行带回浏览器。Snug 的“导入”页面可以读取 CSV，并用 folder 列重建文件夹。要导入到其他浏览器，请使用 Chrome 自带导出得到的 HTML 文件。"
+    ]
+  },
+  "verified": "菜单路径和导出格式于{date}取自 {fromName} 的官方帮助页面。浏览器菜单会随版本变化，如果你屏幕上的路径不同，请查看出处。列名和转义规则取自 Snug 的 CSV 导出器及其测试。"
+}

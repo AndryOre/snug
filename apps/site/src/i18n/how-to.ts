@@ -27,7 +27,9 @@ import {
  * Shape of every locale's copy for a How-to page, taken from the English file.
  * Every page shares the shape, so one file's type stands for all of them.
  */
-export type HowToPageContent = typeof enMoveFirefoxToChrome
+export type HowToPageContent = typeof enMoveFirefoxToChrome & {
+  sample?: { title: string; intro: string }
+}
 
 /**
  * Shape of every locale's shared How-to strings.
@@ -369,6 +371,7 @@ export interface HowToValues {
   toImportPath: string
   toImportPlacement: string
   toImportSources: string
+  fromExportFormats: string
   fromHtmlKeeps: string
   fromHtmlDrops: string
 }
@@ -435,6 +438,11 @@ export function howToValues(locale: Locale, slug: string): HowToValues {
     ),
     toImportSources: listed(
       target.importSources,
+      (items) => sentenceList(items, tag),
+      notListed,
+    ),
+    fromExportFormats: listed(
+      source.exportFormats,
       (items) => sentenceList(items, tag),
       notListed,
     ),
@@ -514,7 +522,7 @@ export function howToSources(
   slug: string,
 ): { browser: string; urls: readonly string[] }[] {
   const { from, to } = getHowToPage(slug)
-  return [from, to].map((browser) => {
+  return [...new Set([from, to])].map((browser) => {
     const facts = BROWSER_FACTS[browser]
     const urls = new Set(sourcedFacts(facts).map(({ fact }) => fact.sourceUrl))
     return { browser: facts.name, urls: [...urls] }

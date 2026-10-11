@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Chrome 북마크를 JSON으로 내보내기 | Snug",
+    "description": "Snug로 Chrome 북마크를 JSON으로 내보내는 방법이에요. 실제 필드 이름과 중첩 트리, 폴더 선택, Snug로 다시 가져오기를 담았어요. {date} 확인."
+  },
+  "title": "Chrome 북마크를 JSON으로 내보내려면 어떻게 하나요?",
+  "directAnswer": "Chrome 도움말에 나오는 내보내기 형식은 {fromExportFormats} 하나이고, {fromExportPath}에서 내보내요. JSON이 필요하면 Snug의 내보내기 페이지를 쓰세요. 폴더 트리를 중첩 데이터로 내보내고, Snug는 그 파일을 폴더 그대로 다시 가져올 수 있어요. 메뉴 경로는 {date}에 확인했어요.",
+  "builtIn": {
+    "title": "브라우저 기본 방법",
+    "intro": "Chrome 도움말에 나오는 내보내기 형식은 {fromExportFormats} 하나뿐이라서, 브라우저 자체에는 CSV나 JSON 옵션이 없어요. 파일을 다른 브라우저에 넘길 때는 이 기본 내보내기가 알맞아요.",
+    "steps": [
+      "Chrome에서 {fromExportPath}을(를) 열어요.",
+      "파일을 저장해요. Chrome은 기본적으로 {fromExportFile}(이)라는 이름을 붙여요.",
+      "폴더 트리를 데이터로 쓰려면 아래 Snug 방법으로 이어서 진행해요."
+    ]
+  },
+  "carriesOver": {
+    "title": "JSON에 담기는 내용",
+    "intro": "파일은 id가 0인 루트 노드 하나를 담은 배열이에요. 그 아래에 Bookmarks bar와 Other bookmarks가 있고, 폴더는 children 배열로 중첩돼요.",
+    "items": [
+      "북마크: id, parentId, title, url, syncing.",
+      "폴더: id, title, syncing, children. 중첩 위치로 자리가 정해지므로 parentId는 없어요. 최상위 폴더 둘에는 folderType(bookmarks-bar 또는 other)도 붙어요.",
+      "선택 필드: 추가한 날짜는 dateAdded, 마지막 사용 날짜는 dateLastUsed, 폴더 수정 날짜는 dateGroupModified, 파비콘 포함은 iconData를 더해요. 날짜는 1970년부터의 정수 초예요.",
+      "폴더 선택: 내보내기 페이지에서 체크한 항목만 기록돼요. 기타 북마크 숨기기는 Other bookmarks의 내용을 최상위로 올리고, 상위 폴더 숨기기는 일반 폴더를 없애고 북마크만 남겨요.",
+      "텍스트: 제목과 주소의 문자는 그대로 유지돼요. 예: Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Snug로 JSON 내보내기",
+    "intro": "Snug는 Chrome과 다른 Chromium 브라우저에서 동작해요. JSON은 폴더와 루트 위치를 그대로 유지한 채 Snug로 복원할 수 있는 형식이에요.",
+    "steps": [
+      "Chrome 웹 스토어에서 Snug를 설치해요.",
+      "Snug의 내보내기 페이지를 열어요. 북마크를 검색한 뒤 개별 북마크나 폴더 전체를 체크하거나, 모든 북마크 선택을 사용해요.",
+      "내보내기 형식에서 JSON을 선택해요.",
+      "내보내기 옵션을 열어 추가한 날짜, 마지막 사용 날짜, 폴더 수정 날짜, 파비콘 포함을 넣거나 기타 북마크 숨기기 또는 상위 폴더 숨기기를 켜요.",
+      "파일 이름 템플릿을 수정해 파일 이름을 정해요. 예를 들어 %yyyy%mm%dd myPc는 20260930 myPc.json 같은 이름이 돼요.",
+      "북마크 N개 내보내기를 클릭해요. N은 체크한 개수예요. Snug가 파일을 다운로드해요."
+    ],
+    "snapshot": "파일을 다시 가져오려면 Snug의 가져오기 페이지를 열고 JSON 파일을 선택해요. 미리보기에서 폴더 트리를 먼저 확인할 수 있어요. 폴더 만들기와 복원 — 병합은 기존 북마크를 그대로 두고, 복원 — 교체 전에는 Snug가 안전 스냅샷을 저장해요."
+  },
+  "sample": {
+    "title": "실제 샘플",
+    "intro": "작은 테스트 트리에 대한 내보내기 도구의 실제 출력이에요. 북마크바(Bookmarks bar)에 Dev, \"Tools\" 폴더가 있고, 기타 북마크(Other bookmarks)에 북마크가 하나 있어요."
+  },
+  "goesWrong": {
+    "title": "문제가 생겼을 때",
+    "items": [
+      "북마크 하나가 빠졌어요. 내보내기 페이지에서 체크한 항목만 기록돼요. 해당 폴더를 체크하거나 모든 북마크 선택을 사용하세요.",
+      "루트의 제목이 비어 있어요. id가 0인 실제 루트 노드이고, 이 덕분에 Snug가 파일을 그대로 가져올 수 있어요.",
+      "날짜가 없어요. 내보내기 옵션에서 추가한 날짜, 마지막 사용 날짜, 폴더 수정 날짜 중 하나를 켰을 때만 나타나요.",
+      "다른 브라우저가 파일을 받아주지 않아요. 이 JSON은 Snug와 직접 만든 스크립트용이에요. 다른 브라우저로 가져올 때는 Chrome 기본 내보내기로 만든 HTML 파일을 쓰세요."
+    ]
+  },
+  "verified": "메뉴 경로와 내보내기 형식은 {date}에 {fromName}의 공식 도움말 페이지에서 확인했어요. 브라우저 메뉴는 버전에 따라 바뀌므로 화면의 경로가 다르면 출처를 확인하세요. 필드 이름과 중첩 구조는 Snug의 JSON 내보내기 도구와 그 테스트를 따랐어요."
+}

@@ -36,6 +36,7 @@ export interface BrowserFacts {
   exportPath: Listed<SourcedFact<readonly string[]>>
   importPath: Listed<SourcedFact<readonly string[]>>
   importSources: Listed<SourcedFact<readonly string[]>>
+  exportFormats: Listed<SourcedFact<readonly string[]>>
   exportFileName: Listed<SourcedFact<string>>
   importPlacement: Listed<SourcedFact<ImportPlacement>>
   profileFolder: Record<ProfileOs, Listed<SourcedFact<string>>>
@@ -93,6 +94,10 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Bookmarks HTML file'],
       sourceUrl: CHROME_BOOKMARKS_HELP,
     },
+    exportFormats: {
+      value: ['HTML'],
+      sourceUrl: CHROME_BOOKMARKS_HELP,
+    },
     exportFileName: {
       value: 'bookmarks_<date>.html',
       sourceUrl: CHROMIUM_EXPORT_FILE_NAME,
@@ -136,6 +141,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Google Chrome', 'IE11', 'Favorites or bookmarks HTML file'],
       sourceUrl: EDGE_IMPORT_HELP,
     },
+    exportFormats: 'not-listed',
     exportFileName: 'not-listed',
     importPlacement: {
       value: 'favoritesBarFolder',
@@ -158,6 +164,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Browsers detected on this computer', 'Bookmarks HTML file'],
       sourceUrl: BRAVE_IMPORT_HELP,
     },
+    exportFormats: 'not-listed',
     exportFileName: 'not-listed',
     importPlacement: 'not-listed',
     profileFolder: NOT_LISTED_PROFILE,
@@ -177,6 +184,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       sourceUrl: OPERA_FEATURES_HELP,
     },
     importSources: 'not-listed',
+    exportFormats: 'not-listed',
     exportFileName: 'not-listed',
     importPlacement: 'not-listed',
     profileFolder: NOT_LISTED_PROFILE,
@@ -198,6 +206,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
     },
     importPath: 'not-listed',
     importSources: 'not-listed',
+    exportFormats: 'not-listed',
     exportFileName: { value: 'bookmarks.html', sourceUrl: FIREFOX_EXPORT_HELP },
     importPlacement: 'not-listed',
     profileFolder: NOT_LISTED_PROFILE,
@@ -220,6 +229,7 @@ export const BROWSER_FACTS: Record<BrowserSlug, BrowserFacts> = {
       value: ['Google Chrome', 'Firefox', 'Bookmarks HTML File'],
       sourceUrl: SAFARI_BOOKMARKS_HELP,
     },
+    exportFormats: 'not-listed',
     exportFileName: {
       value: 'Safari Bookmarks.html',
       sourceUrl: SAFARI_BOOKMARKS_HELP,
@@ -252,6 +262,7 @@ export function sourcedFacts(
     ['exportPath', facts.exportPath],
     ['importPath', facts.importPath],
     ['importSources', facts.importSources],
+    ['exportFormats', facts.exportFormats],
     ['exportFileName', facts.exportFileName],
     ['importPlacement', facts.importPlacement],
     ['htmlExportKeeps', facts.htmlExportKeeps],

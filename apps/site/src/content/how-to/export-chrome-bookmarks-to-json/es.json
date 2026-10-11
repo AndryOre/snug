@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Exportar marcadores de Chrome a JSON | Snug",
+    "description": "Exporta marcadores de Chrome a JSON con Snug: el árbol de carpetas como datos anidados, campos reales, carpetas y reimportar. Revisado el {date}."
+  },
+  "title": "¿Cómo exporto mis marcadores de Chrome a JSON?",
+  "directAnswer": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, al que se llega con {fromExportPath}. Para JSON, usa la página Exportar de Snug: escribe el árbol de carpetas como datos anidados que Snug puede importar de vuelta con las carpetas en su lugar. Rutas de menú verificadas el {date}.",
+  "builtIn": {
+    "title": "El método integrado",
+    "intro": "La ayuda de Chrome describe un solo formato de exportación, {fromExportFormats}, así que el navegador no tiene opción propia de CSV ni de JSON. Su exportación sigue siendo la adecuada cuando el archivo va a otro navegador.",
+    "steps": [
+      "En Chrome, abre {fromExportPath}.",
+      "Guarda el archivo. Chrome lo llama {fromExportFile} de forma predeterminada.",
+      "Para tener el árbol de carpetas como datos, sigue abajo con Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "Qué contiene el JSON",
+    "intro": "El archivo es una lista de un elemento que contiene un nodo raíz con id 0. Bajo él están Bookmarks bar y Other bookmarks, y las carpetas se anidan mediante listas children.",
+    "items": [
+      "Marcadores: id, parentId, title, url y syncing.",
+      "Carpetas: id, title, syncing y children, sin parentId porque el anidamiento indica su lugar. Las dos carpetas superiores llevan además folderType, bookmarks-bar u other.",
+      "Campos opcionales: Fecha de creación añade dateAdded, Fecha de último uso añade dateLastUsed, Fechas de modificación de carpetas añade dateGroupModified e Incluir favicons añade iconData. Las fechas son segundos enteros desde 1970.",
+      "Elegir carpetas: solo se escribe lo que marcas en la página Exportar. Ocultar otros marcadores sube el contenido de Other bookmarks al nivel superior, y Ocultar carpeta superior elimina las carpetas normales y conserva sus marcadores.",
+      "Texto: los títulos y las direcciones conservan sus caracteres tal cual, por ejemplo Café <résumé>."
+    ]
+  },
+  "withSnug": {
+    "title": "Exportar JSON con Snug",
+    "intro": "Snug funciona en Chrome y otros navegadores basados en Chromium. JSON es el formato que se restaura en Snug con las carpetas y las ubicaciones raíz intactas.",
+    "steps": [
+      "Instala Snug desde Chrome Web Store.",
+      "Abre la página Exportar de Snug. Busca marcadores y marca marcadores sueltos o carpetas enteras, o usa Seleccionar todos los marcadores.",
+      "En Formato de exportación, elige JSON.",
+      "Abre Opciones de exportación para añadir Fecha de creación, Fecha de último uso, Fechas de modificación de carpetas o Incluir favicons, o para activar Ocultar otros marcadores u Ocultar carpeta superior.",
+      "Edita Plantilla de nombre de archivo para nombrar el archivo. Por ejemplo, %yyyy%mm%dd myPc da un nombre como 20260930 myPc.json.",
+      "Haz clic en Exportar N marcadores, donde N es la cantidad que marcaste. Snug descarga el archivo."
+    ],
+    "snapshot": "Para recuperar el archivo, abre la página Importar de Snug y elige el archivo JSON. Vista previa muestra primero el árbol de carpetas. Crear carpeta y Restaurar — combinar conservan tus marcadores actuales, y antes de Restaurar — reemplazar Snug guarda una instantánea de seguridad."
+  },
+  "sample": {
+    "title": "Un ejemplo real",
+    "intro": "Esta es la salida real del exportador para un árbol de prueba pequeño: una carpeta llamada Dev, \"Tools\" en la barra de marcadores (Bookmarks bar) y un marcador en Otros marcadores (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Si algo sale mal",
+    "items": [
+      "Falta un marcador. Solo se escribe lo que marcaste en la página Exportar. Marca su carpeta o usa Seleccionar todos los marcadores.",
+      "La raíz tiene un título vacío. Es el nodo raíz real, con id 0, y mantiene el archivo importable por Snug.",
+      "Faltan las fechas. Solo aparecen cuando Fecha de creación, Fecha de último uso o Fechas de modificación de carpetas está activada en Opciones de exportación.",
+      "Otro navegador no acepta el archivo. Este JSON está pensado para Snug y tus propios scripts. Para la importación de otro navegador, usa el archivo HTML de la exportación integrada de Chrome."
+    ]
+  },
+  "verified": "La ruta de menú y el formato de exportación se leyeron en las páginas de ayuda oficiales de {fromName} el {date}. Los menús cambian entre versiones, así que consulta la fuente si una ruta es distinta en tu pantalla. Los nombres de campo y el anidamiento provienen del exportador JSON de Snug y sus pruebas."
+}

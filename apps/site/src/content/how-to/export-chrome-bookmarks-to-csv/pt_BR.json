@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "title": "Exportar favoritos do Chrome para CSV | Snug",
+    "description": "Exporte favoritos do Chrome para CSV pelo Snug: uma linha por favorito, colunas title, url e folder, e como a planilha as lê. Checado em {date}."
+  },
+  "title": "Como exporto meus favoritos do Chrome para CSV?",
+  "directAnswer": "A ajuda do Chrome descreve um único formato de exportação, {fromExportFormats}, acessível por {fromExportPath}. Para CSV, use a página Exportar do Snug: ela grava uma linha por favorito com title, url e folder, só das pastas que você escolher. Caminhos de menu verificados em {date}.",
+  "builtIn": {
+    "title": "O método integrado",
+    "intro": "A ajuda do Chrome descreve um único formato de exportação, {fromExportFormats}, então o navegador não tem opção própria de CSV nem de JSON. A exportação dele continua sendo a escolha certa quando o arquivo vai para outro navegador.",
+    "steps": [
+      "No Chrome, abra {fromExportPath}.",
+      "Salve o arquivo. O Chrome o chama de {fromExportFile} por padrão.",
+      "Para ter linhas em uma planilha, continue abaixo com o Snug."
+    ]
+  },
+  "carriesOver": {
+    "title": "O que o CSV contém",
+    "intro": "A primeira linha nomeia as colunas. Cada favorito ocupa depois uma linha, e as pastas não têm linha própria.",
+    "items": [
+      "Colunas: title, url e folder. Data de criação, Data do último uso e Incluir favicons acrescentam depois dateAdded, dateLastUsed e iconData.",
+      "Pastas: a coluna folder contém o caminho completo, unido por /, começando pela pasta de nível superior, como Bookmarks bar. Ocultar pasta principal mantém só essa pasta de nível superior.",
+      "Aspas: cada campo fica entre aspas duplas, e uma aspa dentro do campo é duplicada. Uma / ou uma \\ no nome de uma pasta recebe uma barra invertida, então Q3/Q4 aparece como Q3\\/Q4.",
+      "Planilhas: um campo que começa com =, +, - ou @ recebe um apóstrofo no início, para que a planilha não o execute como fórmula.",
+      "Datas: dateAdded e dateLastUsed são segundos inteiros desde 1970, não milissegundos."
+    ]
+  },
+  "withSnug": {
+    "title": "Exportar CSV com o Snug",
+    "intro": "O Snug funciona no Chrome e em outros navegadores Chromium. Na página Exportar dele, você escolhe o que entra no arquivo e como ele se chama.",
+    "steps": [
+      "Instale o Snug pela Chrome Web Store.",
+      "Abra a página Exportar do Snug. Pesquise favoritos e marque favoritos soltos ou pastas inteiras, ou use Selecionar todos os favoritos.",
+      "Em Formato de exportação, escolha CSV.",
+      "Abra Opções de exportação para adicionar Data de criação, Data do último uso ou Incluir favicons como colunas extras, ou para ativar Ocultar pasta principal.",
+      "Edite Modelo de nome de arquivo para nomear o arquivo. Por exemplo, %yyyy%mm%dd myPc gera um nome como 20260930 myPc.csv.",
+      "Clique em Exportar N favoritos, em que N é a quantidade marcada. O Snug baixa o arquivo."
+    ],
+    "snapshot": "O pop-up exporta a árvore inteira com um clique. Sem modelo, o Snug chama o arquivo de Bookmarks_<date>_<time>, por exemplo Bookmarks_2026-10-03_14-05-09."
+  },
+  "sample": {
+    "title": "Um exemplo real",
+    "intro": "Esta é a saída real do exportador para uma pequena árvore de teste: pastas chamadas Dev, \"Tools\" e Q3/Q4 na barra de favoritos (Bookmarks bar) e um favorito em Outros favoritos (Other bookmarks)."
+  },
+  "goesWrong": {
+    "title": "Se algo der errado",
+    "items": [
+      "Vírgulas ou aspas dividem um título em várias células. O Snug coloca cada campo entre aspas, então importe o arquivo como CSV com a aspa dupla como delimitador de texto e Comma, and \"quotes\" fica em uma só célula.",
+      "A coluna folder mostra uma barra invertida. Uma / dentro do nome de uma pasta é escrita \\/ para que / continue sendo o separador de caminho.",
+      "Uma célula começa com um apóstrofo. O Snug o adiciona a valores que começam com =, +, - ou @ para que não sejam executados como fórmulas.",
+      "Só algumas pastas devem entrar no arquivo. O pop-up exporta a árvore inteira. Use a página Exportar e marque as pastas desejadas.",
+      "Você precisa das linhas de volta em um navegador. A página Importar do Snug lê CSV e usa a coluna folder para reconstruir as pastas. Para a importação de outro navegador, use o arquivo HTML da exportação integrada do Chrome."
+    ]
+  },
+  "verified": "O caminho de menu e o formato de exportação foram lidos nas páginas de ajuda oficiais de {fromName} em {date}. Os menus mudam entre versões, então consulte a fonte se um caminho for diferente na sua tela. Os nomes das colunas e o escape vêm do exportador CSV do Snug e dos testes dele."
+}
