@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
 
+import { HOW_TO_PAGES } from '../src/content/how-to-pages'
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { howToLocales } from './how-to-paths'
 import { translatedTitle } from './translated-guide'
 
 for (const locale of LOCALES) {
@@ -103,3 +105,45 @@ test('the search button opens the dialog with Ctrl K and closes with Escape', as
   await page.keyboard.press('Escape')
   await expect(dialog).toBeHidden()
 })
+
+const GUIDE_ROUTES = [
+  'guide',
+  'guide/exporting',
+  'guide/importing',
+  'guide/duplicates',
+  'guide/settings',
+  'guide/auto-export',
+  'changelog',
+]
+
+for (const locale of LOCALES) {
+  for (const route of GUIDE_ROUTES) {
+    const slugs = Object.entries(HOW_TO_PAGES)
+      .filter(([, page]) => page.relatedGuide.includes(route))
+      .map(([slug]) => slug)
+    const expectation =
+      slugs.length > 0
+        ? 'links its related How-to pages'
+        : 'has no Related how-to block'
+    test(`${locale} /${route}/ ${expectation}`, async ({ page, request }) => {
+      await page.goto(localePath(locale, `/${route}/`))
+      const block = page.locator('[data-section="related-how-to"]')
+      if (slugs.length === 0) {
+        await expect(block).toHaveCount(0)
+        return
+      }
+      const links = block.locator('a')
+      await expect(links).toHaveCount(slugs.length)
+      for (const [index, slug] of slugs.entries()) {
+        const target = howToLocales(slug).includes(locale)
+          ? localePath(locale, `/how-to/${slug}/`)
+          : `/how-to/${slug}/`
+        await expect(links.nth(index)).toHaveAttribute('href', target)
+        const box = await links.nth(index).boundingBox()
+        expect(box?.height).toBeGreaterThanOrEqual(44)
+        const response = await request.get(target)
+        expect(response.status()).toBe(200)
+      }
+    })
+  }
+}

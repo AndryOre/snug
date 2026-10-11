@@ -218,6 +218,27 @@ export function howToPath(locale: Locale, slug: string): string {
 }
 
 /**
+ * The How-to pages that list a Guide page as related, found by inverting each
+ * page's `relatedGuide`.
+ * @param entryId - Starlight entry id of a Guide page, with a lowercase
+ * language tag prefix for translated routes, e.g. `pt-br/guide/importing`.
+ * @param pages - Page definitions, defaulting to the registry.
+ * @returns Slugs in registry order, empty when no page relates to the Guide page.
+ */
+export function howToSlugsForGuideEntry(
+  entryId: string,
+  pages: Record<string, HowToPageDefinition> = HOW_TO_PAGES,
+): string[] {
+  return Object.entries(pages)
+    .filter(([, page]) =>
+      page.relatedGuide.some(
+        (id) => entryId === id || entryId.endsWith(`/${id}`),
+      ),
+    )
+    .map(([slug]) => slug)
+}
+
+/**
  * Whether a page carries a With Snug section. Pages that only describe the
  * built-in method leave the `withSnug` key out of every locale's copy.
  * @param slug - A How-to page slug.
