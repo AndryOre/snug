@@ -8,7 +8,6 @@ on:
       - 'apps/site/**'
       - 'packages/ui/**'
       - 'PRIVACY_POLICY.md'
-      - '.env'
       - '.github/scripts/deploy-coolify.sh'
       - '.github/workflows/deploy-site.yml'
 
@@ -44,19 +43,10 @@ jobs:
             --build-arg LAST_MODIFIED_DATES="${LAST_MODIFIED_DATES}" \
             -t snug-site:ci .
 
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
-        with:
-          bun-version-file: package.json
-          no-cache: true
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile --ignore-scripts
-
-      # The token is dotenvx-encrypted in .env (ADR 0012); dotenvx decrypts it
-      # with DOTENV_PRIVATE_KEY and the script never echoes it.
+      # The token is a GitHub secret (ADR 0022) and the script never echoes it.
       - name: Publish last-modified dates, deploy via Coolify and wait
         env:
-          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
           COOLIFY_APP_UUID: ${{ vars.SNUG_COOLIFY_APP_UUID }}
           LAST_MODIFIED_DATES: ${{ steps.dates.outputs.map }}
-        run: bunx dotenvx run -- bash .github/scripts/deploy-coolify.sh
+        run: bash .github/scripts/deploy-coolify.sh

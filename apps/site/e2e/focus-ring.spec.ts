@@ -54,7 +54,8 @@ const TARGETS: readonly FocusTarget[] = [
     hydrate: hydrateHeader,
     locate: (page) => page.getByRole('menuitemradio').first(),
     open: async (page) => {
-      await page.locator('[data-theme-menu] button').click()
+      await page.locator('[data-theme-menu] button').focus()
+      await page.keyboard.press('Enter')
     },
   },
   {
@@ -67,7 +68,8 @@ const TARGETS: readonly FocusTarget[] = [
     hydrate: hydrateHeader,
     locate: (page) => page.locator('[data-language-menu] a').first(),
     open: async (page) => {
-      await page.locator('[data-language-switcher] button').click()
+      await page.locator('[data-language-switcher] button').focus()
+      await page.keyboard.press('Enter')
     },
   },
   {
@@ -101,7 +103,6 @@ function contrastRatio(first: readonly number[], second: readonly number[]) {
 
 async function readFocusColors(target: Locator) {
   await target.scrollIntoViewIfNeeded()
-  await target.page().keyboard.press('Tab')
   await target.focus()
   const readRing = () =>
     target.evaluate((element) => {
@@ -147,6 +148,7 @@ for (const colorScheme of SCHEMES) {
       await page.goto(path)
       await hydrate?.(page)
       await open?.(page)
+      if (!open) await page.keyboard.press('Tab')
       const { ring, background } = await readFocusColors(locate(page))
       expect(ring, 'a 3px ring with a 2px offset').toBeDefined()
       const [ringRgb = [], backgroundRgb = []] = await toRgbList(page, [
