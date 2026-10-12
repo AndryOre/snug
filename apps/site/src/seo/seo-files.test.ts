@@ -1,15 +1,18 @@
 import { describe, expect, it } from 'vitest'
 
 import { loadCatalog } from '../docs/catalog'
+import { markdownTwinPath } from '../docs/markdown-twin'
 import { PUBLISHED_SOURCES, publishedRoute } from '../docs/published'
 import {
   alternativesPath,
   COMPARISON_PAGE_LOCALES,
   COMPARISON_SLUGS,
+  getComparisonContent,
   getComparisonMeta,
 } from '../i18n/comparisons'
 import { getContent } from '../i18n/content'
 import {
+  getHowToContent,
   getHowToIndexMeta,
   getHowToMeta,
   HOW_TO_INDEX_LOCALES,
@@ -32,12 +35,15 @@ import { GET as getLlmsFullTxt } from '../pages/llms-full.txt'
 import { GET as getLlmsTxt } from '../pages/llms.txt'
 import { GET as getRobotsTxt } from '../pages/robots.txt'
 import { GET as getSitemapXml } from '../pages/sitemap.xml'
+import { comparisonLlmsFullSections } from './comparison-pages'
 import {
   buildLlmsFullTxt,
   buildLlmsTxt,
   buildRobotsTxt,
   buildSitemapXml,
 } from './crawlers'
+import { demoteHeadings, guideLlmsFullSections } from './documentation-pages'
+import { howToLlmsFullSections } from './how-to-pages'
 import { lastCommitDate } from './last-modified'
 import { STORE_FACTS } from './store-facts'
 import {
@@ -112,18 +118,37 @@ describe('buildLlmsTxt', () => {
     expect(buildLlmsTxt('d', pages)).toContain(`${SITE_ORIGIN}/llms-full.txt`)
   })
 
-  it('lists every documentation page under its own heading', () => {
+  it('lists each Guide page once, with its description and Markdown link', () => {
     const body = buildLlmsTxt('d', pages, [
       {
-        languageTag: 'es',
         title: 'Exporting',
-        url: `${SITE_ORIGIN}/es/guide/exporting/`,
+        description: 'Save your tabs to a file.',
+        markdownUrl: `${SITE_ORIGIN}/guide/exporting.md`,
       },
     ])
-    expect(body).toContain("## Guide and What's new")
+    expect(body).toContain('## Guide\n')
     expect(body).toContain(
-      `[Exporting](${SITE_ORIGIN}/es/guide/exporting/): es`,
+      `- [Exporting](${SITE_ORIGIN}/guide/exporting.md): Save your tabs to a file.`,
     )
+    expect(body).toContain('every page exists under `/<locale>/`')
+  })
+
+  it('moves secondary pages under Optional', () => {
+    const body = buildLlmsTxt('d', pages, [
+      {
+        title: "What's new",
+        description: 'Release notes.',
+        markdownUrl: `${SITE_ORIGIN}/whats-new.md`,
+        secondary: true,
+      },
+    ])
+    const [beforeOptional, optional] = body.split('## Optional', 2)
+    expect(beforeOptional).not.toContain(`${SITE_ORIGIN}/whats-new.md`)
+    expect(optional).toContain(`[What's new](${SITE_ORIGIN}/whats-new.md)`)
+  })
+
+  it('omits the Guide section when there are no Guide pages', () => {
+    expect(buildLlmsTxt('d', pages)).not.toContain('## Guide')
   })
 })
 
@@ -191,6 +216,59 @@ describe('buildLlmsFullTxt', () => {
       expect(body).toContain(`### ${item.question}`)
       expect(body).toContain(item.answer)
     }
+  })
+
+  it('appends each extra section under a title and url heading', () => {
+    const extended = buildLlmsFullTxt(getContent('en'), [
+      { title: 'Extra', url: `${SITE_ORIGIN}/extra`, body: 'Body text.\n' },
+    ])
+    expect(extended).toContain(
+      `## Extra (${SITE_ORIGIN}/extra)\n\nBody text.\n`,
+    )
+    expect(extended.endsWith('\n')).toBe(true)
+  })
+})
+
+describe('llms-full.txt sections', () => {
+  it('has one how-to section per page with its answer and checked date', () => {
+    const sections = howToLlmsFullSections()
+    expect(sections).toHaveLength(HOW_TO_SLUGS.length)
+    for (const slug of HOW_TO_SLUGS) {
+      const section = sections.find(
+        ({ url }) => url === `${SITE_ORIGIN}${howToPath('en', slug)}`,
+      )
+      expect(section?.title).toBe(getHowToContent('en', slug).title)
+      expect(section?.body).toContain('1. ')
+      expect(section?.body).not.toMatch(/\{[a-zA-Z]+\}/)
+    }
+  })
+
+  it('has the Alternatives page and each comparison with its checked date', () => {
+    const sections = comparisonLlmsFullSections()
+    expect(sections).toHaveLength(COMPARISON_SLUGS.length + 1)
+    const { pages } = getComparisonContent('en')
+    for (const slug of COMPARISON_SLUGS) {
+      expect(
+        sections.find(({ title }) => title === pages[slug].title)?.body,
+      ).toMatch(/\d{4}-\d{2}-\d{2}|\b20\d{2}\b/)
+    }
+    for (const { body } of sections) {
+      expect(body).not.toMatch(/\{[a-zA-Z]+\}/)
+    }
+  })
+
+  it('has every Guide page body below the section heading', () => {
+    const sections = guideLlmsFullSections()
+    expect(sections.length).toBeGreaterThan(0)
+    for (const { body } of sections) {
+      expect(body).not.toMatch(/^# /m)
+    }
+  })
+
+  it('demotes headings but leaves fenced code alone', () => {
+    expect(demoteHeadings('## A\n```\n# not a heading\n```\n### B')).toBe(
+      '### A\n```\n# not a heading\n```\n#### B',
+    )
   })
 })
 
@@ -481,8 +559,12 @@ describe('root file routes', () => {
     }
     expect(text).toContain(`${SITE_ORIGIN}/privacy/`)
     for (const source of PUBLISHED_SOURCES) {
+      expect(text).toContain(
+        `(${SITE_ORIGIN}${markdownTwinPath(publishedRoute(source, 'en'))}): ${source.description}`,
+      )
       for (const locale of LOCALES) {
-        expect(text).toContain(
+        if (locale === 'en') continue
+        expect(text).not.toContain(
           `(${SITE_ORIGIN}${publishedRoute(source, locale)})`,
         )
       }
@@ -490,6 +572,7 @@ describe('root file routes', () => {
     for (const entry of loadCatalog()) {
       expect(text).toContain(`[${entry.title}](`)
     }
+    expect(text).toContain('every page exists under `/<locale>/`')
     expect(text).toContain('## Comparisons')
     for (const slug of [undefined, ...COMPARISON_SLUGS]) {
       const { title, description } = getComparisonMeta(
@@ -517,7 +600,19 @@ describe('root file routes', () => {
   it('serves llms-full.txt as plain text', async () => {
     const response = getLlmsFullTxt()
     expect(response.headers.get('Content-Type')).toContain('text/plain')
-    expect(await response.text()).toBe(buildLlmsFullTxt(getContent('en')))
+    const text = await response.text()
+    const llmsTxt = await getLlmsTxt().text()
+    expect(text.length).toBeGreaterThan(llmsTxt.length)
+    for (const slug of HOW_TO_SLUGS) {
+      expect(text).toContain(`## ${getHowToContent('en', slug).title} (`)
+    }
+    for (const section of [
+      ...comparisonLlmsFullSections(),
+      ...guideLlmsFullSections(),
+    ]) {
+      expect(text).toContain(`## ${section.title} (${section.url})`)
+    }
+    expect(text).not.toContain('{date}')
   })
 
   it("serves a sitemap with one url per locale, privacy page, guide page and What's new", async () => {
