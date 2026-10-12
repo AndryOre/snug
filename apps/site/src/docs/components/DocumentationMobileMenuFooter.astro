@@ -1,4 +1,29 @@
 ---
+import { getContent } from '../../i18n/content'
+import { resolveDocumentationLocale } from '../locale'
+
+const locale = resolveDocumentationLocale(Astro.locals.starlightRoute.lang)
+const { closeLabel } = getContent(locale).docsSidebar
 ---
 
-<></>
+<button
+  type="button"
+  popovertarget="starlight__sidebar"
+  popovertargetaction="hide"
+  data-docs-menu-close
+  class="print:hidden"
+>
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    class="size-4.5 shrink-0"
+    focusable="false"
+  >
+    <path d="M6 6l12 12M18 6L6 18"></path>
+  </svg>
+  <span>{closeLabel}</span>
+</button>

@@ -110,6 +110,16 @@ for pair in "/index.html:/" "/es/index.html:/es/"; do
   [ "$(status "$base${pair%%:*}")" = 301 ] || fail "${pair%%:*} is not 301"
   [ "$(location "$base${pair%%:*}")" = "${pair##*:}" ] || fail "${pair%%:*} does not redirect to ${pair##*:}"
 done
+[ "$(status "$base/privacy/index.html")" = 301 ] || fail "/privacy/index.html is not 301"
+[ "$(location "$base/privacy/index.html")" = "/privacy/" ] || fail "/privacy/index.html does not redirect to /privacy/"
+for path in /sitemap-index.xml /sitemap-0.xml; do
+  [ "$(status "$base$path")" = 404 ] || fail "$path is not 404"
+done
+md_headers="$(curl -s -o /dev/null -D - "$base/guide/exporting.md" | tr -d '\r')"
+grep -qi '^link: <https://snug.andryore.dev/guide/exporting/>; rel="canonical"' <<<"$md_headers" || fail "/guide/exporting.md lacks the canonical Link"
+if grep -qi '^x-robots-tag:' <<<"$md_headers"; then fail "/guide/exporting.md has X-Robots-Tag"; fi
+[ "$(status "$base/.well-known/security.txt")" = 200 ] || fail "security.txt is not 200"
+grep -qi 'text/plain; charset=utf-8' <<<"$(header_of content-type "$base/.well-known/security.txt")" || fail "security.txt content type"
 [ "$(status "$base/es/404/")" = 404 ] || fail "/es/404/ is not 404"
 for path in /nope/ /ja/nope/; do
   [ "$(header_of cache-control "$base$path")" = no-cache ] || fail "$path 404 lacks no-cache"

@@ -85,6 +85,7 @@ function applyChoice(choice: ThemeChoice) {
   root.dataset.themeChoice = choice
   root.classList.add('theme-switching')
   root.classList.toggle('dark', isDark)
+  root.dataset.theme = isDark ? 'dark' : 'light'
   requestAnimationFrame(() => {
     requestAnimationFrame(() => root.classList.remove('theme-switching'))
   })

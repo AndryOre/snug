@@ -236,6 +236,9 @@
     "copied": "已复制",
     "copyFailed": "无法复制"
   },
+  "docsSidebar": {
+    "closeLabel": "关闭菜单"
+  },
   "docsSearch": {
     "noResults": "没有找到与 {query} 相关的结果。",
     "hint": "请尝试其他词语或更短的词语。"

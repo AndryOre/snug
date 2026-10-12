@@ -62,10 +62,21 @@ describe('buildRobotsTxt', () => {
     const groupFor = (agent: string): string =>
       groups.find((entry) => entry.includes(`User-agent: ${agent}\n`)) ?? ''
 
-    expect(groupFor('Googlebot')).toContain('Allow: /')
-    expect(groupFor('Googlebot')).not.toContain('Disallow: /')
-    expect(groupFor('ClaudeBot')).toContain('Disallow: /')
-    expect(groupFor('ClaudeBot')).not.toContain('Allow: /')
+    expect(groupFor('Googlebot').split('\n')).toContain('Allow: /')
+    expect(groupFor('Googlebot').split('\n')).not.toContain('Disallow: /')
+    expect(groupFor('ClaudeBot').split('\n')).toContain('Disallow: /')
+    expect(groupFor('ClaudeBot').split('\n')).not.toContain('Allow: /')
+  })
+
+  it('disallows the redirect-only paths in every group', () => {
+    const groups = buildRobotsTxt()
+      .split('\n\n')
+      .filter((entry) => entry.includes('User-agent:'))
+    expect(groups.length).toBeGreaterThan(0)
+    for (const entry of groups) {
+      expect(entry.split('\n')).toContain('Disallow: /install')
+      expect(entry.split('\n')).toContain('Disallow: /reviews')
+    }
   })
 
   it('does not block Google-Extended, which feeds Gemini grounding', () => {

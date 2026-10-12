@@ -69,12 +69,24 @@ describe('theme init script', () => {
   it('follows live system changes only while the choice is System', () => {
     const system = runInit({ stored: null, systemDark: false })
     expect(system.dataset.themeChoice).toBe('system')
+    expect(system.dataset.theme).toBe('light')
     system.changeSystem(true)
     expect(system.classes.has('dark')).toBe(true)
+    expect(system.dataset.theme).toBe('dark')
 
     const override = runInit({ stored: 'light', systemDark: false })
     expect(override.dataset.themeChoice).toBe('light')
     override.changeSystem(true)
     expect(override.classes.has('dark')).toBe(false)
+    expect(override.dataset.theme).toBe('light')
+  })
+
+  it('keeps data-theme equal to the stored override', () => {
+    expect(runInit({ stored: 'dark', systemDark: false }).dataset.theme).toBe(
+      'dark',
+    )
+    expect(runInit({ stored: 'light', systemDark: true }).dataset.theme).toBe(
+      'light',
+    )
   })
 })

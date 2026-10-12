@@ -35,6 +35,12 @@ export default defineConfig({
   integrations: [
     interactionDirective(),
     react(),
+    /**
+     * Starlight adds `@astrojs/sitemap` only when no integration of that name
+     * exists; this no-op keeps it from emitting a second sitemap beside the
+     * site's own `/sitemap.xml`.
+     */
+    { name: '@astrojs/sitemap', hooks: {} },
     starlight({
       title: 'Snug',
       disable404Route: true,
@@ -73,6 +79,8 @@ export default defineConfig({
         Header: './src/docs/components/DocumentationHeader.astro',
         Pagination: './src/docs/components/DocumentationPagination.astro',
         PageTitle: './src/docs/components/DocumentationPageTitle.astro',
+        TableOfContents:
+          './src/docs/components/DocumentationTableOfContents.astro',
         ThemeProvider: './src/docs/components/DocumentationThemeProvider.astro',
         ThemeSelect: './src/docs/components/DocumentationThemeSelect.astro',
       },
