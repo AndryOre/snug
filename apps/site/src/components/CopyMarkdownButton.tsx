@@ -64,10 +64,11 @@ export default function CopyMarkdownButton({
         variant="outline"
         size="touch"
         data-copy-markdown
+        aria-label={copy.copyMarkdown}
         onClick={() => void handleClick()}
       >
         <Icon aria-hidden="true" />
-        <span>{copy.copyMarkdown}</span>
+        <span>{copy[STATE_LABEL_KEYS[state]]}</span>
       </Button>
       <span role="status" className="sr-only">
         {state === 'idle' ? '' : copy[STATE_LABEL_KEYS[state]]}
