@@ -18,6 +18,17 @@ export function markCollapsedPanelsFindable(html: string): string {
   )
 }
 
+/**
+ * Markdown tables scroll horizontally on narrow screens, and a scrollable
+ * region has to be reachable with the keyboard. Starlight emits them as a bare
+ * `<table>`, so give each one a tab stop.
+ * @param html - A built page.
+ * @returns The page with every Markdown table focusable.
+ */
+export function markMarkdownTablesFocusable(html: string): string {
+  return html.replaceAll('<table>', '<table tabindex="0">')
+}
+
 function listHtmlFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = path.join(directory, entry.name)
@@ -28,7 +39,7 @@ function listHtmlFiles(directory: string): string[] {
 
 /**
  * Astro integration that rewrites the built pages with
- * {@link markCollapsedPanelsFindable}.
+ * {@link markCollapsedPanelsFindable} and {@link markMarkdownTablesFocusable}.
  * @returns The integration to register in `astro.config.ts`.
  */
 export function hiddenUntilFound(): AstroIntegration {
@@ -39,7 +50,9 @@ export function hiddenUntilFound(): AstroIntegration {
         const files = listHtmlFiles(fileURLToPath(dir))
         for (const file of files) {
           const html = readFileSync(file, 'utf8')
-          const marked = markCollapsedPanelsFindable(html)
+          const marked = markMarkdownTablesFocusable(
+            markCollapsedPanelsFindable(html),
+          )
           if (marked !== html) writeFileSync(file, marked)
         }
       },

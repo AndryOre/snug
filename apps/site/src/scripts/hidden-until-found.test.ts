@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
-import { markCollapsedPanelsFindable } from './hidden-until-found'
+import {
+  markCollapsedPanelsFindable,
+  markMarkdownTablesFocusable,
+} from './hidden-until-found'
 
 const collapsedPanel =
   '<div data-orientation="vertical" data-closed="" hidden="" id="p1" role="region" data-slot="accordion-content" class="x">A</div>'
@@ -17,5 +20,18 @@ describe('markCollapsedPanelsFindable', () => {
     const html =
       '<div hidden="" id="other"></div><div data-open="" id="p2" role="region" data-slot="accordion-content"></div>'
     expect(markCollapsedPanelsFindable(html)).toBe(html)
+  })
+})
+
+describe('markMarkdownTablesFocusable', () => {
+  it('gives every bare table a tab stop', () => {
+    const html = '<table><tr><td>a</td></tr></table><table></table>'
+    const result = markMarkdownTablesFocusable(html)
+    expect(result.match(/<table tabindex="0">/g)).toHaveLength(2)
+  })
+
+  it('leaves tables that already carry attributes alone', () => {
+    const html = '<table data-slot="table" class="x"></table>'
+    expect(markMarkdownTablesFocusable(html)).toBe(html)
   })
 })

@@ -7,7 +7,14 @@ import { firstFaqTrigger } from './faq-helpers'
 import { HOW_TO_INDEX_PATHS, HOW_TO_PATHS } from './how-to-paths'
 import { expectNoHorizontalOverflow } from './layout-helpers'
 
-const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
+const AXE_TAGS = [
+  'wcag2a',
+  'wcag2aa',
+  'wcag21a',
+  'wcag21aa',
+  'wcag22aa',
+  'best-practice',
+]
 
 const PAGES = [
   ...LOCALES.map((locale) => localePath(locale)),
@@ -17,7 +24,7 @@ const PAGES = [
   ...HOW_TO_PATHS,
 ]
 
-const AXE_PAGES = [...PAGES, '/guide/']
+const AXE_PAGES = [...PAGES, '/guide/', '/guide/exporting/', '/changelog/']
 
 async function expectNoViolations(page: Page): Promise<void> {
   const { violations } = await new AxeBuilder({ page })

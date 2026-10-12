@@ -73,7 +73,7 @@ export default function LanguageSwitcher({
           align="end"
           sideOffset={8}
           aria-label={label}
-          className="w-56"
+          className="max-h-(--available-height) w-56 overflow-y-auto"
           data-language-menu
         >
           <ul>
