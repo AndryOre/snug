@@ -23,14 +23,21 @@ const TRAINING_CRAWLERS = [
   'Bytespider',
 ] as const
 
+const REDIRECT_ONLY_PATHS = ['/install', '/reviews'] as const
+
 function group(agents: readonly string[], rule: string): string {
-  return `${agents.map((agent) => `User-agent: ${agent}`).join('\n')}\n${rule}\n`
+  const rules = [
+    rule,
+    ...REDIRECT_ONLY_PATHS.map((path) => `Disallow: ${path}`),
+  ]
+  return `${agents.map((agent) => `User-agent: ${agent}`).join('\n')}\n${rules.join('\n')}\n`
 }
 
 /**
  * The `robots.txt` body: search and answer crawlers are allowed, training
  * crawlers are disallowed in their own explicit group, everything else is
- * allowed. `Google-Extended` is not listed: blocking it also removes Gemini
+ * allowed. `/install` and `/reviews` are disallowed in every group: they only
+ * redirect to the store. `Google-Extended` is not listed: blocking it also removes Gemini
  * grounding and does not affect Search.
  * @returns The file contents.
  */

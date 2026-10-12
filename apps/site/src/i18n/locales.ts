@@ -19,13 +19,18 @@ export type Locale = (typeof LOCALES)[number]
 /**
  * A font subset worth preloading for a locale's first paint.
  */
-export type FontPreload = 'space-grotesk-latin' | 'geist-cyrillic'
+export type FontPreload =
+  'space-grotesk-latin' | 'geist-latin' | 'geist-cyrillic'
 
-const LATIN_PRELOAD: readonly FontPreload[] = ['space-grotesk-latin']
+const LATIN_PRELOAD: readonly FontPreload[] = [
+  'space-grotesk-latin',
+  'geist-latin',
+]
 
 /**
  * Per-locale presentation settings: the text direction for `<html dir>` and
- * the font subsets to preload. Latin locales preload Space Grotesk latin;
+ * the font subsets to preload. Latin locales preload Space Grotesk latin and
+ * Geist latin, so the body font swap does not shift the table rows;
  * Russian has no Space Grotesk Cyrillic, so it preloads Geist Cyrillic; CJK
  * pages barely use either and preload nothing.
  */

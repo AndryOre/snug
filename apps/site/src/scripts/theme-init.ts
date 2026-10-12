@@ -1,11 +1,13 @@
 import { createHash } from 'node:crypto'
 
+import { THEME_COLORS } from './theme-color'
+
 /**
  * Blocking inline script that applies the stored or system theme to `<html>`
  * before first paint. Its CSP hash is derived from this exact string, so edit it
  * only here.
  */
-export const THEME_INIT_SCRIPT = `{const root=document.documentElement;let theme='system';try{const stored=localStorage.getItem('snug:theme');if(stored==='light'||stored==='dark')theme=stored}catch{theme='system'}const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);root.classList.toggle('dark',dark);root.classList.add('js')}`
+export const THEME_INIT_SCRIPT = `{const root=document.documentElement;let theme='system';try{const stored=localStorage.getItem('snug:theme');if(stored==='light'||stored==='dark')theme=stored}catch{theme='system'}const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);const apply=isDark=>{root.classList.toggle('dark',isDark);root.dataset.theme=isDark?'dark':'light'};apply(dark);root.dataset.themeChoice=theme;if(theme==='system')matchMedia('(prefers-color-scheme: dark)').addEventListener('change',event=>{if(root.dataset.themeChoice==='system')apply(event.matches)});if(theme!=='system'){for(const meta of document.querySelectorAll('meta[name="theme-color"]'))meta.setAttribute('content',dark?'${THEME_COLORS.dark}':'${THEME_COLORS.light}')}root.classList.add('js')}`
 
 /**
  * CSP hash source (without quotes) for {@link THEME_INIT_SCRIPT}, in the form

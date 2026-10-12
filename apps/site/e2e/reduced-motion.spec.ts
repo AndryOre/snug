@@ -46,10 +46,6 @@ test('language popover has no transform animation under reduced motion', async (
   page,
 }) => {
   await page.goto('/')
-  await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
   await page.locator('[data-language-switcher]').getByRole('button').click()
   await expect(page.locator('[data-language-menu]')).toBeVisible()
   const popup = page.locator('[data-slot="popover-content"]')

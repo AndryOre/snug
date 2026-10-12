@@ -32,8 +32,9 @@ tokens of its own. The code map is
   after the visitor clicks it.
 - Default to `.astro` components that render to static HTML. Use a React island
   (`client:*`) only for real interactivity, and prefer `client:visible` or
-  `client:idle` over `client:load`. The FAQ accordion and the language popover
-  are the two sanctioned islands besides the video
+  `client:idle` over `client:load`. The header island hydrates on its first
+  interaction with the custom `client:interaction` directive. The FAQ accordion
+  and the header menus are the two sanctioned islands besides the video
   ([ADR 0013](../../docs/adr/0013-landing-islands-for-faq-and-language-switcher.md)).
 - Install buttons link to `/install`, which the server answers with a 302 to the
   Chrome Web Store listing with UTM tags; `/reviews` does the same for the

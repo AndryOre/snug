@@ -7,6 +7,7 @@ import { buildSidebar } from './src/docs/sidebar'
 import { collectStarlightInlineScriptHashes } from './src/docs/starlight-inline-hashes'
 import { languageTag, LOCALE_NAMES, LOCALES } from './src/i18n/locales'
 import { hiddenUntilFound } from './src/scripts/hidden-until-found'
+import { interactionDirective } from './src/scripts/interaction-integration'
 import { THEME_INIT_HASH } from './src/scripts/theme-init'
 import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from './src/seo/umami'
 
@@ -32,7 +33,14 @@ export default defineConfig({
     },
   },
   integrations: [
+    interactionDirective(),
     react(),
+    /**
+     * Starlight adds `@astrojs/sitemap` only when no integration of that name
+     * exists; this no-op keeps it from emitting a second sitemap beside the
+     * site's own `/sitemap.xml`.
+     */
+    { name: '@astrojs/sitemap', hooks: {} },
     starlight({
       title: 'Snug',
       disable404Route: true,
@@ -60,6 +68,7 @@ export default defineConfig({
           tag: 'link',
           attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         },
+        { tag: 'link', attrs: { rel: 'sitemap', href: '/sitemap.xml' } },
       ],
       components: {
         MobileMenuToggle:
@@ -70,6 +79,8 @@ export default defineConfig({
         Header: './src/docs/components/DocumentationHeader.astro',
         Pagination: './src/docs/components/DocumentationPagination.astro',
         PageTitle: './src/docs/components/DocumentationPageTitle.astro',
+        TableOfContents:
+          './src/docs/components/DocumentationTableOfContents.astro',
         ThemeProvider: './src/docs/components/DocumentationThemeProvider.astro',
         ThemeSelect: './src/docs/components/DocumentationThemeSelect.astro',
       },

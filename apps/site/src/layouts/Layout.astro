@@ -3,6 +3,7 @@ import '../styles/site.css'
 import { cn } from '@workspace/ui/lib/utils'
 
 import geistCyrillic from '@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2?url'
+import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
 
 import Footer from '../components/Footer.astro'
@@ -23,11 +24,13 @@ import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
 import type { PageDescriptor } from '../seo/page-descriptor'
 import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import { buildStructuredData } from '../seo/structured-data'
+import { THEME_COLORS } from '../scripts/theme-color'
 import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
 import { UMAMI_DOMAINS, UMAMI_SCRIPT_URL, UMAMI_WEBSITE_ID } from '../seo/umami'
 
 const FONT_PRELOAD_URLS: Record<FontPreload, string> = {
   'space-grotesk-latin': spaceGroteskLatin,
+  'geist-latin': geistLatin,
   'geist-cyrillic': geistCyrillic,
 }
 
@@ -79,12 +82,12 @@ const switcherHref = page && hasAlternates ? page.path : undefined
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
-      content="#fbf7f0"
+      content={THEME_COLORS.light}
       media="(prefers-color-scheme: light)"
     />
     <meta
       name="theme-color"
-      content="#17120a"
+      content={THEME_COLORS.dark}
       media="(prefers-color-scheme: dark)"
     />
     <script is:inline set:html={THEME_INIT_SCRIPT} />

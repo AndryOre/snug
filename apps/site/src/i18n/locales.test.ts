@@ -22,10 +22,16 @@ describe('locales', () => {
     expect(skipped).toEqual(['ja', 'ko', 'zh_CN'])
   })
 
-  it('preloads Geist Cyrillic for ru and Space Grotesk latin for Latin locales', () => {
+  it('preloads Geist Cyrillic for ru and Space Grotesk plus Geist latin for Latin locales', () => {
     expect(LOCALE_CONFIG.ru.preloadFonts).toEqual(['geist-cyrillic'])
-    expect(LOCALE_CONFIG.en.preloadFonts).toEqual(['space-grotesk-latin'])
-    expect(LOCALE_CONFIG.pt_BR.preloadFonts).toEqual(['space-grotesk-latin'])
+    expect(LOCALE_CONFIG.en.preloadFonts).toEqual([
+      'space-grotesk-latin',
+      'geist-latin',
+    ])
+    expect(LOCALE_CONFIG.pt_BR.preloadFonts).toEqual([
+      'space-grotesk-latin',
+      'geist-latin',
+    ])
   })
 
   it('matches the extension locale files', () => {

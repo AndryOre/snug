@@ -236,6 +236,9 @@
     "copied": "コピーしました",
     "copyFailed": "コピーできませんでした"
   },
+  "docsSidebar": {
+    "closeLabel": "メニューを閉じる"
+  },
   "docsSearch": {
     "noResults": "{query} に一致する結果はありません。",
     "hint": "別の言葉や、より短い言葉をお試しください。"

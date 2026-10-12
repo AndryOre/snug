@@ -10,10 +10,11 @@ import {
   howToSlugsForGuideEntry,
 } from '../../i18n/how-to'
 import { DEFAULT_LOCALE, localePath } from '../../i18n/locales'
+import { documentationLanguageHref } from '../language-links'
 import { resolveDocumentationLocale } from '../locale'
 import DocumentationPagination from './DocumentationPagination.astro'
 
-const { lang, dir, editUrl, entry } = Astro.locals.starlightRoute
+const { lang, dir, editUrl, entry, head } = Astro.locals.starlightRoute
 const locale = resolveDocumentationLocale(lang)
 const hasEditLink = locale === DEFAULT_LOCALE && Boolean(editUrl)
 const relatedHowTos = howToSlugsForGuideEntry(entry.id).map((slug) => ({
@@ -22,6 +23,9 @@ const relatedHowTos = howToSlugsForGuideEntry(entry.id).map((slug) => ({
   lang: howToPageLocales(slug).includes(locale) ? undefined : DEFAULT_LOCALE,
 }))
 const relatedLabel = getHowToSharedContent(locale).relatedHowToTitle
+const pageHref = documentationLanguageHref(head, (code) =>
+  localePath(code, DOCS_PATHS.guide),
+)
 ---
 
 <div class="mt-12 flex flex-col gap-8" lang={lang} dir={dir}>
@@ -56,8 +60,5 @@ const relatedLabel = getHowToSharedContent(locale).relatedHowToTitle
   )}
 </div>
 <div class="mt-12">
-  <Footer
-    locale={locale}
-    pageHref={(code) => localePath(code, DOCS_PATHS.guide)}
-  />
+  <Footer locale={locale} pageHref={pageHref} />
 </div>
