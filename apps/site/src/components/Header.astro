@@ -1,6 +1,6 @@
 ---
 import { DOCS_PATHS, DOCS_UI } from '../i18n/docs-ui'
-import { getClosingCopy } from '../i18n/landing'
+import { FOOTER_LINK_HREFS, getClosingCopy } from '../i18n/landing'
 import { buttonVariants } from '@workspace/ui/components/button'
 import { cn } from '@workspace/ui/lib/utils'
 
@@ -14,6 +14,7 @@ import {
 import HeaderMenus from './HeaderMenus'
 
 interface Props {
+  as?: 'header' | 'div'
   locale: Locale
   markCurrent?: boolean
   pageHref?: (locale: Locale) => string
@@ -21,17 +22,23 @@ interface Props {
 }
 
 const {
+  as: Element = 'header',
   locale,
   markCurrent = true,
   pageHref = localePath,
   skipLink = true,
 } = Astro.props
-const { header } = getClosingCopy(locale)
+const { footer, header } = getClosingCopy(locale)
 const siteLinks = [
   {
     key: 'guide',
     href: localePath(locale, DOCS_PATHS.guide),
     label: DOCS_UI.guide,
+  },
+  {
+    key: 'how-to',
+    href: FOOTER_LINK_HREFS.howTo(locale),
+    label: footer.howTo,
   },
   {
     key: 'whats-new',
@@ -47,7 +54,7 @@ const options = LOCALES.map((code) => ({
 }))
 ---
 
-<header data-section="header" class="relative z-10">
+<Element data-section="header" class="relative z-10">
   {skipLink && (
     <a
       href="#main"
@@ -105,7 +112,7 @@ const options = LOCALES.map((code) => ({
     </nav>
     <slot name="search" />
     <HeaderMenus
-      client:idle
+      client:interaction
       theme={header.theme}
       language={{
         current: locale,
@@ -118,4 +125,4 @@ const options = LOCALES.map((code) => ({
       }}
     />
   </div>
-</header>
+</Element>

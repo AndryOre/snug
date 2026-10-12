@@ -9,6 +9,8 @@ import {
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useEffect, useSyncExternalStore } from 'react'
 
+import { themeColor } from '../scripts/theme-color'
+
 const THEME_STORAGE_KEY = 'snug:theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'
 
@@ -73,6 +75,14 @@ function applyChoice(choice: ThemeChoice) {
   const isDark =
     choice === 'dark' || (choice === 'system' && matchMedia(DARK_QUERY).matches)
   const root = document.documentElement
+  for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+    const isDarkMedia = meta.getAttribute('media') === DARK_QUERY
+    meta.setAttribute(
+      'content',
+      themeColor(choice === 'system' ? isDarkMedia : isDark),
+    )
+  }
+  root.dataset.themeChoice = choice
   root.classList.add('theme-switching')
   root.classList.toggle('dark', isDark)
   requestAnimationFrame(() => {
@@ -110,7 +120,6 @@ export default function ThemeMenu({ copy }: { copy: ThemeMenuCopy }) {
     return () => query.removeEventListener('change', follow)
   }, [choice])
 
-  const ActiveIcon = CHOICE_ICONS[choice]
   return (
     <div className="hidden shrink-0 js:block" data-theme-menu>
       <DropdownMenu>
@@ -124,7 +133,18 @@ export default function ThemeMenu({ copy }: { copy: ThemeMenuCopy }) {
             />
           }
         >
-          <ActiveIcon aria-hidden="true" />
+          <MonitorIcon
+            aria-hidden="true"
+            className="in-data-[theme-choice=dark]:hidden in-data-[theme-choice=light]:hidden"
+          />
+          <SunIcon
+            aria-hidden="true"
+            className="hidden in-data-[theme-choice=light]:block"
+          />
+          <MoonIcon
+            aria-hidden="true"
+            className="hidden in-data-[theme-choice=dark]:block"
+          />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" sideOffset={8} className="w-46">
           <DropdownMenuRadioGroup value={choice} onValueChange={selectChoice}>

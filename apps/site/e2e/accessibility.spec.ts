@@ -141,9 +141,6 @@ test.describe('opened states', () => {
     page,
   }) => {
     await page.goto('/')
-    await expect(
-      page.locator('astro-island[client="idle"]'),
-    ).not.toHaveAttribute('ssr', '')
     await page.locator('[data-language-switcher]').getByRole('button').click()
     await expect(page.locator('[data-language-menu]')).toBeVisible()
     await expectNoViolations(page)

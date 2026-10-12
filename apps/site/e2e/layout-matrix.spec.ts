@@ -1,7 +1,11 @@
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
-import { expectNoElementOverflow, MIN_TOUCH_TARGET } from './layout-helpers'
+import {
+  expectNoElementOverflow,
+  hydrateHeaderIsland,
+  MIN_TOUCH_TARGET,
+} from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 const SWEEP_WIDTHS = [320, 768]
@@ -76,10 +80,7 @@ test.describe('touch targets', () => {
   for (const [label, selector] of Object.entries(TOUCH_TARGETS)) {
     test(`${label} are at least 44px tall and wide`, async ({ page }) => {
       await page.goto('/')
-      await expect(page.locator('header astro-island')).not.toHaveAttribute(
-        'ssr',
-        '',
-      )
+      await hydrateHeaderIsland(page)
       const targets = page.locator(selector)
       const count = await targets.count()
       expect(count).toBeGreaterThan(0)
