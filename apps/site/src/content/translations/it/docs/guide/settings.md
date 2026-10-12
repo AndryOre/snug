@@ -1,6 +1,10 @@
 ---
 title: Impostazioni
 sourceHash: 27e95d807b037c3c
+description:
+  "Imposta il tema, la visualizzazione dell'albero dei segnalibri e la modalità
+  di importazione predefinita, e trova la scheda dell'istantanea di sicurezza."
+seoTitle: 'Impostazioni di Snug: tema, importazione, sicurezza'
 ---
 
 La pagina **Impostazioni** dell'app contiene il tema (Sistema, Chiaro, Scuro),

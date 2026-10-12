@@ -1,6 +1,10 @@
 ---
 title: ブックマークを書き出す
 sourceHash: 2c9f860aa372f840
+description:
+  'Chrome のブックマークを HTML、JSON、CSV、Markdown、OPML、XBEL
+  で書き出します。ポップアップで一括、アプリでは対象を選べます。'
+seoTitle: 'Chrome のブックマークを HTML・JSON・CSV で書き出す'
 ---
 
 1. クイック書き出し: ポップアップで形式を選び、「すべて書き出す」をクリックすると、ブックマークツリー全体を書き出せます。

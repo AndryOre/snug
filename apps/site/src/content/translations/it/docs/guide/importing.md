@@ -1,6 +1,10 @@
 ---
 title: Importare i segnalibri
 sourceHash: 4c537c8e1b7a7231
+description:
+  "Importa i segnalibri da un file in Chrome. Controlla l'anteprima, scegli la
+  modalità di importazione e salta i segnalibri che hai già."
+seoTitle: 'Importare i segnalibri in Chrome da un file'
 ---
 
 1. Importazione rapida, dal popup:

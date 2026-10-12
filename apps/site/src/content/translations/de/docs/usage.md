@@ -1,6 +1,10 @@
 ---
 title: Nutzung
 sourceHash: e1c70f0d3247c344
+description:
+  'Öffne die Snug-App und folge den Anleitungen zum Exportieren, Importieren,
+  Finden von Duplikaten, zu den Einstellungen und zum automatischen Export.'
+seoTitle: 'Snug nutzen: Lesezeichen exportieren und importieren'
 ---
 
 ## Die App öffnen

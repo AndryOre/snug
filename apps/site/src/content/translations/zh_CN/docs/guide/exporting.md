@@ -1,6 +1,10 @@
 ---
 title: 导出书签
 sourceHash: 2c9f860aa372f840
+description:
+  '将 Chrome 书签导出为 HTML、JSON、CSV、Markdown、OPML 或
+  XBEL。可在弹窗中一键导出全部，也可在应用中自选内容。'
+seoTitle: '将 Chrome 书签导出为 HTML、JSON 或 CSV'
 ---
 
 1. 快速导出：在弹出窗口中选择一种格式并点击“全部导出”，即可导出整个书签树。

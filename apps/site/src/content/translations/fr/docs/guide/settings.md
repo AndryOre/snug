@@ -1,6 +1,10 @@
 ---
 title: Paramètres
 sourceHash: 27e95d807b037c3c
+description:
+  "Réglez le thème, l'affichage de l'arborescence des favoris et le mode
+  d'importation par défaut, et retrouvez l'instantané de sécurité."
+seoTitle: 'Paramètres de Snug : thème, importation, sécurité'
 ---
 
 La page **Paramètres** de l'application regroupe le thème (Système, Clair,

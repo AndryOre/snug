@@ -1,6 +1,10 @@
 ---
 title: 북마크 내보내기
 sourceHash: 2c9f860aa372f840
+description:
+  'Chrome 북마크를 HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내세요. 팝업에서
+  한 번에, 앱에서는 원하는 항목만 고를 수 있어요.'
+seoTitle: 'Chrome 북마크를 HTML, JSON, CSV로 내보내기'
 ---
 
 1. 빠른 내보내기: 팝업에서 형식을 고르고 "모두 내보내기"를 클릭하면 북마크 트리

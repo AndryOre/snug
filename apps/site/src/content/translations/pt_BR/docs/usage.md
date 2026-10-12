@@ -1,6 +1,10 @@
 ---
 title: Uso
 sourceHash: e1c70f0d3247c344
+description:
+  'Abra o app do Snug e siga as páginas do guia para exportar, importar,
+  encontrar duplicados, ajustar configurações e agendar a exportação automática.'
+seoTitle: 'Como usar o Snug: exportar e importar favoritos'
 ---
 
 ## Abrir o app

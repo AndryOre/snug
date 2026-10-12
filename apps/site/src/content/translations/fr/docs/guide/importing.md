@@ -1,6 +1,10 @@
 ---
 title: Importer des favoris
 sourceHash: 4c537c8e1b7a7231
+description:
+  "Importez des favoris depuis un fichier dans Chrome. Vérifiez l'aperçu,
+  choisissez le mode d'importation et ignorez les favoris que vous avez déjà."
+seoTitle: 'Importer des favoris dans Chrome depuis un fichier'
 ---
 
 1. Importation rapide, depuis la fenêtre contextuelle :

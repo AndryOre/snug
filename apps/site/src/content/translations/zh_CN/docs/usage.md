@@ -1,6 +1,10 @@
 ---
 title: 使用方法
 sourceHash: e1c70f0d3247c344
+description:
+  '打开 Snug
+  应用，按指南页面操作：导出、导入、查找重复项、调整设置，以及定时自动导出。'
+seoTitle: 'Snug 使用指南：导出和导入书签'
 ---
 
 ## 打开应用

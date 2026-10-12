@@ -25,6 +25,8 @@ import {
 export interface CatalogEntry {
   id: string
   title: string
+  description: string
+  seoTitle: string
   body: string
   editUrl: string
   sourcePath: string
@@ -87,6 +89,8 @@ export function buildCatalogEntry(
     return {
       id: source.id,
       title: DOCS_UI.whatsNew,
+      description: source.description,
+      seoTitle: source.seoTitle,
       body: rewriteMarkdownLinks(notes, context),
       editUrl,
       sourcePath: source.sourcePath,
@@ -99,6 +103,8 @@ export function buildCatalogEntry(
   return {
     id: source.id,
     title,
+    description: source.description,
+    seoTitle: source.seoTitle,
     body: rewriteMarkdownLinks(body, context),
     editUrl,
     sourcePath: source.sourcePath,
@@ -168,6 +174,8 @@ export function buildLocalizedPage(
     return {
       id,
       title: translation.title,
+      description: translation.description ?? english.description,
+      seoTitle: translation.seoTitle ?? english.seoTitle,
       body: rewriteMarkdownLinks(translation.body, {
         sourcePath: source.sourcePath,
         locale,

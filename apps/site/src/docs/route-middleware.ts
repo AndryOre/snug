@@ -2,10 +2,12 @@ import { defineRouteMiddleware } from '@astrojs/starlight/route-data'
 
 import { getPageMeta } from '../i18n/content'
 import { resolveDocumentationLocale } from './locale'
+import { applySeoTitle } from './page-meta'
 
 /**
- * Gives every Guide page a meta description from its locale's site
- * description, and marks the content of a page that renders the English text
+ * Swaps a page's `<title>` and `og:title` for its SEO title, falls back to
+ * the locale's site description only when a page has no description of its
+ * own, and marks the content of a page that renders the English text
  * as English, so the content wrapper carries `lang="en"` and assistive
  * technology switches voice. The page chrome keeps the locale of the route.
  */
@@ -24,6 +26,8 @@ export const onRequest = defineRouteMiddleware((context) => {
       },
     )
   }
+  const { seoTitle, title } = route.entry.data
+  route.head = applySeoTitle(route.head, title, seoTitle)
   if (route.entry.data.translationStatus === 'translated') return
   route.entryMeta = { ...route.entryMeta, lang: 'en', dir: 'ltr' }
 })
