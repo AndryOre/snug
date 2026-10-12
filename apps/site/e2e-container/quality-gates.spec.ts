@@ -271,10 +271,14 @@ for (const { path, interactive } of CSP_PAGES) {
       const trigger = faq.getByRole('button').first()
       await trigger.click()
       await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      const languageTrigger = page
+        .locator('[data-language-switcher]')
+        .getByRole('button')
+      await languageTrigger.focus()
       await expect(
         page.locator('astro-island:has([data-language-switcher])'),
       ).not.toHaveAttribute('ssr', '')
-      await page.locator('[data-language-switcher]').getByRole('button').click()
+      await languageTrigger.click()
       await expect(page.locator('[data-language-menu]')).toBeVisible()
     }
     await page.waitForTimeout(250)

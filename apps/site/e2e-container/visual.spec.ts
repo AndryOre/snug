@@ -43,7 +43,9 @@ for (const { name, path } of pagePaths) {
           await page.setViewportSize({ width, height: 900 })
           await page.goto(path, { waitUntil: 'networkidle' })
           await settlePage(page)
-          await expect(page.locator('astro-island[ssr]')).toHaveCount(0)
+          await expect(
+            page.locator('astro-island[ssr]:not([client="interaction"])'),
+          ).toHaveCount(0)
 
           await expect(page).toHaveScreenshot(
             `${name}-${colorScheme}-${width}.png`,
