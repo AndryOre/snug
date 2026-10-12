@@ -271,10 +271,10 @@ test.describe('root files', () => {
     const groups = robots.split('\n\n')
     const groupFor = (agent: string): string =>
       groups.find((entry) => entry.includes(`User-agent: ${agent}\n`)) ?? ''
-    expect(groupFor('OAI-SearchBot')).toContain('Allow: /')
-    expect(groupFor('OAI-SearchBot')).not.toContain('Disallow: /')
-    expect(groupFor('GPTBot')).toContain('Disallow: /')
-    expect(groupFor('GPTBot')).not.toContain('Allow: /')
+    expect(groupFor('OAI-SearchBot').split('\n')).toContain('Allow: /')
+    expect(groupFor('OAI-SearchBot').split('\n')).not.toContain('Disallow: /')
+    expect(groupFor('GPTBot').split('\n')).toContain('Disallow: /')
+    expect(groupFor('GPTBot').split('\n')).not.toContain('Allow: /')
     expect(robots).not.toContain('User-agent: Google-Extended')
     expect(robots).toContain(`Sitemap: ${SITE_ORIGIN}/sitemap.xml`)
   })
