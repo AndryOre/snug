@@ -11,6 +11,12 @@ export const INTERACTION_EVENTS = [
 const CAPTURE = { capture: true }
 
 /**
+ * Time given to React's concurrent hydration to attach its handlers after the
+ * island reports it has hydrated, before early clicks are replayed.
+ */
+const HYDRATION_SETTLE_MS = 50
+
+/**
  * Hydrate an island on its first interaction. A click that lands while the
  * island's code is still loading would hit inert server HTML, so those clicks
  * are recorded and replayed once hydration finishes.
@@ -31,6 +37,9 @@ export function hydrateOnInteraction(
     const hydrate = await load()
     root.removeEventListener('click', recordClick, CAPTURE)
     await hydrate()
+    if (earlyClickTargets.length > 0) {
+      await new Promise((resolve) => setTimeout(resolve, HYDRATION_SETTLE_MS))
+    }
     for (const target of earlyClickTargets) {
       const replayable = target as { isConnected?: boolean; click?: () => void }
       if (replayable.isConnected !== false) replayable.click?.()

@@ -2,8 +2,9 @@ import { expect, type Page } from '@playwright/test'
 
 /**
  * Hydrate the header island the way a visitor does, by moving focus into it,
- * then wait until it is interactive. The header hydrates on interaction, so
- * waiting alone would never finish.
+ * then wait until it is interactive, including the frames React needs to
+ * attach its handlers once the island reports hydrated. The header hydrates on
+ * interaction, so waiting alone would never finish.
  * @param page - A page with the site header.
  */
 export async function hydrateHeaderIsland(page: Page): Promise<void> {
@@ -11,6 +12,16 @@ export async function hydrateHeaderIsland(page: Page): Promise<void> {
   await expect(
     page.locator('astro-island[client="interaction"]'),
   ).not.toHaveAttribute('ssr', '')
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        globalThis.requestAnimationFrame(() => {
+          globalThis.requestAnimationFrame(() => {
+            resolve()
+          })
+        })
+      }),
+  )
 }
 
 const ELEMENT_SWEEP_SELECTOR = [
