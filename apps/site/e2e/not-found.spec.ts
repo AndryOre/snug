@@ -10,6 +10,7 @@ import {
   localePath,
   LOCALES,
 } from '../src/i18n/locales'
+import { howToIndexPath } from './how-to-paths'
 import { expectNoHorizontalOverflow } from './layout-helpers'
 
 const siteRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -61,6 +62,23 @@ test.describe('built 404 pages', () => {
       expect(html).toContain(escapeHtml(notFound.backLink))
       expect(html).toContain('name="robots" content="noindex"')
       expect(html).not.toContain('aria-current')
+    })
+  }
+})
+
+test.describe('404 secondary links', () => {
+  for (const locale of LOCALES) {
+    test(`${locale} 404 links the Guide and the How-to index`, async ({
+      page,
+    }) => {
+      await page.goto(notFoundUrl(locale))
+      const links = page.locator('[data-not-found-links] a')
+      await expect(links).toHaveCount(2)
+      await expect(links.nth(0)).toHaveAttribute(
+        'href',
+        localePath(locale, '/guide/'),
+      )
+      await expect(links.nth(1)).toHaveAttribute('href', howToIndexPath(locale))
     })
   }
 })

@@ -9,14 +9,13 @@ const TRUST_TARGETS = [
   'trust-ci',
   'trust-privacy',
 ]
-const FOOTER_TARGETS = [
-  'footer-source',
+const FOOTER_OUTBOUND_TARGETS = ['footer-source', 'footer-listing']
+const FOOTER_NAV_TARGETS = [
   'footer-alternatives',
   'footer-how-to',
   'footer-privacy',
   'footer-guide',
   'footer-changelog',
-  'footer-listing',
 ]
 
 for (const locale of LOCALES) {
@@ -65,10 +64,21 @@ for (const locale of LOCALES) {
       expect(
         targets.toSorted((a, b) => String(a).localeCompare(String(b))),
       ).toEqual(
-        ['hero-source', ...TRUST_TARGETS, ...FOOTER_TARGETS].toSorted((a, b) =>
-          a.localeCompare(b),
+        ['hero-source', ...TRUST_TARGETS, ...FOOTER_OUTBOUND_TARGETS].toSorted(
+          (a, b) => a.localeCompare(b),
         ),
       )
+    })
+
+    test('internal footer links carry nav-click with stable targets', async ({
+      page,
+    }) => {
+      const targets = await page
+        .locator('footer a[data-umami-event="nav-click"]')
+        .evaluateAll((anchors) =>
+          anchors.map((anchor) => anchor.dataset.umamiEventTarget),
+        )
+      expect(targets).toEqual(FOOTER_NAV_TARGETS)
     })
 
     test('no event property depends on locale or translated text', async ({

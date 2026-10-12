@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { localePath, LOCALES } from '../src/i18n/locales'
+
 const DESKTOP_WIDTH = 1440
 const PHONE_WIDTH = 375
 const NARROWEST_WIDTH = 320
@@ -65,6 +67,27 @@ test('Japanese headings break by phrase', async ({ page }) => {
   expect(wordBreaks.length).toBeGreaterThan(1)
   expect(new Set(wordBreaks)).toEqual(new Set(['auto-phrase']))
 })
+
+for (const locale of LOCALES) {
+  test(`the ${locale} h1 reads as two sentences in its text content`, async ({
+    page,
+  }) => {
+    await page.goto(localePath(locale))
+    const { text, lead, accent } = await page
+      .locator('h1')
+      .evaluate((element) => {
+        const [first, second] = [...element.querySelectorAll('span')]
+        return {
+          text: element.textContent ?? '',
+          lead: first?.textContent ?? '',
+          accent: second?.textContent ?? '',
+        }
+      })
+    expect(lead).not.toBe('')
+    expect(accent).not.toBe('')
+    expect(text.trim()).toBe(`${lead} ${accent}`)
+  })
+}
 
 test('the German h1 keeps Lesezeichen on one line at 320', async ({ page }) => {
   await page.setViewportSize({ width: NARROWEST_WIDTH, height: 700 })
