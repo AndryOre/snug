@@ -35,6 +35,12 @@ export default defineConfig({
   integrations: [
     interactionDirective(),
     react(),
+    /**
+     * Starlight adds `@astrojs/sitemap` only when no integration of that name
+     * exists; this no-op keeps it from emitting a second sitemap beside the
+     * site's own `/sitemap.xml`.
+     */
+    { name: '@astrojs/sitemap', hooks: {} },
     starlight({
       title: 'Snug',
       disable404Route: true,
