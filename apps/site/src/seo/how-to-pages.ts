@@ -1,4 +1,5 @@
 import {
+  getHowToContent,
   getHowToIndexMeta,
   getHowToMeta,
   HOW_TO_INDEX_LOCALES,
@@ -6,13 +7,15 @@ import {
   howToIndexPath,
   howToPageLocales,
   howToPath,
+  howToValues,
+  interpolateHowTo,
 } from '../i18n/how-to'
 import {
   DEFAULT_LOCALE,
   hreflangAlternates,
   SITE_ORIGIN,
 } from '../i18n/locales'
-import type { LlmsHowToPage, SitemapEntry } from './crawlers'
+import type { LlmsFullSection, LlmsHowToPage, SitemapEntry } from './crawlers'
 import { lastCommitDate } from './last-modified'
 
 /**
@@ -54,6 +57,55 @@ export function howToSitemapEntries(): SitemapEntry[] {
     }))
   })
   return [...indexEntries, ...pageEntries]
+}
+
+function numbered(steps: readonly string[]): string {
+  return steps.map((step, index) => `${index + 1}. ${step}`).join('\n')
+}
+
+function bulleted(items: readonly string[]): string {
+  return items.map((item) => `- ${item}`).join('\n')
+}
+
+/**
+ * The English How-to pages as `llms-full.txt` sections: the short answer, the
+ * built-in steps, the Snug steps and what to do when something goes wrong, with
+ * the date the browser facts were verified.
+ * @returns One section per page, in registry order.
+ */
+export function howToLlmsFullSections(): LlmsFullSection[] {
+  return HOW_TO_SLUGS.map((slug) => {
+    const copy = getHowToContent(DEFAULT_LOCALE, slug)
+    const values = howToValues(DEFAULT_LOCALE, slug) as unknown as Record<
+      string,
+      string
+    >
+    const fill = (template: string) =>
+      interpolateHowTo(template, DEFAULT_LOCALE, values)
+    const snug = 'withSnug' in copy ? copy.withSnug : undefined
+    const blocks = [
+      fill(copy.directAnswer),
+      `### ${copy.builtIn.title}`,
+      fill(copy.builtIn.intro),
+      numbered(copy.builtIn.steps.map((item) => fill(item))),
+      ...(snug
+        ? [
+            `### ${snug.title}`,
+            fill(snug.intro),
+            numbered(snug.steps.map((item) => fill(item))),
+            fill(snug.snapshot),
+          ]
+        : []),
+      `### ${copy.goesWrong.title}`,
+      bulleted(copy.goesWrong.items.map((item) => fill(item))),
+      fill(copy.verified),
+    ]
+    return {
+      title: copy.title,
+      url: `${SITE_ORIGIN}${howToPath(DEFAULT_LOCALE, slug)}`,
+      body: blocks.join('\n\n'),
+    }
+  })
 }
 
 /**

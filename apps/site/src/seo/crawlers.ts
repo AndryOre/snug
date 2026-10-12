@@ -62,9 +62,26 @@ export interface LlmsLocalePage {
 }
 
 /**
- * One Guide page or What's new in one locale, as listed in `llms.txt`.
+ * One English Guide page or What's new, as listed in `llms.txt`: its
+ * description and the link to its Markdown copy. `secondary` pages go under
+ * `## Optional`.
  */
-export type LlmsDocumentationPage = LlmsLocalePage
+export interface LlmsDocumentationPage {
+  title: string
+  description: string
+  markdownUrl: string
+  secondary?: boolean
+}
+
+/**
+ * One page's Markdown, appended to `llms-full.txt` under an
+ * `## <title> (<url>)` heading.
+ */
+export interface LlmsFullSection {
+  title: string
+  url: string
+  body: string
+}
 
 /**
  * One Alternatives or Comparison page, as listed in `llms.txt`.
@@ -84,7 +101,7 @@ export type LlmsHowToPage = LlmsComparisonPage
  * The `llms.txt` body summarizing the product and linking the key pages.
  * @param description - The English meta description.
  * @param localePages - Every locale's landing page.
- * @param documentationPages - Every Guide page and What's new, per locale.
+ * @param documentationPages - The English Guide pages and What's new.
  * @param comparisonPages - The Alternatives page and each Comparison page.
  * @param howToPages - Each English How-to page.
  * @returns The file contents.
@@ -111,15 +128,25 @@ export function buildLlmsTxt(
     .join('\n')
   const comparisonSection =
     comparisonLines === '' ? '' : `## Comparisons\n\n${comparisonLines}\n\n`
-  const documentationLines = documentationPages
-    .map(
-      ({ languageTag, title, url }) => `- [${title}](${url}): ${languageTag}`,
-    )
-    .join('\n')
+  const documentationLine = ({
+    title,
+    description: summary,
+    markdownUrl,
+  }: LlmsDocumentationPage): string =>
+    `- [${title}](${markdownUrl}): ${summary}`
+  const guideLines = documentationPages
+    .filter(({ secondary }) => !secondary)
+    .map((page) => documentationLine(page))
   const documentationSection =
-    documentationLines === ''
+    guideLines.length === 0
       ? ''
-      : `## Guide and What's new\n\n${documentationLines}\n\n`
+      : `## Guide\n\n${guideLines.join('\n')}\n\nThe Guide is translated: every page exists under \`/<locale>/\`, for example \`${SITE_ORIGIN}/es/guide/\`.\n\n`
+  const optionalLines = [
+    ...documentationPages
+      .filter(({ secondary }) => secondary)
+      .map((page) => documentationLine(page)),
+    `- [Chrome Web Store reviews](${SITE_ORIGIN}/reviews): what users say about Snug`,
+  ].join('\n')
   const localeLines = localePages
     .map(
       ({ languageTag, title, url }) => `- [${title}](${url}): ${languageTag}`,
@@ -135,9 +162,9 @@ Snug is a free, open-source Chromium browser extension. It makes no network call
 
 ${localeLines}
 
-${comparisonSection}${howToSection}${documentationSection}## Pages
+${documentationSection}${comparisonSection}${howToSection}## Pages
 
-- [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page as Markdown
+- [Full English page content](${SITE_ORIGIN}/llms-full.txt): the landing page, How-to answers, comparisons and Guide as Markdown
 - [Install](${SITE_ORIGIN}/install): redirects to the Chrome Web Store or Microsoft Edge Add-ons listing
 - [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/efknehclgcncocgochoibgiiagklcnho): the Edge listing
 - [Privacy policy](${SITE_ORIGIN}/privacy/): what Snug stores and what it never sends
@@ -146,7 +173,7 @@ ${comparisonSection}${howToSection}${documentationSection}## Pages
 
 ## Optional
 
-- [Chrome Web Store reviews](${SITE_ORIGIN}/reviews): what users say about Snug
+${optionalLines}
 `
 }
 
@@ -155,11 +182,16 @@ function section(heading: string, ...blocks: string[]): string {
 }
 
 /**
- * The `llms-full.txt` body: the English landing page flattened to Markdown.
+ * The `llms-full.txt` body: the English landing page flattened to Markdown,
+ * then each extra page under its own `## <title> (<url>)` heading.
  * @param content - The English content tree.
+ * @param extraSections - How-to, comparison and Guide pages to append.
  * @returns The file contents.
  */
-export function buildLlmsFullTxt(content: SiteContent): string {
+export function buildLlmsFullTxt(
+  content: SiteContent,
+  extraSections: readonly LlmsFullSection[] = [],
+): string {
   const titled = (
     entries: Record<string, { title: string; body: string }>,
   ): string[] =>
@@ -205,6 +237,9 @@ export function buildLlmsFullTxt(content: SiteContent): string {
       content.final.heading,
       content.final.line,
       `[${content.final.button}](${SITE_ORIGIN}/install)`,
+    ),
+    ...extraSections.map(
+      ({ title, url, body }) => `## ${title} (${url})\n\n${body.trim()}`,
     ),
   ]
   return `${sections.join('\n\n')}\n`
