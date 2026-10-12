@@ -16,7 +16,14 @@ const LOCALE_PATHS = LOCALES.map((locale) => localePath(locale))
 const STORE_LISTING_PATH =
   '/detail/snug-bookmark-export-impo/gdhpeilfkeeajillmcncaelnppiakjhn'
 
-const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
+const AXE_TAGS = [
+  'wcag2a',
+  'wcag2aa',
+  'wcag21a',
+  'wcag21aa',
+  'wcag22aa',
+  'best-practice',
+]
 
 for (const path of LOCALE_PATHS) {
   test(`${path} responds with a page`, async ({ page }) => {
@@ -157,6 +164,9 @@ for (const path of [
   ...COMPARISON_PATHS,
   ...HOW_TO_INDEX_PATHS,
   ...HOW_TO_PATHS,
+  '/guide/',
+  '/guide/exporting/',
+  '/changelog/',
 ]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
     const response = await page.goto(path)
