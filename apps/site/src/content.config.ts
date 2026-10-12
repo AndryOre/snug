@@ -10,6 +10,7 @@ const translationFields = z.object({
     .enum(['translated', 'missing', 'stale'])
     .default('translated'),
   englishPath: z.string().optional(),
+  seoTitle: z.string().optional(),
 })
 
 export const collections = {

@@ -1,6 +1,10 @@
 ---
 title: Esportazione automatica
 sourceHash: 5eb2acaa2e4867cc
+description:
+  "Pianifica l'esportazione automatica dei segnalibri in Chrome. Scegli formati,
+  intervallo e cartella, e Snug salva i file senza finestre di dialogo."
+seoTitle: "Pianificare l'esportazione automatica dei segnalibri"
 ---
 
 Snug può esportare i tuoi segnalibri in modo pianificato, senza alcuna azione

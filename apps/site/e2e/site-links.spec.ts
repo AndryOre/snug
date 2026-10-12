@@ -68,7 +68,7 @@ test.describe('How-to index', () => {
       await page.goto(path)
       const link = page.locator('a[data-footer-link="how-to"]')
       await expect(link).toHaveAttribute('href', '/how-to/')
-      await expect(link).toHaveAttribute('data-umami-event', 'outbound-click')
+      await expect(link).toHaveAttribute('data-umami-event', 'nav-click')
       await expect(link).toHaveAttribute(
         'data-umami-event-target',
         'footer-how-to',

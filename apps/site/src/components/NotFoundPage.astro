@@ -6,7 +6,8 @@ import {
   EmptyHeader,
 } from '@workspace/ui/components/empty'
 
-import { getClosingCopy } from '../i18n/landing'
+import { DOCS_UI } from '../i18n/docs-ui'
+import { FOOTER_LINK_HREFS, getClosingCopy, resolveHref } from '../i18n/landing'
 import { localePath, type Locale } from '../i18n/locales'
 import Layout from '../layouts/Layout.astro'
 import SectionHeading from './SectionHeading.astro'
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { locale } = Astro.props
-const { notFound } = getClosingCopy(locale)
+const { footer, notFound } = getClosingCopy(locale)
 const page = {
   meta: { title: `${notFound.title} | Snug`, description: notFound.body },
   path: () => '/404/',
@@ -34,6 +35,21 @@ const page = {
       </EmptyHeader>
       <EmptyContent>
         <TextLink href={localePath(locale)}>{notFound.backLink}</TextLink>
+        <ul
+          class="m-0 flex list-none flex-wrap justify-center gap-x-6 gap-y-2 p-0"
+          data-not-found-links
+        >
+          <li>
+            <TextLink href={resolveHref(FOOTER_LINK_HREFS.guide, locale)}>
+              {DOCS_UI.guide}
+            </TextLink>
+          </li>
+          <li>
+            <TextLink href={resolveHref(FOOTER_LINK_HREFS.howTo, locale)}>
+              {footer.howTo}
+            </TextLink>
+          </li>
+        </ul>
       </EmptyContent>
     </Empty>
   </main>

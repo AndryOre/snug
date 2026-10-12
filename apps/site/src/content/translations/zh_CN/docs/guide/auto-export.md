@@ -1,6 +1,10 @@
 ---
 title: 自动导出
 sourceHash: 5eb2acaa2e4867cc
+description:
+  '让 Chrome 书签按计划自动导出。选择格式、间隔和文件夹，Snug
+  会直接保存文件，无需保存对话框。'
+seoTitle: '定时自动导出 Chrome 书签'
 ---
 
 Snug 可以按计划自动导出你的书签，无需任何手动操作：

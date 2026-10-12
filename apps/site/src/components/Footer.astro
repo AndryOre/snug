@@ -54,6 +54,7 @@ const links = [
   },
   { key: 'listing', href: installHref('footer'), label: footer.listing },
 ]
+const OUTBOUND_LINK_KEYS = new Set(['source', 'listing'])
 const noteParts = footer.note.split('Snug')
 ---
 
@@ -66,7 +67,11 @@ const noteParts = footer.note.split('Snug')
             <TextLink
               href={link.href}
               data-footer-link={link.key}
-              data-umami-event="outbound-click"
+              data-umami-event={
+                OUTBOUND_LINK_KEYS.has(link.key)
+                  ? 'outbound-click'
+                  : 'nav-click'
+              }
               data-umami-event-target={`footer-${link.key}`}
             >
               {link.label}

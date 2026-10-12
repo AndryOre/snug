@@ -42,6 +42,10 @@ const JSX_NO_LITERALS_ALLOWED_STRINGS = [
  * - `CardTitle`/`CardDescription`: the settings and auto-export pages render a
  *   deliberately compact title/description scale (bolder + smaller than
  *   Card's own defaults).
+ * - `Button`, `DropdownMenuRadioItem`, `AccordionTrigger`: the light-theme
+ *   focus ring must reach 3:1, so the site's `focus-ring-solid` utility
+ *   replaces the registry's translucent `ring-ring/50`. The FAQ trigger also
+ *   takes `accordion-icon-sync` so its icon turns on the panel's 200ms curve.
  */
 const shadcnNoRestyleContracts = [
   {
@@ -70,6 +74,18 @@ const shadcnNoRestyleContracts = [
   {
     pattern: '^Badge$',
     allow: ['layout', 'font-mono'],
+  },
+  {
+    pattern: '^Button$',
+    allow: ['layout', 'focus-ring-solid'],
+  },
+  {
+    pattern: '^DropdownMenuRadioItem$',
+    allow: ['layout', 'focus-ring-solid'],
+  },
+  {
+    pattern: '^AccordionTrigger$',
+    allow: ['layout', 'focus-ring-solid', 'accordion-icon-sync'],
   },
   {
     pattern: '^CardFooter$',

@@ -2,6 +2,7 @@
 import { DOCS_PATHS, DOCS_UI } from '../i18n/docs-ui'
 import { getClosingCopy } from '../i18n/landing'
 import { buttonVariants } from '@workspace/ui/components/button'
+import { cn } from '@workspace/ui/lib/utils'
 
 import {
   languageTag,
@@ -50,10 +51,11 @@ const options = LOCALES.map((code) => ({
   {skipLink && (
     <a
       href="#main"
-      class={buttonVariants({
-        className:
-          'sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50',
-      })}
+      class={cn(
+        buttonVariants(),
+        'sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-4 focus:z-50',
+        'focus-ring-solid hover:bg-primary-hover',
+      )}
     >
       {header.skipLink}
     </a>
@@ -62,7 +64,7 @@ const options = LOCALES.map((code) => ({
     <a
       href={localePath(locale)}
       aria-label={header.homeLabel}
-      class="flex min-h-11 shrink-0 items-center gap-2 rounded-md outline-hidden focus-visible:ring-3 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      class="flex min-h-11 shrink-0 items-center gap-2 rounded-md focus-ring-solid"
     >
       <svg
         aria-hidden="true"
@@ -95,7 +97,7 @@ const options = LOCALES.map((code) => ({
           href={link.href}
           data-header-link={link.key}
           aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
-          class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground outline-hidden hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring aria-[current=page]:text-foreground"
+          class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground hover:text-foreground focus-ring-solid aria-[current=page]:text-foreground"
         >
           {link.label}
         </a>

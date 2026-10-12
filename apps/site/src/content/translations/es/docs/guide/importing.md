@@ -1,6 +1,10 @@
 ---
 title: Importar marcadores
 sourceHash: 4c537c8e1b7a7231
+description:
+  'Importa marcadores desde un archivo a Chrome. Revisa la vista previa, elige
+  Crear carpeta, Restaurar y combinar o Restaurar y reemplazar.'
+seoTitle: 'Importar marcadores a Chrome desde un archivo'
 ---
 
 1. Importación rápida, desde el popup:

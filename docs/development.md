@@ -76,6 +76,27 @@ every needed job is `success` or `skipped` (e.g. `commitlint` is skipped on
 part of the `CI passed` aggregator — findings surface via code scanning, not as
 a gate. See [ADR 0004](adr/0004-enable-codeql-sast.md).
 
+## Site deploy
+
+`.github/workflows/deploy-site.yml` deploys the landing page through Coolify
+(see [ADR 0012](adr/0012-dotenvx-encrypted-deploy-secrets.md) for the token).
+Coolify builds from a shallow clone with no `.git`, so the sitemap and How-to
+`lastmod` dates cannot be derived at build time there. The workflow computes
+them with `apps/site/docker/last-modified.sh`, and
+`.github/scripts/deploy-coolify.sh` upserts them as the app's build-time
+variable `LAST_MODIFIED_DATES` (`PATCH /api/v1/applications/{uuid}/envs/bulk`)
+before calling `/deploy`. The `snug-site:ci` image build stays as a build check
+only; it is never pushed.
+
+Two Coolify settings are required:
+
+- The API token needs the `write` ability, not just `deploy`, to update
+  environment variables.
+- **Use Docker Build Secrets** must be off for the app. When on, build-time
+  variables are not passed as build arguments and the dates are lost.
+
+`apps/site/docker/smoke.sh` fails when any `sitemap.xml` URL lacks `<lastmod>`.
+
 ## Commit format
 
 `<type>: <emoji> <lowercase subject>`, e.g. `feat: ✨ add dark mode`.

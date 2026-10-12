@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
+import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 const themeCss = readFileSync(
@@ -12,6 +13,12 @@ function tokenValue(block: string, name: string): string {
   const match = new RegExp(String.raw`--${name}:\s*([^;]+);`).exec(block)
   if (!match) throw new Error(`Missing --${name}`)
   return (match[1] ?? '').trim()
+}
+
+function resolveToken(block: string, name: string): string {
+  const value = tokenValue(block, name)
+  const reference = /^var\(--([\w-]+)\)$/.exec(value)
+  return reference ? resolveToken(block, reference[1] ?? '') : value
 }
 
 function themeBlock(selector: string): string {
@@ -80,5 +87,42 @@ describe.each([
 
   it('draws the card hairline at least 1.5:1 against the card', () => {
     expect(contrast(hairline, card)).toBeGreaterThanOrEqual(1.5)
+  })
+})
+
+describe.each([
+  ['light', ':root'],
+  ['dark', '.dark'],
+])('%s theme primary hover', (_name, selector) => {
+  const block = themeBlock(selector)
+  const label = parseOklch(resolveToken(block, 'primary-foreground')).rgb
+  const hover = parseOklch(resolveToken(block, 'primary-hover')).rgb
+
+  it('keeps the CTA label at least 4.5:1 on the hover fill', () => {
+    expect(contrast(label, hover)).toBeGreaterThanOrEqual(4.5)
+  })
+})
+
+describe('card borders', () => {
+  const sourceRoot = new URL('../', import.meta.url)
+
+  function listSources(directory: URL): string[] {
+    return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+      const entryPath = path.join(directory.pathname, entry.name)
+      if (entry.isDirectory())
+        return listSources(new URL(`file://${entryPath}/`))
+      return /\.(astro|tsx)$/.test(entry.name) ? [entryPath] : []
+    })
+  }
+
+  it('never draws border-border on a bg-card element', () => {
+    const offenders = listSources(sourceRoot).filter((path) =>
+      readFileSync(path, 'utf8')
+        .split('\n')
+        .some(
+          (line) => /\bborder-border\b/.test(line) && /\bbg-card\b/.test(line),
+        ),
+    )
+    expect(offenders).toEqual([])
   })
 })

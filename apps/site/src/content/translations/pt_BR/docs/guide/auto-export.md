@@ -1,6 +1,11 @@
 ---
 title: Exportação automática
 sourceHash: 5eb2acaa2e4867cc
+description:
+  'Agende a exportação automática dos seus favoritos no Chrome. Escolha
+  formatos, intervalo e pasta, e o Snug salva os arquivos sem janela de
+  salvamento.'
+seoTitle: 'Agendar a exportação automática de favoritos'
 ---
 
 O Snug pode exportar seus favoritos em um agendamento, sem nenhuma ação manual:

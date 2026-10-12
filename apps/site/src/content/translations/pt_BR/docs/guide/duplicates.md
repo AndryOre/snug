@@ -1,6 +1,10 @@
 ---
 title: Encontrar duplicados
 sourceHash: 79ffc61fffa52a8e
+description:
+  'Procure nos favoritos cópias com a mesma URL normalizada, mantenha a que
+  quiser e exclua o resto na página Duplicados.'
+seoTitle: 'Encontrar e remover favoritos duplicados no Chrome'
 ---
 
 A página **Duplicados** verifica seus favoritos em busca de **Duplicados**:

@@ -1,6 +1,10 @@
 ---
 title: Duplikate finden
 sourceHash: 79ffc61fffa52a8e
+description:
+  'Suche Lesezeichen mit derselben normalisierten URL, behalte die Kopie, die du
+  willst, und lösche den Rest auf der Seite Duplikate.'
+seoTitle: 'Doppelte Chrome-Lesezeichen finden und löschen'
 ---
 
 Die Seite **Duplikate** durchsucht deine Lesezeichen nach **Duplikaten**:

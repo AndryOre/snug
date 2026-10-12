@@ -12,6 +12,8 @@ export interface ParsedTranslation {
   title: string
   sourceHash: string
   body: string
+  description?: string
+  seoTitle?: string
 }
 
 /**
@@ -43,14 +45,15 @@ export function hashSource(source: string): string {
 
 function unquote(value: string): string {
   const quote = value[0]
-  return (quote === '"' || quote === "'") && value.endsWith(quote)
-    ? value.slice(1, -1)
-    : value
+  if (!(quote === '"' || quote === "'") || !value.endsWith(quote)) return value
+  const inner = value.slice(1, -1)
+  return quote === "'" ? inner.replaceAll("''", "'") : inner
 }
 
 /**
  * Parses a translation: simple `key: value` frontmatter with a required
- * `title` and `sourceHash`, then the Markdown body.
+ * `title` and `sourceHash` and an optional `description` and `seoTitle`, then
+ * the Markdown body.
  * @param text - The file contents.
  * @param label - The file name, used in error messages.
  * @returns The parsed translation.
@@ -65,24 +68,37 @@ export function parseTranslation(
   if (!match) throw new MalformedTranslationError(label, 'missing frontmatter')
   const fields = new Map<string, string>()
   const lines = (match[1] ?? '').split(/\r?\n/)
+  let continuedKey: string | undefined
   for (const line of lines) {
     if (line.trim() === '') continue
+    if (continuedKey !== undefined && /^\s/.test(line)) {
+      const previous = fields.get(continuedKey) ?? ''
+      fields.set(continuedKey, `${previous} ${line.trim()}`.trim())
+      continue
+    }
     const separator = line.indexOf(':')
     if (separator < 1) {
       throw new MalformedTranslationError(label, `invalid line "${line}"`)
     }
-    fields.set(
-      line.slice(0, separator).trim(),
-      unquote(line.slice(separator + 1).trim()),
-    )
+    continuedKey = line.slice(0, separator).trim()
+    fields.set(continuedKey, line.slice(separator + 1).trim())
   }
+  for (const [key, value] of fields) fields.set(key, unquote(value))
   const title = fields.get('title')
   if (!title) throw new MalformedTranslationError(label, 'missing title')
   const sourceHash = fields.get('sourceHash')
   if (!sourceHash) {
     throw new MalformedTranslationError(label, 'missing sourceHash')
   }
-  return { title, sourceHash, body: match[2] ?? '' }
+  const description = fields.get('description')
+  const seoTitle = fields.get('seoTitle')
+  return {
+    title,
+    sourceHash,
+    body: match[2] ?? '',
+    ...(description && { description }),
+    ...(seoTitle && { seoTitle }),
+  }
 }
 
 /**

@@ -1,6 +1,10 @@
 ---
 title: Exportation automatique
 sourceHash: 5eb2acaa2e4867cc
+description:
+  "Planifiez l'exportation automatique de vos favoris dans Chrome. Choisissez
+  formats, intervalle et dossier, et Snug enregistre sans dialogue."
+seoTitle: "Planifier l'exportation automatique des favoris"
 ---
 
 Snug peut exporter vos favoris selon un calendrier, sans action manuelle :

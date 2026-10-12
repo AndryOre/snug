@@ -1,6 +1,10 @@
 ---
 title: Trovare i duplicati
 sourceHash: 79ffc61fffa52a8e
+description:
+  'Cerca nei segnalibri le copie con lo stesso URL normalizzato, tieni quella
+  che vuoi ed elimina le altre dalla pagina Duplicati.'
+seoTitle: 'Trovare ed eliminare i segnalibri duplicati in Chrome'
 ---
 
 La pagina **Duplicati** cerca tra i tuoi segnalibri i **Duplicati**: segnalibri

@@ -20,6 +20,7 @@ const { placement, label } = Astro.props
   class={cn(
     buttonVariants({ size: 'xl' }),
     'motion-safe:hover:-translate-y-px',
+    'focus-ring-solid hover:bg-primary-hover',
   )}
 >
   {label}

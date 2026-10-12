@@ -1,6 +1,10 @@
 ---
 title: Lesezeichen importieren
 sourceHash: 4c537c8e1b7a7231
+description:
+  'Importiere Lesezeichen aus einer Datei in Chrome. Prüfe die Vorschau, wähle
+  den Importmodus und überspringe Lesezeichen, die du schon hast.'
+seoTitle: 'Lesezeichen aus einer Datei in Chrome importieren'
 ---
 
 1. Schnellimport, aus dem Popup:

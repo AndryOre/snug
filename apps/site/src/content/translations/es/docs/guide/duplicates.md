@@ -1,6 +1,10 @@
 ---
 title: Buscar duplicados
 sourceHash: 79ffc61fffa52a8e
+description:
+  'Escanea tus marcadores en busca de copias con la misma URL normalizada,
+  conserva la que quieras y elimina el resto desde la página Duplicados.'
+seoTitle: 'Buscar y eliminar marcadores duplicados en Chrome'
 ---
 
 La página **Duplicados** escanea tus marcadores en busca de **duplicados**:

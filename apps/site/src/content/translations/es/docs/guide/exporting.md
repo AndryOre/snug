@@ -1,6 +1,10 @@
 ---
 title: Exportar marcadores
 sourceHash: 2c9f860aa372f840
+description:
+  'Exporta tus marcadores de Chrome como HTML, JSON, CSV, Markdown, OPML o XBEL.
+  Exporta todo desde el popup o elige qué incluir en la app.'
+seoTitle: 'Exportar marcadores de Chrome a HTML, JSON o CSV'
 ---
 
 1. Exportación rápida: en el popup, elige un formato y haz clic en "Exportar

@@ -1,16 +1,16 @@
 ---
+import { cn } from '@workspace/ui/lib/utils'
+
 const { dir, pagination } = Astro.locals.starlightRoute
 const { prev, next } = pagination
+const cardClass =
+  'flex flex-col gap-1 rounded-lg border border-card-border bg-card p-4 text-card-foreground hover:border-primary focus-ring-solid'
 ---
 
 {(prev || next) && (
   <nav class="grid gap-4 sm:grid-cols-2 print:hidden" dir={dir}>
     {prev && (
-      <a
-        href={prev.href}
-        rel="prev"
-        class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 text-card-foreground outline-hidden hover:border-primary focus-visible:ring-3 focus-visible:ring-ring"
-      >
+      <a href={prev.href} rel="prev" class={cardClass}>
         <span class="text-sm text-muted-foreground">
           {Astro.locals.t('page.previousLink')}
         </span>
@@ -21,7 +21,7 @@ const { prev, next } = pagination
       <a
         href={next.href}
         rel="next"
-        class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4 text-card-foreground outline-hidden hover:border-primary focus-visible:ring-3 focus-visible:ring-ring sm:col-start-2 sm:text-end"
+        class={cn(cardClass, 'sm:col-start-2 sm:text-end')}
       >
         <span class="text-sm text-muted-foreground">
           {Astro.locals.t('page.nextLink')}
