@@ -9,6 +9,8 @@ import {
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
 import { useEffect, useSyncExternalStore } from 'react'
 
+import { themeColor } from '../scripts/theme-color'
+
 const THEME_STORAGE_KEY = 'snug:theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'
 
@@ -73,6 +75,13 @@ function applyChoice(choice: ThemeChoice) {
   const isDark =
     choice === 'dark' || (choice === 'system' && matchMedia(DARK_QUERY).matches)
   const root = document.documentElement
+  for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+    const isDarkMedia = meta.getAttribute('media') === DARK_QUERY
+    meta.setAttribute(
+      'content',
+      themeColor(choice === 'system' ? isDarkMedia : isDark),
+    )
+  }
   root.classList.add('theme-switching')
   root.classList.toggle('dark', isDark)
   requestAnimationFrame(() => {

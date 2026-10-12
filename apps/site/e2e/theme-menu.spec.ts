@@ -7,10 +7,6 @@ const WIDTHS = [320, 375, 768, 1280]
 
 async function visit(page: Page, path = '/') {
   await page.goto(path)
-  await expect(page.locator('header astro-island')).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
 }
 
 async function openMenu(page: Page) {

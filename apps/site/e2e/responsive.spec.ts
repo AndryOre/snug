@@ -23,9 +23,6 @@ for (const path of PATHS) {
     page,
   }) => {
     await page.goto(path)
-    await expect(
-      page.locator('astro-island[client="idle"]'),
-    ).not.toHaveAttribute('ssr', '')
     await page.locator('[data-language-switcher]').getByRole('button').click()
     await expect(page.locator('[data-language-menu]')).toBeVisible()
     await expectNoHorizontalOverflow(page)

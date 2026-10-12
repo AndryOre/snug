@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { hydratedFaq } from './faq-helpers'
+import { hydrateHeaderIsland } from './layout-helpers'
 
 test('video poster overlay carries video-play, never the link itself', async ({
   page,
@@ -38,10 +39,7 @@ test('language options carry language-change with the locale code', async ({
   page,
 }) => {
   await page.goto('/')
-  await expect(page.locator('header astro-island').first()).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
+  await hydrateHeaderIsland(page)
   await page.locator('[data-language-switcher] button').click()
   const options = page.locator('[data-language-menu] a')
   const count = await options.count()
@@ -57,10 +55,7 @@ test('language options carry language-change with the locale code', async ({
 
 test('theme options carry theme-change with the theme', async ({ page }) => {
   await page.goto('/')
-  await expect(page.locator('header astro-island').first()).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
+  await hydrateHeaderIsland(page)
   await page.locator('[data-theme-menu] button').click()
   const items = page.getByRole('menuitemradio')
   await expect(items).toHaveCount(3)

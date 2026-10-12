@@ -7,6 +7,7 @@ import { buildSidebar } from './src/docs/sidebar'
 import { collectStarlightInlineScriptHashes } from './src/docs/starlight-inline-hashes'
 import { languageTag, LOCALE_NAMES, LOCALES } from './src/i18n/locales'
 import { hiddenUntilFound } from './src/scripts/hidden-until-found'
+import { interactionDirective } from './src/scripts/interaction-integration'
 import { THEME_INIT_HASH } from './src/scripts/theme-init'
 import { UMAMI_COLLECT_ORIGIN, UMAMI_SCRIPT_ORIGIN } from './src/seo/umami'
 
@@ -32,6 +33,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    interactionDirective(),
     react(),
     starlight({
       title: 'Snug',

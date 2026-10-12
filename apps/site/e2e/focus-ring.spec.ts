@@ -1,6 +1,7 @@
 import { expect, type Locator, type Page, test } from '@playwright/test'
 
 import { hydratedFaq } from './faq-helpers'
+import { hydrateHeaderIsland } from './layout-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
 const MINIMUM_CONTRAST = 3
@@ -15,10 +16,7 @@ interface FocusTarget {
 }
 
 async function hydrateHeader(page: Page) {
-  await expect(page.locator('header astro-island').first()).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
+  await hydrateHeaderIsland(page)
 }
 
 async function hydrateFaq(page: Page) {

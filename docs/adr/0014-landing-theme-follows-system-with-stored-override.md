@@ -26,9 +26,12 @@ page should follow the visitor's theme.
   ([ADR 0011](0011-landing-static-site-no-third-party-scripts.md)).
 - Without JavaScript the page shows the light theme and the menu is hidden: the
   theme tokens switch on the `.dark` class, which only the script sets. The
-  `color-scheme` and `theme-color` metas still follow the system.
+  `color-scheme` and `theme-color` metas still follow the system. With a stored
+  override, the head script and the menu rewrite both `theme-color` metas so the
+  browser chrome matches the rendered theme.
 - The menu is the shared shadcn DropdownMenu with a radio group, rendered in the
-  same `client:idle` island as the language menu, so the header hydrates once
+  same island as the language menu, hydrated on interaction, so the header
+  hydrates once
   ([ADR 0013](0013-landing-islands-for-faq-and-language-switcher.md)).
 - Product screenshots ship a dark and a light variant, switched by the same
   theme class so a stored override applies to them too. The promo video poster
@@ -53,7 +56,7 @@ page should follow the visitor's theme.
 - The site now writes to `localStorage`. This is a preference, not tracking, but
   it is a change to the "no scripts or storage" posture, so the privacy page
   mentions it.
-- The header island carries two menus; it stays `client:idle` and never
+- The header island carries two menus; it hydrates on interaction and never with
   `client:load`.
 - Theme-dependent assets (screenshots) need both variants in the page, with the
   hidden one lazy and unfetched.

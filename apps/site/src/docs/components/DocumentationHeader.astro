@@ -9,6 +9,7 @@ const locale = resolveDocumentationLocale(Astro.locals.starlightRoute.lang)
 ---
 
 <Header
+  as="div"
   locale={locale}
   skipLink={false}
   pageHref={(code) => localePath(code, DOCS_PATHS.guide)}

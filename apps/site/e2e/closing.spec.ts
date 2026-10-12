@@ -2,7 +2,11 @@ import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
-import { expectNoHorizontalOverflow, MIN_TOUCH_TARGET } from './layout-helpers'
+import {
+  expectNoHorizontalOverflow,
+  hydrateHeaderIsland,
+  MIN_TOUCH_TARGET,
+} from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
@@ -85,10 +89,7 @@ test('FAQ questions are headings and only one answer is open', async ({
 const MENU = '[data-language-menu]'
 
 async function waitForLanguageIsland(page: Page): Promise<void> {
-  await expect(page.locator('astro-island[client="idle"]')).not.toHaveAttribute(
-    'ssr',
-    '',
-  )
+  await hydrateHeaderIsland(page)
 }
 
 async function openLanguageMenu(page: Page): Promise<void> {
