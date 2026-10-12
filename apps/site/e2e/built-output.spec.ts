@@ -165,7 +165,7 @@ test.describe('built pages', () => {
         locale === 'ru'
           ? ['geist-cyrillic-wght-normal']
           : LOCALE_CONFIG[locale].preloadFonts.length > 0
-            ? ['space-grotesk-latin-wght-normal']
+            ? ['space-grotesk-latin-wght-normal', 'geist-latin-wght-normal']
             : []
       expect(preloads).toHaveLength(expectedPreloads.length)
       for (const [index, name] of expectedPreloads.entries()) {
