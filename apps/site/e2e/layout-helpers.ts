@@ -12,6 +12,15 @@ export async function hydrateHeaderIsland(page: Page): Promise<void> {
   await expect(
     page.locator('astro-island[client="interaction"]'),
   ).not.toHaveAttribute('ssr', '')
+  await page.waitForFunction(() => {
+    const button = globalThis.document.querySelector(
+      '[data-language-switcher] button',
+    )
+    return (
+      button !== null &&
+      Object.keys(button).some((key) => key.startsWith('__reactProps$'))
+    )
+  })
   await page.evaluate(
     () =>
       new Promise<void>((resolve) => {
