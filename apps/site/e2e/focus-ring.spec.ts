@@ -25,6 +25,17 @@ async function hydrateFaq(page: Page) {
   await hydratedFaq(page)
 }
 
+async function openMenu(trigger: Locator) {
+  await expect(async () => {
+    if ((await trigger.getAttribute('aria-expanded')) !== 'true') {
+      await trigger.click()
+    }
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true', {
+      timeout: 1000,
+    })
+  }).toPass()
+}
+
 const TARGETS: readonly FocusTarget[] = [
   {
     name: 'logo link',
@@ -55,9 +66,7 @@ const TARGETS: readonly FocusTarget[] = [
     name: 'theme item',
     hydrate: hydrateHeader,
     locate: (page) => page.getByRole('menuitemradio').first(),
-    open: async (page) => {
-      await page.locator('[data-theme-menu] button').click()
-    },
+    open: (page) => openMenu(page.locator('[data-theme-menu] button')),
   },
   {
     name: 'language trigger',
@@ -68,9 +77,7 @@ const TARGETS: readonly FocusTarget[] = [
     name: 'language item',
     hydrate: hydrateHeader,
     locate: (page) => page.locator('[data-language-menu] a').first(),
-    open: async (page) => {
-      await page.locator('[data-language-switcher] button').click()
-    },
+    open: (page) => openMenu(page.locator('[data-language-switcher] button')),
   },
   {
     name: 'FAQ trigger',
