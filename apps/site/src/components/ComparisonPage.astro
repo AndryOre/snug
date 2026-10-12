@@ -105,12 +105,19 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
         </h2>
         <p class="mt-4 leading-prose">{fill(copy.whyLook.body)}</p>
       </section>
-      <section data-section="picks" aria-label={shared.pickSnug} class="mt-12">
+      <section
+        data-section="picks"
+        aria-labelledby="pick-snug-heading pick-other-heading"
+        class="mt-12"
+      >
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card size="lg" className="w-full">
             <CardHeader>
               <CardTitle>
-                <h2 class="text-xl leading-tight break-words">
+                <h2
+                  id="pick-snug-heading"
+                  class="text-xl leading-tight break-words"
+                >
                   {shared.pickSnug}
                 </h2>
               </CardTitle>
@@ -124,7 +131,10 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
           <Card size="lg" className="w-full">
             <CardHeader>
               <CardTitle>
-                <h2 class="text-xl leading-tight break-words">
+                <h2
+                  id="pick-other-heading"
+                  class="text-xl leading-tight break-words"
+                >
                   {fill(shared.pickOther)}
                 </h2>
               </CardTitle>

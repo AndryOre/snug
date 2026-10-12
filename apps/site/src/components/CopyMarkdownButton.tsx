@@ -58,15 +58,20 @@ export default function CopyMarkdownButton({
 
   const Icon = STATE_ICONS[state]
   return (
-    <Button
-      type="button"
-      variant="outline"
-      size="touch"
-      data-copy-markdown
-      onClick={() => void handleClick()}
-    >
-      <Icon aria-hidden="true" />
-      <span aria-live="polite">{copy[STATE_LABEL_KEYS[state]]}</span>
-    </Button>
+    <>
+      <Button
+        type="button"
+        variant="outline"
+        size="touch"
+        data-copy-markdown
+        onClick={() => void handleClick()}
+      >
+        <Icon aria-hidden="true" />
+        <span>{copy.copyMarkdown}</span>
+      </Button>
+      <span role="status" className="sr-only">
+        {state === 'idle' ? '' : copy[STATE_LABEL_KEYS[state]]}
+      </span>
+    </>
   )
 }
