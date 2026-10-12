@@ -119,7 +119,7 @@ export default function ThemeMenu({ copy }: { copy: ThemeMenuCopy }) {
             <Button
               variant="ghost"
               size="icon"
-              className="size-11"
+              className="size-11 focus-ring-solid"
               aria-label={copy.label}
             />
           }
@@ -137,7 +137,7 @@ export default function ThemeMenu({ copy }: { copy: ThemeMenuCopy }) {
                   data-umami-event="theme-change"
                   data-umami-event-theme={value}
                   closeOnClick
-                  className="min-h-11"
+                  className="min-h-11 focus-ring-solid"
                 >
                   <Icon aria-hidden="true" />
                   {copy[value]}

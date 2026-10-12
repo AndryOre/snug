@@ -161,8 +161,14 @@ a blurred copy of the mark behind it.
 - Don't imply cloud, sync, an account, pricing or multi-file import, in copy or
   in imagery.
 - Don't add third-party fonts, scripts or embeds on load.
-- Do focus links with a full-opacity `ring-ring` 3px ring and a 2px
-  `ring-offset-background` offset (3:1 minimum, WCAG 1.4.11); never
-  `ring-ring/50`.
+- Do focus links and shadcn button-based controls with a full-opacity
+  `ring-ring` 3px ring and a 2px `ring-offset-background` offset (3:1 minimum,
+  WCAG 1.4.11); never `ring-ring/50`. Consumers add the `focus-ring-solid`
+  utility from `packages/ui/src/styles/theme.css`, which overrides the registry
+  default without editing `packages/ui/src/components`.
+- Do hover the primary CTA with `hover:bg-primary-hover`, the token that keeps
+  the label at 4.5:1 in both themes; never `bg-primary/80`.
+- Do draw link underlines with `decoration-muted-foreground` and cards with
+  `border-card-border`, never `border-border` on `bg-card`.
 - Don't put the brand gradient in UI chrome or copy.
 - Don't use a side-stripe border on cards or gradient text.

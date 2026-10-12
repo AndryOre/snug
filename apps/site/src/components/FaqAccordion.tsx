@@ -26,6 +26,7 @@ export default function FaqAccordion({ entries }: FaqAccordionProperties) {
       {entries.map((entry, index) => (
         <AccordionItem key={entry.id} value={`faq-${index}`}>
           <AccordionTrigger
+            className="focus-ring-solid accordion-icon-sync"
             data-umami-event="faq-open"
             data-umami-event-question={entry.id}
           >
