@@ -2,7 +2,7 @@
 # Publishes LAST_MODIFIED_DATES as the app's build-time variable, then triggers
 # a Coolify deploy and waits for its result. Coolify builds from a shallow clone
 # without git history, so the sitemap dates must arrive as a build variable.
-# Requires COOLIFY_API_TOKEN (from dotenvx, with the `write` ability),
+# Requires COOLIFY_API_TOKEN (a GitHub secret with `read`, `write` and `deploy`),
 # COOLIFY_APP_UUID (repo variable) and LAST_MODIFIED_DATES (the JSON printed by
 # apps/site/docker/last-modified.sh).
 set -euo pipefail

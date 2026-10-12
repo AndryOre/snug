@@ -31,7 +31,6 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                                                     |
 | `bun run format:write`      | Formats the repo with Prettier.                                                                                                                                  |
 | `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                        |
-| `bun run env:encrypt`       | Encrypts the root `.env` in place with dotenvx.                                                                                                                  |
 | `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                        |
 | `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                           |
 | `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                               |
@@ -79,7 +78,7 @@ a gate. See [ADR 0004](adr/0004-enable-codeql-sast.md).
 ## Site deploy
 
 `.github/workflows/deploy-site.yml` deploys the landing page through Coolify
-(see [ADR 0012](adr/0012-dotenvx-encrypted-deploy-secrets.md) for the token).
+(see [ADR 0022](adr/0022-coolify-token-as-github-secret.md) for the token).
 Coolify builds from a shallow clone with no `.git`, so the sitemap and How-to
 `lastmod` dates cannot be derived at build time there. The workflow computes
 them with `apps/site/docker/last-modified.sh`, and

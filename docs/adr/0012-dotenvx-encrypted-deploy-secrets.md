@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted.
+Superseded by [ADR 0022](0022-coolify-token-as-github-secret.md).
 
 ## Context
 

@@ -52,8 +52,8 @@ An index of every document in this repository.
   — the ADR documenting the bun workspaces and Turborepo monorepo.
 - [`docs/adr/0011-landing-static-site-no-third-party-scripts.md`](adr/0011-landing-static-site-no-third-party-scripts.md)
   — the ADR documenting the static landing site with no third-party scripts.
-- [`docs/adr/0012-dotenvx-encrypted-deploy-secrets.md`](adr/0012-dotenvx-encrypted-deploy-secrets.md)
-  — the ADR documenting dotenvx-encrypted deploy secrets.
+- [`docs/adr/0022-coolify-token-as-github-secret.md`](adr/0022-coolify-token-as-github-secret.md)
+  — the ADR documenting the Coolify token as a GitHub secret.
 - [`docs/adr/0013-landing-islands-for-faq-and-language-switcher.md`](adr/0013-landing-islands-for-faq-and-language-switcher.md)
   — the ADR documenting the landing islands for the FAQ and language switcher.
 - [`docs/adr/0014-landing-theme-follows-system-with-stored-override.md`](adr/0014-landing-theme-follows-system-with-stored-override.md)
