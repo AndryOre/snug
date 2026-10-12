@@ -34,6 +34,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-text: var(--primary-text);
+  --color-primary-hover: var(--primary-hover);
   --background-image-brand-gradient: var(--brand-gradient);
   --background-image-brand-text-gradient: var(--brand-text-gradient);
   --color-popover-foreground: var(--popover-foreground);
@@ -64,6 +65,7 @@
   --primary: oklch(0.528 0.131 54.6);
   --primary-foreground: oklch(1 0 0);
   --primary-text: oklch(0.49 0.125 54.6);
+  --primary-hover: oklch(0.49 0.125 54.6);
   --brand-gradient: linear-gradient(135deg, #ffa230, #ffd37a);
   --brand-text-gradient: linear-gradient(135deg, #9a4a00, #a35200);
   --secondary: oklch(0.915 0.02 80.1);
@@ -111,6 +113,7 @@
   --primary: oklch(0.789 0.161 65.7);
   --primary-foreground: var(--background);
   --primary-text: var(--primary);
+  --primary-hover: oklch(0.75 0.155 65.7);
   --brand-gradient: linear-gradient(135deg, #ffa230, #ffd37a);
   --brand-text-gradient: linear-gradient(135deg, #ffa230, #ffd37a);
   --secondary: oklch(0.268 0.026 71.5);
@@ -193,6 +196,26 @@
 @utility journey-boundary {
   border: 1.5px dashed var(--primary);
   border-radius: 18px;
+}
+
+@utility focus-ring-solid {
+  &:focus-visible:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 5px var(--ring);
+  }
+}
+
+@utility accordion-icon-sync {
+  & [data-slot='accordion-trigger-icon'] {
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-out-strong);
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0s;
+    }
+  }
 }
 
 @utility phrase-break {

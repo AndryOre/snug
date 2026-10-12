@@ -51,7 +51,11 @@ export default function LanguageSwitcher({
       <Popover>
         <PopoverTrigger
           render={
-            <Button variant="ghost" size="touch" className="max-w-full" />
+            <Button
+              variant="ghost"
+              size="touch"
+              className="max-w-full focus-ring-solid"
+            />
           }
         >
           <span className="sr-only">{accessibleLabel}</span>
@@ -88,7 +92,7 @@ export default function LanguageSwitcher({
                     variant: 'ghost',
                     size: 'touch',
                     className:
-                      'w-full justify-start aria-[current=page]:text-primary-text',
+                      'w-full justify-start focus-ring-solid aria-[current=page]:text-primary-text',
                   })}
                 >
                   {option.name}
