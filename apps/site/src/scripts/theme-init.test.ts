@@ -9,8 +9,11 @@ function runInit(options: { stored: string | null; systemDark: boolean }) {
     { content: THEME_COLORS.light },
     { content: THEME_COLORS.dark },
   ]
+  const dataset: Record<string, string> = {}
+  const changeListeners: ((event: { matches: boolean }) => void)[] = []
   const fakeDocument = {
     documentElement: {
+      dataset,
       classList: {
         toggle: (name: string, isForced: boolean) =>
           isForced ? classes.add(name) : classes.delete(name),
@@ -25,13 +28,24 @@ function runInit(options: { stored: string | null; systemDark: boolean }) {
       })),
   }
   const fakeStorage = { getItem: () => options.stored }
-  const fakeMatchMedia = () => ({ matches: options.systemDark })
+  const fakeMatchMedia = () => ({
+    matches: options.systemDark,
+    addEventListener: (
+      _type: string,
+      listener: (event: { matches: boolean }) => void,
+    ) => {
+      changeListeners.push(listener)
+    },
+  })
   new Function('document', 'localStorage', 'matchMedia', THEME_INIT_SCRIPT)(
     fakeDocument,
     fakeStorage,
     fakeMatchMedia,
   )
-  return { classes, metas }
+  const changeSystem = (isDark: boolean) => {
+    for (const listener of changeListeners) listener({ matches: isDark })
+  }
+  return { classes, metas, dataset, changeSystem }
 }
 
 describe('theme init script', () => {
@@ -50,5 +64,17 @@ describe('theme init script', () => {
   it('leaves the media-specific metas alone without an override', () => {
     const { metas } = runInit({ stored: null, systemDark: true })
     expect(metas.map((meta) => meta.content)).toEqual(['#f1ece4', '#17120a'])
+  })
+
+  it('follows live system changes only while the choice is System', () => {
+    const system = runInit({ stored: null, systemDark: false })
+    expect(system.dataset.themeChoice).toBe('system')
+    system.changeSystem(true)
+    expect(system.classes.has('dark')).toBe(true)
+
+    const override = runInit({ stored: 'light', systemDark: false })
+    expect(override.dataset.themeChoice).toBe('light')
+    override.changeSystem(true)
+    expect(override.classes.has('dark')).toBe(false)
   })
 })
