@@ -92,6 +92,71 @@ test('the mobile drawer traps focus, closes with Escape and returns focus', asyn
   await expect(page.locator('.main-frame')).not.toHaveAttribute('inert', '')
 })
 
+test('the mobile drawer closes by keyboard through its close button and by backdrop', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 800 })
+  await page.goto('/guide/')
+  const toggle = page.getByRole('button', { name: 'Guide' })
+  const drawer = page.locator('#starlight__sidebar')
+  await toggle.focus()
+  await page.keyboard.press('Enter')
+  await expect(drawer).toBeVisible()
+  const close = drawer.getByRole('button', { name: 'Close menu' })
+  await expect(close).toBeVisible()
+  await close.focus()
+  await page.keyboard.press('Enter')
+  await expect(drawer).toBeHidden()
+  await expect(toggle).toBeFocused()
+  await toggle.click()
+  await expect(drawer).toBeVisible()
+  await page.mouse.click(385, 400)
+  await expect(drawer).toBeHidden()
+})
+
+test('the Guide close button is localized', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 800 })
+  await page.goto('/es/guide/')
+  await page.locator('[data-docs-menu-toggle]').click()
+  await expect(
+    page.locator('#starlight__sidebar').getByRole('button', {
+      name: 'Cerrar menú',
+    }),
+  ).toBeVisible()
+})
+
+test('the Guide language links keep the reader on the same page', async ({
+  page,
+}) => {
+  await page.goto('/guide/exporting/')
+  await expect(
+    page.locator('[data-footer-languages] a[hreflang="es"]'),
+  ).toHaveAttribute('href', '/es/guide/exporting/')
+  await page.goto('/changelog/')
+  await expect(
+    page.locator('[data-footer-languages] a[hreflang="es"]'),
+  ).toHaveAttribute('href', '/es/changelog/')
+})
+
+test('the Guide heading order starts at the page title', async ({ page }) => {
+  await page.goto('/guide/')
+  const levels = await page
+    .locator('h1, h2, h3, h4, h5, h6')
+    .evaluateAll((headings) =>
+      headings.map((heading) => Number(heading.tagName.slice(1))),
+    )
+  expect(levels[0]).toBe(1)
+})
+
+test('the Guide keeps data-theme in step with the stored theme', async ({
+  page,
+}) => {
+  await page.emulateMedia({ colorScheme: 'light' })
+  await page.addInitScript(() => localStorage.setItem('snug:theme', 'dark'))
+  await page.goto('/guide/')
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+})
+
 test('the search button opens the dialog with Ctrl K and closes with Escape', async ({
   page,
 }) => {

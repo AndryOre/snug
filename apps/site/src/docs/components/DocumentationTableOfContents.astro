@@ -1,0 +1,22 @@
+---
+import TableOfContentsList from '../../../node_modules/@astrojs/starlight/dist/components-internals/TableOfContents/TableOfContentsList.astro'
+
+const { toc } = Astro.locals.starlightRoute
+const label = Astro.locals.t('tableOfContents.onThisPage')
+---
+
+{toc && (
+  <starlight-toc
+    data-min-h={toc.minHeadingLevel}
+    data-max-h={toc.maxHeadingLevel}
+  >
+    <nav aria-label={label}>
+      <p aria-hidden="true" data-toc-label>
+        {label}
+      </p>
+      <TableOfContentsList toc={toc.items} />
+    </nav>
+  </starlight-toc>
+)}
+
+<script src="../../../node_modules/@astrojs/starlight/dist/components-internals/TableOfContents/starlight-toc"></script>

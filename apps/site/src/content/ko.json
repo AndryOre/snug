@@ -236,6 +236,9 @@
     "copied": "복사했어요",
     "copyFailed": "복사하지 못했어요"
   },
+  "docsSidebar": {
+    "closeLabel": "메뉴 닫기"
+  },
   "docsSearch": {
     "noResults": "{query}에 대한 결과가 없습니다.",
     "hint": "다른 단어나 더 짧은 단어로 검색해 보세요."
