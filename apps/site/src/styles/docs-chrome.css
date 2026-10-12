@@ -111,7 +111,28 @@
       width: min(18.75rem, 85%);
       border-inline-end: 1px solid var(--border);
       background-color: var(--card);
-      box-shadow: 0.5rem 0 1.5rem color-mix(in oklab, black 20%, transparent);
+      overscroll-behavior: contain;
+    }
+
+    [data-docs-menu-close] {
+      width: 100%;
+      min-height: var(--docs-target);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      margin-block-start: 1rem;
+      padding: 0 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background-color: var(--card);
+      color: var(--card-foreground);
+      font-size: var(--sl-text-sm);
+      cursor: pointer;
+    }
+
+    [data-docs-menu-close]:focus-visible {
+      outline-offset: 2px;
     }
 
     .sidebar-content {
@@ -124,13 +145,13 @@
     }
   }
 
-  @media (max-width: 49.99rem) and (prefers-reduced-motion: no-preference) {
+  @media (max-width: 49.99rem) {
     .sidebar-pane {
       translate: -100% 0;
       transition:
-        translate 0.2s ease-out,
-        overlay 0.2s allow-discrete,
-        display 0.2s allow-discrete;
+        translate 240ms cubic-bezier(0.32, 0.72, 0, 1),
+        overlay 240ms allow-discrete,
+        display 240ms allow-discrete;
     }
 
     .sidebar-pane:popover-open {
@@ -139,9 +160,9 @@
 
     .sidebar-pane::backdrop {
       transition:
-        opacity 0.2s ease-out,
-        overlay 0.2s allow-discrete,
-        display 0.2s allow-discrete;
+        opacity 200ms var(--ease-out-strong),
+        overlay 200ms allow-discrete,
+        display 200ms allow-discrete;
     }
 
     @starting-style {
@@ -150,6 +171,34 @@
       }
 
       .sidebar-pane:popover-open::backdrop {
+        opacity: 0;
+      }
+    }
+  }
+
+  @media (max-width: 49.99rem) and (prefers-reduced-motion: reduce) {
+    .sidebar-pane {
+      translate: 0 0;
+      opacity: 0;
+      transition:
+        opacity 150ms ease-out,
+        overlay 150ms allow-discrete,
+        display 150ms allow-discrete;
+    }
+
+    .sidebar-pane:popover-open {
+      opacity: 1;
+    }
+
+    .sidebar-pane::backdrop {
+      transition:
+        opacity 150ms ease-out,
+        overlay 150ms allow-discrete,
+        display 150ms allow-discrete;
+    }
+
+    @starting-style {
+      .sidebar-pane:popover-open {
         opacity: 0;
       }
     }
@@ -309,7 +358,7 @@
     }
   }
 
-  starlight-toc h2 {
+  starlight-toc [data-toc-label] {
     margin-bottom: 0.5rem;
     color: var(--muted-foreground);
     font-size: var(--sl-text-2xs);

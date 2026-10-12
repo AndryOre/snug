@@ -236,6 +236,9 @@
     "copied": "Copied",
     "copyFailed": "Could not copy"
   },
+  "docsSidebar": {
+    "closeLabel": "Close menu"
+  },
   "docsSearch": {
     "noResults": "No results for {query}.",
     "hint": "Try a different or shorter word."
