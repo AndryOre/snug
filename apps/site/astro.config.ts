@@ -60,6 +60,7 @@ export default defineConfig({
           tag: 'link',
           attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         },
+        { tag: 'link', attrs: { rel: 'sitemap', href: '/sitemap.xml' } },
       ],
       components: {
         MobileMenuToggle:
