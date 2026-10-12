@@ -1,6 +1,10 @@
 ---
 title: 자동 내보내기
 sourceHash: 5eb2acaa2e4867cc
+description:
+  'Chrome 북마크를 정해진 간격으로 자동 내보내세요. 형식, 간격, 폴더를 고르면
+  Snug가 저장 창 없이 파일을 저장해요.'
+seoTitle: '북마크 자동 내보내기 예약하기'
 ---
 
 Snug는 직접 조작하지 않아도 일정에 따라 북마크를 내보낼 수 있어요.

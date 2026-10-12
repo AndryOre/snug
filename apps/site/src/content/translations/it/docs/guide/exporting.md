@@ -1,6 +1,10 @@
 ---
 title: Esportare i segnalibri
 sourceHash: 2c9f860aa372f840
+description:
+  "Esporta i segnalibri di Chrome in HTML, JSON, CSV, Markdown, OPML o XBEL.
+  Tutto dal popup oppure una selezione precisa nell'app."
+seoTitle: 'Esportare i segnalibri di Chrome in HTML, JSON o CSV'
 ---
 
 1. Esportazione rapida: nel popup, scegli un formato e fai clic su "Esporta

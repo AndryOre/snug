@@ -1,6 +1,11 @@
 ---
 title: Trouver les doublons
 sourceHash: 79ffc61fffa52a8e
+description:
+  'Analysez vos favoris à la recherche de copies avec la même URL normalisée,
+  gardez celle qui vous convient et supprimez les autres depuis la page
+  Doublons.'
+seoTitle: 'Trouver et supprimer les favoris en double (Chrome)'
 ---
 
 La page **Doublons** analyse vos favoris à la recherche de **doublons** : des

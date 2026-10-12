@@ -20,6 +20,8 @@ async function fillStore(context: LoaderContext): Promise<void> {
       id: entry.id,
       data: {
         title: entry.title,
+        description: entry.description,
+        seoTitle: entry.seoTitle,
         editUrl: entry.editUrl,
         translationStatus: entry.status,
         englishPath: entry.englishPath,

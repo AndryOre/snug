@@ -1,6 +1,10 @@
 ---
 title: Exportar favoritos
 sourceHash: 2c9f860aa372f840
+description:
+  'Exporte seus favoritos do Chrome em HTML, JSON, CSV, Markdown, OPML ou XBEL.
+  Tudo pelo popup ou só o que você escolher no app.'
+seoTitle: 'Exportar favoritos do Chrome em HTML, JSON ou CSV'
 ---
 
 1. Exportação rápida: no popup, escolha um formato e clique em "Exportar tudo"

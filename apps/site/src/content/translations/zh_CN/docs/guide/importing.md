@@ -1,6 +1,9 @@
 ---
 title: 导入书签
 sourceHash: 4c537c8e1b7a7231
+description:
+  '从文件将书签导入 Chrome。先预览，再选择导入方式，并可跳过你已有的书签。'
+seoTitle: '从文件将书签导入 Chrome'
 ---
 
 1. 快速导入，在弹出窗口中进行：

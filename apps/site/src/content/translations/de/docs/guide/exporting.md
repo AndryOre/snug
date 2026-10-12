@@ -1,6 +1,10 @@
 ---
 title: Lesezeichen exportieren
 sourceHash: 2c9f860aa372f840
+description:
+  'Exportiere deine Chrome-Lesezeichen als HTML, JSON, CSV, Markdown, OPML oder
+  XBEL. Alles im Popup oder gezielt in der App.'
+seoTitle: 'Chrome-Lesezeichen als HTML, JSON, CSV exportieren'
 ---
 
 1. Schnellexport: Wähle im Popup ein Format und klicke auf „Alle exportieren“,
