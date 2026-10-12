@@ -47,5 +47,6 @@ apps/site/dist/
 apps/site/dist-test/
 apps/site/.astro/
 
-# env files (encrypted .env files are safe to commit)
-.env.keys
+# env files (deploy secrets live in GitHub repository secrets, ADR 0022)
+.env
+.env.*
