@@ -64,7 +64,6 @@ export default function CopyMarkdownButton({
         variant="outline"
         size="touch"
         data-copy-markdown
-        aria-label={copy.copyMarkdown}
         onClick={() => void handleClick()}
       >
         <Icon aria-hidden="true" />
