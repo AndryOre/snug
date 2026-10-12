@@ -90,6 +90,14 @@ for file in robots.txt sitemap.xml llms.txt; do
   [ "$(status "$base/$file")" = 200 ] || fail "$file is not 200"
 done
 
+missing_lastmod="$(curl -s "$base/sitemap.xml" | awk '
+  /<url>/ { loc = ""; has = 0 }
+  /<loc>/ { loc = $0; gsub(/^[ \t]*<loc>|<\/loc>[ \t]*$/, "", loc) }
+  /<lastmod>/ { has = 1 }
+  /<\/url>/ && !has { print loc }
+')"
+[ -z "$missing_lastmod" ] || fail "sitemap URLs lack <lastmod>: $(tr '\n' ' ' <<<"$missing_lastmod")"
+
 header_of() { curl -s -o /dev/null -D - -H 'Accept-Encoding: gzip, br' "$2" | tr -d '\r' | awk -v name="$1:" 'tolower($1)==name{sub(/^[^ ]+ /,""); print}'; }
 
 for file in llms.txt llms-full.txt robots.txt sitemap.xml; do
