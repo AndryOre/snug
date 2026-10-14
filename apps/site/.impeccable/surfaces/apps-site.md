@@ -7,11 +7,14 @@ related_targets: []
 
 # Surface brief: Snug landing (apps/site)
 
-Mode: Persuade. Approved by the maintainer on the design canvas (desktop 1440,
-mobile 390) on 2026-10-05. Section order is fixed by the AO-1248 spec: 1 Hero, 2
-Trust proof, 3 Features, 4 Real interface, 5 Video, 6 Social proof, 7 FAQ, 8
-Final call to action and footer. Copy is `docs/landing/content.md` (EN source,
-ten locales).
+Mode: Persuade. Landing v2 (AO-1908), superseding the 2026-10-05 canvas. Boards:
+<https://claude.ai/artifact/8ftMuNdgUodA8wfRPoUBsN> (`Landing.dc.html`, area
+"Landing v2"). Section order is fixed: 1 Hero, 2 Stats strip, 3 Browser marquee,
+4 Bento, 5 Format playground, 6 Interface showcase, 7 Video, 8 Reviews marquee,
+9 FAQ (six questions), 10 Closing panel, 11 Footer, plus the Install dock. Copy
+is `docs/landing/content.md` (EN source, ten locales). Motion architecture:
+[ADR 0023](../../../../docs/adr/0023-landing-v2-motion-and-logos.md). Visual
+rules: `apps/site/DESIGN.md`.
 
 ## Job and audience
 
@@ -32,29 +35,26 @@ composition is decided here.
 
 ## Direction contract
 
-THESIS: The page proves "nothing leaves your device" by drawing the file's path.
-It refuses the centered-headline-over-three-feature-cards extension template.
+THESIS: The page proves "nothing leaves your device" and now shows it moving. It
+refuses the centered-headline-over-three-feature-cards extension template.
 OWN-WORLD: Aurora ground (`--background` with a radial amber glow at the top
 left and a faint one on the right), `--card` panels with 1px `--border`, flat
 `--primary` amber for the headline's second line, the eyebrow, icons and
 numerals. Space Grotesk 700 for headlines, Geist for text, Geist Mono for
-eyebrows, file names and format chips. Ribbon-tag mark with its blurred halo in
-the header. STORY: The visitor reads the promise, sees one file travel from
-their browser to another browser inside a dashed boundary labelled Your device,
-sees nothing outside it, then reads the three trust points, then sees the real
-interface. They believe it because the diagram and the source agree, and they
-click Add to Chrome. FIRST VIEWPORT: Left-aligned eyebrow, two-line headline
-(second line amber), subheadline, amber Add to Chrome button plus GitHub link,
-the free/open source/browsers line. Directly below, the journey: a dashed amber
-boundary with a Your device label holding three cards in a row, Your browser
-(folder tree), One file (`bookmarks.html` with the six export formats as chips),
-Another browser (folder tree), joined by amber arrows. A mono line outside the
-boundary reads Network calls: none. FORM: Surface composition "the file's
-journey" (dealt as index 4 of 7, seed key ac844837). Sections after the hero
-reuse the same grammar: bordered `--card` panels, numbered mono labels, one
-amber accent per section. FINISH: unreviewed and undocumented is unfinished;
-this build ends with the finish review, the verdict, DESIGN.md, and every
-shipping raster carrying its provenance
+eyebrows, file names and format chips. The ribbon-tag mark with its blurred halo
+is the visual protagonist of the hero and the closing panel, never a mascot.
+STORY: The visitor reads the promise beside the moving ribbon, sees the facts in
+the stats strip and the browsers it works in, plays with the six formats, sees
+the real interface, and believes it because the diagram and the source agree.
+Then they click Add to Chrome. FIRST VIEWPORT: Left-aligned eyebrow, two-line
+headline (second line amber), subheadline, amber Add to Chrome button plus
+GitHub link, the free/open source/browsers line, with the ribbon motion graphic
+beside it. The dashed amber Your device boundary stays the only dashed element;
+a mono line outside it reads Network calls: none. Real browser logos are
+allowed. FORM: bordered `--card` panels, one amber accent per section; two new
+islands only, the Format playground and the Interface showcase. FINISH: motion
+is CSS only, static end state first, `prefers-reduced-motion: no-preference` and
+`@supports` gated, transform and opacity only, `will-change` on marquees only.
 
 ## Real interface
 
@@ -68,7 +68,11 @@ illustration; labelled folders (Research, Job search) are illustrative.
   and Geist through `@fontsource-variable/*` as `globals.css` already does. The
   canvas loaded Google Fonts only as a preview.
 - Static Astro; `.astro` components by default, a React island only for real
-  interaction (ADR 0011, `apps/site/AGENTS.md`).
+  interaction (ADR 0011, `apps/site/AGENTS.md`). Landing v2 islands: Format
+  playground and Interface showcase (`client:visible`), plus the FAQ and header
+  islands. No motion library.
+- Keyframes and utilities live in `packages/ui` `theme.css` or sanctioned
+  per-section CSS files; no arbitrary values, no `<style>` blocks.
 - Ten locales: German and Russian run longer than English, CJK needs its own
   fallbacks, so cards and the journey row must reflow without fixed widths.
 - Comments are TSDoc only, per the root `AGENTS.md`.
@@ -79,5 +83,7 @@ illustration; labelled folders (Research, Job search) are illustrative.
   menu (ADR 0014). Both themes use the shared tokens; the brand stays dark-first
   and the promo video poster stays dark.
 - Section order, copy and the Network calls line are fixed; do not add claims
-  about sync, cloud, accounts, pricing or importing several files.
-- Video section ships only when a video exists (content.md section 5).
+  about sync, cloud, accounts, pricing or importing several files. No cloud or
+  sync imagery.
+- Motion never gates content, and the ribbon never becomes a mascot.
+- Video section ships only when a video exists (content.md).

@@ -78,8 +78,17 @@ redefine them here. The landing ships both themes: it follows the system
 following the system) that proves a claim by drawing it: one file moves from a
 browser to another browser inside a dashed boundary labelled Your device, and
 nothing exists outside it. It sounds like the product: precise, quietly warm,
-never loud. Anti-references: the centered headline over three feature cards,
-cloud or sync imagery, gradients in UI chrome, a stock mascot, hype copy.
+never loud. Landing v2 keeps that identity and makes it move and respond: the
+page is shorter, the ribbon mark is the visual protagonist, and motion and two
+small interactive islands do the persuading that cards used to. Anti-references:
+the centered headline over three feature cards, cloud or sync imagery, gradients
+in UI chrome, a stock mascot, hype copy.
+
+Design boards: the Landing v2 canvas
+(<https://claude.ai/artifact/8ftMuNdgUodA8wfRPoUBsN>, `Landing.dc.html`, area
+"Landing v2"). Motion architecture and its constraints are decided in
+[ADR 0023](../../docs/adr/0023-landing-v2-motion-and-logos.md); this file
+describes the visual rules and must agree with it.
 
 ## Colors
 
@@ -111,12 +120,26 @@ so they never split inside a phrase. The German h1 uses manual hyphenation
 
 One centered column, max width about 1240px, with 56px side padding on desktop
 and 16px on phones. Sections are separated by 96px of space on desktop and 56px
-on phones. Section order is fixed by the spec: Hero, Trust proof, Features, Real
-interface, Video, Social proof, FAQ, Final call to action and footer. The
-journey row is a three-card grid joined by arrows on desktop and a vertical
-stack with down arrows on phones. The trust and feature grids are one column on
-phones and a fixed three columns from `lg` up (two even rows of three for the
-six features); other card grids use `repeat(auto-fit, minmax(260px, 1fr))`.
+on phones. Section order is fixed by the Landing v2 spec:
+
+1. Hero: the ribbon mark as a motion graphic, headline, Add to Chrome and the
+   GitHub link, the free/open source line.
+2. Stats strip: a short row of verifiable facts (formats, locales, network
+   calls), no new claims.
+3. Browser marquee: real browser logos drifting in a loop.
+4. Bento: four panels, unequal sizes, one amber accent each.
+5. Format playground: island, pick a format and see the file change.
+6. Interface showcase: island, the real extension screenshots.
+7. Video: only when a video exists.
+8. Reviews marquee: real store review excerpts in a loop.
+9. FAQ: six questions; the rest live on the Guide FAQ page.
+10. Closing panel: the final Add to Chrome call to action.
+11. Footer.
+
+The Install dock is a persistent compact Add to Chrome control that sits outside
+this flow and never overlaps the closing panel. Wide grids use
+`repeat(auto-fit, minmax(260px, 1fr))` and collapse to one column on phones.
+Nothing relies on a fixed width, so German, Russian and CJK reflow.
 
 ## Elevation & Depth
 
@@ -130,8 +153,11 @@ is the only atmospheric effect and stays behind content.
 
 Nova radius from the shared theme: 10px on buttons, 14px on panels, 20px on the
 Your device boundary. The boundary is a 1.5px dashed amber line, the only dashed
-element on the page. The brand mark is a ribbon tag with a V-notch; its halo is
-a blurred copy of the mark behind it.
+element on the page: marquee edges, dividers and playground frames use solid
+hairlines. The brand mark is a ribbon tag with a V-notch; its halo is a blurred
+copy of the mark behind it. In v2 the mark is the visual protagonist of the hero
+and the closing panel: a large ribbon that the page's motion revolves around. It
+is a brand mark, never a mascot: no face, no pose, no character behaviour.
 
 ## Components
 
@@ -148,10 +174,46 @@ a blurred copy of the mark behind it.
 - **Journey card:** a panel; the middle card (the file) gets a 1px
   `ring-primary/50` amber ring and the other two stay plain. Folder icons are
   Lucide `folder`, 2px stroke, amber.
-- **Format chip:** one outline Badge style for the hero and the feature cards:
+- **Format chip:** one outline Badge style for the hero and the playground:
   Geist Mono 12px, 1px hairline border, no fill, pill radius.
-- **Real interface:** the real extension screenshot in a 16px-radius frame with
-  a hairline border and the caption from the content document.
+- **Browser logos:** real browser logos are allowed (Chrome, Edge, Brave,
+  Firefox and peers), self-hosted as static assets, shown at one consistent
+  size, and presented as compatibility facts, never as endorsements.
+- **Marquee:** the browser and reviews rows loop horizontally on a duplicated
+  track with a hairline mask at the edges. Hover or focus within pauses it; the
+  static state is a wrapped, fully visible row.
+- **Format playground (island):** the visitor picks one of the six export
+  formats and sees the sample file change. Hydrated with `client:visible`; the
+  server HTML already shows the default format, so the section reads without
+  JavaScript. Keyboard operable, no network request.
+- **Interface showcase (island):** the real extension screenshots switchable by
+  tab, in a 16px-radius frame with a hairline border and the caption from the
+  content document. Hydrated with `client:visible`; the first screenshot is in
+  the server HTML.
+
+## Motion
+
+Motion explains and rewards; it never gates content.
+
+- **Static end state first.** Every section is complete and legible with no
+  animation. Motion is an enhancement layered on that state.
+- **Gating.** Animations run only inside
+  `@media (prefers-reduced-motion: no-preference)`, and scroll or view timelines
+  additionally inside `@supports (animation-timeline: view())`. Browsers without
+  support, and visitors who prefer reduced motion, get the end state.
+- **No motion library.** Pure CSS: keyframes, scroll and view timelines,
+  `@starting-style`, `sibling-index()` stagger. Islands add no animation
+  runtime.
+- **Transform and opacity only.** Animate `transform` and `opacity` so the work
+  stays on the compositor; never animate layout properties, filters or
+  gradients. The FAQ panel height transition is the one existing exception and
+  is removed under reduced motion.
+- **`will-change` only on marquees.** Nowhere else, and never as a blanket hint.
+- **Where it lives.** Keyframes and utilities live in
+  `packages/ui/src/styles/theme.css` or the sanctioned per-section CSS files,
+  never arbitrary values or `<style>` blocks.
+- **Purpose.** The ribbon mark in the hero, the file travelling in the journey,
+  the marquees and in-view reveals. One idea per section, no parallax stacks.
 
 ## Do's and Don'ts
 
@@ -160,7 +222,10 @@ a blurred copy of the mark behind it.
   real data.
 - Don't imply cloud, sync, an account, pricing or multi-file import, in copy or
   in imagery.
-- Don't add third-party fonts, scripts or embeds on load.
+- Don't add third-party fonts, scripts or embeds on load; browser logos are
+  self-hosted.
+- Don't turn the ribbon mark into a mascot, or the motion into decoration that
+  hides content.
 - Do focus links and shadcn button-based controls with a full-opacity
   `ring-ring` 3px ring and a 2px `ring-offset-background` offset (3:1 minimum,
   WCAG 1.4.11); never `ring-ring/50`. Consumers add the `focus-ring-solid`
