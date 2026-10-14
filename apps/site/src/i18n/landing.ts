@@ -45,6 +45,18 @@ export const FEATURE_KEYS = [
 export const SHOT_KEYS = ['export', 'import', 'autoExport', 'popup'] as const
 
 /**
+ * Export format names shown as chips in the hero.
+ */
+export const EXPORT_FORMATS = [
+  'HTML',
+  'JSON',
+  'CSV',
+  'Markdown',
+  'OPML',
+  'XBEL',
+] as const
+
+/**
  * Copy for the features section of one locale.
  */
 export type FeaturesCopy = SiteContent['features']

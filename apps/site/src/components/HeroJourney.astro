@@ -13,7 +13,7 @@ import chromeLogo from '../assets/browsers/chrome.svg'
 import edgeLogo from '../assets/browsers/edge.svg'
 import operaLogo from '../assets/browsers/opera.svg'
 import { getContent } from '../i18n/content'
-import { FEATURE_FORMATS } from '../i18n/landing'
+import { EXPORT_FORMATS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import FolderTree from './FolderTree.astro'
 
@@ -23,7 +23,7 @@ interface Props {
 
 const { locale } = Astro.props
 const { stages } = getContent(locale).landing.hero
-const formats = FEATURE_FORMATS.export ?? []
+const formats = EXPORT_FORMATS
 
 const sourceLogos = [chromeLogo, edgeLogo, braveLogo]
 const targetLogos = [edgeLogo, braveLogo, operaLogo]
