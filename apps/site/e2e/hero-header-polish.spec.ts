@@ -19,7 +19,7 @@ for (const width of [DESKTOP_WIDTH, PHONE_WIDTH]) {
   })
 }
 
-test('only the middle journey card carries the amber ring', async ({
+test('only the target browser card carries the amber ring', async ({
   page,
 }) => {
   await page.goto('/')
@@ -28,9 +28,8 @@ test('only the middle journey card carries the amber ring', async ({
     .evaluateAll((cards) =>
       cards.map((card) => globalThis.getComputedStyle(card).boxShadow),
     )
-  expect(shadows).toHaveLength(3)
+  expect(shadows).toHaveLength(2)
   expect(shadows[1]).not.toBe(shadows[0])
-  expect(shadows[0]).toBe(shadows[2])
 })
 
 test('hero and feature chips share one style', async ({ page }) => {

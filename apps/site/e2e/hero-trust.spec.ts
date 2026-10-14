@@ -84,36 +84,82 @@ test.describe('hero journey diagram', () => {
       await page.goto(path)
       const figure = page.locator('[data-section="hero"] figure')
       await expect(figure).toBeVisible()
-      await expect(figure.locator('[data-slot="card"]')).toHaveCount(3)
-      await expect(figure.locator('[data-slot="badge"]')).toHaveCount(6)
+      await expect(figure.locator('[data-slot="card"]')).toHaveCount(2)
+      await expect(figure.locator('[data-slot="badge"]')).toHaveText([
+        'HTML',
+        'JSON',
+        'CSV',
+        'Markdown',
+        'OPML',
+        'XBEL',
+      ])
       await expect(figure.locator('[data-journey="network"]')).toBeVisible()
       await expect(figure.locator('[translate="no"]').first()).toBeVisible()
     })
   }
 
-  test('cards share one row at 1280 and stack at 375', async ({ page }) => {
-    const cardBoxes = async () =>
+  test('the stage is a row at 1280 and stacks at 375', async ({ page }) => {
+    const boxes = async () =>
       page
-        .locator('[data-section="hero"] figure [data-slot="card"]')
-        .evaluateAll((cards) =>
-          cards.map((card) => {
-            const { x, y, width, height } = card.getBoundingClientRect()
+        .locator(
+          '[data-section="hero"] figure [data-slot="card"], [data-section="hero"] figure .hero-track',
+        )
+        .evaluateAll((items) =>
+          items.map((item) => {
+            const { x, y, width, height } = item.getBoundingClientRect()
             return { x, y, width, height }
           }),
         )
 
     await page.setViewportSize({ width: 1280, height: 900 })
     await page.goto('/')
-    const row = await cardBoxes()
+    const row = await boxes()
     expect(row).toHaveLength(3)
-    expect(Math.abs(row[0]!.y - row[1]!.y)).toBeLessThan(2)
-    expect(Math.abs(row[1]!.y - row[2]!.y)).toBeLessThan(2)
-    expect(row[1]!.x).toBeGreaterThan(row[0]!.x + row[0]!.width)
+    expect(row[1]!.x).toBeGreaterThan(row[0]!.x + row[0]!.width - 1)
+    expect(row[2]!.x).toBeGreaterThan(row[1]!.x + row[1]!.width - 1)
 
     await page.setViewportSize({ width: 375, height: 800 })
-    const stack = await cardBoxes()
-    expect(stack[1]!.y).toBeGreaterThan(stack[0]!.y + stack[0]!.height)
-    expect(stack[2]!.y).toBeGreaterThan(stack[1]!.y + stack[1]!.height)
+    const stack = await boxes()
+    expect(stack[1]!.y).toBeGreaterThan(stack[0]!.y + stack[0]!.height - 1)
+    expect(stack[2]!.y).toBeGreaterThan(stack[1]!.y + stack[1]!.height - 1)
+  })
+
+  test('the stage loops under no-preference', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.goto('/')
+    const read = (selector: string) =>
+      page
+        .locator(selector)
+        .first()
+        .evaluate((element) => {
+          const style = globalThis.getComputedStyle(element)
+          return [style.animationName, style.animationDuration]
+        })
+    expect(await read('.hero-file')).toEqual(['hero-file-travel', '8s'])
+    expect(await read('.hero-tree-source')).toEqual([
+      'hero-tree-compress',
+      '8s',
+    ])
+    expect(await read('.hero-tree-target')).toEqual(['hero-tree-unfold', '8s'])
+    expect(await read('.hero-logos > *')).toEqual(['hero-pair-rotate', '24s'])
+    await expect(page.locator('h1')).toHaveCSS('animation-name', 'none')
+  })
+
+  test('the stage is static and fully visible under reduce', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/')
+    for (const selector of [
+      '.hero-file',
+      '.hero-tree-source',
+      '.hero-tree-target',
+    ]) {
+      const target = page.locator(selector).first()
+      await expect(target).toHaveCSS('animation-name', 'none')
+      await expect(target).toHaveCSS('opacity', '1')
+      await expect(target).toBeVisible()
+    }
   })
 
   for (const path of ['/de/', '/ru/']) {
@@ -146,9 +192,7 @@ test.describe('hero journey diagram', () => {
     await expect(figure).toHaveAttribute('aria-labelledby', /.+/)
     const descriptionId = await figure.getAttribute('aria-describedby')
     expect(descriptionId).toBeTruthy()
-    await expect(page.locator(`#${descriptionId}`)).toContainText(
-      'bookmarks.html',
-    )
+    await expect(page.locator(`#${descriptionId}`)).toContainText('one file')
     await expect(
       figure.locator('svg[aria-hidden="true"]').first(),
     ).toBeAttached()
