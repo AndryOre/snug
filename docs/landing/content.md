@@ -2003,6 +2003,57 @@ re-confirmed in a browser before launch.
 
 ---
 
+## 12. Landing v2 copy (EN final, other locales EN placeholders)
+
+Copy for the redesigned landing page (AO-1908). It lives under the `landing` key
+of each locale JSON and sits next to the v1 keys until the last ticket of the
+redesign removes them. Other locales carry these same English strings as
+placeholders until the translation tickets replace them. Page order: Hero, Stats
+strip, Browser marquee, Bento, Format playground, Interface showcase, Video,
+Reviews, FAQ, Closing, Install dock.
+
+Terms: Install dock and Format playground. Never sync, cloud or account.
+
+### EN
+
+- **Hero headline** (`landing.hero.headline`): One file. Six formats. Nothing
+  leaves your device.
+- **Hero subheadline:** Back up, export and import bookmarks. No network calls.
+- **Hero button:** Add to Chrome
+- **Hero chips:** Free, Open source, No account
+- **Journey stages:** Your device (boundary), Your browser, One file, Another
+  browser, Network calls: 0
+- **Hero description (screen readers only):** Your bookmarks leave your browser
+  as one file, in any of six formats, and open in another browser. Every step
+  stays on your device.
+- **Stats strip:** Users 5,000, Rating 4.8, Formats 6, Network calls 0
+- **Browser marquee group labels:** Works in, Imports from
+- **Bento:**
+  - Export anything: Whole tree or chosen folders, in six formats.
+  - Import with a preview: See what will be added, skipped or deleted first.
+  - Back up on a schedule: Auto-export saves files on the schedule you set.
+  - Drop files in the popup: Drop several files at once and Snug imports them.
+- **Format playground:** Pick a format. Same bookmarks, six files. / See the
+  same folder in each format. / Tabs: HTML, JSON, CSV, Markdown, OPML, XBEL
+- **Interface showcase:** The real interface. / Tabs: Export, Import,
+  Auto-export, Popup
+- **Video:** reads the v1 heading "See it work" (`video.heading`)
+- **Reviews:** What people say / Public Chrome Web Store reviews, written before
+  the rename. The four quotes in section 6 are unchanged.
+- **FAQ:** Questions / More questions. The six items kept on the landing page
+  use their v1 text, selected by key: `network`, `account`, `sync`, `overwrite`,
+  `builtin`, `cost`. The other six (`oneFile`, `permissions`, `browsers`,
+  `formats`, `safe`, `folder`) move to the Guide FAQ page.
+- **Closing panel:** Add Snug to Chrome. / Free and open source. / Add to Chrome
+- **Install dock:** Add to Chrome, Source (screen reader label: Add Snug to
+  Chrome)
+
+Visible EN word count of the page, with the verbatim review quotes (73 words)
+and the six kept FAQ items counted: about 366, under the 380 ceiling. Without
+the quotes: about 293.
+
+---
+
 ## Claim sweep
 
 - No sync, cloud, account or pricing claim anywhere, checked against Product:
