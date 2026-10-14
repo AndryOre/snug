@@ -1,2 +1,93 @@
 @layer components {
+  [data-section='marquee'] [data-marquee-viewport] {
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+  }
+
+  [data-section='marquee'] [data-marquee-track] {
+    display: flex;
+    width: max-content;
+  }
+
+  [data-section='marquee'] [data-marquee-row] {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 3rem;
+    padding-inline: 1.5rem;
+  }
+
+  [data-section='marquee'] [data-marquee-group] {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  [data-section='marquee'] [data-marquee-label] {
+    font-size: 0.8125rem;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+  }
+
+  [data-section='marquee'] [data-marquee-logos] {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  [data-section='marquee'] [data-marquee-logo] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-section='marquee'] [data-marquee-track] {
+      animation: motion-marquee var(--marquee-duration, var(--duration-marquee))
+        linear infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    [data-section='marquee']
+      [data-marquee-viewport]:hover
+      [data-marquee-track] {
+      animation-play-state: paused;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-section='marquee'] [data-marquee-viewport] {
+      mask-image: none;
+    }
+
+    [data-section='marquee'] [data-marquee-track] {
+      width: auto;
+      justify-content: center;
+    }
+
+    [data-section='marquee'] [data-marquee-row][aria-hidden='true'] {
+      display: none;
+    }
+
+    [data-section='marquee'] [data-marquee-row],
+    [data-section='marquee'] [data-marquee-group],
+    [data-section='marquee'] [data-marquee-logos] {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    [data-section='marquee'] [data-marquee-row] {
+      row-gap: 1rem;
+    }
+  }
 }

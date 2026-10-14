@@ -18,6 +18,16 @@ export type HeroCopy = SiteContent['hero']
 export type TrustCopy = SiteContent['trust']
 
 /**
+ * Copy for the stats strip of one locale.
+ */
+export type StatsCopy = SiteContent['landing']['stats']
+
+/**
+ * Copy for the browser marquee of one locale.
+ */
+export type MarqueeCopy = SiteContent['landing']['marquee']
+
+/**
  * Keys of the feature cards, in display order.
  */
 export const FEATURE_KEYS = [
@@ -61,9 +71,26 @@ export function getLandingCopy(locale: Locale): {
   features: FeaturesCopy
   interface: InterfaceCopy
   video: VideoCopy
+  stats: StatsCopy
+  marquee: MarqueeCopy
 } {
-  const { hero, trust, features, interface: shots, video } = getContent(locale)
-  return { hero, trust, features, interface: shots, video }
+  const {
+    hero,
+    trust,
+    features,
+    interface: shots,
+    video,
+    landing,
+  } = getContent(locale)
+  return {
+    hero,
+    trust,
+    features,
+    interface: shots,
+    video,
+    stats: landing.stats,
+    marquee: landing.marquee,
+  }
 }
 
 /**
