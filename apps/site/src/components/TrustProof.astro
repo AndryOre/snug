@@ -50,8 +50,8 @@ const groups = [
   <dl class="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
     {statKeys.map((key) => (
       <div class="flex flex-col-reverse gap-1">
-        <dd class="text-3xl font-semibold tabular-nums">{stats[key].value}</dd>
         <dt class="text-sm text-muted-foreground">{stats[key].label}</dt>
+        <dd class="text-3xl font-semibold tabular-nums">{stats[key].value}</dd>
       </div>
     ))}
   </dl>

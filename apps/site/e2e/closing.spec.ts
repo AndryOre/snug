@@ -100,7 +100,11 @@ async function openLanguageMenu(page: Page): Promise<void> {
     Promise.all(
       globalThis.document
         .getAnimations()
-        .filter((a) => a.timeline === globalThis.document.timeline)
+        .filter(
+          (a) =>
+            a.timeline === globalThis.document.timeline &&
+            a.effect?.getComputedTiming().iterations !== Infinity,
+        )
         .map((a) => a.finished),
     ),
   )

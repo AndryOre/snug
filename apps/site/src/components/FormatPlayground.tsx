@@ -71,6 +71,13 @@ export default function FormatPlayground({
             value={format}
             keepMounted
             data-playground-pane={format}
+            render={(properties, state) => (
+              <div
+                {...properties}
+                hidden={undefined}
+                data-pane-hidden={state.hidden ? '' : undefined}
+              />
+            )}
           >
             {panes[format]}
           </TabsContent>

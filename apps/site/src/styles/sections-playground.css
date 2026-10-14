@@ -4,7 +4,7 @@
     display: block;
   }
 
-  [data-section='playground'] [data-playground-pane][hidden] {
+  [data-section='playground'] [data-playground-pane][data-pane-hidden] {
     visibility: hidden;
     opacity: 0;
     filter: blur(4px);
@@ -29,7 +29,7 @@
         var(--ease-out-strong), var(--ease-out-strong), linear;
     }
 
-    [data-section='playground'] [data-playground-pane][hidden] {
+    [data-section='playground'] [data-playground-pane][data-pane-hidden] {
       transition-delay: 0s, 0s, 200ms;
     }
   }

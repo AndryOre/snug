@@ -345,7 +345,7 @@
   --hero-fold-x: 0px;
   --hero-fold-y: 1rem;
   @media (min-width: 48rem) {
-    --hero-travel-x: calc(100cqw - 100%);
+    --hero-travel-x: max(0px, calc(100cqw - 100%));
     --hero-travel-y: 0px;
     --hero-fold-x: 1rem;
     --hero-fold-y: 0px;
