@@ -64,3 +64,13 @@ menu, and it shows up as unused JavaScript and blocking time on mobile.
 - Considered and rejected: keeping `client:idle` and trimming the bundle (the
   React runtime and Base UI primitives dominate the cost), and replacing the
   menus with native `popover` elements (reverses the decision above).
+
+## Amendment: Format playground and Interface showcase islands
+
+Landing v2 sanctions two further islands beyond the FAQ accordion, the header
+menus and the video: the Format playground and the Interface showcase. Both
+hydrate with `client:visible`, so neither downloads JavaScript until the visitor
+scrolls to it. Both stay interactive-only: their static first state is
+server-rendered. See
+[ADR 0023](0023-landing-motion-is-css-scroll-driven-no-motion-library.md) for
+the motion that surrounds them.
