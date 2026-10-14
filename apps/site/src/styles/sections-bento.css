@@ -1,2 +1,248 @@
+@keyframes bento-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  16%,
+  86% {
+    opacity: 1;
+    transform: none;
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes bento-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  18%,
+  86% {
+    opacity: 1;
+    transform: none;
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes bento-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  16%,
+  86% {
+    opacity: 1;
+    transform: none;
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes bento-skip {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  16% {
+    opacity: 1;
+    transform: none;
+  }
+  38%,
+  86% {
+    opacity: 0.45;
+    transform: none;
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes bento-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bento-zone {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  30%,
+  86% {
+    opacity: 1;
+  }
+}
+
 @layer components {
+  [data-section='bento'] {
+    --bento-cycle: 6s;
+  }
+
+  [data-bento~='grid'] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 48rem) {
+    [data-bento~='grid'] {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+
+    [data-bento~='grid'] > :nth-child(1) {
+      grid-row: span 2;
+    }
+
+    [data-bento~='grid'] > :nth-child(4) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  [data-bento~='art'] {
+    display: block;
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  [data-bento~='node'] {
+    fill: var(--muted);
+    stroke: var(--card-border);
+    stroke-width: 1.5;
+  }
+
+  [data-bento~='chip'] {
+    fill: var(--muted);
+    stroke: var(--card-border);
+    stroke-width: 1.5;
+  }
+
+  [data-bento~='zone'] {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+    stroke-dasharray: 6 5;
+  }
+
+  [data-bento~='line'] {
+    fill: none;
+    stroke: var(--muted-foreground);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  [data-bento~='arrow'] {
+    stroke: var(--primary);
+  }
+
+  [data-bento~='bar'] {
+    fill: var(--muted-foreground);
+    opacity: 0.45;
+  }
+
+  [data-bento~='dot'] {
+    fill: var(--primary);
+  }
+
+  [data-bento~='label'] {
+    fill: var(--foreground);
+    font-family: 'Geist Mono Variable', ui-monospace, monospace;
+    font-size: 11px;
+  }
+
+  [data-bento~='accent'] {
+    fill: var(--primary);
+    font-weight: 700;
+  }
+
+  [data-bento~='skip'] {
+    opacity: 0.45;
+  }
+
+  [data-bento~='hand'] {
+    transform-box: view-box;
+    transform-origin: 80px 90px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-bento~='rise'],
+    [data-bento~='drop'],
+    [data-bento~='slide'],
+    [data-bento~='skip'] {
+      animation-duration: var(--bento-cycle);
+      animation-timing-function: var(--ease-out-strong);
+      animation-iteration-count: infinite;
+      animation-fill-mode: both;
+      animation-delay: calc(var(--i, 0) * 120ms);
+      transform-box: fill-box;
+    }
+
+    [data-bento~='rise'] {
+      animation-name: bento-rise;
+    }
+
+    [data-bento~='drop'] {
+      animation-name: bento-drop;
+    }
+
+    [data-bento~='slide'] {
+      animation-name: bento-slide;
+    }
+
+    [data-bento~='skip'] {
+      animation-name: bento-skip;
+    }
+
+    [data-bento~='hand'] {
+      animation-name: bento-spin;
+      animation-duration: var(--bento-cycle);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    [data-bento~='zone'] {
+      animation-name: bento-zone;
+      animation-duration: var(--bento-cycle);
+      animation-timing-function: var(--ease-out-strong);
+      animation-iteration-count: infinite;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    [data-bento-card] [data-slot='card']::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background-image: radial-gradient(
+        18rem circle at var(--bento-x, 50%) var(--bento-y, 50%),
+        color-mix(in oklch, var(--primary) 12%, transparent),
+        transparent 70%
+      );
+      transition: opacity var(--duration-base) var(--ease-out-strong);
+    }
+
+    [data-bento-card] [data-slot='card']:hover::before {
+      opacity: 1;
+    }
+  }
 }

@@ -207,7 +207,7 @@ test.describe('built pages', () => {
       expect(app.isAccessibleForFree).toBe(true)
       expect(app.author).toEqual({ '@id': nodeOf('Person')['@id'] })
       expect(app.installUrl).toBe(`${SITE_ORIGIN}/install`)
-      expect(app.featureList).toHaveLength(6)
+      expect(app.featureList).toHaveLength(4)
       expect(app).not.toHaveProperty('aggregateRating')
       expect(app).toHaveProperty('interactionStatistic')
       expect(JSON.stringify(graph)).not.toContain('FAQPage')

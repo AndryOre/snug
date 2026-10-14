@@ -1,0 +1,95 @@
+---
+import { Badge } from '@workspace/ui/components/badge'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@workspace/ui/components/card'
+import { FileText } from 'lucide-react'
+
+import braveLogo from '../assets/browsers/brave.svg'
+import chromeLogo from '../assets/browsers/chrome.svg'
+import edgeLogo from '../assets/browsers/edge.svg'
+import operaLogo from '../assets/browsers/opera.svg'
+import { getContent } from '../i18n/content'
+import { EXPORT_FORMATS } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import FolderTree from './FolderTree.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { stages } = getContent(locale).landing.hero
+const formats = EXPORT_FORMATS
+
+const sourceLogos = [chromeLogo, edgeLogo, braveLogo]
+const targetLogos = [edgeLogo, braveLogo, operaLogo]
+---
+
+<div class="relative journey-boundary p-4 pt-8 md:p-6 md:pt-9">
+  <p
+    id="journey-device"
+    class="absolute top-0 left-5 -translate-y-1/2 bg-background px-3 font-mono text-xs tracking-eyebrow text-primary-text uppercase"
+  >
+    {stages.device}
+  </p>
+  <div
+    class="hero-stage flex flex-col items-stretch gap-3 md:flex-row md:gap-4"
+    aria-hidden="true"
+  >
+    <Card size="sm" className="min-w-0 flex-1">
+      <CardHeader>
+        <CardTitle className="break-words">{stages.browser}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div class="hero-logos mb-3">
+          {sourceLogos.map((logo) => (
+            <img src={logo.src} width="28" height="28" alt="" />
+          ))}
+        </div>
+        <div class="hero-tree-source">
+          <FolderTree locale={locale} />
+        </div>
+      </CardContent>
+    </Card>
+    <div class="hero-track relative h-24 shrink-0 md:h-12 md:w-40 lg:w-48">
+      <p
+        translate="no"
+        class="hero-file absolute flex items-center gap-2 rounded-md border bg-card px-2 py-1 font-mono text-sm whitespace-nowrap text-foreground"
+      >
+        <FileText className="size-4 shrink-0 text-primary-text" />
+        bookmarks.html
+      </p>
+    </div>
+    <Card size="sm" className="min-w-0 flex-1 ring-primary/50">
+      <CardHeader>
+        <CardTitle className="break-words">{stages.target}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div class="hero-logos mb-3">
+          {targetLogos.map((logo) => (
+            <img src={logo.src} width="28" height="28" alt="" />
+          ))}
+        </div>
+        <div class="hero-tree-target">
+          <FolderTree locale={locale} />
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+  <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+    <p class="font-mono text-xs text-muted-foreground">{stages.file}</p>
+    <ul class="flex flex-wrap gap-1.5" translate="no">
+      {formats.map((format) => (
+        <li>
+          <Badge variant="outline" className="font-mono">
+            {format}
+          </Badge>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

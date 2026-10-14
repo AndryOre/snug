@@ -17,32 +17,49 @@ async function distinctOffsets(cards: Locator) {
 }
 
 for (const { width, columns, rows } of [
-  { width: 1280, columns: 3, rows: 2 },
-  { width: 1440, columns: 3, rows: 2 },
-  { width: 375, columns: 1, rows: 6 },
+  { width: 1280, columns: 2, rows: 3 },
+  { width: 1440, columns: 2, rows: 3 },
+  { width: 375, columns: 1, rows: 4 },
 ]) {
-  test(`features render ${columns} columns by ${rows} rows at ${width}px`, async ({
+  test(`bento renders ${columns} columns by ${rows} rows at ${width}px`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 })
     await page.goto('/')
-    const cards = page.locator('[data-section="features"] ol > li')
-    await expect(cards).toHaveCount(6)
+    const cards = page.locator('[data-section="bento"] ul > li')
+    await expect(cards).toHaveCount(4)
     expect(await distinctOffsets(cards)).toEqual({ columns, rows })
   })
 }
 
-test('trust items carry no step numerals', async ({ page }) => {
+test('bento has no horizontal overflow at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 })
   await page.goto('/')
-  const items = page.locator('[data-section="trust"] ol > li')
-  await expect(items).toHaveCount(3)
-  const texts = await items.allInnerTexts()
-  for (const text of texts) {
-    expect(text).not.toMatch(/\b0[1-3]\b/)
-  }
-  await expect(
-    page.locator('[data-section="trust"] ol span[aria-hidden="true"]'),
-  ).toHaveCount(0)
+  const overflow = await page.evaluate(
+    () =>
+      globalThis.document.documentElement.scrollWidth - globalThis.innerWidth,
+  )
+  expect(overflow).toBeLessThanOrEqual(0)
+})
+
+test('bento loops run under no-preference and stay static under reduce', async ({
+  page,
+}) => {
+  const animationNames = () =>
+    page.evaluate(() =>
+      [
+        ...globalThis.document.querySelectorAll(
+          '[data-section="bento"] svg [data-bento]',
+        ),
+      ].map((element) => globalThis.getComputedStyle(element).animationName),
+    )
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const running = await animationNames()
+  expect(running).toEqual(expect.arrayContaining(['bento-rise', 'bento-drop']))
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  const reduced = await animationNames()
+  expect(new Set(reduced)).toEqual(new Set(['none']))
 })
 
 test('open FAQ answers use the lead size with a 4px top offset', async ({

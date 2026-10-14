@@ -30,7 +30,7 @@ const measureSizes = (image: Locator) =>
   })
 
 for (const path of PATHS) {
-  test(`${path} renders features, interface and video sections`, async ({
+  test(`${path} renders bento, interface and video sections`, async ({
     page,
   }) => {
     await blockUmami(page)
@@ -44,9 +44,8 @@ for (const path of PATHS) {
     await page.goto(path)
     await page.waitForLoadState('networkidle')
 
-    await expect(page.locator('[data-section="features"] ol > li')).toHaveCount(
-      6,
-    )
+    await expect(page.locator('[data-section="bento"] ul > li')).toHaveCount(4)
+    await expect(page.locator('[data-section="bento"] svg')).toHaveCount(4)
 
     const figures = page.locator('[data-section="interface"] figure')
     await expect(figures).toHaveCount(4)

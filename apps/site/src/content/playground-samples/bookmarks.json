@@ -1,0 +1,52 @@
+[
+  {
+    "id": "0",
+    "title": "",
+    "syncing": false,
+    "children": [
+      {
+        "id": "1",
+        "title": "Bookmarks bar",
+        "folderType": "bookmarks-bar",
+        "syncing": false,
+        "children": [
+          {
+            "id": "10",
+            "title": "Reading list",
+            "syncing": false,
+            "children": [
+              {
+                "id": "11",
+                "parentId": "10",
+                "title": "Astro docs",
+                "url": "https://docs.astro.build",
+                "syncing": false
+              },
+              {
+                "id": "12",
+                "parentId": "10",
+                "title": "MDN Web Docs",
+                "url": "https://developer.mozilla.org",
+                "syncing": false
+              }
+            ]
+          },
+          {
+            "id": "13",
+            "parentId": "1",
+            "title": "Snug",
+            "url": "https://snug.andryore.dev",
+            "syncing": false
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "title": "Other bookmarks",
+        "folderType": "other",
+        "syncing": false,
+        "children": []
+      }
+    ]
+  }
+]
