@@ -338,6 +338,93 @@
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
 }
 
+@utility hero-track {
+  container-type: size;
+  --hero-travel-x: 0px;
+  --hero-travel-y: calc(100cqh - 100%);
+  --hero-fold-x: 0px;
+  --hero-fold-y: 1rem;
+  @media (min-width: 48rem) {
+    --hero-travel-x: calc(100cqw - 100%);
+    --hero-travel-y: 0px;
+    --hero-fold-x: 1rem;
+    --hero-fold-y: 0px;
+  }
+}
+
+@utility hero-file {
+  inset-inline-start: 50%;
+  inset-block-start: 0;
+  translate: -50% 0;
+  transform: translate(
+    calc(var(--hero-travel-x) / 2),
+    calc(var(--hero-travel-y) / 2)
+  );
+  @media (min-width: 48rem) {
+    inset-inline-start: 0;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      opacity: 0;
+      animation: hero-file-travel 8s var(--ease-in-out-strong) infinite;
+    }
+  }
+}
+
+@utility hero-logos {
+  display: grid;
+  & > * {
+    grid-area: 1 / 1;
+    opacity: 0;
+  }
+  & > :first-child {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      & > * {
+        animation: hero-pair-rotate 24s var(--ease-in-out-strong) infinite;
+      }
+      & > :nth-child(2) {
+        animation-delay: 8s;
+      }
+      & > :nth-child(3) {
+        animation-delay: 16s;
+      }
+    }
+  }
+}
+
+@utility hero-stage {
+  translate: 0 0;
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      transition: translate var(--duration-slow) var(--ease-out-strong);
+      @starting-style {
+        translate: 0 1.5rem;
+      }
+    }
+  }
+}
+
+@utility hero-tree-source {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      animation: hero-tree-compress 8s var(--ease-in-out-strong) infinite;
+    }
+  }
+}
+
+@utility hero-tree-target {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      animation: hero-tree-unfold 8s var(--ease-in-out-strong) infinite;
+    }
+  }
+}
+
 @utility journey-boundary {
   border: 1.5px dashed var(--primary);
   border-radius: 18px;

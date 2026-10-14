@@ -1,2 +1,64 @@
-@layer components {
+@keyframes hero-file-travel {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(var(--hero-travel-x), var(--hero-travel-y)) scale(1);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--hero-travel-x), var(--hero-travel-y)) scale(0.6);
+  }
+}
+
+@keyframes hero-tree-compress {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  25%,
+  75% {
+    opacity: 0.25;
+    transform: translate(var(--hero-fold-x), var(--hero-fold-y)) scale(0.85);
+  }
+}
+
+@keyframes hero-tree-unfold {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translate(
+        calc(var(--hero-fold-x) * -1),
+        calc(var(--hero-fold-y) * -1)
+      )
+      scale(0.85);
+  }
+  75%,
+  95% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes hero-pair-rotate {
+  0%,
+  30% {
+    opacity: 1;
+  }
+  33.33%,
+  100% {
+    opacity: 0;
+  }
 }
