@@ -6,9 +6,8 @@ const LAYOUT_SPECS =
 export default defineConfig({
   testDir: './e2e',
   forbidOnly: !!process.env.CI,
-  retries: 0,
-  maxFailures: 6,
-  reporter: 'list',
+  retries: process.env.CI ? 2 : 0,
+  reporter: process.env.CI ? [['html', { open: 'never' }]] : 'list',
   use: { baseURL: 'http://localhost:4399' },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
