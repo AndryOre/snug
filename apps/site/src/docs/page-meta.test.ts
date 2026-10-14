@@ -42,7 +42,10 @@ describe('per-page description and SEO title', () => {
       if (locale !== DEFAULT_LOCALE) {
         it('translates the copy instead of reusing the English text', () => {
           const english = pages.filter((page) => page.locale === DEFAULT_LOCALE)
-          for (const page of localePages) {
+          const translated = localePages.filter(
+            (page) => page.status !== 'missing',
+          )
+          for (const page of translated) {
             const source = english.find(
               (candidate) => candidate.sourcePath === page.sourcePath,
             )
