@@ -8,6 +8,7 @@ import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-gr
 
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
+import { bentoTitles } from '../i18n/bento'
 import { getContent, getPageMeta } from '../i18n/content'
 import {
   DEFAULT_LOCALE,
@@ -54,9 +55,7 @@ const ogAlternates = hasAlternates
   : []
 const ogImage = `${SITE_ORIGIN}${ogImagePath(locale)}`
 const ogImageAlt = content.seo.ogImageAlt
-const featureTitles = Object.values(content.features.items).map(
-  (item) => item.title,
-)
+const featureTitles = bentoTitles(locale)
 const structuredData = page
   ? page.jsonLd
   : buildStructuredData(locale, meta.description, featureTitles, {

@@ -1,0 +1,259 @@
+---
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@workspace/ui/components/card'
+import { BENTO_KEYS, getBentoCopy } from '../i18n/bento'
+import type { Locale } from '../i18n/locales'
+import Section from './Section.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const copy = getBentoCopy(Astro.props.locale)
+
+const FORMATS = ['HTML', 'JSON', 'CSV', 'Markdown', 'OPML', 'XBEL'] as const
+const IMPORT_ROWS = ['added', 'skipped', 'added', 'added'] as const
+const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
+---
+
+<Section section="bento" class="defer-render-md">
+  <ul data-bento="grid">
+    {BENTO_KEYS.map((key) => (
+      <li class="flex" data-bento-card={key}>
+        <Card size="lg" className="relative w-full">
+          <CardHeader>
+            <CardTitle className="text-2xl leading-tight break-words hyphens-auto">
+              <h3>{copy[key].title}</h3>
+            </CardTitle>
+            <CardDescription className="mt-3 text-base">
+              {copy[key].body}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-1 items-center" translate="no">
+            <svg
+              data-bento="art"
+              viewBox="0 0 320 180"
+              aria-hidden="true"
+              focusable="false"
+            >
+              {key === 'export' && (
+                <>
+                  <rect
+                    data-bento="node"
+                    x="16"
+                    y="20"
+                    width="64"
+                    height="20"
+                    rx="4"
+                  />
+                  <path
+                    data-bento="line"
+                    d="M26 40 V108 M26 62 H38 M26 86 H38 M26 110 H38"
+                  />
+                  <rect
+                    data-bento="node"
+                    x="38"
+                    y="54"
+                    width="64"
+                    height="16"
+                    rx="4"
+                  />
+                  <rect
+                    data-bento="node"
+                    x="38"
+                    y="78"
+                    width="64"
+                    height="16"
+                    rx="4"
+                  />
+                  <rect
+                    data-bento="node"
+                    x="38"
+                    y="102"
+                    width="64"
+                    height="16"
+                    rx="4"
+                  />
+                  <path
+                    data-bento="line arrow"
+                    d="M114 90 H156 M148 83 L156 90 L148 97"
+                  />
+                  {FORMATS.map((format, index) => (
+                    <g data-bento="rise" style={{ '--i': index }}>
+                      <rect
+                        data-bento="chip"
+                        x={index % 2 === 0 ? 176 : 248}
+                        y={34 + Math.floor(index / 2) * 40}
+                        width="64"
+                        height="28"
+                        rx="6"
+                      />
+                      <text
+                        data-bento="label"
+                        x={index % 2 === 0 ? 208 : 280}
+                        y={52 + Math.floor(index / 2) * 40}
+                        text-anchor="middle"
+                      >
+                        {format}
+                      </text>
+                    </g>
+                  ))}
+                </>
+              )}
+              {key === 'import' && (
+                <>
+                  {IMPORT_ROWS.map((state, index) => (
+                    <g
+                      data-bento={state === 'skipped' ? 'skip' : 'slide'}
+                      style={{ '--i': index }}
+                    >
+                      <rect
+                        data-bento="chip"
+                        x="24"
+                        y={14 + index * 40}
+                        width="272"
+                        height="30"
+                        rx="6"
+                      />
+                      <rect
+                        data-bento="bar"
+                        x="38"
+                        y={25 + index * 40}
+                        width={state === 'skipped' ? 120 : 150 - index * 14}
+                        height="8"
+                        rx="4"
+                      />
+                      <text
+                        data-bento={
+                          state === 'skipped' ? 'label' : 'label accent'
+                        }
+                        x="278"
+                        y={34 + index * 40}
+                        text-anchor="end"
+                      >
+                        {state === 'skipped' ? '=' : '+'}
+                      </text>
+                    </g>
+                  ))}
+                </>
+              )}
+              {key === 'backup' && (
+                <>
+                  <circle data-bento="node" cx="80" cy="90" r="46" />
+                  <path data-bento="line" d="M80 58 V90" />
+                  <path data-bento="line hand" d="M80 90 L80 56" />
+                  <circle data-bento="dot" cx="80" cy="90" r="4" />
+                  <path
+                    data-bento="line arrow"
+                    d="M140 90 H164 M156 83 L164 90 L156 97"
+                  />
+                  {BACKUP_FILES.map((date, index) => (
+                    <g data-bento="drop" style={{ '--i': index }}>
+                      <rect
+                        data-bento="chip"
+                        x="184"
+                        y={30 + index * 40}
+                        width="112"
+                        height="30"
+                        rx="6"
+                      />
+                      <text
+                        data-bento="label"
+                        x="240"
+                        y={49 + index * 40}
+                        text-anchor="middle"
+                      >
+                        {date}
+                      </text>
+                    </g>
+                  ))}
+                </>
+              )}
+              {key === 'popup' && (
+                <>
+                  <rect
+                    data-bento="node"
+                    x="70"
+                    y="12"
+                    width="180"
+                    height="156"
+                    rx="10"
+                  />
+                  <rect
+                    data-bento="bar"
+                    x="86"
+                    y="26"
+                    width="64"
+                    height="8"
+                    rx="4"
+                  />
+                  <rect
+                    data-bento="zone"
+                    x="86"
+                    y="48"
+                    width="148"
+                    height="104"
+                    rx="8"
+                  />
+                  {[0, 1, 2].map((index) => (
+                    <g data-bento="drop" style={{ '--i': index }}>
+                      <rect
+                        data-bento="chip"
+                        x={106 + index * 40}
+                        y={78 + (index % 2) * 14}
+                        width="28"
+                        height="36"
+                        rx="4"
+                      />
+                      <path
+                        data-bento="line"
+                        d={`M${112 + index * 40} ${92 + (index % 2) * 14} H${128 + index * 40} M${112 + index * 40} ${100 + (index % 2) * 14} H${124 + index * 40}`}
+                      />
+                    </g>
+                  ))}
+                </>
+              )}
+            </svg>
+          </CardContent>
+        </Card>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<script>
+  const FINE_HOVER = '(hover: hover) and (pointer: fine)'
+  const NO_REDUCED_MOTION = '(prefers-reduced-motion: no-preference)'
+
+  if (matchMedia(FINE_HOVER).matches && matchMedia(NO_REDUCED_MOTION).matches) {
+    let pending: { card: HTMLElement; x: number; y: number } | undefined
+    let frame = 0
+
+    const flush = () => {
+      frame = 0
+      if (!pending) return
+      const { card, x, y } = pending
+      const box = card.getBoundingClientRect()
+      card.style.setProperty('--bento-x', `${x - box.left}px`)
+      card.style.setProperty('--bento-y', `${y - box.top}px`)
+      pending = undefined
+    }
+
+    document
+      .querySelector('[data-section="bento"]')
+      ?.addEventListener('pointermove', (event) => {
+        const card = (event.target as Element).closest<HTMLElement>(
+          '[data-slot="card"]',
+        )
+        if (!card) return
+        const { clientX, clientY } = event as PointerEvent
+        pending = { card, x: clientX, y: clientY }
+        if (frame === 0) frame = requestAnimationFrame(flush)
+      })
+  }
+</script>
