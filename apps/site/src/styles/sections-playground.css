@@ -1,2 +1,36 @@
 @layer components {
+  [data-section='playground'] [data-playground-pane] {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  [data-section='playground'] [data-playground-pane][hidden] {
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  [data-section='playground'] [data-playground-pane] .expressive-code,
+  [data-section='playground'] [data-playground-pane] figure,
+  [data-section='playground'] [data-playground-pane] pre {
+    height: 100%;
+    margin: 0;
+  }
+
+  [data-section='playground'] [data-playground-pane] pre {
+    overflow: auto;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-section='playground'] [data-playground-pane] {
+      transition-property: opacity, filter, visibility;
+      transition-duration: 200ms, 200ms, 0s;
+      transition-timing-function:
+        var(--ease-out-strong), var(--ease-out-strong), linear;
+    }
+
+    [data-section='playground'] [data-playground-pane][hidden] {
+      transition-delay: 0s, 0s, 200ms;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import Faq from '../../components/Faq.astro'
 import Bento from '../../components/Bento.astro'
 import FinalCta from '../../components/FinalCta.astro'
 import Hero from '../../components/Hero.astro'
+import Playground from '../../components/Playground.astro'
 import RealInterface from '../../components/RealInterface.astro'
 import SocialProof from '../../components/SocialProof.astro'
 import TrustProof from '../../components/TrustProof.astro'
@@ -28,6 +29,7 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
     <Hero locale={locale} />
     <TrustProof locale={locale} />
     <Bento locale={locale} />
+    <Playground locale={locale} />
     <RealInterface locale={locale} />
     <VideoSection locale={locale} />
     <SocialProof locale={locale} />
