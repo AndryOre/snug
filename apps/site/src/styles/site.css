@@ -4,6 +4,16 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/space-grotesk';
 @import '@workspace/ui/theme.css';
+@import './sections-hero.css';
+@import './sections-stats.css';
+@import './sections-marquee.css';
+@import './sections-bento.css';
+@import './sections-playground.css';
+@import './sections-showcase.css';
+@import './sections-proof.css';
+@import './sections-faq.css';
+@import './sections-closing.css';
+@import './sections-dock.css';
 
 @source '../';
 @source '../../../../packages/ui/src/components/accordion.tsx';

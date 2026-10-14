@@ -241,6 +241,31 @@ facade, iframes and `<time>` elements are masked and animations are disabled.
 - `test:container` skips these tests (`--grep-invert @visual`); Docker is
   required for `test:visual`.
 
+## Landing motion utilities
+
+Defined in `packages/ui/src/styles/theme.css`
+([ADR 0023](adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md)).
+Tokens: `--ease-out-strong`, `--ease-in-out-strong`, `--duration-fast`,
+`--duration-base`, `--duration-slow`, `--duration-marquee`.
+
+- `header-surface` — fades an element from 0 to 1 over the first 64px of root
+  scroll. Fade only, so it is not gated by reduced motion.
+- `scroll-reveal` — fade and rise as the element enters the viewport; the start
+  is offset by `sibling-index()` for a stagger.
+- `scroll-reveal-named` — same, on the timeline named by `--reveal-timeline`
+  (use when a parent clips with `overflow`).
+- `enter-start` — `@starting-style` entrance on first render.
+- `marquee-track` — infinite horizontal loop (duplicate the content once);
+  pauses on hover.
+- `dock-reveal` — slides in on the `--dock-start` timeline and out on
+  `--dock-end`; declare both as `view-timeline-name` on the sections that bound
+  the dock.
+- `spotlight` — radial highlight at `--spotlight-x` and `--spotlight-y`, which a
+  pointer handler sets.
+
+Motion utilities apply only under `prefers-reduced-motion: no-preference` and
+`@supports`; the static layout is the default.
+
 ## Accessibility
 
 - **Linting**: `eslint-plugin-jsx-a11y`'s `recommended` config is enabled in
