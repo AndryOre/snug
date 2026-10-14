@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xbel PUBLIC "+//IDN python.org//DTD XML Bookmark Exchange Language 1.0//EN//XML" "https://www.python.org/topics/xml/dtds/xbel-1.0.dtd">
+<xbel version="1.0">
+  <folder>
+    <title>Bookmarks bar</title>
+    <folder>
+      <title>Reading list</title>
+      <bookmark href="https://docs.astro.build">
+        <title>Astro docs</title>
+      </bookmark>
+      <bookmark href="https://developer.mozilla.org">
+        <title>MDN Web Docs</title>
+      </bookmark>
+    </folder>
+    <bookmark href="https://snug.andryore.dev">
+      <title>Snug</title>
+    </bookmark>
+  </folder>
+  <folder>
+    <title>Other bookmarks</title>
+  </folder>
+</xbel>

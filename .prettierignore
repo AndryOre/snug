@@ -10,3 +10,4 @@ coverage
 apps/video/out
 apps/site/dist
 apps/site/.astro
+apps/site/src/content/playground-samples
