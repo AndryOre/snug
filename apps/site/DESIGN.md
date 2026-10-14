@@ -87,8 +87,8 @@ in UI chrome, a stock mascot, hype copy.
 Design boards: the Landing v2 canvas
 (<https://claude.ai/artifact/8ftMuNdgUodA8wfRPoUBsN>, `Landing.dc.html`, area
 "Landing v2"). Motion architecture and its constraints are decided in
-[ADR 0023](../../docs/adr/0023-landing-v2-motion-and-logos.md); this file
-describes the visual rules and must agree with it.
+[ADR 0023](../../docs/adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md);
+this file describes the visual rules and must agree with it.
 
 ## Colors
 

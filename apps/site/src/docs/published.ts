@@ -87,7 +87,7 @@ export const PUBLISHED_SOURCES: readonly PublishedSource[] = [
     kind: 'markdown',
     seoTitle: 'Snug FAQ: Formats, Browsers, Safety and Backups',
     description:
-      'Answers to common questions about Snug: overwriting bookmarks, supported formats and browsers, safety, backup folders and cost.',
+      'Answers to common questions about Snug: importing several files, permissions, supported formats and browsers, safety and backup folders.',
   },
   {
     id: 'changelog',

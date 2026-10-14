@@ -51,7 +51,7 @@ relative to `apps/extension/` unless it starts with `packages/`.
     playground (island), Interface showcase (island), Video, Reviews marquee,
     FAQ (six questions), Closing panel, Footer, plus the Install dock. Motion is
     pure CSS, static end state first
-    ([ADR 0023](adr/0023-landing-v2-motion-and-logos.md),
+    ([ADR 0023](adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md),
     `apps/site/DESIGN.md`).
   - Site map: the landing page (`/`, `/<locale>/`), `/privacy/`, the Guide and
     What's new (`/guide/`, `/changelog/`), and the Alternatives page

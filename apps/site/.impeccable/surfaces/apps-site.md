@@ -13,8 +13,8 @@ Mode: Persuade. Landing v2 (AO-1908), superseding the 2026-10-05 canvas. Boards:
 4 Bento, 5 Format playground, 6 Interface showcase, 7 Video, 8 Reviews marquee,
 9 FAQ (six questions), 10 Closing panel, 11 Footer, plus the Install dock. Copy
 is `docs/landing/content.md` (EN source, ten locales). Motion architecture:
-[ADR 0023](../../../../docs/adr/0023-landing-v2-motion-and-logos.md). Visual
-rules: `apps/site/DESIGN.md`.
+[ADR 0023](../../../../docs/adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md).
+Visual rules: `apps/site/DESIGN.md`.
 
 ## Job and audience
 

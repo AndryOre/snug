@@ -2,10 +2,15 @@
 
 Short answers to the questions people ask most about Snug.
 
-## Will it overwrite my current bookmarks?
+## Can I import several files at once?
 
-Only if you choose Replace. You see a preview first, and Replace saves a Safety
-snapshot you can restore.
+Yes. Pick or drop several files on the Import page or in the toolbar popup and
+Snug imports them in one go.
+
+## Why does it need access to all my bookmarks?
+
+Reading and writing them is the only way an extension can export and import
+them. Snug makes no network calls, so nothing it reads can leave your device.
 
 ## Which formats does it handle?
 
@@ -28,7 +33,3 @@ Yes. On the [Auto-export](auto-export.md) page, choose a Custom folder. After a
 restart, Chrome asks once to confirm access to it; choose "Allow on every visit"
 so unattended runs keep working. If access is missing, Snug warns you and the
 run fails instead of saving somewhere else.
-
-## Does Snug cost anything?
-
-No. It is free.
