@@ -264,7 +264,7 @@
       animation-fill-mode: both;
       animation-timeline: view();
       animation-range: entry 0% entry 60%;
-      animation-range-start: calc(entry 0% + (sibling-index() - 1) * 4%);
+      animation-range-start: entry calc((sibling-index() - 1) * 4%);
     }
   }
 }
@@ -315,7 +315,7 @@
       animation-name: motion-dock, motion-dock-out;
       animation-duration: 1ms, 1ms;
       animation-timing-function: var(--ease-out-strong), linear;
-      animation-fill-mode: both, both;
+      animation-fill-mode: both, forwards;
       animation-timeline: --dock-start, --dock-end;
       animation-range:
         exit 0% exit 100%,

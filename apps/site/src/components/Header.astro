@@ -55,11 +55,13 @@ const options = LOCALES.map((code) => ({
 ---
 
 <Element data-section="header" class="sticky top-0 z-10">
-  <div
-    aria-hidden="true"
-    data-header-surface
-    class="header-surface pointer-events-none absolute inset-0 border-b bg-background/80 backdrop-blur-md"
-  ></div>
+  {Element === 'header' && (
+    <div
+      aria-hidden="true"
+      data-header-surface
+      class="header-surface pointer-events-none absolute inset-0 border-b bg-background/80 backdrop-blur-md"
+    />
+  )}
   {skipLink && (
     <a
       href="#main"
