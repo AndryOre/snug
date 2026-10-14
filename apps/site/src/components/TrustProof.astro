@@ -1,9 +1,13 @@
 ---
+import brave from '../assets/browsers/brave.svg'
+import chrome from '../assets/browsers/chrome.svg'
+import edge from '../assets/browsers/edge.svg'
+import firefox from '../assets/browsers/firefox.svg'
+import opera from '../assets/browsers/opera.svg'
+import safari from '../assets/browsers/safari.svg'
 import { getLandingCopy, resolveHref, TRUST_LINK_HREFS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
-import CardGrid from './CardGrid.astro'
 import InstallButton from './InstallButton.astro'
-import NumberedCard from './NumberedCard.astro'
 import Section from './Section.astro'
 import TextLink from './TextLink.astro'
 
@@ -11,8 +15,8 @@ interface Props {
   locale: Locale
 }
 
-const { hero, trust } = getLandingCopy(Astro.props.locale)
-const points = [trust.points.network, trust.points.account, trust.points.source]
+const { hero, trust, stats, marquee } = getLandingCopy(Astro.props.locale)
+const statKeys = ['users', 'rating', 'formats', 'network'] as const
 const linkKeys = [
   'source',
   'scorecard',
@@ -20,31 +24,92 @@ const linkKeys = [
   'ci',
   'privacy',
 ] as const
+const groups = [
+  {
+    key: 'browsers',
+    label: marquee.browsers,
+    logos: [
+      { name: 'Chrome', src: chrome.src },
+      { name: 'Edge', src: edge.src },
+      { name: 'Brave', src: brave.src },
+      { name: 'Opera', src: opera.src },
+    ],
+  },
+  {
+    key: 'sources',
+    label: marquee.sources,
+    logos: [
+      { name: 'Firefox', src: firefox.src },
+      { name: 'Safari', src: safari.src },
+    ],
+  },
+]
 ---
 
-<Section section="trust" heading={trust.heading} lead={trust.intro}>
-  <CardGrid as="ol" columns="three">
-    {points.map((point) => (
-      <NumberedCard {...point} />
+<Section section="stats" class="border-y">
+  <dl class="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
+    {statKeys.map((key) => (
+      <div class="flex flex-col-reverse gap-1">
+        <dd class="text-3xl font-semibold tabular-nums">{stats[key].value}</dd>
+        <dt class="text-sm text-muted-foreground">{stats[key].label}</dt>
+      </div>
     ))}
-  </CardGrid>
-  <p class="mt-8 max-w-2xl leading-body text-muted-foreground">
-    {trust.access}
-  </p>
-  <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-    {linkKeys.map((key) => (
-      <li>
-        <TextLink
-          href={resolveHref(TRUST_LINK_HREFS[key], Astro.props.locale)}
-          data-umami-event="outbound-click"
-          data-umami-event-target={`trust-${key}`}
-        >
-          {trust.links[key]}
-        </TextLink>
-      </li>
-    ))}
-  </ul>
-  <div class="mt-10">
+  </dl>
+</Section>
+
+<section data-section="marquee" class="overflow-hidden">
+  <div class="mx-auto max-w-site py-10">
+    <div data-marquee-viewport>
+      <div data-marquee-track>
+        {[false, true].map((isClone) => (
+          <div data-marquee-row aria-hidden={isClone ? 'true' : undefined}>
+            {groups.map((group) => (
+              <div data-marquee-group>
+                <p data-marquee-label>{group.label}</p>
+                <ul data-marquee-logos>
+                  {group.logos.map((logo) => (
+                    <li data-marquee-logo>
+                      <img src={logo.src} alt="" width="24" height="24" />
+                      <span>{logo.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<Section section="trust">
+  <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
     <InstallButton placement="trust" label={hero.install} />
+    <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      {linkKeys.map((key) => (
+        <li>
+          <TextLink
+            href={resolveHref(TRUST_LINK_HREFS[key], Astro.props.locale)}
+            data-umami-event="outbound-click"
+            data-umami-event-target={`trust-${key}`}
+          >
+            {trust.links[key]}
+          </TextLink>
+        </li>
+      ))}
+    </ul>
   </div>
 </Section>
+
+<script>
+  const MARQUEE_SPEED_PX_PER_SECOND = 40
+  const track = document.querySelector<HTMLElement>('[data-marquee-track]')
+  if (track) {
+    const rowWidth = track.scrollWidth / 2
+    track.style.setProperty(
+      '--marquee-duration',
+      `${(rowWidth / MARQUEE_SPEED_PX_PER_SECOND).toFixed(2)}s`,
+    )
+  }
+</script>

@@ -32,19 +32,6 @@ for (const { width, columns, rows } of [
   })
 }
 
-test('trust items carry no step numerals', async ({ page }) => {
-  await page.goto('/')
-  const items = page.locator('[data-section="trust"] ol > li')
-  await expect(items).toHaveCount(3)
-  const texts = await items.allInnerTexts()
-  for (const text of texts) {
-    expect(text).not.toMatch(/\b0[1-3]\b/)
-  }
-  await expect(
-    page.locator('[data-section="trust"] ol span[aria-hidden="true"]'),
-  ).toHaveCount(0)
-})
-
 test('open FAQ answers use the lead size with a 4px top offset', async ({
   page,
 }) => {

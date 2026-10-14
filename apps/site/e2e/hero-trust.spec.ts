@@ -26,7 +26,12 @@ for (const path of PATHS) {
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('[data-section="hero"]')).toBeVisible()
     await expect(page.locator('[data-section="trust"]')).toBeVisible()
-    await expect(page.locator('[data-section="trust"] ol > li')).toHaveCount(3)
+    await expect(page.locator('[data-section="stats"] dl > div')).toHaveCount(4)
+    await expect(
+      page.locator(
+        '[data-section="marquee"] [data-marquee-row]:not([aria-hidden])',
+      ),
+    ).toHaveCount(1)
     await expect(page.locator('[data-section="trust"] ul a')).toHaveCount(5)
 
     await expect(page.locator('a[data-install="hero"]')).toHaveAttribute(
@@ -165,4 +170,64 @@ test.describe('hero journey diagram', () => {
       expect(violations).toEqual([])
     })
   }
+})
+
+test.describe('stats strip and browser marquee', () => {
+  test('render in order after the hero', async ({ page }) => {
+    await page.goto('/')
+    const order = await page
+      .locator('main > section')
+      .evaluateAll((sections) =>
+        sections.map((section) => section.dataset.section),
+      )
+    expect(order.slice(0, 4)).toEqual(['hero', 'stats', 'marquee', 'trust'])
+  })
+
+  test('animation duration follows the row width at 40 px/s', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.goto('/')
+    const { rowWidth, duration } = await page
+      .locator('[data-marquee-track]')
+      .evaluate((track) => ({
+        rowWidth: track.scrollWidth / 2,
+        duration: Number(
+          getComputedStyle(track).animationDuration.replace('s', ''),
+        ),
+      }))
+    expect(Math.abs(duration - rowWidth / 40)).toBeLessThan(0.1)
+  })
+
+  test('pauses on hover with a fine pointer', async ({ page, hasTouch }) => {
+    test.skip(hasTouch, 'hover needs a fine pointer')
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.goto('/')
+    await page.locator('[data-marquee-viewport]').hover()
+    await expect(page.locator('[data-marquee-track]')).toHaveCSS(
+      'animation-play-state',
+      'paused',
+    )
+  })
+
+  test('is static under reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/')
+    await expect(page.locator('[data-marquee-track]')).toHaveCSS(
+      'animation-name',
+      'none',
+    )
+    await expect(
+      page.locator('[data-marquee-row][aria-hidden="true"]'),
+    ).toBeHidden()
+  })
+
+  test('does not overflow at 320', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 })
+    await page.goto('/')
+    const scrollWidth = await page.evaluate(
+      () => globalThis.document.documentElement.scrollWidth,
+    )
+    expect(scrollWidth).toBeLessThanOrEqual(320)
+  })
 })
