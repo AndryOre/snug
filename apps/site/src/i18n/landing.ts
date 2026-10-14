@@ -94,16 +94,6 @@ export function getLandingCopy(locale: Locale): {
 }
 
 /**
- * Format names shown as chips on the feature cards that list formats.
- */
-export const FEATURE_FORMATS: Partial<
-  Record<(typeof FEATURE_KEYS)[number], readonly string[]>
-> = {
-  export: ['HTML', 'JSON', 'CSV', 'Markdown', 'OPML', 'XBEL'],
-  preview: ['HTML', 'JSON', 'CSV', 'XBEL'],
-}
-
-/**
  * Public YouTube video id of the promo in each locale.
  */
 export const PROMO_VIDEO_IDS: Record<Locale, string> = {
