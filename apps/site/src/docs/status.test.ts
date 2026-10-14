@@ -19,7 +19,7 @@ function pagesWith(translations: Record<string, string>): LocalizedPage[] {
 describe('formatStatusReport', () => {
   it('reports every non-English locale with its outstanding pages', () => {
     const report = formatStatusReport(pagesWith({}))
-    expect(report).toContain('es: 7 missing, 0 stale, 0 up to date')
+    expect(report).toContain('es: 8 missing, 0 stale, 0 up to date')
     expect(report).toContain('  missing docs/guide/settings.md')
     expect(report).not.toContain('en:')
   })
@@ -32,7 +32,7 @@ describe('formatStatusReport', () => {
         'es/docs/usage.md': `---\ntitle: Uso\nsourceHash: ${hash}\n---\nHola\n`,
       }),
     )
-    expect(report).toContain('es: 6 missing, 0 stale, 1 up to date')
+    expect(report).toContain('es: 7 missing, 0 stale, 1 up to date')
     expect(report.split('de:', 1)[0]).not.toContain('missing docs/usage.md')
   })
 
@@ -43,7 +43,7 @@ describe('formatStatusReport', () => {
           '---\ntitle: Nutzung\nsourceHash: 0000000000000000\n---\nHallo\n',
       }),
     )
-    expect(report).toContain('de: 6 missing, 1 stale, 0 up to date')
+    expect(report).toContain('de: 7 missing, 1 stale, 0 up to date')
     expect(report).toContain('  stale   docs/usage.md')
   })
 })

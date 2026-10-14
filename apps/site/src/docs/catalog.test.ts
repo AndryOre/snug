@@ -21,6 +21,7 @@ describe('published allowlist', () => {
       'docs/guide/duplicates.md',
       'docs/guide/settings.md',
       'docs/guide/auto-export.md',
+      'docs/guide/faq.md',
       'CHANGELOG.md',
     ])
   })
@@ -88,7 +89,7 @@ describe('buildCatalogEntry', () => {
 })
 
 describe('loadCatalog', () => {
-  it('builds all seven pages from the real repository files', () => {
+  it('builds all eight pages from the real repository files', () => {
     const entries = loadCatalog()
     expect(entries.map((entry) => entry.id)).toEqual([
       'guide',
@@ -97,6 +98,7 @@ describe('loadCatalog', () => {
       'guide/duplicates',
       'guide/settings',
       'guide/auto-export',
+      'guide/faq',
       'changelog',
     ])
     expect(entries.every((entry) => entry.body.length > 0)).toBe(true)
@@ -122,6 +124,7 @@ describe('buildSidebar', () => {
       { label: 'Duplicates', slug: 'guide/duplicates' },
       { label: 'Settings', slug: 'guide/settings' },
       { label: 'Auto-export', slug: 'guide/auto-export' },
+      { label: 'FAQ', slug: 'guide/faq' },
     ])
     expect(whatsNew).toMatchObject({ label: "What's new", slug: 'changelog' })
   })

@@ -13,6 +13,7 @@ export interface SidebarLabels {
   duplicates: string
   settings: string
   autoExport: string
+  faq: string
   whatsNew: string
 }
 
@@ -34,6 +35,7 @@ const SIDEBAR_PAGES = [
   ['duplicates', 'guide/duplicates'],
   ['settings', 'guide/settings'],
   ['autoExport', 'guide/auto-export'],
+  ['faq', 'guide/faq'],
 ] as const satisfies readonly (readonly [keyof SidebarLabels, string])[]
 
 /**
