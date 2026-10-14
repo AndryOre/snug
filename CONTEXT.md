@@ -155,9 +155,18 @@ job is to send visitors to the store listing for the browser in use. _Avoid_:
 website, homepage, marketing site, promo page.
 
 **Guide** The user documentation on the Website, one page per area of the App
-(exporting, importing, duplicates, settings, Auto-export). The English text
-prevails; every other locale shows a translation that says so when it lags the
-English. _Avoid_: docs, manual, usage docs, help center.
+(exporting, importing, duplicates, settings, Auto-export), plus one page of
+frequently asked questions. The English text prevails; every other locale shows
+a translation that says so when it lags the English. _Avoid_: docs, manual,
+usage docs, help center.
+
+**Install dock** The floating bar on the Landing page that carries the Install
+redirect once the hero has scrolled out of view, and hides again at the closing
+panel. _Avoid_: sticky CTA, floating button, install bar.
+
+**Format playground** The Landing page section where a visitor picks one of the
+export formats and sees the same sample bookmarks written in it. _Avoid_: demo,
+code preview, format picker.
 
 **Alternatives page** The Website page that lists Snug, the browser's built-in
 export and the other bookmark export or backup extensions side by side, and

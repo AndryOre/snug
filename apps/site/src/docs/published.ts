@@ -82,6 +82,14 @@ export const PUBLISHED_SOURCES: readonly PublishedSource[] = [
       'Schedule automatic bookmark exports in Chrome. Pick formats, an interval and a folder, and Snug saves the files with no save dialog.',
   },
   {
+    id: 'guide/faq',
+    sourcePath: 'docs/guide/faq.md',
+    kind: 'markdown',
+    seoTitle: 'Snug FAQ: Formats, Browsers, Safety and Backups',
+    description:
+      'Answers to common questions about Snug: importing several files, permissions, supported formats and browsers, safety and backup folders.',
+  },
+  {
     id: 'changelog',
     sourcePath: 'CHANGELOG.md',
     kind: 'changelog',

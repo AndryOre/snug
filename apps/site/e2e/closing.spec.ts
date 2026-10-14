@@ -97,7 +97,12 @@ async function openLanguageMenu(page: Page): Promise<void> {
   await page.locator('[data-language-switcher]').getByRole('button').click()
   await expect(page.locator(MENU)).toBeVisible()
   await page.evaluate(() =>
-    Promise.all(globalThis.document.getAnimations().map((a) => a.finished)),
+    Promise.all(
+      globalThis.document
+        .getAnimations()
+        .filter((a) => a.timeline === globalThis.document.timeline)
+        .map((a) => a.finished),
+    ),
   )
 }
 

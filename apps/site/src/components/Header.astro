@@ -54,7 +54,14 @@ const options = LOCALES.map((code) => ({
 }))
 ---
 
-<Element data-section="header" class="relative z-10">
+<Element data-section="header" class="sticky top-0 z-10">
+  {Element === 'header' && (
+    <div
+      aria-hidden="true"
+      data-header-surface
+      class="header-surface pointer-events-none absolute inset-0 border-b bg-background/80 backdrop-blur-md"
+    />
+  )}
   {skipLink && (
     <a
       href="#main"
@@ -67,7 +74,7 @@ const options = LOCALES.map((code) => ({
       {header.skipLink}
     </a>
   )}
-  <div class="mx-auto flex h-14 max-w-site items-center justify-between gap-2 px-4 md:px-14">
+  <div class="relative mx-auto flex h-14 max-w-site items-center justify-between gap-2 px-4 md:px-14">
     <a
       href={localePath(locale)}
       aria-label={header.homeLabel}

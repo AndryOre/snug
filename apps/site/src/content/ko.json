@@ -226,6 +226,7 @@
     "duplicates": "중복",
     "settings": "설정",
     "autoExport": "자동 내보내기",
+    "faq": "FAQ",
     "whatsNew": "새로운 기능",
     "notice": {
       "stale": "이 번역은 최신 내용이 아니라서 영어 원문을 보여 드려요.",
@@ -242,5 +243,104 @@
   "docsSearch": {
     "noResults": "{query}에 대한 결과가 없습니다.",
     "hint": "다른 단어나 더 짧은 단어로 검색해 보세요."
+  },
+  "landing": {
+    "hero": {
+      "headline": "One file. Six formats. Nothing leaves your device.",
+      "subheadline": "Back up, export and import bookmarks. No network calls.",
+      "cta": "Add to Chrome",
+      "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
+      "chips": {
+        "free": "Free",
+        "openSource": "Open source",
+        "noAccount": "No account"
+      },
+      "stages": {
+        "device": "Your device",
+        "browser": "Your browser",
+        "file": "One file",
+        "target": "Another browser",
+        "network": "Network calls: 0"
+      }
+    },
+    "stats": {
+      "users": {
+        "label": "Users",
+        "value": "5,000"
+      },
+      "rating": {
+        "label": "Rating",
+        "value": "4.8"
+      },
+      "formats": {
+        "label": "Formats",
+        "value": "6"
+      },
+      "network": {
+        "label": "Network calls",
+        "value": "0"
+      }
+    },
+    "marquee": {
+      "browsers": "Works in",
+      "sources": "Imports from"
+    },
+    "bento": {
+      "export": {
+        "title": "Export anything",
+        "body": "Whole tree or chosen folders, in six formats."
+      },
+      "import": {
+        "title": "Import with a preview",
+        "body": "See what will be added, skipped or deleted first."
+      },
+      "backup": {
+        "title": "Back up on a schedule",
+        "body": "Auto-export saves files on the schedule you set."
+      },
+      "popup": {
+        "title": "Drop files in the popup",
+        "body": "Drop several files at once and Snug imports them."
+      }
+    },
+    "playground": {
+      "heading": "Pick a format. Same bookmarks, six files.",
+      "subline": "See the same folder in each format.",
+      "tabs": {
+        "html": "HTML",
+        "json": "JSON",
+        "csv": "CSV",
+        "markdown": "Markdown",
+        "opml": "OPML",
+        "xbel": "XBEL"
+      }
+    },
+    "showcase": {
+      "heading": "The real interface.",
+      "tabs": {
+        "export": "Export",
+        "import": "Import",
+        "autoExport": "Auto-export",
+        "popup": "Popup"
+      }
+    },
+    "reviews": {
+      "heading": "What people say",
+      "note": "Public Chrome Web Store reviews, written before the rename."
+    },
+    "faq": {
+      "heading": "Questions",
+      "more": "More questions"
+    },
+    "closing": {
+      "heading": "Add Snug to Chrome.",
+      "line": "Free and open source.",
+      "button": "Add to Chrome"
+    },
+    "dock": {
+      "install": "Add to Chrome",
+      "source": "Source",
+      "label": "Add Snug to Chrome"
+    }
   }
 }

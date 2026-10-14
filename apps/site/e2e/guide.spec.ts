@@ -178,6 +178,7 @@ const GUIDE_ROUTES = [
   'guide/duplicates',
   'guide/settings',
   'guide/auto-export',
+  'guide/faq',
   'changelog',
 ]
 

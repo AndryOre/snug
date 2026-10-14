@@ -16,7 +16,7 @@ describe('per-page description and SEO title', () => {
     describe(`locale ${locale}`, () => {
       it('gives every page a description that is not the home description', () => {
         const homeDescription = getPageMeta(locale).description
-        expect(localePages).toHaveLength(7)
+        expect(localePages).toHaveLength(8)
         for (const page of localePages) {
           expect(page.description.length).toBeGreaterThan(20)
           expect(page.description.length).toBeLessThanOrEqual(155)
@@ -42,7 +42,10 @@ describe('per-page description and SEO title', () => {
       if (locale !== DEFAULT_LOCALE) {
         it('translates the copy instead of reusing the English text', () => {
           const english = pages.filter((page) => page.locale === DEFAULT_LOCALE)
-          for (const page of localePages) {
+          const translated = localePages.filter(
+            (page) => page.status !== 'missing',
+          )
+          for (const page of translated) {
             const source = english.find(
               (candidate) => candidate.sourcePath === page.sourcePath,
             )

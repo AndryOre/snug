@@ -38,14 +38,21 @@ relative to `apps/extension/` unless it starts with `packages/`.
   (English at `/`, the rest under their own path). Pages are `.astro` files in
   `src/pages`; React islands (`@astrojs/react`) are used only where
   interactivity is needed. It reuses `@workspace/ui` for components and the
-  theme: pages import `@workspace/ui/globals.css` once and compose
-  `@workspace/ui/components/*`, with Tailwind wired through `@tailwindcss/vite`
-  in `astro.config.ts`, so brand tokens stay in one place. Its only third-party
-  request on load is the Umami Cloud cookieless analytics script
-  ([ADR 0017](adr/0017-landing-umami-cloud-cookieless-analytics.md), partially
-  superseding
+  theme: `src/styles/site.css` imports `@workspace/ui/theme.css` and lists the
+  shared components it uses with explicit `@source` lines, pages compose
+  `@workspace/ui/components/*`, and Tailwind is wired through
+  `@tailwindcss/vite` in `astro.config.ts`, so brand tokens stay in one place.
+  Its only third-party request on load is the Umami Cloud cookieless analytics
+  script ([ADR 0017](adr/0017-landing-umami-cloud-cookieless-analytics.md),
+  partially superseding
   [ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
   video it has no runtime link to the extension. Rules: `apps/site/AGENTS.md`.
+  - Landing v2 section order: Hero, Stats strip, Browser marquee, Bento, Format
+    playground (island), Interface showcase (island), Video, Reviews marquee,
+    FAQ (six questions), Closing panel, Footer, plus the Install dock. Motion is
+    pure CSS, static end state first
+    ([ADR 0023](adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md),
+    `apps/site/DESIGN.md`).
   - Site map: the landing page (`/`, `/<locale>/`), `/privacy/`, the Guide and
     What's new (`/guide/`, `/changelog/`), and the Alternatives page
     (`/alternatives/`) with one Comparison page per competitor in
