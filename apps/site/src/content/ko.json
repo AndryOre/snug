@@ -6,43 +6,7 @@
   "seo": {
     "ogImageAlt": "Snug 로고(호박색 북마크 아이콘)와 확장 프로그램의 짧은 설명이 어두운 배경 위에 있습니다."
   },
-  "hero": {
-    "eyebrow": "북마크 내보내기, 가져오기, 백업",
-    "headlineLead": "북마크를 그대로 옮기세요.",
-    "headlineAccent": "기기 밖으로는 아무것도 나가지 않아요.",
-    "subheadline": "Snug는 Chrome과 다른 Chromium 기반 브라우저에서 북마크를 내보내고, 가져오고, 백업해요. 네트워크 호출을 하지 않고 계정도 필요 없어요.",
-    "install": "Chrome에 추가",
-    "note": "무료. 오픈 소스. Chrome, Edge, Brave, Opera에서 작동해요.",
-    "source": "GitHub에서 소스 코드 보기",
-    "journey": {
-      "device": "내 기기",
-      "from": "내 브라우저",
-      "file": "파일 하나",
-      "to": "다른 브라우저",
-      "folderResearch": "리서치",
-      "folderJobSearch": "구직",
-      "network": "네트워크 호출: 없음",
-      "description": "북마크는 여섯 가지 형식으로 제공되는 bookmarks.html 파일 하나로 브라우저에서 내보내져 다른 브라우저에서 열립니다. 모든 과정이 내 기기 안에서만 이루어집니다."
-    }
-  },
   "trust": {
-    "heading": "믿어야 할 서버가 없는 확장 프로그램",
-    "intro": "Snug는 기기에서 브라우저 자체의 북마크 트리를 읽고 써요. 어디에도 연결하지 않으니 북마크가 갈 곳이 없어요.",
-    "points": {
-      "network": {
-        "title": "네트워크 호출 없음",
-        "body": "Snug는 하지 않아요. 내보내기와 가져오기는 모두 기기 안에서 이루어져요."
-      },
-      "account": {
-        "title": "계정 없음",
-        "body": "가입하거나 로그인할 것이 없어요."
-      },
-      "source": {
-        "title": "오픈 소스",
-        "body": "코드가 공개되어 있어요. 직접 읽어 보거나, 프로젝트의 OpenSSF Scorecard 및 Best Practices 배지, CodeQL 검사, CI 실행 기록을 확인해 보세요."
-      }
-    },
-    "access": "북마크를 읽고 쓰는 것이 확장 프로그램이 북마크를 내보내고 가져올 수 있는 유일한 방법이에요. Snug는 그것만 해요.",
     "links": {
       "source": "소스 코드",
       "scorecard": "OpenSSF Scorecard",
@@ -51,37 +15,7 @@
       "privacy": "개인정보처리방침"
     }
   },
-  "features": {
-    "heading": "Snug가 하는 일",
-    "items": {
-      "export": {
-        "title": "원하는 것만 내보내기",
-        "body": "전체 트리 또는 선택한 폴더만 HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내요. 파일 이름에 날짜를 넣을 수 있어서 나중에 구분하기 쉬워요."
-      },
-      "preview": {
-        "title": "가져오기 전에 미리보기",
-        "body": "HTML, JSON, CSV, XBEL 파일, Chrome 프로필의 “Bookmarks” 파일, 즐겨찾기와 읽기 목록이 들어 있는 Safari 내보내기 파일을 가져와요. 여러 파일을 한꺼번에 가져올 수도 있어요. Snug가 형식을 감지해서 추가, 건너뜀, 삭제될 항목을 미리보기로 보여 줘요. 그런 다음 병합하거나, 교체하거나, 모두 새 폴더에 추가해요. 병합하거나 새 폴더에 추가할 때는 원하지 않는 폴더나 북마크를 먼저 선택 해제할 수 있어요."
-      },
-      "undo": {
-        "title": "교체 되돌리기",
-        "body": "교체하기 전에 Snug가 안전 스냅샷을 저장해요. 최근 5개를 보관하고, 설정에서 원하는 것을 복원할 수 있어요."
-      },
-      "duplicates": {
-        "title": "중복 정리하기",
-        "body": "중복 페이지에서 반복된 북마크를 찾아요. 가져올 때 중복 건너뛰기를 켜면 이미 있는 URL은 제외해요."
-      },
-      "backup": {
-        "title": "일정에 맞춰 백업하기",
-        "body": "자동 내보내기는 정한 일정에 따라 북마크를 다운로드 폴더나 직접 고른 폴더에 저장해요. 보존 설정은 최신 파일만 남기고, 실행이 실패하면 알림을 받을 수 있어요."
-      },
-      "works": {
-        "title": "어디서든 작동해요",
-        "body": "Chrome, Edge, Brave, Opera와 다른 Chromium 기반 브라우저에서 작동해요. 인터페이스는 10개 언어를 지원하고 브라우저의 테마와 언어를 따라요."
-      }
-    }
-  },
   "interface": {
-    "heading": "실제 화면",
     "shots": {
       "export": "내보내기 페이지: 트리에서 폴더를 고르고, 형식을 선택해 내보내요.",
       "import": "가져오기 미리보기: 무엇이 바뀌는지 확인하고 병합, 교체, 새 폴더 중에서 골라요.",
@@ -103,14 +37,9 @@
     "labelSeparator": ": "
   },
   "proof": {
-    "heading": "사용자 후기",
-    "numbers": "사용자 5,000명. Chrome 웹 스토어 평점 4.8점(20개 평가, {date}).",
-    "renameNote": "Chrome 웹 스토어에 공개된 후기를 게시된 영어 그대로 실었어요. 대부분 Snug 이름이 바뀌기 전, 등록 이름이 “Bookmark Import/Export”였을 때 작성되어서 현재 인터페이스가 아니라 내보내기와 가져오기를 이야기해요.",
-    "reviewsLead": "후기 4개를 영어 원문 그대로 실었어요:",
     "link": "Chrome 웹 스토어에서 후기 모두 읽기"
   },
   "faq": {
-    "heading": "자주 묻는 질문",
     "items": {
       "network": {
         "question": "Snug가 북마크를 어딘가로 보내나요?",
@@ -124,48 +53,19 @@
         "question": "기기 간에 북마크를 동기화하나요?",
         "answer": "아니요. Snug에는 동기화도 클라우드도없어요. 북마크를 다른 브라우저나 컴퓨터로 옮기려면 파일로 내보내서 그쪽에서가져오세요."
       },
-      "oneFile": {
-        "question": "파일을 여러 개 한꺼번에 가져올 수 있나요?",
-        "answer": "네. 가져오기 페이지나 툴바 팝업에서 파일을 여러 개 고르거나 끌어다 놓으면 Snug가 한 번에 가져와요."
-      },
-      "permissions": {
-        "question": "왜 모든 북마크에 접근해야 하나요?",
-        "answer": "북마크를 읽고 쓰는 것이 확장 프로그램이북마크를 내보내고 가져올 수 있는 유일한 방법이에요. Snug는 네트워크 호출을 하지않으므로 읽은 내용이 기기 밖으로 나갈 수 없어요."
-      },
-      "builtin": {
-        "question": "브라우저도 HTML로 내보낼 수 있는데 왜 Snug를 쓰나요?",
-        "answer": "기본 내보내기에는 폴더선택, 미리보기, 실행 취소, 일정, 중복 확인, 추가 형식이 없어요. Snug에는 모두있어요."
-      },
       "overwrite": {
         "question": "현재 북마크를 덮어쓰나요?",
         "answer": "교체를 선택할 때만 그래요. 먼저 미리보기를 볼 수있고, 교체하면 복원할 수 있는 안전 스냅샷이 저장돼요."
       },
-      "formats": {
-        "question": "어떤 형식을 지원하나요?",
-        "answer": "HTML, JSON, CSV, Markdown, OPML, XBEL로 내보내요. HTML, JSON, CSV, XBEL, Chrome 프로필의 “Bookmarks” 파일, Safari 내보내기 파일을 가져와요."
-      },
-      "browsers": {
-        "question": "어떤 브라우저에서 작동하나요?",
-        "answer": "Chrome과 Edge, Brave, Opera 같은 Chromium 기반브라우저에서 작동해요."
-      },
-      "safe": {
-        "question": "1인 개발자의 확장 프로그램을 설치해도 안전한가요?",
-        "answer": "소스 코드가 공개되어 있고, CodeQL이 검사하고, 프로젝트에 OpenSSF Scorecard와 Best Practices 배지가 있고, CI는 버전을 고정해 실행해요. GitHub에서 직접 판단해 보세요."
-      },
-      "folder": {
-        "question": "백업을 다운로드 외의 다른 폴더에 저장할 수 있나요?",
-        "answer": "네. 자동 내보내기 페이지에서 사용자 지정 폴더를 고르세요. Chrome을 다시 시작하면 접근 권한을 한 번 확인하는데, “방문할 때마다 허용”을 선택해야 사용자가 없을 때도 실행이 이어져요. 접근 권한이 없으면 Snug가 경고하고, 다른 곳에 저장하지 않고 실행이 실패해요."
+      "builtin": {
+        "question": "브라우저도 HTML로 내보낼 수 있는데 왜 Snug를 쓰나요?",
+        "answer": "기본 내보내기에는 폴더선택, 미리보기, 실행 취소, 일정, 중복 확인, 추가 형식이 없어요. Snug에는 모두있어요."
       },
       "cost": {
         "question": "Snug는 유료인가요?",
         "answer": "아니요. 무료예요."
       }
     }
-  },
-  "final": {
-    "heading": "북마크를 가지고 다니세요",
-    "line": "Snug를 Chrome에 추가하고 몇 번의 클릭으로 내보내기, 가져오기, 백업을해 보세요. 무료이고 오픈 소스이며, 기기 밖으로는 아무것도 나가지 않아요.",
-    "button": "Chrome에 추가"
   },
   "footer": {
     "source": "GitHub 소스",
@@ -261,7 +161,12 @@
         "file": "파일 하나",
         "target": "다른 브라우저",
         "network": "네트워크 호출: 0"
-      }
+      },
+      "folders": {
+        "research": "리서치",
+        "jobSearch": "구직"
+      },
+      "source": "GitHub에서 소스 코드 보기"
     },
     "stats": {
       "users": {
@@ -338,9 +243,7 @@
       "button": "Chrome에 추가"
     },
     "dock": {
-      "install": "Chrome에 추가",
-      "source": "소스 코드",
-      "label": "Snug를 Chrome에 추가"
+      "install": "Chrome에 추가"
     }
   }
 }

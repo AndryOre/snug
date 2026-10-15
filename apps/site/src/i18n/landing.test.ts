@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 
 import { STORE_FACTS } from '../seo/store-facts'
 import {
-  FEATURE_KEYS,
   FOOTER_LINK_HREFS,
   getClosingCopy,
   getLandingCopy,
@@ -20,10 +19,10 @@ describe('landing copy', () => {
   it('has non-empty hero and trust copy in every locale', () => {
     for (const locale of LOCALES) {
       const { hero, trust } = getLandingCopy(locale)
-      expect(hero.headlineLead.length).toBeGreaterThan(0)
-      expect(hero.headlineAccent.length).toBeGreaterThan(0)
-      expect(hero.install.length).toBeGreaterThan(0)
-      expect(trust.points.network.title.length).toBeGreaterThan(0)
+      expect(hero.headline.length).toBeGreaterThan(0)
+      expect(hero.cta.length).toBeGreaterThan(0)
+      expect(hero.source.length).toBeGreaterThan(0)
+      expect(hero.folders.research.length).toBeGreaterThan(0)
       expect(trust.links.privacy.length).toBeGreaterThan(0)
     }
   })
@@ -33,13 +32,9 @@ describe('landing copy', () => {
     expect(installHref('trust')).toBe('/install?c=trust')
   })
 
-  it('has features, interface and video copy in every locale', () => {
+  it('has interface and video copy in every locale', () => {
     for (const locale of LOCALES) {
-      const { features, interface: shots, video } = getLandingCopy(locale)
-      for (const key of FEATURE_KEYS) {
-        expect(features.items[key].title.length).toBeGreaterThan(0)
-        expect(features.items[key].body.length).toBeGreaterThan(0)
-      }
+      const { interface: shots, video } = getLandingCopy(locale)
       for (const key of SHOT_KEYS) {
         expect(shots.shots[key].length).toBeGreaterThan(0)
       }

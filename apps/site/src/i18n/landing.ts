@@ -3,17 +3,16 @@ import { alternativesPath } from './comparisons'
 import { getContent, type SiteContent } from './content'
 import { DOCS_PATHS } from './docs-ui'
 import { howToIndexPath } from './how-to'
-import { languageTag, type Locale, localePath } from './locales'
+import { type Locale, localePath } from './locales'
 import { privacyPath } from './privacy'
-import { formatRatingsSentence } from './proof'
 
 /**
  * Copy for the hero section of one locale.
  */
-export type HeroCopy = SiteContent['hero']
+export type HeroCopy = SiteContent['landing']['hero']
 
 /**
- * Copy for the trust proof section of one locale.
+ * Copy for the trust links of one locale.
  */
 export type TrustCopy = SiteContent['trust']
 
@@ -26,18 +25,6 @@ export type StatsCopy = SiteContent['landing']['stats']
  * Copy for the browser marquee of one locale.
  */
 export type MarqueeCopy = SiteContent['landing']['marquee']
-
-/**
- * Keys of the feature cards, in display order.
- */
-export const FEATURE_KEYS = [
-  'export',
-  'preview',
-  'undo',
-  'duplicates',
-  'backup',
-  'works',
-] as const
 
 /**
  * Keys of the real-interface screenshots, in display order.
@@ -57,12 +44,7 @@ export const EXPORT_FORMATS = [
 ] as const
 
 /**
- * Copy for the features section of one locale.
- */
-export type FeaturesCopy = SiteContent['features']
-
-/**
- * Copy for the real-interface section of one locale.
+ * Copy for the real-interface captions and alt texts of one locale.
  */
 export type InterfaceCopy = SiteContent['interface']
 
@@ -80,24 +62,15 @@ export type VideoCopy = SiteContent['video']
 export function getLandingCopy(locale: Locale): {
   hero: HeroCopy
   trust: TrustCopy
-  features: FeaturesCopy
   interface: InterfaceCopy
   video: VideoCopy
   stats: StatsCopy
   marquee: MarqueeCopy
 } {
-  const {
-    hero,
-    trust,
-    features,
-    interface: shots,
-    video,
-    landing,
-  } = getContent(locale)
+  const { trust, interface: shots, video, landing } = getContent(locale)
   return {
-    hero,
+    hero: landing.hero,
     trust,
-    features,
     interface: shots,
     video,
     stats: landing.stats,
@@ -178,8 +151,7 @@ export function installHref(placement: InstallPlacement): string {
 }
 
 /**
- * Copy for the social proof section of one locale. `reviewsLead` is empty
- * where the rename note already introduces the reviews.
+ * Copy for the social proof section of one locale.
  */
 export type ProofCopy = SiteContent['proof']
 
@@ -189,9 +161,9 @@ export type ProofCopy = SiteContent['proof']
 export type FaqCopy = SiteContent['faq']
 
 /**
- * Copy for the final install call to action of one locale.
+ * Copy for the closing install panel of one locale.
  */
-export type FinalCopy = SiteContent['final']
+export type ClosingPanelCopy = SiteContent['landing']['closing']
 
 /**
  * Copy for the footer of one locale.
@@ -209,26 +181,23 @@ export type HeaderCopy = SiteContent['header']
 export type NotFoundCopy = SiteContent['notFound']
 
 /**
- * Proof, FAQ, final call to action, footer, header and 404 copy for one locale.
+ * Proof, FAQ, closing panel, footer, header and 404 copy for one locale.
  * @param locale - A supported locale code.
- * @returns The locale's `proof`, `faq`, `final`, `footer`, `header` and `notFound` content.
+ * @returns The locale's `proof`, `faq`, `closing`, `footer`, `header` and `notFound` content.
  */
 export function getClosingCopy(locale: Locale): {
   proof: ProofCopy
   faq: FaqCopy
-  final: FinalCopy
+  closing: ClosingPanelCopy
   footer: FooterCopy
   header: HeaderCopy
   notFound: NotFoundCopy
 } {
-  const { proof, faq, final, footer, header, notFound } = getContent(locale)
+  const { proof, faq, landing, footer, header, notFound } = getContent(locale)
   return {
-    proof: {
-      ...proof,
-      numbers: formatRatingsSentence(proof.numbers, languageTag(locale)),
-    },
+    proof,
     faq,
-    final,
+    closing: landing.closing,
     footer,
     header,
     notFound,

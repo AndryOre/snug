@@ -1,7 +1,7 @@
 import type { SiteContent } from '../i18n/content'
 import { PROMO_VIDEO_IDS, youtubeWatchUrl } from '../i18n/landing'
 import { SITE_ORIGIN } from '../i18n/locales'
-import { formatRatingsSentence, REVIEWS } from '../i18n/proof'
+import { REVIEWS } from '../i18n/proof'
 import { STORE_FACTS } from './store-facts'
 
 const SEARCH_AND_ANSWER_CRAWLERS = [
@@ -192,10 +192,13 @@ export function buildLlmsFullTxt(
   content: SiteContent,
   extraSections: readonly LlmsFullSection[] = [],
 ): string {
-  const titled = (
-    entries: Record<string, { title: string; body: string }>,
-  ): string[] =>
-    Object.values(entries).map(({ title, body }) => `### ${title}\n\n${body}`)
+  const { landing } = content
+  const bentoCards = Object.values(landing.bento).map(
+    ({ title, body }) => `### ${title}\n\n${body}`,
+  )
+  const stats = Object.values(landing.stats)
+    .map(({ label, value }) => `- ${label}: ${value}`)
+    .join('\n')
   const faqItems = Object.values(content.faq.items).map(
     ({ question, answer }) => `### ${question}\n\n${answer}`,
   )
@@ -205,38 +208,29 @@ export function buildLlmsFullTxt(
   const sections = [
     `# Snug\n\n> ${content.meta.description}`,
     section(
-      `${content.hero.headlineLead} ${content.hero.headlineAccent}`,
-      content.hero.subheadline,
-      content.hero.note,
+      landing.hero.headline,
+      landing.hero.subheadline,
+      Object.values(landing.hero.chips).join(', '),
+      stats,
+      ...bentoCards,
     ),
-    section(content.features.heading, ...titled(content.features.items)),
-    section(
-      content.trust.heading,
-      content.trust.intro,
-      ...titled(content.trust.points),
-      content.trust.access,
-    ),
-    section(
-      content.interface.heading,
-      ...Object.values(content.interface.alts),
-    ),
+    section(landing.showcase.heading, ...Object.values(content.interface.alts)),
     section(
       content.video.heading,
       content.video.caption,
       `[Watch the walkthrough on YouTube](${youtubeWatchUrl(PROMO_VIDEO_IDS.en)})`,
     ),
     section(
-      content.proof.heading,
-      formatRatingsSentence(content.proof.numbers, 'en'),
-      content.proof.renameNote,
+      landing.reviews.heading,
+      landing.reviews.note,
       ...reviewQuotes,
       `[${content.proof.link}](${SITE_ORIGIN}/reviews)`,
     ),
-    section(content.faq.heading, ...faqItems),
+    section(landing.faq.heading, ...faqItems),
     section(
-      content.final.heading,
-      content.final.line,
-      `[${content.final.button}](${SITE_ORIGIN}/install)`,
+      landing.closing.heading,
+      landing.closing.line,
+      `[${landing.closing.button}](${SITE_ORIGIN}/install)`,
     ),
     ...extraSections.map(
       ({ title, url, body }) => `## ${title} (${url})\n\n${body.trim()}`,

@@ -34,3 +34,9 @@
     }
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-section='playground'] [role='tab'] {
+    transition-duration: 0s;
+  }
+}

@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 
@@ -45,39 +47,26 @@ test('Japanese headings break by phrase', async ({ page }) => {
 })
 
 for (const locale of LOCALES) {
-  test(`the ${locale} h1 reads as two sentences in its text content`, async ({
+  test(`the ${locale} h1 is the single localized headline`, async ({
     page,
   }) => {
     await page.goto(localePath(locale))
-    const { text, lead, accent } = await page
-      .locator('h1')
-      .evaluate((element) => {
-        const [first, second] = [...element.querySelectorAll('span')]
-        return {
-          text: element.textContent ?? '',
-          lead: first?.textContent ?? '',
-          accent: second?.textContent ?? '',
-        }
-      })
-    expect(lead).not.toBe('')
-    expect(accent).not.toBe('')
-    expect(text.trim()).toBe(`${lead} ${accent}`)
+    const content = JSON.parse(
+      readFileSync(
+        path.join(import.meta.dirname, '../src/content', `${locale}.json`),
+        'utf8',
+      ),
+    ) as { landing: { hero: { headline: string } } }
+    await expect(page.locator('h1')).toHaveCount(1)
+    await expect(page.locator('h1')).toHaveText(content.landing.hero.headline)
   })
 }
 
-test('the German h1 keeps Lesezeichen on one line at 320', async ({ page }) => {
+test('the German h1 does not overflow at 320', async ({ page }) => {
   await page.setViewportSize({ width: NARROWEST_WIDTH, height: 700 })
   await page.goto('/de/')
-  const heading = page.locator('h1')
-  await expect(heading).toHaveCSS('hyphens', 'manual')
-  const lineCount = await heading.evaluate((element) => {
-    const word = 'Lesezeichen'
-    const text = element.querySelector('span')!.firstChild!
-    const start = text.textContent!.indexOf(word)
-    const range = globalThis.document.createRange()
-    range.setStart(text, start)
-    range.setEnd(text, start + word.length)
-    return new Set([...range.getClientRects()].map((rect) => rect.top)).size
-  })
-  expect(lineCount).toBe(1)
+  const overflow = await page
+    .locator('h1')
+    .evaluate((element) => element.scrollWidth - element.clientWidth)
+  expect(overflow).toBeLessThanOrEqual(0)
 })

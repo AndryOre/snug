@@ -12,20 +12,20 @@ interface Props {
 }
 
 const { locale, heading, line, button } = Astro.props
-const { final } = getClosingCopy(locale)
+const { closing } = getClosingCopy(locale)
 ---
 
 <section data-section="final" aria-labelledby="final-heading">
   <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
     <div data-final-panel class="bg-final-cta-glow">
       <SectionHeading id="final-heading">
-        {heading ?? final.heading}
+        {heading ?? closing.heading}
       </SectionHeading>
       <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
-        {line ?? final.line}
+        {line ?? closing.line}
       </p>
       <div class="mt-8">
-        <InstallButton placement="final" label={button ?? final.button} />
+        <InstallButton placement="final" label={button ?? closing.button} />
       </div>
     </div>
   </div>

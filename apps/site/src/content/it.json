@@ -6,43 +6,7 @@
   "seo": {
     "ogImageAlt": "Logo di Snug, un’icona di segnalibro color ambra, sopra una breve descrizione dell’estensione su sfondo scuro."
   },
-  "hero": {
-    "eyebrow": "Esportazione, importazione e backup dei segnalibri",
-    "headlineLead": "Porta con te i tuoi segnalibri.",
-    "headlineAccent": "Niente lascia il tuo dispositivo.",
-    "subheadline": "Snug esporta, importa e fa il backup dei tuoi segnalibri in Chrome e in altri browser Chromium. Non effettua chiamate di rete e non richiede alcun account.",
-    "install": "Aggiungi a Chrome",
-    "note": "Gratis. Open source. Funziona in Chrome, Edge, Brave e Opera.",
-    "source": "Vedi il codice sorgente su GitHub",
-    "journey": {
-      "device": "Il tuo dispositivo",
-      "from": "Il tuo browser",
-      "file": "Un file",
-      "to": "Un altro browser",
-      "folderResearch": "Ricerca",
-      "folderJobSearch": "Ricerca di lavoro",
-      "network": "Chiamate di rete: nessuna",
-      "description": "I tuoi segnalibri lasciano il tuo browser come un unico file bookmarks.html, disponibile in sei formati, e si aprono in un altro browser. Tutto resta sul tuo dispositivo."
-    }
-  },
   "trust": {
-    "heading": "Un'estensione senza un server di cui fidarsi",
-    "intro": "Snug legge e scrive l'albero dei segnalibri del tuo browser, sul tuo dispositivo. Non si connette a nulla, quindi i tuoi segnalibri non hanno dove andare.",
-    "points": {
-      "network": {
-        "title": "Nessuna chiamata di rete",
-        "body": "Snug non ne fa. Ogni esportazione e importazione avviene in locale."
-      },
-      "account": {
-        "title": "Nessun account",
-        "body": "Non c'è niente a cui registrarsi né dove accedere."
-      },
-      "source": {
-        "title": "Open source",
-        "body": "Il codice è pubblico. Leggilo, oppure controlla i badge OpenSSF Scorecard e Best Practices del progetto, le scansioni CodeQL e le esecuzioni della CI."
-      }
-    },
-    "access": "Leggere e scrivere i tuoi segnalibri è l'unico modo in cui un'estensione può esportarli e importarli. Snug fa questo e nient'altro.",
     "links": {
       "source": "Codice sorgente",
       "scorecard": "OpenSSF Scorecard",
@@ -51,37 +15,7 @@
       "privacy": "Informativa sulla privacy"
     }
   },
-  "features": {
-    "heading": "Cosa fa Snug",
-    "items": {
-      "export": {
-        "title": "Esporta ciò che scegli",
-        "body": "Esporta l'intero albero o solo le cartelle che selezioni, in HTML, JSON, CSV, Markdown, OPML o XBEL. I nomi dei file possono includere la data, così li distingui più avanti."
-      },
-      "preview": {
-        "title": "Anteprima prima di importare",
-        "body": "Importa file HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari con Preferiti e Lista di lettura, anche più file insieme. Snug rileva il formato e mostra un'anteprima di ciò che verrà aggiunto, saltato ed eliminato. Poi unisci, sostituisci o aggiungi tutto a una nuova cartella. Quando unisci o usi una nuova cartella, puoi prima deselezionare qualsiasi cartella o segnalibro."
-      },
-      "undo": {
-        "title": "Annulla una sostituzione",
-        "body": "Prima di sostituire, Snug salva un'istantanea di sicurezza. Conserva le ultime cinque e puoi ripristinarne una qualsiasi dalle Impostazioni."
-      },
-      "duplicates": {
-        "title": "Elimina i duplicati",
-        "body": "Una pagina Duplicati trova i segnalibri ripetuti. In importazione, Salta i duplicati lascia fuori gli URL che hai già."
-      },
-      "backup": {
-        "title": "Backup programmato",
-        "body": "L'esportazione automatica salva i tuoi segnalibri nella cartella Download o in una cartella a tua scelta, con la pianificazione che imposti. La Conservazione tiene solo i file più recenti e puoi ricevere una notifica se un'esecuzione fallisce."
-      },
-      "works": {
-        "title": "Funziona dove sei",
-        "body": "Chrome, Edge, Brave, Opera e altri browser Chromium. L'interfaccia è in 10 lingue e segue il tema e la lingua del tuo browser."
-      }
-    }
-  },
   "interface": {
-    "heading": "L'interfaccia reale",
     "shots": {
       "export": "Pagina di esportazione: scegli le cartelle dall'albero, un formato ed esporta.",
       "import": "Anteprima di importazione: vedi cosa cambia, poi scegli unisci, sostituisci o nuova cartella.",
@@ -103,14 +37,9 @@
     "labelSeparator": ": "
   },
   "proof": {
-    "heading": "Cosa dicono le persone",
-    "numbers": "5.000 utenti. 4,8 stelle su 20 valutazioni nel Chrome Web Store ({date}).",
-    "renameNote": "Sono recensioni pubbliche del Chrome Web Store, in inglese come sono state pubblicate. La maggior parte è stata scritta prima che Snug cambiasse nome, quando la scheda si chiamava «Bookmark Import/Export», quindi descrivono l'esportazione e l'importazione, non l'interfaccia attuale.",
-    "reviewsLead": "Quattro recensioni, nell'originale inglese:",
     "link": "Leggi tutte le recensioni nel Chrome Web Store"
   },
   "faq": {
-    "heading": "Domande frequenti",
     "items": {
       "network": {
         "question": "Snug invia i miei segnalibri da qualche parte?",
@@ -124,48 +53,19 @@
         "question": "Sincronizza i miei segnalibri tra dispositivi?",
         "answer": "No. Snug non ha sincronizzazione né cloud. Per spostare i segnalibri su un altro browser o computer, esporta un file e importalo lì."
       },
-      "oneFile": {
-        "question": "Posso importare più file alla volta?",
-        "answer": "Sì. Scegli o trascina più file nella pagina Importa o nel popup della barra degli strumenti e Snug li importa in un colpo solo."
-      },
-      "permissions": {
-        "question": "Perché ha bisogno di accedere a tutti i miei segnalibri?",
-        "answer": "Leggerli e scriverli è l'unico modo in cui un'estensione può esportarli e importarli. Snug non effettua chiamate di rete, quindi nulla di ciò che legge può lasciare il tuo dispositivo."
-      },
-      "builtin": {
-        "question": "Il mio browser esporta già in HTML. Perché usare Snug?",
-        "answer": "L'esportazione integrata non ha selezione delle cartelle, anteprima, annullamento, pianificazione, controllo dei duplicati né formati aggiuntivi. Snug li ha tutti."
-      },
       "overwrite": {
         "question": "Sovrascriverà i miei segnalibri attuali?",
         "answer": "Solo se scegli Sostituisci. Prima vedi un'anteprima, e Sostituisci salva un'istantanea di sicurezza che puoi ripristinare."
       },
-      "formats": {
-        "question": "Quali formati gestisce?",
-        "answer": "Esporta in HTML, JSON, CSV, Markdown, OPML o XBEL. Importa HTML, JSON, CSV o XBEL, un file «Bookmarks» di un profilo Chrome oppure un'esportazione di Safari."
-      },
-      "browsers": {
-        "question": "In quali browser funziona?",
-        "answer": "In Chrome e in altri browser Chromium come Edge, Brave e Opera."
-      },
-      "safe": {
-        "question": "È sicuro installare l'estensione di uno sviluppatore indipendente?",
-        "answer": "Il codice sorgente è pubblico, CodeQL lo analizza, il progetto ha i badge OpenSSF Scorecard e Best Practices e la CI usa versioni bloccate. Giudica tu stesso su GitHub."
-      },
-      "folder": {
-        "question": "I backup possono andare in una cartella diversa da Download?",
-        "answer": "Sì. Nella pagina di esportazione automatica scegli una Cartella personalizzata. Dopo un riavvio, Chrome chiede una sola volta di confermare l'accesso; scegli “Consenti a ogni visita” così le esecuzioni non presidiate continuano a funzionare. Se manca l'accesso, Snug ti avvisa e l'esecuzione fallisce invece di salvare altrove."
+      "builtin": {
+        "question": "Il mio browser esporta già in HTML. Perché usare Snug?",
+        "answer": "L'esportazione integrata non ha selezione delle cartelle, anteprima, annullamento, pianificazione, controllo dei duplicati né formati aggiuntivi. Snug li ha tutti."
       },
       "cost": {
         "question": "Snug costa qualcosa?",
         "answer": "No. È gratis."
       }
     }
-  },
-  "final": {
-    "heading": "Porta con te i tuoi segnalibri",
-    "line": "Aggiungi Snug a Chrome ed esporta, importa o fai il backup in pochi clic. Gratis, open source, e niente lascia il tuo dispositivo.",
-    "button": "Aggiungi a Chrome"
   },
   "footer": {
     "source": "Codice su GitHub",
@@ -261,7 +161,12 @@
         "file": "Un file",
         "target": "Un altro browser",
         "network": "Chiamate di rete: 0"
-      }
+      },
+      "folders": {
+        "research": "Ricerca",
+        "jobSearch": "Ricerca di lavoro"
+      },
+      "source": "Vedi il codice sorgente su GitHub"
     },
     "stats": {
       "users": {
@@ -338,9 +243,7 @@
       "button": "Aggiungi a Chrome"
     },
     "dock": {
-      "install": "Aggiungi a Chrome",
-      "source": "Codice",
-      "label": "Aggiungi Snug a Chrome"
+      "install": "Aggiungi a Chrome"
     }
   }
 }

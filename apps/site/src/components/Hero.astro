@@ -1,10 +1,8 @@
 ---
 import { cn } from '@workspace/ui/lib/utils'
 
-import { getContent } from '../i18n/content'
 import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
-import Eyebrow from './Eyebrow.astro'
 import HeroJourney from './HeroJourney.astro'
 import InstallButton from './InstallButton.astro'
 import Section from './Section.astro'
@@ -15,25 +13,23 @@ interface Props {
 }
 
 const { hero } = getLandingCopy(Astro.props.locale)
-const { stages, description } = getContent(Astro.props.locale).landing.hero
+const { stages, description, chips } = hero
 ---
 
 <Section section="hero" class="-mt-14 bg-hero-glow pt-14">
-  <Eyebrow class="mb-6">{hero.eyebrow}</Eyebrow>
   <h1
     class={cn(
       'max-w-4xl font-heading text-display font-bold break-words phrase-break text-balance',
       Astro.props.locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
     )}
   >
-    <span class="block">{hero.headlineLead}</span>{' '}
-    <span class="block text-primary-text">{hero.headlineAccent}</span>
+    {hero.headline}
   </h1>
   <p class="mt-6 max-w-2xl text-lead text-muted-foreground">
     {hero.subheadline}
   </p>
   <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-    <InstallButton placement="hero" label={hero.install} />
+    <InstallButton placement="hero" label={hero.cta} />
     <TextLink
       href={TRUST_LINK_HREFS.source}
       data-umami-event="outbound-click"
@@ -42,7 +38,11 @@ const { stages, description } = getContent(Astro.props.locale).landing.hero
       {hero.source}
     </TextLink>
   </div>
-  <p class="mt-4 text-sm text-muted-foreground">{hero.note}</p>
+  <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
+    {Object.values(chips).map((chip) => (
+      <li>{chip}</li>
+    ))}
+  </ul>
   <figure
     class="mt-14 mb-0 max-w-5xl"
     aria-labelledby="journey-device"

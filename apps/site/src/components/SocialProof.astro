@@ -1,5 +1,6 @@
 ---
 import { Card, CardContent } from '@workspace/ui/components/card'
+import { getContent } from '../i18n/content'
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
@@ -11,23 +12,16 @@ interface Props {
 }
 
 const { proof } = getClosingCopy(Astro.props.locale)
+const { reviews } = getContent(Astro.props.locale).landing
 ---
 
-<Section section="proof" heading={proof.heading}>
-  <p data-proof="numbers" class="mt-5 max-w-2xl text-lead tabular-nums">
-    {proof.numbers}
-  </p>
+<Section section="proof" heading={reviews.heading}>
   <p
     data-proof="rename-note"
     class="mt-5 max-w-2xl text-lead text-muted-foreground"
   >
-    {proof.renameNote}
+    {reviews.note}
   </p>
-  {proof.reviewsLead !== '' && (
-    <p class="mt-3 max-w-2xl leading-body text-muted-foreground">
-      {proof.reviewsLead}
-    </p>
-  )}
   {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard and touch users pause the marquee through :focus-within (WCAG 2.2.2) */}
   <div data-proof-viewport role="group" tabindex="0" class="mt-10">
     <div data-proof-track>
