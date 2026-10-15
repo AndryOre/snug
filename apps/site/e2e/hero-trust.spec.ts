@@ -215,7 +215,7 @@ test.describe('hero journey diagram', () => {
 
   for (const colorScheme of SCHEMES) {
     test(`the journey passes axe in ${colorScheme}`, async ({ page }) => {
-      await page.emulateMedia({ colorScheme })
+      await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
       await page.goto('/')
       const { violations } = await new AxeBuilder({ page })
         .include('[data-section="how"] figure')

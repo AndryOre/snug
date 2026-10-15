@@ -35,6 +35,10 @@ async function expectNoViolations(page: Page): Promise<void> {
 
 const SCHEMES = ['light', 'dark'] as const
 
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+})
+
 for (const colorScheme of SCHEMES) {
   for (const path of AXE_PAGES) {
     test(`${path} has no accessibility violations in ${colorScheme}`, async ({
