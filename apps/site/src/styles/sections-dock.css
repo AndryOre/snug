@@ -72,7 +72,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       [data-dock] {
-        animation-timing-function: steps(1, start), steps(1, start);
+        animation-timing-function: steps(1, end), steps(1, start);
       }
     }
   }
