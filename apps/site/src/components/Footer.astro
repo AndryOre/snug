@@ -67,6 +67,8 @@ const noteParts = footer.note.split('Snug')
             <TextLink
               href={link.href}
               data-footer-link={link.key}
+              target={link.key === 'listing' ? '_blank' : undefined}
+              rel={link.key === 'listing' ? 'noopener' : undefined}
               data-umami-event={
                 OUTBOUND_LINK_KEYS.has(link.key)
                   ? 'outbound-click'

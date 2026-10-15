@@ -1112,16 +1112,21 @@ re-confirmed in a browser before launch.
 Copy for the redesigned landing page (AO-1908). It lives under the `landing` key
 of each locale JSON; the v1 keys it replaced have been removed. Other locales
 carry these same English strings as placeholders until the translation tickets
-replace them. Page order: Hero, Stats strip, Browser marquee, Bento, Format
-playground, Interface showcase, Video, Reviews, FAQ, Closing, Install dock.
+replace them. Page order: Hero (text, install button and video side by side),
+Stats strip, Browser marquee, How it works, Bento, Format playground, Interface
+showcase, Video, Reviews, FAQ, Closing, Install dock.
 
 Terms: Install dock and Format playground. Never sync, cloud or account.
 
 ### EN
 
-- **Hero headline** (`landing.hero.headline`): One file. Six formats. Nothing
-  leaves your device.
-- **Hero subheadline:** Back up, export and import bookmarks. No network calls.
+- **Hero headline** (`landing.hero.headline`): Move your bookmarks to any
+  browser.
+- **Hero subheadline:** Snug backs up, exports and imports your Chrome bookmarks
+  as one file. Free, private, nothing leaves your device.
+- **How it works** (`landing.howItWorks`): How it works / Your bookmarks leave
+  Chrome as one file and open in another browser. Every step stays on your
+  device. The journey diagram renders here, not in the hero.
 - **Hero button:** Add to Chrome
 - **Hero chips:** Free, Open source, No account
 - **Journey stages:** Your device (boundary), Your browser, One file, Another
@@ -1140,7 +1145,8 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
   same folder in each format. / Tabs: HTML, JSON, CSV, Markdown, OPML, XBEL
 - **Interface showcase:** The real interface. / Tabs: Export, Import,
   Auto-export, Popup
-- **Video:** reads the v1 heading "See it work" (`video.heading`)
+- **Video:** now the hero's click-to-load poster; `video.heading` ("See it
+  work") is its title
 - **Reviews:** What people say / Public Chrome Web Store reviews, written before
   the rename. The four quotes in section 6 are unchanged.
 - **FAQ:** Questions / More questions. The six items kept on the landing page

@@ -46,9 +46,25 @@ for (const path of PATHS) {
       'href',
       '/install?c=final',
     )
+    await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
+      'target',
+      '_blank',
+    )
+    await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
+      'rel',
+      'noopener',
+    )
     await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
       'href',
       '/install?c=footer',
+    )
+    await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
+      'target',
+      '_blank',
+    )
+    await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
+      'rel',
+      'noopener',
     )
     await expect(page.locator('a[data-footer-link]')).toHaveCount(7)
   })

@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "Un archivo. Seis formatos. Nada sale de tu dispositivo.",
-      "subheadline": "Respalda, exporta e importa marcadores. Sin llamadas de red.",
+      "headline": "Lleva tus marcadores a cualquier navegador.",
+      "subheadline": "Snug respalda, exporta e importa tus marcadores de Chrome en un solo archivo. Gratis, privado y nada sale de tu dispositivo.",
       "cta": "Añadir a Chrome",
       "description": "Tus marcadores salen de tu navegador como un solo archivo, en cualquiera de seis formatos, y se abren en otro navegador. Cada paso ocurre en tu dispositivo.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Investigación",
         "jobSearch": "Búsqueda de empleo"
-      },
-      "source": "Ver el código en GitHub"
+      }
+    },
+    "howItWorks": {
+      "heading": "Cómo funciona",
+      "lead": "Tus marcadores salen de Chrome en un solo archivo y se abren en otro navegador. Cada paso ocurre en tu dispositivo."
     },
     "stats": {
       "users": {

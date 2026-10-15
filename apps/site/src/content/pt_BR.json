@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "Um arquivo. Seis formatos. Nada sai do seu dispositivo.",
-      "subheadline": "Faça backup, exporte e importe favoritos. Sem chamadas de rede.",
+      "headline": "Leve seus favoritos para qualquer navegador.",
+      "subheadline": "O Snug faz backup, exporta e importa seus favoritos do Chrome em um único arquivo. Grátis, privado e nada sai do seu dispositivo.",
       "cta": "Usar no Chrome",
       "description": "Seus favoritos saem do navegador como um único arquivo, em qualquer um de seis formatos, e abrem em outro navegador. Cada etapa fica no seu dispositivo.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Pesquisa",
         "jobSearch": "Busca de emprego"
-      },
-      "source": "Ver o código-fonte no GitHub"
+      }
+    },
+    "howItWorks": {
+      "heading": "Como funciona",
+      "lead": "Seus favoritos saem do Chrome em um único arquivo e abrem em outro navegador. Cada etapa fica no seu dispositivo."
     },
     "stats": {
       "users": {

@@ -53,7 +53,7 @@ for (const locale of LOCALES) {
       )
     })
 
-    test('hero, trust and footer links carry outbound-click with stable targets', async ({
+    test('trust and footer links carry outbound-click with stable targets', async ({
       page,
     }) => {
       const targets = await page
@@ -64,8 +64,8 @@ for (const locale of LOCALES) {
       expect(
         targets.toSorted((a, b) => String(a).localeCompare(String(b))),
       ).toEqual(
-        ['hero-source', ...TRUST_TARGETS, ...FOOTER_OUTBOUND_TARGETS].toSorted(
-          (a, b) => a.localeCompare(b),
+        [...TRUST_TARGETS, ...FOOTER_OUTBOUND_TARGETS].toSorted((a, b) =>
+          a.localeCompare(b),
         ),
       )
     })

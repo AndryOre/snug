@@ -41,9 +41,10 @@ tokens of its own. The code map is
   ([ADR 0023](../../docs/adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md)).
   Shared keyframes and utilities live in `packages/ui/src/styles/theme.css`.
   Each section owns one stylesheet, `src/styles/sections-<section>.css` (hero,
-  stats, marquee, bento, playground, showcase, proof, faq, closing, dock), all
-  imported by `site.css`; edit only your own. Arbitrary values stay banned there
-  too. Browser logos are vendored in `src/assets/browsers/`, never hot-linked.
+  how, stats, marquee, bento, playground, showcase, proof, faq, closing, dock),
+  all imported by `site.css`; edit only your own. Arbitrary values stay banned
+  there too. Browser logos are vendored in `src/assets/browsers/`, never
+  hot-linked.
 - Install buttons link to `/install`, which the server answers with a 302 to the
   Chrome Web Store listing with UTM tags; `/reviews` does the same for the
   listing's reviews tab. Never link the listing directly.
