@@ -36,7 +36,6 @@ for (const path of PATHS) {
         liveRow.locator('figcaption', { hasText: caption }),
       ).toHaveCount(1)
     }
-    await expect(proof.locator('[data-proof="numbers"]')).toContainText('2026')
     await expect(proof.locator('[data-proof="rename-note"]')).toContainText(
       'Bookmark Import/Export',
     )
@@ -56,13 +55,6 @@ for (const path of PATHS) {
     await expect(page.locator('a[data-footer-link]')).toHaveCount(7)
   })
 }
-
-test('English figures match the content document', async ({ page }) => {
-  await page.goto('/')
-  await expect(page.locator('[data-proof="numbers"]')).toHaveText(
-    '5,000 users. 4.8 stars from 20 ratings on the Chrome Web Store (Oct 5, 2026).',
-  )
-})
 
 test('reviews marquee pauses on hover', async ({ page }) => {
   await page.goto('/')

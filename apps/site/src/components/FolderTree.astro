@@ -1,14 +1,14 @@
 ---
 import { Folder } from 'lucide-react'
-import { getLandingCopy } from '../i18n/landing'
+import { getContent } from '../i18n/content'
 import type { Locale } from '../i18n/locales'
 
 interface Props {
   locale: Locale
 }
 
-const { journey } = getLandingCopy(Astro.props.locale).hero
-const folders = [journey.folderResearch, journey.folderJobSearch]
+const { folders: names } = getContent(Astro.props.locale).landing.hero
+const folders = [names.research, names.jobSearch]
 ---
 
 <ul class="flex flex-col gap-2">

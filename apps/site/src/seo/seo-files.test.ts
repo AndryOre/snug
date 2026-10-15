@@ -187,8 +187,8 @@ describe('buildLlmsFullTxt', () => {
 
   it('flattens the English page to Markdown', () => {
     expect(body).toMatch(/^# Snug\n/)
-    expect(body).toContain(`## ${getContent('en').features.heading}`)
-    expect(body).toContain(getContent('en').hero.subheadline)
+    expect(body).toContain(`## ${getContent('en').landing.showcase.heading}`)
+    expect(body).toContain(getContent('en').landing.hero.subheadline)
   })
 
   it('links the counted redirects, never the raw store URL', () => {
@@ -206,9 +206,15 @@ describe('buildLlmsFullTxt', () => {
     )
   })
 
-  it('joins the hero headline into one heading', () => {
-    const { headlineLead, headlineAccent } = getContent('en').hero
-    expect(body).toContain(`## ${headlineLead} ${headlineAccent}\n`)
+  it('uses the hero headline as the first heading', () => {
+    const { headline } = getContent('en').landing.hero
+    expect(body).toContain(`## ${headline}\n`)
+  })
+
+  it('lists the stats and the bento cards', () => {
+    const { stats, bento } = getContent('en').landing
+    expect(body).toContain(`- ${stats.users.label}: ${stats.users.value}`)
+    expect(body).toContain(`### ${bento.export.title}`)
   })
 
   it('keeps every FAQ question and answer', () => {

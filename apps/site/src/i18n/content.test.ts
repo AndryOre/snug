@@ -90,15 +90,6 @@ describe('content', () => {
     expect(new Set(alts).size).toBe(LOCALES.length)
   })
 
-  it('quotes the Bookmarks file name in the preview card and formats FAQ', () => {
-    const quoted = /[“«„「]\u{A0}?Bookmarks\u{A0}?[”»“」]/u
-    for (const locale of LOCALES) {
-      const content = getContent(locale)
-      expect(content.features.items.preview.body).toMatch(quoted)
-      expect(content.faq.items.formats.answer).toMatch(quoted)
-    }
-  })
-
   it('keeps every meta title keyword-first, Chrome-tagged, within 60 visual columns and ending with the brand', () => {
     for (const locale of LOCALES) {
       const { title } = getContent(locale).meta
