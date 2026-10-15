@@ -226,20 +226,33 @@ for why this runs against the built extension instead of a component-test layer.
 
 The site's layout specs run on real browsers through BrowserStack Automate (see
 [ADR 0024](adr/0024-cross-browser-coverage-on-browserstack.md)): Safari on
-macOS, Firefox and Edge on Windows 11, a real iPhone (Safari) and a real Pixel
-(Chrome).
+macOS, Firefox and Edge on Windows 11, a real iPhone 15 (Safari) and a real
+Pixel 8 (Chrome). The run is informational: it never blocks a merge and is not
+part of `CI passed`.
 
 - Platforms are declared in `apps/site/browserstack.yml`; the spec selection is
   `LAYOUT_SPECS` from `apps/site/playwright.layout-specs.ts`, shared with
   `playwright.config.ts`, and the run uses `playwright.browserstack.config.ts`.
+- Tiers run the same tests on different triggers. **Lean** (204 tests per
+  platform, no `accessibility.spec.ts`; Safari, Firefox, Edge, Pixel 8; about 20
+  minutes) runs on PRs touching `apps/site/**` or `packages/ui/**`. **Full**
+  (all 932 tests per platform) runs nightly, on pushes to `main` and on manual
+  dispatch. The iPhone full suite (~7 h) is sharded four ways to fit the 6 h job
+  limit.
+- Measured per test: Edge ~3s, Firefox ~4s, Safari ~5s, Pixel 8 ~6s, iPhone 15
+  ~27s. The timing reporter logs per-test durations and a mean/p50/p95 summary
+  in each job's summary.
+- Run one platform on demand: Actions, BrowserStack, Run workflow, then pick
+  `tier` (`lean` or `full`) and `platform` (`all`, `safari`, `firefox`, `edge`,
+  `pixel`, `iphone`).
 - Run locally with `bun run test:e2e:browserstack` from `apps/site`, after
   exporting your own `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY`. The
-  SDK starts BrowserStack Local and tunnels to `astro preview` on port 4399.
-- In CI, `ci.yml` calls `.github/workflows/browserstack.yml` and `CI passed`
-  aggregates it. It also runs nightly and on manual dispatch.
-- The job runs only when `apps/site/**` or `packages/ui/**` changed. If the
-  paths do not match, or the secrets are unavailable (fork PRs), it is skipped
-  with a notice and counts as green.
+  SDK starts BrowserStack Local and tunnels to `astro preview` on port 4399. Set
+  `BROWSERSTACK_TIER=lean` for the lean selection and pass `--shard=1/4` to
+  split a run.
+- Failures print in the job log; the HTML report and `test-results/` are
+  uploaded as `browserstack-report-<platform>` artifacts. If the secrets are
+  unavailable (fork PRs), the run is skipped with a notice.
 - The sponsored plan expires on 2027-10-10.
 
 ### Landing visual regression

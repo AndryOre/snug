@@ -192,11 +192,15 @@ jobs:
             echo "::notice title=BrowserStack skipped::No changes under apps/site or packages/ui."
           fi
 
+  # Informational: deliberately absent from `CI passed` needs, so it never
+  # blocks a merge. PRs run the lean tier, pushes to main the full tier.
   browserstack:
     name: BrowserStack (site layout)
     needs: [changes]
     if: needs.changes.outputs.site == 'true'
     uses: ./.github/workflows/browserstack.yml # zizmor: ignore[self-repository] actionlint 1.7.12 rejects the $/ form
+    with:
+      tier: ${{ github.event_name == 'pull_request' && 'lean' || 'full' }}
     secrets:
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
@@ -237,7 +241,7 @@ jobs:
     name: CI passed
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [quality, build, e2e, changes, browserstack, commitlint]
+    needs: [quality, build, e2e, commitlint]
     if: always()
     steps:
       - name: Check job results
