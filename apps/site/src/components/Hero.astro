@@ -24,7 +24,7 @@ const { chips } = hero
 const poster = posters[`../assets/video-posters/${locale}.png`]!.default
 const POSTER_WIDTHS = [640, 960, 1280] as const
 const POSTER_SIZES =
-  '(min-width: 1024px) 560px, (min-width: 768px) calc(50vw - 70px), calc(100vw - 32px)'
+  '(min-width: 1240px) 538px, (min-width: 768px) calc(50vw - 82px), calc(100vw - 34px)'
 const posterImages = await Promise.all(
   POSTER_WIDTHS.map((width) =>
     getImage({ src: poster, width, format: 'webp' }),
@@ -69,6 +69,7 @@ const posterSourceSet = posterImages
         posterSrc={posterImage.src}
         posterSrcSet={posterSourceSet}
         posterSizes={POSTER_SIZES}
+        posterPriority
         posterWidth={poster.width}
         posterHeight={poster.height}
       />
