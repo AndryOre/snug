@@ -169,6 +169,7 @@ for (const path of [
   '/changelog/',
 ]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
     const { violations } = await new AxeBuilder({ page })
