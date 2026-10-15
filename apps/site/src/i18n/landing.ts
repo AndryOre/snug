@@ -146,7 +146,7 @@ export function resolveHref(
 /**
  * Placements that tag an install button for the counted redirect.
  */
-export type InstallPlacement = 'hero' | 'trust' | 'final' | 'dock' | 'footer'
+export type InstallPlacement = 'hero' | 'final' | 'dock' | 'footer'
 
 /**
  * Site-relative install URL carrying a placement tag.
@@ -216,9 +216,33 @@ export function getClosingCopy(locale: Locale): {
  */
 export const FOOTER_LINK_HREFS = {
   source: TRUST_LINK_HREFS.source,
+  scorecard: TRUST_LINK_HREFS.scorecard,
+  bestPractices: TRUST_LINK_HREFS.bestPractices,
+  ci: TRUST_LINK_HREFS.ci,
   privacy: TRUST_LINK_HREFS.privacy,
   guide: (locale: Locale) => localePath(locale, DOCS_PATHS.guide),
   changelog: (locale: Locale) => localePath(locale, DOCS_PATHS.whatsNew),
   alternatives: (locale: Locale) => alternativesPath(locale),
   howTo: (locale: Locale) => howToIndexPath(locale),
 } as const
+
+/**
+ * Splits a localized stat value into the integer a CSS counter animates and
+ * the separator it re-inserts, so the animated number matches the copy.
+ * @param value - The localized stat text, such as `5,000` or `4,8`.
+ * @returns The digits, the counter format and the separator character.
+ */
+export function countUpParts(value: string): {
+  target: string
+  format: 'tenths' | 'grouped' | 'plain'
+  separator: string
+} {
+  const target = value.replaceAll(/\D/g, '')
+  const mark = /^\d+([.,])\d$/.exec(value)?.[1]
+  const group = /^\d{1,3}(\D)\d{3}$/.exec(value)?.[1]
+  return {
+    target,
+    format: mark ? 'tenths' : group ? 'grouped' : 'plain',
+    separator: mark ?? group ?? '',
+  }
+}

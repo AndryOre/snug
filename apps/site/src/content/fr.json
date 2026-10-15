@@ -211,18 +211,6 @@
         "body": "Déposez plusieurs fichiers d'un coup, Snug les importe."
       }
     },
-    "playground": {
-      "heading": "Choisissez un format. Mêmes favoris, six fichiers.",
-      "subline": "Voyez le même dossier dans chaque format.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "La vraie interface.",
       "tabs": {

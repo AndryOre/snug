@@ -48,9 +48,9 @@ relative to `apps/extension/` unless it starts with `packages/`.
   [ADR 0011](adr/0011-landing-static-site-no-third-party-scripts.md)). Like the
   video it has no runtime link to the extension. Rules: `apps/site/AGENTS.md`.
   - Landing section order: Hero (with the click-to-load video), Stats strip,
-    Browser marquee, How it works, Bento, Format playground (island), Interface
-    showcase (island), Reviews marquee, FAQ (six questions), Closing panel,
-    Footer, plus the Install dock. Motion is pure CSS, static end state first
+    Browser marquee, How it works, Bento, Interface showcase (island), Reviews
+    marquee, FAQ (six questions), Closing panel, Footer, plus the Install dock.
+    Motion is pure CSS, static end state first
     ([ADR 0023](adr/0023-landing-motion-is-css-scroll-driven-no-motion-library.md),
     `apps/site/DESIGN.md`).
   - Site map: the landing page (`/`, `/<locale>/`), `/privacy/`, the Guide and

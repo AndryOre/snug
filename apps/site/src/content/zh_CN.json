@@ -211,18 +211,6 @@
         "body": "一次拖入多个文件，Snug 会依次导入。"
       }
     },
-    "playground": {
-      "heading": "选一种格式，同样的书签，六个文件。",
-      "subline": "在每种格式中查看同一个文件夹。",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "真实界面",
       "tabs": {

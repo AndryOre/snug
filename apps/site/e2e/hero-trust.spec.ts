@@ -9,7 +9,7 @@ const SCHEMES = ['light', 'dark'] as const
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
 for (const path of PATHS) {
-  test(`${path} renders hero, trust proof and tagged install actions`, async ({
+  test(`${path} renders hero, stats and tagged install actions`, async ({
     page,
   }) => {
     await blockUmami(page)
@@ -25,14 +25,17 @@ for (const path of PATHS) {
 
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('[data-section="hero"]')).toBeVisible()
-    await expect(page.locator('[data-section="trust"]')).toBeVisible()
+    await expect(page.locator('[data-section="trust"]')).toHaveCount(0)
     await expect(page.locator('[data-section="stats"] dl > div')).toHaveCount(4)
     await expect(
       page.locator(
         '[data-section="marquee"] [data-marquee-row]:not([aria-hidden])',
       ),
     ).toHaveCount(1)
-    await expect(page.locator('[data-section="trust"] ul a')).toHaveCount(5)
+    await expect(page.locator('[data-section="playground"]')).toHaveCount(0)
+    await expect(
+      page.locator('footer a[data-umami-event="outbound-click"]'),
+    ).toHaveCount(5)
 
     await expect(page.locator('a[data-install="hero"]')).toHaveAttribute(
       'href',
@@ -48,10 +51,7 @@ for (const path of PATHS) {
     )
     await expect(page.locator('[data-section="how"] figure')).toBeVisible()
     await expect(page.locator('[data-section="hero"] figure')).toHaveCount(0)
-    await expect(page.locator('a[data-install="trust"]')).toHaveAttribute(
-      'href',
-      '/install?c=trust',
-    )
+    await expect(page.locator('a[data-install="trust"]')).toHaveCount(0)
     const storeLinks = await page
       .locator('a[href*="chromewebstore.google.com"]:not([data-reviews-link])')
       .count()
@@ -89,7 +89,9 @@ test('works without JavaScript', async ({ browser }) => {
   const page = await context.newPage()
   await page.goto('/')
   await expect(page.locator('a[data-install="hero"]')).toBeVisible()
-  await expect(page.locator('[data-section="trust"]')).toBeVisible()
+  await expect(page.locator('[data-section="stats"] dd').first()).toHaveText(
+    /\d/,
+  )
   await context.close()
 })
 
@@ -234,7 +236,8 @@ test.describe('stats strip and browser marquee', () => {
       .evaluateAll((sections) =>
         sections.map((section) => section.dataset.section),
       )
-    expect(order.slice(0, 4)).toEqual(['hero', 'stats', 'marquee', 'trust'])
+    expect(order.slice(0, 3)).toEqual(['hero', 'stats', 'marquee'])
+    expect(order).not.toContain('trust')
   })
 
   test('animation duration follows the row width at 40 px/s', async ({

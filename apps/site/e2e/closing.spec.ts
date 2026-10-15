@@ -66,7 +66,7 @@ for (const path of PATHS) {
       'rel',
       'noopener',
     )
-    await expect(page.locator('a[data-footer-link]')).toHaveCount(7)
+    await expect(page.locator('a[data-footer-link]')).toHaveCount(10)
   })
 }
 

@@ -211,18 +211,6 @@
         "body": "파일 여러 개를 한 번에 놓으면 Snug가 가져와요."
       }
     },
-    "playground": {
-      "heading": "형식을 고르세요. 같은 북마크, 여섯 개의 파일.",
-      "subline": "같은 폴더를 형식별로 비교해 보세요.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "실제 화면",
       "tabs": {

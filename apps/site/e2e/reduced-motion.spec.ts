@@ -101,7 +101,7 @@ for (const path of PATHS) {
     page,
   }) => {
     await page.goto(path)
-    for (const section of ['playground', 'interface']) {
+    for (const section of ['interface']) {
       const root = page.locator(`[data-section="${section}"]`)
       await root.scrollIntoViewIfNeeded()
       await expect(root.locator('astro-island').first()).not.toHaveAttribute(
@@ -135,3 +135,13 @@ for (const path of PATHS) {
     }
   })
 }
+
+test('stats show their final numbers as plain text', async ({ page }) => {
+  await page.goto('/')
+  const value = page.locator('[data-section="stats"] dd').first()
+  await expect(value).toContainText('5,000')
+  const content = await value.evaluate(
+    (element) => getComputedStyle(element, '::after').content,
+  )
+  expect(['none', 'normal']).toContain(content)
+})

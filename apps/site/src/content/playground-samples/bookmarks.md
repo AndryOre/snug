@@ -1,6 +1,0 @@
-- Bookmarks bar
-  - Reading list
-    - [Astro docs](https://docs.astro.build)
-    - [MDN Web Docs](https://developer.mozilla.org)
-  - [Snug](https://snug.andryore.dev)
-- Other bookmarks

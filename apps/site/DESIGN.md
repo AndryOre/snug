@@ -128,13 +128,12 @@ on phones. Section order is fixed by the Landing v2 spec:
    calls), no new claims.
 3. Browser marquee: real browser logos drifting in a loop.
 4. Bento: four panels, unequal sizes, one amber accent each.
-5. Format playground: island, pick a format and see the file change.
-6. Interface showcase: island, the real extension screenshots.
-7. Video: only when a video exists.
-8. Reviews marquee: real store review excerpts in a loop.
-9. FAQ: six questions; the rest live on the Guide FAQ page.
-10. Closing panel: the final Add to Chrome call to action.
-11. Footer.
+5. Interface showcase: island, the real extension screenshots.
+6. Video: only when a video exists.
+7. Reviews marquee: real store review excerpts in a loop.
+8. FAQ: six questions; the rest live on the Guide FAQ page.
+9. Closing panel: the final Add to Chrome call to action.
+10. Footer.
 
 The Install dock is a persistent compact Add to Chrome control that sits outside
 this flow and never overlaps the closing panel. Wide grids use
@@ -153,11 +152,11 @@ is the only atmospheric effect and stays behind content.
 
 Nova radius from the shared theme: 10px on buttons, 14px on panels, 20px on the
 Your device boundary. The boundary is a 1.5px dashed amber line, the only dashed
-element on the page: marquee edges, dividers and playground frames use solid
-hairlines. The brand mark is a ribbon tag with a V-notch; its halo is a blurred
-copy of the mark behind it. In v2 the mark is the visual protagonist of the hero
-and the closing panel: a large ribbon that the page's motion revolves around. It
-is a brand mark, never a mascot: no face, no pose, no character behaviour.
+element on the page: marquee edges, dividers and frames use solid hairlines. The
+brand mark is a ribbon tag with a V-notch; its halo is a blurred copy of the
+mark behind it. In v2 the mark is the visual protagonist of the hero and the
+closing panel: a large ribbon that the page's motion revolves around. It is a
+brand mark, never a mascot: no face, no pose, no character behaviour.
 
 ## Components
 
@@ -174,18 +173,14 @@ is a brand mark, never a mascot: no face, no pose, no character behaviour.
 - **Journey card:** a panel; the middle card (the file) gets a 1px
   `ring-primary/50` amber ring and the other two stay plain. Folder icons are
   Lucide `folder`, 2px stroke, amber.
-- **Format chip:** one outline Badge style for the hero and the playground:
-  Geist Mono 12px, 1px hairline border, no fill, pill radius.
+- **Format chip:** one outline Badge style for the hero: Geist Mono 12px, 1px
+  hairline border, no fill, pill radius.
 - **Browser logos:** real browser logos are allowed (Chrome, Edge, Brave,
   Firefox and peers), self-hosted as static assets, shown at one consistent
   size, and presented as compatibility facts, never as endorsements.
 - **Marquee:** the browser and reviews rows loop horizontally on a duplicated
   track with a hairline mask at the edges. Hover or focus within pauses it; the
   static state is a wrapped, fully visible row.
-- **Format playground (island):** the visitor picks one of the six export
-  formats and sees the sample file change. Hydrated with `client:visible`; the
-  server HTML already shows the default format, so the section reads without
-  JavaScript. Keyboard operable, no network request.
 - **Interface showcase (island):** the real extension screenshots switchable by
   tab, in a 16px-radius frame with a hairline border and the caption from the
   content document. Hydrated with `client:visible`; the first screenshot is in

@@ -211,18 +211,6 @@
         "body": "Ziehe mehrere Dateien auf einmal hinein, und Snug importiert sie."
       }
     },
-    "playground": {
-      "heading": "Wähle ein Format. Dieselben Lesezeichen, sechs Dateien.",
-      "subline": "Sieh denselben Ordner in jedem Format.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "Die echte Oberfläche.",
       "tabs": {

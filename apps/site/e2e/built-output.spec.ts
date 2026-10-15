@@ -424,10 +424,10 @@ test.describe('privacy page', () => {
   })
 
   for (const locale of LOCALES) {
-    test(`${locale} links the trust section and footer to its privacy page`, () => {
+    test(`${locale} links the footer to its privacy page`, () => {
       const html = readBuilt(pageFile(locale))
       const link = `href="${privacyPath(locale)}"`
-      expect(html.split(link).length - 1).toBeGreaterThanOrEqual(2)
+      expect(html.split(link).length - 1).toBeGreaterThanOrEqual(1)
     })
   }
 })
