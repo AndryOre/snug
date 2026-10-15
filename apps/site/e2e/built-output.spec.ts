@@ -107,7 +107,7 @@ test.describe('built pages', () => {
           'utf8',
         ),
       ) as { faq: { items: Record<string, unknown> } }
-      expect(Object.keys(content.faq.items).length).toBeGreaterThan(
+      expect(Object.keys(content.faq.items)).toHaveLength(
         LANDING_FAQ_KEYS.length,
       )
       expect(panels).toHaveLength(LANDING_FAQ_KEYS.length)
@@ -297,7 +297,7 @@ test.describe('root files', () => {
     }
     expect(llmsFull).toContain(REVIEWS[0]!.quote)
     expect(llmsFull).toMatch(/https:\/\/www\.youtube\.com\/watch\?v=[\w-]+/)
-    expect(llmsFull.match(/^## Move your bookmarks\. /gm)).toHaveLength(1)
+    expect(llmsFull.match(/^## One file\. Six formats\. /gm)).toHaveLength(1)
     const lastmods = readBuilt('sitemap.xml')
       .matchAll(/<lastmod>([^<]+)</g)
       .map((match) => match[1])
