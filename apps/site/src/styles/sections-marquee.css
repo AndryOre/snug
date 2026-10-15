@@ -55,6 +55,12 @@
       animation: motion-marquee var(--marquee-duration, var(--duration-marquee))
         linear infinite;
     }
+
+    [data-section='marquee']
+      [data-marquee-viewport]:focus-within
+      [data-marquee-track] {
+      animation-play-state: paused;
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {

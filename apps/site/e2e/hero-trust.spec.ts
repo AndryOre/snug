@@ -254,6 +254,23 @@ test.describe('stats strip and browser marquee', () => {
     )
   })
 
+  test('pauses when the viewport takes focus', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await page.goto('/')
+    const viewport = page.locator('[data-marquee-viewport]')
+    await expect(viewport).toHaveAttribute('role', 'group')
+    await expect(viewport).toHaveAttribute('aria-label', /.+/)
+    await expect(page.locator('[data-marquee-track]')).toHaveCSS(
+      'animation-play-state',
+      'running',
+    )
+    await viewport.focus()
+    await expect(page.locator('[data-marquee-track]')).toHaveCSS(
+      'animation-play-state',
+      'paused',
+    )
+  })
+
   test('is static under reduced motion', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/')
