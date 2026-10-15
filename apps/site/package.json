@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "astro build && playwright test",
-    "test:e2e:browserstack": "astro build && browserstack-node-sdk playwright test -c playwright.browserstack.config.ts",
+    "test:e2e:browserstack": "astro build && browserstack-node-sdk playwright test --config=playwright.browserstack.config.ts",
     "test:container": "playwright test -c playwright.container.config.ts --grep-invert @visual",
     "test:visual": "bash scripts/visual.sh test",
     "test:visual:update": "bash scripts/visual.sh update",
