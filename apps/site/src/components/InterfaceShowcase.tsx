@@ -45,7 +45,7 @@ export default function InterfaceShowcase({
         variant="line"
         activateOnFocus
         aria-label={listLabel}
-        className="h-auto max-w-full flex-wrap justify-start"
+        className="h-auto max-w-full flex-wrap justify-start group-data-[orientation=horizontal]/tabs:h-auto"
       >
         {SHOWCASE_SHOTS.map((shot) => (
           <TabsTrigger key={shot} value={shot}>

@@ -47,7 +47,7 @@ export default function FormatPlayground({
         variant="line"
         activateOnFocus
         aria-label={listLabel}
-        className="h-auto max-w-full flex-wrap justify-start"
+        className="h-auto max-w-full flex-wrap justify-start group-data-[orientation=horizontal]/tabs:h-auto"
       >
         {PLAYGROUND_FORMATS.map((format) => (
           <TabsTrigger
