@@ -13,9 +13,14 @@ const isLeanTier = process.env.BROWSERSTACK_TIER === 'lean'
  * `BROWSERSTACK_TIER=lean` drops `accessibility.spec.ts`; any other value runs
  * every layout spec. In CI the `list` reporter prints failures in the job log
  * and `browserstack-timing-reporter.ts` records per-test durations.
+ *
+ * `fullyParallel` lets `--shard` split inside a file: without it every test of
+ * `accessibility.spec.ts` lands in one shard, which the real iPhone cannot
+ * finish. Each job still runs a single worker, so tests execute one at a time.
  */
 export default defineConfig({
   testDir: './e2e',
+  fullyParallel: true,
   testMatch: isLeanTier ? LEAN_LAYOUT_SPECS : LAYOUT_SPECS,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

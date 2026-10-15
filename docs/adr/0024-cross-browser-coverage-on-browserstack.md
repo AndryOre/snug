@@ -22,9 +22,18 @@ Automate (5 parallels, unlimited minutes) and Percy.
   BrowserStack Node SDK with its own Playwright config. BrowserStack Local
   tunnels the remote browsers to the existing `astro preview` server.
 - The run is informational and never blocks a merge. `ci.yml` calls the reusable
-  `browserstack.yml` workflow, but neither it nor its `changes` gate is in the
-  `needs` of `CI passed`; a failure shows as a red, non-required check. The
-  first real run (PR #238) showed a full run is far too slow to gate PRs.
+  `browserstack.yml` workflow for pull requests only, and neither it nor its
+  `changes` gate is in the `needs` of `CI passed`; a failure shows as a red,
+  non-required check. The first real run (PR #238) showed a full run is far too
+  slow to gate PRs.
+- The full tier does not run from `ci.yml`. `browserstack.yml` has its own
+  `push` (to `main`, site and UI paths), `schedule` and `workflow_dispatch`
+  triggers, because a multi-hour run inside the `CI` workflow would hold its
+  per-ref concurrency group on `main` and leave later pushes without
+  `CI passed`.
+- `fullyParallel` is on in the BrowserStack Playwright config so `--shard` can
+  split inside `accessibility.spec.ts`; without it all 728 tests land in one
+  shard.
 - Nothing is skipped; the same tests run on different triggers (tiers):
   - **Lean** (204 tests per platform: every layout spec except
     `accessibility.spec.ts`, via `BROWSERSTACK_TIER=lean`): PRs touching

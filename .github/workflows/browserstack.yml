@@ -17,6 +17,12 @@ on:
         required: false
       BROWSERSTACK_ACCESS_KEY:
         required: false
+  push:
+    branches: [main]
+    paths:
+      - apps/site/**
+      - packages/ui/**
+      - .github/workflows/browserstack.yml
   schedule:
     - cron: '17 3 * * *'
   workflow_dispatch:

@@ -163,6 +163,7 @@ jobs:
 
   changes:
     name: Detect site changes
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -193,14 +194,18 @@ jobs:
           fi
 
   # Informational: deliberately absent from `CI passed` needs, so it never
-  # blocks a merge. PRs run the lean tier, pushes to main the full tier.
+  # blocks a merge. Only PRs run it from here, with the lean tier; the full tier
+  # runs from browserstack.yml's own push, schedule and dispatch triggers so its
+  # hours-long run never holds this workflow's concurrency group on main.
   browserstack:
     name: BrowserStack (site layout)
     needs: [changes]
-    if: needs.changes.outputs.site == 'true'
+    if:
+      github.event_name == 'pull_request' && needs.changes.outputs.site ==
+      'true'
     uses: ./.github/workflows/browserstack.yml # zizmor: ignore[self-repository] actionlint 1.7.12 rejects the $/ form
     with:
-      tier: ${{ github.event_name == 'pull_request' && 'lean' || 'full' }}
+      tier: lean
     secrets:
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
