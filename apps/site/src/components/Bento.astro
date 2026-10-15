@@ -26,6 +26,7 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
     {BENTO_KEYS.map((key) => (
       <li class="flex" data-bento-card={key}>
         <Card size="lg" className="relative w-full">
+          <span data-bento-glow aria-hidden="true" />
           <CardHeader>
             <CardTitle className="text-2xl leading-tight break-words hyphens-auto">
               <h2 class="phrase-break">{copy[key].title}</h2>
@@ -231,16 +232,14 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
   const NO_REDUCED_MOTION = '(prefers-reduced-motion: no-preference)'
 
   if (matchMedia(FINE_HOVER).matches && matchMedia(NO_REDUCED_MOTION).matches) {
-    let pending: { card: HTMLElement; x: number; y: number } | undefined
+    let pending: { glow: HTMLElement; x: number; y: number } | undefined
     let frame = 0
 
     const flush = () => {
       frame = 0
       if (!pending) return
-      const { card, x, y } = pending
-      const box = card.getBoundingClientRect()
-      card.style.setProperty('--bento-x', `${x - box.left}px`)
-      card.style.setProperty('--bento-y', `${y - box.top}px`)
+      const { glow, x, y } = pending
+      glow.style.transform = `translate(${x - glow.offsetWidth / 2}px, ${y - glow.offsetHeight / 2}px)`
       pending = undefined
     }
 
@@ -252,7 +251,10 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
         )
         if (!card) return
         const { clientX, clientY } = event as PointerEvent
-        pending = { card, x: clientX, y: clientY }
+        const glow = card.querySelector<HTMLElement>('[data-bento-glow]')
+        if (!glow) return
+        const box = card.getBoundingClientRect()
+        pending = { glow, x: clientX - box.left, y: clientY - box.top }
         if (frame === 0) frame = requestAnimationFrame(flush)
       })
   }
