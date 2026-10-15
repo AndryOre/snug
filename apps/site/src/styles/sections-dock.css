@@ -1,2 +1,79 @@
 @layer components {
+  main {
+    timeline-scope: --dock-start, --dock-end;
+  }
+
+  [data-section='hero'] {
+    view-timeline: --dock-start block;
+  }
+
+  [data-section='final'] {
+    view-timeline: --dock-end block;
+  }
+
+  [data-dock] {
+    display: none;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    justify-content: center;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+    pointer-events: none;
+  }
+
+  [data-dock] a {
+    min-height: 2.75rem;
+    pointer-events: auto;
+    box-shadow: 0 0.5rem 1.5rem
+      color-mix(in oklch, var(--foreground) 18%, transparent);
+  }
+
+  @keyframes dock-enter {
+    from {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+  }
+
+  @keyframes dock-exit {
+    from {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    to {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(100%);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    [data-dock] {
+      display: flex;
+      opacity: 0;
+      visibility: hidden;
+      animation-name: dock-enter, dock-exit;
+      animation-duration: 1ms, 1ms;
+      animation-timing-function: var(--ease-out-strong), linear;
+      animation-fill-mode: both, forwards;
+      animation-timeline: --dock-start, --dock-end;
+      animation-range:
+        exit 0% exit 100%,
+        entry 0% entry 60%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-dock] {
+        animation-timing-function: steps(1, start), steps(1, start);
+      }
+    }
+  }
 }
