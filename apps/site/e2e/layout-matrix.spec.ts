@@ -36,22 +36,22 @@ for (const colorScheme of SCHEMES) {
 }
 
 test.describe('breakpoint at 767 vs 768', () => {
-  test('RealInterface grid is one column at 767 and two at 768', async ({
+  test('interface showcase stays inside the viewport at 767 and 768', async ({
     page,
   }) => {
-    const columnCount = () =>
+    const overflow = () =>
       page
-        .locator('[data-section="interface"] .grid')
-        .first()
+        .locator('[data-section="interface"]')
         .evaluate(
-          (grid) =>
-            getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+          (section) =>
+            section.scrollWidth -
+            globalThis.document.documentElement.clientWidth,
         )
     await page.setViewportSize({ width: 767, height: 900 })
     await page.goto('/')
-    expect(await columnCount()).toBe(1)
+    expect(await overflow()).toBeLessThanOrEqual(0)
     await page.setViewportSize({ width: 768, height: 900 })
-    expect(await columnCount()).toBe(2)
+    expect(await overflow()).toBeLessThanOrEqual(0)
   })
 
   test('hero journey stacks at 767 and runs in a row at 768', async ({

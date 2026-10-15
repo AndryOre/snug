@@ -246,66 +246,66 @@
   },
   "landing": {
     "hero": {
-      "headline": "One file. Six formats. Nothing leaves your device.",
-      "subheadline": "Back up, export and import bookmarks. No network calls.",
-      "cta": "Add to Chrome",
-      "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
+      "headline": "파일 하나. 형식 여섯 가지. 기기 밖으로는 아무것도 나가지 않아요.",
+      "subheadline": "북마크를 백업하고, 내보내고, 가져와요. 네트워크 호출은 없어요.",
+      "cta": "Chrome에 추가",
+      "description": "북마크는 여섯 가지 형식 중 하나의 파일로 브라우저 밖으로 나가 다른 브라우저에서 열려요. 모든 단계는 기기 안에서만 이뤄져요.",
       "chips": {
-        "free": "Free",
-        "openSource": "Open source",
-        "noAccount": "No account"
+        "free": "무료",
+        "openSource": "오픈 소스",
+        "noAccount": "계정 없음"
       },
       "stages": {
-        "device": "Your device",
-        "browser": "Your browser",
-        "file": "One file",
-        "target": "Another browser",
-        "network": "Network calls: 0"
+        "device": "내 기기",
+        "browser": "내 브라우저",
+        "file": "파일 하나",
+        "target": "다른 브라우저",
+        "network": "네트워크 호출: 0"
       }
     },
     "stats": {
       "users": {
-        "label": "Users",
+        "label": "사용자",
         "value": "5,000"
       },
       "rating": {
-        "label": "Rating",
+        "label": "평점",
         "value": "4.8"
       },
       "formats": {
-        "label": "Formats",
+        "label": "형식",
         "value": "6"
       },
       "network": {
-        "label": "Network calls",
+        "label": "네트워크 호출",
         "value": "0"
       }
     },
     "marquee": {
-      "browsers": "Works in",
-      "sources": "Imports from"
+      "browsers": "지원 브라우저",
+      "sources": "가져오기 가능한 곳"
     },
     "bento": {
       "export": {
-        "title": "Export anything",
-        "body": "Whole tree or chosen folders, in six formats."
+        "title": "무엇이든 내보내기",
+        "body": "트리 전체나 고른 폴더를 여섯 가지 형식으로 내보내요."
       },
       "import": {
-        "title": "Import with a preview",
-        "body": "See what will be added, skipped or deleted first."
+        "title": "미리 보고 가져오기",
+        "body": "추가, 건너뜀, 삭제될 항목을 먼저 확인해요."
       },
       "backup": {
-        "title": "Back up on a schedule",
-        "body": "Auto-export saves files on the schedule you set."
+        "title": "일정에 맞춰 백업",
+        "body": "자동 내보내기가 정해 둔 일정에 맞춰 파일을 저장해요."
       },
       "popup": {
-        "title": "Drop files in the popup",
-        "body": "Drop several files at once and Snug imports them."
+        "title": "팝업에 파일 놓기",
+        "body": "파일 여러 개를 한 번에 놓으면 Snug가 가져와요."
       }
     },
     "playground": {
-      "heading": "Pick a format. Same bookmarks, six files.",
-      "subline": "See the same folder in each format.",
+      "heading": "형식을 고르세요. 같은 북마크, 여섯 개의 파일.",
+      "subline": "같은 폴더를 형식별로 비교해 보세요.",
       "tabs": {
         "html": "HTML",
         "json": "JSON",
@@ -316,31 +316,31 @@
       }
     },
     "showcase": {
-      "heading": "The real interface.",
+      "heading": "실제 화면",
       "tabs": {
-        "export": "Export",
-        "import": "Import",
-        "autoExport": "Auto-export",
-        "popup": "Popup"
+        "export": "내보내기",
+        "import": "가져오기",
+        "autoExport": "자동 내보내기",
+        "popup": "팝업"
       }
     },
     "reviews": {
-      "heading": "What people say",
-      "note": "Public Chrome Web Store reviews, written before the rename."
+      "heading": "사용자 후기",
+      "note": "Chrome 웹 스토어에 공개된 리뷰예요. 이름이 바뀌기 전에 작성됐어요."
     },
     "faq": {
-      "heading": "Questions",
-      "more": "More questions"
+      "heading": "자주 묻는 질문",
+      "more": "질문 더 보기"
     },
     "closing": {
-      "heading": "Add Snug to Chrome.",
-      "line": "Free and open source.",
-      "button": "Add to Chrome"
+      "heading": "Snug를 Chrome에 추가하세요.",
+      "line": "무료이고 오픈 소스예요.",
+      "button": "Chrome에 추가"
     },
     "dock": {
-      "install": "Add to Chrome",
-      "source": "Source",
-      "label": "Add Snug to Chrome"
+      "install": "Chrome에 추가",
+      "source": "소스 코드",
+      "label": "Snug를 Chrome에 추가"
     }
   }
 }
