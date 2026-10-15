@@ -24,7 +24,7 @@
 
   [data-section='faq']:has([aria-expanded='true'])
     [data-faq='visuals']
-    > svg:first-child {
+    > :first-child {
     opacity: 0;
   }
 

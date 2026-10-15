@@ -113,6 +113,8 @@ test('the FAQ visual follows the open item and More questions opens the Guide FA
   const faq = await hydratedFaq(page)
   const visual = (key: string) => faq.locator(`[data-faq-visual="${key}"]`)
   await expect(visual('network')).toHaveCSS('opacity', '1')
+  await faq.getByRole('button').nth(0).click()
+  await expect(visual('network')).toHaveCSS('opacity', '1')
   await faq.getByRole('button').nth(2).click()
   await expect(visual('sync')).toHaveCSS('opacity', '1')
   await expect(visual('network')).toHaveCSS('opacity', '0')
