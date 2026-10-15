@@ -32,9 +32,10 @@ tokens of its own. The code map is
   after the visitor clicks it.
 - Default to `.astro` components that render to static HTML. Use a React island
   (`client:*`) only for real interactivity, and prefer `client:visible` or
-  `client:idle` over `client:load`. The header island hydrates on its first
-  interaction with the custom `client:interaction` directive. The FAQ accordion
-  and the header menus are the two sanctioned islands besides the video
+  `client:idle` over `client:load`. The header island and the hero video island
+  hydrate on their first interaction with the custom `client:interaction`
+  directive. The FAQ accordion and the header menus are the two sanctioned
+  islands besides the video
   ([ADR 0013](../../docs/adr/0013-landing-islands-for-faq-and-language-switcher.md)).
 - Landing motion is CSS only (scroll and view timelines, `@starting-style`,
   `sibling-index()`), static end state by default, with no motion library
