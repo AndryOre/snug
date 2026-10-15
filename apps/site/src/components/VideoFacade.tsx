@@ -14,6 +14,7 @@ interface VideoFacadeProperties {
   posterSizes: string
   posterWidth: number
   posterHeight: number
+  posterPriority?: boolean
 }
 
 /**
@@ -30,6 +31,8 @@ interface VideoFacadeProperties {
  * @param props.posterSizes - `sizes` attribute matching the poster layout.
  * @param props.posterWidth - Poster width in pixels.
  * @param props.posterHeight - Poster height in pixels.
+ * @param props.posterPriority - Load the poster eagerly with high priority
+ * when it sits above the fold.
  * @returns The poster link, or the player iframe once activated.
  */
 export default function VideoFacade({
@@ -42,6 +45,7 @@ export default function VideoFacade({
   posterSizes,
   posterWidth,
   posterHeight,
+  posterPriority = false,
 }: VideoFacadeProperties) {
   const [active, setActive] = useState(false)
   const frameReference = useRef<HTMLIFrameElement>(null)
@@ -85,7 +89,8 @@ export default function VideoFacade({
         alt=""
         width={posterWidth}
         height={posterHeight}
-        loading="lazy"
+        loading={posterPriority ? 'eager' : 'lazy'}
+        fetchPriority={posterPriority ? 'high' : undefined}
         decoding="async"
         className="h-full w-full object-cover"
       />

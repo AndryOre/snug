@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "Un file. Sei formati. Niente lascia il tuo dispositivo.",
-      "subheadline": "Fai il backup, esporta e importa i segnalibri. Nessuna chiamata di rete.",
+      "headline": "Porta i tuoi segnalibri su qualsiasi browser.",
+      "subheadline": "Snug fa il backup, esporta e importa i tuoi segnalibri di Chrome in un unico file. Gratis, privato, niente lascia il tuo dispositivo.",
       "cta": "Aggiungi a Chrome",
       "description": "I tuoi segnalibri lasciano il browser come un unico file, in uno dei sei formati, e si aprono in un altro browser. Ogni passaggio resta sul tuo dispositivo.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Ricerca",
         "jobSearch": "Ricerca di lavoro"
-      },
-      "source": "Vedi il codice sorgente su GitHub"
+      }
+    },
+    "howItWorks": {
+      "heading": "Come funziona",
+      "lead": "I tuoi segnalibri escono da Chrome in un unico file e si aprono in un altro browser. Ogni passaggio resta sul tuo dispositivo."
     },
     "stats": {
       "users": {

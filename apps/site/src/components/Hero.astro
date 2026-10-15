@@ -1,62 +1,78 @@
 ---
+import type { ImageMetadata } from 'astro'
+import { getImage } from 'astro:assets'
 import { cn } from '@workspace/ui/lib/utils'
 
-import { getLandingCopy, TRUST_LINK_HREFS } from '../i18n/landing'
+import { getLandingCopy, PROMO_VIDEO_IDS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
-import HeroJourney from './HeroJourney.astro'
 import InstallButton from './InstallButton.astro'
 import Section from './Section.astro'
-import TextLink from './TextLink.astro'
+import VideoFacade from './VideoFacade'
 
 interface Props {
   locale: Locale
 }
 
-const { hero } = getLandingCopy(Astro.props.locale)
-const { stages, description, chips } = hero
+const posters = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/video-posters/*.png',
+  { eager: true },
+)
+
+const { locale } = Astro.props
+const { hero, video } = getLandingCopy(locale)
+const { chips } = hero
+const poster = posters[`../assets/video-posters/${locale}.png`]!.default
+const POSTER_WIDTHS = [640, 960, 1280] as const
+const POSTER_SIZES =
+  '(min-width: 1240px) 538px, (min-width: 768px) calc(50vw - 82px), calc(100vw - 34px)'
+const posterImages = await Promise.all(
+  POSTER_WIDTHS.map((width) =>
+    getImage({ src: poster, width, format: 'webp' }),
+  ),
+)
+const posterImage = posterImages.at(-1)!
+const posterSourceSet = posterImages
+  .map((image, index) => `${image.src} ${POSTER_WIDTHS[index]}w`)
+  .join(', ')
 ---
 
 <Section section="hero" class="-mt-14 bg-hero-glow pt-14">
-  <h1
-    class={cn(
-      'max-w-4xl font-heading text-display font-bold break-words phrase-break text-balance',
-      Astro.props.locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
-    )}
-  >
-    {hero.headline}
-  </h1>
-  <p class="mt-6 max-w-2xl text-lead text-muted-foreground">
-    {hero.subheadline}
-  </p>
-  <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-    <InstallButton placement="hero" label={hero.cta} />
-    <TextLink
-      href={TRUST_LINK_HREFS.source}
-      data-umami-event="outbound-click"
-      data-umami-event-target="hero-source"
-    >
-      {hero.source}
-    </TextLink>
+  <div class="grid grid-cols-1 items-center gap-x-12 gap-y-10 md:grid-cols-2">
+    <div>
+      <h1
+        class={cn(
+          'font-heading text-display font-bold break-words phrase-break text-balance',
+          locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
+        )}
+      >
+        {hero.headline}
+      </h1>
+      <p class="mt-6 max-w-xl text-lead text-muted-foreground">
+        {hero.subheadline}
+      </p>
+      <div class="mt-8">
+        <InstallButton placement="hero" label={hero.cta} />
+      </div>
+      <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
+        {Object.values(chips).map((chip) => (
+          <li>{chip}</li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <VideoFacade
+        client:interaction
+        videoId={PROMO_VIDEO_IDS[locale]}
+        title={video.heading}
+        playLabel={video.play}
+        labelSeparator={video.labelSeparator}
+        posterSrc={posterImage.src}
+        posterSrcSet={posterSourceSet}
+        posterSizes={POSTER_SIZES}
+        posterPriority
+        posterWidth={poster.width}
+        posterHeight={poster.height}
+      />
+    </div>
   </div>
-  <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
-    {Object.values(chips).map((chip) => (
-      <li>{chip}</li>
-    ))}
-  </ul>
-  <figure
-    class="mt-14 mb-0 max-w-5xl"
-    aria-labelledby="journey-device"
-    aria-describedby="journey-description"
-  >
-    <p id="journey-description" class="sr-only">
-      {description}
-    </p>
-    <HeroJourney locale={Astro.props.locale} />
-    <figcaption
-      data-journey="network"
-      class="mt-4 font-mono text-sm text-muted-foreground"
-    >
-      {stages.network}
-    </figcaption>
-  </figure>
 </Section>

@@ -1,0 +1,33 @@
+---
+import { getLandingCopy } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import HeroJourney from './HeroJourney.astro'
+import Section from './Section.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const { hero, howItWorks } = getLandingCopy(locale)
+const { stages, description } = hero
+---
+
+<Section section="how" heading={howItWorks.heading} lead={howItWorks.lead}>
+  <figure
+    class="mt-14 mb-0 max-w-5xl"
+    aria-labelledby="journey-device"
+    aria-describedby="journey-description"
+  >
+    <p id="journey-description" class="sr-only">
+      {description}
+    </p>
+    <HeroJourney locale={locale} />
+    <figcaption
+      data-journey="network"
+      class="mt-4 font-mono text-sm text-muted-foreground"
+    >
+      {stages.network}
+    </figcaption>
+  </figure>
+</Section>

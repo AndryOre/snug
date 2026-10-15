@@ -74,3 +74,13 @@ scrolls to it. Both stay interactive-only: their static first state is
 server-rendered. See
 [ADR 0023](0023-landing-motion-is-css-scroll-driven-no-motion-library.md) for
 the motion that surrounds them.
+
+## Amendment: hero video hydrates on interaction
+
+Landing v3 moves the promo video into the hero, inside the first viewport. With
+`client:visible` it hydrated on load and put the React runtime and the facade on
+the critical path, which dropped the mobile Lighthouse performance score of the
+longer-copy locales below the budget. The video island now hydrates with
+`client:interaction`, like the header: the poster is server-rendered, the poster
+loads eagerly, and a click that lands before hydration is replayed. The video
+still contacts YouTube only after a click.

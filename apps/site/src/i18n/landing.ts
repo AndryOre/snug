@@ -49,6 +49,11 @@ export const EXPORT_FORMATS = [
 export type InterfaceCopy = SiteContent['interface']
 
 /**
+ * Copy for the How it works section of one locale.
+ */
+export type HowItWorksCopy = SiteContent['landing']['howItWorks']
+
+/**
  * Copy for the click-to-load video section of one locale.
  */
 export type VideoCopy = SiteContent['video']
@@ -66,6 +71,7 @@ export function getLandingCopy(locale: Locale): {
   video: VideoCopy
   stats: StatsCopy
   marquee: MarqueeCopy
+  howItWorks: HowItWorksCopy
 } {
   const { trust, interface: shots, video, landing } = getContent(locale)
   return {
@@ -75,6 +81,7 @@ export function getLandingCopy(locale: Locale): {
     video,
     stats: landing.stats,
     marquee: landing.marquee,
+    howItWorks: landing.howItWorks,
   }
 }
 

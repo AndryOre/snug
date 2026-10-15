@@ -21,7 +21,6 @@ describe('landing copy', () => {
       const { hero, trust } = getLandingCopy(locale)
       expect(hero.headline.length).toBeGreaterThan(0)
       expect(hero.cta.length).toBeGreaterThan(0)
-      expect(hero.source.length).toBeGreaterThan(0)
       expect(hero.folders.research.length).toBeGreaterThan(0)
       expect(trust.links.privacy.length).toBeGreaterThan(0)
     }

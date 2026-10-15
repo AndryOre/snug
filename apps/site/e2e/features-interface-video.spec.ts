@@ -94,6 +94,7 @@ test('video loads YouTube only after keyboard activation', async ({ page }) => {
 
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
+  await poster.hover()
   await expect(
     page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')
@@ -150,6 +151,7 @@ test('modified click on the poster does not swap in the player', async ({
   await page.goto('/')
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
+  await poster.hover()
   await expect(
     page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')

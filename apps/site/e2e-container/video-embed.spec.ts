@@ -32,6 +32,7 @@ test('the promo video iframe loads under the production CSP', async ({
   expect(youtubeRequests).toEqual([])
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
+  await poster.hover()
   await expect(
     page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')

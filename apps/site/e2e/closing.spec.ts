@@ -46,9 +46,25 @@ for (const path of PATHS) {
       'href',
       '/install?c=final',
     )
+    await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
+      'target',
+      '_blank',
+    )
+    await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
+      'rel',
+      'noopener',
+    )
     await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
       'href',
       '/install?c=footer',
+    )
+    await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
+      'target',
+      '_blank',
+    )
+    await expect(page.locator('a[data-footer-link="listing"]')).toHaveAttribute(
+      'rel',
+      'noopener',
     )
     await expect(page.locator('a[data-footer-link]')).toHaveCount(7)
   })
@@ -106,7 +122,7 @@ test.describe('reduced motion', () => {
     await page.goto('/')
     const dock = page.locator('[data-dock]')
     await expect(dock).toBeHidden()
-    await page.locator('[data-section="trust"]').scrollIntoViewIfNeeded()
+    await page.locator('[data-section="how"]').scrollIntoViewIfNeeded()
     await expect(dock).toBeVisible()
     await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
     await expect(dock).toBeHidden()

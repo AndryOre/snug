@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "Eine Datei. Sechs Formate. Nichts verlässt dein Gerät.",
-      "subheadline": "Lesezeichen sichern, exportieren und importieren. Ohne Netzwerkzugriff.",
+      "headline": "Nimm deine Lesezeichen in jeden Browser mit.",
+      "subheadline": "Snug sichert, exportiert und importiert deine Chrome-Lesezeichen als eine Datei. Kostenlos, privat, nichts verlässt dein Gerät.",
       "cta": "Zu Chrome hinzufügen",
       "description": "Deine Lesezeichen verlassen deinen Browser als eine Datei in einem von sechs Formaten und öffnen sich in einem anderen Browser. Jeder Schritt bleibt auf deinem Gerät.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Recherche",
         "jobSearch": "Jobsuche"
-      },
-      "source": "Quellcode auf GitHub ansehen"
+      }
+    },
+    "howItWorks": {
+      "heading": "So funktioniert es",
+      "lead": "Deine Lesezeichen verlassen Chrome als eine Datei und öffnen sich in einem anderen Browser. Jeder Schritt bleibt auf deinem Gerät."
     },
     "stats": {
       "users": {

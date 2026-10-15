@@ -26,7 +26,7 @@ test('only the target browser card carries the amber ring', async ({
 }) => {
   await page.goto('/')
   const shadows = await page
-    .locator('[data-section="hero"] figure [data-slot="card"]')
+    .locator('[data-section="how"] figure [data-slot="card"]')
     .evaluateAll((cards) =>
       cards.map((card) => globalThis.getComputedStyle(card).boxShadow),
     )

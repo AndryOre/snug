@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "One file. Six formats. Nothing leaves your device.",
-      "subheadline": "Back up, export and import bookmarks. No network calls.",
+      "headline": "Move your bookmarks to any browser.",
+      "subheadline": "Snug backs up, exports and imports your Chrome bookmarks as one file. Free, private, nothing leaves your device.",
       "cta": "Add to Chrome",
       "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Research",
         "jobSearch": "Job search"
-      },
-      "source": "See the source on GitHub"
+      }
+    },
+    "howItWorks": {
+      "heading": "How it works",
+      "lead": "Your bookmarks leave Chrome as one file and open in another browser. Every step stays on your device."
     },
     "stats": {
       "users": {
