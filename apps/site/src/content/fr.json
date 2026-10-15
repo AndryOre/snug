@@ -146,8 +146,8 @@
   },
   "landing": {
     "hero": {
-      "headline": "Un fichier. Six formats. Rien ne quitte votre appareil.",
-      "subheadline": "Sauvegardez, exportez et importez vos favoris. Aucun appel réseau.",
+      "headline": "Emportez vos favoris dans n'importe quel navigateur.",
+      "subheadline": "Snug sauvegarde, exporte et importe vos favoris Chrome dans un seul fichier. Gratuit, privé, rien ne quitte votre appareil.",
       "cta": "Ajouter à Chrome",
       "description": "Vos favoris quittent votre navigateur sous la forme d'un seul fichier, dans l'un des six formats, et s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil.",
       "chips": {
@@ -165,8 +165,11 @@
       "folders": {
         "research": "Recherche",
         "jobSearch": "Recherche d'emploi"
-      },
-      "source": "Voir le code source sur GitHub"
+      }
+    },
+    "howItWorks": {
+      "heading": "Comment ça marche",
+      "lead": "Vos favoris quittent Chrome dans un seul fichier et s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil."
     },
     "stats": {
       "users": {

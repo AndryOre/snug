@@ -59,7 +59,7 @@ test.describe('breakpoint at 767 vs 768', () => {
   }) => {
     const direction = () =>
       page
-        .locator('[data-section="hero"] .journey-boundary > .hero-stage')
+        .locator('[data-section="how"] .journey-boundary > .hero-stage')
         .evaluate((flex) => getComputedStyle(flex).flexDirection)
     await page.setViewportSize({ width: 767, height: 900 })
     await page.goto('/')

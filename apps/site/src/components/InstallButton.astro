@@ -12,8 +12,11 @@ interface Props {
 const { placement, label } = Astro.props
 ---
 
+{/* eslint-disable-next-line react/jsx-no-target-blank -- rel="noopener" is the spec; noreferrer would strip the referer the install redirect tags */}
 <a
   href={installHref(placement)}
+  target="_blank"
+  rel="noopener"
   data-install={placement}
   data-umami-event="install"
   data-umami-event-placement={placement}
