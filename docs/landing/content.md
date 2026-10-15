@@ -2052,6 +2052,76 @@ Visible EN word count of the page, with the verbatim review quotes (73 words)
 and the six kept FAQ items counted: about 366, under the 380 ceiling. Without
 the quotes: about 293.
 
+### DE
+
+- **Hero headline:** Eine Datei. Sechs Formate. Nichts verlässt dein Gerät.
+- **Hero subheadline:** Lesezeichen sichern, exportieren und importieren. Ohne
+  Netzwerkzugriff.
+- **Hero button:** Zu Chrome hinzufügen
+- **Hero chips:** Kostenlos, Open Source, Kein Konto
+- **Journey stages:** Dein Gerät, Dein Browser, Eine Datei, Ein anderer Browser,
+  Netzwerkaufrufe: 0
+- **Hero description (screen readers only):** Deine Lesezeichen verlassen deinen
+  Browser als eine Datei in einem von sechs Formaten und öffnen sich in einem
+  anderen Browser. Jeder Schritt bleibt auf deinem Gerät.
+- **Stats strip:** Nutzer 5.000, Bewertung 4,8, Formate 6, Netzwerkaufrufe 0
+- **Browser marquee group labels:** Funktioniert in, Importiert aus
+- **Bento:**
+  - Alles exportieren: Den ganzen Baum oder ausgewählte Ordner, in sechs
+    Formaten.
+  - Import mit Vorschau: Sieh vorab, was hinzugefügt, übersprungen oder gelöscht
+    wird.
+  - Nach Zeitplan sichern: Auto-Export speichert Dateien nach dem Zeitplan, den
+    du festlegst.
+  - Dateien ins Popup ziehen: Ziehe mehrere Dateien auf einmal hinein, und Snug
+    importiert sie.
+- **Format playground:** Wähle ein Format. Dieselben Lesezeichen, sechs Dateien.
+  / Sieh denselben Ordner in jedem Format.
+- **Interface showcase:** Die echte Oberfläche. / Tabs: Export, Import,
+  Auto-Export, Popup
+- **Reviews:** Das sagen Nutzer / Öffentliche Rezensionen aus dem Chrome Web
+  Store, vor der Umbenennung geschrieben.
+- **FAQ:** Fragen / Weitere Fragen
+- **Closing panel:** Snug zu Chrome hinzufügen. / Kostenlos und Open Source. /
+  Zu Chrome hinzufügen
+- **Install dock:** Zu Chrome hinzufügen, Quellcode (screen reader label: Snug
+  zu Chrome hinzufügen)
+
+### RU
+
+- **Hero headline:** Один файл. Шесть форматов. Ничто не покидает устройство.
+- **Hero subheadline:** Резервные копии, экспорт и импорт закладок. Без
+  обращений к сети.
+- **Hero button:** Установить в Chrome
+- **Hero chips:** Бесплатно, Открытый код, Без аккаунта
+- **Journey stages:** Ваше устройство, Ваш браузер, Один файл, Другой браузер,
+  Обращений к сети: 0
+- **Hero description (screen readers only):** Ваши закладки покидают браузер
+  одним файлом в одном из шести форматов и открываются в другом браузере. Каждый
+  шаг остаётся на вашем устройстве.
+- **Stats strip:** Пользователи 5 000, Рейтинг 4,8, Форматы 6, Обращения к сети
+  0
+- **Browser marquee group labels:** Работает в, Импорт из
+- **Bento:**
+  - Экспорт любых данных: Всё дерево или выбранные папки, в шести форматах.
+  - Импорт с предпросмотром: Сначала видно, что будет добавлено, пропущено или
+    удалено.
+  - Копии по расписанию: Автоэкспорт сохраняет файлы по заданному вами
+    расписанию.
+  - Файлы во всплывающем окне: Перетащите сразу несколько файлов, и Snug их
+    импортирует.
+- **Format playground:** Выберите формат. Те же закладки, шесть файлов. / Одна и
+  та же папка в каждом формате.
+- **Interface showcase:** Настоящий интерфейс. / Tabs: Экспорт, Импорт,
+  Автоэкспорт, Всплывающее окно
+- **Reviews:** Что говорят люди / Публичные отзывы из Chrome Web Store,
+  написанные до переименования.
+- **FAQ:** Вопросы / Ещё вопросы
+- **Closing panel:** Установите Snug в Chrome. / Бесплатно, с открытым кодом. /
+  Установить в Chrome
+- **Install dock:** Установить в Chrome, Исходный код (screen reader label:
+  Установить Snug в Chrome)
+
 ---
 
 ## Claim sweep
