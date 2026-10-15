@@ -2,8 +2,10 @@
 import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
 
+import { getContent } from '../i18n/content'
 import { getLandingCopy, SHOT_KEYS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
+import InterfaceShowcase from './InterfaceShowcase'
 import Section from './Section.astro'
 
 interface Props {
@@ -18,7 +20,7 @@ const SHOT_FILES = {
 } as const
 
 const SIZES =
-  '(min-width: 1240px) 552px, (min-width: 768px) calc((100vw - 136px) / 2), calc(100vw - 32px)'
+  '(min-width: 880px) 768px, (min-width: 768px) calc(100vw - 112px), calc(100vw - 32px)'
 
 const THEMES = [
   { theme: 'light', directory: 'light/', visibility: 'block dark:hidden' },
@@ -32,12 +34,17 @@ const screenshots = import.meta.glob<{ default: ImageMetadata }>(
 
 const { locale } = Astro.props
 const copy = getLandingCopy(locale).interface
+const { showcase } = getContent(locale).landing
 ---
 
-<Section section="interface" heading={copy.heading} class="defer-render-lg">
-  <div class="mt-10 grid gap-6 md:grid-cols-2">
+<Section section="interface" heading={showcase.heading} class="defer-render-lg">
+  <InterfaceShowcase
+    client:visible
+    labels={showcase.tabs}
+    listLabel={showcase.heading}
+  >
     {SHOT_KEYS.map((key) => (
-      <figure class="m-0">
+      <figure slot={key} class="m-0">
         {THEMES.map(({ theme, directory, visibility }) => (
           <Image
             src={
@@ -58,5 +65,5 @@ const copy = getLandingCopy(locale).interface
         </figcaption>
       </figure>
     ))}
-  </div>
+  </InterfaceShowcase>
 </Section>
