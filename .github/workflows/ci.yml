@@ -235,7 +235,7 @@ jobs:
     name: CI passed
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [quality, build, e2e, browserstack, commitlint]
+    needs: [quality, build, e2e, changes, browserstack, commitlint]
     if: always()
     steps:
       - name: Check job results
