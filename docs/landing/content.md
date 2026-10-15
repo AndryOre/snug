@@ -1143,8 +1143,8 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
   - Drop files in the popup: Drop several files at once and Snug imports them.
 - **Format playground:** Pick a format. Same bookmarks, six files. / See the
   same folder in each format. / Tabs: HTML, JSON, CSV, Markdown, OPML, XBEL
-- **Interface showcase:** The real interface. / Tabs: Export, Import,
-  Auto-export, Popup
+- **Interface showcase:** The real interface. / Sticky scroll steps: Export,
+  Import, Auto-export, Popup
 - **Video:** now the hero's click-to-load poster; `video.heading` ("See it
   work") is its title
 - **Reviews:** What people say / Public Chrome Web Store reviews, written before
