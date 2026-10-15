@@ -101,7 +101,9 @@ test('bento glow is invisible under reduced motion', async ({ page }) => {
   await page.mouse.move(box.x + 60, box.y + 50)
   expect(await glow.evaluate((element) => element.style.transform)).toBe('')
   expect(
-    await glow.evaluate((element) => getComputedStyle(element).display),
+    await glow.evaluate(
+      (element) => getComputedStyle(element.parentElement!).display,
+    ),
   ).toBe('none')
 })
 

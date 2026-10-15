@@ -26,7 +26,9 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
     {BENTO_KEYS.map((key) => (
       <li class="flex" data-bento-card={key}>
         <Card size="lg" className="relative w-full">
-          <span data-bento-glow aria-hidden="true" />
+          <span data-bento-glow-clip aria-hidden="true">
+            <span data-bento-glow></span>
+          </span>
           <CardHeader>
             <CardTitle className="text-2xl leading-tight break-words hyphens-auto">
               <h2 class="phrase-break">{copy[key].title}</h2>
