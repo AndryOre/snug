@@ -1,17 +1,107 @@
 ---
-import { getClosingCopy } from '../i18n/landing'
+import { getLandingFaqCopy } from '../i18n/faq'
 import type { Locale } from '../i18n/locales'
 import FaqAccordion from './FaqAccordion'
 import Section from './Section.astro'
+import TextLink from './TextLink.astro'
 
 interface Props {
   locale: Locale
 }
 
-const { faq } = getClosingCopy(Astro.props.locale)
-const entries = Object.entries(faq.items).map(([id, item]) => ({ id, ...item }))
+const { heading, more, moreHref, entries } = getLandingFaqCopy(
+  Astro.props.locale,
+)
 ---
 
-<Section section="faq" heading={faq.heading}>
-  <FaqAccordion client:visible entries={entries} />
+<Section section="faq" heading={heading}>
+  <div data-faq="layout" class="mt-10">
+    <div data-faq="list">
+      <FaqAccordion client:visible entries={entries} />
+      <TextLink href={moreHref} class="mt-6" data-umami-event="faq-more">
+        {more}
+      </TextLink>
+    </div>
+    <div data-faq="visuals" aria-hidden="true" translate="no">
+      {entries.map((entry) => (
+        <svg
+          data-faq-visual={entry.id}
+          viewBox="0 0 160 160"
+          focusable="false"
+          fill="none"
+        >
+          <rect data-faq="plate" x="8" y="8" width="144" height="144" rx="16" />
+          {entry.id === 'network' && (
+            <>
+              <circle data-faq="stroke" cx="80" cy="80" r="34" />
+              <path data-faq="stroke" d="M46 80 H114 M80 46 V114" />
+              <path data-faq="accent" d="M56 56 L104 104" />
+            </>
+          )}
+          {entry.id === 'account' && (
+            <>
+              <circle data-faq="stroke" cx="80" cy="64" r="16" />
+              <path data-faq="stroke" d="M48 114 C52 92 108 92 112 114" />
+              <path data-faq="accent" d="M50 50 L110 110" />
+            </>
+          )}
+          {entry.id === 'sync' && (
+            <>
+              <rect
+                data-faq="stroke"
+                x="34"
+                y="56"
+                width="36"
+                height="48"
+                rx="6"
+              />
+              <rect
+                data-faq="stroke"
+                x="90"
+                y="56"
+                width="36"
+                height="48"
+                rx="6"
+              />
+              <path data-faq="accent" d="M74 80 H86" />
+            </>
+          )}
+          {entry.id === 'overwrite' && (
+            <>
+              <rect
+                data-faq="stroke"
+                x="40"
+                y="46"
+                width="64"
+                height="48"
+                rx="6"
+              />
+              <rect
+                data-faq="stroke"
+                x="56"
+                y="64"
+                width="64"
+                height="48"
+                rx="6"
+              />
+              <path data-faq="accent" d="M70 88 L80 98 L102 76" />
+            </>
+          )}
+          {entry.id === 'builtin' && (
+            <>
+              <path data-faq="stroke" d="M52 38 H92 L112 58 V122 H52 Z" />
+              <path data-faq="stroke" d="M92 38 V58 H112" />
+              <path data-faq="accent" d="M64 78 H100 M64 92 H100 M64 106 H88" />
+            </>
+          )}
+          {entry.id === 'cost' && (
+            <>
+              <circle data-faq="stroke" cx="80" cy="80" r="34" />
+              <ellipse data-faq="accent" cx="80" cy="80" rx="12" ry="18" />
+            </>
+          )}
+        </svg>
+      ))}
+    </div>
+  </div>
 </Section>

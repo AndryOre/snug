@@ -2,7 +2,7 @@
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import InstallButton from './InstallButton.astro'
-import Section from './Section.astro'
+import SectionHeading from './SectionHeading.astro'
 
 interface Props {
   locale: Locale
@@ -15,13 +15,18 @@ const { locale, heading, line, button } = Astro.props
 const { final } = getClosingCopy(locale)
 ---
 
-<Section
-  section="final"
-  heading={heading ?? final.heading}
-  lead={line ?? final.line}
-  class="bg-final-cta-glow"
->
-  <div class="mt-8">
-    <InstallButton placement="final" label={button ?? final.button} />
+<section data-section="final" aria-labelledby="final-heading">
+  <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+    <div data-final-panel class="bg-final-cta-glow">
+      <SectionHeading id="final-heading">
+        {heading ?? final.heading}
+      </SectionHeading>
+      <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
+        {line ?? final.line}
+      </p>
+      <div class="mt-8">
+        <InstallButton placement="final" label={button ?? final.button} />
+      </div>
+    </div>
   </div>
-</Section>
+</section>

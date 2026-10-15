@@ -1,2 +1,96 @@
 @layer components {
+  [data-faq='layout'] {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  [data-faq='visuals'] {
+    display: grid;
+    justify-items: center;
+  }
+
+  [data-faq='visuals'] > svg {
+    grid-area: 1 / 1;
+    width: 100%;
+    max-width: 16rem;
+    height: auto;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-out-strong);
+  }
+
+  [data-faq='visuals'] > svg:first-child {
+    opacity: 1;
+  }
+
+  [data-section='faq']:has([aria-expanded='true'])
+    [data-faq='visuals']
+    > :first-child {
+    opacity: 0;
+  }
+
+  [data-section='faq']:has(
+      [data-umami-event-question='network'][aria-expanded='true']
+    )
+    [data-faq-visual='network'],
+  [data-section='faq']:has(
+      [data-umami-event-question='account'][aria-expanded='true']
+    )
+    [data-faq-visual='account'],
+  [data-section='faq']:has(
+      [data-umami-event-question='sync'][aria-expanded='true']
+    )
+    [data-faq-visual='sync'],
+  [data-section='faq']:has(
+      [data-umami-event-question='overwrite'][aria-expanded='true']
+    )
+    [data-faq-visual='overwrite'],
+  [data-section='faq']:has(
+      [data-umami-event-question='builtin'][aria-expanded='true']
+    )
+    [data-faq-visual='builtin'],
+  [data-section='faq']:has(
+      [data-umami-event-question='cost'][aria-expanded='true']
+    )
+    [data-faq-visual='cost'] {
+    opacity: 1;
+  }
+
+  [data-faq='plate'] {
+    fill: var(--card);
+    stroke: var(--card-border);
+    stroke-width: 1.5;
+  }
+
+  [data-faq='stroke'] {
+    stroke: var(--muted-foreground);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  [data-faq='accent'] {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (min-width: 64rem) {
+    [data-faq='layout'] {
+      grid-template-columns: minmax(0, 1fr) 16rem;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    [data-faq='visuals'] {
+      position: sticky;
+      top: 6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-faq='visuals'] > svg {
+      transition-duration: 0s;
+    }
+  }
 }

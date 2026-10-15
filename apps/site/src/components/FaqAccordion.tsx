@@ -17,12 +17,7 @@ interface FaqAccordionProperties {
 
 export default function FaqAccordion({ entries }: FaqAccordionProperties) {
   return (
-    <Accordion
-      variant="faq"
-      hiddenUntilFound
-      keepMounted
-      className="mt-10 max-w-208"
-    >
+    <Accordion variant="faq" hiddenUntilFound keepMounted className="max-w-208">
       {entries.map((entry, index) => (
         <AccordionItem key={entry.id} value={`faq-${index}`}>
           <AccordionTrigger

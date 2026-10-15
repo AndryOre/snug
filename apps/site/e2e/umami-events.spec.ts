@@ -38,7 +38,7 @@ for (const locale of LOCALES) {
         )
       const placements = entries.map((entry) => entry.placement)
       expect(placements).toEqual(
-        expect.arrayContaining(['final', 'hero', 'trust']),
+        expect.arrayContaining(['dock', 'final', 'hero', 'trust']),
       )
       for (const entry of entries) {
         expect(entry.event).toBe('install')

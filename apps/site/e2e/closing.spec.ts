@@ -25,10 +25,15 @@ for (const path of PATHS) {
     await page.goto(path)
 
     const proof = page.locator('[data-section="proof"]')
-    await expect(proof.locator('blockquote')).toHaveCount(4)
+    const liveRow = proof.locator('[data-proof-row]:not([aria-hidden])')
+    await expect(liveRow).toHaveCount(1)
+    await expect(liveRow.locator('blockquote')).toHaveCount(4)
+    await expect(
+      proof.locator('[data-proof-row][aria-hidden="true"]'),
+    ).toHaveCount(1)
     for (const caption of REVIEW_AUTHORS) {
       await expect(
-        proof.locator('figcaption', { hasText: caption }),
+        liveRow.locator('figcaption', { hasText: caption }),
       ).toHaveCount(1)
     }
     await expect(proof.locator('[data-proof="numbers"]')).toContainText('2026')
@@ -38,7 +43,7 @@ for (const path of PATHS) {
 
     await expect(
       page.locator('[data-section="faq"]').getByRole('heading', { level: 3 }),
-    ).toHaveCount(12)
+    ).toHaveCount(6)
     await expect(page.locator('[data-section="final"]')).toBeVisible()
     await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
       'href',
@@ -57,6 +62,91 @@ test('English figures match the content document', async ({ page }) => {
   await expect(page.locator('[data-proof="numbers"]')).toHaveText(
     '5,000 users. 4.8 stars from 20 ratings on the Chrome Web Store (Oct 5, 2026).',
   )
+})
+
+test('reviews marquee pauses on hover', async ({ page }) => {
+  await page.goto('/')
+  const viewport = page.locator('[data-proof-viewport]')
+  const track = page.locator('[data-proof-track]')
+  await viewport.scrollIntoViewIfNeeded()
+  const playState = () =>
+    track.evaluate((element) => getComputedStyle(element).animationPlayState)
+  const hasPointer = await page.evaluate(
+    () => globalThis.matchMedia('(hover: hover) and (pointer: fine)').matches,
+  )
+  test.skip(!hasPointer, 'hover pause needs a fine pointer')
+  expect(await playState()).toBe('running')
+  await viewport.hover()
+  await expect.poll(playState).toBe('paused')
+})
+
+test('reviews marquee pauses while focus is inside it', async ({ page }) => {
+  await page.goto('/')
+  const track = page.locator('[data-proof-track]')
+  await page.locator('[data-proof-viewport]').focus()
+  await expect
+    .poll(() =>
+      track.evaluate((element) => getComputedStyle(element).animationPlayState),
+    )
+    .toBe('paused')
+})
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' })
+
+  test('reviews render as a static wrapped grid without the duplicate row', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    const track = page.locator('[data-proof-track]')
+    await expect(
+      page.locator('[data-proof-row][aria-hidden="true"]'),
+    ).toBeHidden()
+    expect(
+      await track.evaluate(
+        (element) => getComputedStyle(element).animationName,
+      ),
+    ).toBe('none')
+    await expectNoHorizontalOverflow(page)
+  })
+
+  test('the install dock appears after the hero and hides at the closing panel', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    const dock = page.locator('[data-dock]')
+    await expect(dock).toBeHidden()
+    await page.locator('[data-section="trust"]').scrollIntoViewIfNeeded()
+    await expect(dock).toBeVisible()
+    await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
+    await expect(dock).toBeHidden()
+  })
+})
+
+test('install dock is hidden over the hero and the closing panel and visible between', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const dock = page.locator('[data-dock]')
+  await expect(dock).toBeHidden()
+  await page.locator('[data-section="proof"]').scrollIntoViewIfNeeded()
+  await expect(dock).toBeVisible()
+  const link = dock.locator('a[data-install="dock"]')
+  await expect(link).toHaveAttribute('href', '/install?c=dock')
+  expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(
+    MIN_TOUCH_TARGET,
+  )
+  await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
+  await expect(dock).toBeHidden()
+})
+
+test('closing panel keeps the final install button', async ({ page }) => {
+  await page.goto('/')
+  await expect(
+    page.locator(
+      '[data-section="final"] [data-final-panel] a[data-install="final"]',
+    ),
+  ).toBeVisible()
 })
 
 test('FAQ opens and closes by keyboard', async ({ page }) => {
@@ -78,7 +168,7 @@ test('FAQ questions are headings and only one answer is open', async ({
   await page.goto('/')
   const faq = await hydratedFaq(page)
   const triggers = faq.getByRole('button')
-  await expect(faq.getByRole('heading', { level: 3 })).toHaveCount(12)
+  await expect(faq.getByRole('heading', { level: 3 })).toHaveCount(6)
   await triggers.nth(0).click()
   await expect(triggers.nth(0)).toHaveAttribute('aria-expanded', 'true')
   await triggers.nth(1).click()

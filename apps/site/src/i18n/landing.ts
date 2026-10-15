@@ -166,7 +166,7 @@ export function resolveHref(
 /**
  * Placements that tag an install button for the counted redirect.
  */
-export type InstallPlacement = 'hero' | 'trust' | 'final' | 'footer'
+export type InstallPlacement = 'hero' | 'trust' | 'final' | 'dock' | 'footer'
 
 /**
  * Site-relative install URL carrying a placement tag.
