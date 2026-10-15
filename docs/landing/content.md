@@ -2048,6 +2048,148 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
 - **Install dock:** Add to Chrome, Source (screen reader label: Add Snug to
   Chrome)
 
+### ES
+
+- **Hero headline:** Un archivo. Seis formatos. Nada sale de tu dispositivo.
+- **Hero subheadline:** Respalda, exporta e importa marcadores. Sin llamadas de
+  red.
+- **Hero button:** Añadir a Chrome
+- **Hero chips:** Gratis, Código abierto, Sin cuenta
+- **Journey stages:** Tu dispositivo, Tu navegador, Un archivo, Otro navegador,
+  Llamadas de red: 0
+- **Hero description (screen readers only):** Tus marcadores salen de tu
+  navegador como un solo archivo, en cualquiera de seis formatos, y se abren en
+  otro navegador. Cada paso ocurre en tu dispositivo.
+- **Stats strip:** Usuarios 5,000, Valoración 4.8, Formatos 6, Llamadas de red 0
+- **Browser marquee group labels:** Funciona en, Importa desde
+- **Bento:**
+  - Exporta lo que quieras: Todo el árbol o las carpetas que elijas, en seis
+    formatos.
+  - Importa con vista previa: Mira antes qué se añadirá, omitirá o eliminará.
+  - Respalda con horario: La exportación automática guarda archivos según el
+    horario que definas.
+  - Suelta archivos en el popup: Suelta varios archivos a la vez y Snug los
+    importa.
+- **Format playground:** Elige un formato. Mismos marcadores, seis archivos. /
+  Mira la misma carpeta en cada formato. / Tabs: HTML, JSON, CSV, Markdown,
+  OPML, XBEL
+- **Interface showcase:** La interfaz real. / Tabs: Exportar, Importar,
+  Auto-export, Popup
+- **Reviews:** Lo que dice la gente / Reseñas públicas de la Chrome Web Store,
+  escritas antes del cambio de nombre.
+- **FAQ:** Preguntas / Más preguntas
+- **Closing panel:** Añade Snug a Chrome. / Gratis y de código abierto. / Añadir
+  a Chrome
+- **Install dock:** Añadir a Chrome, Código (screen reader label: Añadir Snug a
+  Chrome)
+
+### FR
+
+- **Hero headline:** Un fichier. Six formats. Rien ne quitte votre appareil.
+- **Hero subheadline:** Sauvegardez, exportez et importez vos favoris. Aucun
+  appel réseau.
+- **Hero button:** Ajouter à Chrome
+- **Hero chips:** Gratuit, Open source, Sans compte
+- **Journey stages:** Votre appareil, Votre navigateur, Un fichier, Un autre
+  navigateur, Appels réseau : 0
+- **Hero description (screen readers only):** Vos favoris quittent votre
+  navigateur sous la forme d'un seul fichier, dans l'un des six formats, et
+  s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil.
+- **Stats strip:** Utilisateurs 5,000, Note 4.8, Formats 6, Appels réseau 0
+- **Browser marquee group labels:** Fonctionne dans, Importe depuis
+- **Bento:**
+  - Exportez ce que vous voulez: L'arborescence entière ou les dossiers de votre
+    choix, en six formats.
+  - Importez avec un aperçu: Voyez d'abord ce qui sera ajouté, ignoré ou
+    supprimé.
+  - Sauvegardez selon un planning: L'exportation automatique enregistre des
+    fichiers au rythme que vous fixez.
+  - Déposez des fichiers dans le popup: Déposez plusieurs fichiers d'un coup,
+    Snug les importe.
+- **Format playground:** Choisissez un format. Mêmes favoris, six fichiers. /
+  Voyez le même dossier dans chaque format. / Tabs: HTML, JSON, CSV, Markdown,
+  OPML, XBEL
+- **Interface showcase:** La vraie interface. / Tabs: Export, Import,
+  Auto-export, Popup
+- **Reviews:** Ce qu'en disent les utilisateurs / Avis publics du Chrome Web
+  Store, rédigés avant le changement de nom.
+- **FAQ:** Questions / Plus de questions
+- **Closing panel:** Ajoutez Snug à Chrome. / Gratuit et open source. / Ajouter
+  à Chrome
+- **Install dock:** Ajouter à Chrome, Code (screen reader label: Ajouter Snug à
+  Chrome)
+
+### IT
+
+- **Hero headline:** Un file. Sei formati. Niente lascia il tuo dispositivo.
+- **Hero subheadline:** Fai il backup, esporta e importa i segnalibri. Nessuna
+  chiamata di rete.
+- **Hero button:** Aggiungi a Chrome
+- **Hero chips:** Gratis, Open source, Senza account
+- **Journey stages:** Il tuo dispositivo, Il tuo browser, Un file, Un altro
+  browser, Chiamate di rete: 0
+- **Hero description (screen readers only):** I tuoi segnalibri lasciano il
+  browser come un unico file, in uno dei sei formati, e si aprono in un altro
+  browser. Ogni passaggio resta sul tuo dispositivo.
+- **Stats strip:** Utenti 5,000, Valutazione 4.8, Formati 6, Chiamate di rete 0
+- **Browser marquee group labels:** Funziona in, Importa da
+- **Bento:**
+  - Esporta quello che vuoi: L'albero intero o le cartelle che scegli, in sei
+    formati.
+  - Importa con un'anteprima: Prima vedi cosa verrà aggiunto, saltato o
+    eliminato.
+  - Backup pianificato: L'esportazione automatica salva i file con la
+    pianificazione che imposti.
+  - Trascina i file nel popup: Trascina più file insieme e Snug li importa.
+- **Format playground:** Scegli un formato. Gli stessi segnalibri, sei file. /
+  Guarda la stessa cartella in ogni formato. / Tabs: HTML, JSON, CSV, Markdown,
+  OPML, XBEL
+- **Interface showcase:** L'interfaccia reale. / Tabs: Esporta, Importa,
+  Auto-export, Popup
+- **Reviews:** Cosa dicono le persone / Recensioni pubbliche del Chrome Web
+  Store, scritte prima del cambio di nome.
+- **FAQ:** Domande / Altre domande
+- **Closing panel:** Aggiungi Snug a Chrome. / Gratis e open source. / Aggiungi
+  a Chrome
+- **Install dock:** Aggiungi a Chrome, Codice (screen reader label: Aggiungi
+  Snug a Chrome)
+
+### PT_BR
+
+- **Hero headline:** Um arquivo. Seis formatos. Nada sai do seu dispositivo.
+- **Hero subheadline:** Faça backup, exporte e importe favoritos. Sem chamadas
+  de rede.
+- **Hero button:** Usar no Chrome
+- **Hero chips:** Grátis, Código aberto, Sem conta
+- **Journey stages:** Seu dispositivo, Seu navegador, Um arquivo, Outro
+  navegador, Chamadas de rede: 0
+- **Hero description (screen readers only):** Seus favoritos saem do navegador
+  como um único arquivo, em qualquer um de seis formatos, e abrem em outro
+  navegador. Cada etapa fica no seu dispositivo.
+- **Stats strip:** Usuários 5,000, Nota 4.8, Formatos 6, Chamadas de rede 0
+- **Browser marquee group labels:** Funciona em, Importa de
+- **Bento:**
+  - Exporte o que quiser: A árvore inteira ou as pastas que escolher, em seis
+    formatos.
+  - Importe com pré-visualização: Veja antes o que será adicionado, ignorado ou
+    excluído.
+  - Backup agendado: A exportação automática salva arquivos no horário que você
+    definir.
+  - Solte arquivos no pop-up: Solte vários arquivos de uma vez e o Snug os
+    importa.
+- **Format playground:** Escolha um formato. Mesmos favoritos, seis arquivos. /
+  Veja a mesma pasta em cada formato. / Tabs: HTML, JSON, CSV, Markdown, OPML,
+  XBEL
+- **Interface showcase:** A interface real. / Tabs: Exportar, Importar,
+  Auto-export, Pop-up
+- **Reviews:** O que as pessoas dizem / Avaliações públicas da Chrome Web Store,
+  escritas antes da mudança de nome.
+- **FAQ:** Perguntas / Mais perguntas
+- **Closing panel:** Adicione o Snug ao Chrome. / Grátis e de código aberto. /
+  Usar no Chrome
+- **Install dock:** Usar no Chrome, Código (screen reader label: Adicionar o
+  Snug ao Chrome)
+
 Visible EN word count of the page, with the verbatim review quotes (73 words)
 and the six kept FAQ items counted: about 366, under the 380 ceiling. Without
 the quotes: about 293.
