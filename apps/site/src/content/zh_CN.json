@@ -246,66 +246,66 @@
   },
   "landing": {
     "hero": {
-      "headline": "One file. Six formats. Nothing leaves your device.",
-      "subheadline": "Back up, export and import bookmarks. No network calls.",
-      "cta": "Add to Chrome",
-      "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
+      "headline": "一个文件，六种格式，内容不会离开你的设备。",
+      "subheadline": "备份、导出和导入书签，不发起任何网络请求。",
+      "cta": "添加至 Chrome",
+      "description": "你的书签会以一个文件的形式离开浏览器，格式可选六种，并可在另一个浏览器中打开。每一步都只在你的设备上完成。",
       "chips": {
-        "free": "Free",
-        "openSource": "Open source",
-        "noAccount": "No account"
+        "free": "免费",
+        "openSource": "开源",
+        "noAccount": "无需账号"
       },
       "stages": {
-        "device": "Your device",
-        "browser": "Your browser",
-        "file": "One file",
-        "target": "Another browser",
-        "network": "Network calls: 0"
+        "device": "你的设备",
+        "browser": "你的浏览器",
+        "file": "一个文件",
+        "target": "另一个浏览器",
+        "network": "网络请求：0"
       }
     },
     "stats": {
       "users": {
-        "label": "Users",
+        "label": "用户",
         "value": "5,000"
       },
       "rating": {
-        "label": "Rating",
+        "label": "评分",
         "value": "4.8"
       },
       "formats": {
-        "label": "Formats",
+        "label": "格式",
         "value": "6"
       },
       "network": {
-        "label": "Network calls",
+        "label": "网络请求",
         "value": "0"
       }
     },
     "marquee": {
-      "browsers": "Works in",
-      "sources": "Imports from"
+      "browsers": "适用浏览器",
+      "sources": "可导入自"
     },
     "bento": {
       "export": {
-        "title": "Export anything",
-        "body": "Whole tree or chosen folders, in six formats."
+        "title": "导出任何内容",
+        "body": "整棵树或选定的文件夹，都可导出为六种格式。"
       },
       "import": {
-        "title": "Import with a preview",
-        "body": "See what will be added, skipped or deleted first."
+        "title": "先预览再导入",
+        "body": "先查看将要添加、跳过或删除的内容。"
       },
       "backup": {
-        "title": "Back up on a schedule",
-        "body": "Auto-export saves files on the schedule you set."
+        "title": "按计划备份",
+        "body": "自动导出会按你设定的计划保存文件。"
       },
       "popup": {
-        "title": "Drop files in the popup",
-        "body": "Drop several files at once and Snug imports them."
+        "title": "把文件拖入弹出窗口",
+        "body": "一次拖入多个文件，Snug 会依次导入。"
       }
     },
     "playground": {
-      "heading": "Pick a format. Same bookmarks, six files.",
-      "subline": "See the same folder in each format.",
+      "heading": "选一种格式，同样的书签，六个文件。",
+      "subline": "在每种格式中查看同一个文件夹。",
       "tabs": {
         "html": "HTML",
         "json": "JSON",
@@ -316,31 +316,31 @@
       }
     },
     "showcase": {
-      "heading": "The real interface.",
+      "heading": "真实界面",
       "tabs": {
-        "export": "Export",
-        "import": "Import",
-        "autoExport": "Auto-export",
-        "popup": "Popup"
+        "export": "导出",
+        "import": "导入",
+        "autoExport": "自动导出",
+        "popup": "弹出窗口"
       }
     },
     "reviews": {
-      "heading": "What people say",
-      "note": "Public Chrome Web Store reviews, written before the rename."
+      "heading": "用户评价",
+      "note": "来自 Chrome 应用商店的公开评价，写于更名之前。"
     },
     "faq": {
-      "heading": "Questions",
-      "more": "More questions"
+      "heading": "常见问题",
+      "more": "更多问题"
     },
     "closing": {
-      "heading": "Add Snug to Chrome.",
-      "line": "Free and open source.",
-      "button": "Add to Chrome"
+      "heading": "把 Snug 添加到 Chrome。",
+      "line": "免费、开源。",
+      "button": "添加至 Chrome"
     },
     "dock": {
-      "install": "Add to Chrome",
-      "source": "Source",
-      "label": "Add Snug to Chrome"
+      "install": "添加至 Chrome",
+      "source": "源代码",
+      "label": "把 Snug 添加到 Chrome"
     }
   }
 }
