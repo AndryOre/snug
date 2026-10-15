@@ -3,7 +3,6 @@ import { Card, CardContent } from '@workspace/ui/components/card'
 import { getClosingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import { REVIEWS, STORE_REVIEWS_URL } from '../i18n/proof'
-import CardGrid from './CardGrid.astro'
 import Section from './Section.astro'
 import TextLink from './TextLink.astro'
 
@@ -29,24 +28,35 @@ const { proof } = getClosingCopy(Astro.props.locale)
       {proof.reviewsLead}
     </p>
   )}
-  <CardGrid>
-    {REVIEWS.map((review) => (
-      <li class="flex">
-        <Card lang="en" size="lg" className="w-full">
-          <figure class="contents">
-            <CardContent className="flex-1">
-              <blockquote class="leading-body text-base">
-                &ldquo;{review.quote}&rdquo;
-              </blockquote>
-            </CardContent>
-            <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
-              {review.author}, {review.date}
-            </figcaption>
-          </figure>
-        </Card>
-      </li>
-    ))}
-  </CardGrid>
+  <div
+    data-proof-viewport
+    role="group"
+    aria-labelledby="proof-heading"
+    class="mt-10"
+  >
+    <div data-proof-track>
+      {[false, true].map((isClone) => (
+        <ul data-proof-row aria-hidden={isClone ? 'true' : undefined}>
+          {REVIEWS.map((review) => (
+            <li data-proof-card>
+              <Card lang="en" size="lg" className="h-full w-full">
+                <figure class="contents">
+                  <CardContent className="flex-1">
+                    <blockquote class="leading-body text-base">
+                      &ldquo;{review.quote}&rdquo;
+                    </blockquote>
+                  </CardContent>
+                  <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
+                    {review.author}, {review.date}
+                  </figcaption>
+                </figure>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
   <p class="mt-8">
     <TextLink
       href={STORE_REVIEWS_URL}

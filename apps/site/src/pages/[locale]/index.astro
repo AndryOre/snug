@@ -2,6 +2,7 @@
 import Faq from '../../components/Faq.astro'
 import Bento from '../../components/Bento.astro'
 import FinalCta from '../../components/FinalCta.astro'
+import InstallDock from '../../components/InstallDock.astro'
 import Hero from '../../components/Hero.astro'
 import Playground from '../../components/Playground.astro'
 import RealInterface from '../../components/RealInterface.astro'
@@ -35,5 +36,6 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
     <SocialProof locale={locale} />
     <Faq locale={locale} />
     <FinalCta locale={locale} />
+    <InstallDock locale={locale} />
   </main>
 </Layout>

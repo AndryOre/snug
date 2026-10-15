@@ -1,0 +1,15 @@
+---
+import { getLandingCopy } from '../i18n/landing'
+import type { Locale } from '../i18n/locales'
+import InstallButton from './InstallButton.astro'
+
+interface Props {
+  locale: Locale
+}
+
+const { hero } = getLandingCopy(Astro.props.locale)
+---
+
+<div data-dock>
+  <InstallButton placement="dock" label={hero.install} />
+</div>
