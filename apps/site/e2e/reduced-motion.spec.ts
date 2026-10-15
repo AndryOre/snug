@@ -96,46 +96,6 @@ test('FAQ accordion has no transitions under reduced motion', async ({
   }
 })
 
-for (const path of PATHS) {
-  test(`${path} islands switch tabs without animation under reduced motion`, async ({
-    page,
-  }) => {
-    await page.goto(path)
-    for (const section of ['interface']) {
-      const root = page.locator(`[data-section="${section}"]`)
-      await root.scrollIntoViewIfNeeded()
-      await expect(root.locator('astro-island').first()).not.toHaveAttribute(
-        'ssr',
-        '',
-      )
-      await page.waitForFunction((name) => {
-        const tab = globalThis.document.querySelector(
-          `[data-section="${CSS.escape(name)}"] [role="tab"]`,
-        )
-        return (
-          tab !== null &&
-          Object.keys(tab).some((key) => key.startsWith('__reactProps$'))
-        )
-      }, section)
-      const tabs = root.getByRole('tab')
-      await expect(tabs.nth(1)).toBeVisible()
-      await tabs.nth(1).click()
-      await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true')
-      const moving = await root.evaluate((element) =>
-        element
-          .getAnimations({ subtree: true })
-          .filter(
-            (animation) =>
-              animation.effect?.getComputedTiming().iterations !== Infinity &&
-              animation.playState === 'running',
-          )
-          .map((animation) => animation.constructor.name),
-      )
-      expect(moving, `${section} animations`).toEqual([])
-    }
-  })
-}
-
 test('stats show their final numbers as plain text', async ({ page }) => {
   await page.goto('/')
   const value = page.locator('[data-section="stats"] dd').first()

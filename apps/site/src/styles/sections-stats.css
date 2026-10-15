@@ -1,6 +1,6 @@
 @layer components {
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: view()) and (top: mod(1px, 1px)) {
       [data-section='stats'] dd[data-stat] {
         position: relative;
         --stat-value: 0;
