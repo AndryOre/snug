@@ -15,17 +15,22 @@
     max-width: 16rem;
     height: auto;
     opacity: 0;
-    transition: opacity 300ms var(--ease-out-strong);
+    filter: blur(2px);
+    transition:
+      opacity 200ms var(--ease-out-strong),
+      filter 200ms var(--ease-out-strong);
   }
 
   [data-faq='visuals'] > svg:first-child {
     opacity: 1;
+    filter: blur(0);
   }
 
   [data-section='faq']:has([aria-expanded='true'])
     [data-faq='visuals']
     > :first-child {
     opacity: 0;
+    filter: blur(2px);
   }
 
   [data-section='faq']:has(
@@ -53,6 +58,7 @@
     )
     [data-faq-visual='cost'] {
     opacity: 1;
+    filter: blur(0);
   }
 
   [data-faq='plate'] {

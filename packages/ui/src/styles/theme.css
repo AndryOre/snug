@@ -171,7 +171,6 @@
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
   --duration-fast: 150ms;
   --duration-base: 250ms;
-  --duration-slow: 500ms;
   --duration-marquee: 40s;
 }
 
@@ -220,28 +219,6 @@
   }
 }
 
-@keyframes motion-dock {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes motion-dock-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-  to {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-}
-
 @utility header-surface {
   opacity: 1;
   @supports (animation-timeline: scroll()) {
@@ -280,58 +257,6 @@
       animation-range: entry 0% entry 60%;
     }
   }
-}
-
-@utility enter-start {
-  transition:
-    opacity var(--duration-slow) var(--ease-out-strong),
-    transform var(--duration-slow) var(--ease-out-strong);
-  @starting-style {
-    opacity: 0;
-    transform: translateY(0.75rem);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    transition-duration: 0s;
-  }
-}
-
-@utility marquee-track {
-  display: flex;
-  width: max-content;
-  @media (prefers-reduced-motion: no-preference) {
-    animation-name: motion-marquee;
-    animation-duration: var(--duration-marquee);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    &:hover {
-      animation-play-state: paused;
-    }
-  }
-}
-
-@utility dock-reveal {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      animation-name: motion-dock, motion-dock-out;
-      animation-duration: 1ms, 1ms;
-      animation-timing-function: var(--ease-out-strong), linear;
-      animation-fill-mode: both, forwards;
-      animation-timeline: --dock-start, --dock-end;
-      animation-range:
-        exit 0% exit 100%,
-        entry 0% entry 100%;
-    }
-  }
-}
-
-@utility spotlight {
-  --spotlight-x: 50%;
-  --spotlight-y: 50%;
-  background-image: radial-gradient(
-    18rem circle at var(--spotlight-x) var(--spotlight-y),
-    color-mix(in oklch, var(--primary) 14%, transparent),
-    transparent 70%
-  );
 }
 
 @utility grid-cols-auto-cards {
@@ -401,7 +326,7 @@
   translate: 0 0;
   @media (prefers-reduced-motion: no-preference) {
     @supports (container-type: size) {
-      transition: translate var(--duration-slow) var(--ease-out-strong);
+      transition: translate var(--duration-base) var(--ease-out-strong);
       @starting-style {
         translate: 0 1.5rem;
       }

@@ -59,7 +59,14 @@ const groups = [
 
 <section data-section="marquee" class="overflow-hidden">
   <div class="mx-auto max-w-site py-10">
-    <div data-marquee-viewport>
+    <div
+      data-marquee-viewport
+      role="group"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard and touch users pause the marquee through :focus-within (WCAG 2.2.2)
+      tabindex="0"
+      aria-label={marquee.browsers}
+      class="rounded-md focus-ring-solid"
+    >
       <div data-marquee-track>
         {[false, true].map((isClone) => (
           <div data-marquee-row aria-hidden={isClone ? 'true' : undefined}>

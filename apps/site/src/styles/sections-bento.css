@@ -191,7 +191,7 @@
       animation-timing-function: var(--ease-out-strong);
       animation-iteration-count: infinite;
       animation-fill-mode: both;
-      animation-delay: calc(var(--i, 0) * 120ms);
+      animation-delay: calc(var(--i, 0) * 60ms);
       transform-box: fill-box;
     }
 
@@ -226,22 +226,37 @@
     }
   }
 
+  [data-bento-glow-clip] {
+    display: none;
+  }
+
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    [data-bento-card] [data-slot='card']::before {
-      content: '';
+    [data-bento-glow-clip] {
+      display: block;
       position: absolute;
       inset: 0;
+      overflow: hidden;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    [data-bento-glow] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 36rem;
+      height: 36rem;
       pointer-events: none;
       opacity: 0;
       background-image: radial-gradient(
-        18rem circle at var(--bento-x, 50%) var(--bento-y, 50%),
+        circle closest-side,
         color-mix(in oklch, var(--primary) 12%, transparent),
-        transparent 70%
+        transparent
       );
-      transition: opacity var(--duration-base) var(--ease-out-strong);
+      transition: opacity 250ms var(--ease-out-strong);
     }
 
-    [data-bento-card] [data-slot='card']:hover::before {
+    [data-bento-card] [data-slot='card']:hover [data-bento-glow] {
       opacity: 1;
     }
   }
