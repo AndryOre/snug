@@ -246,66 +246,66 @@
   },
   "landing": {
     "hero": {
-      "headline": "One file. Six formats. Nothing leaves your device.",
-      "subheadline": "Back up, export and import bookmarks. No network calls.",
-      "cta": "Add to Chrome",
-      "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
+      "headline": "1 つのファイル。6 つの形式。データは端末の外に出ません。",
+      "subheadline": "ブックマークのバックアップ、書き出し、読み込みに対応。ネットワーク通信はありません。",
+      "cta": "Chrome に追加",
+      "description": "ブックマークは 1 つのファイルとして、6 つの形式のいずれかでブラウザの外に出て、別のブラウザで開けます。すべての手順は端末の中だけで行われます。",
       "chips": {
-        "free": "Free",
-        "openSource": "Open source",
-        "noAccount": "No account"
+        "free": "無料",
+        "openSource": "オープンソース",
+        "noAccount": "アカウント不要"
       },
       "stages": {
-        "device": "Your device",
-        "browser": "Your browser",
-        "file": "One file",
-        "target": "Another browser",
-        "network": "Network calls: 0"
+        "device": "お使いの端末",
+        "browser": "お使いのブラウザ",
+        "file": "1 つのファイル",
+        "target": "別のブラウザ",
+        "network": "ネットワーク通信：0 回"
       }
     },
     "stats": {
       "users": {
-        "label": "Users",
+        "label": "ユーザー数",
         "value": "5,000"
       },
       "rating": {
-        "label": "Rating",
+        "label": "評価",
         "value": "4.8"
       },
       "formats": {
-        "label": "Formats",
+        "label": "形式",
         "value": "6"
       },
       "network": {
-        "label": "Network calls",
+        "label": "ネットワーク通信",
         "value": "0"
       }
     },
     "marquee": {
-      "browsers": "Works in",
-      "sources": "Imports from"
+      "browsers": "対応ブラウザ",
+      "sources": "読み込み元"
     },
     "bento": {
       "export": {
-        "title": "Export anything",
-        "body": "Whole tree or chosen folders, in six formats."
+        "title": "何でも書き出せる",
+        "body": "ツリー全体も、選んだフォルダーだけも、6 つの形式で書き出せます。"
       },
       "import": {
-        "title": "Import with a preview",
-        "body": "See what will be added, skipped or deleted first."
+        "title": "プレビューしてから読み込む",
+        "body": "追加、スキップ、削除される項目を先に確認できます。"
       },
       "backup": {
-        "title": "Back up on a schedule",
-        "body": "Auto-export saves files on the schedule you set."
+        "title": "スケジュールでバックアップ",
+        "body": "自動書き出しが、設定したスケジュールでファイルを保存します。"
       },
       "popup": {
-        "title": "Drop files in the popup",
-        "body": "Drop several files at once and Snug imports them."
+        "title": "ポップアップにファイルをドロップ",
+        "body": "複数のファイルをまとめてドロップすると、Snug が読み込みます。"
       }
     },
     "playground": {
-      "heading": "Pick a format. Same bookmarks, six files.",
-      "subline": "See the same folder in each format.",
+      "heading": "形式を選ぶ。同じブックマークが 6 つのファイルに。",
+      "subline": "同じフォルダーを、形式ごとに見比べられます。",
       "tabs": {
         "html": "HTML",
         "json": "JSON",
@@ -316,31 +316,31 @@
       }
     },
     "showcase": {
-      "heading": "The real interface.",
+      "heading": "実際の画面",
       "tabs": {
-        "export": "Export",
-        "import": "Import",
-        "autoExport": "Auto-export",
-        "popup": "Popup"
+        "export": "書き出し",
+        "import": "読み込み",
+        "autoExport": "自動書き出し",
+        "popup": "ポップアップ"
       }
     },
     "reviews": {
-      "heading": "What people say",
-      "note": "Public Chrome Web Store reviews, written before the rename."
+      "heading": "ユーザーの声",
+      "note": "Chrome ウェブストアに公開されているレビューです。名称変更前に書かれたものです。"
     },
     "faq": {
-      "heading": "Questions",
-      "more": "More questions"
+      "heading": "よくある質問",
+      "more": "ほかの質問を見る"
     },
     "closing": {
-      "heading": "Add Snug to Chrome.",
-      "line": "Free and open source.",
-      "button": "Add to Chrome"
+      "heading": "Snug を Chrome に追加。",
+      "line": "無料でオープンソースです。",
+      "button": "Chrome に追加"
     },
     "dock": {
-      "install": "Add to Chrome",
-      "source": "Source",
-      "label": "Add Snug to Chrome"
+      "install": "Chrome に追加",
+      "source": "ソースコード",
+      "label": "Snug を Chrome に追加"
     }
   }
 }

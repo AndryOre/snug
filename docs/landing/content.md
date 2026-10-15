@@ -2264,6 +2264,93 @@ the quotes: about 293.
 - **Install dock:** Установить в Chrome, Исходный код (screen reader label:
   Установить Snug в Chrome)
 
+### JA
+
+- **Hero headline:** 1 つのファイル。6 つの形式。データは端末の外に出ません。
+- **Hero subheadline:**
+  ブックマークのバックアップ、書き出し、読み込みに対応。ネットワーク通信はありません。
+- **Hero button:** Chrome に追加
+- **Hero chips:** 無料, オープンソース, アカウント不要
+- **Journey stages:** お使いの端末, お使いのブラウザ,
+  1 つのファイル, 別のブラウザ, ネットワーク通信：0 回
+- **Hero description (screen readers only):**
+  ブックマークは 1 つのファイルとして、6 つの形式のいずれかでブラウザの外に出て、別のブラウザで開けます。すべての手順は端末の中だけで行われます。
+- **Stats strip:** ユーザー数 5,000, 評価 4.8, 形式 6, ネットワーク通信 0
+- **Browser marquee group labels:** 対応ブラウザ, 読み込み元
+- **Bento:**
+  - 何でも書き出せる: ツリー全体も、選んだフォルダーだけも、6 つの形式で書き出せます。
+  - プレビューしてから読み込む: 追加、スキップ、削除される項目を先に確認できます。
+  - スケジュールでバックアップ: 自動書き出しが、設定したスケジュールでファイルを保存します。
+  - ポップアップにファイルをドロップ: 複数のファイルをまとめてドロップすると、Snug が読み込みます。
+- **Format playground:**
+  形式を選ぶ。同じブックマークが 6 つのファイルに。 / 同じフォルダーを、形式ごとに見比べられます。
+- **Interface showcase:** 実際の画面 /
+  Tabs: 書き出し, 読み込み, 自動書き出し, ポップアップ
+- **Reviews:** ユーザーの声 /
+  Chrome ウェブストアに公開されているレビューです。名称変更前に書かれたものです。
+- **FAQ:** よくある質問 / ほかの質問を見る
+- **Closing panel:** Snug を Chrome に追加。 / 無料でオープンソースです。 /
+  Chrome に追加
+- **Install dock:** Chrome に追加, ソースコード (screen reader label:
+  Snug を Chrome に追加)
+
+### KO
+
+- **Hero headline:** 파일 하나. 형식 여섯 가지. 기기 밖으로는 아무것도 나가지
+  않아요.
+- **Hero subheadline:** 북마크를 백업하고, 내보내고, 가져와요. 네트워크 호출은
+  없어요.
+- **Hero button:** Chrome에 추가
+- **Hero chips:** 무료, 오픈 소스, 계정 없음
+- **Journey stages:** 내 기기, 내 브라우저, 파일 하나, 다른 브라우저, 네트워크
+  호출: 0
+- **Hero description (screen readers only):** 북마크는 여섯 가지 형식 중 하나의
+  파일로 브라우저 밖으로 나가 다른 브라우저에서 열려요. 모든 단계는 기기
+  안에서만 이뤄져요.
+- **Stats strip:** 사용자 5,000, 평점 4.8, 형식 6, 네트워크 호출 0
+- **Browser marquee group labels:** 지원 브라우저, 가져오기 가능한 곳
+- **Bento:**
+  - 무엇이든 내보내기: 트리 전체나 고른 폴더를 여섯 가지 형식으로 내보내요.
+  - 미리 보고 가져오기: 추가, 건너뜀, 삭제될 항목을 먼저 확인해요.
+  - 일정에 맞춰 백업: 자동 내보내기가 정해 둔 일정에 맞춰 파일을 저장해요.
+  - 팝업에 파일 놓기: 파일 여러 개를 한 번에 놓으면 Snug가 가져와요.
+- **Format playground:** 형식을 고르세요. 같은 북마크, 여섯 개의 파일. / 같은
+  폴더를 형식별로 비교해 보세요.
+- **Interface showcase:** 실제 화면 / Tabs: 내보내기, 가져오기, 자동 내보내기,
+  팝업
+- **Reviews:** 사용자 후기 / Chrome 웹 스토어에 공개된 리뷰예요. 이름이 바뀌기
+  전에 작성됐어요.
+- **FAQ:** 자주 묻는 질문 / 질문 더 보기
+- **Closing panel:** Snug를 Chrome에 추가하세요. / 무료이고 오픈 소스예요. /
+  Chrome에 추가
+- **Install dock:** Chrome에 추가, 소스 코드 (screen reader label: Snug를
+  Chrome에 추가)
+
+### ZH_CN
+
+- **Hero headline:** 一个文件，六种格式，内容不会离开你的设备。
+- **Hero subheadline:** 备份、导出和导入书签，不发起任何网络请求。
+- **Hero button:** 添加至 Chrome
+- **Hero chips:** 免费, 开源, 无需账号
+- **Journey stages:** 你的设备, 你的浏览器, 一个文件, 另一个浏览器, 网络请求：0
+- **Hero description (screen readers only):**
+  你的书签会以一个文件的形式离开浏览器，格式可选六种，并可在另一个浏览器中打开。每一步都只在你的设备上完成。
+- **Stats strip:** 用户 5,000, 评分 4.8, 格式 6, 网络请求 0
+- **Browser marquee group labels:** 适用浏览器, 可导入自
+- **Bento:**
+  - 导出任何内容：整棵树或选定的文件夹，都可导出为六种格式。
+  - 先预览再导入：先查看将要添加、跳过或删除的内容。
+  - 按计划备份：自动导出会按你设定的计划保存文件。
+  - 把文件拖入弹出窗口：一次拖入多个文件，Snug 会依次导入。
+- **Format playground:**
+  选一种格式，同样的书签，六个文件。 / 在每种格式中查看同一个文件夹。
+- **Interface showcase:** 真实界面 / Tabs: 导出, 导入, 自动导出, 弹出窗口
+- **Reviews:** 用户评价 / 来自 Chrome 应用商店的公开评价，写于更名之前。
+- **FAQ:** 常见问题 / 更多问题
+- **Closing panel:** 把 Snug 添加到 Chrome。 / 免费、开源。 / 添加至 Chrome
+- **Install dock:** 添加至 Chrome, 源代码 (screen reader
+  label: 把 Snug 添加到 Chrome)
+
 ---
 
 ## Claim sweep
