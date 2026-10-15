@@ -23,3 +23,9 @@
     }
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-section='interface'] [role='tab'] {
+    transition-duration: 0s;
+  }
+}
