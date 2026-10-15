@@ -281,62 +281,67 @@ for (const width of [375, 768, 1024]) {
       .locator(`${SHOT_IMAGES}[data-shot-theme="light"]`)
       .first()
     await image.scrollIntoViewIfNeeded()
-    await expect(
-      page.locator('astro-island:has([data-showcase])'),
-    ).not.toHaveAttribute('ssr', '')
     const { declared, rendered } = await measureSizes(image)
     expect(Math.abs(declared - rendered)).toBeLessThanOrEqual(1)
   })
 }
 
-test('showcase tabs switch the visible screenshot by keyboard', async ({
+test('showcase is a plain step list with all screenshots and no tabs', async ({
   page,
 }) => {
   await page.goto('/')
   const section = page.locator('[data-section="interface"]')
-  await section.scrollIntoViewIfNeeded()
-  await expect(
-    page.locator('astro-island:has([data-showcase])'),
-  ).not.toHaveAttribute('ssr', '')
-  const tabs = section.getByRole('tab')
-  await expect(tabs).toHaveCount(4)
-  await expect(section.locator('[data-showcase-pane="export"]')).toBeVisible()
-  await expect(section.locator('[data-showcase-pane="import"]')).toBeHidden()
-
-  await tabs.first().focus()
-  await page.keyboard.press('ArrowRight')
-  await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true')
-  await expect(section.locator('[data-showcase-pane="import"]')).toBeVisible()
-  await expect(section.locator('[data-showcase-pane="export"]')).toBeHidden()
+  await expect(section.getByRole('tablist')).toHaveCount(0)
+  await expect(page.locator('astro-island:has([data-showcase])')).toHaveCount(0)
+  await expect(section.locator('[data-step]')).toHaveCount(4)
+  await expect(section.locator('img')).toHaveCount(8)
   await expect(section.locator('figcaption')).toHaveCount(4)
 })
 
-test('showcase keeps its height when the tab changes', async ({ page }) => {
-  await page.goto('/')
-  const section = page.locator('[data-section="interface"]')
-  await section.scrollIntoViewIfNeeded()
-  await expect(
-    page.locator('astro-island:has([data-showcase])'),
-  ).not.toHaveAttribute('ssr', '')
-  const panes = section.locator('[data-showcase-panes]')
-  const before = await panes.boundingBox()
-  await section.getByRole('tab').nth(3).click()
-  await expect(section.locator('[data-showcase-pane="popup"]')).toBeVisible()
-  const after = await panes.boundingBox()
-  expect(after!.height).toBe(before!.height)
-})
-
-test('showcase swaps instantly under reduced motion', async ({ page }) => {
+test('showcase shows the first screenshot under reduced motion', async ({
+  page,
+}) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
   const section = page.locator('[data-section="interface"]')
   await section.scrollIntoViewIfNeeded()
-  await expect(
-    page.locator('astro-island:has([data-showcase])'),
-  ).not.toHaveAttribute('ssr', '')
-  const pane = section.locator('[data-showcase-pane="export"]')
-  await expect(pane).toBeVisible()
-  await section.getByRole('tab').nth(1).click()
-  await expect(pane).toHaveCSS('transition-duration', '0s')
-  await expect(pane).toBeHidden()
+  await expect(section.locator('[data-shot="export"]')).toBeVisible()
+  await expect(section.locator('[data-shot="import"]')).toBeHidden()
+  const steps = await section.locator('[data-step]').all()
+  for (const step of steps) await expect(step).toBeVisible()
+})
+
+test('showcase screenshot sits right of the steps and changes on scroll', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 })
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const section = page.locator('[data-section="interface"]')
+  const steps = await section.locator('[data-step]').first().boundingBox()
+  const stage = await section.locator('[data-showcase-stage]').boundingBox()
+  expect(stage!.x).toBeGreaterThan(steps!.x + steps!.width - 1)
+  await section
+    .locator('[data-step="autoExport"]')
+    .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  await expect(section.locator('[data-shot="autoExport"]')).toHaveCSS(
+    'opacity',
+    '1',
+  )
+  await expect(section.locator('[data-shot="export"]')).toHaveCSS(
+    'opacity',
+    '0',
+  )
+})
+
+test('showcase has no horizontal overflow at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 })
+  await page.goto('/')
+  const overflow = await page
+    .locator('[data-section="interface"]')
+    .evaluate(
+      (section) =>
+        section.scrollWidth - globalThis.document.documentElement.clientWidth,
+    )
+  expect(overflow).toBeLessThanOrEqual(0)
 })

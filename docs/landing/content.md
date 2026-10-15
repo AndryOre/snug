@@ -1145,8 +1145,8 @@ Terms: Install dock. Never sync, cloud or account.
   - Import with a preview: See what will be added, skipped or deleted first.
   - Back up on a schedule: Auto-export saves files on the schedule you set.
   - Drop files in the popup: Drop several files at once and Snug imports them.
-- **Interface showcase:** The real interface. / Tabs: Export, Import,
-  Auto-export, Popup
+- **Interface showcase:** The real interface. / Sticky scroll steps: Export,
+  Import, Auto-export, Popup
 - **Video:** now the hero's click-to-load poster; `video.heading` ("See it
   work") is its title
 - **Reviews:** What people say / Public Chrome Web Store reviews, written before
