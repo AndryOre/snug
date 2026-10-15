@@ -3,6 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { LANDING_FAQ_KEYS } from '../src/i18n/faq-keys'
 import {
   DEFAULT_LOCALE,
   hreflangAlternates,
@@ -90,8 +91,8 @@ test.describe('built pages', () => {
           'utf8',
         ),
       ) as { faq: { items: Record<string, { answer: string }> } }
-      for (const entry of Object.values(content.faq.items)) {
-        expect(html).toContain(entry.answer)
+      for (const key of LANDING_FAQ_KEYS) {
+        expect(html).toContain(content.faq.items[key]?.answer)
       }
     })
 
@@ -106,7 +107,10 @@ test.describe('built pages', () => {
           'utf8',
         ),
       ) as { faq: { items: Record<string, unknown> } }
-      expect(panels).toHaveLength(Object.keys(content.faq.items).length)
+      expect(Object.keys(content.faq.items).length).toBeGreaterThan(
+        LANDING_FAQ_KEYS.length,
+      )
+      expect(panels).toHaveLength(LANDING_FAQ_KEYS.length)
       const panelTags = panels ?? []
       for (const panel of panelTags) {
         expect(panel).toContain('hidden="until-found"')

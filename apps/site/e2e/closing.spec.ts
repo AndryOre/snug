@@ -43,7 +43,7 @@ for (const path of PATHS) {
 
     await expect(
       page.locator('[data-section="faq"]').getByRole('heading', { level: 3 }),
-    ).toHaveCount(12)
+    ).toHaveCount(6)
     await expect(page.locator('[data-section="final"]')).toBeVisible()
     await expect(page.locator('a[data-install="final"]')).toHaveAttribute(
       'href',
@@ -168,7 +168,7 @@ test('FAQ questions are headings and only one answer is open', async ({
   await page.goto('/')
   const faq = await hydratedFaq(page)
   const triggers = faq.getByRole('button')
-  await expect(faq.getByRole('heading', { level: 3 })).toHaveCount(12)
+  await expect(faq.getByRole('heading', { level: 3 })).toHaveCount(6)
   await triggers.nth(0).click()
   await expect(triggers.nth(0)).toHaveAttribute('aria-expanded', 'true')
   await triggers.nth(1).click()

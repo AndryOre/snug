@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import type { Locator } from '@playwright/test'
 
-import { firstFaqTrigger } from './faq-helpers'
+import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 
 async function distinctOffsets(cards: Locator) {
   const boxes = await cards.evaluateAll((elements) =>
@@ -104,4 +104,19 @@ test('a collapsed FAQ answer opens when find-in-page reveals it', async ({
     element.dispatchEvent(new Event('beforematch', { bubbles: true }))
   })
   await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+})
+
+test('the FAQ visual follows the open item and More questions opens the Guide FAQ', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const faq = await hydratedFaq(page)
+  const visual = (key: string) => faq.locator(`[data-faq-visual="${key}"]`)
+  await expect(visual('network')).toHaveCSS('opacity', '1')
+  await faq.getByRole('button').nth(2).click()
+  await expect(visual('sync')).toHaveCSS('opacity', '1')
+  await expect(visual('network')).toHaveCSS('opacity', '0')
+  await expect(
+    faq.getByRole('link', { name: 'More questions' }),
+  ).toHaveAttribute('href', '/guide/faq/')
 })
