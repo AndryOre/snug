@@ -246,30 +246,30 @@
   },
   "landing": {
     "hero": {
-      "headline": "One file. Six formats. Nothing leaves your device.",
-      "subheadline": "Back up, export and import bookmarks. No network calls.",
-      "cta": "Add to Chrome",
-      "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
+      "headline": "Un fichier. Six formats. Rien ne quitte votre appareil.",
+      "subheadline": "Sauvegardez, exportez et importez vos favoris. Aucun appel réseau.",
+      "cta": "Ajouter à Chrome",
+      "description": "Vos favoris quittent votre navigateur sous la forme d'un seul fichier, dans l'un des six formats, et s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil.",
       "chips": {
-        "free": "Free",
+        "free": "Gratuit",
         "openSource": "Open source",
-        "noAccount": "No account"
+        "noAccount": "Sans compte"
       },
       "stages": {
-        "device": "Your device",
-        "browser": "Your browser",
-        "file": "One file",
-        "target": "Another browser",
-        "network": "Network calls: 0"
+        "device": "Votre appareil",
+        "browser": "Votre navigateur",
+        "file": "Un fichier",
+        "target": "Un autre navigateur",
+        "network": "Appels réseau : 0"
       }
     },
     "stats": {
       "users": {
-        "label": "Users",
+        "label": "Utilisateurs",
         "value": "5,000"
       },
       "rating": {
-        "label": "Rating",
+        "label": "Note",
         "value": "4.8"
       },
       "formats": {
@@ -277,35 +277,35 @@
         "value": "6"
       },
       "network": {
-        "label": "Network calls",
+        "label": "Appels réseau",
         "value": "0"
       }
     },
     "marquee": {
-      "browsers": "Works in",
-      "sources": "Imports from"
+      "browsers": "Fonctionne dans",
+      "sources": "Importe depuis"
     },
     "bento": {
       "export": {
-        "title": "Export anything",
-        "body": "Whole tree or chosen folders, in six formats."
+        "title": "Exportez ce que vous voulez",
+        "body": "L'arborescence entière ou les dossiers de votre choix, en six formats."
       },
       "import": {
-        "title": "Import with a preview",
-        "body": "See what will be added, skipped or deleted first."
+        "title": "Importez avec un aperçu",
+        "body": "Voyez d'abord ce qui sera ajouté, ignoré ou supprimé."
       },
       "backup": {
-        "title": "Back up on a schedule",
-        "body": "Auto-export saves files on the schedule you set."
+        "title": "Sauvegardez selon un planning",
+        "body": "L'exportation automatique enregistre des fichiers au rythme que vous fixez."
       },
       "popup": {
-        "title": "Drop files in the popup",
-        "body": "Drop several files at once and Snug imports them."
+        "title": "Déposez des fichiers dans le popup",
+        "body": "Déposez plusieurs fichiers d'un coup, Snug les importe."
       }
     },
     "playground": {
-      "heading": "Pick a format. Same bookmarks, six files.",
-      "subline": "See the same folder in each format.",
+      "heading": "Choisissez un format. Mêmes favoris, six fichiers.",
+      "subline": "Voyez le même dossier dans chaque format.",
       "tabs": {
         "html": "HTML",
         "json": "JSON",
@@ -316,7 +316,7 @@
       }
     },
     "showcase": {
-      "heading": "The real interface.",
+      "heading": "La vraie interface.",
       "tabs": {
         "export": "Export",
         "import": "Import",
@@ -325,22 +325,22 @@
       }
     },
     "reviews": {
-      "heading": "What people say",
-      "note": "Public Chrome Web Store reviews, written before the rename."
+      "heading": "Ce qu'en disent les utilisateurs",
+      "note": "Avis publics du Chrome Web Store, rédigés avant le changement de nom."
     },
     "faq": {
       "heading": "Questions",
-      "more": "More questions"
+      "more": "Plus de questions"
     },
     "closing": {
-      "heading": "Add Snug to Chrome.",
-      "line": "Free and open source.",
-      "button": "Add to Chrome"
+      "heading": "Ajoutez Snug à Chrome.",
+      "line": "Gratuit et open source.",
+      "button": "Ajouter à Chrome"
     },
     "dock": {
-      "install": "Add to Chrome",
-      "source": "Source",
-      "label": "Add Snug to Chrome"
+      "install": "Ajouter à Chrome",
+      "source": "Code",
+      "label": "Ajouter Snug à Chrome"
     }
   }
 }
