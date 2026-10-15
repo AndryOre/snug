@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const LAYOUT_SPECS =
-  /(responsive|accessibility|hero-trust|closing|theme|theme-menu|layout-matrix|page-scroll-motion)\.spec\.ts$/
+import { LAYOUT_SPECS } from './playwright.layout-specs'
 
 export default defineConfig({
   testDir: './e2e',

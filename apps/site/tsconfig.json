@@ -11,6 +11,8 @@
     "astro.config.ts",
     "playwright.config.ts",
     "playwright.container.config.ts",
+    "playwright.browserstack.config.ts",
+    "playwright.layout-specs.ts",
     "vitest.config.ts",
     "e2e/**/*",
     "e2e-container/**/*",

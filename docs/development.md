@@ -222,6 +222,26 @@ for why this runs against the built extension instead of a component-test layer.
   `bunx playwright install --with-deps chromium` and uploads the Playwright HTML
   report as an artifact on failure.
 
+### Cross-browser testing
+
+The site's layout specs run on real browsers through BrowserStack Automate (see
+[ADR 0024](adr/0024-cross-browser-coverage-on-browserstack.md)): Safari on
+macOS, Firefox and Edge on Windows 11, a real iPhone (Safari) and a real Pixel
+(Chrome).
+
+- Platforms are declared in `apps/site/browserstack.yml`; the spec selection is
+  `LAYOUT_SPECS` from `apps/site/playwright.layout-specs.ts`, shared with
+  `playwright.config.ts`, and the run uses `playwright.browserstack.config.ts`.
+- Run locally with `bun run test:e2e:browserstack` from `apps/site`, after
+  exporting your own `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY`. The
+  SDK starts BrowserStack Local and tunnels to `astro preview` on port 4399.
+- In CI, `ci.yml` calls `.github/workflows/browserstack.yml` and `CI passed`
+  aggregates it. It also runs nightly and on manual dispatch.
+- The job runs only when `apps/site/**` or `packages/ui/**` changed. If the
+  paths do not match, or the secrets are unavailable (fork PRs), it is skipped
+  with a notice and counts as green.
+- The sponsored plan expires on 2027-10-10.
+
 ### Landing visual regression
 
 `apps/site/e2e-container/visual.spec.ts` takes full-page `toHaveScreenshot`
