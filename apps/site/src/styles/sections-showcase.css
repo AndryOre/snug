@@ -1,2 +1,25 @@
 @layer components {
+  [data-section='interface'] [data-showcase-pane] {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  [data-section='interface'] [data-showcase-pane][data-pane-hidden] {
+    visibility: hidden;
+    opacity: 0;
+    filter: blur(4px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-section='interface'] [data-showcase-pane] {
+      transition-property: opacity, filter, visibility;
+      transition-duration: 200ms, 200ms, 0s;
+      transition-timing-function:
+        var(--ease-out-strong), var(--ease-out-strong), linear;
+    }
+
+    [data-section='interface'] [data-showcase-pane][data-pane-hidden] {
+      transition-delay: 0s, 0s, 200ms;
+    }
+  }
 }
