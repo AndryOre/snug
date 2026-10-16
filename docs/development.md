@@ -345,6 +345,21 @@ Tokens: `--ease-out-strong`, `--ease-in-out-strong`, `--duration-fast`,
 - `scroll-reveal-named` — same, on the timeline named by `--reveal-timeline`
   (use when a parent clips with `overflow`).
 
+Where `scroll-reveal` is used: the eyebrow, heading and lead in `Section.astro`,
+and the content block of How it works, Bento (each card), the Real interface
+steps (the inner block, since `li[data-step]` runs its own timelines), the
+Social proof viewport, the FAQ layout and the Final CTA panel. Never put it on
+the hero, its `h1` or the trust strip.
+
+The stats count-up (`sections-stats.css`) is hybrid. Where
+`timeline-trigger-name` is supported (Chrome 145+), a `view()` timeline trigger
+starts a time-based 1.6s `--ease-out-strong` count-up through
+`animation-trigger` with `play-once`, so it runs at once when the strip is
+already visible on load and on entry otherwise. Elsewhere the scroll-driven
+`animation-timeline: view()` version remains the fallback, with its range
+starting at `entry 0%`. Under reduced motion the final numbers render as static
+text.
+
 Motion utilities apply only under `prefers-reduced-motion: no-preference` and
 `@supports`; the static layout is the default.
 

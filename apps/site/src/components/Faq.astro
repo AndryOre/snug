@@ -15,7 +15,7 @@ const { heading, more, moreHref, entries } = getLandingFaqCopy(
 ---
 
 <Section section="faq" heading={heading}>
-  <div data-faq="layout" class="mt-10">
+  <div data-faq="layout" class="mt-10 scroll-reveal">
     <div data-faq="list">
       <FaqAccordion client:visible entries={entries} />
       <TextLink href={moreHref} class="mt-6" data-umami-event="faq-more">
