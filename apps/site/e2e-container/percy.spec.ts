@@ -16,6 +16,13 @@ test.skip(
   'PERCY_TOKEN is not set, so Percy snapshots are skipped',
 )
 
+test.beforeAll(() => {
+  expect(
+    process.env.PERCY_BUILD_ID,
+    'Percy did not start: run this spec through `percy exec`, and check that PERCY_TOKEN is valid',
+  ).toBeTruthy()
+})
+
 for (const { name, path } of pages) {
   for (const colorScheme of colorSchemes) {
     test.describe(`${name} ${colorScheme}`, () => {
