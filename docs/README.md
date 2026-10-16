@@ -82,6 +82,9 @@ An index of every document in this repository.
   [settings](guide/settings.md), and [Auto-export](guide/auto-export.md).
 - [`docs/how-to/add-a-locale.md`](how-to/add-a-locale.md) — steps to add a new
   locale.
+- [`docs/testing/browserstack-live-checklist.md`](testing/browserstack-live-checklist.md)
+  — pre-release manual QA on BrowserStack Live: the site on mobile browsers and
+  the extension on Chrome, Edge and Opera.
 - [`docs/how-to/cut-a-release.md`](how-to/cut-a-release.md) — steps to cut a new
   release.
 
