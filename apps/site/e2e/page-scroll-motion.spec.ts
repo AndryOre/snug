@@ -65,6 +65,10 @@ test.describe('reveal coverage', () => {
     page,
   }) => {
     await page.goto('/')
+    const hasScrollTimelines = await page.evaluate(
+      () => 'animationTimeline' in globalThis.document.body.style,
+    )
+    test.skip(!hasScrollTimelines, 'scroll-driven animations unsupported')
     const revealCounts = await page.evaluate(() => {
       const counts: Record<string, number> = {}
       for (const element of globalThis.document.querySelectorAll(
