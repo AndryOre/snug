@@ -26,6 +26,7 @@ for (const path of PATHS) {
 
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('[data-section="hero"]')).toBeVisible()
+    await expect(page.locator('[data-section="hero"] ul')).toHaveCount(0)
     await expect(page.locator('[data-section="trust"]')).toHaveCount(0)
     await expect(page.locator('[data-section="stats"] dl > div')).toHaveCount(4)
     await expect(

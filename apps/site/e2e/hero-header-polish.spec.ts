@@ -57,14 +57,23 @@ for (const locale of LOCALES) {
         'utf8',
       ),
     ) as {
-      landing: { hero: { headline: string; headlineAccent: string } }
+      landing: {
+        hero: { eyebrow: string; headline: string; headlineAccent: string }
+      }
     }
     const separator = locale === 'ja' || locale === 'zh_CN' ? '' : ' '
     const { headline, headlineAccent } = content.landing.hero
     await expect(page.locator('h1')).toHaveCount(1)
-    await expect(page.locator('h1')).toHaveText(
-      `${headline}${separator}${headlineAccent}`,
+    const fullHeadline = `${headline}${separator}${headlineAccent}`
+    await expect(page.locator('h1')).toHaveText(fullHeadline)
+    expect(await page.locator('h1').evaluate((h) => h.textContent)).toBe(
+      fullHeadline,
     )
+    await expect(page.locator('h1 > span')).toHaveText(headlineAccent)
+    await expect(page.locator('h1 > span')).toHaveClass(/text-primary-text/)
+    await expect(
+      page.locator('[data-section="hero"] p.font-mono').first(),
+    ).toHaveText(content.landing.hero.eyebrow)
   })
 }
 

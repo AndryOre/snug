@@ -105,3 +105,14 @@ test('stats show their final numbers as plain text', async ({ page }) => {
   )
   expect(['none', 'normal']).toContain(content)
 })
+
+test('how it works journey is static and fully visible', async ({ page }) => {
+  await page.goto('/')
+  for (const selector of ['.hero-arrow-in', '.hero-arrow-out', '.hero-file']) {
+    const target = page.locator(`[data-section="how"] ${selector}`)
+    await expect(target).toHaveCSS('animation-name', 'none')
+    await expect(target).toHaveCSS('opacity', '1')
+  }
+  const logos = page.locator('[data-section="how"] .hero-logos > *')
+  await expect(logos.first()).toHaveCSS('opacity', '1')
+})

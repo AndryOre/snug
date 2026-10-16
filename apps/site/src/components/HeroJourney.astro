@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@workspace/ui/components/card'
-import { FileText } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 import braveLogo from '../assets/browsers/brave.svg'
 import chromeLogo from '../assets/browsers/chrome.svg'
@@ -25,8 +25,18 @@ const { locale } = Astro.props
 const { stages } = getContent(locale).landing.hero
 const formats = EXPORT_FORMATS
 
-const sourceLogos = [chromeLogo, edgeLogo, braveLogo]
-const targetLogos = [edgeLogo, braveLogo, operaLogo]
+const sourceBrowsers = [
+  { name: 'Chrome', logo: chromeLogo },
+  { name: 'Edge', logo: edgeLogo },
+  { name: 'Brave', logo: braveLogo },
+]
+const targetBrowsers = [
+  { name: 'Edge', logo: edgeLogo },
+  { name: 'Brave', logo: braveLogo },
+  { name: 'Opera', logo: operaLogo },
+]
+const ribbonPath =
+  'M20 8 L64 8 Q70 8 70 14 L70 68 Q70 78 61 72 L42 59 L23 72 Q14 78 14 68 L14 14 Q14 8 20 8 Z'
 ---
 
 <div class="relative journey-boundary p-4 pt-8 md:p-6 md:pt-9">
@@ -46,8 +56,14 @@ const targetLogos = [edgeLogo, braveLogo, operaLogo]
       </CardHeader>
       <CardContent>
         <div class="hero-logos mb-3">
-          {sourceLogos.map((logo) => (
-            <img src={logo.src} width="28" height="28" alt="" />
+          {sourceBrowsers.map(({ name, logo }) => (
+            <span
+              class="flex items-center gap-2 text-sm font-medium"
+              translate="no"
+            >
+              <img src={logo.src} width="28" height="28" alt="" />
+              {name}
+            </span>
           ))}
         </div>
         <div class="hero-tree-source">
@@ -55,23 +71,51 @@ const targetLogos = [edgeLogo, braveLogo, operaLogo]
         </div>
       </CardContent>
     </Card>
-    <div class="hero-track relative h-24 shrink-0 md:h-12 md:w-40 lg:w-48">
+    <ArrowRight
+      className="hero-arrow hero-arrow-in size-5 shrink-0 rotate-90 self-center text-primary md:rotate-0"
+      aria-hidden="true"
+    />
+    <div class="hero-track relative h-32 shrink-0 md:h-24 md:w-40 lg:w-48">
       <p
         translate="no"
-        class="hero-file absolute flex items-center gap-2 rounded-md border bg-card px-2 py-1 font-mono text-sm whitespace-nowrap text-foreground"
+        class="hero-file absolute flex flex-col items-center gap-1 font-mono text-xs whitespace-nowrap text-foreground"
       >
-        <FileText className="size-4 shrink-0 text-primary-text" />
+        <svg
+          viewBox="0 0 84 84"
+          width="56"
+          height="56"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <defs>
+            <linearGradient id="journey-ribbon" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFA230"></stop>
+              <stop offset="1" stop-color="#FFD37A"></stop>
+            </linearGradient>
+          </defs>
+          <path fill="url(#journey-ribbon)" d={ribbonPath}></path>
+        </svg>
         bookmarks.html
       </p>
     </div>
+    <ArrowRight
+      className="hero-arrow hero-arrow-out size-5 shrink-0 rotate-90 self-center text-primary md:rotate-0"
+      aria-hidden="true"
+    />
     <Card size="sm" className="min-w-0 flex-1 ring-primary/50">
       <CardHeader>
         <CardTitle className="break-words">{stages.target}</CardTitle>
       </CardHeader>
       <CardContent>
         <div class="hero-logos mb-3">
-          {targetLogos.map((logo) => (
-            <img src={logo.src} width="28" height="28" alt="" />
+          {targetBrowsers.map(({ name, logo }) => (
+            <span
+              class="flex items-center gap-2 text-sm font-medium"
+              translate="no"
+            >
+              <img src={logo.src} width="28" height="28" alt="" />
+              {name}
+            </span>
           ))}
         </div>
         <div class="hero-tree-target">

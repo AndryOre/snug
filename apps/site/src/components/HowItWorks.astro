@@ -13,7 +13,12 @@ const { hero, howItWorks } = getLandingCopy(locale)
 const { stages, description } = hero
 ---
 
-<Section section="how" heading={howItWorks.heading} lead={howItWorks.lead}>
+<Section
+  section="how"
+  eyebrow={howItWorks.eyebrow}
+  heading={howItWorks.heading}
+  lead={howItWorks.lead}
+>
   <figure
     class="mt-14 mb-0 max-w-5xl"
     aria-labelledby="journey-device"
