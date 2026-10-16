@@ -25,16 +25,20 @@ document is content only: it does not decide layout, visuals or components.
 - **Store figures, read 2026-10-05:** 5,000 users, 4.8 stars from 20 ratings.
   Re-check on the listing before launch.
 
-Section order: 2 Trust proof (links), 4 Real interface, 5 Video, 6 Social proof,
+Section order: 2 Footer trust links, 4 Real interface, 5 Video, 6 Social proof,
 7 FAQ, 8 Footer, 9 Search metadata, 10 Comparison pages, 11 How-to pages, 12
 Landing v2 copy. Sections 1 (Hero) and 3 (Features) were removed with the old
 keys; hero, features-style cards and closing copy now live in section 12.
 
 ---
 
-## 2. Trust proof
+## 2. Footer trust links
 
-Leads with the proof only Snug can give. The reader is deciding whether to give
+The trust section is gone from the page body (landing v3). These labels now
+appear in the footer, in this order after Source code: OpenSSF Scorecard,
+OpenSSF Best Practices, CI status. Privacy Policy keeps its footer slot. The
+`trust.links` keys are reused as is; targets are `footer-scorecard`,
+`footer-bestPractices` and `footer-ci`. The reader is deciding whether to give
 an extension read and write access to the whole bookmark tree.
 
 ### EN
@@ -1113,10 +1117,10 @@ Copy for the redesigned landing page (AO-1908). It lives under the `landing` key
 of each locale JSON; the v1 keys it replaced have been removed. Other locales
 carry these same English strings as placeholders until the translation tickets
 replace them. Page order: Hero (text, install button and video side by side),
-Stats strip, Browser marquee, How it works, Bento, Format playground, Interface
-showcase, Video, Reviews, FAQ, Closing, Install dock.
+Stats strip, Browser marquee, How it works, Bento, Interface showcase, Video,
+Reviews, FAQ, Closing, Install dock.
 
-Terms: Install dock and Format playground. Never sync, cloud or account.
+Terms: Install dock. Never sync, cloud or account.
 
 ### EN
 
@@ -1141,10 +1145,8 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
   - Import with a preview: See what will be added, skipped or deleted first.
   - Back up on a schedule: Auto-export saves files on the schedule you set.
   - Drop files in the popup: Drop several files at once and Snug imports them.
-- **Format playground:** Pick a format. Same bookmarks, six files. / See the
-  same folder in each format. / Tabs: HTML, JSON, CSV, Markdown, OPML, XBEL
-- **Interface showcase:** The real interface. / Tabs: Export, Import,
-  Auto-export, Popup
+- **Interface showcase:** The real interface. / Sticky scroll steps: Export,
+  Import, Auto-export, Popup
 - **Video:** now the hero's click-to-load poster; `video.heading` ("See it
   work") is its title
 - **Reviews:** What people say / Public Chrome Web Store reviews, written before
@@ -1179,9 +1181,6 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
     horario que definas.
   - Suelta archivos en el popup: Suelta varios archivos a la vez y Snug los
     importa.
-- **Format playground:** Elige un formato. Mismos marcadores, seis archivos. /
-  Mira la misma carpeta en cada formato. / Tabs: HTML, JSON, CSV, Markdown,
-  OPML, XBEL
 - **Interface showcase:** La interfaz real. / Tabs: Exportar, Importar,
   Auto-export, Popup
 - **Reviews:** Lo que dice la gente / Reseñas públicas de la Chrome Web Store,
@@ -1215,9 +1214,6 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
     fichiers au rythme que vous fixez.
   - Déposez des fichiers dans le popup: Déposez plusieurs fichiers d'un coup,
     Snug les importe.
-- **Format playground:** Choisissez un format. Mêmes favoris, six fichiers. /
-  Voyez le même dossier dans chaque format. / Tabs: HTML, JSON, CSV, Markdown,
-  OPML, XBEL
 - **Interface showcase:** La vraie interface. / Tabs: Export, Import,
   Auto-export, Popup
 - **Reviews:** Ce qu'en disent les utilisateurs / Avis publics du Chrome Web
@@ -1250,9 +1246,6 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
   - Backup pianificato: L'esportazione automatica salva i file con la
     pianificazione che imposti.
   - Trascina i file nel popup: Trascina più file insieme e Snug li importa.
-- **Format playground:** Scegli un formato. Gli stessi segnalibri, sei file. /
-  Guarda la stessa cartella in ogni formato. / Tabs: HTML, JSON, CSV, Markdown,
-  OPML, XBEL
 - **Interface showcase:** L'interfaccia reale. / Tabs: Esporta, Importa,
   Auto-export, Popup
 - **Reviews:** Cosa dicono le persone / Recensioni pubbliche del Chrome Web
@@ -1286,9 +1279,6 @@ Terms: Install dock and Format playground. Never sync, cloud or account.
     definir.
   - Solte arquivos no pop-up: Solte vários arquivos de uma vez e o Snug os
     importa.
-- **Format playground:** Escolha um formato. Mesmos favoritos, seis arquivos. /
-  Veja a mesma pasta em cada formato. / Tabs: HTML, JSON, CSV, Markdown, OPML,
-  XBEL
 - **Interface showcase:** A interface real. / Tabs: Exportar, Importar,
   Auto-export, Pop-up
 - **Reviews:** O que as pessoas dizem / Avaliações públicas da Chrome Web Store,
@@ -1326,8 +1316,6 @@ the quotes: about 293.
     du festlegst.
   - Dateien ins Popup ziehen: Ziehe mehrere Dateien auf einmal hinein, und Snug
     importiert sie.
-- **Format playground:** Wähle ein Format. Dieselben Lesezeichen, sechs Dateien.
-  / Sieh denselben Ordner in jedem Format.
 - **Interface showcase:** Die echte Oberfläche. / Tabs: Export, Import,
   Auto-Export, Popup
 - **Reviews:** Das sagen Nutzer / Öffentliche Rezensionen aus dem Chrome Web
@@ -1361,8 +1349,6 @@ the quotes: about 293.
     расписанию.
   - Файлы во всплывающем окне: Перетащите сразу несколько файлов, и Snug их
     импортирует.
-- **Format playground:** Выберите формат. Те же закладки, шесть файлов. / Одна и
-  та же папка в каждом формате.
 - **Interface showcase:** Настоящий интерфейс. / Tabs: Экспорт, Импорт,
   Автоэкспорт, Всплывающее окно
 - **Reviews:** Что говорят люди / Публичные отзывы из Chrome Web Store,
@@ -1391,8 +1377,6 @@ the quotes: about 293.
   - プレビューしてから読み込む: 追加、スキップ、削除される項目を先に確認できます。
   - スケジュールでバックアップ: 自動書き出しが、設定したスケジュールでファイルを保存します。
   - ポップアップにファイルをドロップ: 複数のファイルをまとめてドロップすると、Snug が読み込みます。
-- **Format playground:**
-  形式を選ぶ。同じブックマークが 6 つのファイルに。 / 同じフォルダーを、形式ごとに見比べられます。
 - **Interface showcase:** 実際の画面 /
   Tabs: 書き出し, 読み込み, 自動書き出し, ポップアップ
 - **Reviews:** ユーザーの声 /
@@ -1423,8 +1407,6 @@ the quotes: about 293.
   - 미리 보고 가져오기: 추가, 건너뜀, 삭제될 항목을 먼저 확인해요.
   - 일정에 맞춰 백업: 자동 내보내기가 정해 둔 일정에 맞춰 파일을 저장해요.
   - 팝업에 파일 놓기: 파일 여러 개를 한 번에 놓으면 Snug가 가져와요.
-- **Format playground:** 형식을 고르세요. 같은 북마크, 여섯 개의 파일. / 같은
-  폴더를 형식별로 비교해 보세요.
 - **Interface showcase:** 실제 화면 / Tabs: 내보내기, 가져오기, 자동 내보내기,
   팝업
 - **Reviews:** 사용자 후기 / Chrome 웹 스토어에 공개된 리뷰예요. 이름이 바뀌기
@@ -1451,8 +1433,6 @@ the quotes: about 293.
   - 先预览再导入：先查看将要添加、跳过或删除的内容。
   - 按计划备份：自动导出会按你设定的计划保存文件。
   - 把文件拖入弹出窗口：一次拖入多个文件，Snug 会依次导入。
-- **Format playground:**
-  选一种格式，同样的书签，六个文件。 / 在每种格式中查看同一个文件夹。
 - **Interface showcase:** 真实界面 / Tabs: 导出, 导入, 自动导出, 弹出窗口
 - **Reviews:** 用户评价 / 来自 Chrome 应用商店的公开评价，写于更名之前。
 - **FAQ:** 常见问题 / 更多问题

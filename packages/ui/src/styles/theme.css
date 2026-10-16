@@ -213,6 +213,21 @@
   }
 }
 
+@property --stat-value {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes stat-count-up {
+  from {
+    --stat-value: 0;
+  }
+  to {
+    --stat-value: var(--stat-target);
+  }
+}
+
 @keyframes motion-marquee {
   to {
     transform: translateX(-50%);

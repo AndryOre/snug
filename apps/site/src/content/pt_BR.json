@@ -211,18 +211,6 @@
         "body": "Solte vários arquivos de uma vez e o Snug os importa."
       }
     },
-    "playground": {
-      "heading": "Escolha um formato. Mesmos favoritos, seis arquivos.",
-      "subline": "Veja a mesma pasta em cada formato.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "A interface real.",
       "tabs": {

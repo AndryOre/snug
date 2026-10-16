@@ -2,14 +2,13 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 
-const TRUST_TARGETS = [
-  'trust-source',
-  'trust-scorecard',
-  'trust-bestPractices',
-  'trust-ci',
-  'trust-privacy',
+const FOOTER_OUTBOUND_TARGETS = [
+  'footer-source',
+  'footer-scorecard',
+  'footer-bestPractices',
+  'footer-ci',
+  'footer-listing',
 ]
-const FOOTER_OUTBOUND_TARGETS = ['footer-source', 'footer-listing']
 const FOOTER_NAV_TARGETS = [
   'footer-alternatives',
   'footer-how-to',
@@ -38,7 +37,7 @@ for (const locale of LOCALES) {
         )
       const placements = entries.map((entry) => entry.placement)
       expect(placements).toEqual(
-        expect.arrayContaining(['dock', 'final', 'hero', 'trust']),
+        expect.arrayContaining(['dock', 'final', 'hero']),
       )
       for (const entry of entries) {
         expect(entry.event).toBe('install')
@@ -53,7 +52,7 @@ for (const locale of LOCALES) {
       )
     })
 
-    test('trust and footer links carry outbound-click with stable targets', async ({
+    test('footer links carry outbound-click with stable targets', async ({
       page,
     }) => {
       const targets = await page
@@ -63,11 +62,7 @@ for (const locale of LOCALES) {
         )
       expect(
         targets.toSorted((a, b) => String(a).localeCompare(String(b))),
-      ).toEqual(
-        [...TRUST_TARGETS, ...FOOTER_OUTBOUND_TARGETS].toSorted((a, b) =>
-          a.localeCompare(b),
-        ),
-      )
+      ).toEqual(FOOTER_OUTBOUND_TARGETS.toSorted((a, b) => a.localeCompare(b)))
     })
 
     test('internal footer links carry nav-click with stable targets', async ({

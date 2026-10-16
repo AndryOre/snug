@@ -2,6 +2,7 @@
 import {
   FOOTER_LINK_HREFS,
   getClosingCopy,
+  getLandingCopy,
   installHref,
   resolveHref,
 } from '../i18n/landing'
@@ -25,8 +26,20 @@ interface Props {
 
 const { locale, markCurrent = true, pageHref = localePath } = Astro.props
 const { footer, header } = getClosingCopy(locale)
+const { trust } = getLandingCopy(locale)
 const links = [
   { key: 'source', href: FOOTER_LINK_HREFS.source, label: footer.source },
+  {
+    key: 'scorecard',
+    href: FOOTER_LINK_HREFS.scorecard,
+    label: trust.links.scorecard,
+  },
+  {
+    key: 'bestPractices',
+    href: FOOTER_LINK_HREFS.bestPractices,
+    label: trust.links.bestPractices,
+  },
+  { key: 'ci', href: FOOTER_LINK_HREFS.ci, label: trust.links.ci },
   {
     key: 'alternatives',
     href: resolveHref(FOOTER_LINK_HREFS.alternatives, locale),
@@ -54,7 +67,13 @@ const links = [
   },
   { key: 'listing', href: installHref('footer'), label: footer.listing },
 ]
-const OUTBOUND_LINK_KEYS = new Set(['source', 'listing'])
+const OUTBOUND_LINK_KEYS = new Set([
+  'source',
+  'scorecard',
+  'bestPractices',
+  'ci',
+  'listing',
+])
 const noteParts = footer.note.split('Snug')
 ---
 

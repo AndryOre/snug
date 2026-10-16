@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { STORE_FACTS } from '../seo/store-facts'
 import {
+  countUpParts,
   FOOTER_LINK_HREFS,
   getClosingCopy,
   getLandingCopy,
@@ -28,7 +29,7 @@ describe('landing copy', () => {
 
   it('tags install links with the placement', () => {
     expect(installHref('hero')).toBe('/install?c=hero')
-    expect(installHref('trust')).toBe('/install?c=trust')
+    expect(installHref('footer')).toBe('/install?c=footer')
   })
 
   it('has interface and video copy in every locale', () => {
@@ -103,5 +104,18 @@ describe('landing copy', () => {
 
   it('shares one source url between the trust links and the store facts', () => {
     expect(STORE_FACTS.sourceUrl).toBe(TRUST_LINK_HREFS.source)
+  })
+})
+
+describe('countUpParts', () => {
+  it.each([
+    ['5,000', '5000', 'grouped', ','],
+    ['5 000', '5000', 'grouped', ' '],
+    ['4.8', '48', 'tenths', '.'],
+    ['4,8', '48', 'tenths', ','],
+    ['6', '6', 'plain', ''],
+    ['0', '0', 'plain', ''],
+  ])('splits %s', (value, target, format, separator) => {
+    expect(countUpParts(value)).toEqual({ target, format, separator })
   })
 })

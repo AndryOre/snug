@@ -5,7 +5,6 @@ import { Image } from 'astro:assets'
 import { getContent } from '../i18n/content'
 import { getLandingCopy, SHOT_KEYS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
-import InterfaceShowcase from './InterfaceShowcase'
 import Section from './Section.astro'
 
 interface Props {
@@ -20,7 +19,7 @@ const SHOT_FILES = {
 } as const
 
 const SIZES =
-  '(min-width: 880px) 768px, (min-width: 768px) calc(100vw - 112px), calc(100vw - 32px)'
+  '(min-width: 768px) calc((min(100vw, 77.5rem) - 10rem) * 0.615385), calc(100vw - 32px)'
 
 const THEMES = [
   { theme: 'light', directory: 'light/', visibility: 'block dark:hidden' },
@@ -37,33 +36,43 @@ const copy = getLandingCopy(locale).interface
 const { showcase } = getContent(locale).landing
 ---
 
-<Section section="interface" heading={showcase.heading} class="defer-render-lg">
-  <InterfaceShowcase
-    client:visible
-    labels={showcase.tabs}
-    listLabel={showcase.heading}
-  >
-    {SHOT_KEYS.map((key) => (
-      <figure slot={key} class="m-0">
-        {THEMES.map(({ theme, directory, visibility }) => (
-          <Image
-            src={
-              screenshots[
-                `../assets/screenshots/${locale}/${directory}${SHOT_FILES[key]}.png`
-              ]!.default
-            }
-            alt={copy.alts[key]}
-            widths={[640, 960, 1280]}
-            sizes={SIZES}
-            format="webp"
-            data-shot-theme={theme}
-            class={`h-auto w-full rounded-2xl border border-border ${visibility}`}
-          />
-        ))}
-        <figcaption class="mt-3 text-sm leading-body text-muted-foreground">
-          {copy.shots[key]}
-        </figcaption>
-      </figure>
-    ))}
-  </InterfaceShowcase>
+<Section section="interface" heading={showcase.heading}>
+  <div data-showcase class="mt-10">
+    <ol data-showcase-steps class="m-0 list-none p-0">
+      {SHOT_KEYS.map((key) => (
+        <li data-step={key}>
+          <div>
+            <h3 class="text-lg font-semibold text-foreground">
+              {showcase.tabs[key]}
+            </h3>
+            <p class="mt-1 text-base leading-body text-muted-foreground">
+              {copy.shots[key]}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div data-showcase-stage>
+      {SHOT_KEYS.map((key) => (
+        <figure data-shot={key} class="m-0">
+          {THEMES.map(({ theme, directory, visibility }) => (
+            <Image
+              src={
+                screenshots[
+                  `../assets/screenshots/${locale}/${directory}${SHOT_FILES[key]}.png`
+                ]!.default
+              }
+              alt={copy.alts[key]}
+              widths={[640, 960, 1280]}
+              sizes={SIZES}
+              format="webp"
+              data-shot-theme={theme}
+              class={`h-auto w-full rounded-2xl border border-border ${visibility}`}
+            />
+          ))}
+          <figcaption class="sr-only">{copy.shots[key]}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
 </Section>

@@ -1,2 +1,42 @@
 @layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) and (top: mod(1px, 1px)) {
+      [data-section='stats'] dd[data-stat] {
+        position: relative;
+        --stat-value: 0;
+        animation: stat-count-up 1ms var(--ease-out-strong) both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 35%;
+        counter-reset: stat-whole round(down, calc(var(--stat-value) / 10), 1)
+          stat-tenth mod(var(--stat-value), 10) stat-thousand
+          round(down, calc(var(--stat-value) / 1000), 1) stat-hundred
+          mod(round(down, calc(var(--stat-value) / 100), 1), 10) stat-ten
+          mod(round(down, calc(var(--stat-value) / 10), 1), 10) stat-one
+          mod(var(--stat-value), 10) stat-plain var(--stat-value);
+      }
+
+      [data-section='stats'] dd[data-stat] [data-stat-text] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      [data-section='stats'] dd[data-stat]::after {
+        content: counter(stat-plain) / '';
+      }
+
+      [data-section='stats'] dd[data-stat='tenths']::after {
+        content: counter(stat-whole) var(--stat-separator) counter(stat-tenth) /
+          '';
+      }
+
+      [data-section='stats'] dd[data-stat='grouped']::after {
+        content: counter(stat-thousand) var(--stat-separator)
+          counter(stat-hundred) counter(stat-ten) counter(stat-one) / '';
+      }
+    }
+  }
 }

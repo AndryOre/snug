@@ -211,18 +211,6 @@
         "body": "複数のファイルをまとめてドロップすると、Snug が読み込みます。"
       }
     },
-    "playground": {
-      "heading": "形式を選ぶ。同じブックマークが 6 つのファイルに。",
-      "subline": "同じフォルダーを、形式ごとに見比べられます。",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "実際の画面",
       "tabs": {
