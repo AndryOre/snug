@@ -1,24 +1,34 @@
 ---
 import { Folder } from 'lucide-react'
-import { getContent } from '../i18n/content'
+import { getLandingCopy } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 
 interface Props {
   locale: Locale
 }
 
-const { folders: names } = getContent(Astro.props.locale).landing.hero
-const folders = [names.research, names.jobSearch]
+const { hero, folders: roots } = getLandingCopy(Astro.props.locale)
+const rows = [
+  { name: roots.bookmarksBar, nested: false },
+  { name: hero.folders.research, nested: true },
+  { name: hero.folders.jobSearch, nested: true },
+  { name: roots.otherBookmarks, nested: false },
+]
 ---
 
 <ul class="flex flex-col gap-2">
-  {folders.map((folder) => (
-    <li class="flex min-w-0 items-center gap-2 text-sm break-words">
+  {rows.map(({ name, nested }) => (
+    <li
+      class:list={[
+        'flex min-w-0 items-center gap-2 text-sm break-words',
+        nested && 'ps-4',
+      ]}
+    >
       <Folder
-        className="size-4 shrink-0 text-primary-text"
+        className="size-4 shrink-0 fill-current text-primary-text"
         aria-hidden="true"
       />
-      {folder}
+      {name}
     </li>
   ))}
 </ul>

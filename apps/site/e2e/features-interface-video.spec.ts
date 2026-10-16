@@ -345,14 +345,16 @@ test('showcase screenshot sits right of the steps and changes on scroll', async 
     expect(shown.length).toBeLessThanOrEqual(1)
   }
 
-  await section
-    .locator('[data-step="popup"]')
-    .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  const scrollPastCenter = (step: string) =>
+    section.locator(`[data-step="${step}"]`).evaluate((element) => {
+      element.scrollIntoView({ block: 'center' })
+      globalThis.scrollBy(0, 40)
+    })
+
+  await scrollPastCenter('popup')
   await expect.poll(visibleShots).toEqual(['popup'])
 
-  await section
-    .locator('[data-step="autoExport"]')
-    .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  await scrollPastCenter('autoExport')
   await expect.poll(visibleShots).toEqual(['autoExport'])
   await expect(section.locator('[data-step="autoExport"] h3')).toHaveCSS(
     'opacity',

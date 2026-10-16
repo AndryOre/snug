@@ -21,22 +21,14 @@ const IMPORT_ROWS = ['added', 'skipped', 'added', 'added'] as const
 const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
 ---
 
-<Section section="bento" class="defer-render-md">
-  <ul data-bento="grid">
+<Section section="bento" heading={copy.heading} class="defer-render-md">
+  <ul data-bento="grid" class="mt-10 md:mt-14">
     {BENTO_KEYS.map((key) => (
       <li class="flex" data-bento-card={key}>
         <Card size="lg" className="relative w-full">
           <span data-bento-glow-clip aria-hidden="true">
             <span data-bento-glow></span>
           </span>
-          <CardHeader>
-            <CardTitle className="text-2xl leading-tight break-words hyphens-auto">
-              <h2 class="phrase-break">{copy[key].title}</h2>
-            </CardTitle>
-            <CardDescription className="mt-3 text-base">
-              {copy[key].body}
-            </CardDescription>
-          </CardHeader>
           <CardContent className="flex flex-1 items-center" translate="no">
             <svg
               data-bento="art"
@@ -223,6 +215,14 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
               )}
             </svg>
           </CardContent>
+          <CardHeader>
+            <CardTitle className="text-2xl leading-tight break-words hyphens-auto">
+              <h3 class="phrase-break">{copy[key].title}</h3>
+            </CardTitle>
+            <CardDescription className="mt-3 text-base">
+              {copy[key].body}
+            </CardDescription>
+          </CardHeader>
         </Card>
       </li>
     ))}

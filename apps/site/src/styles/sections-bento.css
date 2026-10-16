@@ -105,11 +105,7 @@
     }
 
     [data-bento~='grid'] > :nth-child(1) {
-      grid-row: span 2;
-    }
-
-    [data-bento~='grid'] > :nth-child(4) {
-      grid-column: 1 / -1;
+      grid-row: span 3;
     }
   }
 
