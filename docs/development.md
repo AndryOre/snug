@@ -280,9 +280,10 @@ uploaded to the `snug-site` Percy project by the `percy` job of
 
 #### Extension on BrowserStack: manual-only
 
-The extension is not automated on BrowserStack, and Edge, Opera and Brave are
-checked by hand (see the manual Live checklist). The spike looked at
-BrowserStack's
+The extension is not automated on BrowserStack, and Chrome on macOS, Edge, Opera
+and Brave are checked by hand (see the
+[manual Live checklist](testing/browserstack-live-checklist.md)). The spike
+looked at BrowserStack's
 [Chrome extension testing for Playwright](https://www.browserstack.com/docs/automate/playwright/chrome-extension-testing)
 path: upload the built zip with the Automate `upload-media` API, pass the
 `media://` URL as `browserstack.uploadMedia`, set `browser: chromefortesting` on

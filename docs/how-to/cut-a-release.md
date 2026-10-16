@@ -79,6 +79,11 @@
    [pre-publish checklist](../store/README.md#pre-publish-checklist) before
    pushing the tag.
 
+   Also run the
+   [BrowserStack Live checklist](../testing/browserstack-live-checklist.md)
+   before pushing the tag: it is the only cross-browser check of the extension
+   on Edge, Opera and Chrome on macOS.
+
 9. In parallel with the Chrome Web Store job, a third job,
    `publish-edge-add-ons`, submits the Edge zip (`snug-X.Y.Z-edge.zip`) to
    Microsoft Edge Add-ons via `wxt submit`, using the Edge Add-ons API v1.1 with
