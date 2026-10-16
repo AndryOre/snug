@@ -110,10 +110,10 @@
       }
 
       [data-section='interface'] [data-step] {
-        min-height: 40vh;
+        min-height: 0;
         animation-duration: 1ms, 1ms;
         animation-fill-mode: both, forwards;
-        animation-range: cover 35% cover 50%;
+        animation-range: cover 44% cover 50%;
         animation-timing-function: var(--ease-out-strong);
       }
 
@@ -147,7 +147,7 @@
         opacity: 0.6;
         animation-duration: 1ms, 1ms;
         animation-fill-mode: both, forwards;
-        animation-range: cover 35% cover 50%;
+        animation-range: cover 44% cover 50%;
         animation-timing-function: var(--ease-out-strong);
       }
 
@@ -174,7 +174,7 @@
       }
 
       [data-section='interface'] [data-showcase-steps] > li + li {
-        margin-top: 0;
+        margin-top: 1.75rem;
       }
 
       [data-section='interface'] [data-showcase-stage] {
@@ -213,7 +213,7 @@
 
       @media (min-width: 768px) {
         [data-section='interface'] [data-step] {
-          min-height: 60vh;
+          min-height: 0;
         }
 
         [data-section='interface'] [data-showcase-stage] {
