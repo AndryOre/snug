@@ -68,23 +68,37 @@
 
   @keyframes showcase-step-in {
     from {
-      opacity: 0.5;
       border-left-color: var(--border);
     }
     to {
-      opacity: 1;
       border-left-color: var(--primary);
     }
   }
 
   @keyframes showcase-step-out {
     from {
-      opacity: 1;
       border-left-color: var(--primary);
     }
     to {
-      opacity: 0.5;
       border-left-color: var(--border);
+    }
+  }
+
+  @keyframes showcase-title-in {
+    from {
+      opacity: 0.6;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes showcase-title-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.6;
     }
   }
 
@@ -97,7 +111,6 @@
 
       [data-section='interface'] [data-step] {
         min-height: 40vh;
-        opacity: 0.5;
         animation-duration: 1ms, 1ms;
         animation-fill-mode: both, forwards;
         animation-range: cover 35% cover 50%;
@@ -106,7 +119,6 @@
 
       [data-section='interface'] [data-step='export'] {
         view-timeline: --step-export block;
-        opacity: 1;
         border-left-color: var(--primary);
         animation-name: showcase-step-out;
         animation-timeline: --step-import;
@@ -131,6 +143,36 @@
         animation-fill-mode: both;
       }
 
+      [data-section='interface'] [data-step] h3 {
+        opacity: 0.6;
+        animation-duration: 1ms, 1ms;
+        animation-fill-mode: both, forwards;
+        animation-range: cover 35% cover 50%;
+        animation-timing-function: var(--ease-out-strong);
+      }
+
+      [data-section='interface'] [data-step='export'] h3 {
+        opacity: 1;
+        animation-name: showcase-title-out;
+        animation-timeline: --step-import;
+        animation-duration: 1ms;
+        animation-fill-mode: forwards;
+      }
+      [data-section='interface'] [data-step='import'] h3 {
+        animation-name: showcase-title-in, showcase-title-out;
+        animation-timeline: --step-import, --step-autoExport;
+      }
+      [data-section='interface'] [data-step='autoExport'] h3 {
+        animation-name: showcase-title-in, showcase-title-out;
+        animation-timeline: --step-autoExport, --step-popup;
+      }
+      [data-section='interface'] [data-step='popup'] h3 {
+        animation-name: showcase-title-in;
+        animation-timeline: --step-popup;
+        animation-duration: 1ms;
+        animation-fill-mode: both;
+      }
+
       [data-section='interface'] [data-showcase-steps] > li + li {
         margin-top: 0;
       }
@@ -143,7 +185,8 @@
         padding-block: 0.5rem;
       }
 
-      [data-section='interface'] [data-shot] {
+      [data-section='interface'] [data-shot],
+      [data-section='interface'] [data-shot]:not(:first-child) {
         visibility: visible;
         animation-duration: 1ms;
         animation-timing-function: step-end;

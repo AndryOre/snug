@@ -262,7 +262,7 @@ for (const colorScheme of SCHEMES) {
   test(`the interface section has no accessibility violations in ${colorScheme}`, async ({
     page,
   }) => {
-    await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
+    await page.emulateMedia({ colorScheme })
     await page.goto('/')
     const { violations } = await new AxeBuilder({ page })
       .include('[data-section="interface"]')
@@ -346,16 +346,21 @@ test('showcase screenshot sits right of the steps and changes on scroll', async 
   }
 
   await section
+    .locator('[data-step="popup"]')
+    .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  await expect.poll(visibleShots).toEqual(['popup'])
+
+  await section
     .locator('[data-step="autoExport"]')
     .evaluate((element) => element.scrollIntoView({ block: 'center' }))
   await expect.poll(visibleShots).toEqual(['autoExport'])
-  await expect(section.locator('[data-step="autoExport"]')).toHaveCSS(
+  await expect(section.locator('[data-step="autoExport"] h3')).toHaveCSS(
     'opacity',
     '1',
   )
-  await expect(section.locator('[data-step="popup"]')).toHaveCSS(
+  await expect(section.locator('[data-step="popup"] h3')).toHaveCSS(
     'opacity',
-    '0.5',
+    '0.6',
   )
   const marker = await section
     .locator('[data-step="autoExport"] h3')
