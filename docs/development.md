@@ -278,6 +278,39 @@ uploaded to the `snug-site` Percy project by the `percy` job of
   branch-protection check, because PRs that do not touch the site never report
   to it.
 
+#### Extension on BrowserStack: manual-only
+
+The extension is not automated on BrowserStack, and Edge, Opera and Brave are
+checked by hand (see the manual Live checklist). The spike looked at
+BrowserStack's
+[Chrome extension testing for Playwright](https://www.browserstack.com/docs/automate/playwright/chrome-extension-testing)
+path: upload the built zip with the Automate `upload-media` API, pass the
+`media://` URL as `browserstack.uploadMedia`, set `browser: chromefortesting` on
+Windows, and attach with `chromium.connectOverCDP` to
+`wss://cdp.browserstack.com`.
+
+- The documented path covers loading the extension and driving ordinary pages.
+  It says nothing about discovering the extension ID, reaching the MV3 service
+  worker, or opening `chrome-extension://` pages.
+- Every spec in `apps/extension/e2e` depends on those three things.
+  `e2e/fixtures.ts` derives `extensionId` from the service worker URL, seeds and
+  reads bookmarks and storage through `serviceWorker.evaluate`, and opens the
+  popup and app pages at `chrome-extension://<id>/...`. A BrowserStack fixture
+  that cannot reach them would run no useful check, including the `app-shell`
+  and `popup-export` smoke specs.
+- A remote `connectOverCDP` context is also not a launched persistent context:
+  `--load-extension` flags and the temporary profile in the local fixture do not
+  apply, so the local fixture cannot simply be reused.
+- This could not be confirmed by running it: BrowserStack credentials are only
+  available in CI, and shipping an unverified fixture would leave dead code
+  behind. No fixture, config or CI step was added.
+
+To reopen the question, run a throwaway probe against the uploaded zip that logs
+`context.serviceWorkers()` and `context.backgroundPages()` after connecting,
+then tries `chrome://extensions` and `chrome-extension://<id>/popup.html`. If
+the service worker and the extension pages are reachable, port `app-shell` and
+`popup-export` behind a BrowserStack fixture gated on `apps/extension/**`.
+
 ### Landing visual regression
 
 `apps/site/e2e-container/visual.spec.ts` takes full-page `toHaveScreenshot`
