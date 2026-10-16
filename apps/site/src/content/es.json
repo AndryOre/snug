@@ -211,18 +211,6 @@
         "body": "Suelta varios archivos a la vez y Snug los importa."
       }
     },
-    "playground": {
-      "heading": "Elige un formato. Mismos marcadores, seis archivos.",
-      "subline": "Mira la misma carpeta en cada formato.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "La interfaz real.",
       "tabs": {

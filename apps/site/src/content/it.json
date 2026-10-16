@@ -211,18 +211,6 @@
         "body": "Trascina più file insieme e Snug li importa."
       }
     },
-    "playground": {
-      "heading": "Scegli un formato. Gli stessi segnalibri, sei file.",
-      "subline": "Guarda la stessa cartella in ogni formato.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "L'interfaccia reale.",
       "tabs": {

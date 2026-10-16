@@ -211,18 +211,6 @@
         "body": "Перетащите сразу несколько файлов, и Snug их импортирует."
       }
     },
-    "playground": {
-      "heading": "Выберите формат. Те же закладки, шесть файлов.",
-      "subline": "Одна и та же папка в каждом формате.",
-      "tabs": {
-        "html": "HTML",
-        "json": "JSON",
-        "csv": "CSV",
-        "markdown": "Markdown",
-        "opml": "OPML",
-        "xbel": "XBEL"
-      }
-    },
     "showcase": {
       "heading": "Настоящий интерфейс.",
       "tabs": {
