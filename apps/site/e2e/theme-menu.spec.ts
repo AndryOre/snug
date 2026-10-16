@@ -137,7 +137,7 @@ for (const path of ['/de/', '/ru/']) {
 
 for (const colorScheme of ['light', 'dark'] as const) {
   test(`axe passes with the menu open in ${colorScheme}`, async ({ page }) => {
-    await page.emulateMedia({ colorScheme })
+    await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
     await visit(page)
     await openMenu(page)
     const { violations } = await new AxeBuilder({ page })

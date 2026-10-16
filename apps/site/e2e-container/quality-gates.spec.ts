@@ -169,6 +169,7 @@ for (const path of [
   '/changelog/',
 ]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
     const { violations } = await new AxeBuilder({ page })
@@ -377,6 +378,7 @@ test('activating the video raises no CSP or Trusted Types violation', async ({
   await page.goto('/', { waitUntil: 'networkidle' })
   const poster = page.locator('[data-video-poster]')
   await poster.scrollIntoViewIfNeeded()
+  await poster.hover()
   await expect(
     page.locator('astro-island:has([data-video-poster])'),
   ).not.toHaveAttribute('ssr', '')

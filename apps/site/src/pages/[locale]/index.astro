@@ -3,12 +3,12 @@ import Faq from '../../components/Faq.astro'
 import Bento from '../../components/Bento.astro'
 import FinalCta from '../../components/FinalCta.astro'
 import InstallDock from '../../components/InstallDock.astro'
+import HowItWorks from '../../components/HowItWorks.astro'
 import Hero from '../../components/Hero.astro'
 import Playground from '../../components/Playground.astro'
 import RealInterface from '../../components/RealInterface.astro'
 import SocialProof from '../../components/SocialProof.astro'
 import TrustProof from '../../components/TrustProof.astro'
-import VideoSection from '../../components/VideoSection.astro'
 import Layout from '../../layouts/Layout.astro'
 import { DEFAULT_LOCALE, languageTag, LOCALES } from '../../i18n/locales'
 
@@ -29,10 +29,10 @@ if (!locale) throw new Error(`Unknown locale "${segment}"`)
   <main id="main">
     <Hero locale={locale} />
     <TrustProof locale={locale} />
+    <HowItWorks locale={locale} />
     <Bento locale={locale} />
     <Playground locale={locale} />
     <RealInterface locale={locale} />
-    <VideoSection locale={locale} />
     <SocialProof locale={locale} />
     <Faq locale={locale} />
     <FinalCta locale={locale} />

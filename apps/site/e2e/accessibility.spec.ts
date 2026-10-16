@@ -35,6 +35,10 @@ async function expectNoViolations(page: Page): Promise<void> {
 
 const SCHEMES = ['light', 'dark'] as const
 
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+})
+
 for (const colorScheme of SCHEMES) {
   for (const path of AXE_PAGES) {
     test(`${path} has no accessibility violations in ${colorScheme}`, async ({
@@ -163,6 +167,7 @@ test.describe('opened states', () => {
     await page.goto('/')
     const poster = page.locator('[data-video-poster]')
     await poster.scrollIntoViewIfNeeded()
+    await poster.hover()
     await expect(
       page.locator('astro-island:has([data-video-poster])'),
     ).not.toHaveAttribute('ssr', '')

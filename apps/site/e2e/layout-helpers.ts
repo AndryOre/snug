@@ -10,7 +10,7 @@ import { expect, type Page } from '@playwright/test'
 export async function hydrateHeaderIsland(page: Page): Promise<void> {
   await page.locator('[data-language-switcher]').getByRole('button').focus()
   await expect(
-    page.locator('astro-island[client="interaction"]'),
+    page.locator('astro-island:has([data-language-switcher])'),
   ).not.toHaveAttribute('ssr', '')
   await page.waitForFunction(() => {
     const button = globalThis.document.querySelector(

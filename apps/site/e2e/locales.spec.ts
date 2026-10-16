@@ -30,7 +30,7 @@ test('ja renders its own folder names in both journey trees', async ({
   page,
 }) => {
   await page.goto(localePath('ja'))
-  const folders = page.locator('[data-section="hero"] ul li', {
+  const folders = page.locator('[data-section="how"] ul li', {
     hasText: /リサーチ|求職/,
   })
   await expect(folders).toHaveText(['リサーチ', '求職', 'リサーチ', '求職'])

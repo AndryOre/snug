@@ -38,6 +38,16 @@ for (const path of PATHS) {
       'href',
       '/install?c=hero',
     )
+    await expect(page.locator('a[data-install="hero"]')).toHaveAttribute(
+      'target',
+      '_blank',
+    )
+    await expect(page.locator('a[data-install="hero"]')).toHaveAttribute(
+      'rel',
+      'noopener',
+    )
+    await expect(page.locator('[data-section="how"] figure')).toBeVisible()
+    await expect(page.locator('[data-section="hero"] figure')).toHaveCount(0)
     await expect(page.locator('a[data-install="trust"]')).toHaveAttribute(
       'href',
       '/install?c=trust',
@@ -87,7 +97,7 @@ test.describe('hero journey diagram', () => {
   for (const path of PATHS) {
     test(`${path} shows the journey and the network line`, async ({ page }) => {
       await page.goto(path)
-      const figure = page.locator('[data-section="hero"] figure')
+      const figure = page.locator('[data-section="how"] figure')
       await expect(figure).toBeVisible()
       await expect(figure.locator('[data-slot="card"]')).toHaveCount(2)
       await expect(figure.locator('[data-slot="badge"]')).toHaveText([
@@ -107,7 +117,7 @@ test.describe('hero journey diagram', () => {
     const boxes = async () =>
       page
         .locator(
-          '[data-section="hero"] figure [data-slot="card"], [data-section="hero"] figure .hero-track',
+          '[data-section="how"] figure [data-slot="card"], [data-section="how"] figure .hero-track',
         )
         .evaluateAll((items) =>
           items.map((item) => {
@@ -172,7 +182,7 @@ test.describe('hero journey diagram', () => {
       await page.setViewportSize({ width: 320, height: 700 })
       await page.goto(path)
       const overflowing = await page
-        .locator('[data-section="hero"] figure')
+        .locator('[data-section="how"] figure')
         .evaluate((figure, limit) => {
           return [figure, ...figure.querySelectorAll('*')]
             .filter((element) => {
@@ -193,7 +203,7 @@ test.describe('hero journey diagram', () => {
     page,
   }) => {
     await page.goto('/')
-    const figure = page.locator('[data-section="hero"] figure')
+    const figure = page.locator('[data-section="how"] figure')
     await expect(figure).toHaveAttribute('aria-labelledby', /.+/)
     const descriptionId = await figure.getAttribute('aria-describedby')
     expect(descriptionId).toBeTruthy()
@@ -205,10 +215,10 @@ test.describe('hero journey diagram', () => {
 
   for (const colorScheme of SCHEMES) {
     test(`the journey passes axe in ${colorScheme}`, async ({ page }) => {
-      await page.emulateMedia({ colorScheme })
+      await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
       await page.goto('/')
       const { violations } = await new AxeBuilder({ page })
-        .include('[data-section="hero"] figure')
+        .include('[data-section="how"] figure')
         .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
         .analyze()
       expect(violations).toEqual([])
