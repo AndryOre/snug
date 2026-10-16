@@ -14,6 +14,12 @@ describe('bento copy', () => {
     }
   })
 
+  it('has a section heading in every locale', () => {
+    for (const locale of LOCALES) {
+      expect(getBentoCopy(locale).heading.length).toBeGreaterThan(0)
+    }
+  })
+
   it('lists the four titles in card order for the feature list', () => {
     expect(bentoTitles('en')).toEqual([
       'Export anything',
