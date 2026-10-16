@@ -66,14 +66,22 @@ export type VideoCopy = SiteContent['video']
 const UNSPACED_HEADLINE_LOCALES = new Set<Locale>(['ja', 'zh_CN'])
 
 /**
+ * Separator between the hero headline lead and its accent phrase.
+ * @param locale - The locale of the copy.
+ * @returns An empty string for unspaced scripts, a single space otherwise.
+ */
+export function headlineSeparator(locale: Locale): string {
+  return UNSPACED_HEADLINE_LOCALES.has(locale) ? '' : ' '
+}
+
+/**
  * Joins the hero headline lead and its accent phrase into the full H1 text.
  * @param hero - The locale's hero copy.
  * @param locale - The locale of that copy, which decides the separator.
  * @returns The lead and the accent, spaced as the locale's script requires.
  */
 export function fullHeadline(hero: HeroCopy, locale: Locale): string {
-  const separator = UNSPACED_HEADLINE_LOCALES.has(locale) ? '' : ' '
-  return `${hero.headline}${separator}${hero.headlineAccent}`
+  return `${hero.headline}${headlineSeparator(locale)}${hero.headlineAccent}`
 }
 
 /**

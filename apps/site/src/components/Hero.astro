@@ -3,8 +3,13 @@ import type { ImageMetadata } from 'astro'
 import { getImage } from 'astro:assets'
 import { cn } from '@workspace/ui/lib/utils'
 
-import { fullHeadline, getLandingCopy, PROMO_VIDEO_IDS } from '../i18n/landing'
+import {
+  getLandingCopy,
+  headlineSeparator,
+  PROMO_VIDEO_IDS,
+} from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
+import Eyebrow from './Eyebrow.astro'
 import InstallButton from './InstallButton.astro'
 import Section from './Section.astro'
 import VideoFacade from './VideoFacade'
@@ -20,7 +25,6 @@ const posters = import.meta.glob<{ default: ImageMetadata }>(
 
 const { locale } = Astro.props
 const { hero, video } = getLandingCopy(locale)
-const { chips } = hero
 const poster = posters[`../assets/video-posters/${locale}.png`]!.default
 const POSTER_WIDTHS = [640, 960, 1280] as const
 const POSTER_SIZES =
@@ -39,13 +43,16 @@ const posterSourceSet = posterImages
 <Section section="hero" class="-mt-14 bg-hero-glow pt-14">
   <div class="grid grid-cols-1 items-center gap-x-12 gap-y-10 md:grid-cols-2">
     <div>
+      <Eyebrow>{hero.eyebrow}</Eyebrow>
       <h1
         class={cn(
-          'font-heading text-display font-bold break-words phrase-break text-balance',
+          'mt-4 font-heading text-display font-bold break-words phrase-break text-balance',
           locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
         )}
       >
-        {fullHeadline(hero, locale)}
+        {hero.headline}
+        {headlineSeparator(locale)}
+        <span class="text-primary-text">{hero.headlineAccent}</span>
       </h1>
       <p class="mt-6 max-w-xl text-lead text-muted-foreground">
         {hero.subheadline}
@@ -53,11 +60,6 @@ const posterSourceSet = posterImages
       <div class="mt-8">
         <InstallButton placement="hero" label={hero.cta} />
       </div>
-      <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
-        {Object.values(chips).map((chip) => (
-          <li>{chip}</li>
-        ))}
-      </ul>
     </div>
     <div>
       <VideoFacade
