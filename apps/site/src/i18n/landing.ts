@@ -12,6 +12,11 @@ import { privacyPath } from './privacy'
 export type HeroCopy = SiteContent['landing']['hero']
 
 /**
+ * Copy for the folder names of the browser's bookmark tree in one locale.
+ */
+export type FoldersCopy = SiteContent['landing']['folders']
+
+/**
  * Copy for the trust links of one locale.
  */
 export type TrustCopy = SiteContent['trust']
@@ -58,6 +63,19 @@ export type HowItWorksCopy = SiteContent['landing']['howItWorks']
  */
 export type VideoCopy = SiteContent['video']
 
+const UNSPACED_HEADLINE_LOCALES = new Set<Locale>(['ja', 'zh_CN'])
+
+/**
+ * Joins the hero headline lead and its accent phrase into the full H1 text.
+ * @param hero - The locale's hero copy.
+ * @param locale - The locale of that copy, which decides the separator.
+ * @returns The lead and the accent, spaced as the locale's script requires.
+ */
+export function fullHeadline(hero: HeroCopy, locale: Locale): string {
+  const separator = UNSPACED_HEADLINE_LOCALES.has(locale) ? '' : ' '
+  return `${hero.headline}${separator}${hero.headlineAccent}`
+}
+
 /**
  * Landing copy for one locale. Key parity across locales is enforced by
  * `loadAllContent`, so the English shape holds for every locale.
@@ -72,6 +90,7 @@ export function getLandingCopy(locale: Locale): {
   stats: StatsCopy
   marquee: MarqueeCopy
   howItWorks: HowItWorksCopy
+  folders: FoldersCopy
 } {
   const { trust, interface: shots, video, landing } = getContent(locale)
   return {
@@ -82,6 +101,7 @@ export function getLandingCopy(locale: Locale): {
     stats: landing.stats,
     marquee: landing.marquee,
     howItWorks: landing.howItWorks,
+    folders: landing.folders,
   }
 }
 

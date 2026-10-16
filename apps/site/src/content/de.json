@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "Nimm deine Lesezeichen in jeden Browser mit.",
+      "eyebrow": "Kostenlos · Open Source · Kein Konto",
+      "headline": "Nimm deine Lesezeichen mit in",
+      "headlineAccent": "jeden Browser.",
       "subheadline": "Snug sichert, exportiert und importiert deine Chrome-Lesezeichen als eine Datei. Kostenlos, privat, nichts verlässt dein Gerät.",
       "cta": "Zu Chrome hinzufügen",
       "description": "Deine Lesezeichen verlassen deinen Browser als eine Datei in einem von sechs Formaten und öffnen sich in einem anderen Browser. Jeder Schritt bleibt auf deinem Gerät.",
@@ -167,9 +169,33 @@
         "jobSearch": "Jobsuche"
       }
     },
+    "folders": {
+      "bookmarksBar": "Lesezeichenleiste",
+      "otherBookmarks": "Weitere Lesezeichen"
+    },
     "howItWorks": {
-      "heading": "So funktioniert es",
-      "lead": "Deine Lesezeichen verlassen Chrome als eine Datei und öffnen sich in einem anderen Browser. Jeder Schritt bleibt auf deinem Gerät."
+      "eyebrow": "So funktioniert es",
+      "heading": "Eine Datei, von einem Browser zum anderen.",
+      "lead": "Exportiere deine Lesezeichen und importiere sie überall. Jeder Schritt bleibt auf deinem Gerät."
+    },
+    "bento": {
+      "heading": "Alles, was es kann, in vier Abläufen",
+      "export": {
+        "title": "Alles exportieren",
+        "body": "Den ganzen Baum oder ausgewählte Ordner, in sechs Formaten."
+      },
+      "import": {
+        "title": "Import mit Vorschau",
+        "body": "Sieh vorab, was hinzugefügt, übersprungen oder gelöscht wird."
+      },
+      "backup": {
+        "title": "Nach Zeitplan sichern",
+        "body": "Auto-Export speichert Dateien nach dem Zeitplan, den du festlegst."
+      },
+      "popup": {
+        "title": "Dateien ins Popup ziehen",
+        "body": "Ziehe mehrere Dateien auf einmal hinein, und Snug importiert sie."
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "Funktioniert in",
       "sources": "Importiert aus"
-    },
-    "bento": {
-      "export": {
-        "title": "Alles exportieren",
-        "body": "Den ganzen Baum oder ausgewählte Ordner, in sechs Formaten."
-      },
-      "import": {
-        "title": "Import mit Vorschau",
-        "body": "Sieh vorab, was hinzugefügt, übersprungen oder gelöscht wird."
-      },
-      "backup": {
-        "title": "Nach Zeitplan sichern",
-        "body": "Auto-Export speichert Dateien nach dem Zeitplan, den du festlegst."
-      },
-      "popup": {
-        "title": "Dateien ins Popup ziehen",
-        "body": "Ziehe mehrere Dateien auf einmal hinein, und Snug importiert sie."
-      }
     },
     "showcase": {
       "heading": "Die echte Oberfläche.",

@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "Porta i tuoi segnalibri su qualsiasi browser.",
+      "eyebrow": "Gratis · Open source · Senza account",
+      "headline": "Porta i tuoi segnalibri su",
+      "headlineAccent": "qualsiasi browser.",
       "subheadline": "Snug fa il backup, esporta e importa i tuoi segnalibri di Chrome in un unico file. Gratis, privato, niente lascia il tuo dispositivo.",
       "cta": "Aggiungi a Chrome",
       "description": "I tuoi segnalibri lasciano il browser come un unico file, in uno dei sei formati, e si aprono in un altro browser. Ogni passaggio resta sul tuo dispositivo.",
@@ -167,9 +169,33 @@
         "jobSearch": "Ricerca di lavoro"
       }
     },
+    "folders": {
+      "bookmarksBar": "Barra dei segnalibri",
+      "otherBookmarks": "Altri segnalibri"
+    },
     "howItWorks": {
-      "heading": "Come funziona",
-      "lead": "I tuoi segnalibri escono da Chrome in un unico file e si aprono in un altro browser. Ogni passaggio resta sul tuo dispositivo."
+      "eyebrow": "Come funziona",
+      "heading": "Un solo file, da un browser all'altro.",
+      "lead": "Esporta i tuoi segnalibri, poi importali dove vuoi. Ogni passaggio resta sul tuo dispositivo."
+    },
+    "bento": {
+      "heading": "Tutto quello che fa, in quattro cicli",
+      "export": {
+        "title": "Esporta quello che vuoi",
+        "body": "L'albero intero o le cartelle che scegli, in sei formati."
+      },
+      "import": {
+        "title": "Importa con un'anteprima",
+        "body": "Prima vedi cosa verrà aggiunto, saltato o eliminato."
+      },
+      "backup": {
+        "title": "Backup pianificato",
+        "body": "L'esportazione automatica salva i file con la pianificazione che imposti."
+      },
+      "popup": {
+        "title": "Trascina i file nel popup",
+        "body": "Trascina più file insieme e Snug li importa."
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "Funziona in",
       "sources": "Importa da"
-    },
-    "bento": {
-      "export": {
-        "title": "Esporta quello che vuoi",
-        "body": "L'albero intero o le cartelle che scegli, in sei formati."
-      },
-      "import": {
-        "title": "Importa con un'anteprima",
-        "body": "Prima vedi cosa verrà aggiunto, saltato o eliminato."
-      },
-      "backup": {
-        "title": "Backup pianificato",
-        "body": "L'esportazione automatica salva i file con la pianificazione che imposti."
-      },
-      "popup": {
-        "title": "Trascina i file nel popup",
-        "body": "Trascina più file insieme e Snug li importa."
-      }
     },
     "showcase": {
       "heading": "L'interfaccia reale.",

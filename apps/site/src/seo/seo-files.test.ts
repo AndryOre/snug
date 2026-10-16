@@ -21,7 +21,7 @@ import {
   howToPageLocales,
   howToPath,
 } from '../i18n/how-to'
-import { PROMO_VIDEO_IDS } from '../i18n/landing'
+import { fullHeadline, PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
   hreflangAlternates,
   languageTag,
@@ -207,8 +207,8 @@ describe('buildLlmsFullTxt', () => {
   })
 
   it('uses the hero headline as the first heading', () => {
-    const { headline } = getContent('en').landing.hero
-    expect(body).toContain(`## ${headline}\n`)
+    const { hero } = getContent('en').landing
+    expect(body).toContain(`## ${fullHeadline(hero, 'en')}\n`)
   })
 
   it('lists the stats and the bento cards', () => {

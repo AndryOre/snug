@@ -1,5 +1,6 @@
+import { BENTO_KEYS } from '../i18n/bento'
 import type { SiteContent } from '../i18n/content'
-import { PROMO_VIDEO_IDS, youtubeWatchUrl } from '../i18n/landing'
+import { fullHeadline, PROMO_VIDEO_IDS, youtubeWatchUrl } from '../i18n/landing'
 import { SITE_ORIGIN } from '../i18n/locales'
 import { REVIEWS } from '../i18n/proof'
 import { STORE_FACTS } from './store-facts'
@@ -193,9 +194,10 @@ export function buildLlmsFullTxt(
   extraSections: readonly LlmsFullSection[] = [],
 ): string {
   const { landing } = content
-  const bentoCards = Object.values(landing.bento).map(
-    ({ title, body }) => `### ${title}\n\n${body}`,
-  )
+  const bentoCards = BENTO_KEYS.map((key) => {
+    const { title, body } = landing.bento[key]
+    return `### ${title}\n\n${body}`
+  })
   const stats = Object.values(landing.stats)
     .map(({ label, value }) => `- ${label}: ${value}`)
     .join('\n')
@@ -208,7 +210,7 @@ export function buildLlmsFullTxt(
   const sections = [
     `# Snug\n\n> ${content.meta.description}`,
     section(
-      landing.hero.headline,
+      fullHeadline(landing.hero, 'en'),
       landing.hero.subheadline,
       Object.values(landing.hero.chips).join(', '),
       stats,
