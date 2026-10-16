@@ -1,16 +1,18 @@
 ---
 import { cn } from '@workspace/ui/lib/utils'
 
+import Eyebrow from './Eyebrow.astro'
 import SectionHeading from './SectionHeading.astro'
 
 interface Props {
   section: string
+  eyebrow?: string
   heading?: string
   lead?: string
   class?: string
 }
 
-const { section, heading, lead, class: className } = Astro.props
+const { section, eyebrow, heading, lead, class: className } = Astro.props
 const headingId = heading === undefined ? undefined : `${section}-heading`
 ---
 
@@ -20,6 +22,7 @@ const headingId = heading === undefined ? undefined : `${section}-heading`
   class={cn(className)}
 >
   <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
+    {eyebrow !== undefined && <Eyebrow class="mb-3">{eyebrow}</Eyebrow>}
     {heading !== undefined && (
       <SectionHeading id={headingId}>{heading}</SectionHeading>
     )}

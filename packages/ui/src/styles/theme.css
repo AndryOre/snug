@@ -504,3 +504,17 @@
     touch-action: manipulation;
   }
 }
+
+@utility hero-arrow {
+  opacity: 1;
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (container-type: size) {
+      &.hero-arrow-in {
+        animation: hero-arrow-in 8s var(--ease-in-out-strong) infinite;
+      }
+      &.hero-arrow-out {
+        animation: hero-arrow-out 8s var(--ease-in-out-strong) infinite;
+      }
+    }
+  }
+}
