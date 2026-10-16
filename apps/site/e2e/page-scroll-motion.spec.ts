@@ -55,6 +55,117 @@ test.describe('motion allowed', () => {
   }
 })
 
+const REVEAL_SECTIONS = ['how', 'bento', 'interface', 'proof', 'faq', 'final']
+const STATIC_SECTIONS = ['hero', 'stats']
+
+test.describe('reveal coverage', () => {
+  test.use({ reducedMotion: 'no-preference' })
+
+  test('every in-scope section reveals and the hero stays static', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    const revealCounts = await page.evaluate(() => {
+      const counts: Record<string, number> = {}
+      for (const element of globalThis.document.querySelectorAll(
+        '[data-section] *, [data-section]',
+      )) {
+        const section =
+          element.closest<HTMLElement>('[data-section]')?.dataset.section
+        const isReveal = globalThis
+          .getComputedStyle(element)
+          .animationName.split(',')
+          .some((animation) => animation.trim() === 'motion-reveal')
+        if (section && isReveal) counts[section] = (counts[section] ?? 0) + 1
+      }
+      return counts
+    })
+    const counts = {
+      revealed: REVEAL_SECTIONS.map(
+        (name) => [name, revealCounts[name] ?? 0] as const,
+      ),
+      untouched: STATIC_SECTIONS.map(
+        (name) => [name, revealCounts[name] ?? 0] as const,
+      ),
+    }
+    for (const [name, count] of counts.revealed) {
+      expect(count, `${name} has reveal elements`).toBeGreaterThan(0)
+    }
+    for (const [name, count] of counts.untouched) {
+      expect(count, `${name} has no reveal elements`).toBe(0)
+    }
+  })
+})
+
+/**
+ * Sample the first stat's counted value every frame for a fixed window.
+ * @param page - A page that finished its first navigation.
+ * @param durationMs - How long to sample.
+ * @returns The sampled values and the final target.
+ */
+async function sampleStatValues(
+  page: Page,
+  durationMs: number,
+): Promise<{ values: number[]; target: number }> {
+  return page.evaluate(async (windowMs) => {
+    const stat = globalThis.document.querySelector<HTMLElement>(
+      '[data-section="stats"] dd[data-stat]',
+    )
+    if (stat === null) throw new Error('stats strip is missing')
+    const read = () => {
+      const style = globalThis.getComputedStyle(stat)
+      return {
+        value: Number(style.getPropertyValue('--stat-value')),
+        target: Number(style.getPropertyValue('--stat-target')),
+      }
+    }
+    const values: number[] = []
+    const startedAt = globalThis.performance.now()
+    while (globalThis.performance.now() - startedAt < windowMs) {
+      values.push(read().value)
+      await new Promise((resolve) => globalThis.requestAnimationFrame(resolve))
+    }
+    values.push(read().value)
+    return { values, target: read().target }
+  }, durationMs)
+}
+
+test.describe('stats count-up', () => {
+  test.use({ reducedMotion: 'no-preference' })
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/')
+    const hasTriggerSupport = await page.evaluate(
+      () => 'timelineTriggerName' in globalThis.document.body.style,
+    )
+    test.skip(!hasTriggerSupport, 'timeline-trigger needs Chrome 145+')
+  })
+
+  test('counts at once when the strip is visible on load', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 1000 })
+    await page.goto('/')
+    const { values, target } = await sampleStatValues(page, 2400)
+    expect(target).toBeGreaterThan(0)
+    expect(values.some((value) => value > 0 && value < target)).toBe(true)
+    expect(values.at(-1)).toBe(target)
+  })
+
+  test('counts only after the strip scrolls into view in a short viewport', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 600 })
+    await page.goto('/')
+    const before = await sampleStatValues(page, 300)
+    expect(new Set(before.values)).toEqual(new Set([0]))
+    await page
+      .locator('[data-section="stats"]')
+      .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+    const { values, target } = await sampleStatValues(page, 2400)
+    expect(values.some((value) => value > 0 && value < target)).toBe(true)
+    expect(values.at(-1)).toBe(target)
+  })
+})
+
 test.describe('reduced motion', () => {
   test.use({ reducedMotion: 'reduce' })
 

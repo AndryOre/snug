@@ -24,7 +24,7 @@ const BACKUP_FILES = ['05-01', '05-08', '05-15'] as const
 <Section section="bento" heading={copy.heading} class="defer-render-md">
   <ul data-bento="grid" class="mt-10 md:mt-14">
     {BENTO_KEYS.map((key) => (
-      <li class="flex" data-bento-card={key}>
+      <li class="flex scroll-reveal" data-bento-card={key}>
         <Card size="lg" className="relative w-full">
           <span data-bento-glow-clip aria-hidden="true">
             <span data-bento-glow></span>
