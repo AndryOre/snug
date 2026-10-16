@@ -1,6 +1,8 @@
 import percySnapshot from '@percy/playwright'
 import { expect, test } from '@playwright/test'
 
+import { settlePage } from './settle-page'
+
 const percyWidths = [320, 375, 768, 1280]
 const colorSchemes = ['light', 'dark'] as const
 
@@ -30,7 +32,7 @@ for (const { name, path } of pages) {
 
       test('percy snapshot', { tag: '@percy' }, async ({ page }) => {
         await page.goto(path, { waitUntil: 'networkidle' })
-        await page.evaluate(() => globalThis.document.fonts.ready)
+        await settlePage(page)
         await expect(
           page.locator('astro-island[ssr]:not([client="interaction"])'),
         ).toHaveCount(0)
