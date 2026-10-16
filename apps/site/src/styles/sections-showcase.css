@@ -4,8 +4,22 @@
     gap: 1.5rem;
   }
 
+  [data-section='interface'] [data-showcase-steps] {
+    counter-reset: showcase-step;
+  }
+
   [data-section='interface'] [data-showcase-steps] > li + li {
     margin-top: 1.5rem;
+  }
+
+  [data-section='interface'] [data-step] {
+    counter-increment: showcase-step;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  [data-section='interface'] [data-step] h3::before {
+    content: counter(showcase-step) '. ';
   }
 
   [data-section='interface'] [data-showcase-stage] {
@@ -34,40 +48,43 @@
     }
   }
 
-  @keyframes showcase-focus-mid {
-    0%,
-    100% {
-      opacity: var(--focus-min);
-      visibility: var(--focus-visibility);
+  @keyframes showcase-shot-in {
+    from {
+      opacity: 0;
     }
-    35%,
-    65% {
+    to {
       opacity: 1;
-      visibility: visible;
     }
   }
 
-  @keyframes showcase-focus-first {
-    0%,
-    65% {
-      opacity: 1;
+  @keyframes showcase-shot-out {
+    from {
       visibility: visible;
     }
-    100% {
-      opacity: var(--focus-min);
-      visibility: var(--focus-visibility);
+    to {
+      visibility: hidden;
     }
   }
 
-  @keyframes showcase-focus-last {
-    0% {
-      opacity: var(--focus-min);
-      visibility: var(--focus-visibility);
+  @keyframes showcase-step-in {
+    from {
+      opacity: 0.5;
+      border-left-color: var(--border);
     }
-    35%,
-    100% {
+    to {
       opacity: 1;
-      visibility: visible;
+      border-left-color: var(--primary);
+    }
+  }
+
+  @keyframes showcase-step-out {
+    from {
+      opacity: 1;
+      border-left-color: var(--primary);
+    }
+    to {
+      opacity: 0.5;
+      border-left-color: var(--border);
     }
   }
 
@@ -80,19 +97,38 @@
 
       [data-section='interface'] [data-step] {
         min-height: 40vh;
+        opacity: 0.5;
+        animation-duration: 1ms, 1ms;
+        animation-fill-mode: both, forwards;
+        animation-range: cover 35% cover 50%;
+        animation-timing-function: var(--ease-out-strong);
       }
 
       [data-section='interface'] [data-step='export'] {
         view-timeline: --step-export block;
+        opacity: 1;
+        border-left-color: var(--primary);
+        animation-name: showcase-step-out;
+        animation-timeline: --step-import;
+        animation-duration: 1ms;
+        animation-fill-mode: forwards;
       }
       [data-section='interface'] [data-step='import'] {
         view-timeline: --step-import block;
+        animation-name: showcase-step-in, showcase-step-out;
+        animation-timeline: --step-import, --step-autoExport;
       }
       [data-section='interface'] [data-step='autoExport'] {
         view-timeline: --step-autoExport block;
+        animation-name: showcase-step-in, showcase-step-out;
+        animation-timeline: --step-autoExport, --step-popup;
       }
       [data-section='interface'] [data-step='popup'] {
         view-timeline: --step-popup block;
+        animation-name: showcase-step-in;
+        animation-timeline: --step-popup;
+        animation-duration: 1ms;
+        animation-fill-mode: both;
       }
 
       [data-section='interface'] [data-showcase-steps] > li + li {
@@ -108,58 +144,27 @@
       }
 
       [data-section='interface'] [data-shot] {
-        --focus-min: 0;
-        --focus-visibility: hidden;
-        opacity: 1;
         visibility: visible;
         animation-duration: 1ms;
-        animation-timing-function: var(--ease-out-strong);
+        animation-timing-function: step-end;
         animation-fill-mode: both;
-        animation-range: cover 0% cover 100%;
+        animation-range: cover 0% cover 50%;
       }
 
-      [data-section='interface'] [data-step] h3 {
-        --focus-min: 0.7;
-        --focus-visibility: visible;
-        animation-duration: 1ms;
-        animation-timing-function: var(--ease-out-strong);
-        animation-fill-mode: both;
-        animation-range: cover 0% cover 100%;
-      }
-
-      [data-section='interface'] [data-shot]:not(:first-child) {
-        visibility: visible;
-      }
-
-      [data-section='interface'] [data-shot='export'],
-      [data-section='interface'] [data-step='export'] h3 {
-        animation-name: showcase-focus-first;
-      }
-      [data-section='interface'] [data-shot='import'],
-      [data-section='interface'] [data-step='import'] h3,
-      [data-section='interface'] [data-shot='autoExport'],
-      [data-section='interface'] [data-step='autoExport'] h3 {
-        animation-name: showcase-focus-mid;
-      }
-      [data-section='interface'] [data-shot='popup'],
-      [data-section='interface'] [data-step='popup'] h3 {
-        animation-name: showcase-focus-last;
-      }
-
-      [data-section='interface'] [data-shot='export'],
-      [data-section='interface'] [data-step='export'] h3 {
-        animation-timeline: --step-export;
-      }
-      [data-section='interface'] [data-shot='import'],
-      [data-section='interface'] [data-step='import'] h3 {
+      [data-section='interface'] [data-shot='export'] {
+        animation-name: showcase-shot-out;
         animation-timeline: --step-import;
       }
-      [data-section='interface'] [data-shot='autoExport'],
-      [data-section='interface'] [data-step='autoExport'] h3 {
-        animation-timeline: --step-autoExport;
+      [data-section='interface'] [data-shot='import'] {
+        animation-name: showcase-shot-in, showcase-shot-out;
+        animation-timeline: --step-import, --step-autoExport;
       }
-      [data-section='interface'] [data-shot='popup'],
-      [data-section='interface'] [data-step='popup'] h3 {
+      [data-section='interface'] [data-shot='autoExport'] {
+        animation-name: showcase-shot-in, showcase-shot-out;
+        animation-timeline: --step-autoExport, --step-popup;
+      }
+      [data-section='interface'] [data-shot='popup'] {
+        animation-name: showcase-shot-in;
         animation-timeline: --step-popup;
       }
 
