@@ -5,6 +5,8 @@ import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 import {
   expectNoHorizontalOverflow,
   hydrateHeaderIsland,
+  languageTrigger,
+  linkTabKey,
   MIN_TOUCH_TARGET,
 } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
@@ -97,6 +99,37 @@ test('reviews marquee pauses while focus is inside it', async ({ page }) => {
     .toBe('paused')
 })
 
+/**
+ * Whether this browser lacks scroll-driven animations (`animation-timeline`),
+ * which drive the install dock. Safari before 26 and Firefox without the flag
+ * lack them, so the dock stays `display: none` there as a progressive
+ * enhancement, while the hero and closing panel keep their install buttons.
+ * @param page - A loaded landing page.
+ * @returns True when the dock cannot appear in this browser.
+ */
+async function isMissingScrollTimelines(page: Page): Promise<boolean> {
+  return !(await page.evaluate(
+    () => 'animationTimeline' in globalThis.document.documentElement.style,
+  ))
+}
+
+/**
+ * Asserts the dock never covers the page without scroll-driven animations,
+ * and that the install buttons in the hero and the closing panel still serve
+ * those visitors.
+ * @param page - A loaded landing page.
+ */
+async function expectDockStaysOutOfTheWay(page: Page): Promise<void> {
+  const dock = page.locator('[data-dock]')
+  await expect(dock).toBeHidden()
+  await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
+  await expect(dock).toBeHidden()
+  await expect(page.locator('a[data-install="hero"]')).toHaveCount(1)
+  await expect(
+    page.locator('[data-section="final"] a[data-install="final"]'),
+  ).toBeVisible()
+}
+
 test.describe('reduced motion', () => {
   test.use({ reducedMotion: 'reduce' })
 
@@ -125,6 +158,10 @@ test.describe('reduced motion', () => {
     await page
       .locator('[data-section="how"]')
       .evaluate((element) => element.scrollIntoView({ block: 'start' }))
+    if (await isMissingScrollTimelines(page)) {
+      await expectDockStaysOutOfTheWay(page)
+      return
+    }
     await expect(dock).toBeVisible()
     await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
     await expect(dock).toBeHidden()
@@ -138,6 +175,10 @@ test('install dock is hidden over the hero and the closing panel and visible bet
   const dock = page.locator('[data-dock]')
   await expect(dock).toBeHidden()
   await page.locator('[data-section="proof"]').scrollIntoViewIfNeeded()
+  if (await isMissingScrollTimelines(page)) {
+    await expectDockStaysOutOfTheWay(page)
+    return
+  }
   await expect(dock).toBeVisible()
   const link = dock.locator('a[data-install="dock"]')
   await expect(link).toHaveAttribute('href', '/install?c=dock')
@@ -192,7 +233,7 @@ async function waitForLanguageIsland(page: Page): Promise<void> {
 
 async function openLanguageMenu(page: Page): Promise<void> {
   await waitForLanguageIsland(page)
-  await page.locator('[data-language-switcher]').getByRole('button').click()
+  await languageTrigger(page).click()
   await expect(page.locator(MENU)).toBeVisible()
   await page.evaluate(() =>
     Promise.all(
@@ -212,9 +253,8 @@ test('language switcher moves between locales without redirecting', async ({
   page,
 }) => {
   await page.goto('/')
-  const switcher = page.locator('[data-language-switcher]')
   await waitForLanguageIsland(page)
-  await switcher.getByRole('button').focus()
+  await languageTrigger(page).focus()
   await page.keyboard.press('Enter')
   const links = page.locator(`${MENU} a`)
   await expect(links).toHaveCount(LOCALES.length)
@@ -235,11 +275,11 @@ test('language switcher menu moves focus through items with Tab', async ({
 }) => {
   await page.goto('/')
   await waitForLanguageIsland(page)
-  await page.locator('[data-language-switcher]').getByRole('button').focus()
+  await languageTrigger(page).focus()
   await page.keyboard.press('Enter')
   const links = page.locator(`${MENU} a`)
   await expect(links.first()).toBeFocused()
-  await page.keyboard.press('Tab')
+  await page.keyboard.press(await linkTabKey(page))
   await expect(links.nth(1)).toBeFocused()
 })
 
@@ -247,7 +287,7 @@ test('language switcher closes on Escape and returns focus to the trigger', asyn
   page,
 }) => {
   await page.goto('/')
-  const trigger = page.locator('[data-language-switcher]').getByRole('button')
+  const trigger = languageTrigger(page)
   const panel = page.locator(MENU)
   await openLanguageMenu(page)
   await page.keyboard.press('Escape')
@@ -282,7 +322,7 @@ for (const width of [320, 375, 768, 1240, 1280, 1300, 1400]) {
   }) => {
     await page.setViewportSize({ width, height: 800 })
     await page.goto('/pt-br/')
-    const trigger = page.locator('[data-language-switcher]').getByRole('button')
+    const trigger = languageTrigger(page)
     await openLanguageMenu(page)
     const box = await page.locator(MENU).boundingBox()
     expect(box).not.toBeNull()
@@ -304,10 +344,7 @@ test('header keeps brand and switcher on one row at 320px', async ({
   await page.goto('/pt-br/')
   const header = page.locator('header')
   const brand = await header.getByRole('link', { name: 'Snug' }).boundingBox()
-  const trigger = await header
-    .locator('[data-language-switcher]')
-    .getByRole('button')
-    .boundingBox()
+  const trigger = await languageTrigger(page).boundingBox()
   expect(brand!.y).toBeLessThan(trigger!.y + trigger!.height)
   expect(trigger!.y).toBeLessThan(brand!.y + brand!.height)
   expect((await header.boundingBox())!.height).toBeLessThanOrEqual(64)
@@ -315,7 +352,7 @@ test('header keeps brand and switcher on one row at 320px', async ({
 
 test('skip link is first in tab order and reaches main', async ({ page }) => {
   await page.goto('/')
-  await page.keyboard.press('Tab')
+  await page.keyboard.press(await linkTabKey(page))
   const skip = page.locator('a[href="#main"]')
   await expect(skip).toBeFocused()
   await expect(skip).toBeVisible()
@@ -410,7 +447,5 @@ test('language trigger is announced as the label plus the language name', async 
 }) => {
   await page.goto('/')
   await waitForLanguageIsland(page)
-  await expect(
-    page.locator('[data-language-switcher]').getByRole('button'),
-  ).toHaveAccessibleName('Language: English')
+  await expect(languageTrigger(page)).toHaveAccessibleName('Language: English')
 })

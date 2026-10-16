@@ -1,4 +1,37 @@
-import { expect, type Page } from '@playwright/test'
+import { expect, type Locator, type Page } from '@playwright/test'
+
+/**
+ * The header language trigger. It is matched by its slot instead of its role
+ * because WebKit leaves the open popover's focus guards (`span[role=button]`)
+ * in the accessibility tree, so `getByRole('button')` matches several elements
+ * while the menu is open.
+ * @param page - A page with the site header.
+ * @returns A locator for the single trigger button.
+ */
+export function languageTrigger(page: Page): Locator {
+  return page.locator(
+    '[data-language-switcher] button[data-slot="popover-trigger"]',
+  )
+}
+
+/**
+ * The key chord that moves keyboard focus to the next link. Safari on macOS
+ * skips links on a plain Tab by default and reaches them with Option+Tab; every
+ * other browser, including WebKit on Linux, reaches them with Tab.
+ * @param page - A loaded page, used to read the browser identity.
+ * @returns `Alt+Tab` for macOS WebKit, `Tab` otherwise.
+ */
+export async function linkTabKey(page: Page): Promise<'Alt+Tab' | 'Tab'> {
+  const isMacSafari = await page.evaluate(() => {
+    const { platform, userAgent } = globalThis.navigator
+    return (
+      platform.startsWith('Mac') &&
+      /Safari/.test(userAgent) &&
+      !/Chrome|Chromium|CriOS|Edg|Firefox|FxiOS/.test(userAgent)
+    )
+  })
+  return isMacSafari ? 'Alt+Tab' : 'Tab'
+}
 
 /**
  * Hydrate the header island the way a visitor does, by moving focus into it,
@@ -8,7 +41,7 @@ import { expect, type Page } from '@playwright/test'
  * @param page - A page with the site header.
  */
 export async function hydrateHeaderIsland(page: Page): Promise<void> {
-  await page.locator('[data-language-switcher]').getByRole('button').focus()
+  await languageTrigger(page).focus()
   await expect(
     page.locator('astro-island:has([data-language-switcher])'),
   ).not.toHaveAttribute('ssr', '')
