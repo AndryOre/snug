@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro'
 import { getImage } from 'astro:assets'
 import { cn } from '@workspace/ui/lib/utils'
 
-import { getLandingCopy, PROMO_VIDEO_IDS } from '../i18n/landing'
+import { fullHeadline, getLandingCopy, PROMO_VIDEO_IDS } from '../i18n/landing'
 import type { Locale } from '../i18n/locales'
 import InstallButton from './InstallButton.astro'
 import Section from './Section.astro'
@@ -45,7 +45,7 @@ const posterSourceSet = posterImages
           locale === 'de' ? 'hyphens-manual' : 'hyphens-auto',
         )}
       >
-        {hero.headline}
+        {fullHeadline(hero, locale)}
       </h1>
       <p class="mt-6 max-w-xl text-lead text-muted-foreground">
         {hero.subheadline}

@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "Emportez vos favoris dans n'importe quel navigateur.",
+      "eyebrow": "Gratuit · Open source · Sans compte",
+      "headline": "Emportez vos favoris dans",
+      "headlineAccent": "n'importe quel navigateur.",
       "subheadline": "Snug sauvegarde, exporte et importe vos favoris Chrome dans un seul fichier. Gratuit, privé, rien ne quitte votre appareil.",
       "cta": "Ajouter à Chrome",
       "description": "Vos favoris quittent votre navigateur sous la forme d'un seul fichier, dans l'un des six formats, et s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil.",
@@ -167,9 +169,33 @@
         "jobSearch": "Recherche d'emploi"
       }
     },
+    "folders": {
+      "bookmarksBar": "Barre de favoris",
+      "otherBookmarks": "Autres favoris"
+    },
     "howItWorks": {
-      "heading": "Comment ça marche",
-      "lead": "Vos favoris quittent Chrome dans un seul fichier et s'ouvrent dans un autre navigateur. Chaque étape reste sur votre appareil."
+      "eyebrow": "Comment ça marche",
+      "heading": "Un seul fichier, d'un navigateur à l'autre.",
+      "lead": "Exportez vos favoris, puis importez-les où vous voulez. Chaque étape reste sur votre appareil."
+    },
+    "bento": {
+      "heading": "Tout ce qu'il fait, en quatre boucles",
+      "export": {
+        "title": "Exportez ce que vous voulez",
+        "body": "L'arborescence entière ou les dossiers de votre choix, en six formats."
+      },
+      "import": {
+        "title": "Importez avec un aperçu",
+        "body": "Voyez d'abord ce qui sera ajouté, ignoré ou supprimé."
+      },
+      "backup": {
+        "title": "Sauvegardez selon un planning",
+        "body": "L'exportation automatique enregistre des fichiers au rythme que vous fixez."
+      },
+      "popup": {
+        "title": "Déposez des fichiers dans le popup",
+        "body": "Déposez plusieurs fichiers d'un coup, Snug les importe."
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "Fonctionne dans",
       "sources": "Importe depuis"
-    },
-    "bento": {
-      "export": {
-        "title": "Exportez ce que vous voulez",
-        "body": "L'arborescence entière ou les dossiers de votre choix, en six formats."
-      },
-      "import": {
-        "title": "Importez avec un aperçu",
-        "body": "Voyez d'abord ce qui sera ajouté, ignoré ou supprimé."
-      },
-      "backup": {
-        "title": "Sauvegardez selon un planning",
-        "body": "L'exportation automatique enregistre des fichiers au rythme que vous fixez."
-      },
-      "popup": {
-        "title": "Déposez des fichiers dans le popup",
-        "body": "Déposez plusieurs fichiers d'un coup, Snug les importe."
-      }
     },
     "showcase": {
       "heading": "La vraie interface.",

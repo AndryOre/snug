@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "Move your bookmarks to any browser.",
+      "eyebrow": "Free · Open source · No account",
+      "headline": "Move your bookmarks to",
+      "headlineAccent": "any browser.",
       "subheadline": "Snug backs up, exports and imports your Chrome bookmarks as one file. Free, private, nothing leaves your device.",
       "cta": "Add to Chrome",
       "description": "Your bookmarks leave your browser as one file, in any of six formats, and open in another browser. Every step stays on your device.",
@@ -167,9 +169,33 @@
         "jobSearch": "Job search"
       }
     },
+    "folders": {
+      "bookmarksBar": "Bookmarks bar",
+      "otherBookmarks": "Other bookmarks"
+    },
     "howItWorks": {
-      "heading": "How it works",
-      "lead": "Your bookmarks leave Chrome as one file and open in another browser. Every step stays on your device."
+      "eyebrow": "How it works",
+      "heading": "One file, from one browser to another.",
+      "lead": "Export your bookmarks, then import them anywhere. Every step stays on your device."
+    },
+    "bento": {
+      "heading": "Everything it does, in four loops",
+      "export": {
+        "title": "Export anything",
+        "body": "Whole tree or chosen folders, in six formats."
+      },
+      "import": {
+        "title": "Import with a preview",
+        "body": "See what will be added, skipped or deleted first."
+      },
+      "backup": {
+        "title": "Back up on a schedule",
+        "body": "Auto-export saves files on the schedule you set."
+      },
+      "popup": {
+        "title": "Drop files in the popup",
+        "body": "Drop several files at once and Snug imports them."
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "Works in",
       "sources": "Imports from"
-    },
-    "bento": {
-      "export": {
-        "title": "Export anything",
-        "body": "Whole tree or chosen folders, in six formats."
-      },
-      "import": {
-        "title": "Import with a preview",
-        "body": "See what will be added, skipped or deleted first."
-      },
-      "backup": {
-        "title": "Back up on a schedule",
-        "body": "Auto-export saves files on the schedule you set."
-      },
-      "popup": {
-        "title": "Drop files in the popup",
-        "body": "Drop several files at once and Snug imports them."
-      }
     },
     "showcase": {
       "heading": "The real interface.",

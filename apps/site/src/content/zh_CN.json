@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "把书签带到任何浏览器。",
+      "eyebrow": "免费 · 开源 · 无需账号",
+      "headline": "把书签带到",
+      "headlineAccent": "任何浏览器。",
       "subheadline": "Snug 将你的 Chrome 书签备份、导出和导入为一个文件。免费、私密，内容不会离开你的设备。",
       "cta": "添加至 Chrome",
       "description": "你的书签会以一个文件的形式离开浏览器，格式可选六种，并可在另一个浏览器中打开。每一步都只在你的设备上完成。",
@@ -167,9 +169,33 @@
         "jobSearch": "求职"
       }
     },
+    "folders": {
+      "bookmarksBar": "书签栏",
+      "otherBookmarks": "其他书签"
+    },
     "howItWorks": {
-      "heading": "工作方式",
-      "lead": "书签以一个文件的形式离开 Chrome，并在另一个浏览器中打开。每一步都在你的设备上完成。"
+      "eyebrow": "工作方式",
+      "heading": "一个文件，从一个浏览器到另一个浏览器。",
+      "lead": "导出书签，然后在任何地方导入。每一步都保留在你的设备上。"
+    },
+    "bento": {
+      "heading": "它能做的一切，归为四个循环",
+      "export": {
+        "title": "导出任何内容",
+        "body": "整棵树或选定的文件夹，都可导出为六种格式。"
+      },
+      "import": {
+        "title": "先预览再导入",
+        "body": "先查看将要添加、跳过或删除的内容。"
+      },
+      "backup": {
+        "title": "按计划备份",
+        "body": "自动导出会按你设定的计划保存文件。"
+      },
+      "popup": {
+        "title": "把文件拖入弹出窗口",
+        "body": "一次拖入多个文件，Snug 会依次导入。"
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "适用浏览器",
       "sources": "可导入自"
-    },
-    "bento": {
-      "export": {
-        "title": "导出任何内容",
-        "body": "整棵树或选定的文件夹，都可导出为六种格式。"
-      },
-      "import": {
-        "title": "先预览再导入",
-        "body": "先查看将要添加、跳过或删除的内容。"
-      },
-      "backup": {
-        "title": "按计划备份",
-        "body": "自动导出会按你设定的计划保存文件。"
-      },
-      "popup": {
-        "title": "把文件拖入弹出窗口",
-        "body": "一次拖入多个文件，Snug 会依次导入。"
-      }
     },
     "showcase": {
       "heading": "真实界面",
