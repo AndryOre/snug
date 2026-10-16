@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { linkTabKey } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
@@ -66,8 +67,9 @@ test('install button shows a visible keyboard focus ring', async ({ page }) => {
   await page.goto('/')
   const install = page.locator('a[data-install="hero"]')
   await install.focus()
-  await page.keyboard.press('Shift+Tab')
-  await page.keyboard.press('Tab')
+  const tabKey = await linkTabKey(page)
+  await page.keyboard.press(`Shift+${tabKey}`)
+  await page.keyboard.press(tabKey)
   await expect(install).toBeFocused()
   const boxShadow = await install.evaluate(
     (element) => getComputedStyle(element).boxShadow,

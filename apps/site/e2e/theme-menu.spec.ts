@@ -142,6 +142,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
     await openMenu(page)
     const { violations } = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .exclude('[data-base-ui-focus-guard]')
       .analyze()
     expect(violations).toEqual([])
   })

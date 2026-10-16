@@ -35,6 +35,7 @@
         "src/scripts/render-security-headers.ts",
         "src/docs/route-middleware.ts",
         "playwright.browserstack.config.ts",
+        "playwright.percy.config.ts",
         "browserstack-timing-reporter.ts",
       ],
       // `@fontsource-variable/geist-mono` is only referenced by a relative

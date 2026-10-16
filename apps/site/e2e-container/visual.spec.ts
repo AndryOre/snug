@@ -1,4 +1,6 @@
-import { expect, type Page, test } from '@playwright/test'
+import { expect, test } from '@playwright/test'
+
+import { settlePage } from './settle-page'
 
 const pagePaths = [
   { name: 'en', path: '/' },
@@ -7,31 +9,6 @@ const pagePaths = [
 
 const viewportWidths = [1280, 768, 375, 320] as const
 const colorSchemes = ['light', 'dark'] as const
-
-async function settlePage(page: Page): Promise<void> {
-  await page.evaluate(async () => {
-    const { document: doc, window: win } = globalThis
-    await doc.fonts.ready
-    const step = win.innerHeight
-    for (let y = 0; y < doc.body.scrollHeight; y += step) {
-      win.scrollTo(0, y)
-      await new Promise((resolve) => globalThis.setTimeout(resolve, 50))
-    }
-    win.scrollTo(0, 0)
-    for (const image of doc.images) image.loading = 'eager'
-  })
-  await page.waitForLoadState('networkidle')
-  await expect
-    .poll(() =>
-      page.evaluate(() => {
-        const { document: doc } = globalThis
-        return [...doc.images].every(
-          (image) => image.complete && image.naturalWidth > 0,
-        )
-      }),
-    )
-    .toBe(true)
-}
 
 for (const { name, path } of pagePaths) {
   for (const colorScheme of colorSchemes) {

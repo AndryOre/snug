@@ -99,10 +99,14 @@ const groups = [
   const MARQUEE_SPEED_PX_PER_SECOND = 40
   const track = document.querySelector<HTMLElement>('[data-marquee-track]')
   if (track) {
-    const rowWidth = track.scrollWidth / 2
-    track.style.setProperty(
-      '--marquee-duration',
-      `${(rowWidth / MARQUEE_SPEED_PX_PER_SECOND).toFixed(2)}s`,
-    )
+    const applyDuration = () => {
+      const rowWidth = track.scrollWidth / 2
+      track.style.setProperty(
+        '--marquee-duration',
+        `${(rowWidth / MARQUEE_SPEED_PX_PER_SECOND).toFixed(2)}s`,
+      )
+    }
+    applyDuration()
+    new ResizeObserver(applyDuration).observe(track)
   }
 </script>
