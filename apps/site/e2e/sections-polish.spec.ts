@@ -167,3 +167,69 @@ test('the FAQ visual follows the open item and More questions opens the Guide FA
     faq.getByRole('link', { name: 'More questions' }),
   ).toHaveAttribute('href', '/guide/faq/')
 })
+
+test('how it works shows the eyebrow, browser names, ribbon file and arrows', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/')
+  const section = page.locator('[data-section="how"]')
+  await expect(section.locator('p.font-mono.uppercase').first()).toBeVisible()
+  const figure = section.locator('figure')
+  await expect(figure.locator('.hero-logos').first()).toContainText('Chrome')
+  await expect(figure.locator('.hero-logos').nth(1)).toContainText('Edge')
+  await expect(figure.locator('.hero-file svg')).toHaveAttribute('width', '56')
+  await expect(figure.locator('.hero-file')).toContainText('bookmarks.html')
+  await expect(figure.locator('.hero-arrow')).toHaveCount(2)
+  const nested = await figure
+    .locator('.hero-tree-source li')
+    .evaluateAll((items) =>
+      items.map((item) => getComputedStyle(item).paddingInlineStart),
+    )
+  expect(nested).toEqual(['0px', '16px', '16px', '0px'])
+})
+
+test('how it works arrows rotate to point down below md', async ({ page }) => {
+  const rotation = () =>
+    page
+      .locator('[data-section="how"] .hero-arrow')
+      .first()
+      .evaluate((element) => getComputedStyle(element).rotate)
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/')
+  expect(['none', '0deg']).toContain(await rotation())
+  await page.setViewportSize({ width: 375, height: 800 })
+  expect(await rotation()).toBe('90deg')
+})
+
+test('how it works arrows only animate opacity under no-preference', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const properties = await page
+    .locator('[data-section="how"] .hero-arrow')
+    .evaluateAll((arrows) =>
+      arrows.flatMap((arrow) =>
+        arrow
+          .getAnimations()
+          .flatMap((animation) =>
+            (animation.effect as KeyframeEffect)
+              .getKeyframes()
+              .flatMap((keyframe) =>
+                Object.keys(keyframe).filter(
+                  (key) =>
+                    ![
+                      'offset',
+                      'easing',
+                      'composite',
+                      'computedOffset',
+                    ].includes(key),
+                ),
+              ),
+          ),
+      ),
+    )
+  expect(properties.length).toBeGreaterThan(0)
+  expect(new Set(properties)).toEqual(new Set(['opacity']))
+})

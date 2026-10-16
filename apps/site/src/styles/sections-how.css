@@ -74,3 +74,29 @@
     opacity: 0;
   }
 }
+
+@keyframes hero-arrow-in {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes hero-arrow-out {
+  0%,
+  40% {
+    opacity: 0.3;
+  }
+  50%,
+  75% {
+    opacity: 1;
+  }
+  85%,
+  100% {
+    opacity: 0.3;
+  }
+}
