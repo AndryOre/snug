@@ -255,6 +255,29 @@ part of `CI passed`.
   unavailable (fork PRs), the run is skipped with a notice.
 - The sponsored plan expires on 2027-10-10.
 
+#### Percy visual review
+
+Percy renders DOM snapshots of the landing in Chrome, Firefox, Edge and Safari,
+uploaded to the `snug-site` Percy project by the `percy` job of
+`.github/workflows/browserstack.yml` (secret `PERCY_TOKEN`).
+
+- `apps/site/e2e-container/percy.spec.ts` snapshots `/`, `/de/`, `/guide/` and
+  `/404.html` in light and dark, each at 320, 375, 768 and 1280 px. The Linux
+  pixel baselines of `visual.spec.ts` are untouched, and the container run
+  ignores the Percy spec.
+- Run it with `PERCY_TOKEN=... bun run test:percy` from `apps/site`. Without the
+  token the spec skips itself, and the CI job skips with a notice (fork PRs).
+  Percy upload errors fail the job; on PRs the job is informational, like the
+  rest of this workflow. The nightly schedule does not run it.
+- Budget: 8 snapshots × 4 widths × 4 browsers is about 130 screenshots per
+  build, against the 25,000 per month Percy Desktop entitlement (roughly 190
+  builds a month). Add pages or widths only after checking this arithmetic.
+- Review flow: once the maintainer installs the Percy GitHub app, the Percy
+  status appears on PRs that touch the site. Open the build, review the diffs
+  per browser and approve or request changes. Percy is not a required
+  branch-protection check, because PRs that do not touch the site never report
+  to it.
+
 ### Landing visual regression
 
 `apps/site/e2e-container/visual.spec.ts` takes full-page `toHaveScreenshot`

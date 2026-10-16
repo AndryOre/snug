@@ -17,6 +17,8 @@ on:
         required: false
       BROWSERSTACK_ACCESS_KEY:
         required: false
+      PERCY_TOKEN:
+        required: false
   push:
     branches: [main]
     paths:
@@ -190,3 +192,53 @@ jobs:
             apps/site/test-results/
           if-no-files-found: ignore
           retention-days: 7
+
+  percy:
+    name: Percy cross-browser snapshots
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: ${{ github.event_name == 'pull_request' }}
+    env:
+      PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+    steps:
+      - name: Check for the Percy token
+        id: token
+        run: |
+          if [[ -z "${PERCY_TOKEN}" ]]; then
+            echo "::notice title=Percy skipped::PERCY_TOKEN is unavailable (fork PR or missing secret); skipping."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - if: steps.token.outputs.available == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - if: steps.token.outputs.available == 'true'
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version-file: package.json
+
+      - if: steps.token.outputs.available == 'true'
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        if: steps.token.outputs.available == 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Install Chromium
+        if: steps.token.outputs.available == 'true'
+        working-directory: apps/site
+        run: bunx playwright install --with-deps chromium
+
+      - name: Upload Percy snapshots
+        if: steps.token.outputs.available == 'true'
+        working-directory: apps/site
+        run: bun run test:percy

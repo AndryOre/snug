@@ -6,6 +6,7 @@ import { defineConfig } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './e2e-container',
+  testIgnore: /percy\.spec\.ts$/,
   snapshotPathTemplate: '{testDir}/{testFileName}-snapshots/{arg}{ext}',
   expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.002 } },
   forbidOnly: !!process.env.CI,

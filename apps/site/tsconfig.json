@@ -12,6 +12,7 @@
     "playwright.config.ts",
     "playwright.container.config.ts",
     "playwright.browserstack.config.ts",
+    "playwright.percy.config.ts",
     "playwright.layout-specs.ts",
     "browserstack-timing-reporter.ts",
     "vitest.config.ts",

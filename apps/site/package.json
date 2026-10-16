@@ -17,6 +17,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "astro build && playwright test",
     "test:e2e:browserstack": "astro build && browserstack-node-sdk playwright test --config=playwright.browserstack.config.ts",
+    "test:percy": "astro build && percy exec -- playwright test -c playwright.percy.config.ts",
     "test:container": "playwright test -c playwright.container.config.ts --grep-invert @visual",
     "test:visual": "bash scripts/visual.sh test",
     "test:visual:update": "bash scripts/visual.sh update",
@@ -42,6 +43,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.13.0",
+    "@percy/cli": "^1.32.11",
+    "@percy/playwright": "^1.1.2",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "catalog:",
     "@types/react": "catalog:",
