@@ -118,8 +118,8 @@
         animation-range: cover 0% cover 100%;
       }
 
-      [data-section='interface'] [data-step-text] {
-        --focus-min: 0.45;
+      [data-section='interface'] [data-step] h3 {
+        --focus-min: 0.7;
         --focus-visibility: visible;
         animation-duration: 1ms;
         animation-timing-function: var(--ease-out-strong);
@@ -132,34 +132,34 @@
       }
 
       [data-section='interface'] [data-shot='export'],
-      [data-section='interface'] [data-step='export'] [data-step-text] {
+      [data-section='interface'] [data-step='export'] h3 {
         animation-name: showcase-focus-first;
       }
       [data-section='interface'] [data-shot='import'],
-      [data-section='interface'] [data-step='import'] [data-step-text],
+      [data-section='interface'] [data-step='import'] h3,
       [data-section='interface'] [data-shot='autoExport'],
-      [data-section='interface'] [data-step='autoExport'] [data-step-text] {
+      [data-section='interface'] [data-step='autoExport'] h3 {
         animation-name: showcase-focus-mid;
       }
       [data-section='interface'] [data-shot='popup'],
-      [data-section='interface'] [data-step='popup'] [data-step-text] {
+      [data-section='interface'] [data-step='popup'] h3 {
         animation-name: showcase-focus-last;
       }
 
       [data-section='interface'] [data-shot='export'],
-      [data-section='interface'] [data-step='export'] [data-step-text] {
+      [data-section='interface'] [data-step='export'] h3 {
         animation-timeline: --step-export;
       }
       [data-section='interface'] [data-shot='import'],
-      [data-section='interface'] [data-step='import'] [data-step-text] {
+      [data-section='interface'] [data-step='import'] h3 {
         animation-timeline: --step-import;
       }
       [data-section='interface'] [data-shot='autoExport'],
-      [data-section='interface'] [data-step='autoExport'] [data-step-text] {
+      [data-section='interface'] [data-step='autoExport'] h3 {
         animation-timeline: --step-autoExport;
       }
       [data-section='interface'] [data-shot='popup'],
-      [data-section='interface'] [data-step='popup'] [data-step-text] {
+      [data-section='interface'] [data-step='popup'] h3 {
         animation-timeline: --step-popup;
       }
 

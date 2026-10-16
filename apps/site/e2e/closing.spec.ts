@@ -122,7 +122,9 @@ test.describe('reduced motion', () => {
     await page.goto('/')
     const dock = page.locator('[data-dock]')
     await expect(dock).toBeHidden()
-    await page.locator('[data-section="how"]').scrollIntoViewIfNeeded()
+    await page
+      .locator('[data-section="how"]')
+      .evaluate((element) => element.scrollIntoView({ block: 'start' }))
     await expect(dock).toBeVisible()
     await page.locator('[data-section="final"]').scrollIntoViewIfNeeded()
     await expect(dock).toBeHidden()

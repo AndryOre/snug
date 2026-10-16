@@ -19,7 +19,7 @@ const SHOT_FILES = {
 } as const
 
 const SIZES =
-  '(min-width: 880px) 768px, (min-width: 768px) calc(100vw - 112px), calc(100vw - 32px)'
+  '(min-width: 768px) calc((min(100vw, 77.5rem) - 10rem) * 0.615385), calc(100vw - 32px)'
 
 const THEMES = [
   { theme: 'light', directory: 'light/', visibility: 'block dark:hidden' },
@@ -41,7 +41,7 @@ const { showcase } = getContent(locale).landing
     <ol data-showcase-steps class="m-0 list-none p-0">
       {SHOT_KEYS.map((key) => (
         <li data-step={key}>
-          <div data-step-text>
+          <div>
             <h3 class="text-lg font-semibold text-foreground">
               {showcase.tabs[key]}
             </h3>
