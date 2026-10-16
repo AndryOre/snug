@@ -1,0 +1,31 @@
+# Credentials come from BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY.
+projectName: Snug
+buildName: snug-site-layout
+framework: playwright
+browserstackLocal: true
+parallelsPerPlatform: 1
+platforms:
+  - os: OS X
+    osVersion: Sonoma
+    browserName: playwright-webkit
+    browserVersion: latest
+  - os: Windows
+    osVersion: '11'
+    browserName: playwright-firefox
+    browserVersion: latest
+  - os: Windows
+    osVersion: '11'
+    browserName: edge
+    browserVersion: latest
+  - deviceName: iPhone 15
+    osVersion: '17'
+    browserName: safari
+    deviceOrientation: portrait
+  - deviceName: Google Pixel 8
+    osVersion: '14.0'
+    browserName: chrome
+    deviceOrientation: portrait
+source: playwright:snug-site:v1
+debug: false
+networkLogs: false
+consoleLogs: errors
