@@ -146,7 +146,9 @@
   },
   "landing": {
     "hero": {
-      "headline": "Lleva tus marcadores a cualquier navegador.",
+      "eyebrow": "Gratis · Código abierto · Sin cuenta",
+      "headline": "Lleva tus marcadores a",
+      "headlineAccent": "cualquier navegador.",
       "subheadline": "Snug respalda, exporta e importa tus marcadores de Chrome en un solo archivo. Gratis, privado y nada sale de tu dispositivo.",
       "cta": "Añadir a Chrome",
       "description": "Tus marcadores salen de tu navegador como un solo archivo, en cualquiera de seis formatos, y se abren en otro navegador. Cada paso ocurre en tu dispositivo.",
@@ -167,9 +169,33 @@
         "jobSearch": "Búsqueda de empleo"
       }
     },
+    "folders": {
+      "bookmarksBar": "Barra de marcadores",
+      "otherBookmarks": "Otros marcadores"
+    },
     "howItWorks": {
-      "heading": "Cómo funciona",
-      "lead": "Tus marcadores salen de Chrome en un solo archivo y se abren en otro navegador. Cada paso ocurre en tu dispositivo."
+      "eyebrow": "Cómo funciona",
+      "heading": "Un archivo, de un navegador a otro.",
+      "lead": "Exporta tus marcadores e impórtalos donde quieras. Cada paso se queda en tu dispositivo."
+    },
+    "bento": {
+      "heading": "Todo lo que hace, en cuatro ciclos",
+      "export": {
+        "title": "Exporta lo que quieras",
+        "body": "Todo el árbol o las carpetas que elijas, en seis formatos."
+      },
+      "import": {
+        "title": "Importa con vista previa",
+        "body": "Mira antes qué se añadirá, omitirá o eliminará."
+      },
+      "backup": {
+        "title": "Respalda con horario",
+        "body": "La exportación automática guarda archivos según el horario que definas."
+      },
+      "popup": {
+        "title": "Suelta archivos en el popup",
+        "body": "Suelta varios archivos a la vez y Snug los importa."
+      }
     },
     "stats": {
       "users": {
@@ -192,24 +218,6 @@
     "marquee": {
       "browsers": "Funciona en",
       "sources": "Importa desde"
-    },
-    "bento": {
-      "export": {
-        "title": "Exporta lo que quieras",
-        "body": "Todo el árbol o las carpetas que elijas, en seis formatos."
-      },
-      "import": {
-        "title": "Importa con vista previa",
-        "body": "Mira antes qué se añadirá, omitirá o eliminará."
-      },
-      "backup": {
-        "title": "Respalda con horario",
-        "body": "La exportación automática guarda archivos según el horario que definas."
-      },
-      "popup": {
-        "title": "Suelta archivos en el popup",
-        "body": "Suelta varios archivos a la vez y Snug los importa."
-      }
     },
     "showcase": {
       "heading": "La interfaz real.",

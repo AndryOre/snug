@@ -56,9 +56,15 @@ for (const locale of LOCALES) {
         path.join(import.meta.dirname, '../src/content', `${locale}.json`),
         'utf8',
       ),
-    ) as { landing: { hero: { headline: string } } }
+    ) as {
+      landing: { hero: { headline: string; headlineAccent: string } }
+    }
+    const separator = locale === 'ja' || locale === 'zh_CN' ? '' : ' '
+    const { headline, headlineAccent } = content.landing.hero
     await expect(page.locator('h1')).toHaveCount(1)
-    await expect(page.locator('h1')).toHaveText(content.landing.hero.headline)
+    await expect(page.locator('h1')).toHaveText(
+      `${headline}${separator}${headlineAccent}`,
+    )
   })
 }
 

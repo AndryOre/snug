@@ -321,17 +321,51 @@ test('showcase screenshot sits right of the steps and changes on scroll', async 
   const steps = await section.locator('[data-step]').first().boundingBox()
   const stage = await section.locator('[data-showcase-stage]').boundingBox()
   expect(stage!.x).toBeGreaterThan(steps!.x + steps!.width - 1)
+  const visibleShots = () =>
+    section.locator('[data-shot]').evaluateAll((shots) =>
+      shots
+        .filter((shot) => {
+          const style = getComputedStyle(shot)
+          return style.visibility === 'visible' && style.opacity !== '0'
+        })
+        .map((shot) => (shot as HTMLElement).dataset.shot),
+    )
+  const stepOffsets = await section
+    .locator('[data-step]')
+    .evaluateAll((items) =>
+      items.map((item) => item.getBoundingClientRect().top + scrollY),
+    )
+  const top = stepOffsets[0]!
+  const lastOffset = stepOffsets.at(-1)!
+  const bottom = lastOffset + 600
+  for (let y = top - 800; y <= bottom; y += 40) {
+    await page.evaluate((offset) => globalThis.scrollTo(0, offset), y)
+    await page.waitForTimeout(0)
+    const shown = await visibleShots()
+    expect(shown.length).toBeLessThanOrEqual(1)
+  }
+
+  await section
+    .locator('[data-step="popup"]')
+    .evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  await expect.poll(visibleShots).toEqual(['popup'])
+
   await section
     .locator('[data-step="autoExport"]')
     .evaluate((element) => element.scrollIntoView({ block: 'center' }))
-  await expect(section.locator('[data-shot="autoExport"]')).toHaveCSS(
+  await expect.poll(visibleShots).toEqual(['autoExport'])
+  await expect(section.locator('[data-step="autoExport"] h3')).toHaveCSS(
     'opacity',
     '1',
   )
-  await expect(section.locator('[data-shot="export"]')).toHaveCSS(
+  await expect(section.locator('[data-step="popup"] h3')).toHaveCSS(
     'opacity',
-    '0',
+    '0.6',
   )
+  const marker = await section
+    .locator('[data-step="autoExport"] h3')
+    .evaluate((heading) => getComputedStyle(heading, '::before').content)
+  expect(marker).toBe('counter(showcase-step) ". "')
 })
 
 test('showcase has no horizontal overflow at 320px', async ({ page }) => {

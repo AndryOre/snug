@@ -1,4 +1,8 @@
 @layer components {
+  [data-section='stats'] dd[data-stat] {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) and (top: mod(1px, 1px)) {
       [data-section='stats'] dd[data-stat] {

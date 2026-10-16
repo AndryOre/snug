@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
 import { STORE_FACTS } from '../seo/store-facts'
+import { getBentoCopy } from './bento'
 import {
   countUpParts,
   FOOTER_LINK_HREFS,
+  fullHeadline,
   getClosingCopy,
   getLandingCopy,
   installHref,
@@ -25,6 +27,38 @@ describe('landing copy', () => {
       expect(hero.folders.research.length).toBeGreaterThan(0)
       expect(trust.links.privacy.length).toBeGreaterThan(0)
     }
+  })
+
+  it('has the v3 fidelity copy keys in every locale', () => {
+    for (const locale of LOCALES) {
+      const { hero, howItWorks, folders } = getLandingCopy(locale)
+      const copy = [
+        hero.eyebrow,
+        hero.headline,
+        hero.headlineAccent,
+        howItWorks.eyebrow,
+        howItWorks.heading,
+        howItWorks.lead,
+        folders.bookmarksBar,
+        folders.otherBookmarks,
+        getBentoCopy(locale).heading,
+      ]
+      for (const value of copy) {
+        expect(value.trim().length).toBeGreaterThan(0)
+      }
+      expect(howItWorks.eyebrow).not.toBe(howItWorks.heading)
+    }
+  })
+
+  it('joins the headline lead and accent per script', () => {
+    const hero = getLandingCopy('en').hero
+    expect(fullHeadline(hero, 'en')).toBe('Move your bookmarks to any browser.')
+    expect(fullHeadline(getLandingCopy('ja').hero, 'ja')).toBe(
+      'ブックマークを、どのブラウザーにも。',
+    )
+    expect(fullHeadline(getLandingCopy('zh_CN').hero, 'zh_CN')).toBe(
+      '把书签带到任何浏览器。',
+    )
   })
 
   it('tags install links with the placement', () => {
