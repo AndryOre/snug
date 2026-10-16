@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page, test } from '@playwright/test'
 
 import { hydratedFaq } from './faq-helpers'
-import { hydrateHeaderIsland } from './layout-helpers'
+import { hydrateHeaderIsland, linkTabKey } from './layout-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
 const MINIMUM_CONTRAST = 3
@@ -148,7 +148,7 @@ for (const colorScheme of SCHEMES) {
       await page.goto(path)
       await hydrate?.(page)
       await open?.(page)
-      if (!open) await page.keyboard.press('Tab')
+      if (!open) await page.keyboard.press(await linkTabKey(page))
       const { ring, background } = await readFocusColors(locate(page))
       expect(ring, 'a 3px ring with a 2px offset').toBeDefined()
       const [ringRgb = [], backgroundRgb = []] = await toRgbList(page, [
