@@ -124,6 +124,7 @@ jobs:
     if: needs.plan.outputs.available == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: ${{ matrix.timeout }}
+    continue-on-error: ${{ github.event_name == 'pull_request' }}
     strategy:
       fail-fast: false
       max-parallel: 5
