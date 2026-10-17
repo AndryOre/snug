@@ -174,9 +174,8 @@
       }
 
       [data-section='interface'] [data-shot] img {
-        width: auto;
-        max-width: 100cqw;
-        max-height: 100cqh;
+        width: min(100cqw, calc(100cqh * 4 / 3));
+        aspect-ratio: 4 / 3;
       }
 
       [data-section='interface'] [data-shot],
