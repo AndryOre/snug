@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
-import { linkTabKey } from './layout-helpers'
+import { hasFinePointer, linkTabKey, setViewportOrSkip } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
@@ -131,14 +131,14 @@ test.describe('hero journey diagram', () => {
           }),
         )
 
-    await page.setViewportSize({ width: 1280, height: 900 })
+    await setViewportOrSkip(page, { width: 1280, height: 900 })
     await page.goto('/')
     const row = await boxes()
     expect(row).toHaveLength(3)
     expect(row[1]!.x).toBeGreaterThan(row[0]!.x + row[0]!.width - 1)
     expect(row[2]!.x).toBeGreaterThan(row[1]!.x + row[1]!.width - 1)
 
-    await page.setViewportSize({ width: 375, height: 800 })
+    await setViewportOrSkip(page, { width: 375, height: 800 })
     const stack = await boxes()
     expect(stack[1]!.y).toBeGreaterThan(stack[0]!.y + stack[0]!.height - 1)
     expect(stack[2]!.y).toBeGreaterThan(stack[1]!.y + stack[1]!.height - 1)
@@ -184,7 +184,7 @@ test.describe('hero journey diagram', () => {
 
   for (const path of ['/de/', '/ru/']) {
     test(`${path} journey does not overflow at 320`, async ({ page }) => {
-      await page.setViewportSize({ width: 320, height: 700 })
+      await setViewportOrSkip(page, { width: 320, height: 700 })
       await page.goto(path)
       const overflowing = await page
         .locator('[data-section="how"] figure')
@@ -259,10 +259,10 @@ test.describe('stats strip and browser marquee', () => {
     expect(Math.abs(duration - rowWidth / 40)).toBeLessThan(0.1)
   })
 
-  test('pauses on hover with a fine pointer', async ({ page, hasTouch }) => {
-    test.skip(hasTouch, 'hover needs a fine pointer')
+  test('pauses on hover with a fine pointer', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/')
+    test.skip(!(await hasFinePointer(page)), 'hover needs a fine pointer')
     await page.locator('[data-marquee-viewport]').hover()
     await expect(page.locator('[data-marquee-track]')).toHaveCSS(
       'animation-play-state',
@@ -300,7 +300,7 @@ test.describe('stats strip and browser marquee', () => {
   })
 
   test('does not overflow at 320', async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 700 })
+    await setViewportOrSkip(page, { width: 320, height: 700 })
     await page.goto('/')
     const scrollWidth = await page.evaluate(
       () => globalThis.document.documentElement.scrollWidth,

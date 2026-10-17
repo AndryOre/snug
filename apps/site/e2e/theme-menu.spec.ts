@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
-import { MIN_TOUCH_TARGET } from './layout-helpers'
+import { MIN_TOUCH_TARGET, setViewportOrSkip } from './layout-helpers'
 
 const WIDTHS = [320, 375, 768, 1280]
 
@@ -88,7 +88,7 @@ for (const width of WIDTHS) {
   test(`menu items are 44px tall and the panel fits at ${width}px`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width, height: 800 })
+    await setViewportOrSkip(page, { width, height: 800 })
     await visit(page)
     await openMenu(page)
     const items = page.getByRole('menuitemradio')
@@ -115,7 +115,7 @@ test('the trigger is a 44px square', async ({ page }) => {
 
 for (const path of ['/de/', '/ru/']) {
   test(`header stays on one row at 320px on ${path}`, async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 800 })
+    await setViewportOrSkip(page, { width: 320, height: 800 })
     await visit(page, path)
     const header = page.locator('header')
     await expect(header.locator('[data-theme-menu]')).toBeVisible()

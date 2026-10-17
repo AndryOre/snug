@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test'
+import { expect, type Locator, type Page, test } from '@playwright/test'
 
 /**
  * The header language trigger. It is matched by its slot instead of its role
@@ -119,4 +119,37 @@ export async function expectNoElementOverflow(page: Page): Promise<void> {
     return found
   }, ELEMENT_SWEEP_SELECTOR)
   expect(offenders).toEqual([])
+}
+
+/**
+ * Resizes the viewport and skips the running test when the device keeps its
+ * own. Real mobile devices on BrowserStack ignore `page.setViewportSize`, so a
+ * layout assertion that depends on the requested width would measure the
+ * device width instead.
+ * @param page - The page under test.
+ * @param size - The viewport to request.
+ * @param size.width - Requested width in CSS pixels.
+ * @param size.height - Requested height in CSS pixels.
+ */
+export async function setViewportOrSkip(
+  page: Page,
+  size: { width: number; height: number },
+): Promise<void> {
+  await page.setViewportSize(size)
+  const appliedWidth = await page.evaluate(() => globalThis.innerWidth)
+  test.skip(
+    appliedWidth !== size.width,
+    `the device ignored the ${size.width}×${size.height} viewport`,
+  )
+}
+
+/**
+ * Whether the primary input can hover, which touch devices cannot.
+ * @param page - A loaded page.
+ * @returns True when the device has a hovering, fine pointer.
+ */
+export async function hasFinePointer(page: Page): Promise<boolean> {
+  return page.evaluate(
+    () => globalThis.matchMedia('(hover: hover) and (pointer: fine)').matches,
+  )
 }

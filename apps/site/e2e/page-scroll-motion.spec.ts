@@ -1,6 +1,7 @@
 import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { setViewportOrSkip } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -25,7 +26,9 @@ async function scrollThroughPage(page: Page): Promise<void> {
 }
 
 test.describe('motion allowed', () => {
-  test.use({ reducedMotion: 'no-preference' })
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+  })
 
   for (const path of PATHS) {
     test(`${path} settles every reveal by the end of the page`, async ({
@@ -59,7 +62,9 @@ const REVEAL_SECTIONS = ['how', 'bento', 'interface', 'proof', 'faq', 'final']
 const STATIC_SECTIONS = ['hero', 'stats']
 
 test.describe('reveal coverage', () => {
-  test.use({ reducedMotion: 'no-preference' })
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+  })
 
   test('every in-scope section reveals and the hero stays static', async ({
     page,
@@ -135,9 +140,8 @@ async function sampleStatValues(
 }
 
 test.describe('stats count-up', () => {
-  test.use({ reducedMotion: 'no-preference' })
-
   test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/')
     const hasTriggerSupport = await page.evaluate(
       () => 'timelineTriggerName' in globalThis.document.body.style,
@@ -146,10 +150,8 @@ test.describe('stats count-up', () => {
   })
 
   test('counts at once when the strip is visible on load', async ({ page }) => {
-    await page.setViewportSize({ width: 1280, height: 1000 })
+    await setViewportOrSkip(page, { width: 1280, height: 1000 })
     await page.goto('/')
-    const appliedWidth = await page.evaluate(() => globalThis.innerWidth)
-    test.skip(appliedWidth < 1280, 'the device ignored the 1280×1000 viewport')
     const { values, target } = await sampleStatValues(page, 2400)
     expect(target).toBeGreaterThan(0)
     expect(values.some((value) => value > 0 && value < target)).toBe(true)
@@ -159,7 +161,7 @@ test.describe('stats count-up', () => {
   test('counts only after the strip scrolls into view in a short viewport', async ({
     page,
   }) => {
-    await page.setViewportSize({ width: 1280, height: 600 })
+    await setViewportOrSkip(page, { width: 1280, height: 600 })
     await page.goto('/')
     const before = await sampleStatValues(page, 300)
     expect(new Set(before.values)).toEqual(new Set([0]))
@@ -173,7 +175,9 @@ test.describe('stats count-up', () => {
 })
 
 test.describe('reduced motion', () => {
-  test.use({ reducedMotion: 'reduce' })
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+  })
 
   for (const path of PATHS) {
     test(`${path} is static and fully visible`, async ({ page }) => {
@@ -204,7 +208,9 @@ test.describe('reduced motion', () => {
 })
 
 test.describe('layout stability', () => {
-  test.use({ reducedMotion: 'no-preference' })
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
+  })
 
   test('home page records zero layout shift while scrolling', async ({
     page,

@@ -5,7 +5,7 @@ import { localePath, LOCALES } from '../src/i18n/locales'
 import { COMPARISON_PATHS } from './comparison-paths'
 import { firstFaqTrigger } from './faq-helpers'
 import { HOW_TO_INDEX_PATHS, HOW_TO_PATHS } from './how-to-paths'
-import { expectNoHorizontalOverflow } from './layout-helpers'
+import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
 
 const AXE_TAGS = [
   'wcag2a',
@@ -52,7 +52,7 @@ for (const colorScheme of SCHEMES) {
 }
 
 test('/privacy/ has no accessibility violations at 320px', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 640 })
+  await setViewportOrSkip(page, { width: 320, height: 640 })
   await page.goto('/privacy/')
   await expectNoViolations(page)
 })
@@ -65,7 +65,7 @@ for (const path of [
   test(`${path} has no accessibility violations or horizontal scroll at 320px`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width: 320, height: 640 })
+    await setViewportOrSkip(page, { width: 320, height: 640 })
     await page.goto(path)
     await expectNoViolations(page)
     await expectNoHorizontalOverflow(page)
@@ -76,7 +76,7 @@ test('/guide/ has no accessibility violations at 320px and 768px', async ({
   page,
 }) => {
   for (const width of [320, 768]) {
-    await page.setViewportSize({ width, height: 800 })
+    await setViewportOrSkip(page, { width, height: 800 })
     await page.goto('/guide/')
     await expectNoViolations(page)
   }
@@ -140,7 +140,7 @@ test.describe('opened states', () => {
   test('FAQ open has no accessibility violations at 320px', async ({
     page,
   }) => {
-    await page.setViewportSize({ width: 320, height: 640 })
+    await setViewportOrSkip(page, { width: 320, height: 640 })
     await page.goto('/')
     const first = await firstFaqTrigger(page)
     await first.click()
