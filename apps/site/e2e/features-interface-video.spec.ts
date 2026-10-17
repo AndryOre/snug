@@ -1,6 +1,5 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, test } from '@playwright/test'
-import type { Locator } from '@playwright/test'
+import { expect, type Locator, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
@@ -311,13 +310,31 @@ test('showcase shows the first screenshot under reduced motion', async ({
   for (const step of steps) await expect(step).toBeVisible()
 })
 
-test('showcase screenshot sits right of the steps and changes on scroll', async ({
+const SHOWCASE_STEPS = ['export', 'import', 'autoExport', 'popup'] as const
+
+const scrollToShowcaseStep = (page: Page, index: number) =>
+  page.evaluate((stepIndex) => {
+    const { document, getComputedStyle, innerHeight, scrollY } = globalThis
+    const track = document.querySelector('[data-showcase]')!
+    const panel = track.querySelector('[data-showcase-panel]')!
+    const pinTop = Number(getComputedStyle(panel).top.replace('px', ''))
+    const stepDistance = innerHeight * 0.75
+    const pinStart = track.getBoundingClientRect().top + scrollY - pinTop
+    globalThis.scrollTo(
+      0,
+      pinStart + stepDistance * stepIndex + stepDistance / 2,
+    )
+    return pinTop
+  }, index)
+
+test('showcase pins its panel and switches one screenshot per step on scroll', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 800 })
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/')
   const section = page.locator('[data-section="interface"]')
+  const panel = section.locator('[data-showcase-panel]')
   const steps = await section.locator('[data-step]').first().boundingBox()
   const stage = await section.locator('[data-showcase-stage]').boundingBox()
   expect(stage!.x).toBeGreaterThan(steps!.x + steps!.width - 1)
@@ -330,44 +347,54 @@ test('showcase screenshot sits right of the steps and changes on scroll', async 
         })
         .map((shot) => (shot as HTMLElement).dataset.shot),
     )
-  const stepOffsets = await section
-    .locator('[data-step]')
-    .evaluateAll((items) =>
-      items.map((item) => item.getBoundingClientRect().top + scrollY),
-    )
-  const top = stepOffsets[0]!
-  const lastOffset = stepOffsets.at(-1)!
-  const bottom = lastOffset + 600
-  for (let y = top - 800; y <= bottom; y += 40) {
-    await page.evaluate((offset) => globalThis.scrollTo(0, offset), y)
-    await page.waitForTimeout(0)
-    const shown = await visibleShots()
-    expect(shown.length).toBeLessThanOrEqual(1)
+  for (const [index, step] of SHOWCASE_STEPS.entries()) {
+    const pinTop = await scrollToShowcaseStep(page, index)
+    await expect.poll(visibleShots).toEqual([step])
+    const box = await panel.boundingBox()
+    expect(Math.abs(box!.y - pinTop)).toBeLessThanOrEqual(1)
+    const heading = await section.locator('h2').boundingBox()
+    const shot = await section
+      .locator(`[data-shot="${step}"] img:visible`)
+      .boundingBox()
+    expect(heading!.y).toBeGreaterThanOrEqual(0)
+    expect(shot!.y).toBeGreaterThanOrEqual(0)
+    expect(shot!.y + shot!.height).toBeLessThanOrEqual(800)
   }
 
-  const scrollPastCenter = (step: string) =>
-    section.locator(`[data-step="${step}"]`).evaluate((element) => {
-      element.scrollIntoView({ block: 'center' })
-      globalThis.scrollBy(0, 40)
-    })
-
-  await scrollPastCenter('popup')
-  await expect.poll(visibleShots).toEqual(['popup'])
-
-  await scrollPastCenter('autoExport')
-  await expect.poll(visibleShots).toEqual(['autoExport'])
-  await expect(section.locator('[data-step="autoExport"] h3')).toHaveCSS(
+  await expect(section.locator('[data-step="popup"] h3')).toHaveCSS(
     'opacity',
     '1',
   )
-  await expect(section.locator('[data-step="popup"] h3')).toHaveCSS(
+  await expect(section.locator('[data-step="autoExport"] h3')).toHaveCSS(
     'opacity',
     '0.6',
   )
   const marker = await section
-    .locator('[data-step="autoExport"] h3')
+    .locator('[data-step="popup"] h3')
     .evaluate((heading) => getComputedStyle(heading, '::before').content)
   expect(marker).toBe('counter(showcase-step) ". "')
+})
+
+test('showcase on mobile pins the stage and shows only the active step', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 740 })
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  const section = page.locator('[data-section="interface"]')
+  const visibleSteps = () =>
+    section.locator('[data-step]').evaluateAll((items) =>
+      items
+        .filter((item) => {
+          const style = getComputedStyle(item)
+          return style.visibility === 'visible' && style.opacity !== '0'
+        })
+        .map((item) => (item as HTMLElement).dataset.step),
+    )
+  for (const [index, step] of SHOWCASE_STEPS.entries()) {
+    await scrollToShowcaseStep(page, index)
+    await expect.poll(visibleSteps).toEqual([step])
+  }
 })
 
 test('showcase has no horizontal overflow at 320px', async ({ page }) => {
