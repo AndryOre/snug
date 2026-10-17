@@ -5,6 +5,7 @@ import {
   expectNoElementOverflow,
   hydrateHeaderIsland,
   MIN_TOUCH_TARGET,
+  setViewportOrSkip,
 } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
@@ -26,7 +27,7 @@ for (const colorScheme of SCHEMES) {
         page,
       }) => {
         await page.emulateMedia({ colorScheme })
-        await page.setViewportSize({ width, height: 900 })
+        await setViewportOrSkip(page, { width, height: 900 })
         await page.goto(path)
         await expect(page.locator('h1')).toBeVisible()
         await expectNoElementOverflow(page)
@@ -47,10 +48,10 @@ test.describe('breakpoint at 767 vs 768', () => {
             section.scrollWidth -
             globalThis.document.documentElement.clientWidth,
         )
-    await page.setViewportSize({ width: 767, height: 900 })
+    await setViewportOrSkip(page, { width: 767, height: 900 })
     await page.goto('/')
     expect(await overflow()).toBeLessThanOrEqual(0)
-    await page.setViewportSize({ width: 768, height: 900 })
+    await setViewportOrSkip(page, { width: 768, height: 900 })
     expect(await overflow()).toBeLessThanOrEqual(0)
   })
 
@@ -61,10 +62,10 @@ test.describe('breakpoint at 767 vs 768', () => {
       page
         .locator('[data-section="how"] .journey-boundary > .hero-stage')
         .evaluate((flex) => getComputedStyle(flex).flexDirection)
-    await page.setViewportSize({ width: 767, height: 900 })
+    await setViewportOrSkip(page, { width: 767, height: 900 })
     await page.goto('/')
     expect(await direction()).toBe('column')
-    await page.setViewportSize({ width: 768, height: 900 })
+    await setViewportOrSkip(page, { width: 768, height: 900 })
     expect(await direction()).toBe('row')
   })
 })

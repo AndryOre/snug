@@ -4,10 +4,12 @@ import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 import {
   expectNoHorizontalOverflow,
+  hasFinePointer,
   hydrateHeaderIsland,
   languageTrigger,
   linkTabKey,
   MIN_TOUCH_TARGET,
+  setViewportOrSkip,
 } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
@@ -79,10 +81,7 @@ test('reviews marquee pauses on hover', async ({ page }) => {
   await viewport.scrollIntoViewIfNeeded()
   const playState = () =>
     track.evaluate((element) => getComputedStyle(element).animationPlayState)
-  const hasPointer = await page.evaluate(
-    () => globalThis.matchMedia('(hover: hover) and (pointer: fine)').matches,
-  )
-  test.skip(!hasPointer, 'hover pause needs a fine pointer')
+  test.skip(!(await hasFinePointer(page)), 'hover pause needs a fine pointer')
   expect(await playState()).toBe('running')
   await viewport.hover()
   await expect.poll(playState).toBe('paused')
@@ -131,7 +130,9 @@ async function expectDockStaysOutOfTheWay(page: Page): Promise<void> {
 }
 
 test.describe('reduced motion', () => {
-  test.use({ reducedMotion: 'reduce' })
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+  })
 
   test('reviews render as a static wrapped grid without the duplicate row', async ({
     page,
@@ -321,7 +322,7 @@ for (const width of [320, 375, 768, 1240, 1280, 1300, 1400]) {
   test(`language switcher opens within the viewport at ${width}px`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width, height: 800 })
+    await setViewportOrSkip(page, { width, height: 800 })
     await page.goto('/pt-br/')
     const trigger = languageTrigger(page)
     await openLanguageMenu(page)
@@ -341,7 +342,7 @@ for (const width of [320, 375, 768, 1240, 1280, 1300, 1400]) {
 test('header keeps brand and switcher on one row at 320px', async ({
   page,
 }) => {
-  await page.setViewportSize({ width: 320, height: 800 })
+  await setViewportOrSkip(page, { width: 320, height: 800 })
   await page.goto('/pt-br/')
   const header = page.locator('header')
   const brand = await header.getByRole('link', { name: 'Snug' }).boundingBox()

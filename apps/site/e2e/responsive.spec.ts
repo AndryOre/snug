@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger } from './faq-helpers'
-import { expectNoHorizontalOverflow } from './layout-helpers'
+import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -31,7 +31,7 @@ for (const path of PATHS) {
   test(`${path} has no horizontal overflow at 320px with a FAQ answer open`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width: 320, height: 640 })
+    await setViewportOrSkip(page, { width: 320, height: 640 })
     await page.goto(path)
     const first = await firstFaqTrigger(page)
     await first.click()
