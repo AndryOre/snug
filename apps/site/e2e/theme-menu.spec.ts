@@ -1,7 +1,12 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
-import { MIN_TOUCH_TARGET, setViewportOrSkip } from './layout-helpers'
+import {
+  emulateMediaOrSkip,
+  MIN_TOUCH_TARGET,
+  newContextOrSkip,
+  setViewportOrSkip,
+} from './layout-helpers'
 
 const WIDTHS = [320, 375, 768, 1280]
 
@@ -20,7 +25,7 @@ async function openMenu(page: Page) {
 test('keyboard opens, moves, selects and returns focus on Escape', async ({
   page,
 }) => {
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await visit(page)
   const trigger = page.getByRole('button', { name: 'Theme' })
   await expect(trigger).toBeVisible()
@@ -45,7 +50,7 @@ test('keyboard opens, moves, selects and returns focus on Escape', async ({
 })
 
 test('the choice persists across a reload', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await visit(page)
   await openMenu(page)
   await page.getByRole('menuitemradio', { name: 'Light' }).click()
@@ -61,26 +66,26 @@ test('the choice persists across a reload', async ({ page }) => {
 })
 
 test('System follows operating system changes', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await visit(page)
   await openMenu(page)
   await page.getByRole('menuitemradio', { name: 'System' }).click()
   await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
 
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await expect(page.locator('html')).toHaveClass(/\bdark\b/)
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
 })
 
 test('an explicit choice ignores operating system changes', async ({
   page,
 }) => {
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await visit(page)
   await openMenu(page)
   await page.getByRole('menuitemradio', { name: 'Light' }).click()
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
 })
 
@@ -137,7 +142,7 @@ for (const path of ['/de/', '/ru/']) {
 
 for (const colorScheme of ['light', 'dark'] as const) {
   test(`axe passes with the menu open in ${colorScheme}`, async ({ page }) => {
-    await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
+    await emulateMediaOrSkip(page, { colorScheme, reducedMotion: 'reduce' })
     await visit(page)
     await openMenu(page)
     const { violations } = await new AxeBuilder({ page })
@@ -149,7 +154,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
 }
 
 test('the theme menu is hidden without JavaScript', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false })
+  const context = await newContextOrSkip(browser, { javaScriptEnabled: false })
   const page = await context.newPage()
   await page.goto('http://localhost:4399/')
   await expect(page.locator('[data-theme-menu]')).toBeHidden()
@@ -159,7 +164,7 @@ test('the theme menu is hidden without JavaScript', async ({ browser }) => {
 test('a theme switch runs no colour transition on the frame it flips', async ({
   page,
 }) => {
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await visit(page)
   await page.evaluate(() => {
     const samples: string[] = []

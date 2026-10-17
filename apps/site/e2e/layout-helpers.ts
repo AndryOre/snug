@@ -1,4 +1,12 @@
-import { expect, type Locator, type Page, test } from '@playwright/test'
+import {
+  type Browser,
+  type BrowserContext,
+  type BrowserContextOptions,
+  expect,
+  type Locator,
+  type Page,
+  test,
+} from '@playwright/test'
 
 /**
  * The header language trigger. It is matched by its slot instead of its role
@@ -152,4 +160,59 @@ export async function hasFinePointer(page: Page): Promise<boolean> {
   return page.evaluate(
     () => globalThis.matchMedia('(hover: hover) and (pointer: fine)').matches,
   )
+}
+
+/**
+ * Applies media emulation and skips the running test when the device cannot.
+ * Real iPhones on BrowserStack reject `page.emulateMedia`; the test still runs
+ * when the device already reports every requested value.
+ * @param page - The page under test.
+ * @param media - The `page.emulateMedia` options to apply.
+ */
+export async function emulateMediaOrSkip(
+  page: Page,
+  media: Parameters<Page['emulateMedia']>[0],
+): Promise<void> {
+  try {
+    await page.emulateMedia(media)
+  } catch (error) {
+    if (!String(error).includes('Unsupported Playwright command on iOS'))
+      throw error
+    const reported = await page.evaluate(() => ({
+      colorScheme: globalThis.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light',
+      reducedMotion: globalThis.matchMedia('(prefers-reduced-motion: reduce)')
+        .matches
+        ? 'reduce'
+        : 'no-preference',
+    }))
+    const isSupported =
+      (media?.colorScheme === undefined ||
+        media.colorScheme === reported.colorScheme) &&
+      (media?.reducedMotion === undefined ||
+        media.reducedMotion === reported.reducedMotion)
+    test.skip(!isSupported, 'the device cannot emulate the requested media')
+  }
+}
+
+/**
+ * Opens an extra browser context and skips the running test when the device
+ * allows only one. Real iPhones on BrowserStack reject a second context.
+ * @param browser - The `browser` fixture.
+ * @param options - Context options, as for `browser.newContext`.
+ * @returns A context created with the given options.
+ */
+export async function newContextOrSkip(
+  browser: Browser,
+  options: BrowserContextOptions,
+): Promise<BrowserContext> {
+  try {
+    return await browser.newContext(options)
+  } catch (error) {
+    if (!String(error).includes('Only one browser context is allowed'))
+      throw error
+    test.skip(true, 'the device allows a single browser context')
+    throw error
+  }
 }

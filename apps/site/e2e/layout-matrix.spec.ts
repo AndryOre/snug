@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import {
+  emulateMediaOrSkip,
   expectNoElementOverflow,
   hydrateHeaderIsland,
   MIN_TOUCH_TARGET,
@@ -26,7 +27,7 @@ for (const colorScheme of SCHEMES) {
       test(`${path} clips no heading, button, card or badge at ${width}px in ${colorScheme}`, async ({
         page,
       }) => {
-        await page.emulateMedia({ colorScheme })
+        await emulateMediaOrSkip(page, { colorScheme })
         await setViewportOrSkip(page, { width, height: 900 })
         await page.goto(path)
         await expect(page.locator('h1')).toBeVisible()

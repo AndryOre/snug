@@ -5,7 +5,11 @@ import { localePath, LOCALES } from '../src/i18n/locales'
 import { COMPARISON_PATHS } from './comparison-paths'
 import { firstFaqTrigger } from './faq-helpers'
 import { HOW_TO_INDEX_PATHS, HOW_TO_PATHS } from './how-to-paths'
-import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
+import {
+  emulateMediaOrSkip,
+  expectNoHorizontalOverflow,
+  setViewportOrSkip,
+} from './layout-helpers'
 
 const AXE_TAGS = [
   'wcag2a',
@@ -36,7 +40,7 @@ async function expectNoViolations(page: Page): Promise<void> {
 const SCHEMES = ['light', 'dark'] as const
 
 test.beforeEach(async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await emulateMediaOrSkip(page, { reducedMotion: 'reduce' })
 })
 
 for (const colorScheme of SCHEMES) {
@@ -44,7 +48,7 @@ for (const colorScheme of SCHEMES) {
     test(`${path} has no accessibility violations in ${colorScheme}`, async ({
       page,
     }) => {
-      await page.emulateMedia({ colorScheme })
+      await emulateMediaOrSkip(page, { colorScheme })
       await page.goto(path)
       await expectNoViolations(page)
     })
@@ -105,7 +109,7 @@ for (const colorScheme of SCHEMES) {
   test(`the 404 page has no accessibility violations in ${colorScheme}`, async ({
     page,
   }) => {
-    await page.emulateMedia({ colorScheme })
+    await emulateMediaOrSkip(page, { colorScheme })
     const response = await page.goto('/nope')
     expect(response?.status()).toBe(404)
     await expectNoViolations(page)

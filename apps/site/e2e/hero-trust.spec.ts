@@ -2,7 +2,13 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
-import { hasFinePointer, linkTabKey, setViewportOrSkip } from './layout-helpers'
+import {
+  emulateMediaOrSkip,
+  hasFinePointer,
+  linkTabKey,
+  newContextOrSkip,
+  setViewportOrSkip,
+} from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 
 const SCHEMES = ['light', 'dark'] as const
@@ -81,14 +87,14 @@ for (const colorScheme of SCHEMES) {
   test(`the root color-scheme follows a ${colorScheme} system`, async ({
     page,
   }) => {
-    await page.emulateMedia({ colorScheme })
+    await emulateMediaOrSkip(page, { colorScheme })
     await page.goto('/')
     await expect(page.locator('html')).toHaveCSS('color-scheme', colorScheme)
   })
 }
 
 test('works without JavaScript', async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false })
+  const context = await newContextOrSkip(browser, { javaScriptEnabled: false })
   const page = await context.newPage()
   await page.goto('/')
   await expect(page.locator('a[data-install="hero"]')).toBeVisible()
@@ -145,7 +151,7 @@ test.describe('hero journey diagram', () => {
   })
 
   test('the stage loops under no-preference', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
     await page.goto('/')
     const read = (selector: string) =>
       page
@@ -168,7 +174,7 @@ test.describe('hero journey diagram', () => {
   test('the stage is static and fully visible under reduce', async ({
     page,
   }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'reduce' })
     await page.goto('/')
     for (const selector of [
       '.hero-file',
@@ -220,7 +226,7 @@ test.describe('hero journey diagram', () => {
 
   for (const colorScheme of SCHEMES) {
     test(`the journey passes axe in ${colorScheme}`, async ({ page }) => {
-      await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' })
+      await emulateMediaOrSkip(page, { colorScheme, reducedMotion: 'reduce' })
       await page.goto('/')
       const { violations } = await new AxeBuilder({ page })
         .include('[data-section="how"] figure')
@@ -246,7 +252,7 @@ test.describe('stats strip and browser marquee', () => {
   test('animation duration follows the row width at 40 px/s', async ({
     page,
   }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
     await page.goto('/')
     const { rowWidth, duration } = await page
       .locator('[data-marquee-track]')
@@ -260,7 +266,7 @@ test.describe('stats strip and browser marquee', () => {
   })
 
   test('pauses on hover with a fine pointer', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
     await page.goto('/')
     test.skip(!(await hasFinePointer(page)), 'hover needs a fine pointer')
     await page.locator('[data-marquee-viewport]').hover()
@@ -271,7 +277,7 @@ test.describe('stats strip and browser marquee', () => {
   })
 
   test('pauses when the viewport takes focus', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
     await page.goto('/')
     const viewport = page.locator('[data-marquee-viewport]')
     await expect(viewport).toHaveAttribute('role', 'group')
@@ -288,7 +294,7 @@ test.describe('stats strip and browser marquee', () => {
   })
 
   test('is static under reduced motion', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'reduce' })
     await page.goto('/')
     await expect(page.locator('[data-marquee-track]')).toHaveCSS(
       'animation-name',

@@ -1,7 +1,7 @@
 import { expect, type Page, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
-import { setViewportOrSkip } from './layout-helpers'
+import { emulateMediaOrSkip, setViewportOrSkip } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -27,7 +27,7 @@ async function scrollThroughPage(page: Page): Promise<void> {
 
 test.describe('motion allowed', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
   })
 
   for (const path of PATHS) {
@@ -63,7 +63,7 @@ const STATIC_SECTIONS = ['hero', 'stats']
 
 test.describe('reveal coverage', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
   })
 
   test('every in-scope section reveals and the hero stays static', async ({
@@ -141,7 +141,7 @@ async function sampleStatValues(
 
 test.describe('stats count-up', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
     await page.goto('/')
     const hasTriggerSupport = await page.evaluate(
       () => 'timelineTriggerName' in globalThis.document.body.style,
@@ -176,7 +176,7 @@ test.describe('stats count-up', () => {
 
 test.describe('reduced motion', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'reduce' })
   })
 
   for (const path of PATHS) {
@@ -209,7 +209,7 @@ test.describe('reduced motion', () => {
 
 test.describe('layout stability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'no-preference' })
   })
 
   test('home page records zero layout shift while scrolling', async ({

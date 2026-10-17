@@ -3,12 +3,14 @@ import { expect, type Page, test } from '@playwright/test'
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
 import {
+  emulateMediaOrSkip,
   expectNoHorizontalOverflow,
   hasFinePointer,
   hydrateHeaderIsland,
   languageTrigger,
   linkTabKey,
   MIN_TOUCH_TARGET,
+  newContextOrSkip,
   setViewportOrSkip,
 } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
@@ -131,7 +133,7 @@ async function expectDockStaysOutOfTheWay(page: Page): Promise<void> {
 
 test.describe('reduced motion', () => {
   test.beforeEach(async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await emulateMediaOrSkip(page, { reducedMotion: 'reduce' })
   })
 
   test('reviews render as a static wrapped grid without the duplicate row', async ({
@@ -399,19 +401,20 @@ test('proof section keeps third-party requests off the page', async ({
   expect([...origins]).toEqual(['http://localhost:4399'])
 })
 
-test.describe('without JavaScript', () => {
-  test.use({ javaScriptEnabled: false })
-
-  test('footer links reach every locale', async ({ page }) => {
-    await page.goto('/')
-    const links = page.locator('footer [data-footer-languages] a')
-    await expect(links).toHaveCount(LOCALES.length)
-    await page
-      .locator('footer [data-footer-languages]')
-      .getByRole('link', { name: 'Deutsch' })
-      .click()
-    await expect(page).toHaveURL(/\/de\/$/)
-  })
+test('without JavaScript the footer links reach every locale', async ({
+  browser,
+}) => {
+  const context = await newContextOrSkip(browser, { javaScriptEnabled: false })
+  const page = await context.newPage()
+  await page.goto('/')
+  const links = page.locator('footer [data-footer-languages] a')
+  await expect(links).toHaveCount(LOCALES.length)
+  await page
+    .locator('footer [data-footer-languages]')
+    .getByRole('link', { name: 'Deutsch' })
+    .click()
+  await expect(page).toHaveURL(/\/de\/$/)
+  await context.close()
 })
 
 test('/404/ marks no language link as current', async ({ page }) => {

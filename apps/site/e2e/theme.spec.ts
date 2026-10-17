@@ -1,12 +1,14 @@
 import { expect, test } from '@playwright/test'
 
+import { emulateMediaOrSkip, newContextOrSkip } from './layout-helpers'
+
 const SCHEMES = ['light', 'dark'] as const
 
 for (const colorScheme of SCHEMES) {
   test(`a ${colorScheme} system sets the dark class accordingly`, async ({
     page,
   }) => {
-    await page.emulateMedia({ colorScheme })
+    await emulateMediaOrSkip(page, { colorScheme })
     await page.goto('/')
     const html = page.locator('html')
     await expect(html).toHaveClass(/\bjs\b/)
@@ -16,7 +18,7 @@ for (const colorScheme of SCHEMES) {
 }
 
 test('a stored light theme beats a dark system', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await page.addInitScript(() => localStorage.setItem('snug:theme', 'light'))
   await page.goto('/')
   await expect(page.locator('html')).not.toHaveClass(/\bdark\b/)
@@ -24,7 +26,7 @@ test('a stored light theme beats a dark system', async ({ page }) => {
 })
 
 test('a stored dark theme beats a light system', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' })
+  await emulateMediaOrSkip(page, { colorScheme: 'light' })
   await page.addInitScript(() => localStorage.setItem('snug:theme', 'dark'))
   await page.goto('/')
   await expect(page.locator('html')).toHaveClass(/\bdark\b/)
@@ -32,14 +34,14 @@ test('a stored dark theme beats a light system', async ({ page }) => {
 })
 
 test('an invalid stored theme falls back to the system', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await page.addInitScript(() => localStorage.setItem('snug:theme', 'blue'))
   await page.goto('/')
   await expect(page.locator('html')).toHaveClass(/\bdark\b/)
 })
 
 test('the theme class is set before first paint', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'dark' })
+  await emulateMediaOrSkip(page, { colorScheme: 'dark' })
   await page.addInitScript(() => {
     document.addEventListener('DOMContentLoaded', () => {
       Object.assign(globalThis, {
@@ -60,7 +62,7 @@ test('the theme class is set before first paint', async ({ page }) => {
 test('without JavaScript the metas let the system decide', async ({
   browser,
 }) => {
-  const context = await browser.newContext({
+  const context = await newContextOrSkip(browser, {
     javaScriptEnabled: false,
     colorScheme: 'dark',
   })
