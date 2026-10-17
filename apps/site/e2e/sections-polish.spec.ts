@@ -17,8 +17,8 @@ async function distinctOffsets(cards: Locator) {
 }
 
 for (const { width, columns, rows } of [
-  { width: 1280, columns: 2, rows: 3 },
-  { width: 1440, columns: 2, rows: 3 },
+  { width: 1280, columns: 2, rows: 2 },
+  { width: 1440, columns: 2, rows: 2 },
   { width: 375, columns: 1, rows: 4 },
 ]) {
   test(`bento renders ${columns} columns by ${rows} rows at ${width}px`, async ({

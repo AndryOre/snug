@@ -22,29 +22,31 @@ const { reviews } = getContent(Astro.props.locale).landing
   >
     {reviews.note}
   </p>
-  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard and touch users pause the marquee through :focus-within (WCAG 2.2.2) */}
-  <div data-proof-viewport role="group" tabindex="0" class="mt-10">
-    <div data-proof-track>
-      {[false, true].map((isClone) => (
-        <ul data-proof-row aria-hidden={isClone ? 'true' : undefined}>
-          {REVIEWS.map((review) => (
-            <li data-proof-card>
-              <Card lang="en" size="lg" className="h-full w-full">
-                <figure class="contents">
-                  <CardContent className="flex-1">
-                    <blockquote class="leading-body text-base">
-                      &ldquo;{review.quote}&rdquo;
-                    </blockquote>
-                  </CardContent>
-                  <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
-                    {review.author}, {review.date}
-                  </figcaption>
-                </figure>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      ))}
+  <div class="mt-10 scroll-reveal">
+    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard and touch users pause the marquee through :focus-within (WCAG 2.2.2) */}
+    <div data-proof-viewport role="group" tabindex="0">
+      <div data-proof-track>
+        {[false, true].map((isClone) => (
+          <ul data-proof-row aria-hidden={isClone ? 'true' : undefined}>
+            {REVIEWS.map((review) => (
+              <li data-proof-card>
+                <Card lang="en" size="lg" className="h-full w-full">
+                  <figure class="contents">
+                    <CardContent className="flex-1">
+                      <blockquote class="leading-body text-base">
+                        &ldquo;{review.quote}&rdquo;
+                      </blockquote>
+                    </CardContent>
+                    <figcaption class="px-(--card-spacing) font-mono text-eyebrow tracking-eyebrow text-muted-foreground">
+                      {review.author}, {review.date}
+                    </figcaption>
+                  </figure>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
     </div>
   </div>
   <p class="mt-8">

@@ -127,8 +127,12 @@ on phones. Section order is fixed by the Landing v2 spec:
 2. Stats strip: a short row of verifiable facts (formats, locales, network
    calls), no new claims.
 3. Browser marquee: real browser logos drifting in a loop.
-4. Bento: four panels, unequal sizes, one amber accent each.
-5. Interface showcase: island, the real extension screenshots.
+4. Bento: four panels in a 2x2 grid from 48rem (equal columns, 1.25rem gap, no
+   row span), one column below, one amber accent each.
+5. Interface showcase: island, the real extension screenshots. With
+   scroll-driven animation the steps sit tight (no min-height, 1.75rem apart)
+   and the sticky screenshot switches at each step's midpoint (`cover 44%` to
+   `cover 50%`).
 6. Video: only when a video exists.
 7. Reviews marquee: real store review excerpts in a loop.
 8. FAQ: six questions; the rest live on the Guide FAQ page.

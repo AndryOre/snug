@@ -242,6 +242,7 @@ async function openLanguageMenu(page: Page): Promise<void> {
         .filter(
           (a) =>
             a.timeline === globalThis.document.timeline &&
+            a.playState === 'running' &&
             a.effect?.getComputedTiming().iterations !== Infinity,
         )
         .map((a) => a.finished),

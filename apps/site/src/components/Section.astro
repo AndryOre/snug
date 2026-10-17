@@ -22,12 +22,18 @@ const headingId = heading === undefined ? undefined : `${section}-heading`
   class={cn(className)}
 >
   <div class="mx-auto max-w-site px-4 py-14 md:px-14 md:py-24">
-    {eyebrow !== undefined && <Eyebrow class="mb-3">{eyebrow}</Eyebrow>}
+    {eyebrow !== undefined && (
+      <Eyebrow class="mb-3 scroll-reveal">{eyebrow}</Eyebrow>
+    )}
     {heading !== undefined && (
-      <SectionHeading id={headingId}>{heading}</SectionHeading>
+      <SectionHeading id={headingId} class="scroll-reveal">
+        {heading}
+      </SectionHeading>
     )}
     {lead !== undefined && (
-      <p class="mt-5 max-w-2xl text-lead text-muted-foreground">{lead}</p>
+      <p class="mt-5 max-w-2xl text-lead text-muted-foreground scroll-reveal">
+        {lead}
+      </p>
     )}
     <slot />
   </div>
