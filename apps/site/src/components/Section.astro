@@ -9,11 +9,19 @@ interface Props {
   eyebrow?: string
   heading?: string
   lead?: string
+  labelledBy?: string
   class?: string
 }
 
-const { section, eyebrow, heading, lead, class: className } = Astro.props
-const headingId = heading === undefined ? undefined : `${section}-heading`
+const {
+  section,
+  eyebrow,
+  heading,
+  lead,
+  labelledBy,
+  class: className,
+} = Astro.props
+const headingId = heading === undefined ? labelledBy : `${section}-heading`
 ---
 
 <section
