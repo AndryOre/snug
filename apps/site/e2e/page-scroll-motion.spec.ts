@@ -145,13 +145,11 @@ test.describe('stats count-up', () => {
     test.skip(!hasTriggerSupport, 'timeline-trigger needs Chrome 145+')
   })
 
-  test('counts at once when the strip is visible on load', async ({
-    page,
-    hasTouch,
-  }) => {
-    test.skip(hasTouch, 'real touch devices ignore the 1280×1000 viewport')
+  test('counts at once when the strip is visible on load', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 1000 })
     await page.goto('/')
+    const appliedWidth = await page.evaluate(() => globalThis.innerWidth)
+    test.skip(appliedWidth < 1280, 'the device ignored the 1280×1000 viewport')
     const { values, target } = await sampleStatValues(page, 2400)
     expect(target).toBeGreaterThan(0)
     expect(values.some((value) => value > 0 && value < target)).toBe(true)
