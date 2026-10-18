@@ -9,7 +9,7 @@ on:
         type: string
         default: lean
       platform:
-        description: all, safari, firefox, edge, pixel or iphone
+        description: all, safari, firefox, edge or pixel
         type: string
         default: all
     secrets:
@@ -37,7 +37,7 @@ on:
       platform:
         description: Run one platform, or all of them
         type: choice
-        options: [all, safari, firefox, edge, pixel, iphone]
+        options: [all, safari, firefox, edge, pixel]
         default: all
 
 permissions:
@@ -77,16 +77,14 @@ jobs:
           fi
 
           case "${REQUESTED_TIER}" in lean | full) ;; *) echo "::error::Unknown tier '${REQUESTED_TIER}'"; exit 1 ;; esac
-          case "${REQUESTED_PLATFORM}" in all | safari | firefox | edge | pixel | iphone) ;; *) echo "::error::Unknown platform '${REQUESTED_PLATFORM}'"; exit 1 ;; esac
+          case "${REQUESTED_PLATFORM}" in all | safari | firefox | edge | pixel) ;; *) echo "::error::Unknown platform '${REQUESTED_PLATFORM}'"; exit 1 ;; esac
 
           # Measured per test on the sponsored plan: Edge ~3s, Firefox ~4s,
-          # Safari ~5s, Pixel 8 ~6s, real iPhone 15 ~27s. Full tier is 932
-          # tests per platform: Edge ~47m, Firefox ~62m, Safari ~78m, Pixel
-          # ~93m, iPhone ~7h, which exceeds the 6h hosted-job limit, so the
-          # iPhone is split into 4 shards of ~105m. That makes 8 single-platform
-          # jobs capped at 5 sessions at once (the plan's parallels). The lean
-          # tier is 204 tests: 10 to 20 minutes per platform, iPhone excluded
-          # unless asked for explicitly.
+          # Safari ~5s, Pixel 8 ~6s. Full tier is 932 tests per platform: Edge
+          # ~47m, Firefox ~62m, Safari ~78m, Pixel ~93m. That makes 4
+          # single-platform jobs, under the plan's 5 parallels. The lean tier
+          # is 204 tests: 10 to 20 minutes per platform. A real iPhone is not
+          # automated (ADR 0025).
           matrix="$(jq -nc --arg tier "${REQUESTED_TIER}" --arg platform "${REQUESTED_PLATFORM}" '
             def entry($id; $label; $field; $value):
               {id: $id, label: $label, field: $field, value: $value,
@@ -95,25 +93,10 @@ jobs:
               entry("safari"; "Safari macOS"; "browserName"; "playwright-webkit"),
               entry("firefox"; "Firefox Windows"; "browserName"; "playwright-firefox"),
               entry("edge"; "Edge Windows"; "browserName"; "edge"),
-              entry("pixel"; "Pixel 8"; "deviceName"; "Google Pixel 8"),
-              entry("iphone"; "iPhone 15"; "deviceName"; "iPhone 15")
+              entry("pixel"; "Pixel 8"; "deviceName"; "Google Pixel 8")
             ]
-            | map(select(
-                .id == $platform
-                or ($platform == "all" and (.id != "iphone" or $tier == "full"))))
-            | map(
-                if .id == "iphone" and $tier == "full" then
-                  . as $base
-                  | [range(1; 5)]
-                  | map(. as $index | $base + {
-                      id: "iphone-\($index)of4",
-                      label: "iPhone 15 \($index)/4",
-                      shard: "\($index)/4",
-                      timeout: 330})
-                elif $tier == "lean" and .id != "iphone" then [. + {timeout: 60}]
-                else [.] end)
-            | flatten
-            | sort_by(if (.id | startswith("iphone")) then 0 else 1 end)
+            | map(select($platform == "all" or .id == $platform))
+            | map(if $tier == "lean" then . + {timeout: 60} else . end)
           ')"
 
           echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
