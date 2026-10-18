@@ -2,7 +2,8 @@
 
 ## Status
 
-Accepted.
+Accepted. The real iPhone 15 is superseded by
+[ADR 0025](0025-real-iphone-is-not-automated-on-browserstack.md).
 
 ## Context
 

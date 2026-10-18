@@ -118,10 +118,9 @@ This project is tested with BrowserStack.
 [![BrowserStack](https://cdn.simpleicons.org/browserstack)](https://www.browserstack.com)
 
 - **Site, Automate:** the landing page layout specs run on real browsers and
-  devices: Safari on macOS, Firefox and Edge on Windows 11 and a real Pixel 8,
-  plus a real iPhone 15 in the full tier. A lean tier runs on pull requests and
-  a full tier runs nightly, on `main` and on demand. Results are informational
-  and do not gate merges.
+  devices: Safari on macOS, Firefox and Edge on Windows 11 and a real Pixel 8. A
+  lean tier runs on pull requests and a full tier runs nightly, on `main` and on
+  demand. Results are informational and do not gate merges.
 - **Site, Percy:** visual snapshots of the home page (English and German), the
   guide and the 404 page, in light and dark, at four widths, in Chrome, Firefox,
   Edge and Safari.
