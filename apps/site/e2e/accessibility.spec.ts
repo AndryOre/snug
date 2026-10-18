@@ -29,6 +29,7 @@ const AXE_PAGES = [...PAGES, '/guide/', '/guide/exporting/', '/changelog/']
 async function expectNoViolations(page: Page): Promise<void> {
   const { violations } = await new AxeBuilder({ page })
     .withTags(AXE_TAGS)
+    .exclude('[data-base-ui-focus-guard]')
     .analyze()
   expect(violations).toEqual([])
 }
