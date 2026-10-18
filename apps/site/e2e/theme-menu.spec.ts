@@ -1,7 +1,11 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
-import { MIN_TOUCH_TARGET, setViewportOrSkip } from './layout-helpers'
+import {
+  hydrateHeaderIsland,
+  MIN_TOUCH_TARGET,
+  setViewportOrSkip,
+} from './layout-helpers'
 
 const WIDTHS = [320, 375, 768, 1280]
 
@@ -22,6 +26,7 @@ test('keyboard opens, moves, selects and returns focus on Escape', async ({
 }) => {
   await page.emulateMedia({ colorScheme: 'light' })
   await visit(page)
+  await hydrateHeaderIsland(page)
   const trigger = page.getByRole('button', { name: 'Theme' })
   await expect(trigger).toBeVisible()
   await trigger.focus()
