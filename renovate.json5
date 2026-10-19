@@ -1,7 +1,7 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:recommended',
+    'config:best-practices',
     ':dependencyDashboard',
     ':semanticCommits',
     ':semanticCommitTypeAll(chore)',
@@ -42,7 +42,48 @@
   lockFileMaintenance: {
     enabled: true,
     schedule: ['before 12pm on monday'],
+    automerge: true,
+    automergeType: 'pr',
   },
+
+  customManagers: [
+    // Bumping ACTIONLINT_VERSION leaves ACTIONLINT_SHA256 stale: the Renovate PR
+    // fails lint-workflows until the checksum is updated by hand
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^\\.github/workflows/lint-workflows\\.yml$/'],
+      matchStrings: ['ACTIONLINT_VERSION: (?<currentValue>\\d+\\.\\d+\\.\\d+)'],
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'rhysd/actionlint',
+      extractVersionTemplate: '^v(?<version>.+)$',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^\\.github/workflows/lint-workflows\\.yml$/'],
+      matchStrings: [
+        'zizmorcore/zizmor-action@[^\\n]+\\n\\s+with:\\n\\s+version: (?<currentValue>v\\d+\\.\\d+\\.\\d+)',
+      ],
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'zizmorcore/zizmor',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^apps/site/scripts/.+\\.sh$/'],
+      matchStrings: ['lighthouse@(?<currentValue>\\d+\\.\\d+\\.\\d+)'],
+      datasourceTemplate: 'npm',
+      depNameTemplate: 'lighthouse',
+    },
+    // LYCHEE_VERSION mirrors lychee-action's default lycheeVersion; the action's
+    // own bump is guarded by EXPECTED_LYCHEE_ACTION_VERSION in lint-docs.test.ts
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^scripts/lint-docs\\.ts$/'],
+      matchStrings: ["LYCHEE_VERSION = '(?<currentValue>v\\d+\\.\\d+\\.\\d+)'"],
+      datasourceTemplate: 'github-releases',
+      depNameTemplate: 'lycheeverse/lychee',
+      extractVersionTemplate: '^lychee-(?<version>.+)$',
+    },
+  ],
 
   // apps/site (Astro, @astrojs/*) needs no dedicated rule: its dependencies fall
   // under the dependencies/devDependencies and all non-major rules below, and
