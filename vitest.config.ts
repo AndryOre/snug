@@ -12,7 +12,7 @@ export default defineConfig({
       include: ['scripts/**/*.ts', 'eslint-rules/**/*.mjs'],
       exclude: ['scripts/**/*.test.ts', 'eslint-rules/**/*.test.ts'],
       reporter: ['text', 'lcov'],
-      thresholds: { lines: 60, statements: 60, branches: 60, functions: 80 },
+      thresholds: { lines: 67, statements: 67, branches: 65, functions: 86 },
     },
   },
 })
