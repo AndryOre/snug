@@ -23,7 +23,7 @@
     "@snug/extension": "workspace:*",
     "@types/bun": "catalog:",
     "@types/react": "catalog:",
-    "@types/web": "0.0.166",
+    "@types/web": "0.0.358",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
