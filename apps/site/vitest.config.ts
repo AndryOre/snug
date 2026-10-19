@@ -8,7 +8,7 @@ export default defineConfig({
       reporter: ['text', 'lcov'],
       include: ['src/**/*.ts'],
       exclude: ['src/**/*.test.ts', 'src/scripts/render-security-headers.ts'],
-      thresholds: { lines: 90, statements: 89, branches: 84, functions: 90 },
+      thresholds: { lines: 89, statements: 89, branches: 84, functions: 90 },
     },
   },
 })

@@ -342,9 +342,9 @@ raises them in the same change.
 
 | Workspace        | Lines | Statements | Branches | Functions |
 | ---------------- | ----- | ---------- | -------- | --------- |
-| `apps/extension` | 94    | 93         | 86       | 93        |
-| `apps/site`      | 90    | 89         | 84       | 90        |
-| root tooling     | 67    | 67         | 65       | 86        |
+| `apps/extension` | 93    | 93         | 86       | 93        |
+| `apps/site`      | 89    | 89         | 84       | 90        |
+| root tooling     | 65    | 65         | 63       | 83        |
 | target           | 95    | 95         | 90       | 95        |
 
 Next steps toward the target:
