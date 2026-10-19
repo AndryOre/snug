@@ -1,7 +1,7 @@
 ---
 import Footer from '../../components/Footer.astro'
 import TextLink from '../../components/TextLink.astro'
-import { DOCS_PATHS, DOCS_UI } from '../../i18n/docs-ui'
+import { DOCS_PATHS } from '../../i18n/docs-ui'
 import {
   getHowToContent,
   getHowToSharedContent,
@@ -12,6 +12,7 @@ import {
 import { DEFAULT_LOCALE, localePath } from '../../i18n/locales'
 import { documentationLanguageHref } from '../language-links'
 import { resolveDocumentationLocale } from '../locale'
+import DocumentationEditLink from './DocumentationEditLink.astro'
 import DocumentationPagination from './DocumentationPagination.astro'
 
 const { lang, dir, editUrl, entry, head } = Astro.locals.starlightRoute
@@ -29,11 +30,7 @@ const pageHref = documentationLanguageHref(head, (code) =>
 ---
 
 <div class="mt-12 flex flex-col gap-8" lang={lang} dir={dir}>
-  {hasEditLink && (
-    <TextLink href={String(editUrl)} class="self-start text-sm">
-      {DOCS_UI.editPage}
-    </TextLink>
-  )}
+  {hasEditLink && <DocumentationEditLink href={String(editUrl)} />}
   <DocumentationPagination />
   {relatedHowTos.length > 0 && (
     <section

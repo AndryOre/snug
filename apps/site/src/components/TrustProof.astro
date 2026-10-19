@@ -96,14 +96,16 @@ const groups = [
 </section>
 
 <script>
-  const MARQUEE_SPEED_PX_PER_SECOND = 40
+  import { marqueeDurationSeconds } from '../scripts/marquee'
+
   const track = document.querySelector<HTMLElement>('[data-marquee-track]')
   if (track) {
     const applyDuration = () => {
       const rowWidth = track.scrollWidth / 2
+      if (rowWidth <= 0) return
       track.style.setProperty(
         '--marquee-duration',
-        `${(rowWidth / MARQUEE_SPEED_PX_PER_SECOND).toFixed(2)}s`,
+        `${marqueeDurationSeconds(rowWidth).toFixed(2)}s`,
       )
     }
     applyDuration()

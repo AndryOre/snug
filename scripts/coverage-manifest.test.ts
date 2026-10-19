@@ -65,7 +65,6 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/components/CopyMarkdownButton.tsx': ISLAND_REASON,
   'apps/site/src/components/Eyebrow.astro': ASTRO_REASON,
   'apps/site/src/components/Faq.astro': ASTRO_REASON,
-  'apps/site/src/components/FaqAccordion.tsx': ISLAND_REASON,
   'apps/site/src/components/FinalCta.astro': ASTRO_REASON,
   'apps/site/src/components/FolderTree.astro': ASTRO_REASON,
   'apps/site/src/components/Footer.astro': ASTRO_REASON,
@@ -86,11 +85,11 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/components/SectionHeading.astro': ASTRO_REASON,
   'apps/site/src/components/SocialProof.astro': ASTRO_REASON,
   'apps/site/src/components/TextLink.astro': ASTRO_REASON,
-  'apps/site/src/components/ThemeMenu.tsx': ISLAND_REASON,
   'apps/site/src/components/TrustProof.astro': ASTRO_REASON,
   'apps/site/src/components/VideoFacade.tsx': ISLAND_REASON,
   'apps/site/src/content/how-to-pages.ts': SITE_MODULE_REASON,
   'apps/site/src/content.config.ts': SITE_MODULE_REASON,
+  'apps/site/src/docs/components/DocumentationEditLink.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationFooter.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationHeader.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationMobileMenuFooter.astro':
@@ -152,8 +151,6 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/seo/umami.ts': SITE_MODULE_REASON,
   'scripts/workflow-files.ts':
     'Workflow loader used by workflows-invariants.test.ts, which exercises it against the real workflows.',
-  'eslint-rules/index.mjs':
-    'Plugin entry that only registers the rules, each tested in its own colocated test.',
 }
 
 const exemptedFiles = new Set(Object.keys(EXEMPTIONS))
