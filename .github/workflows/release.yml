@@ -11,7 +11,7 @@ jobs:
   verify:
     name: Verify tagged commit
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 100
     permissions:
       contents: read
       checks: read
@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          deadline=$((SECONDS + 1200))
+          deadline=$((SECONDS + 4200))
           while true; do
             run_json=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs?per_page=100" \
               --jq '[.check_runs[] | select(.name == "CI passed")] | sort_by(.id) | last // empty')
@@ -49,9 +49,9 @@ jobs:
             fi
             if (( SECONDS >= deadline )); then
               if [[ -z "${status}" ]]; then
-                echo "No CI passed check run found for ${GITHUB_SHA} after 20 minutes"
+                echo "No CI passed check run found for ${GITHUB_SHA} after 70 minutes"
               else
-                echo "CI passed is still ${status} for ${GITHUB_SHA} after 20 minutes"
+                echo "CI passed is still ${status} for ${GITHUB_SHA} after 70 minutes"
               fi
               exit 1
             fi
@@ -142,7 +142,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
-            echo "Release ${GITHUB_REF_NAME} already exists, skipping store publishing"
+            echo "::warning::Release ${GITHUB_REF_NAME} already exists, so store publishing is skipped. If a store job failed earlier, use Re-run failed jobs instead of Re-run all jobs."
             echo "already-released=true" >> "${GITHUB_OUTPUT}"
             exit 0
           fi
