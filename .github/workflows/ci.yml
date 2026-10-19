@@ -106,15 +106,8 @@ jobs:
           read -r -a affected_flags <<< "$AFFECTED"
           bunx turbo run zip "${affected_flags[@]}"
 
-      - name: Report zip size
-        run: |
-          zip_path=$(ls apps/extension/.output/*-chrome.zip 2>/dev/null || true)
-          if [[ -z "$zip_path" ]]; then
-            echo "No extension zip built (extension not affected by this change)." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          zip_size=$(du -h "$zip_path" | cut -f1)
-          echo "**Extension zip size:** \`${zip_size}\` (\`$(basename "$zip_path")\`)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Enforce zip size budget
+        run: bun scripts/check-zip-size.ts apps/extension/.output
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
