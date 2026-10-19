@@ -1,6 +1,6 @@
 ---
 title: Novità
-sourceHash: 8d640827463373eb
+sourceHash: 15fa3a9f711f42d1
 description:
   "Note di rilascio dell'estensione Snug per Chrome: cosa è cambiato in ogni
   versione, dalle nuove opzioni di esportazione automatica alle correzioni."

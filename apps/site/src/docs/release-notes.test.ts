@@ -41,6 +41,24 @@ describe('parseChangelog', () => {
     ])
   })
 
+  it('skips an empty Unreleased section at the top of the real changelog', () => {
+    expect(changelog).toMatch(/^## \[Unreleased\]$/m)
+    const entries = parseChangelog(changelog)
+    expect(
+      entries.every((entry) => /^\d+\.\d+\.\d+$/.test(entry.version)),
+    ).toBe(true)
+  })
+
+  it('skips an empty Unreleased section without publishing it', () => {
+    const entries = parseChangelog(
+      '# Changelog\n\n## [Unreleased]\n\n## [1.0.0] - 2024-01-01\n\n- ok\n',
+    )
+    expect(entries).toEqual([
+      { version: '1.0.0', isoDate: '2024-01-01', body: '- ok' },
+    ])
+    expect(parseChangelog('## [Unreleased]\n')).toEqual([])
+  })
+
   it('throws naming the line for a malformed release heading', () => {
     const source =
       '# Changelog\n\n## [1.0.0] - 2024-01-01\n\n- a\n\n## [1.1] - 2024-02-01\n'
