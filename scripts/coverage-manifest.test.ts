@@ -89,6 +89,7 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/components/VideoFacade.tsx': ISLAND_REASON,
   'apps/site/src/content/how-to-pages.ts': SITE_MODULE_REASON,
   'apps/site/src/content.config.ts': SITE_MODULE_REASON,
+  'apps/site/src/docs/components/DocumentationEditLink.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationFooter.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationHeader.astro': ASTRO_REASON,
   'apps/site/src/docs/components/DocumentationMobileMenuFooter.astro':
