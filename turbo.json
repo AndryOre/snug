@@ -87,12 +87,19 @@
         "scripts/**",
         "eslint-rules/**",
         "docs/adr/**",
+        ".github/workflows/**",
         "vitest.config.ts"
       ],
       "outputs": []
     },
     "//#test:coverage:root": {
-      "inputs": ["scripts/**", "eslint-rules/**", "vitest.config.ts"],
+      "inputs": [
+        "scripts/**",
+        "eslint-rules/**",
+        "docs/adr/**",
+        ".github/workflows/**",
+        "vitest.config.ts"
+      ],
       "outputs": ["coverage/**"]
     }
   }

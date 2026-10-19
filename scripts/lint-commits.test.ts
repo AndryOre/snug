@@ -24,8 +24,8 @@ function findCommitlintRunCommand(): string {
 describe('buildCommitlintCommand', () => {
   test('uses the same invocation and flags as the ci.yml commitlint job', () => {
     const workflowCommand = findCommitlintRunCommand()
-      .replace('${{ github.event.pull_request.base.sha }}', 'BASE')
-      .replace('${{ github.event.pull_request.head.sha }}', 'HEAD')
+      .replace('"${BASE_SHA}"', 'BASE')
+      .replace('"${HEAD_SHA}"', 'HEAD')
     expect(buildCommitlintCommand('BASE', 'HEAD').join(' ')).toBe(
       workflowCommand,
     )
