@@ -26,6 +26,11 @@ function triggerNames(workflow: Workflow): string[] {
     : []
 }
 
+function needsList(needs: unknown): string[] {
+  if (typeof needs === 'string') return [needs]
+  return Array.isArray(needs) ? needs.map(String) : []
+}
+
 function usesReferences(source: string): { target: string; rest: string }[] {
   return source.split('\n').flatMap((line) => {
     const match = USES_LINE_PATTERN.exec(line)
@@ -196,6 +201,46 @@ describe('ci.yml', () => {
 describe('codeql.yml', () => {
   test('exists as a workflow (ADR 0004)', () => {
     expect(allFiles).toContain('codeql.yml')
+  })
+})
+
+describe('release.yml (ADR 0026)', () => {
+  const workflow = readWorkflow('release.yml')
+  const jobs = Object.entries(workflow.jobs ?? {})
+  const verifyRuns = (workflow.jobs?.verify?.steps ?? [])
+    .map((step) => step.run ?? '')
+    .join('\n')
+
+  test('has a read-only verify job', () => {
+    expect(workflow.jobs?.verify).toBeDefined()
+    expect(workflow.jobs?.verify?.permissions).toEqual({
+      contents: 'read',
+      checks: 'read',
+    })
+  })
+
+  test('verify checks main ancestry, CI passed, check, test and build', () => {
+    expect(verifyRuns).toContain('merge-base --is-ancestor')
+    expect(verifyRuns).toContain('CI passed')
+    expect(verifyRuns).toContain('bun run check')
+    expect(verifyRuns).toContain('bun run test')
+    expect(verifyRuns).toContain('bun run build')
+  })
+
+  test('every job except verify needs verify', () => {
+    const others = jobs.filter(([name]) => name !== 'verify')
+    expect(others.length).toBeGreaterThan(0)
+    for (const [, job] of others) {
+      expect(needsList(job.needs)).toContain('verify')
+    }
+  })
+
+  test('publish jobs skip a version already released', () => {
+    const publishJobs = jobs.filter(([name]) => name.startsWith('publish-'))
+    expect(publishJobs.length).toBeGreaterThan(0)
+    for (const [, job] of publishJobs) {
+      expect(job.if).toContain('already-released')
+    }
   })
 })
 
