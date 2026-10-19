@@ -17,9 +17,7 @@ class ResizeObserverStub {
 describe('AppRouter', () => {
   beforeEach(() => {
     fakeBrowser.reset()
-    fakeBrowser.i18n.getMessage = vi.fn(
-      (key: string) => key,
-    ) as typeof fakeBrowser.i18n.getMessage
+    fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
     fakeBrowser.runtime.getManifest = vi.fn().mockReturnValue({
       version: '2.0.0',
     }) as typeof fakeBrowser.runtime.getManifest

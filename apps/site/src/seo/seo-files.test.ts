@@ -374,8 +374,8 @@ describe('buildStructuredData', () => {
       '@type': 'VideoObject',
       name: `Snug ${locale}`,
       description: `Walkthrough ${locale}`,
-      thumbnailUrl: expect.stringContaining(PROMO_VIDEO_IDS[locale]),
-      uploadDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+      thumbnailUrl: expect.stringContaining(PROMO_VIDEO_IDS[locale]) as string,
+      uploadDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/) as string,
       embedUrl: `https://www.youtube-nocookie.com/embed/${PROMO_VIDEO_IDS[locale]}`,
     })
   })

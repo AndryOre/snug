@@ -45,9 +45,7 @@ function mockOffscreenApi(): void {
     createDocument: vi.fn(async () => {}),
     closeDocument: vi.fn(async () => {}),
   } as unknown as typeof chrome.offscreen
-  chrome.runtime.getContexts = vi.fn(
-    async () => [],
-  ) as unknown as typeof chrome.runtime.getContexts
+  chrome.runtime.getContexts = vi.fn(async () => [])
 }
 
 /**
@@ -104,21 +102,21 @@ function mockDownload(
         return id
       }),
   )
-  browser.downloads.download = mock as typeof browser.downloads.download
+  browser.downloads.download = mock
   browser.downloads.onChanged.addListener = vi.fn((listener: unknown) => {
     listeners.push(listener as OnChangedListener)
-  }) as typeof browser.downloads.onChanged.addListener
+  })
   browser.downloads.onChanged.removeListener = vi.fn((listener: unknown) => {
     const index = listeners.indexOf(listener as OnChangedListener)
     if (index !== -1) listeners.splice(index, 1)
-  }) as typeof browser.downloads.onChanged.removeListener
+  })
 
   function fire(id: number, state: 'complete' | 'interrupted' = 'complete') {
     for (const listener of listeners) {
       listener({
         id,
         state: { current: state },
-      } as Browser.downloads.DownloadDelta)
+      })
     }
   }
 
@@ -162,10 +160,8 @@ async function runAutoExportAndSettle(
 function mockActionBadge() {
   const setBadgeText = vi.fn(async () => {})
   const setBadgeBackgroundColor = vi.fn(async () => {})
-  browser.action.setBadgeText =
-    setBadgeText as typeof browser.action.setBadgeText
-  browser.action.setBadgeBackgroundColor =
-    setBadgeBackgroundColor as typeof browser.action.setBadgeBackgroundColor
+  browser.action.setBadgeText = setBadgeText
+  browser.action.setBadgeBackgroundColor = setBadgeBackgroundColor
   return { setBadgeText, setBadgeBackgroundColor }
 }
 
@@ -759,7 +755,7 @@ describe('runAutoExport', () => {
     })
     expect(setBadgeText).toHaveBeenCalledWith({ text: '!' })
     expect(setBadgeBackgroundColor).toHaveBeenCalledWith(
-      expect.objectContaining({ color: expect.any(String) }),
+      expect.objectContaining({ color: expect.any(String) as string }),
     )
   })
 
@@ -978,7 +974,9 @@ describe('runAutoExport', () => {
     fire(1, 'complete')
     await vi.waitFor(() =>
       expect(browser.runtime.sendMessage).toHaveBeenCalledWith(
-        expect.objectContaining({ url: expect.stringContaining('blob:') }),
+        expect.objectContaining({
+          url: expect.stringContaining('blob:') as string,
+        }),
       ),
     )
     expect(await autoExportLastRunStore.getValue()).toBeNull()
@@ -1004,8 +1002,7 @@ function mockCleanup() {
   ])
   browser.downloads.search =
     search as unknown as typeof browser.downloads.search
-  browser.downloads.removeFile =
-    removeFile as unknown as typeof browser.downloads.removeFile
+  browser.downloads.removeFile = removeFile
   browser.downloads.erase = erase as unknown as typeof browser.downloads.erase
   return { removeFile, erase }
 }
@@ -1031,7 +1028,11 @@ describe('runAutoExport retention', () => {
     expect(erase).toHaveBeenCalledTimes(2)
     expect(await autoExportRunsStore.getValue()).toEqual([
       { destination: 'downloads', runAt: 3, ids: [102] },
-      { destination: 'downloads', runAt: expect.any(Number), ids: [1] },
+      {
+        destination: 'downloads',
+        runAt: expect.any(Number) as number,
+        ids: [1],
+      },
     ])
   })
 
@@ -1070,7 +1071,11 @@ describe('runAutoExport retention', () => {
     expect(await autoExportRunsStore.getValue()).toEqual([
       { destination: 'downloads', runAt: 1, ids: [100] },
       { destination: 'downloads', runAt: 2, ids: [101] },
-      { destination: 'downloads', runAt: expect.any(Number), ids: [1] },
+      {
+        destination: 'downloads',
+        runAt: expect.any(Number) as number,
+        ids: [1],
+      },
     ])
   })
 
@@ -1108,7 +1113,11 @@ describe('runAutoExport retention', () => {
     expect(removeFile).toHaveBeenCalledTimes(2)
     expect(await autoExportLastRunStore.getValue()).toMatchObject({ ok: true })
     expect(await autoExportRunsStore.getValue()).toEqual([
-      { destination: 'downloads', runAt: expect.any(Number), ids: [1] },
+      {
+        destination: 'downloads',
+        runAt: expect.any(Number) as number,
+        ids: [1],
+      },
     ])
   })
 
@@ -1132,7 +1141,11 @@ describe('runAutoExport retention', () => {
         error: 'Download 1 timed out.',
       })
       expect(await autoExportRunsStore.getValue()).toEqual([
-        { destination: 'downloads', runAt: expect.any(Number), ids: [1] },
+        {
+          destination: 'downloads',
+          runAt: expect.any(Number) as number,
+          ids: [1],
+        },
       ])
     } finally {
       vi.useRealTimers()

@@ -8,7 +8,9 @@ function openDatabase(): Promise<IDBDatabase> {
       request.result.createObjectStore(STORE_NAME)
     }
     request.onsuccess = () => resolve(request.result)
-    request.addEventListener('error', () => reject(request.error))
+    request.addEventListener('error', () =>
+      reject(request.error ?? new Error('IndexedDB request failed')),
+    )
   })
 }
 
@@ -23,7 +25,9 @@ async function runRequest<T>(
         database.transaction(STORE_NAME, mode).objectStore(STORE_NAME),
       )
       request.onsuccess = () => resolve(request.result)
-      request.addEventListener('error', () => reject(request.error))
+      request.addEventListener('error', () =>
+        reject(request.error ?? new Error('IndexedDB request failed')),
+      )
     })
   } finally {
     database.close()
@@ -34,13 +38,17 @@ async function listIdentities(): Promise<
   { id: string; handle: FileSystemDirectoryHandle }[]
 > {
   const [ids, handles] = await Promise.all([
-    runRequest<IDBValidKey[]>('readonly', (store) => store.getAllKeys()),
-    runRequest<FileSystemDirectoryHandle[]>('readonly', (store) =>
-      store.getAll(),
+    runRequest<string[]>(
+      'readonly',
+      (store) => store.getAllKeys() as IDBRequest<string[]>,
+    ),
+    runRequest<FileSystemDirectoryHandle[]>(
+      'readonly',
+      (store) => store.getAll() as IDBRequest<FileSystemDirectoryHandle[]>,
     ),
   ])
   return ids.map((id, index) => ({
-    id: String(id),
+    id,
     handle: handles[index] as FileSystemDirectoryHandle,
   }))
 }

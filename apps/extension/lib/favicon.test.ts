@@ -94,7 +94,14 @@ describe('getFaviconBase64', () => {
 
     const placeholderCalls = vi
       .mocked(fetch)
-      .mock.calls.filter(([input]) => String(input).includes('snug.invalid'))
+      .mock.calls.filter(([input]) =>
+        (typeof input === 'string'
+          ? input
+          : input instanceof URL
+            ? input.href
+            : input.url
+        ).includes('snug.invalid'),
+      )
     expect(placeholderCalls).toHaveLength(2)
   })
 

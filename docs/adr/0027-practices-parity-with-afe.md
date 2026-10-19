@@ -37,6 +37,7 @@ other.
 | Extension and store E2E                   | Applies     | N/A        | AFE is a library, not an extension                                                                          |
 | Umami analytics                           | Applies     | N/A        | AFE has no analytics, same reason as the privacy page                                                       |
 | Cross-browser library tests               | N/A         | Applies    | Snug is Chromium-only; AFE is a multi-browser library                                                       |
+| typescript-eslint preset                  | Deferred    | Applies    | Snug is on `recommendedTypeChecked`; `strictTypeChecked` is a follow-up ramp                                |
 
 ## Alternatives considered
 

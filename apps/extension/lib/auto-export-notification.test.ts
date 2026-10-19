@@ -87,7 +87,7 @@ describe('handleNotificationClick', () => {
     await handleNotificationClick(FAILURE_NOTIFICATION_ID)
 
     expect(createTab).toHaveBeenCalledWith({
-      url: expect.stringMatching(/\/app\.html#\/auto-export$/),
+      url: expect.stringMatching(/\/app\.html#\/auto-export$/) as string,
     })
     expect(clear).toHaveBeenCalledWith(FAILURE_NOTIFICATION_ID)
   })

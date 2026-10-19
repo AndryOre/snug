@@ -80,9 +80,7 @@ function rowTitles(container: HTMLElement) {
 describe('BookmarkTree', () => {
   beforeEach(() => {
     fakeBrowser.reset()
-    fakeBrowser.i18n.getMessage = vi.fn(
-      (key: string) => key,
-    ) as typeof fakeBrowser.i18n.getMessage
+    fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
     seed()
     for (const property of ['offsetHeight', 'offsetWidth']) {
       Object.defineProperty(HTMLElement.prototype, property, {

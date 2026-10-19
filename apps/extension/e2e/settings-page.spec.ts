@@ -158,7 +158,7 @@ test('Safety snapshots list newest first with a Latest badge, Download saves the
     .getByRole('button', { name: en.safetySnapshot_download.message })
     .click()
   const download = await downloadPromise
-  const content = await readFile((await download.path()) as string, 'utf8')
+  const content = await readFile(await download.path(), 'utf8')
   expect(content).toContain('https://older.example/page')
   expect(content).not.toContain('https://newest.example/')
 

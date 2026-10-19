@@ -17,8 +17,8 @@ import type { AutoExportConfig } from '@/lib/types'
 
 import { runAutoExport } from './auto-export'
 
-const folderHandleMock = vi.hoisted(() => ({
-  handle: null as unknown,
+const folderHandleMock = vi.hoisted((): { handle: unknown } => ({
+  handle: null,
 }))
 
 vi.mock('@/lib/folder-handle', async () => ({
@@ -49,9 +49,9 @@ function folderConfig(overrides: Partial<AutoExportConfig> = {}) {
 
 function mockDownloadsAndBadge() {
   const download = vi.fn(async () => 1)
-  browser.downloads.download = download as typeof browser.downloads.download
-  browser.action.setBadgeText = vi.fn(async () => {}) as never
-  browser.action.setBadgeBackgroundColor = vi.fn(async () => {}) as never
+  browser.downloads.download = download
+  browser.action.setBadgeText = vi.fn(async () => {})
+  browser.action.setBadgeBackgroundColor = vi.fn(async () => {})
   return download
 }
 

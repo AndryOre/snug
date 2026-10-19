@@ -142,7 +142,7 @@ const eslintConfig = defineConfig([
   wxtAutoImports,
   {
     files: ['**/*.{ts,tsx}'],
-    extends: [tseslint.configs.recommended],
+    extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -151,6 +151,18 @@ const eslintConfig = defineConfig([
     },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/only-throw-error': [
+        'error',
+        {
+          allow: [
+            {
+              from: 'package',
+              package: '@tanstack/router-core',
+              name: 'Redirect',
+            },
+          ],
+        },
+      ],
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-misused-promises': [
@@ -291,6 +303,19 @@ const eslintConfig = defineConfig([
     plugins: { vitest },
     rules: {
       ...vitest.configs.recommended.rules,
+    },
+  },
+  {
+    /**
+     * Test doubles and helpers must keep the async signature of the API
+     * they stand in for (`vi.fn(async () => 1)`, `fakeBrowser.*`, a fake
+     * `FileSystemDirectoryHandle`), and `await act(async () => ...)` needs
+     * the async form to flush effects. They rarely contain an `await`, so
+     * `require-await` is off for tests and test helpers only.
+     */
+    files: ['**/*.test.{ts,tsx}', 'apps/extension/lib/testing/**'],
+    rules: {
+      '@typescript-eslint/require-await': 'off',
     },
   },
   {

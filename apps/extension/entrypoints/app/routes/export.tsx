@@ -41,7 +41,10 @@ function getMasterState(selected: number, total: number): CheckedState {
 export function ExportRoute() {
   const treeReference = useRef<BookmarkTreeHandle>(null)
   const searchInputReference = useRef<HTMLInputElement>(null)
-  const { q: searchTerm = '' } = useSearch({ from: APP_ROUTES.export })
+  const { q: searchTerm = '' } = useSearch({
+    from: APP_ROUTES.export,
+    select: (search: { q?: string }) => search,
+  })
   const navigate = useNavigate({ from: APP_ROUTES.export })
   const [selectedCount, setSelectedCount] = useState(0)
   const [totalCount, setTotalCount] = useState(0)

@@ -32,7 +32,7 @@ import {
 import { useId } from 'react'
 
 import { SafetySnapshotCard } from '@/components/safety-snapshot-card'
-import { APP_ROUTES } from '@/lib/app-url'
+import { APP_ROUTES, type SettingsSection } from '@/lib/app-url'
 import { getImportModeItems } from '@/lib/import-mode-items'
 import {
   autoExpandFoldersStore,
@@ -58,7 +58,10 @@ const THEME_OPTIONS: { value: ThemeChoice; label: string }[] = [
  * @returns The settings view.
  */
 export function SettingsRoute() {
-  const { section } = useSearch({ from: APP_ROUTES.settings })
+  const { section } = useSearch({
+    from: APP_ROUTES.settings,
+    select: (search: { section?: SettingsSection }) => search,
+  })
   const modeSelectId = useId()
   const iconSwitchId = useId()
   const expandSwitchId = useId()

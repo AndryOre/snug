@@ -80,7 +80,7 @@ test('exports a mixed selection as JSON and confirms with a toast', async ({
   await page.getByRole('button', { name: 'Export 3 bookmarks' }).click()
   const download = await downloadPromise
 
-  const content = await readFile((await download.path()) as string, 'utf8')
+  const content = await readFile(await download.path(), 'utf8')
   const [root] = JSON.parse(content) as ExportedNode[]
   expect(leafTitles(root?.children ?? [])).toEqual(
     ['Photo Album', 'Recipe Page', 'Standalone Link'].toSorted((a, b) =>
@@ -135,7 +135,7 @@ for (const { format, extension, shapes } of structuralFormats) {
     const download = await downloadPromise
 
     expect(download.suggestedFilename().endsWith(extension)).toBe(true)
-    const content = await readFile((await download.path()) as string, 'utf8')
+    const content = await readFile(await download.path(), 'utf8')
     for (const shape of shapes) expect(content).toContain(shape)
     expect(content).not.toContain('Work Doc')
   })
@@ -158,7 +158,7 @@ test('exports an icon-less bookmark as HTML without an ICON attribute', async ({
   await page.getByRole('button', { name: 'Export 1 bookmark' }).click()
   const download = await downloadPromise
 
-  const content = await readFile((await download.path()) as string, 'utf8')
+  const content = await readFile(await download.path(), 'utf8')
   expect(content).toContain('https://example.com/standalone-link')
   expect(content).not.toContain('ICON=')
 })
@@ -178,7 +178,7 @@ test('exports a selection made from the search-filtered tree', async ({
   await page.getByRole('button', { name: 'Export 1 bookmark' }).click()
   const download = await downloadPromise
 
-  const content = await readFile((await download.path()) as string, 'utf8')
+  const content = await readFile(await download.path(), 'utf8')
   const [root] = JSON.parse(content) as ExportedNode[]
   expect(leafTitles(root?.children ?? [])).toEqual(['Old Report'])
 })

@@ -37,11 +37,14 @@ function runInit(options: { stored: string | null; systemDark: boolean }) {
       changeListeners.push(listener)
     },
   })
-  new Function('document', 'localStorage', 'matchMedia', THEME_INIT_SCRIPT)(
-    fakeDocument,
-    fakeStorage,
-    fakeMatchMedia,
-  )
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval -- executes the shipped inline script source under fakes
+  const runThemeInit = new Function(
+    'document',
+    'localStorage',
+    'matchMedia',
+    THEME_INIT_SCRIPT,
+  ) as (...arguments_: unknown[]) => void
+  runThemeInit(fakeDocument, fakeStorage, fakeMatchMedia)
   const changeSystem = (isDark: boolean) => {
     for (const listener of changeListeners) listener({ matches: isDark })
   }

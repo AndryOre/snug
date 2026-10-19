@@ -196,9 +196,10 @@ async function requestBlobUrl(
     content,
     mimeType,
   }
-  const response = (await browser.runtime.sendMessage(
-    message,
-  )) as CreateBlobUrlResponse
+  const response = await browser.runtime.sendMessage<
+    typeof message,
+    CreateBlobUrlResponse
+  >(message)
   return response.url
 }
 

@@ -164,7 +164,12 @@ export class ImportWriter {
     }
     this.topLevelIds.length = 0
     this.createdIds.clear()
-    if (firstError) throw firstError
+    if (firstError)
+      throw firstError instanceof Error
+        ? firstError
+        : new Error('Failed to remove a created bookmark', {
+            cause: firstError,
+          })
   }
 }
 
