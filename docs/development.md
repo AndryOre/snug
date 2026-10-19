@@ -427,11 +427,11 @@ Motion utilities apply only under `prefers-reduced-motion: no-preference` and
 
 `.astro` files (almost all of `apps/site`) are linted through
 `eslint-plugin-astro` and `astro-eslint-parser`, with the same `shadcn/*` rules
-and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React JSX rules
-(`react/jsx-key`, `react/no-unknown-property`) are off for `.astro` templates,
-and `Props` is allowed as Astro's component-props interface name. Anything the
-rules flag in a template (arbitrary type sizes, gradients, `<style>` blocks)
-moves into `@theme` or `@utility` entries in
+and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React rules
+(`@eslint-react`, type-checked) apply to `.ts`/`.tsx` only, and `Props` is
+allowed as Astro's component-props interface name. Anything the rules flag in a
+template (arbitrary type sizes, gradients, `<style>` blocks, which
+`shadcn/no-inline-styles` rejects) moves into `@theme` or `@utility` entries in
 `packages/ui/src/styles/globals.css`.
 
 ## Linting `apps/video`

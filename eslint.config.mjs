@@ -1,4 +1,5 @@
 import eslintComments from '@eslint-community/eslint-plugin-eslint-comments'
+import eslintReact from '@eslint-react/eslint-plugin'
 import { plugin as shadcn } from '@shadcn/lint'
 import vitest from '@vitest/eslint-plugin'
 import prettierConfig from 'eslint-config-prettier'
@@ -15,8 +16,9 @@ import wxtAutoImports from './apps/extension/.wxt/eslint-auto-imports.mjs'
 import localPlugin from './eslint-rules/index.mjs'
 
 /**
- * Punctuation/symbol-only JSX text that `react/jsx-no-literals` would
- * otherwise flag as copy — none of these carry translatable meaning.
+ * Punctuation/symbol-only JSX text that `react/jsx-no-literals` (the one
+ * `eslint-plugin-react` rule still used; `@eslint-react` has no equivalent)
+ * would otherwise flag as copy — none of these carry translatable meaning.
  */
 const JSX_NO_LITERALS_ALLOWED_STRINGS = [
   '/',
@@ -179,8 +181,28 @@ const eslintConfig = defineConfig([
       parserOptions: { parser: tseslint.parser },
     },
   },
-  react.configs.flat.recommended,
-  react.configs.flat['jsx-runtime'],
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [eslintReact.configs['recommended-type-checked']],
+    rules: {
+      '@eslint-react/naming-convention-ref-name': 'off',
+    },
+  },
+  {
+    /**
+     * `packages/ui/**` is shadcn-generated and re-synced from the registry,
+     * so the React 19 modernization and render-safety rules that its output
+     * does not follow are off there rather than patched by hand.
+     */
+    files: ['packages/ui/**'],
+    rules: {
+      '@eslint-react/no-array-index-key': 'off',
+      '@eslint-react/no-context-provider': 'off',
+      '@eslint-react/no-leaked-conditional-rendering': 'off',
+      '@eslint-react/no-use-context': 'off',
+      '@eslint-react/use-state': 'off',
+    },
+  },
   {
     /**
      * Explicit plugin registration + rules extraction instead of spreading
@@ -225,23 +247,11 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    settings: {
-      react: {
-        version: '19',
-      },
-    },
-  },
-  {
     /**
-     * `.astro` templates are HTML, not JSX: `class`, `hreflang`, `set:html`
-     * and keyless `.map()` output are all valid there, so the React JSX
-     * rules that the global React config would otherwise apply are off.
      * `Props` is Astro's own convention for a component's props interface.
      */
     files: ['**/*.astro'],
     rules: {
-      'react/jsx-key': 'off',
-      'react/no-unknown-property': 'off',
       'unicorn/name-replacements': [
         'error',
         {
@@ -255,6 +265,11 @@ const eslintConfig = defineConfig([
         },
       ],
     },
+  },
+  {
+    files: ['**/*.astro'],
+    plugins: { react },
+    rules: { 'react/jsx-no-target-blank': 'error' },
   },
   {
     files: ['**/*.{js,jsx,ts,tsx,astro}'],
@@ -287,6 +302,7 @@ const eslintConfig = defineConfig([
   {
     files: ['**/*.tsx'],
     ignores: ['packages/ui/**'],
+    plugins: { react },
     rules: {
       'react/jsx-no-literals': [
         'error',
@@ -328,6 +344,7 @@ const eslintConfig = defineConfig([
     files: ['**/e2e/**'],
     rules: {
       'react-hooks/rules-of-hooks': 'off',
+      '@eslint-react/rules-of-hooks': 'off',
     },
   },
   {
@@ -355,7 +372,8 @@ const eslintConfig = defineConfig([
      * that do not fit Remotion composition code: every `shadcn/*` rule is
      * off because Remotion renders frames from inline styles, raw colors and
      * arbitrary values rather than shadcn/ui components, and
-     * `jsdoc/require-param`, `jsdoc/require-returns`,
+     * `@eslint-react/no-array-index-key` (scenes render fixed lists by frame
+     * index), `jsdoc/require-param`, `jsdoc/require-returns`,
      * `unicorn/name-replacements` and `unicorn/consistent-boolean-name` are
      * off because parameter docs and naming conventions are out of scope for
      * composition code.
@@ -368,6 +386,7 @@ const eslintConfig = defineConfig([
       'shadcn/no-inline-styles': 'off',
       'shadcn/no-unknown-classes': 'off',
       'shadcn/require-static-classes': 'off',
+      '@eslint-react/no-array-index-key': 'off',
       'jsdoc/require-param': 'off',
       'jsdoc/require-returns': 'off',
       'unicorn/name-replacements': 'off',

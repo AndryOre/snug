@@ -3,7 +3,6 @@ import { cn } from 'cn'
 import { Check, File, Folder, Minus } from 'lucide-react'
 import type { ReactNode } from 'react'
 import {
-  forwardRef,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -30,7 +29,6 @@ import {
 import type { FlatTreeRow } from '@/lib/tree-navigation'
 import type {
   BookmarkNode,
-  BookmarkTreeViewHandle,
   BookmarkTreeViewProperties,
   CheckedState,
 } from '@/lib/types'
@@ -47,12 +45,12 @@ const TREE_OVERSCAN_ROWS = 10
  * (exposed as `aria-checked`); disabled nodes get no checkbox and are skipped
  * by select-all and {@link BookmarkTreeViewHandle.getCheckedIds}. It knows
  * nothing about where nodes come from: wrappers own fetching and reloading.
+ * @param properties The component props.
+ * @returns The rendered tree.
  */
-export const BookmarkTreeView = forwardRef<
-  BookmarkTreeViewHandle,
-  BookmarkTreeViewProperties
->(function BookmarkTreeView(
-  {
+export function BookmarkTreeView(properties: BookmarkTreeViewProperties) {
+  const {
+    ref: reference,
     nodes,
     searchTerm,
     ariaLabel,
@@ -65,16 +63,14 @@ export const BookmarkTreeView = forwardRef<
     className,
     placeholder,
     emptyState,
-  },
-  reference,
-) {
+  } = properties
   /**
    * Checked state for leaf (bookmark) nodes only, keyed by bookmark id.
    * Folder checked/indeterminate state is never stored here — it's derived
    * from descendant bookmarks at render time by `determineCheckedState`.
    */
-  const [explicitChecked, setCheckedState] = useState<Map<string, boolean>>(
-    new Map(),
+  const [explicitChecked, setExplicitChecked] = useState<Map<string, boolean>>(
+    () => new Map(),
   )
   const checkedState = useMemo(() => {
     if (!isCheckedByDefault) return explicitChecked
@@ -84,7 +80,9 @@ export const BookmarkTreeView = forwardRef<
     }
     return effective
   }, [explicitChecked, isCheckedByDefault, nodes])
-  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set())
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(
+    () => new Set(),
+  )
   const [focusedId, setFocusedId] = useState<string | undefined>()
   const treeReference = useRef<HTMLDivElement>(null)
   const isFocusInTreeReference = useRef(false)
@@ -109,7 +107,7 @@ export const BookmarkTreeView = forwardRef<
     selectAll: () => {
       if (!isSelectable) return
       const visibleBookmarkIds = collectSelectableIds(visibleNodes)
-      setCheckedState((previous) => {
+      setExplicitChecked((previous) => {
         const next = new Map(previous)
         for (const id of visibleBookmarkIds) next.set(id, true)
         return next
@@ -117,7 +115,7 @@ export const BookmarkTreeView = forwardRef<
     },
     deselectAll: () => {
       const targetIds = collectSelectableIds(isSearching ? visibleNodes : nodes)
-      setCheckedState((previous) => {
+      setExplicitChecked((previous) => {
         const next = new Map(previous)
         for (const id of targetIds) {
           if (isCheckedByDefault) next.set(id, false)
@@ -128,7 +126,7 @@ export const BookmarkTreeView = forwardRef<
     },
     clearSelection: () => {
       const targetIds = collectSelectableIds(nodes)
-      setCheckedState(
+      setExplicitChecked(
         new Map(isCheckedByDefault ? targetIds.map((id) => [id, false]) : []),
       )
     },
@@ -271,7 +269,7 @@ export const BookmarkTreeView = forwardRef<
       : determineCheckedState(node.children ?? [], checkedState)
     const isChecked = current !== true
 
-    setCheckedState((previous) => {
+    setExplicitChecked((previous) => {
       const next = new Map(previous)
       if (node.url) {
         next.set(node.id, isChecked)
@@ -370,7 +368,7 @@ export const BookmarkTreeView = forwardRef<
       </div>
     </div>
   )
-})
+}
 
 interface TreeRowProperties {
   row: FlatTreeRow
