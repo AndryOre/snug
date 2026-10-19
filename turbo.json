@@ -83,7 +83,12 @@
       "outputs": []
     },
     "//#test:root": {
-      "inputs": ["scripts/**", "eslint-rules/**", "vitest.config.ts"],
+      "inputs": [
+        "scripts/**",
+        "eslint-rules/**",
+        "docs/adr/**",
+        "vitest.config.ts"
+      ],
       "outputs": []
     }
   }

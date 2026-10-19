@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "types": ["bun-types"]
   },
-  "include": ["scripts", "eslint-rules", "vitest.config.ts"]
+  "include": ["scripts", "eslint-rules", "docs/adr", "vitest.config.ts"]
 }
