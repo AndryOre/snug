@@ -182,6 +182,57 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  report-failure:
+    name: Report a failed nightly run
+    needs: [layout]
+    if:
+      ${{ github.event_name == 'schedule' && needs.layout.result == 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPOSITORY: ${{ github.repository }}
+      RUN_URL:
+        ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{
+        github.run_id }}
+    steps:
+      - name: Open or update the failure issue
+        run: |
+          title="Nightly BrowserStack run failing"
+          body="The nightly BrowserStack run failed: ${RUN_URL}"
+          number="$(gh issue list --repo "${REPOSITORY}" --state open --search "\"${title}\" in:title" --json number,title --jq "map(select(.title == \"${title}\")) | .[0].number // empty")"
+          if [[ -n "${number}" ]]; then
+            gh issue comment "${number}" --repo "${REPOSITORY}" --body "${body}"
+          else
+            gh issue create --repo "${REPOSITORY}" --title "${title}" --body "${body}"
+          fi
+
+  resolve-failure:
+    name: Close the failure issue after a passing nightly run
+    needs: [layout]
+    if:
+      ${{ github.event_name == 'schedule' && needs.layout.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPOSITORY: ${{ github.repository }}
+      RUN_URL:
+        ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{
+        github.run_id }}
+    steps:
+      - name: Close the open failure issue
+        run: |
+          title="Nightly BrowserStack run failing"
+          number="$(gh issue list --repo "${REPOSITORY}" --state open --search "\"${title}\" in:title" --json number,title --jq "map(select(.title == \"${title}\")) | .[0].number // empty")"
+          if [[ -n "${number}" ]]; then
+            gh issue close "${number}" --repo "${REPOSITORY}" --comment "The nightly BrowserStack run passed again: ${RUN_URL}"
+          fi
+
   percy:
     name: Percy cross-browser snapshots
     if: github.event_name != 'schedule'
