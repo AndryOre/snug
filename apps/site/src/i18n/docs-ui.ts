@@ -7,6 +7,7 @@ export const DOCS_UI = {
   whatsNew: "What's new",
   navLabel: 'Documentation',
   editPage: 'Edit this page on GitHub',
+  opensInNewTab: 'opens in a new tab',
 } as const
 
 /**

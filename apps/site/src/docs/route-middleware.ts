@@ -2,7 +2,11 @@ import { defineRouteMiddleware } from '@astrojs/starlight/route-data'
 
 import { getContent, getPageMeta } from '../i18n/content'
 import { lastCommitDate } from '../seo/last-modified'
-import { buildDocumentationHead, replaceOrPushHead } from './head-tags'
+import {
+  buildDocumentationHead,
+  buildPaginationHead,
+  replaceOrPushHead,
+} from './head-tags'
 import { resolveDocumentationLocale } from './locale'
 import { applySeoTitle } from './page-meta'
 import { PUBLISHED_SOURCES } from './published'
@@ -52,6 +56,10 @@ export const onRequest = defineRouteMiddleware((context) => {
       }),
     )
   }
+  route.head = replaceOrPushHead(
+    route.head,
+    buildPaginationHead(route.pagination),
+  )
   if (route.entry.data.translationStatus === 'translated') return
   route.entryMeta = { ...route.entryMeta, lang: 'en', dir: 'ltr' }
 })
