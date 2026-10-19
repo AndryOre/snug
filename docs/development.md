@@ -35,7 +35,7 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                           |
 | `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                               |
 | `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                                                                  |
-| `bun run test:coverage`     | Runs the Vitest suite with coverage (`apps/extension/lib/**`, v8 provider, 80% lines/statements/functions, 50% branches).                                        |
+| `bun run test:coverage`     | Turborepo runs each workspace's Vitest suite with v8 coverage, plus the root tooling tests. Thresholds are in [Coverage ramp](#coverage-ramp).                   |
 | `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                                                       |
 | `bun run test:e2e`          | Turborepo runs each workspace's Playwright E2E suite: the extension (builds with `wxt build` first, `apps/extension/e2e/**`) and the site (`astro build` first). |
 | `bun run store:screenshots` | Builds the extension, then composes the localized store screenshots (`apps/extension/e2e-store/**`).                                                             |
@@ -189,9 +189,10 @@ a minimal in-memory bookmark tree onto `fakeBrowser.bookmarks` via
 implement `resetState`), so call `resetFakeBookmarks()` (and `resetFakeI18n()`,
 if used) alongside it in `beforeEach`.
 
-Coverage is scoped to `apps/extension/lib/**` only (see
-`apps/extension/vitest.config.ts`), with an 80% threshold on
-lines/statements/functions and 50% on branches.
+Coverage is scoped per workspace (see each `vitest.config.ts`): `lib/**` in
+`apps/extension`, `src/**/*.ts` in `apps/site`, and `scripts/**` plus
+`eslint-rules/**` at the root. Thresholds follow the
+[Coverage ramp](#coverage-ramp).
 
 See [CONTRIBUTING's `## Tests`](../CONTRIBUTING.md#tests) section for this
 repository's testing policy: what a PR is expected to cover and when.
@@ -330,6 +331,36 @@ facade, iframes and `<time>` elements are masked and animations are disabled.
   this script: a local Chromium renders fonts differently and breaks CI.
 - `test:container` skips these tests (`--grep-invert @visual`); Docker is
   required for `test:visual`.
+
+## Coverage ramp
+
+The target for every coverage-measured workspace is 95% lines, 95% statements,
+90% branches and 95% functions
+([ADR 0027](adr/0027-practices-parity-with-afe.md)). Thresholds only ever go up:
+each is set to the measured value rounded down, and a PR that adds tested code
+raises them in the same change.
+
+| Workspace        | Lines | Statements | Branches | Functions |
+| ---------------- | ----- | ---------- | -------- | --------- |
+| `apps/extension` | 94    | 93         | 86       | 93        |
+| `apps/site`      | 90    | 89         | 84       | 90        |
+| root tooling     | 67    | 67         | 65       | 86        |
+| target           | 95    | 95         | 90       | 95        |
+
+Next steps toward the target:
+
+1. `apps/extension`: add colocated tests for the `lib/` modules listed in
+   `scripts/coverage-manifest.test.ts`, starting with the importers and
+   `render-export.ts`, then close the branch gap.
+2. `apps/site`: cover the docs helpers (`markdown.ts`, `sidebar.ts`,
+   `route-middleware.ts`) and the `seo/` builders that have no colocated test.
+3. Root: test the entry paths of `scripts/lint-commits.ts` and
+   `scripts/lint-docs.ts`.
+
+`scripts/coverage-manifest.test.ts` fails when a module has neither a colocated
+test nor a written exemption, and when an exemption is stale (the module is
+gone, now has a test, or has an empty reason). Adding a test for an exempted
+module means deleting its exemption in the same change.
 
 ## Landing motion utilities
 
