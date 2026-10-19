@@ -14,8 +14,8 @@ import {
   recordSavedFolderFile,
 } from './auto-export-retention'
 
-const folderHandleMock = vi.hoisted(() => ({
-  handle: null as unknown,
+const folderHandleMock = vi.hoisted((): { handle: unknown } => ({
+  handle: null,
 }))
 
 vi.mock('@/lib/folder-handle', () => ({
@@ -78,8 +78,7 @@ function mockDownloadsCleanup(
   ])
   browser.downloads.search =
     search as unknown as typeof browser.downloads.search
-  browser.downloads.removeFile =
-    removeFile as unknown as typeof browser.downloads.removeFile
+  browser.downloads.removeFile = removeFile
   browser.downloads.erase = erase as unknown as typeof browser.downloads.erase
   return { removeFile, erase, search }
 }

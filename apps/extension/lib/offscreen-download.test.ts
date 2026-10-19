@@ -92,18 +92,16 @@ function mockDownloadsApi() {
     if (index !== -1) listeners.splice(index, 1)
   })
 
-  browser.downloads.download = download as typeof browser.downloads.download
-  browser.downloads.onChanged.addListener =
-    addListener as typeof browser.downloads.onChanged.addListener
-  browser.downloads.onChanged.removeListener =
-    removeListener as typeof browser.downloads.onChanged.removeListener
+  browser.downloads.download = download
+  browser.downloads.onChanged.addListener = addListener
+  browser.downloads.onChanged.removeListener = removeListener
 
   function fire(id: number, state: 'complete' | 'interrupted'): void {
     for (const listener of listeners) {
       listener({
         id,
         state: { current: state },
-      } as Browser.downloads.DownloadDelta)
+      })
     }
   }
 
@@ -275,7 +273,7 @@ describe('downloadViaOffscreenDocument', () => {
     expect(offscreen.createDocument).toHaveBeenCalledTimes(1)
     expect(offscreen.createDocument).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: expect.stringContaining(OFFSCREEN_DOCUMENT_PATH),
+        url: expect.stringContaining(OFFSCREEN_DOCUMENT_PATH) as string,
         reasons: ['BLOBS'],
       }),
     )
@@ -374,9 +372,7 @@ describe('downloadViaOffscreenDocument', () => {
       createDocument,
       closeDocument,
     } as unknown as typeof chrome.offscreen
-    chrome.runtime.getContexts = vi.fn(
-      async () => [],
-    ) as unknown as typeof chrome.runtime.getContexts
+    chrome.runtime.getContexts = vi.fn(async () => [])
     mockRuntimeSendMessage()
     mockDownloadsApi()
 
@@ -393,7 +389,7 @@ describe('downloadViaOffscreenDocument', () => {
     const download = vi.fn(async () => {
       throw new Error('download failed')
     })
-    browser.downloads.download = download as typeof browser.downloads.download
+    browser.downloads.download = download
     browser.downloads.onChanged.addListener =
       vi.fn() as typeof browser.downloads.onChanged.addListener
     browser.downloads.onChanged.removeListener =

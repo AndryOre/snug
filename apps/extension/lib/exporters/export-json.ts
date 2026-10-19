@@ -53,10 +53,7 @@ export async function exportToJSON(
   const rootNode = rootNodes[0] as ExtendedBookmarkTreeNode
   const nodesToExport = selectedBookmarks ?? rootNode.children ?? []
 
-  const ticker = createExportTicker(
-    options,
-    countBookmarks(nodesToExport as ExtendedBookmarkTreeNode[]),
-  )
+  const ticker = createExportTicker(options, countBookmarks(nodesToExport))
   const options_: NodeOptions = {
     ticker,
     includeIconData,

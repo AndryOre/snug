@@ -211,8 +211,10 @@ function StatusCard({
       destination,
     }
     try {
-      const response = (await browser.runtime.sendMessage(message)) as
+      const response = await browser.runtime.sendMessage<
+        RunManualExportMessage,
         RunManualExportResponse | undefined
+      >(message)
       if (response?.ok) {
         toast.add({
           title: i18n.t('exportNowSuccess'),

@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import {
   installSearchTrustedTypesPolicy,
   restrictToPagefindWorker,
+  type TrustedTypesFactory,
 } from './search-trusted-types'
 
 const ORIGIN = 'https://snug.andryore.dev'
@@ -34,15 +35,14 @@ describe('restrictToPagefindWorker', () => {
 
 describe('installSearchTrustedTypesPolicy', () => {
   it('registers the default policy with HTML and script URL callbacks only', () => {
-    const createPolicy = vi.fn()
+    const createPolicy = vi.fn<TrustedTypesFactory['createPolicy']>()
     installSearchTrustedTypesPolicy({ createPolicy }, ORIGIN)
     expect(createPolicy).toHaveBeenCalledOnce()
     const [name, rules] = createPolicy.mock.calls[0] ?? []
     expect(name).toBe('default')
-    expect(Object.keys(rules).toSorted((a, b) => a.localeCompare(b))).toEqual([
-      'createHTML',
-      'createScriptURL',
-    ])
+    expect(
+      Object.keys(rules ?? {}).toSorted((a, b) => a.localeCompare(b)),
+    ).toEqual(['createHTML', 'createScriptURL'])
   })
 
   it('does nothing without Trusted Types support', () => {

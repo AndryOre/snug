@@ -11,8 +11,8 @@ import { FakeDirectoryHandle } from '@/lib/testing/fake-directory-handle'
 import { resetFakeI18n } from '@/lib/testing/fake-i18n'
 import type { AutoExportConfig } from '@/lib/types'
 
-const folderHandleMock = vi.hoisted(() => ({
-  handle: null as unknown,
+const folderHandleMock = vi.hoisted((): { handle: unknown } => ({
+  handle: null,
 }))
 
 vi.mock('@/lib/folder-handle', async () => ({
@@ -46,8 +46,8 @@ function mockBrowserApis() {
     clear: vi.fn(),
   } as unknown as typeof browser.notifications
   const setBadgeText = vi.fn(async () => {})
-  browser.action.setBadgeText = setBadgeText as never
-  browser.action.setBadgeBackgroundColor = vi.fn(async () => {}) as never
+  browser.action.setBadgeText = setBadgeText
+  browser.action.setBadgeBackgroundColor = vi.fn(async () => {})
   return { create, setBadgeText }
 }
 

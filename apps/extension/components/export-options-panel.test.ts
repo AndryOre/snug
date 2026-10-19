@@ -26,11 +26,11 @@ async function mountPanel() {
 
 async function typeInto(input: HTMLInputElement, value: string) {
   await act(async () => {
-    const setter = Object.getOwnPropertyDescriptor(
+    const descriptor = Object.getOwnPropertyDescriptor(
       HTMLInputElement.prototype,
       'value',
-    )?.set
-    setter?.call(input, value)
+    )
+    descriptor?.set?.call(input, value)
     input.dispatchEvent(new Event('input', { bubbles: true }))
   })
 }
@@ -50,9 +50,7 @@ async function flushStorage() {
 describe('ExportOptionsPanel filename draft', () => {
   beforeEach(() => {
     fakeBrowser.reset()
-    fakeBrowser.i18n.getMessage = vi.fn(
-      (key: string) => key,
-    ) as typeof fakeBrowser.i18n.getMessage
+    fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
   })
 
   afterEach(() => {

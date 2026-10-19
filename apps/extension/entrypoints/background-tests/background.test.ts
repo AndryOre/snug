@@ -54,16 +54,12 @@ function mockRuntimeOnMessage(): {
   let listener: OnMessageListener | undefined
   browser.runtime.onMessage.addListener = vi.fn((l: unknown) => {
     listener = l as OnMessageListener
-  }) as unknown as typeof browser.runtime.onMessage.addListener
+  })
 
   return {
     trigger: (message: unknown) =>
       new Promise((resolve) => {
-        const handled = listener?.(
-          message,
-          {} as Browser.runtime.MessageSender,
-          resolve,
-        )
+        const handled = listener?.(message, {}, resolve)
         if (!handled) resolve(undefined)
       }),
   }

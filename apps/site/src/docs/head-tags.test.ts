@@ -8,6 +8,18 @@ import {
 } from './head-tags'
 import type { HeadEntry } from './page-meta'
 
+interface JsonLdGraph {
+  '@context': string
+  '@graph': {
+    '@type': string
+    itemListElement: { item: string }[]
+  }[]
+}
+
+function parseGraph(content: string | undefined): JsonLdGraph {
+  return JSON.parse(content ?? '{}') as JsonLdGraph
+}
+
 const input: DocumentationHeadInput = {
   locale: 'es',
   sourceId: 'guide/exporting',
@@ -56,7 +68,7 @@ describe('buildDocumentationHead', () => {
   it('emits one WebPage and BreadcrumbList graph with no HowTo or FAQ', () => {
     const scripts = head.filter((entry) => entry.tag === 'script')
     expect(scripts).toHaveLength(1)
-    const graph = JSON.parse(scripts[0]?.content ?? '{}')
+    const graph = parseGraph(scripts[0]?.content)
     expect(graph['@context']).toBe('https://schema.org')
     const [page, breadcrumb] = graph['@graph']
     expect(page).toMatchObject({
@@ -67,10 +79,8 @@ describe('buildDocumentationHead', () => {
       dateModified: '2026-10-01',
       isPartOf: { '@id': 'https://snug.andryore.dev/#website' },
     })
-    expect(breadcrumb['@type']).toBe('BreadcrumbList')
-    expect(
-      breadcrumb.itemListElement.map((item: { item: string }) => item.item),
-    ).toEqual([
+    expect(breadcrumb?.['@type']).toBe('BreadcrumbList')
+    expect(breadcrumb?.itemListElement.map((item) => item.item)).toEqual([
       'https://snug.andryore.dev/es/',
       'https://snug.andryore.dev/es/guide/',
       'https://snug.andryore.dev/es/guide/exporting/',
@@ -84,8 +94,8 @@ describe('buildDocumentationHead', () => {
       locale: 'en',
       sourceId: 'changelog',
     })
-    const graph = JSON.parse(changelog.at(-1)?.content ?? '{}')
-    expect(graph['@graph'][1].itemListElement).toHaveLength(2)
+    const graph = parseGraph(changelog.at(-1)?.content)
+    expect(graph['@graph'][1]?.itemListElement).toHaveLength(2)
   })
 })
 

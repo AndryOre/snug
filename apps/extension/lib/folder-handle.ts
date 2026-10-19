@@ -24,7 +24,9 @@ function openDatabase(): Promise<IDBDatabase> {
       request.result.createObjectStore(STORE_NAME)
     }
     request.onsuccess = () => resolve(request.result)
-    request.addEventListener('error', () => reject(request.error))
+    request.addEventListener('error', () =>
+      reject(request.error ?? new Error('IndexedDB request failed')),
+    )
   })
 }
 
@@ -39,7 +41,9 @@ async function runRequest<T>(
         database.transaction(STORE_NAME, mode).objectStore(STORE_NAME),
       )
       request.onsuccess = () => resolve(request.result)
-      request.addEventListener('error', () => reject(request.error))
+      request.addEventListener('error', () =>
+        reject(request.error ?? new Error('IndexedDB request failed')),
+      )
     })
   } finally {
     database.close()
@@ -64,7 +68,10 @@ export async function saveFolderHandle(
 export async function loadFolderHandle(): Promise<FileSystemDirectoryHandle | null> {
   const handle = await runRequest<FileSystemDirectoryHandle | undefined>(
     'readonly',
-    (store) => store.get(HANDLE_KEY),
+    (store) =>
+      store.get(HANDLE_KEY) as IDBRequest<
+        FileSystemDirectoryHandle | undefined
+      >,
   )
   return handle ?? null
 }

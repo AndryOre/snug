@@ -325,12 +325,12 @@ describe('Mobile root and non-web URLs', () => {
     ])
     const snapshot = await captureSafetySnapshot()
     const realCreate = fakeBrowser.bookmarks.create
-    fakeBrowser.bookmarks.create = (async (
+    fakeBrowser.bookmarks.create = async (
       details: Browser.bookmarks.CreateDetails,
     ) => {
       if (details.url === 'chrome://bad') throw new Error('rejected')
       return realCreate(details)
-    }) as typeof fakeBrowser.bookmarks.create
+    }
 
     await expect(restoreSafetySnapshot(snapshot)).rejects.toThrow()
 
@@ -357,11 +357,11 @@ describe('restoreSafetySnapshot rollback and lock', () => {
     const otherBefore = rootOutline('2')
     const realRemoveTree = fakeBrowser.bookmarks.removeTree
     let calls = 0
-    fakeBrowser.bookmarks.removeTree = (async (id: string) => {
+    fakeBrowser.bookmarks.removeTree = async (id: string) => {
       calls++
       if (calls === 2) throw new Error('remove failed')
       return realRemoveTree(id)
-    }) as typeof fakeBrowser.bookmarks.removeTree
+    }
 
     await expect(restoreSafetySnapshot(snapshot)).rejects.toThrow(
       'remove failed',
@@ -376,11 +376,11 @@ describe('restoreSafetySnapshot rollback and lock', () => {
     const snapshot = await captureSafetySnapshot()
     const realRemoveTree = fakeBrowser.bookmarks.removeTree
     let calls = 0
-    fakeBrowser.bookmarks.removeTree = (async (id: string) => {
+    fakeBrowser.bookmarks.removeTree = async (id: string) => {
       calls++
       if (calls === 2) throw new Error('remove failed')
       return realRemoveTree(id)
-    }) as typeof fakeBrowser.bookmarks.removeTree
+    }
 
     const error = await captureRejection(restoreSafetySnapshot(snapshot))
 

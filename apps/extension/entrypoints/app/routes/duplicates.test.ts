@@ -47,9 +47,7 @@ describe('DuplicatesRoute delete flow', () => {
   beforeEach(async () => {
     fakeBrowser.reset()
     resetFakeBookmarks()
-    fakeBrowser.i18n.getMessage = vi.fn(
-      (key: string) => key,
-    ) as typeof fakeBrowser.i18n.getMessage
+    fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
     vi.stubGlobal('ResizeObserver', ResizeObserverStub)
     const heading = document.createElement('h1')
     heading.tabIndex = -1
@@ -76,7 +74,7 @@ describe('DuplicatesRoute delete flow', () => {
   it('ignores Escape while a delete is running and focuses the heading after the rescan', async () => {
     const removal = Promise.withResolvers<void>()
     const remove = vi.fn(() => removal.promise)
-    fakeBrowser.bookmarks.remove = remove as never
+    fakeBrowser.bookmarks.remove = remove
     await openConfirmDialog()
 
     const confirmButton = [...document.body.querySelectorAll('button')].find(

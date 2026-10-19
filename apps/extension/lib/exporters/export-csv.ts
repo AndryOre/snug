@@ -61,10 +61,7 @@ export async function exportToCSV(options: ExportCSVOptions): Promise<string> {
 
   const rows: CSVRow[] = []
 
-  const ticker = createExportTicker(
-    options,
-    countBookmarks(nodesToExport as ExtendedBookmarkTreeNode[]),
-  )
+  const ticker = createExportTicker(options, countBookmarks(nodesToExport))
 
   await flattenToRows(nodesToExport as ExtendedBookmarkTreeNode[], rows, '', {
     ticker,

@@ -65,10 +65,7 @@ export async function exportToHTML(
     '<DL><p>',
   ]
 
-  const ticker = createExportTicker(
-    options,
-    countBookmarks(nodesToExport as ExtendedBookmarkTreeNode[]),
-  )
+  const ticker = createExportTicker(options, countBookmarks(nodesToExport))
   await generateHtmlContent(
     lines,
     nodesToExport as ExtendedBookmarkTreeNode[],
