@@ -2,6 +2,7 @@ import type { Loader, LoaderContext } from 'astro/loaders'
 import path from 'node:path'
 
 import { loadLocalizedCatalog } from './catalog'
+import { markExternalLinks } from './external-links'
 import { REPOSITORY_ROOT, TRANSLATIONS_DIRECTORY } from './paths'
 import { PUBLISHED_SOURCES } from './published'
 
@@ -27,12 +28,13 @@ async function fillStore(context: LoaderContext): Promise<void> {
         englishPath: entry.englishPath,
       },
     })
+    const rendered = await context.renderMarkdown(entry.body)
     context.store.set({
       id: entry.id,
       data,
       body: entry.body,
       digest: context.generateDigest(`${entry.status}:${entry.body}`),
-      rendered: await context.renderMarkdown(entry.body),
+      rendered: { ...rendered, html: markExternalLinks(rendered.html) },
     })
   }
 }

@@ -73,6 +73,42 @@ export function replaceOrPushHead<Entry extends HeadEntry>(
   return [...kept, ...additions]
 }
 
+/**
+ * The neighbours of a page in the sidebar order, as Starlight reports them.
+ */
+export interface PaginationNeighbours {
+  prev?: { href: string } | undefined
+  next?: { href: string } | undefined
+}
+
+/**
+ * `<link rel="prev">` and `<link rel="next">` head entries for the pages
+ * around a Guide page, so crawlers can follow the reading order.
+ * @param pagination - The route's previous and next pages.
+ * @returns One link entry per neighbour that exists, previous first.
+ */
+export function buildPaginationHead(
+  pagination: PaginationNeighbours,
+): { tag: 'link'; attrs: { rel: string; href: string } }[] {
+  const neighbours = [
+    ['prev', pagination.prev],
+    ['next', pagination.next],
+  ] as const
+  return neighbours.flatMap(([direction, neighbour]) =>
+    neighbour
+      ? [
+          {
+            tag: 'link' as const,
+            attrs: {
+              rel: direction,
+              href: new URL(neighbour.href, SITE_ORIGIN).href,
+            },
+          },
+        ]
+      : [],
+  )
+}
+
 function meta(
   key: 'name' | 'property',
   value: string,

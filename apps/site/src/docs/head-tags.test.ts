@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { LOCALES } from '../i18n/locales'
 import {
   buildDocumentationHead,
+  buildPaginationHead,
   type DocumentationHeadInput,
   replaceOrPushHead,
 } from './head-tags'
@@ -114,5 +115,48 @@ describe('replaceOrPushHead', () => {
       { tag: 'link', attrs: { rel: 'canonical', href: '/a/' } },
       { tag: 'meta', attrs: { property: 'og:locale', content: 'es_ES' } },
     ])
+  })
+})
+
+describe('buildPaginationHead', () => {
+  it('links the previous and next pages by absolute URL', () => {
+    expect(
+      buildPaginationHead({
+        prev: { href: '/es/guide/exporting/' },
+        next: { href: '/es/guide/settings/' },
+      }),
+    ).toEqual([
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'prev',
+          href: 'https://snug.andryore.dev/es/guide/exporting/',
+        },
+      },
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'next',
+          href: 'https://snug.andryore.dev/es/guide/settings/',
+        },
+      },
+    ])
+  })
+
+  it('emits only the neighbour that exists', () => {
+    expect(buildPaginationHead({ next: { href: '/guide/faq/' } })).toEqual([
+      {
+        tag: 'link',
+        attrs: { rel: 'next', href: 'https://snug.andryore.dev/guide/faq/' },
+      },
+    ])
+    expect(buildPaginationHead({})).toEqual([])
+  })
+
+  it('keeps an absolute href as it is', () => {
+    const [entry] = buildPaginationHead({
+      prev: { href: 'https://example.com/a/' },
+    })
+    expect(entry?.attrs.href).toBe('https://example.com/a/')
   })
 })
