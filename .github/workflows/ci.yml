@@ -158,6 +158,8 @@ jobs:
           TURBO_SCM_BASE: origin/${{ github.base_ref }}
           AFFECTED:
             ${{ github.event_name == 'pull_request' && '--affected' || '' }}
+          AXE_MATRIX:
+            ${{ github.event_name == 'pull_request' && 'sampled' || 'full' }}
         run: |
           read -r -a affected_flags <<< "$AFFECTED"
           bunx turbo run test:e2e "${affected_flags[@]}"

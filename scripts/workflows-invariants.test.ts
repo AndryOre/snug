@@ -13,22 +13,6 @@ const FULL_SHA_PATTERN = /^[\da-f]{40}$/
 const VERSION_COMMENT_PATTERN = /#\s*v\d+\.\d+\.\d+\s*$/
 const USES_LINE_PATTERN = /^\s*(?:-\s+)?uses:\s*(\S+)(.*)$/
 
-/**
- * Workflows still waiting for the hygiene fixes tracked in AO-2169. Remove a
- * file from this list when its violations are fixed; the follow-up ticket
- * empties it.
- */
-const EXEMPT_UNTIL_AO_2169: ReadonlySet<string> = new Set([
-  'codeql.yml',
-  'deploy-site.yml',
-  'labels.yml',
-  'lint-docs.yml',
-  'lint-pr.yml',
-  'lint-workflows.yml',
-  'scorecard.yml',
-  'site-quality.yml',
-])
-
 function collectSteps(workflow: Workflow): WorkflowStep[] {
   return Object.values(workflow.jobs ?? {}).flatMap((job) => job.steps ?? [])
 }
@@ -40,6 +24,11 @@ function triggerNames(workflow: Workflow): string[] {
   return trigger !== null && typeof trigger === 'object'
     ? Object.keys(trigger)
     : []
+}
+
+function needsList(needs: unknown): string[] {
+  if (typeof needs === 'string') return [needs]
+  return Array.isArray(needs) ? needs.map(String) : []
 }
 
 function usesReferences(source: string): { target: string; rest: string }[] {
@@ -119,21 +108,12 @@ function findViolations(workflow: Workflow, source: string): string[] {
 }
 
 const allFiles = listWorkflowFiles()
-const checkedFiles = allFiles.filter(
-  (fileName) => !EXEMPT_UNTIL_AO_2169.has(fileName),
-)
 
 test('there is at least one workflow to check', () => {
-  expect(checkedFiles.length).toBeGreaterThan(0)
+  expect(allFiles.length).toBeGreaterThan(0)
 })
 
-test('every exemption names a workflow that still exists', () => {
-  for (const fileName of EXEMPT_UNTIL_AO_2169) {
-    expect(allFiles).toContain(fileName)
-  }
-})
-
-describe.each(checkedFiles)('%s', (fileName) => {
+describe.each(allFiles)('%s', (fileName) => {
   test('satisfies the workflow hygiene rules', () => {
     const violations = findViolations(
       readWorkflow(fileName),
@@ -221,6 +201,46 @@ describe('ci.yml', () => {
 describe('codeql.yml', () => {
   test('exists as a workflow (ADR 0004)', () => {
     expect(allFiles).toContain('codeql.yml')
+  })
+})
+
+describe('release.yml (ADR 0026)', () => {
+  const workflow = readWorkflow('release.yml')
+  const jobs = Object.entries(workflow.jobs ?? {})
+  const verifyRuns = (workflow.jobs?.verify?.steps ?? [])
+    .map((step) => step.run ?? '')
+    .join('\n')
+
+  test('has a read-only verify job', () => {
+    expect(workflow.jobs?.verify).toBeDefined()
+    expect(workflow.jobs?.verify?.permissions).toEqual({
+      contents: 'read',
+      checks: 'read',
+    })
+  })
+
+  test('verify checks main ancestry, CI passed, check, test and build', () => {
+    expect(verifyRuns).toContain('merge-base --is-ancestor')
+    expect(verifyRuns).toContain('CI passed')
+    expect(verifyRuns).toContain('bun run check')
+    expect(verifyRuns).toContain('bun run test')
+    expect(verifyRuns).toContain('bun run build')
+  })
+
+  test('every job except verify needs verify', () => {
+    const others = jobs.filter(([name]) => name !== 'verify')
+    expect(others.length).toBeGreaterThan(0)
+    for (const [, job] of others) {
+      expect(needsList(job.needs)).toContain('verify')
+    }
+  })
+
+  test('publish jobs skip a version already released', () => {
+    const publishJobs = jobs.filter(([name]) => name.startsWith('publish-'))
+    expect(publishJobs.length).toBeGreaterThan(0)
+    for (const [, job] of publishJobs) {
+      expect(job.if).toContain('already-released')
+    }
   })
 })
 

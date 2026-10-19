@@ -33,7 +33,7 @@ for path in "${paths[@]}"; do
   reports=()
   for run in $(seq 1 "$runs"); do
     report="$out/report-$run.json"
-    bunx lighthouse "$base$path" \
+    bunx lighthouse@13.5.0 "$base$path" \
       --quiet --output=json --output-path="$report" \
       --only-categories=performance,accessibility,best-practices,seo \
       --chrome-flags="--headless=new --no-sandbox"

@@ -87,8 +87,8 @@
 9. In parallel with the Chrome Web Store job, a third job,
    `publish-edge-add-ons`, submits the Edge zip (`snug-X.Y.Z-edge.zip`) to
    Microsoft Edge Add-ons via `wxt submit`, using the Edge Add-ons API v1.1 with
-   API key authentication. It depends only on the `release` job, never on
-   `publish-chrome-web-store`, so one store failing does not block the other.
+   API key authentication. It depends on the `verify` and `release` jobs, never
+   on `publish-chrome-web-store`, so one store failing does not block the other.
    This job runs in the `edge-add-ons` GitHub Environment, which must hold these
    secrets:
 
