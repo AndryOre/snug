@@ -36,8 +36,11 @@ Refs: AO-<!-- Linear ticket number, delete this line if not applicable -->
 - [ ] Tested on Chromium (this extension is Chromium-only)
 - [ ] Keyboard navigation + ARIA attributes verified (if UI change)
 - [ ] Translations added/updated for all locales (if user-facing strings)
-- [ ] Passes `bun run fix`
+- [ ] Docs updated (`README.md`, `docs/usage.md` or `docs/guide/`) if
+      user-visible behavior changed
+- [ ] Passes `bun run check` and `bun run test`
 - [ ] PR title follows
       [Conventional Commits](https://www.conventionalcommits.org/)
       (`type(scope): description`)
+- [ ] Commits are signed off (DCO, `git commit -s`)
 - [ ] No secrets or sensitive data included
