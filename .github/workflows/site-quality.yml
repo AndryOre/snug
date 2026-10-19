@@ -67,6 +67,14 @@ jobs:
         working-directory: apps/site
         run: bun run test:visual
 
+      - name: Audit the build output distribution
+        working-directory: apps/site
+        env:
+          REQUIRE_DIST: '1'
+        run: |
+          bun run build
+          bun run test src/seo/distribution-audit.test.ts
+
       - name: Enforce the Lighthouse budget
         working-directory: apps/site
         run: |
