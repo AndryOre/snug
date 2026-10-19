@@ -272,6 +272,13 @@ describe('browserstack.yml nightly failure reporting', () => {
     expect(String(resolve?.if)).toContain("needs.layout.result == 'success'")
   })
 
+  test('the ci.yml caller grants the issues permission the reporting jobs request', () => {
+    const caller = readWorkflow('ci.yml').jobs?.browserstack
+    expect(
+      (caller?.permissions as { issues?: string } | undefined)?.issues,
+    ).toBe('write')
+  })
+
   test('the failure report opts out of the implicit success() gate', () => {
     expect(String(report?.if)).toMatch(/\b(always|failure)\(\)/)
   })

@@ -220,6 +220,7 @@ jobs:
       'true'
     permissions:
       contents: read
+      issues: write
     uses: ./.github/workflows/browserstack.yml # zizmor: ignore[self-repository] actionlint 1.7.12 rejects the $/ form
     with:
       tier: lean
