@@ -90,7 +90,7 @@
     "@shadcn/lint": "^0.2.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/bun": "catalog:",
-    "@vitest/coverage-v8": "^5.0.3",
+    "@vitest/coverage-v8": "^5.0.4",
     "@vitest/eslint-plugin": "^1.6.27",
     "bun-types": "^1.4.2",
     "eslint": "^10.11.0",
