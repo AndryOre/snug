@@ -2,7 +2,7 @@
   "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
   "agentGuidance": false,
-  "globalDependencies": ["bun.lock", "tsconfig.base.json"],
+  "globalDependencies": ["bun.lock", "bunfig.toml", "tsconfig.base.json"],
   "tasks": {
     "transit": {
       "dependsOn": ["^transit"]

@@ -152,8 +152,6 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/seo/umami.ts': SITE_MODULE_REASON,
   'scripts/workflow-files.ts':
     'Workflow loader used by workflows-invariants.test.ts, which exercises it against the real workflows.',
-  'eslint-rules/index.mjs':
-    'Plugin entry that only registers the rules, each tested in its own colocated test.',
 }
 
 const exemptedFiles = new Set(Object.keys(EXEMPTIONS))

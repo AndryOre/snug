@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+  workflow_dispatch:
   push:
     branches: [main] # only permanent branches — avoids duplicate runs when a feature branch has an open PR
 
