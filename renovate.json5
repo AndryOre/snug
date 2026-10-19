@@ -73,16 +73,6 @@
       datasourceTemplate: 'npm',
       depNameTemplate: 'lighthouse',
     },
-    // LYCHEE_VERSION mirrors lychee-action's default lycheeVersion; the action's
-    // own bump is guarded by EXPECTED_LYCHEE_ACTION_VERSION in lint-docs.test.ts
-    {
-      customType: 'regex',
-      managerFilePatterns: ['/^scripts/lint-docs\\.ts$/'],
-      matchStrings: ["LYCHEE_VERSION = '(?<currentValue>v\\d+\\.\\d+\\.\\d+)'"],
-      datasourceTemplate: 'github-releases',
-      depNameTemplate: 'lycheeverse/lychee',
-      extractVersionTemplate: '^lychee-(?<version>.+)$',
-    },
   ],
 
   // apps/site (Astro, @astrojs/*) needs no dedicated rule: its dependencies fall
