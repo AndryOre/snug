@@ -59,7 +59,9 @@ jobs:
           TURBO_SCM_BASE: origin/${{ github.base_ref }}
           AFFECTED:
             ${{ github.event_name == 'pull_request' && '--affected' || '' }}
-        run: bunx turbo run check test:coverage $AFFECTED
+        run: |
+          read -r -a affected_flags <<< "$AFFECTED"
+          bunx turbo run check test:coverage "${affected_flags[@]}"
 
       - name: Check and test repo-wide (format, lint, knip, script tests)
         run: bunx turbo run check:root test:root
@@ -100,7 +102,9 @@ jobs:
           TURBO_SCM_BASE: origin/${{ github.base_ref }}
           AFFECTED:
             ${{ github.event_name == 'pull_request' && '--affected' || '' }}
-        run: bunx turbo run zip $AFFECTED
+        run: |
+          read -r -a affected_flags <<< "$AFFECTED"
+          bunx turbo run zip "${affected_flags[@]}"
 
       - name: Report zip size
         run: |
@@ -154,7 +158,9 @@ jobs:
           TURBO_SCM_BASE: origin/${{ github.base_ref }}
           AFFECTED:
             ${{ github.event_name == 'pull_request' && '--affected' || '' }}
-        run: bunx turbo run test:e2e $AFFECTED
+        run: |
+          read -r -a affected_flags <<< "$AFFECTED"
+          bunx turbo run test:e2e "${affected_flags[@]}"
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
