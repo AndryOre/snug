@@ -21,15 +21,22 @@ other.
   reasons.
 - AFE records the same table in its own ADR; the two copies are mirrors.
 
-| Practice                      | Snug        | AFE        | Reason                                                     |
-| ----------------------------- | ----------- | ---------- | ---------------------------------------------------------- |
-| Build-time code highlighting  | N/A         | Applies    | Snug shows no code outside Starlight                       |
-| Dynamic OG images             | N/A         | Applies    | Snug has a handful of pages, AFE has one per emoji         |
-| Privacy page                  | Applies     | N/A        | AFE has no analytics                                       |
-| Launch kit and store runbooks | Applies     | N/A        | AFE publishes to npm, not to stores                        |
-| Build provenance              | Attestation | Equivalent | npm trusted publishing already gives AFE provenance        |
-| BrowserStack and Percy        | Applies     | Deferred   | BrowserStack OSS approval is per repo and AFE has none yet |
-| `FUNDING.yml`                 | None        | None       | Removed from AFE; neither repo asks for sponsors           |
+| Practice                                  | Snug        | AFE        | Reason                                                                                                      |
+| ----------------------------------------- | ----------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
+| Build-time code highlighting              | N/A         | Applies    | Snug shows no code outside Starlight                                                                        |
+| Dynamic OG images                         | N/A         | Applies    | Snug has a handful of pages, AFE has one per emoji                                                          |
+| Privacy page                              | Applies     | N/A        | AFE has no analytics                                                                                        |
+| Launch kit and store runbooks             | Applies     | N/A        | AFE publishes to npm, not to stores                                                                         |
+| Build provenance                          | Attestation | Equivalent | npm trusted publishing already gives AFE provenance                                                         |
+| BrowserStack and Percy                    | Applies     | Deferred   | BrowserStack OSS approval is per repo and AFE has none yet                                                  |
+| `FUNDING.yml`                             | None        | None       | Removed from AFE; neither repo asks for sponsors                                                            |
+| Docs testing checklist                    | Applies     | N/A        | Tied to BrowserStack, which AFE defers                                                                      |
+| Package gates (publint, attw, size-limit) | N/A         | Applies    | Snug ships no npm package; AO-2172 adds a size budget on the extension zip, which makes this row Equivalent |
+| Asset pipeline and sync-assets            | N/A         | Applies    | Only AFE builds and publishes emoji assets                                                                  |
+| Promo video (Remotion)                    | Applies     | N/A        | Only Snug has a promo video                                                                                 |
+| Extension and store E2E                   | Applies     | N/A        | AFE is a library, not an extension                                                                          |
+| Umami analytics                           | Applies     | N/A        | AFE has no analytics, same reason as the privacy page                                                       |
+| Cross-browser library tests               | N/A         | Applies    | Snug is Chromium-only; AFE is a multi-browser library                                                       |
 
 ## Alternatives considered
 
