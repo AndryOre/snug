@@ -45,6 +45,9 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                                  |
 | `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                             |
 
+If something fails, see [troubleshooting](troubleshooting.md). Task recipes are
+indexed in [how-to](how-to/README.md).
+
 ## Git hooks
 
 Hooks are installed via Husky and live in `.husky/`:
