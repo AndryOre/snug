@@ -36,7 +36,7 @@
     "@types/papaparse": "^5.5.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitest/coverage-v8": "^5.0.3",
+    "@vitest/coverage-v8": "^5.0.4",
     "@wxt-dev/auto-icons": "^1.1.1",
     "@wxt-dev/browser": "^0.3.4",
     "@wxt-dev/module-react": "^1.2.2",
