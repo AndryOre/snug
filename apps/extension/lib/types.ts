@@ -1,5 +1,5 @@
 import type { Browser } from '@wxt-dev/browser'
-import type { ReactNode } from 'react'
+import type { ReactNode, Ref } from 'react'
 
 import type { ExportFormat } from './export-formats'
 import type { ImportControl } from './import-control'
@@ -220,6 +220,7 @@ export interface BookmarkTreeHandle {
 }
 
 export interface BookmarkTreeProperties {
+  ref?: Ref<BookmarkTreeHandle>
   searchTerm: string
   onSelectionChange: (count: number) => void
   onTotalChange: (count: number) => void
@@ -278,6 +279,7 @@ export interface BookmarkTreeViewHandle {
 }
 
 export interface BookmarkTreeViewProperties {
+  ref?: Ref<BookmarkTreeViewHandle>
   nodes: BookmarkNode[]
   searchTerm: string
   /**
