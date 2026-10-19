@@ -116,3 +116,58 @@ test('how it works journey is static and fully visible', async ({ page }) => {
   const logos = page.locator('[data-section="how"] .hero-logos > *')
   await expect(logos.first()).toHaveCSS('opacity', '1')
 })
+
+test('cross-document view transitions are not active', async ({ page }) => {
+  await page.goto('/')
+  const active = await page.evaluate(() => {
+    const found: string[] = []
+    const visit = (list: CSSRuleList) => {
+      for (const rule of list) {
+        if (rule.constructor.name === 'CSSViewTransitionRule') {
+          found.push(rule.cssText)
+        } else if ('conditionText' in rule && 'cssRules' in rule) {
+          if (globalThis.matchMedia(String(rule.conditionText)).matches) {
+            visit(rule.cssRules as CSSRuleList)
+          }
+        } else if ('cssRules' in rule) {
+          visit((rule as CSSGroupingRule).cssRules)
+        }
+      }
+    }
+    for (const sheet of globalThis.document.styleSheets) visit(sheet.cssRules)
+    return found
+  })
+  expect(active).toEqual([])
+})
+
+test('a theme switch starts no view transition', async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => {
+    const started: string[] = []
+    const original = globalThis.document.startViewTransition.bind(
+      globalThis.document,
+    )
+    globalThis.document.startViewTransition = (...callArguments) => {
+      started.push('started')
+      return original(...callArguments)
+    }
+    Object.assign(globalThis, { startedTransitions: started })
+  })
+  await page.locator('[data-theme-menu]').getByRole('button').click()
+  await page.getByRole('menuitemradio', { name: 'Dark' }).click()
+  await expect(page.locator('html')).toHaveClass(/\bdark\b/)
+  const started = await page.evaluate(
+    () =>
+      (globalThis as unknown as { startedTransitions: string[] })
+        .startedTransitions,
+  )
+  expect(started).toEqual([])
+})
+
+test('scroll reveals are not animated', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('[data-bento-card]').first()).toHaveCSS(
+    'animation-name',
+    'none',
+  )
+})

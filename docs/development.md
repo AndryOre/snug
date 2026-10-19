@@ -372,7 +372,8 @@ Tokens: `--ease-out-strong`, `--ease-in-out-strong`, `--duration-fast`,
 - `header-surface` — fades an element from 0 to 1 over the first 64px of root
   scroll. Fade only, so it is not gated by reduced motion.
 - `scroll-reveal` — fade and rise as the element enters the viewport; the start
-  is offset by `sibling-index()` for a stagger.
+  is offset by `sibling-index()` for a stagger, behind
+  `@supports (z-index: sibling-index())` with a `--reveal-index` fallback.
 - `scroll-reveal-named` — same, on the timeline named by `--reveal-timeline`
   (use when a parent clips with `overflow`).
 
