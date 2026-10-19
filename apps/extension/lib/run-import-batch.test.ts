@@ -89,18 +89,16 @@ describe('runImportBatch', () => {
   it('removes everything both files created when canceled in the second', async () => {
     const controller = new AbortController()
     const original = fakeBrowser.bookmarks.create
-    const create = original as unknown as (
-      details: Browser.bookmarks.CreateDetails,
-    ) => Promise<Browser.bookmarks.BookmarkTreeNode>
+    const create = original
     let created = 0
-    fakeBrowser.bookmarks.create = (async (
+    fakeBrowser.bookmarks.create = async (
       details: Browser.bookmarks.CreateDetails,
     ) => {
       const node = await create(details)
       created++
       if (created === 3) controller.abort()
       return node
-    }) as typeof original
+    }
 
     await expect(
       runImportBatch(

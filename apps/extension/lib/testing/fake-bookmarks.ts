@@ -186,7 +186,7 @@ export function resetFakeBookmarks(
 
   fakeBrowser.bookmarks.getTree = async () => [clone(store.root)]
 
-  fakeBrowser.bookmarks.create = (async (
+  fakeBrowser.bookmarks.create = async (
     details: Browser.bookmarks.CreateDetails,
   ) => {
     const parentId = details.parentId ?? '2'
@@ -211,9 +211,9 @@ export function resetFakeBookmarks(
 
     parent.children.push(node)
     return clone(node)
-  }) as typeof fakeBrowser.bookmarks.create
+  }
 
-  fakeBrowser.bookmarks.search = (async (
+  fakeBrowser.bookmarks.search = async (
     query: string | Browser.bookmarks.SearchQuery,
   ) => {
     const title =
@@ -233,11 +233,11 @@ export function resetFakeBookmarks(
     }
     visit(store.root)
     return results
-  }) as typeof fakeBrowser.bookmarks.search
+  }
 
-  fakeBrowser.bookmarks.removeTree = (async (id: string) => {
+  fakeBrowser.bookmarks.removeTree = async (id: string) => {
     didDeleteNode(id)
-  }) as typeof fakeBrowser.bookmarks.removeTree
+  }
 }
 
 /**

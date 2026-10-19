@@ -209,7 +209,7 @@ function preprocessLevel(level: ParsedBookmark[]): PreprocessLevelResult {
     if (bookmark.parentId === ROOT_FOLDER_IDS.otherBookmarks) {
       orphans.push(bookmark)
     } else if (bookmark.children && isVirtualRoot(bookmark)) {
-      virtualRootChildren = bookmark.children as ParsedBookmark[]
+      virtualRootChildren = bookmark.children
       break
     } else {
       orphans.push(bookmark)
@@ -227,9 +227,13 @@ function preprocessLevel(level: ParsedBookmark[]): PreprocessLevelResult {
  */
 function coerceTitles(nodes: ParsedBookmark[]): void {
   for (const node of nodes) {
-    const rawTitle: unknown = node.title
-    node.title = String(rawTitle ?? '')
-    if (node.children) coerceTitles(node.children as ParsedBookmark[])
+    const { title: rawTitle }: { title: unknown } = node
+    if (typeof rawTitle === 'number' || typeof rawTitle === 'boolean') {
+      node.title = String(rawTitle)
+    } else if (typeof rawTitle !== 'string') {
+      node.title = ''
+    }
+    if (node.children) coerceTitles(node.children)
   }
 }
 

@@ -43,9 +43,7 @@ async function dropOn(target: Element, files: File[]) {
 
 beforeEach(() => {
   fakeBrowser.reset()
-  fakeBrowser.i18n.getMessage = vi.fn(
-    (key: string) => key,
-  ) as typeof fakeBrowser.i18n.getMessage
+  fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
 })
 
 afterEach(() => {

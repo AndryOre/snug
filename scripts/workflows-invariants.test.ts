@@ -244,6 +244,46 @@ describe('release.yml (ADR 0026)', () => {
   })
 })
 
+describe('browserstack.yml nightly failure reporting', () => {
+  const workflow = readWorkflow('browserstack.yml')
+  const report = workflow.jobs?.['report-failure']
+  const resolve = workflow.jobs?.['resolve-failure']
+
+  test('only the two reporting jobs may write issues', () => {
+    const writers = Object.entries(workflow.jobs ?? {})
+      .filter(
+        ([, job]) =>
+          (job.permissions as { issues?: string } | undefined)?.issues ===
+          'write',
+      )
+      .map(([name]) => name)
+    expect(writers).toEqual(['report-failure', 'resolve-failure'])
+  })
+
+  test('reporting jobs wait on layout and run for scheduled runs only', () => {
+    for (const job of [report, resolve]) {
+      expect(needsList(job?.needs)).toEqual(['layout'])
+      expect(String(job?.if)).toContain("github.event_name == 'schedule'")
+    }
+  })
+
+  test('failure is reported on failure and closed only on layout success', () => {
+    expect(String(report?.if)).toContain("needs.layout.result == 'failure'")
+    expect(String(resolve?.if)).toContain("needs.layout.result == 'success'")
+  })
+
+  test('the ci.yml caller grants the issues permission the reporting jobs request', () => {
+    const caller = readWorkflow('ci.yml').jobs?.browserstack
+    expect(
+      (caller?.permissions as { issues?: string } | undefined)?.issues,
+    ).toBe('write')
+  })
+
+  test('the failure report opts out of the implicit success() gate', () => {
+    expect(String(report?.if)).toMatch(/\b(always|failure)\(\)/)
+  })
+})
+
 describe('upload-artifact pins', () => {
   test('ci, release and browserstack share one version', () => {
     const pins = new Set(

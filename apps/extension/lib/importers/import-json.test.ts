@@ -617,12 +617,12 @@ describe('importFromJSON trusted restore with a failing folder create', () => {
 
   it('counts every bookmark of the dropped subtree as skipped', async () => {
     const realCreate = fakeBrowser.bookmarks.create
-    fakeBrowser.bookmarks.create = (async (
+    fakeBrowser.bookmarks.create = async (
       details: Browser.bookmarks.CreateDetails,
     ) => {
       if (details.title === 'Broken') throw new Error('create failed')
       return realCreate(details)
-    }) as typeof fakeBrowser.bookmarks.create
+    }
 
     const result = await importFromJSON(trustedTree, 'restore-merge', {
       trusted: true,

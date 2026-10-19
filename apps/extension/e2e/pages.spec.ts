@@ -64,9 +64,9 @@ test("What's new marks the Current version and links into the app", async ({
 })
 
 test('toolbar action title is localized', async ({ serviceWorker }) => {
-  const manifest = await serviceWorker.evaluate(() =>
+  const manifest = (await serviceWorker.evaluate(() =>
     chrome.runtime.getManifest(),
-  )
+  )) as { action?: { default_title?: string } }
 
   expect(manifest.action?.default_title).toBe(en.extensionName.message)
 })

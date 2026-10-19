@@ -131,7 +131,7 @@ const MAX_TEXT_WIDTH = CANVAS.width - 80
 const MAX_SUBTITLE_HEIGHT = 68
 
 async function assertNoOverflow(page: Page, outputPath: string): Promise<void> {
-  const problems = (await page.evaluate(`(() => {
+  const problems = await page.evaluate<string[]>(`(() => {
     const found = []
     const textWidth = (element) => {
       const range = document.createRange()
@@ -147,7 +147,7 @@ async function assertNoOverflow(page: Page, outputPath: string): Promise<void> {
         found.push(element.textContent + ' wraps past two lines')
     }
     return found
-  })()`)) as string[]
+  })()`)
   if (problems.length > 0)
     throw new Error(`Clipped text in ${outputPath}: ${problems.join('; ')}`)
 }

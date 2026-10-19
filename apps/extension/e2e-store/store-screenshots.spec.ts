@@ -274,13 +274,17 @@ test('composes the five store screenshots', async ({
         request.result.createObjectStore('handles')
       }
       request.onsuccess = () => resolve(request.result)
-      request.addEventListener('error', () => reject(request.error))
+      request.addEventListener('error', () =>
+        reject(request.error ?? new Error('IndexedDB request failed')),
+      )
     })
     await new Promise<void>((resolve, reject) => {
       const transaction = database.transaction('handles', 'readwrite')
       transaction.objectStore('handles').put(handle, 'custom-folder')
       transaction.oncomplete = () => resolve()
-      transaction.addEventListener('error', () => reject(transaction.error))
+      transaction.addEventListener('error', () =>
+        reject(transaction.error ?? new Error('IndexedDB transaction failed')),
+      )
     })
     database.close()
   })

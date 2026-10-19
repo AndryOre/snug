@@ -135,10 +135,8 @@ beforeEach(async () => {
       syncing: false,
     },
   ])
-  fakeBrowser.i18n.getMessage = vi.fn(
-    (key: string) => key,
-  ) as typeof fakeBrowser.i18n.getMessage
-  vi.spyOn(fakeBrowser.tabs, 'create').mockResolvedValue(undefined as never)
+  fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
+  vi.spyOn(fakeBrowser.tabs, 'create').mockResolvedValue(undefined)
   runImportMock.mockClear()
   toastAddMock.mockClear()
   await defaultImportModeStore.setValue('folder')

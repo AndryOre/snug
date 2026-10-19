@@ -109,7 +109,9 @@ async function waitForFaviconCached(
               reader.addEventListener('loadend', () =>
                 resolve(reader.result as string),
               )
-              reader.addEventListener('error', () => reject(reader.error))
+              reader.addEventListener('error', () =>
+                reject(reader.error ?? new Error('FileReader failed')),
+              )
               reader.readAsDataURL(blob)
             })
           },

@@ -28,11 +28,12 @@ export function formatZeroResults(copy: SiteContent['docsSearch']): string {
 export function chromeTranslationsLoader(): Loader {
   return {
     name: 'chrome-translations-loader',
-    async load({ store, parseData }) {
+    async load(context) {
+      const { store } = context
       const content = loadAllContent()
       for (const locale of LOCALES) {
         const id = languageTag(locale)
-        const data = await parseData({
+        const data = await context.parseData({
           id,
           data: {
             'pagefind.zero_results': formatZeroResults(

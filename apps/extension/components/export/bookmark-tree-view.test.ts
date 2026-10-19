@@ -71,9 +71,7 @@ function row(container: HTMLElement, title: string) {
 describe('BookmarkTreeView', () => {
   beforeEach(() => {
     fakeBrowser.reset()
-    fakeBrowser.i18n.getMessage = vi.fn(
-      (key: string) => key,
-    ) as typeof fakeBrowser.i18n.getMessage
+    fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
     for (const property of ['offsetHeight', 'offsetWidth']) {
       Object.defineProperty(HTMLElement.prototype, property, {
         configurable: true,
