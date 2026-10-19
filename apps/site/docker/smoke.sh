@@ -48,6 +48,14 @@ for alias in zh-CN zh_CN; do
   [ "$(status "$base/$alias/")" = 301 ] || fail "/$alias/ is not 301"
   [ "$(location "$base/$alias/")" = "/zh-cn/" ] || fail "/$alias/ does not redirect to /zh-cn/"
 done
+for pair in "pt-BR:pt-br" "pt_BR:pt-br" "pt_br:pt-br" "zh-CN:zh-cn" "zh_CN:zh-cn" "zh_cn:zh-cn"; do
+  alias="${pair%%:*}"
+  canonical="${pair##*:}"
+  [ "$(status "$base/$alias/guide/")" = 301 ] || fail "/$alias/guide/ is not 301"
+  [ "$(location "$base/$alias/guide/")" = "/$canonical/guide/" ] || fail "/$alias/guide/ does not redirect to /$canonical/guide/"
+  [ "$(location "$base/$alias/guide/exporting/?a=1&b=2")" = "/$canonical/guide/exporting/?a=1&b=2" ] || fail "/$alias/ deep path drops the query string"
+  [ "$(location "$base/$alias/")" = "/$canonical/" ] || fail "/$alias/ root redirect broke"
+done
 [ "$(status "$base/nope/")" = 404 ] || fail "missing page is not 404"
 
 headers="$(curl -s -o /dev/null -D - "$base/" | tr -d '\r')"
