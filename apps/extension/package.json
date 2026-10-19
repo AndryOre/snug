@@ -32,7 +32,7 @@
     "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "catalog:",
     "@types/bun": "catalog:",
-    "@types/chrome": "^0.3.4",
+    "@types/chrome": "^0.3.5",
     "@types/papaparse": "^5.5.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
