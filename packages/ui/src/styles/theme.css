@@ -256,8 +256,22 @@
       animation-fill-mode: both;
       animation-timeline: view();
       animation-range: entry 0% entry 60%;
-      animation-range-start: entry calc((sibling-index() - 1) * 4%);
+      animation-range-start: entry calc(var(--reveal-index, 0) * 4%);
     }
+    @supports (z-index: sibling-index()) {
+      --reveal-index: calc(sibling-index() - 1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: var(--duration-base);
+    animation-timing-function: var(--ease-out-strong);
   }
 }
 

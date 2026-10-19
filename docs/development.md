@@ -45,6 +45,9 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                                  |
 | `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                             |
 
+If something fails, see [troubleshooting](troubleshooting.md). Task recipes are
+indexed in [how-to](how-to/README.md).
+
 ## Git hooks
 
 Hooks are installed via Husky and live in `.husky/`:
@@ -372,7 +375,8 @@ Tokens: `--ease-out-strong`, `--ease-in-out-strong`, `--duration-fast`,
 - `header-surface` — fades an element from 0 to 1 over the first 64px of root
   scroll. Fade only, so it is not gated by reduced motion.
 - `scroll-reveal` — fade and rise as the element enters the viewport; the start
-  is offset by `sibling-index()` for a stagger.
+  is offset by `sibling-index()` for a stagger, behind
+  `@supports (z-index: sibling-index())` with a `--reveal-index` fallback.
 - `scroll-reveal-named` — same, on the timeline named by `--reveal-timeline`
   (use when a parent clips with `overflow`).
 
@@ -423,11 +427,11 @@ Motion utilities apply only under `prefers-reduced-motion: no-preference` and
 
 `.astro` files (almost all of `apps/site`) are linted through
 `eslint-plugin-astro` and `astro-eslint-parser`, with the same `shadcn/*` rules
-and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React JSX rules
-(`react/jsx-key`, `react/no-unknown-property`) are off for `.astro` templates,
-and `Props` is allowed as Astro's component-props interface name. Anything the
-rules flag in a template (arbitrary type sizes, gradients, `<style>` blocks)
-moves into `@theme` or `@utility` entries in
+and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React rules
+(`@eslint-react`, type-checked) apply to `.ts`/`.tsx` only, and `Props` is
+allowed as Astro's component-props interface name. Anything the rules flag in a
+template (arbitrary type sizes, gradients, `<style>` blocks, which
+`shadcn/no-inline-styles` rejects) moves into `@theme` or `@utility` entries in
 `packages/ui/src/styles/globals.css`.
 
 ## Linting `apps/video`

@@ -13,6 +13,7 @@ import { themeColor } from '../scripts/theme-color'
 
 const THEME_STORAGE_KEY = 'snug:theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 
 type ThemeChoice = 'system' | 'light' | 'dark'
 
@@ -83,12 +84,19 @@ function applyChoice(choice: ThemeChoice) {
     )
   }
   root.dataset.themeChoice = choice
-  root.classList.add('theme-switching')
-  root.classList.toggle('dark', isDark)
-  root.dataset.theme = isDark ? 'dark' : 'light'
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => root.classList.remove('theme-switching'))
-  })
+  const flip = () => {
+    root.classList.add('theme-switching')
+    root.classList.toggle('dark', isDark)
+    root.dataset.theme = isDark ? 'dark' : 'light'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => root.classList.remove('theme-switching'))
+    })
+  }
+  const shouldAnimate =
+    typeof document.startViewTransition === 'function' &&
+    !matchMedia(REDUCED_MOTION_QUERY).matches
+  if (shouldAnimate) document.startViewTransition(flip)
+  else flip()
 }
 
 function selectChoice(value: string) {

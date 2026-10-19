@@ -17,6 +17,8 @@ An index of every document in this repository.
 - [`docs/development.md`](development.md) — the local development guide:
   scripts, git hooks, CI, commit/branch format, the `@shadcn/lint` contract
   workflow, `fakeBrowser` testing, and the code documentation policy.
+- [`docs/troubleshooting.md`](troubleshooting.md) — fixes for real failures: the
+  e2e build step, lychee, forge worktrees, BrowserStack, and the Coolify deploy.
 - [`docs/architecture.md`](architecture.md) — a matklad-style code map of the
   codebase's shape: runtime contexts, data flows, and invariants.
 - [`CONTEXT.md`](../CONTEXT.md) — a glossary of domain terms used consistently
@@ -76,6 +78,7 @@ An index of every document in this repository.
 
 ## How-to
 
+- [`docs/how-to/README.md`](how-to/README.md) — index of the how-to recipes.
 - [`docs/usage.md`](usage.md) — opening the app, plus a guide page each for
   [exporting](guide/exporting.md), [importing](guide/importing.md) (the Safety
   snapshot and Undo), [duplicates](guide/duplicates.md),

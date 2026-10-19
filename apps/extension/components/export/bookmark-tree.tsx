@@ -1,7 +1,6 @@
 import { i18n } from '#i18n'
 import type { Browser } from '@wxt-dev/browser'
 import {
-  forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -13,7 +12,6 @@ import { collectBookmarkIds } from '@/lib/bookmark-tree-nodes'
 import { autoExpandFoldersStore } from '@/lib/storage'
 import type {
   BookmarkNode,
-  BookmarkTreeHandle,
   BookmarkTreeProperties,
   BookmarkTreeViewHandle,
   ExtendedBookmarkTreeNode,
@@ -30,12 +28,12 @@ const BOOKMARK_CHANGE_DEBOUNCE_MS = 150
  * tree down to the checked ids on export. Exposes an imperative handle (see
  * {@link BookmarkTreeHandle}) so the parent can drive selection and
  * refreshes without lifting the checked-state map into props.
+ * @param properties The component props.
+ * @returns The rendered tree.
  */
-export const BookmarkTree = forwardRef<
-  BookmarkTreeHandle,
-  BookmarkTreeProperties
->(function BookmarkTree(
-  {
+export function BookmarkTree(properties: BookmarkTreeProperties) {
+  const {
+    ref: reference,
     searchTerm,
     onSelectionChange,
     onTotalChange,
@@ -44,9 +42,7 @@ export const BookmarkTree = forwardRef<
     emptyState,
     noBookmarksState,
     errorState,
-  },
-  reference,
-) {
+  } = properties
   const [nodes, setNodes] = useState<BookmarkNode[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [hasLoadError, setHasLoadError] = useState(false)
@@ -161,7 +157,7 @@ export const BookmarkTree = forwardRef<
       emptyState={emptyState}
     />
   )
-})
+}
 
 /**
  * Converts raw `browser.bookmarks` nodes into this component's
