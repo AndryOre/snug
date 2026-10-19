@@ -13,22 +13,6 @@ const FULL_SHA_PATTERN = /^[\da-f]{40}$/
 const VERSION_COMMENT_PATTERN = /#\s*v\d+\.\d+\.\d+\s*$/
 const USES_LINE_PATTERN = /^\s*(?:-\s+)?uses:\s*(\S+)(.*)$/
 
-/**
- * Workflows still waiting for the hygiene fixes tracked in AO-2169. Remove a
- * file from this list when its violations are fixed; the follow-up ticket
- * empties it.
- */
-const EXEMPT_UNTIL_AO_2169: ReadonlySet<string> = new Set([
-  'codeql.yml',
-  'deploy-site.yml',
-  'labels.yml',
-  'lint-docs.yml',
-  'lint-pr.yml',
-  'lint-workflows.yml',
-  'scorecard.yml',
-  'site-quality.yml',
-])
-
 function collectSteps(workflow: Workflow): WorkflowStep[] {
   return Object.values(workflow.jobs ?? {}).flatMap((job) => job.steps ?? [])
 }
@@ -119,21 +103,12 @@ function findViolations(workflow: Workflow, source: string): string[] {
 }
 
 const allFiles = listWorkflowFiles()
-const checkedFiles = allFiles.filter(
-  (fileName) => !EXEMPT_UNTIL_AO_2169.has(fileName),
-)
 
 test('there is at least one workflow to check', () => {
-  expect(checkedFiles.length).toBeGreaterThan(0)
+  expect(allFiles.length).toBeGreaterThan(0)
 })
 
-test('every exemption names a workflow that still exists', () => {
-  for (const fileName of EXEMPT_UNTIL_AO_2169) {
-    expect(allFiles).toContain(fileName)
-  }
-})
-
-describe.each(checkedFiles)('%s', (fileName) => {
+describe.each(allFiles)('%s', (fileName) => {
   test('satisfies the workflow hygiene rules', () => {
     const violations = findViolations(
       readWorkflow(fileName),
