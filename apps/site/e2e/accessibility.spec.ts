@@ -1,11 +1,9 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, type Page, test } from '@playwright/test'
 
-import { localePath, LOCALES } from '../src/i18n/locales'
-import { COMPARISON_PATHS } from './comparison-paths'
 import { firstFaqTrigger } from './faq-helpers'
-import { HOW_TO_INDEX_PATHS, HOW_TO_PATHS } from './how-to-paths'
 import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
+import { CONTENT_PATHS, SCANNED_PATHS, WIDTH_CHECK_PATHS } from './routes'
 
 const AXE_TAGS = [
   'wcag2a',
@@ -15,16 +13,6 @@ const AXE_TAGS = [
   'wcag22aa',
   'best-practice',
 ]
-
-const PAGES = [
-  ...LOCALES.map((locale) => localePath(locale)),
-  '/privacy/',
-  ...COMPARISON_PATHS,
-  ...HOW_TO_INDEX_PATHS,
-  ...HOW_TO_PATHS,
-]
-
-const AXE_PAGES = [...PAGES, '/guide/', '/guide/exporting/', '/changelog/']
 
 async function expectNoViolations(page: Page): Promise<void> {
   const { violations } = await new AxeBuilder({ page })
@@ -41,7 +29,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 for (const colorScheme of SCHEMES) {
-  for (const path of AXE_PAGES) {
+  for (const path of SCANNED_PATHS) {
     test(`${path} has no accessibility violations in ${colorScheme}`, async ({
       page,
     }) => {
@@ -58,11 +46,7 @@ test('/privacy/ has no accessibility violations at 320px', async ({ page }) => {
   await expectNoViolations(page)
 })
 
-for (const path of [
-  ...COMPARISON_PATHS,
-  ...HOW_TO_INDEX_PATHS,
-  ...HOW_TO_PATHS,
-]) {
+for (const path of WIDTH_CHECK_PATHS) {
   test(`${path} has no accessibility violations or horizontal scroll at 320px`, async ({
     page,
   }) => {
@@ -113,7 +97,7 @@ for (const colorScheme of SCHEMES) {
   })
 }
 
-for (const path of PAGES) {
+for (const path of CONTENT_PATHS) {
   test(`${path} has one h1 and no skipped heading levels`, async ({ page }) => {
     await page.goto(path)
     const levels = await page
