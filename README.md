@@ -115,7 +115,7 @@ branch naming, and commit/PR conventions. Agent instructions live in
 
 This project is tested with BrowserStack.
 
-[![BrowserStack](https://cdn.simpleicons.org/browserstack)](https://www.browserstack.com)
+[![BrowserStack](https://avatars.githubusercontent.com/u/1119453?s=96&v=4)](https://www.browserstack.com)
 
 - **Site, Automate:** the landing page layout specs run on real browsers and
   devices: Safari on macOS, Firefox and Edge on Windows 11 and a real Pixel 8. A
