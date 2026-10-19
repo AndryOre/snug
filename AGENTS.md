@@ -61,3 +61,22 @@ file-wide or project-wide:
    [`docs/development.md#adding-a-shadcnlint-contract`](docs/development.md#adding-a-shadcnlint-contract).
 4. Last resort: a single-line `eslint-disable-next-line -- <reason>` on the
    exact offending line. Never a file-level or project-level disable.
+
+## Quirks and gotchas
+
+- Extension rules (WXT, MV3, `fakeBrowser`, i18n key parity across locales) live
+  in [`apps/extension/AGENTS.md`](apps/extension/AGENTS.md).
+- The coverage manifest is `scripts/coverage-manifest.test.ts`, with one
+  exemption list keyed by repo-relative paths. A new module needs a colocated
+  test or an exemption.
+- E2E runs against the built extension and needs Playwright's Chromium; it is
+  not part of `bun run check`:
+  [`docs/troubleshooting.md`](docs/troubleshooting.md).
+- `bun run lint:docs` runs lychee (downloaded on first use); broken links and
+  anchors fail it: [`docs/troubleshooting.md`](docs/troubleshooting.md).
+- Actions are SHA-pinned and workflows are linted; edit them with care:
+  [`docs/development.md#ci`](docs/development.md#ci).
+- Repository settings are applied by hand, not by code:
+  [`docs/development.md#repository-settings`](docs/development.md#repository-settings).
+- Releases are tag-driven and gated on a verified tag; never publish to a store
+  by hand: [`docs/how-to/cut-a-release.md`](docs/how-to/cut-a-release.md).

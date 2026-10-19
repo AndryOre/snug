@@ -41,6 +41,8 @@ other.
 | Prettier import-sort plugin               | `@trivago`  | `@ianvs`   | Snug's `importOrder` is tuned to the `@trivago` plugin; switching would reformat the repo for no gain               |
 | Prettier Tailwind class sorting           | Applies     | Deferred   | AFE's Prettier does not load `prettier-plugin-tailwindcss` yet; adding it would reformat its site                   |
 | typescript-eslint preset                  | Deferred    | Applies    | Snug is on `recommendedTypeChecked`; `strictTypeChecked` is a follow-up ramp                                        |
+| PR template browser line                  | Chromium    | Library    | Snug is Chromium-only; "Tested on Chromium" covers Chrome and Edge                                                  |
+| Issue template fields                     | Extension   | Library    | Same four templates; the fields ask for extension or library details respectively                                   |
 
 ## Alternatives considered
 

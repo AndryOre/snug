@@ -23,58 +23,11 @@ An index of every document in this repository.
   codebase's shape: runtime contexts, data flows, and invariants.
 - [`CONTEXT.md`](../CONTEXT.md) — a glossary of domain terms used consistently
   across code, docs, and UI.
-- [`docs/adr/0001-public-repo-security-posture.md`](adr/0001-public-repo-security-posture.md)
-  — the ADR documenting this repo's GitHub security/settings target state.
-- [`docs/adr/0002-tsdoc-only-code-comments.md`](adr/0002-tsdoc-only-code-comments.md)
-  — the ADR documenting the TSDoc-only code comment policy and why it's
-  lint-enforced.
-- [`docs/adr/0003-e2e-against-built-extension.md`](adr/0003-e2e-against-built-extension.md)
-  — the ADR documenting why E2E runs Playwright against the built extension
-  (`wxt build` output) instead of a component-test layer, and why bookmarks are
-  seeded/read through the extension's service worker.
-- [`docs/adr/0004-enable-codeql-sast.md`](adr/0004-enable-codeql-sast.md) — the
-  ADR documenting why CodeQL now runs (superseding ADR 0001's rejection) and the
-  accepted branch-protection limitation.
-- [`docs/adr/0005-store-publishing-via-cws-api-v2.md`](adr/0005-store-publishing-via-cws-api-v2.md)
-  — the ADR documenting why the release workflow publishes to the Chrome Web
-  Store through API v2.
-- [`docs/adr/0006-single-app-hash-routed-shell.md`](adr/0006-single-app-hash-routed-shell.md)
-  — the ADR documenting the single hash-routed App shell that replaced the four
-  full-tab pages.
-- [`docs/adr/0007-legacy-page-redirects.md`](adr/0007-legacy-page-redirects.md)
-  — the ADR documenting the legacy v1 page redirects, the only extra
-  entrypoints.
-- [`docs/adr/0008-safety-snapshot-in-extension-storage.md`](adr/0008-safety-snapshot-in-extension-storage.md)
-  — the ADR documenting why the Safety snapshot lives in extension storage and
-  in a download.
-- [`docs/adr/0009-promo-video-isolated-remotion-package.md`](adr/0009-promo-video-isolated-remotion-package.md)
-  — the ADR documenting the isolated Remotion promo video package, superseded by
-  ADR 0010.
-- [`docs/adr/0010-bun-workspaces-monorepo.md`](adr/0010-bun-workspaces-monorepo.md)
-  — the ADR documenting the bun workspaces and Turborepo monorepo.
-- [`docs/adr/0011-landing-static-site-no-third-party-scripts.md`](adr/0011-landing-static-site-no-third-party-scripts.md)
-  — the ADR documenting the static landing site with no third-party scripts.
-- [`docs/adr/0022-coolify-token-as-github-secret.md`](adr/0022-coolify-token-as-github-secret.md)
-  — the ADR documenting the Coolify token as a GitHub secret.
-- [`docs/adr/0013-landing-islands-for-faq-and-language-switcher.md`](adr/0013-landing-islands-for-faq-and-language-switcher.md)
-  — the ADR documenting the landing islands for the FAQ and language switcher.
-- [`docs/adr/0014-landing-theme-follows-system-with-stored-override.md`](adr/0014-landing-theme-follows-system-with-stored-override.md)
-  — the ADR documenting the landing theme that follows the system with a stored
-  override.
-- [`docs/adr/0015-edge-add-ons-publishing.md`](adr/0015-edge-add-ons-publishing.md)
-  — the ADR documenting publishing to Microsoft Edge Add-ons.
-- [`docs/adr/0016-keep-five-safety-snapshots.md`](adr/0016-keep-five-safety-snapshots.md)
-  — the ADR documenting why Snug keeps the latest five Safety snapshots.
-- [`docs/adr/0017-landing-umami-cloud-cookieless-analytics.md`](adr/0017-landing-umami-cloud-cookieless-analytics.md)
-  — the ADR documenting cookieless Umami Cloud analytics on the landing page.
-- [`docs/adr/0018-translated-privacy-policy-english-prevails.md`](adr/0018-translated-privacy-policy-english-prevails.md)
-  — the ADR documenting the translated privacy policy, where English prevails.
-- [`docs/adr/0019-guide-and-release-notes-on-the-website-with-starlight.md`](adr/0019-guide-and-release-notes-on-the-website-with-starlight.md)
-  — the ADR documenting the Guide and release notes on the website with
-  Starlight.
-- [`docs/adr/0020-custom-folder-via-file-system-access.md`](adr/0020-custom-folder-via-file-system-access.md)
-  — the ADR documenting saving Auto-export to a Custom folder with the File
-  System Access API.
+
+## Architecture decision records
+
+- [`docs/adr/README.md`](adr/README.md) — the ADR index and status table, one
+  row per decision, with the superseding ADR where one applies.
 
 ## How-to
 

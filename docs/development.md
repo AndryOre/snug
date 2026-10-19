@@ -450,6 +450,49 @@ in `eslint.config.mjs` (`files: ['apps/video/**']`). The override turns off:
 Everything else stays on, including `react-hooks`, `unicorn`,
 `jsdoc/informative-docs` and the TSDoc-only comment rule.
 
+## Testing
+
+Snug keeps one Vitest project per coverage-measured workspace, a Playwright
+suite for the extension, and manual cross-browser QA:
+
+- **Unit tests**: `apps/extension/lib/**` runs against `fakeBrowser`, see
+  [`fakeBrowser` testing](#fakebrowser-testing). `apps/site` and the root
+  tooling (`scripts/**`, `eslint-rules/**`, `docs/adr`) have their own Vitest
+  projects. `bun run test` runs all of them through Turborepo.
+- **Coverage**: `bun run test:coverage` enforces the per-workspace thresholds in
+  the [Coverage ramp](#coverage-ramp). `scripts/coverage-manifest.test.ts` fails
+  when a source module has no colocated test and no documented exemption, or
+  when an exemption is stale. One exemption list serves all workspaces, keyed by
+  repo-relative paths.
+- **End to end**: Playwright against the built extension, see
+  [E2E testing](#e2e-testing). It is not part of `bun run check`.
+- **Cross-browser**: BrowserStack and Percy, see
+  [Cross-browser testing](#cross-browser-testing). Snug is Chromium-only, so
+  there is no cross-browser library matrix.
+
+## Packaging
+
+Snug is private and publishes no npm package. `bun run zip` runs `wxt zip` in
+`apps/extension` and produces `snug-X.Y.Z-chrome.zip`, `snug-X.Y.Z-edge.zip` and
+`snug-X.Y.Z-sources.zip` in `apps/extension/.output/`. The release workflow
+verifies the tag and publishes to the Chrome Web Store and Edge Add-ons, see
+[how to cut a release](how-to/cut-a-release.md),
+[ADR 0005](adr/0005-store-publishing-via-cws-api-v2.md) and
+[ADR 0026](adr/0026-store-release-is-gated-on-a-verified-tag.md). Package gates
+such as publint and size-limit do not apply; CI enforces a size budget on the
+zip instead (`scripts/check-zip-size.ts`), see
+[ADR 0027](adr/0027-practices-parity-with-afe.md).
+
+## Dependency updates
+
+Renovate (`renovate.json5`) opens the update pull requests, on Mondays before
+12:00 UTC, and tracks them in the Dependency Dashboard issue. Updates wait three
+days after publication, and a lockfile maintenance PR refreshes the bun
+workspaces weekly. Vulnerabilities come from OSV alerts only; Dependabot alerts
+are disabled ([ADR 0001](adr/0001-public-repo-security-posture.md)). Custom
+managers also pin the tool versions the workflows download, such as actionlint,
+whose SHA-256 must be updated by hand in the same PR.
+
 ## Repository settings
 
 This repo's GitHub settings (rulesets on `main` and `v*` tags, merge strategy,
