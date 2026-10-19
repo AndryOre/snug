@@ -1,6 +1,6 @@
 ---
 title: 新功能
-sourceHash: 8d640827463373eb
+sourceHash: 15fa3a9f711f42d1
 description:
   'Chrome 扩展 Snug 的发布说明：每个版本的变化，从自动导出的新选项到修复与改进。'
 seoTitle: 'Snug 新功能：发布说明与更新日志'
