@@ -45,7 +45,7 @@
     },
     "test:e2e": {
       "cache": false,
-      "passThroughEnv": ["PWDEBUG"]
+      "passThroughEnv": ["PWDEBUG", "AXE_MATRIX"]
     },
     "build": {
       "dependsOn": ["transit"],
