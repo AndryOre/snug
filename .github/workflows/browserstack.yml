@@ -186,7 +186,8 @@ jobs:
     name: Report a failed nightly run
     needs: [layout]
     if:
-      ${{ github.event_name == 'schedule' && needs.layout.result == 'failure' }}
+      ${{ always() && github.event_name == 'schedule' && needs.layout.result ==
+      'failure' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

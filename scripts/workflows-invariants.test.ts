@@ -271,6 +271,10 @@ describe('browserstack.yml nightly failure reporting', () => {
     expect(String(report?.if)).toContain("needs.layout.result == 'failure'")
     expect(String(resolve?.if)).toContain("needs.layout.result == 'success'")
   })
+
+  test('the failure report opts out of the implicit success() gate', () => {
+    expect(String(report?.if)).toMatch(/\b(always|failure)\(\)/)
+  })
 })
 
 describe('upload-artifact pins', () => {
