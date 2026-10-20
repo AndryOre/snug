@@ -71,7 +71,12 @@
       ],
       "outputs": [".output/**", ".wxt/**", "dist/**", ".astro/**"]
     },
+    "@snug/site#sync": {
+      "inputs": ["$TURBO_DEFAULT$", "!.astro/**"],
+      "outputs": [".astro/**"]
+    },
     "//#check:root": {
+      "dependsOn": ["@snug/site#sync"],
       "inputs": [
         "$TURBO_DEFAULT$",
         "!apps/*/.output/**",

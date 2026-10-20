@@ -12,6 +12,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "sync": "astro sync",
     "check": "astro check",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
