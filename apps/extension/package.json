@@ -21,7 +21,7 @@
     "@tanstack/react-router": "^1.170.41",
     "@tanstack/react-virtual": "^3.14.13",
     "@workspace/ui": "workspace:*",
-    "@wxt-dev/i18n": "^0.2.5",
+    "@wxt-dev/i18n": "^0.2.8",
     "cn": "catalog:",
     "lucide-react": "catalog:",
     "papaparse": "^5.5.3",
@@ -37,12 +37,12 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitest/coverage-v8": "^5.0.4",
-    "@wxt-dev/auto-icons": "^1.1.1",
-    "@wxt-dev/browser": "^0.3.4",
-    "@wxt-dev/module-react": "^1.2.2",
+    "@wxt-dev/auto-icons": "1.1.2",
+    "@wxt-dev/browser": "0.3.5",
+    "@wxt-dev/module-react": "1.2.2",
     "jsdom": "^30.1.1",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wxt": "^0.21.4"
+    "wxt": "0.21.4"
   }
 }
