@@ -2,9 +2,12 @@
 
 ## Status
 
-Accepted. Supersedes [ADR 0012](0012-dotenvx-encrypted-deploy-secrets.md).
+Accepted. Supersedes [0012](0012-dotenvx-encrypted-deploy-secrets.md).
 
 Date: 2026-10-12
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

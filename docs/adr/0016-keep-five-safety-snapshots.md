@@ -2,12 +2,15 @@
 
 ## Status
 
-Accepted. Amends [ADR 0008](0008-safety-snapshot-in-extension-storage.md): its
-"only the latest snapshot is kept" clause no longer holds. The rest of 0008 (a
-file in Downloads plus a copy in `chrome.storage.local` under
-`unlimitedStorage`) still stands.
+Accepted. Amends [0008](0008-safety-snapshot-in-extension-storage.md): its "only
+the latest snapshot is kept" clause no longer holds. The rest of 0008 (a file in
+Downloads plus a copy in `chrome.storage.local` under `unlimitedStorage`) still
+stands.
 
 Date: 2026-10-07
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

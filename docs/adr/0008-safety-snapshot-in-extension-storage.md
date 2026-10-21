@@ -2,10 +2,13 @@
 
 ## Status
 
-Accepted. Amended by [ADR 0016](0016-keep-five-safety-snapshots.md): the latest
-five snapshots are kept, not only one.
+Accepted. Amended by [0016](0016-keep-five-safety-snapshots.md): the latest five
+snapshots are kept, not only one.
 
 Date: 2026-10-02
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

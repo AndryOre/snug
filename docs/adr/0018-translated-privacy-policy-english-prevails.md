@@ -2,10 +2,13 @@
 
 ## Status
 
-Accepted. Supersedes the "English only" scope cut made for the privacy page in
-the landing spec (AO-1248).
+Accepted. Reverses the "English only" scope cut made for the privacy page in the
+landing spec (AO-1248).
 
 Date: 2026-10-09
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

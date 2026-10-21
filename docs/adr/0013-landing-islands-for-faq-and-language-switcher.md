@@ -2,12 +2,16 @@
 
 ## Status
 
-Accepted.
+Accepted. Amended by
+[0019](0019-guide-and-release-notes-on-the-website-with-starlight.md).
 
 Date: 2026-10-05
 
 Revised: 2026-10-21, the Format playground and Interface showcase are no longer
 islands, and the list of hydrated islands now matches `apps/site`.
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,9 +2,12 @@
 
 ## Status
 
-Accepted
+Accepted. Amended by [0007](0007-legacy-page-redirects.md).
 
 Date: 2026-10-01
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,13 +2,16 @@
 
 ## Status
 
-Accepted. Partially supersedes
-[ADR 0011](0011-landing-static-site-no-third-party-scripts.md) for the website
-only: its "no third-party scripts" and "no analytics" clauses no longer hold for
+Accepted. Partly supersedes
+[0011](0011-landing-static-site-no-third-party-scripts.md) for the website only:
+its "no third-party scripts" and "no analytics" clauses no longer hold for
 `apps/site`. The extension clause (no analytics inside the extension, now or
 later) and the access-log and `/install` redirect measurement still stand.
 
 Date: 2026-10-08
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 
