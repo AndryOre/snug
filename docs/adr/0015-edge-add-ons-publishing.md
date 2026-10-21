@@ -1,8 +1,10 @@
-# 15. Edge Add-ons publishing from the release workflow
+# 0015: Edge Add-ons publishing from the release workflow
 
 ## Status
 
 Accepted
+
+Date: 2026-10-07
 
 ## Context
 
