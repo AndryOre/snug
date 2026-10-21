@@ -1,4 +1,4 @@
-# 17. Landing uses Umami Cloud cookieless analytics
+# 0017: Landing uses Umami Cloud cookieless analytics
 
 ## Status
 
@@ -7,6 +7,8 @@ Accepted. Partially supersedes
 only: its "no third-party scripts" and "no analytics" clauses no longer hold for
 `apps/site`. The extension clause (no analytics inside the extension, now or
 later) and the access-log and `/install` redirect measurement still stand.
+
+Date: 2026-10-08
 
 ## Context
 

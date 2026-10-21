@@ -1,4 +1,4 @@
-# 19. The Guide and Release notes live on the Website, built with Starlight
+# 0019: The Guide and Release notes live on the Website, built with Starlight
 
 ## Status
 
@@ -6,6 +6,8 @@ Accepted. Extends
 [ADR 0013](0013-landing-islands-for-faq-and-language-switcher.md) and keeps
 [ADR 0011](0011-landing-static-site-no-third-party-scripts.md) and
 [ADR 0017](0017-landing-umami-cloud-cookieless-analytics.md) intact.
+
+Date: 2026-10-09
 
 ## Context
 

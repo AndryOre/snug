@@ -1,8 +1,10 @@
-# 9. Promo video is an isolated Remotion package
+# 0009: Promo video is an isolated Remotion package
 
 ## Status
 
 Superseded by [ADR 0010](0010-bun-workspaces-monorepo.md)
+
+Date: 2026-10-03
 
 ## Context
 

@@ -1,9 +1,11 @@
-# 4. Enable CodeQL SAST
+# 0004: Enable CodeQL SAST
 
 ## Status
 
 Accepted — supersedes the CodeQL item in
 [ADR 0001](0001-public-repo-security-posture.md)
+
+Date: 2026-09-30
 
 ## Context
 

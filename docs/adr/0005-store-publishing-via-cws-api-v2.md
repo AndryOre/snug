@@ -1,8 +1,10 @@
-# 5. Store publishing via CWS API v2 from the release workflow
+# 0005: Store publishing via CWS API v2 from the release workflow
 
 ## Status
 
 Accepted
+
+Date: 2026-09-30
 
 ## Context
 

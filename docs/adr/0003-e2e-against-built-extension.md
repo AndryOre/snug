@@ -1,8 +1,10 @@
-# 3. E2E against the built extension
+# 0003: E2E against the built extension
 
 ## Status
 
 Accepted
+
+Date: 2026-09-30
 
 ## Context
 

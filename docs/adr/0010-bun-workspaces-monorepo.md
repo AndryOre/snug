@@ -1,10 +1,12 @@
-# 10. Bun workspaces monorepo with Turborepo
+# 0010: Bun workspaces monorepo with Turborepo
 
 ## Status
 
 Accepted. Supersedes the "not a bun workspace" decision in
 [ADR 0009](0009-promo-video-isolated-remotion-package.md), which is marked
 superseded; the promo video now lives in `apps/video`.
+
+Date: 2026-10-04
 
 ## Context
 

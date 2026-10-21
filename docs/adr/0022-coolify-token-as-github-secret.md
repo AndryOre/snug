@@ -1,8 +1,10 @@
-# 22. The Coolify token is a GitHub secret, not a dotenvx-encrypted file
+# 0022: The Coolify token is a GitHub secret, not a dotenvx-encrypted file
 
 ## Status
 
 Accepted. Supersedes [ADR 0012](0012-dotenvx-encrypted-deploy-secrets.md).
+
+Date: 2026-10-12
 
 ## Context
 

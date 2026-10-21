@@ -1,8 +1,10 @@
-# 6. Single hash-routed App shell
+# 0006: Single hash-routed App shell
 
 ## Status
 
 Accepted
+
+Date: 2026-10-01
 
 ## Context
 

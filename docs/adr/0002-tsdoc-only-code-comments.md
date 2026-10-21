@@ -1,8 +1,10 @@
-# 2. TSDoc-only code comments
+# 0002: TSDoc-only code comments
 
 ## Status
 
 Accepted
+
+Date: 2026-09-29
 
 ## Context
 

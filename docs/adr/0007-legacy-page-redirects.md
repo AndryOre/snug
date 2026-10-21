@@ -1,8 +1,10 @@
-# 7. Legacy page redirects are the only extra entrypoints
+# 0007: Legacy page redirects are the only extra entrypoints
 
 ## Status
 
 Accepted. Amends [ADR 0006](0006-single-app-hash-routed-shell.md).
+
+Date: 2026-10-02
 
 ## Context
 

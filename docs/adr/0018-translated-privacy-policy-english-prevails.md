@@ -1,9 +1,11 @@
-# 18. The privacy policy is translated and the English text prevails
+# 0018: The privacy policy is translated and the English text prevails
 
 ## Status
 
 Accepted. Supersedes the "English only" scope cut made for the privacy page in
 the landing spec (AO-1248).
+
+Date: 2026-10-09
 
 ## Context
 

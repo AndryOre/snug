@@ -1,9 +1,11 @@
-# 8. Safety snapshot lives in extension storage and in a download
+# 0008: Safety snapshot lives in extension storage and in a download
 
 ## Status
 
 Accepted. Amended by [ADR 0016](0016-keep-five-safety-snapshots.md): the latest
 five snapshots are kept, not only one.
+
+Date: 2026-10-02
 
 ## Context
 
