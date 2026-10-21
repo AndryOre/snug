@@ -1,8 +1,10 @@
-# 13. Landing uses two React islands: FAQ accordion and language popover
+# 0013: Landing uses two React islands: FAQ accordion and language popover
 
 ## Status
 
 Accepted.
+
+Date: 2026-10-05
 
 ## Context
 

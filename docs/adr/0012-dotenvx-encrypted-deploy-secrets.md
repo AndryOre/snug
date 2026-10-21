@@ -1,8 +1,10 @@
-# 12. Deploy secrets are dotenvx-encrypted in the repository
+# 0012: Deploy secrets are dotenvx-encrypted in the repository
 
 ## Status
 
 Superseded by [ADR 0022](0022-coolify-token-as-github-secret.md).
+
+Date: 2026-10-05
 
 ## Context
 
