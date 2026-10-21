@@ -2,80 +2,16 @@ import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
+import {
+  type AdrFile,
+  findAdrViolations,
+  findIndexColumnViolations,
+  findRelationViolations,
+  findRelationWordingViolations,
+} from './adr-checks'
+
 const ADR_DIRECTORY = import.meta.dirname
 const ADR_FILE_PATTERN = /^(\d{4})-[\da-z-]+\.md$/
-const REQUIRED_SECTIONS = ['Status', 'Context', 'Decision', 'Consequences']
-const ALLOWED_STATUS = /^(Accepted|Proposed|Deprecated|Superseded)\b/
-const INDEX_ROW_PATTERN =
-  /^\|\s*(\d{4})\s*\|\s*\[(.+?)\]\((\d{4}-[^)]+\.md)\)\s*\|\s*(\w+)\s*\|/gm
-
-interface AdrFile {
-  readonly fileName: string
-  readonly content: string
-}
-
-/**
- * Returns every violation of the ADR format and index rules, empty when the
- * set is valid. Pure so a broken fixture can prove each rule fires.
- * @param adrs - ADR files to check.
- * @param indexContent - Contents of the index README.
- * @returns One message per violation.
- */
-function findAdrViolations(
-  adrs: readonly AdrFile[],
-  indexContent: string,
-): string[] {
-  const violations: string[] = []
-  const sorted = adrs.toSorted((left, right) =>
-    left.fileName.localeCompare(right.fileName),
-  )
-  const indexRows = indexContent.matchAll(INDEX_ROW_PATTERN).toArray()
-
-  for (const [position, adr] of sorted.entries()) {
-    const number = ADR_FILE_PATTERN.exec(adr.fileName)?.[1] ?? ''
-    if (Number(number) !== position + 1) {
-      violations.push(`${adr.fileName}: expected number ${position + 1}`)
-    }
-    const heading = adr.content.split('\n', 1)[0] ?? ''
-    const title = new RegExp(String.raw`^# ${Number(number)}\. (\S.*)$`).exec(
-      heading,
-    )?.[1]
-    if (title === undefined) {
-      violations.push(`${adr.fileName}: heading must be "# N. Title"`)
-    }
-    for (const section of REQUIRED_SECTIONS) {
-      if (!new RegExp(`^## ${section}$`, 'm').test(adr.content)) {
-        violations.push(`${adr.fileName}: missing "## ${section}"`)
-      }
-    }
-    const status = /^## Status\n\n(.+)/m.exec(adr.content)?.[1] ?? ''
-    if (!ALLOWED_STATUS.test(status)) {
-      violations.push(`${adr.fileName}: invalid status "${status}"`)
-    }
-    const row = indexRows.find((match) => match[3] === adr.fileName)
-    if (row === undefined) {
-      violations.push(`${adr.fileName}: missing from the index`)
-      continue
-    }
-    if (row[1] !== number) {
-      violations.push(`${adr.fileName}: index number ${row[1]}`)
-    }
-    if (title !== undefined && row[2] !== title) {
-      violations.push(`${adr.fileName}: index title differs from heading`)
-    }
-    if (row[4] !== status.split(/\W/, 1)[0]) {
-      violations.push(`${adr.fileName}: index status differs from file`)
-    }
-  }
-
-  const onDisk = new Set(sorted.map((adr) => adr.fileName))
-  for (const row of indexRows) {
-    if (!onDisk.has(row[3] ?? '')) {
-      violations.push(`index lists ${row[3]} which does not exist`)
-    }
-  }
-  return violations
-}
 
 const validAdr = (number: string): AdrFile => ({
   fileName: `${number}-sample.md`,
@@ -107,24 +43,79 @@ describe('ADR invariants', () => {
     ).toEqual(['0002-sample.md: missing from the index'])
   })
 
-  it('flags a gap in numbering', () => {
+  it('allows gaps in numbering', () => {
     expect(
       findAdrViolations(
         [validAdr('0001'), validAdr('0003')],
         validRow('0001') + validRow('0003'),
       ),
-    ).toContain('0003-sample.md: expected number 2')
+    ).toEqual([])
+  })
+
+  it('accepts both heading forms', () => {
+    const migrated = {
+      fileName: '0001-sample.md',
+      content: validAdr('0001').content.replace(
+        '# 1. Sample',
+        '# 0001: Sample',
+      ),
+    }
+    expect(findAdrViolations([migrated], validRow('0001'))).toEqual([])
+  })
+
+  it('flags a heading with the wrong number', () => {
+    const wrong = {
+      fileName: '0001-sample.md',
+      content: validAdr('0001').content.replace(
+        '# 1. Sample',
+        '# 0002: Sample',
+      ),
+    }
+    expect(findAdrViolations([wrong], validRow('0001'))).toContain(
+      '0001-sample.md: heading must be "# N. Title" or "# NNNN: Title"',
+    )
+  })
+
+  it('accepts an optional well-formed Date and Revised line', () => {
+    const adr = {
+      fileName: '0001-sample.md',
+      content: validAdr('0001').content.replace(
+        'Accepted.\n',
+        'Accepted.\n\nDate: 2026-10-17\n\nRevised: 2026-10-19, fixed a fact.\n',
+      ),
+    }
+    expect(findAdrViolations([adr], validRow('0001'))).toEqual([])
+  })
+
+  it('flags malformed Date and Revised lines', () => {
+    const adr = {
+      fileName: '0001-sample.md',
+      content: validAdr('0001').content.replace(
+        'Accepted.\n',
+        'Accepted.\n\nDate: today\n\nRevised: yesterday\n',
+      ),
+    }
+    expect(findAdrViolations([adr], validRow('0001'))).toEqual([
+      '0001-sample.md: Date line must be "Date: YYYY-MM-DD"',
+      '0001-sample.md: Revised line must be "Revised: YYYY-MM-DD, <text>"',
+    ])
+  })
+
+  it('flags a duplicate number', () => {
+    expect(
+      findAdrViolations([validAdr('0001'), validAdr('0001')], validRow('0001')),
+    ).toContain('duplicate ADR number')
   })
 
   it('flags a bad heading and a missing section', () => {
     const broken = {
       fileName: '0001-sample.md',
       content: validAdr('0001')
-        .content.replace('# 1. Sample', '# 0001: Sample')
+        .content.replace('# 1. Sample', '# Sample')
         .replace('## Decision', '## Choice'),
     }
     expect(findAdrViolations([broken], validRow('0001'))).toEqual([
-      '0001-sample.md: heading must be "# N. Title"',
+      '0001-sample.md: heading must be "# N. Title" or "# NNNN: Title"',
       '0001-sample.md: missing "## Decision"',
     ])
   })
@@ -136,5 +127,109 @@ describe('ADR invariants', () => {
         validRow('0001') + validRow('0002'),
       ),
     ).toEqual(['index lists 0002-sample.md which does not exist'])
+  })
+})
+
+const relationAdr = (number: string, status: string): AdrFile => ({
+  fileName: `${number}-sample.md`,
+  content: validAdr(number).content.replace('Accepted.', () => status),
+})
+
+describe('findRelationWordingViolations', () => {
+  it('flags relation wording without a linked ADR number', () => {
+    expect(
+      findRelationWordingViolations([
+        relationAdr('0001', 'Accepted. Amended by a later decision.'),
+      ]),
+    ).toEqual(['0001-sample.md: relation wording must link the ADR number'])
+  })
+
+  it('accepts linked wording wrapped across lines', () => {
+    expect(
+      findRelationWordingViolations([
+        relationAdr('0001', 'Accepted. Amended by\n[0002](0002-sample.md).'),
+      ]),
+    ).toEqual([])
+  })
+})
+
+describe('findRelationViolations', () => {
+  it('accepts relations recorded on both sides', () => {
+    expect(
+      findRelationViolations([
+        relationAdr(
+          '0001',
+          'Accepted. Partly superseded by [0002](0002-sample.md).',
+        ),
+        relationAdr(
+          '0002',
+          'Accepted. Partly supersedes [0001](0001-sample.md).',
+        ),
+      ]),
+    ).toEqual([])
+  })
+
+  it('flags a one-sided forward relation', () => {
+    expect(
+      findRelationViolations([
+        validAdr('0001'),
+        relationAdr('0002', 'Accepted. Extends [0001](0001-sample.md).'),
+      ]),
+    ).toContain(
+      '0002-sample.md: "Extends" 0001 is not recorded on 0001-sample.md',
+    )
+  })
+
+  it('flags a one-sided "by" relation', () => {
+    expect(
+      findRelationViolations([
+        relationAdr('0001', 'Accepted. Superseded by [0002](0002-sample.md).'),
+        validAdr('0002'),
+      ]),
+    ).toContain(
+      '0001-sample.md: "Superseded by" 0002 is not recorded on 0002-sample.md',
+    )
+  })
+
+  it('flags a relation that links a missing ADR', () => {
+    expect(
+      findRelationViolations([
+        relationAdr('0001', 'Accepted. Amends [0009](0009-sample.md).'),
+      ]),
+    ).toContain('0001-sample.md: "Amends" links missing ADR 0009-sample.md')
+  })
+})
+
+describe('findIndexColumnViolations', () => {
+  it('accepts a matching row', () => {
+    expect(
+      findIndexColumnViolations([validAdr('0001')], validRow('0001')),
+    ).toEqual([])
+  })
+
+  it('flags a title mismatch in a padded row', () => {
+    const row = '| 0001   | [Other](0001-sample.md)   | Accepted | -     |'
+    expect(findIndexColumnViolations([validAdr('0001')], row)).toContain(
+      '0001-sample.md: README title "Other" differs from "Sample"',
+    )
+  })
+
+  it('flags a column mismatch against the recorded relations', () => {
+    const adrs = [
+      relationAdr(
+        '0001',
+        'Accepted. Partly superseded by [0002](0002-sample.md).',
+      ),
+    ]
+    expect(findIndexColumnViolations(adrs, validRow('0001'))).toContain(
+      '0001-sample.md: README "Superseded or amended by" is "-", expected "0002 (partly)"',
+    )
+  })
+
+  it('flags a claimed relation the files do not record', () => {
+    const row = '| 0001 | [Sample](0001-sample.md) | Accepted | 0002 |'
+    expect(findIndexColumnViolations([validAdr('0001')], row)).toContain(
+      '0001-sample.md: README "Superseded or amended by" is "0002", expected "-"',
+    )
   })
 })

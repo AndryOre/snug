@@ -1,14 +1,10 @@
 # Architecture decision records
 
-Decisions are recorded in
-[Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions):
-`# N. Title`, then `## Status`, `## Context`, `## Decision` and
-`## Consequences`. `adr-invariants.test.ts` enforces the heading format,
-contiguous numbering, the required sections and that this index lists every ADR.
+The rules for writing, editing and replacing ADRs are in
+[`AGENTS.md`](../../AGENTS.md#architecture-decision-records).
+`adr-invariants.test.ts` enforces them and that this index lists every ADR.
 
-To add one, take the next number, write the file, and add a row below. Never
-rewrite an accepted ADR's decision; supersede or amend it with a new one and
-fill the last column.
+To add one, take the next number, write the file, and add a row below.
 
 | Number | Title                                                                                                                                  | Status     | Superseded or amended by |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------ |
