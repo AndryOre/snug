@@ -1,9 +1,11 @@
-# 24. Cross-browser coverage runs on BrowserStack, informational and tiered
+# 0024: Cross-browser coverage runs on BrowserStack, informational and tiered
 
 ## Status
 
 Accepted. The real iPhone 15 is superseded by
 [ADR 0025](0025-real-iphone-is-not-automated-on-browserstack.md).
+
+Date: 2026-10-15
 
 ## Context
 

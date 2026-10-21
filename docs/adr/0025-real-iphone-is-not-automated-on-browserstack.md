@@ -1,9 +1,11 @@
-# 25. A real iPhone is not automated on BrowserStack
+# 0025: A real iPhone is not automated on BrowserStack
 
 ## Status
 
 Accepted. Supersedes the iPhone 15 part of
 [ADR 0024](0024-cross-browser-coverage-on-browserstack.md).
+
+Date: 2026-10-17
 
 ## Context
 
