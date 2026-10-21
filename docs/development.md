@@ -69,9 +69,10 @@ Hooks are installed via Husky and live in `.husky/`:
 
 Every PR — including docs-only changes — runs the full `ci.yml` pipeline:
 `quality`, `build`, `e2e`, and `commitlint`. The `CI passed` job aggregates
-their results and is the single status check required to merge; it passes once
-every needed job is `success` or `skipped` (e.g. `commitlint` is skipped on
-`push` runs), and fails if any needed job is `failure` or `cancelled`.
+their results and is one of the three status checks required to merge, with
+`Validate PR title` and `Check markdown links`; it passes once every needed job
+is `success` or `skipped` (e.g. `commitlint` is skipped on `push` runs), and
+fails if any needed job is `failure` or `cancelled`.
 
 `.github/workflows/codeql.yml` runs CodeQL static analysis
 (`javascript-typescript`) on every PR, on push to `main`, and weekly. It's not
@@ -338,10 +339,9 @@ facade, iframes and `<time>` elements are masked and animations are disabled.
 ## Coverage ramp
 
 The target for every coverage-measured workspace is 95% lines, 95% statements,
-90% branches and 95% functions
-([ADR 0027](adr/0027-practices-parity-with-afe.md)). Thresholds only ever go up:
-each is set to the measured value rounded down, and a PR that adds tested code
-raises them in the same change.
+90% branches and 95% functions. Thresholds only ever go up: each is set to the
+measured value rounded down, and a PR that adds tested code raises them in the
+same change.
 
 | Workspace        | Lines | Statements | Branches | Functions |
 | ---------------- | ----- | ---------- | -------- | --------- |
@@ -479,9 +479,9 @@ verifies the tag and publishes to the Chrome Web Store and Edge Add-ons, see
 [how to cut a release](how-to/cut-a-release.md),
 [ADR 0005](adr/0005-store-publishing-via-cws-api-v2.md) and
 [ADR 0026](adr/0026-store-release-is-gated-on-a-verified-tag.md). Package gates
-such as publint and size-limit do not apply; CI enforces a size budget on the
-zip instead (`scripts/check-zip-size.ts`), see
-[ADR 0027](adr/0027-practices-parity-with-afe.md).
+such as publint and size-limit do not apply
+([ADR 0027](adr/0027-practices-parity-with-afe.md)); CI enforces a size budget
+on the zip instead (`scripts/check-zip-size.ts`).
 
 ## Dependency updates
 

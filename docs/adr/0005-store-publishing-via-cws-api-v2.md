@@ -6,17 +6,20 @@ Accepted
 
 Date: 2026-09-30
 
+Revised: 2026-10-21, past tense for the work that is done: the pre-change
+release flow, the v1.1 sunset on 2026-10-15, and the v2 publishing step.
+
 ## Context
 
-`release.yml` builds the extension zip, attests build provenance, and publishes
-a GitHub Release, but it never uploads to the Chrome Web Store. As a result the
-public listing drifted to v1.3.0 while the repository has moved on to v1.7.0:
-every release since has shipped to GitHub but never reached users through the
-store's update channel.
+`release.yml` built the extension zip, attested build provenance, and published
+a GitHub Release, but it never uploaded to the Chrome Web Store. As a result the
+public listing drifted to v1.3.0 while the repository moved on to v1.7.0: every
+release since had shipped to GitHub but never reached users through the store's
+update channel.
 
 The Chrome Web Store API has two generations. v1.1's `Item` resource (`kind`,
 `id`, `publicKey`, `uploadState`, `itemError`) only ever supported upload and
-publish; it sunsets entirely on 2026-10-15. v2
+publish; it sunset entirely on 2026-10-15. v2
 (`chromewebstore.googleapis.com/v2/publishers/{pub}/items/{id}`) replaces it
 with `media.upload`, `publish`, `fetchStatus`, `cancelSubmission`, and
 `setPublishedDeployPercentage` — the same scope as v1.1, package lifecycle only.
@@ -57,22 +60,22 @@ to nothing but the Chrome Web Store API).
 
 ## Consequences
 
-- A signed `v*` tag now drives both the GitHub Release and the Chrome Web Store
-  submission from one workflow run — the store can no longer silently fall
-  behind GitHub releases the way it did for four versions.
+- A signed `v*` tag drives both the GitHub Release and the Chrome Web Store
+  submission from one workflow run — the store no longer silently falls behind
+  GitHub releases the way it did for four versions.
 - Revoking store-publishing access from CI is a one-step action in the Developer
   Dashboard (remove the service account), independent of any human account's
   credentials or 2-Step Verification state.
-- The v1.1 sunset deadline (2026-10-15) no longer matters to this repo's release
-  process, since it never depends on v1.1 behavior.
+- The v1.1 sunset (2026-10-15) did not affect this repo's release process, since
+  it never depended on v1.1 behavior.
 - Editing the store listing itself (text, graphics, privacy answers) still
   requires a human in the Developer Dashboard, or a browser-automation session
   against a logged-in profile — tracked separately, outside this workflow.
 
 ### Rejected alternatives
 
-- **v1.1 API**: sunsets 2026-10-15, two weeks from this decision; adopting it
-  now would mean migrating again almost immediately.
+- **v1.1 API**: sunset on 2026-10-15, two weeks after this decision; adopting it
+  would have meant migrating again almost immediately.
 - **OAuth refresh token**: ties CI to a human Google account's session state and
   2-Step Verification; a service account has neither failure mode and is
   purpose-scoped.
