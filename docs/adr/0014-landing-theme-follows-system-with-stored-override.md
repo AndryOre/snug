@@ -1,8 +1,10 @@
-# 14. Landing theme follows the system, with a stored override
+# 0014: Landing theme follows the system, with a stored override
 
 ## Status
 
 Accepted.
+
+Date: 2026-10-05
 
 ## Context
 

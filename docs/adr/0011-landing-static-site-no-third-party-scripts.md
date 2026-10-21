@@ -1,4 +1,4 @@
-# 11. Landing page is a static site with no third-party scripts
+# 0011: Landing page is a static site with no third-party scripts
 
 ## Status
 
@@ -7,6 +7,8 @@ Accepted. Partially superseded by
 only: the landing now loads Umami Cloud cookieless analytics. The extension
 clause (no analytics inside the extension) and the access-log and `/install`
 measurement still stand.
+
+Date: 2026-10-05
 
 ## Context
 
