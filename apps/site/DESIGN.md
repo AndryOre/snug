@@ -108,13 +108,14 @@ against `--background` before shrinking it.
 Space Grotesk 700 for display and headlines, 500 for card titles. Geist for
 text. Geist Mono for eyebrows, file names, format chips and the Network calls
 line, uppercase with wide tracking only at label sizes. Fonts are self-hosted
-through `@fontsource-variable/*` (ADR 0011); Geist Mono is imported in
-`globals.css`. German and Russian run long, and CJK needs its own fallback
-stack, so no heading or card may rely on a fixed width. Japanese headings use
-`word-break: auto-phrase` (the `phrase-break` utility, applied for `:lang(ja)`)
-so they never split inside a phrase. The German h1 uses manual hyphenation
-(`hyphens-manual`) so "Lesezeichen" is never hyphenated; other locales keep
-`hyphens-auto`.
+through `@fontsource-variable/*`
+([ADR 0011](../../docs/adr/0011-landing-static-site-no-third-party-scripts.md));
+Geist Mono is imported in `globals.css`. German and Russian run long, and CJK
+needs its own fallback stack, so no heading or card may rely on a fixed width.
+Japanese headings use `word-break: auto-phrase` (the `phrase-break` utility,
+applied for `:lang(ja)`) so they never split inside a phrase. The German h1 uses
+manual hyphenation (`hyphens-manual`) so "Lesezeichen" is never hyphenated;
+other locales keep `hyphens-auto`.
 
 ## Layout
 
