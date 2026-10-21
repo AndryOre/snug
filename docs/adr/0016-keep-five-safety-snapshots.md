@@ -1,4 +1,4 @@
-# 16. Keep the latest five Safety snapshots
+# 0016: Keep the latest five Safety snapshots
 
 ## Status
 
@@ -6,6 +6,8 @@ Accepted. Amends [ADR 0008](0008-safety-snapshot-in-extension-storage.md): its
 "only the latest snapshot is kept" clause no longer holds. The rest of 0008 (a
 file in Downloads plus a copy in `chrome.storage.local` under
 `unlimitedStorage`) still stands.
+
+Date: 2026-10-07
 
 ## Context
 

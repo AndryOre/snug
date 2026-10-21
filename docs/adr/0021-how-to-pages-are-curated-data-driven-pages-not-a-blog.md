@@ -1,4 +1,4 @@
-# 21. How-to pages are curated, data-driven pages, not a blog
+# 0021: How-to pages are curated, data-driven pages, not a blog
 
 ## Status
 
@@ -7,6 +7,8 @@ Accepted. Follows the pattern of the Comparison pages and keeps
 [ADR 0017](0017-landing-umami-cloud-cookieless-analytics.md) and
 [ADR 0019](0019-guide-and-release-notes-on-the-website-with-starlight.md)
 intact.
+
+Date: 2026-10-11
 
 ## Context
 

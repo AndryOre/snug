@@ -1,4 +1,4 @@
-# 20. Save Auto-export to a Custom folder with the File System Access API
+# 0020: Save Auto-export to a Custom folder with the File System Access API
 
 ## Status
 
@@ -6,6 +6,8 @@ Accepted. Extends Auto-export;
 [ADR 0008](0008-safety-snapshot-in-extension-storage.md) and
 [ADR 0016](0016-keep-five-safety-snapshots.md) are unchanged: Safety snapshots
 still go to Downloads.
+
+Date: 2026-10-10
 
 ## Context
 
