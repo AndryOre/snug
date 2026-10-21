@@ -7,6 +7,9 @@ Accepted. The real iPhone 15 is superseded by
 
 Date: 2026-10-15
 
+Revised: 2026-10-21, four platforms instead of five (the iPhone left, see ADR
+0025), test counts recounted, and the pending iPhone timing finding resolved.
+
 ## Context
 
 The landing page is only ever exercised in Playwright's bundled Chromium (plus
@@ -19,8 +22,10 @@ Automate (5 parallels, unlimited minutes) and Percy.
 
 - The site's layout specs (the same `LAYOUT_SPECS` selection as the local
   multi-project run, shared through `apps/site/playwright.layout-specs.ts`) run
-  on five real platforms through BrowserStack Automate: Safari on macOS, Firefox
-  and Edge on Windows 11, a real iPhone 15 (Safari) and a real Pixel 8 (Chrome).
+  on four real platforms through BrowserStack Automate: Safari on macOS, Firefox
+  and Edge on Windows 11, and a real Pixel 8 (Chrome). A real iPhone 15 (Safari)
+  was the fifth platform until
+  [ADR 0025](0025-real-iphone-is-not-automated-on-browserstack.md) removed it.
 - The platforms live in `apps/site/browserstack.yml` and run through the
   BrowserStack Node SDK with its own Playwright config. BrowserStack Local
   tunnels the remote browsers to the existing `astro preview` server.
@@ -35,54 +40,54 @@ Automate (5 parallels, unlimited minutes) and Percy.
   per-ref concurrency group on `main` and leave later pushes without
   `CI passed`.
 - `fullyParallel` is on in the BrowserStack Playwright config so `--shard` can
-  split inside `accessibility.spec.ts`; without it all 728 tests land in one
-  shard.
+  split inside `accessibility.spec.ts`; without it all 330 of its tests land in
+  one shard. No job is sharded today.
 - Nothing is skipped; the same tests run on different triggers (tiers):
-  - **Lean** (204 tests per platform: every layout spec except
+  - **Lean** (207 tests per platform: every layout spec except
     `accessibility.spec.ts`, via `BROWSERSTACK_TIER=lean`): PRs touching
     `apps/site/**` or `packages/ui/**`, on Safari, Firefox, Edge and Pixel 8.
     About 10 to 20 minutes per platform, all four in parallel.
-  - **Full** (all 932 tests per platform, accessibility included): nightly,
+  - **Full** (all 537 tests per platform, accessibility included): nightly,
     pushes to `main` and manual dispatch.
 - `workflow_dispatch` takes `tier` (`lean`|`full`) and `platform`
-  (`all`|`safari`|`firefox`|`edge`|`pixel`|`iphone`), so one platform can be run
-  on demand.
+  (`all`|`safari`|`firefox`|`edge`|`pixel`), so one platform can be run on
+  demand.
 - A `plan` job builds a matrix of single-platform jobs (the SDK config is
   narrowed to that platform with `yq`), capped at `max-parallel: 5` to match the
-  plan's parallels. Full-tier runs share one non-cancelling concurrency group so
-  they queue instead of oversubscribing; lean PR runs cancel superseded runs of
-  the same PR.
+  plan's parallels (four jobs today). Full-tier runs share one non-cancelling
+  concurrency group so they queue instead of oversubscribing; lean PR runs
+  cancel superseded runs of the same PR.
 - When the secrets are unavailable (fork PRs), the plan job skips everything
   with a notice.
 
 ## Timings and sharding
 
-Measured per test on this plan (932 tests per platform in the full tier, 728 of
-them `accessibility.spec.ts`):
+Per-test durations were measured on this plan. The lean and full columns are
+those durations times the current counts: 207 tests in the lean tier and 537 in
+the full tier (330 of them `accessibility.spec.ts`).
 
-| Platform     | Per test | Lean (204) | Full (932) |
+| Platform     | Per test | Lean (207) | Full (537) |
 | ------------ | -------- | ---------- | ---------- |
-| Edge         | ~3s      | ~10 min    | ~47 min    |
-| Firefox      | ~4s      | ~14 min    | ~62 min    |
-| Safari macOS | ~5s      | ~17 min    | ~78 min    |
-| Pixel 8      | ~6s      | ~20 min    | ~93 min    |
-| iPhone 15    | ~27s     | ~92 min    | ~7 h       |
+| Edge         | ~3s      | ~10 min    | ~27 min    |
+| Firefox      | ~4s      | ~14 min    | ~36 min    |
+| Safari macOS | ~5s      | ~17 min    | ~45 min    |
+| Pixel 8      | ~6s      | ~21 min    | ~54 min    |
 
-The real iPhone full suite does not fit the 6 h hosted-job limit, so it is split
-with Playwright `--shard` into four jobs of about 105 minutes. With the four
-other platforms that is eight jobs under five parallel sessions, about 3 hours
-of wall time per full run, well inside the nightly window and without rotating
-shards across nights. The iPhone is not part of the lean tier (~92 min); it can
-still be dispatched on demand.
+Each platform is one job, so a full run takes as long as its slowest platform,
+about an hour. The real iPhone 15 measured ~27s per test, which put its full
+suite at about 7 hours when it still had 932 tests; that did not fit the 6 h
+hosted-job limit, so it was sharded four ways until ADR 0025 removed it.
 
 ## iPhone per-test duration
 
 `apps/site/browserstack-timing-reporter.ts` logs each test's duration split into
 `pw:api` calls (tunnel round trips to the device) and fixtures (remote page and
 context setup), prints mean, p50 and p95, and writes the numbers to the job
-summary and to a `browserstack-timings-*` artifact. Finding: pending the first
-run with the reporter; the numbers are recorded in this section from the iPhone
-shards' job summary.
+summary and to a `browserstack-timings-*` artifact. Finding: the iPhone's ~27s
+per test was the reason for the four-way sharding, but the shard runs also
+failed on commands BrowserStack does not support on iOS (see ADR 0025), so the
+`pw:api` versus fixture split was never recorded before the iPhone left the
+matrix. The reporter still runs for the four remaining platforms.
 
 ## Alternatives considered
 

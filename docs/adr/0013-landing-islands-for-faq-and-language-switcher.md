@@ -6,6 +6,9 @@ Accepted.
 
 Date: 2026-10-05
 
+Revised: 2026-10-21, the Format playground and Interface showcase are no longer
+islands, and the list of hydrated islands now matches `apps/site`.
+
 ## Context
 
 The landing ([ADR 0011](0011-landing-static-site-no-third-party-scripts.md)) was
@@ -69,13 +72,18 @@ menu, and it shows up as unused JavaScript and blocking time on mobile.
 
 ## Amendment: Format playground and Interface showcase islands
 
-Landing v2 sanctions two further islands beyond the FAQ accordion, the header
-menus and the video: the Format playground and the Interface showcase. Both
-hydrate with `client:visible`, so neither downloads JavaScript until the visitor
-scrolls to it. Both stay interactive-only: their static first state is
-server-rendered. See
+Landing v2 sanctioned two further islands beyond the FAQ accordion, the header
+menus and the video: the Format playground and the Interface showcase. Neither
+exists as an island today: the Format playground component is gone and the
+Interface showcase (`RealInterface.astro`) renders statically with no `client:*`
+directive. See
 [ADR 0023](0023-landing-motion-is-css-scroll-driven-no-motion-library.md) for
-the motion that surrounds them.
+the motion that surrounds the showcase.
+
+The hydrated islands in `apps/site` today are the FAQ accordion
+(`client:visible`), the header menus (`client:interaction`), the hero promo
+video (`client:interaction`), and, on the documentation pages, the copy-Markdown
+button (`client:idle`).
 
 ## Amendment: hero video hydrates on interaction
 
