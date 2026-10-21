@@ -62,11 +62,8 @@ function readNumber(adr: AdrFile): string {
 
 function readTitle(content: string, number: string): string | undefined {
   const heading = content.split('\n', 1)[0] ?? ''
-  const match = /^# (?:(\d+)\. |(\d{4}): )(\S.*)$/.exec(heading)
-  const headingNumber = match?.[1] ?? match?.[2]
-  return headingNumber === undefined || Number(headingNumber) !== Number(number)
-    ? undefined
-    : match?.[3]
+  const match = /^# (\d{4}): (\S.*)$/.exec(heading)
+  return match?.[1] === number ? match[2] : undefined
 }
 
 function parseRelations(statusSection: string): Relation[] {
@@ -102,7 +99,6 @@ function expectedColumnCell(relations: readonly Relation[]): string {
 
 /**
  * Checks that every relation phrase in a Status section links an ADR number.
- * Not enforced on the real ADRs until the migration completes.
  * @param adrs - The ADR files to check.
  * @returns One message per ADR with unlinked relation wording.
  */
@@ -123,7 +119,7 @@ export function findRelationWordingViolations(
 
 /**
  * Checks that every relation links an existing ADR and is recorded on both
- * sides with the inverse wording. Not enforced on the real ADRs yet.
+ * sides with the inverse wording.
  * @param adrs - The ADR files to check.
  * @returns One message per broken or one-sided relation.
  */
@@ -172,7 +168,7 @@ export function findRelationViolations(adrs: readonly AdrFile[]): string[] {
 
 /**
  * Checks that README rows match each ADR's title and reverse relations in the
- * "Superseded or amended by" column. Not enforced on the real ADRs yet.
+ * "Superseded or amended by" column.
  * @param adrs - The ADR files to check.
  * @param indexContent - The contents of the ADR index README.
  * @returns One message per mismatched README row.
@@ -212,8 +208,7 @@ export function findIndexColumnViolations(
 
 /**
  * Returns every violation of the ADR format and index rules, empty when the
- * set is valid. Pure so a broken fixture can prove each rule fires. Accepts
- * both heading forms and an optional `Date:` while ADRs migrate.
+ * set is valid. Pure so a broken fixture can prove each rule fires.
  * @param adrs - ADR files to check.
  * @param indexContent - Contents of the index README.
  * @returns One message per violation.
@@ -243,9 +238,7 @@ export function findAdrViolations(
     const number = readNumber(adr)
     const title = readTitle(adr.content, number)
     if (title === undefined) {
-      violations.push(
-        `${adr.fileName}: heading must be "# N. Title" or "# NNNN: Title"`,
-      )
+      violations.push(`${adr.fileName}: heading must be "# NNNN: Title"`)
     }
     for (const section of REQUIRED_SECTIONS) {
       if (!new RegExp(`^## ${section}$`, 'm').test(adr.content)) {
@@ -257,10 +250,10 @@ export function findAdrViolations(
       violations.push(`${adr.fileName}: invalid status "${status}"`)
     }
     const statusLines = readStatusSection(adr.content).split('\n')
+    const dateLines = statusLines.filter((line) => line.startsWith('Date:'))
     if (
-      statusLines
-        .filter((line) => line.startsWith('Date:'))
-        .some((line) => !DATE_LINE_PATTERN.test(line))
+      dateLines.length !== 1 ||
+      dateLines.some((line) => !DATE_LINE_PATTERN.test(line))
     ) {
       violations.push(`${adr.fileName}: Date line must be "Date: YYYY-MM-DD"`)
     }

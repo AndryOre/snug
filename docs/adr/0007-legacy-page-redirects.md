@@ -2,9 +2,12 @@
 
 ## Status
 
-Accepted. Amends [ADR 0006](0006-single-app-hash-routed-shell.md).
+Accepted. Amends [0006](0006-single-app-hash-routed-shell.md).
 
 Date: 2026-10-02
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,14 +2,17 @@
 
 ## Status
 
-Accepted. Supersedes the "not a bun workspace" decision in
-[ADR 0009](0009-promo-video-isolated-remotion-package.md), which is marked
-superseded; the promo video now lives in `apps/video`.
+Accepted. Supersedes [0009](0009-promo-video-isolated-remotion-package.md): its
+"not a bun workspace" decision, which is marked superseded; the promo video now
+lives in `apps/video`.
 
 Date: 2026-10-04
 
 Revised: 2026-10-21, the Astro landing exists in `apps/site`, so the planned and
 future wording is gone.
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

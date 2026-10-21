@@ -2,10 +2,13 @@
 
 ## Status
 
-Accepted — supersedes the CodeQL item in
-[ADR 0001](0001-public-repo-security-posture.md)
+Accepted. Partly supersedes [0001](0001-public-repo-security-posture.md): the
+CodeQL item.
 
 Date: 2026-09-30
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,11 +2,11 @@
 
 ## Status
 
-Accepted. Partially superseded by
-[ADR 0017](0017-landing-umami-cloud-cookieless-analytics.md) for the website
-only: the landing now loads Umami Cloud cookieless analytics. The extension
-clause (no analytics inside the extension) and the access-log and `/install`
-measurement still stand.
+Accepted. Partly superseded by
+[0017](0017-landing-umami-cloud-cookieless-analytics.md) for the website only:
+the landing now loads Umami Cloud cookieless analytics. The extension clause (no
+analytics inside the extension) and the access-log and `/install` measurement
+still stand.
 
 Date: 2026-10-05
 
@@ -14,6 +14,9 @@ Revised: 2026-10-21, the "no third-party requests on load" claim now names what
 loads from other origins today (Umami Cloud, per ADR 0017, and YouTube after a
 click), and the `/install` redirect section covers `/reviews` and the Edge
 variant.
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,9 +2,12 @@
 
 ## Status
 
-Superseded by [ADR 0022](0022-coolify-token-as-github-secret.md).
+Superseded by [0022](0022-coolify-token-as-github-secret.md).
 
 Date: 2026-10-05
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

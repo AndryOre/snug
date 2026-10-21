@@ -2,12 +2,15 @@
 
 ## Status
 
-Accepted. Extends Auto-export;
+Accepted. Builds on Auto-export;
 [ADR 0008](0008-safety-snapshot-in-extension-storage.md) and
 [ADR 0016](0016-keep-five-safety-snapshots.md) are unchanged: Safety snapshots
 still go to Downloads.
 
 Date: 2026-10-10
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

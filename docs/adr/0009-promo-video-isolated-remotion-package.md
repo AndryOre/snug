@@ -2,9 +2,12 @@
 
 ## Status
 
-Superseded by [ADR 0010](0010-bun-workspaces-monorepo.md)
+Superseded by [0010](0010-bun-workspaces-monorepo.md).
 
 Date: 2026-10-03
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

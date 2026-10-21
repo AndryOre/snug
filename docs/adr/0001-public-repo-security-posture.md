@@ -2,13 +2,17 @@
 
 ## Status
 
-Accepted
+Accepted. Partly superseded by [0004](0004-enable-codeql-sast.md): CodeQL is now
+enabled.
 
 Date: 2026-09-29
 
 Revised: 2026-10-21, the `main` ruleset requires three status checks, the zip
 size budget is now enforced by `scripts/check-zip-size.ts`, and the
 `andryore-dev` mention is dropped.
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

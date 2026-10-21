@@ -15,7 +15,7 @@ const ADR_FILE_PATTERN = /^(\d{4})-[\da-z-]+\.md$/
 
 const validAdr = (number: string): AdrFile => ({
   fileName: `${number}-sample.md`,
-  content: `# ${Number(number)}. Sample\n\n## Status\n\nAccepted.\n\n## Context\n\nc\n\n## Decision\n\nd\n\n## Consequences\n\ne\n`,
+  content: `# ${number}: Sample\n\n## Status\n\nAccepted.\n\nDate: 2026-10-17\n\n## Context\n\nc\n\n## Decision\n\nd\n\n## Consequences\n\ne\n`,
 })
 const validRow = (number: string) =>
   `| ${number} | [Sample](${number}-sample.md) | Accepted | - |\n`
@@ -31,6 +31,9 @@ describe('ADR invariants', () => {
     const index = readFileSync(path.join(ADR_DIRECTORY, 'README.md'), 'utf8')
     expect(adrs.length).toBeGreaterThan(0)
     expect(findAdrViolations(adrs, index)).toEqual([])
+    expect(findRelationWordingViolations(adrs)).toEqual([])
+    expect(findRelationViolations(adrs)).toEqual([])
+    expect(findIndexColumnViolations(adrs, index)).toEqual([])
   })
 
   it('accepts a valid fixture', () => {
@@ -52,36 +55,48 @@ describe('ADR invariants', () => {
     ).toEqual([])
   })
 
-  it('accepts both heading forms', () => {
-    const migrated = {
+  it('flags the legacy numbered heading form', () => {
+    const legacy = {
       fileName: '0001-sample.md',
       content: validAdr('0001').content.replace(
-        '# 1. Sample',
         '# 0001: Sample',
+        () => `# ${Number('0001')}. Sample`,
       ),
     }
-    expect(findAdrViolations([migrated], validRow('0001'))).toEqual([])
+    expect(findAdrViolations([legacy], validRow('0001'))).toContain(
+      '0001-sample.md: heading must be "# NNNN: Title"',
+    )
+  })
+
+  it('flags a missing Date line', () => {
+    const undated = {
+      fileName: '0001-sample.md',
+      content: validAdr('0001').content.replace('Date: 2026-10-17\n\n', ''),
+    }
+    expect(findAdrViolations([undated], validRow('0001'))).toContain(
+      '0001-sample.md: Date line must be "Date: YYYY-MM-DD"',
+    )
   })
 
   it('flags a heading with the wrong number', () => {
     const wrong = {
       fileName: '0001-sample.md',
       content: validAdr('0001').content.replace(
-        '# 1. Sample',
+        '# 0001: Sample',
         '# 0002: Sample',
       ),
     }
     expect(findAdrViolations([wrong], validRow('0001'))).toContain(
-      '0001-sample.md: heading must be "# N. Title" or "# NNNN: Title"',
+      '0001-sample.md: heading must be "# NNNN: Title"',
     )
   })
 
-  it('accepts an optional well-formed Date and Revised line', () => {
+  it('accepts an optional well-formed Revised line', () => {
     const adr = {
       fileName: '0001-sample.md',
       content: validAdr('0001').content.replace(
-        'Accepted.\n',
-        'Accepted.\n\nDate: 2026-10-17\n\nRevised: 2026-10-19, fixed a fact.\n',
+        'Date: 2026-10-17\n',
+        'Date: 2026-10-17\n\nRevised: 2026-10-19, fixed a fact.\n',
       ),
     }
     expect(findAdrViolations([adr], validRow('0001'))).toEqual([])
@@ -91,8 +106,8 @@ describe('ADR invariants', () => {
     const adr = {
       fileName: '0001-sample.md',
       content: validAdr('0001').content.replace(
-        'Accepted.\n',
-        'Accepted.\n\nDate: today\n\nRevised: yesterday\n',
+        'Date: 2026-10-17\n',
+        'Date: today\n\nRevised: yesterday\n',
       ),
     }
     expect(findAdrViolations([adr], validRow('0001'))).toEqual([
@@ -111,11 +126,11 @@ describe('ADR invariants', () => {
     const broken = {
       fileName: '0001-sample.md',
       content: validAdr('0001')
-        .content.replace('# 1. Sample', '# Sample')
+        .content.replace('# 0001: Sample', '# Sample')
         .replace('## Decision', '## Choice'),
     }
     expect(findAdrViolations([broken], validRow('0001'))).toEqual([
-      '0001-sample.md: heading must be "# N. Title" or "# NNNN: Title"',
+      '0001-sample.md: heading must be "# NNNN: Title"',
       '0001-sample.md: missing "## Decision"',
     ])
   })

@@ -2,13 +2,17 @@
 
 ## Status
 
-Accepted. The real iPhone 15 is superseded by
-[ADR 0025](0025-real-iphone-is-not-automated-on-browserstack.md).
+Accepted. Partly superseded by
+[0025](0025-real-iphone-is-not-automated-on-browserstack.md): the real iPhone 15
+is out.
 
 Date: 2026-10-15
 
 Revised: 2026-10-21, four platforms instead of five (the iPhone left, see ADR
 0025), test counts recounted, and the pending iPhone timing finding resolved.
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 

@@ -2,10 +2,13 @@
 
 ## Status
 
-Accepted. Supersedes the iPhone 15 part of
-[ADR 0024](0024-cross-browser-coverage-on-browserstack.md).
+Accepted. Partly supersedes
+[0024](0024-cross-browser-coverage-on-browserstack.md): the iPhone 15 part.
 
 Date: 2026-10-17
+
+Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
+recorded on both sides.
 
 ## Context
 
