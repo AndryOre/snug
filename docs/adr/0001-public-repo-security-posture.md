@@ -1,8 +1,10 @@
-# 1. Public repo security posture
+# 0001: Public repo security posture
 
 ## Status
 
 Accepted
+
+Date: 2026-09-29
 
 ## Context
 
