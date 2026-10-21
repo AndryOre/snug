@@ -339,10 +339,9 @@ facade, iframes and `<time>` elements are masked and animations are disabled.
 ## Coverage ramp
 
 The target for every coverage-measured workspace is 95% lines, 95% statements,
-90% branches and 95% functions
-([ADR 0027](adr/0027-practices-parity-with-afe.md)). Thresholds only ever go up:
-each is set to the measured value rounded down, and a PR that adds tested code
-raises them in the same change.
+90% branches and 95% functions. Thresholds only ever go up: each is set to the
+measured value rounded down, and a PR that adds tested code raises them in the
+same change.
 
 | Workspace        | Lines | Statements | Branches | Functions |
 | ---------------- | ----- | ---------- | -------- | --------- |
@@ -480,9 +479,9 @@ verifies the tag and publishes to the Chrome Web Store and Edge Add-ons, see
 [how to cut a release](how-to/cut-a-release.md),
 [ADR 0005](adr/0005-store-publishing-via-cws-api-v2.md) and
 [ADR 0026](adr/0026-store-release-is-gated-on-a-verified-tag.md). Package gates
-such as publint and size-limit do not apply; CI enforces a size budget on the
-zip instead (`scripts/check-zip-size.ts`), see
-[ADR 0027](adr/0027-practices-parity-with-afe.md).
+such as publint and size-limit do not apply
+([ADR 0027](adr/0027-practices-parity-with-afe.md)); CI enforces a size budget
+on the zip instead (`scripts/check-zip-size.ts`).
 
 ## Dependency updates
 
