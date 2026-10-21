@@ -6,6 +6,10 @@ Accepted
 
 Date: 2026-09-29
 
+Revised: 2026-10-21, the `main` ruleset requires three status checks, the zip
+size budget is now enforced by `scripts/check-zip-size.ts`, and the
+`andryore-dev` mention is dropped.
+
 ## Context
 
 `snug` is a public repository maintained by one person. It had no branch
@@ -27,9 +31,9 @@ rejected for this repository.
   admins not being enforced. Zero approvals keeps the PR mandatory and CI-gated
   without that trade-off.
 - **Squash-only merges**, linear history, signed commits (GitHub signs squash
-  merges done on the web), and a `CI passed` aggregator job as the one required
-  status check name, so adding CI jobs later never requires touching the
-  ruleset.
+  merges done on the web), and three required status checks: `CI passed`,
+  `Validate PR title` and `Check markdown links`. `CI passed` is an aggregator
+  job, so adding CI jobs later never requires touching the ruleset.
 - **Every PR runs the full CI gate**, including docs-only changes —
   `paths-ignore` was removed from `ci.yml`. This closes a gap an AI-driven
   contribution workflow could otherwise slip through.
@@ -40,8 +44,8 @@ rejected for this repository.
 - **OpenSSF Best Practices (bestpractices.dev) badge**, registered manually by
   the maintainer, since the platform requires a GitHub OAuth login with no
   practical write API.
-- Docs-lint parity with `andryore-dev` (`bun run lint:docs`, a local lychee
-  wrapper).
+- Docs lint (`bun run lint:docs`, a local lychee wrapper), also run in CI as the
+  `Check markdown links` required check.
 
 ### Rejected
 
@@ -68,7 +72,9 @@ rejected for this repository.
   GitHub-alert-sourced `vulnerabilityAlerts` block with nothing to read;
   `osvVulnerabilityAlerts` is the effective source.
 - **Bundle-size gate** — no content scripts, installs once; nobody notices zip
-  size. Reported in the CI job summary only.
+  size. Originally reported in the CI job summary only; the zip size is now
+  enforced against a fixed budget by `scripts/check-zip-size.ts` in the `build`
+  job.
 
 ### Settings application
 

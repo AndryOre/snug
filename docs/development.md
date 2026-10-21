@@ -69,9 +69,10 @@ Hooks are installed via Husky and live in `.husky/`:
 
 Every PR — including docs-only changes — runs the full `ci.yml` pipeline:
 `quality`, `build`, `e2e`, and `commitlint`. The `CI passed` job aggregates
-their results and is the single status check required to merge; it passes once
-every needed job is `success` or `skipped` (e.g. `commitlint` is skipped on
-`push` runs), and fails if any needed job is `failure` or `cancelled`.
+their results and is one of the three status checks required to merge, with
+`Validate PR title` and `Check markdown links`; it passes once every needed job
+is `success` or `skipped` (e.g. `commitlint` is skipped on `push` runs), and
+fails if any needed job is `failure` or `cancelled`.
 
 `.github/workflows/codeql.yml` runs CodeQL static analysis
 (`javascript-typescript`) on every PR, on push to `main`, and weekly. It's not
