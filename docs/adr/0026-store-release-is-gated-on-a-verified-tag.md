@@ -1,8 +1,10 @@
-# 26. A store release is gated on a verified tag
+# 0026: A store release is gated on a verified tag
 
 ## Status
 
 Accepted.
+
+Date: 2026-10-19
 
 ## Context
 

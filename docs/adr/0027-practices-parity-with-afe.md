@@ -1,8 +1,10 @@
-# 27. Practices parity with Animated Fluent Emojis
+# 0027: Practices parity with Animated Fluent Emojis
 
 ## Status
 
 Accepted.
+
+Date: 2026-10-19
 
 ## Context
 

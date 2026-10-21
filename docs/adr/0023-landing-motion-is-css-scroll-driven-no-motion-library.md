@@ -1,8 +1,10 @@
-# 23. Landing motion is CSS scroll-driven, no motion library
+# 0023: Landing motion is CSS scroll-driven, no motion library
 
 ## Status
 
 Accepted.
+
+Date: 2026-10-14
 
 ## Context
 
