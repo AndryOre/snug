@@ -2,7 +2,7 @@
 # The context has no .git, so sitemap lastmod dates come in as a build argument:
 #   --build-arg LAST_MODIFIED_DATES="$(bash apps/site/docker/last-modified.sh)"
 # Without it the sitemap omits lastmod.
-FROM oven/bun:1.4.2-alpine AS build
+FROM oven/bun:1.4.4-alpine@sha256:4cf82f5686b196504fe119db3fcd9185b191f82ece82c40680e597228ec6070a AS build
 WORKDIR /repo
 
 COPY package.json bun.lock bunfig.toml tsconfig.base.json ./
