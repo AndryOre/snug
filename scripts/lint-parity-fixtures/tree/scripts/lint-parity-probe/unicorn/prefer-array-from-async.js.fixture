@@ -1,0 +1,5 @@
+const result = [];
+for await (const element of iterable) {
+	result.push(element);
+}
+export const fixtureModule = true;

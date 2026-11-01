@@ -1,0 +1,2 @@
+foo(bar(baz(qux())));
+export const fixtureModule = true;

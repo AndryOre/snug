@@ -1,15 +1,9 @@
 [
   {
     "file": "apps/extension/lib/lint-parity-probe/comments.ts",
-    "line": 44,
-    "rule": "jsdoc/require-yields",
-    "reason": "Location only: the native port reports the same missing @yields on the generator declaration (line 49) instead of the JSDoc block's first line; it is listed as Oxlint-only there."
-  },
-  {
-    "file": "apps/extension/lib/lint-parity-probe/comments.ts",
-    "line": 53,
-    "rule": "jsdoc/require-throws-type",
-    "reason": "Location only: the native port reports the same untyped @throws on the tag's own line (57) instead of the JSDoc block's first line; it is listed as Oxlint-only there."
+    "line": 85,
+    "rule": "unused-disable-directive",
+    "reason": "Location only, upstream Oxlint behaviour with no config or plugin fix (no oxc issue filed yet): Oxlint reports an unused `/* eslint-disable rule */ ... /* eslint-enable rule */` block on the closing enable comment (line 91) instead of the disable comment, with the same 'Unused eslint-disable directive' message, so the unused block is still rejected. Directive reporting happens in Oxlint's Rust core, which no jsPlugin or option reaches."
   },
   {
     "file": "scripts/lint-parity-probe/typescript.ts",

@@ -17,9 +17,12 @@ const ENFORCED_RULE_NAMES = [
 
 /**
  * Rewrites the "force location" the upstream rules report with — a start
- * column of `-1`, meaning "the whole line" to ESLint — into column `0`,
- * which Oxlint accepts (oxc#23330: it throws "Line/column pair translates to
- * an out of range offset" on the `-1`).
+ * column of `-1`, meaning "the whole line" to ESLint — into an empty range
+ * at column `0` of that line. Oxlint throws "Line/column pair translates to
+ * an out of range offset" on the `-1` (oxc#23330). The range is empty so it
+ * ends before the reported comment starts: ESLint's plugin patches the
+ * linter so its reports are never suppressed, while Oxlint drops a report
+ * that overlaps the `eslint-disable` comment it is about.
  * @param descriptor The report descriptor an upstream rule passed.
  * @returns The same descriptor with a non-negative start column.
  */
@@ -28,9 +31,10 @@ function clampReportLocation(descriptor) {
   if (!location?.start || location.start.column >= 0) {
     return descriptor
   }
+  const lineStart = { line: location.start.line, column: 0 }
   return {
     ...descriptor,
-    loc: { ...location, start: { ...location.start, column: 0 } },
+    loc: { start: lineStart, end: lineStart },
   }
 }
 

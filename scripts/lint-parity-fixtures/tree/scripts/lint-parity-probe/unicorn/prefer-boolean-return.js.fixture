@@ -1,0 +1,8 @@
+function isValid(value) {
+	if (value > 0) {
+		return true;
+	}
+
+	return false;
+}
+export const fixtureModule = true;

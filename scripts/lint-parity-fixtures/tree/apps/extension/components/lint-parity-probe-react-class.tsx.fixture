@@ -1,0 +1,116 @@
+import { Component, createContext, lazy, use, useId, useState } from 'react'
+import type { ReactNode } from 'react'
+import {
+  findDOMNode,
+  flushSync,
+  hydrate,
+  render,
+  useFormState,
+} from 'react-dom'
+
+/**
+ * Violations of the `@eslint-react` class-component, `react-dom` legacy API,
+ * JSX and web-API rules the main probe component does not reach.
+ */
+export class LegacyProbe extends Component<{ label: string }, { count: number }> {
+  state = { count: 0 }
+
+  private unusedHelper() {
+    return 1
+  }
+
+  componentWillMount() {
+    this.setState({ count: this.state.count + 1 })
+  }
+
+  componentWillReceiveProps() {
+    this.state.count = 2
+  }
+
+  componentWillUpdate() {
+    this.setState({ count: 3 })
+  }
+
+  UNSAFE_componentWillMount() {}
+
+  UNSAFE_componentWillReceiveProps() {}
+
+  UNSAFE_componentWillUpdate() {}
+
+  componentDidMount() {
+    this.setState({ count: 4 })
+  }
+
+  componentDidUpdate() {
+    this.setState({ count: 5 })
+  }
+
+  render() {
+    return <span>{this.state.count}</span>
+  }
+}
+
+export const themes = createContext('light')
+
+export function legacyDom(container: HTMLElement, node: ReactNode) {
+  findDOMNode(container)
+  flushSync(() => {})
+  hydrate(node, container)
+  const root = render(node, container)
+  return root
+}
+
+export function FormProbe() {
+  const [state] = useFormState(() => 1, 0)
+  const value = useId()
+  return <span>{`${state}${value}`}</span>
+}
+
+export function JsxProbe({ props, total }: { props: object; total: number }) {
+  return (
+    <section>
+      <div dangerouslySetInnerHTML={{ __html: 'x' }}>child</div>
+      <Wrapper children="prop">nested</Wrapper>
+      <Wrapper {...props} key="late" />
+      <p>Total: ${total}</p>
+      <p>
+        {total};
+      </p>
+      <svg:circle />
+    </section>
+  )
+}
+
+function Wrapper({ children }: { children?: ReactNode }) {
+  return <div>{children}</div>
+}
+
+export function LazyProbe() {
+  const Lazy = lazy(() => import('./lint-parity-probe'))
+  return <Lazy />
+}
+
+export function BoundaryProbe({ promise }: { promise: Promise<string> }) {
+  try {
+    const value = use(promise)
+    return <span>{value}</span>
+  } catch {
+    return null
+  }
+}
+
+export function ImpureProbe() {
+  const now = Date.now()
+  return <span>{now}</span>
+}
+
+export function RenderStateProbe() {
+  const [count, setCount] = useState(0)
+  setCount(1)
+  return <span>{count}</span>
+}
+
+export function EvalProbe() {
+  const value = eval('1') as number
+  return <span>{value}</span>
+}

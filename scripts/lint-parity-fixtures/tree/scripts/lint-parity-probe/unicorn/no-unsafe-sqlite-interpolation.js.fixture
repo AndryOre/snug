@@ -1,0 +1,2 @@
+database.exec(`SELECT * FROM users WHERE id = ${id}`);
+export const fixtureModule = true;

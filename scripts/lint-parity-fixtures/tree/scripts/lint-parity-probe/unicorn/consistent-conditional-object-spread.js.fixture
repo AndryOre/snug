@@ -1,0 +1,2 @@
+const object = {...(condition ? {property} : {})};
+export const fixtureModule = true;

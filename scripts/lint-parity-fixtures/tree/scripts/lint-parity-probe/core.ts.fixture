@@ -1,0 +1,30 @@
+/// <reference path="./typescript.ts" />
+import { ReactNode } from 'react'
+
+/**
+ * Violations of core and `@typescript-eslint` rules the TypeScript probe does
+ * not reach.
+ */
+export type Rendered = ReactNode
+
+export const numbers = new Array(1, 2)
+
+const width: number = 1
+export const sameWidth = width as number
+
+/**
+ * Reads `arguments` without a directive.
+ * @returns The first argument.
+ */
+export function firstArgument(): unknown {
+  return arguments[0]
+}
+
+/**
+ * Spreads through `apply`.
+ * @param values The values.
+ * @returns The largest value.
+ */
+export function largest(values: number[]): number {
+  return Math.max.apply(Math, values)
+}

@@ -1,0 +1,4 @@
+window.addEventListener('resize', () => {
+	element.classList.toggle('is-small', element.offsetWidth < 500);
+});
+export const fixtureModule = true;

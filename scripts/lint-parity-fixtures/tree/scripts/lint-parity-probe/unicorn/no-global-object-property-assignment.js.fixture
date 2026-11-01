@@ -1,0 +1,2 @@
+globalThis.foo = value;
+export const fixtureModule = true;

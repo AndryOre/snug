@@ -1,0 +1,4 @@
+const foo = {};
+const {bar} = foo;
+const {baz} = foo;
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+const parameters = Object.fromEntries(query.split('&').map(part => part.split('=')));
+export const fixtureModule = true;

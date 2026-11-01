@@ -1,0 +1,2 @@
+const reversed = [...array].reverse();
+export const fixtureModule = true;

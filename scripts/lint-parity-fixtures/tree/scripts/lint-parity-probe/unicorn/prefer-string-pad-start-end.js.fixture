@@ -1,0 +1,2 @@
+const formatted = '*'.repeat(10 - name.length) + name;
+export const fixtureModule = true;

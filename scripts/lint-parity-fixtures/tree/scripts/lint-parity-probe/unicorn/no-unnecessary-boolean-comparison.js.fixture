@@ -1,0 +1,2 @@
+if ((a > b) === true) {}
+export const fixtureModule = true;

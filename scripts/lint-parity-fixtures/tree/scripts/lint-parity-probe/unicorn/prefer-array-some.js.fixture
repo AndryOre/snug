@@ -1,0 +1,2 @@
+const hasUnicorn = array.filter(element => isUnicorn(element)).length > 0;
+export const fixtureModule = true;

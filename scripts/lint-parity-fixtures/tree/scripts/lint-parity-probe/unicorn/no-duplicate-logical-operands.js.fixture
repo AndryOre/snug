@@ -1,0 +1,2 @@
+if (isReady && isReady) {}
+export const fixtureModule = true;

@@ -1,0 +1,4 @@
+for (const item of getItems(createArgument(seed))) {
+	console.log(item);
+}
+export const fixtureModule = true;

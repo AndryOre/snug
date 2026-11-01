@@ -1,0 +1,2 @@
+const index = foo.findIndex(x => x === 'foo');
+export const fixtureModule = true;

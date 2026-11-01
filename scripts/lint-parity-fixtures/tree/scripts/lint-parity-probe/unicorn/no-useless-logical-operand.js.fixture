@@ -1,0 +1,3 @@
+const value = true && input;
+const other = input && true && fallback;
+export const fixtureModule = true;

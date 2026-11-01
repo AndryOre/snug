@@ -1,0 +1,10 @@
+'use server'
+
+/**
+ * Violation of `@eslint-react/rsc-function-definition`: a React Server
+ * Function that is not async.
+ * @returns A constant.
+ */
+export function serverAction(): number {
+  return 1
+}

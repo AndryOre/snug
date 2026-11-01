@@ -1,0 +1,39 @@
+/**
+ * Violations of the `jsx-a11y` rules the main probe component does not reach.
+ */
+export function AccessibilityProbe({ onSelect }: { onSelect: () => void }) {
+  return (
+    <main>
+      <div aria-activedescendant="option-1" />
+      <div aria-labeledby="heading" />
+      <div aria-hidden="yes" />
+      <div role="datepicker" />
+      <meta aria-hidden="true" />
+      <input type="text" autoComplete="incorrect" />
+      <h1 />
+      <iframe src="https://example.com" />
+      <img src="/cat.png" alt="photo of a cat" />
+      <div role="button" onClick={onSelect} />
+      <label htmlFor="missing" />
+      <audio src="/sound.mp3" />
+      <div onMouseOver={onSelect} />
+      <div accessKey="h" />
+      <marquee />
+      <article role="button" />
+      <ul onClick={onSelect} />
+      <button role="article" />
+      <section tabIndex={0} />
+      <button role="button" />
+      <li aria-checked="true" />
+      <div scope="row" />
+      <span tabIndex={5} />
+    </main>
+  )
+}
+
+/**
+ * Document shell without a language, for `jsx-a11y/html-has-lang`.
+ */
+export function DocumentProbe() {
+  return <html />
+}

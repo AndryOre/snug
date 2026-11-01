@@ -1,0 +1,2 @@
+const indentation = '    ';
+export const fixtureModule = true;

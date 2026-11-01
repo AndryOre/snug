@@ -1,0 +1,2 @@
+document.querySelector(`[data-id="${id}"]`);
+export const fixtureModule = true;

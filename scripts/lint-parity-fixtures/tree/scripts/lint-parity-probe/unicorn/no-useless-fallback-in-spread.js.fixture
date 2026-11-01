@@ -1,0 +1,2 @@
+const object = {...(foo || {})};
+export const fixtureModule = true;

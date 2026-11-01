@@ -1,0 +1,3 @@
+const element = document.querySelector('.banner');
+element.parentNode.removeChild(element);
+export const fixtureModule = true;

@@ -1,0 +1,4 @@
+if (!Number.isInteger(index)) {
+	throw new Error('Expected an integer.');
+}
+export const fixtureModule = true;

@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest'
 
 import {
   checkExpectedFixtures,
+  checkRuleCoverage,
   compareSection,
   diffFindings,
   type Finding,
@@ -12,6 +13,7 @@ import {
   parseAccepted,
   parseEslintJson,
   parseOxlintJson,
+  partitionAccepted,
   renderReport,
   summarizeByRule,
   UNUSED_DIRECTIVE_RULE,
@@ -60,6 +62,25 @@ describe('diffFindings', () => {
     )
     expect(diff.common).toEqual([])
     expect(diff.eslintOnly).toEqual([finding('a.ts', 3, 'no-var')])
+  })
+})
+
+describe('partitionAccepted', () => {
+  test('splits entries by the corpus path prefix', () => {
+    const fixtureEntry = {
+      file: 'scripts/probe.ts',
+      rule: 'eqeqeq',
+      reason: 'r',
+    }
+    const corpusEntry = {
+      file: 'corpus/repo/a.ts',
+      rule: 'eqeqeq',
+      reason: 'r',
+    }
+    expect(partitionAccepted([fixtureEntry, corpusEntry])).toEqual({
+      fixtures: [fixtureEntry],
+      corpus: [corpusEntry],
+    })
   })
 })
 
@@ -320,6 +341,45 @@ describe('fixtureTargetPath', () => {
   })
 })
 
+describe('checkRuleCoverage', () => {
+  test('an enforced rule no fixture triggers is a harness problem', () => {
+    const problems = checkRuleCoverage(
+      new Set(['no-var', 'prefer-const']),
+      [finding('a.ts', 1, 'no-var')],
+      {},
+    )
+    expect(problems).toEqual([
+      'Enforced rule prefer-const is not triggered by any fixture',
+    ])
+  })
+
+  test('an allow-listed rule passes, but only with a reason', () => {
+    expect(
+      checkRuleCoverage(new Set(['prefer-const']), [], {
+        'prefer-const': 'cannot be triggered because of a reason',
+      }),
+    ).toEqual([])
+    expect(
+      checkRuleCoverage(new Set(['prefer-const']), [], { 'prefer-const': ' ' }),
+    ).toEqual([
+      'Untriggerable rule prefer-const needs a reason',
+      'Enforced rule prefer-const is not triggered by any fixture',
+    ])
+  })
+
+  test('an allow-list entry for a triggered or unenforced rule is stale', () => {
+    expect(
+      checkRuleCoverage(new Set(['no-var']), [finding('a.ts', 1, 'no-var')], {
+        'no-var': 'why',
+        gone: 'why',
+      }),
+    ).toEqual([
+      'Untriggerable rule no-var is triggered by a fixture; drop its entry',
+      'Untriggerable rule gone is not enforced; drop its entry',
+    ])
+  })
+})
+
 describe('checkExpectedFixtures', () => {
   test('reports expected rules ESLint did not flag and unlisted fixtures', () => {
     const problems = checkExpectedFixtures(
@@ -411,6 +471,10 @@ describe('normalizeOxlintCode', () => {
     [
       'typed-react(no-leaked-conditional-rendering)',
       '@eslint-react/no-leaked-conditional-rendering',
+    ],
+    [
+      'typescript-eslint-js(no-unsafe-assignment)',
+      '@typescript-eslint/no-unsafe-assignment',
     ],
     ['@eslint-react(no-missing-key)', '@eslint-react/no-missing-key'],
     ['shadcn(no-raw-colors)', 'shadcn/no-raw-colors'],

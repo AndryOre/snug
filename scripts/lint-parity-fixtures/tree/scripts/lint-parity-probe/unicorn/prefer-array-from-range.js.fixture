@@ -1,0 +1,2 @@
+const indexes = [...Array(length).keys()];
+export const fixtureModule = true;

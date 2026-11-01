@@ -1,0 +1,2 @@
+element.childNodes[0];
+export const fixtureModule = true;

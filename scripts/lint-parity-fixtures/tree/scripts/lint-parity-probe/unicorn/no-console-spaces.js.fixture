@@ -1,0 +1,2 @@
+console.log('abc ', 'def');
+export const fixtureModule = true;

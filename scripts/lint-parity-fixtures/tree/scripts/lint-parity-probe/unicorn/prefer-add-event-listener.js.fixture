@@ -1,0 +1,2 @@
+foo.onclick = () => {};
+export const fixtureModule = true;

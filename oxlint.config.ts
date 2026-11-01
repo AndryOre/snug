@@ -298,7 +298,6 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/no-useless-error-capture-stack-trace': 'error',
   'unicorn/no-useless-fallback-in-spread': 'error',
   'unicorn/no-useless-length-check': 'error',
-  'unicorn/no-useless-promise-resolve-reject': 'error',
   'unicorn/no-useless-spread': 'error',
   'unicorn/no-useless-switch-case': 'error',
   'unicorn/no-zero-fractions': 'error',
@@ -321,9 +320,7 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/prefer-dom-node-remove': 'error',
   'unicorn/prefer-event-target': 'error',
   'unicorn/prefer-export-from': 'error',
-  'unicorn/prefer-includes': 'error',
   'unicorn/prefer-keyboard-event-key': 'error',
-  'unicorn/prefer-logical-operator-over-ternary': 'error',
   'unicorn/prefer-math-min-max': 'error',
   'unicorn/prefer-math-trunc': 'error',
   'unicorn/prefer-modern-dom-apis': 'error',
@@ -360,9 +357,12 @@ const unicornNativeRules: DummyRuleMap = {
 }
 
 /**
- * `eslint-plugin-unicorn` rules with no native Oxlint port, run as the original ESLint rules through the `unicorn-js` jsPlugin.
+ * `eslint-plugin-unicorn` rules with no native Oxlint port, run as the original ESLint rules through the `unicorn-js` jsPlugin (`oxlint-plugins/typed-unicorn.mjs`, which adds type information on TypeScript files). `prefer-includes`, `no-useless-promise-resolve-reject` and `prefer-logical-operator-over-ternary` have native ports that miss findings the originals report in the parity fixtures and corpus (`scripts/lint-parity.ts`), so the originals run instead.
  */
 const unicornOriginalRules: DummyRuleMap = {
+  'unicorn-js/prefer-includes': 'error',
+  'unicorn-js/no-useless-promise-resolve-reject': 'error',
+  'unicorn-js/prefer-logical-operator-over-ternary': 'error',
   'unicorn-js/explicit-length-check': 'error',
   'unicorn-js/no-useless-undefined': 'error',
   'unicorn-js/consistent-function-scoping': 'error',
@@ -567,19 +567,19 @@ const unicornOriginalRules: DummyRuleMap = {
 }
 
 /**
- * `eslint-plugin-react-hooks` `recommended-latest` rules, natively ported under the `react` plugin, except `config` and `gating`, which have no native port and run as the original rules through the `react-hooks-js` jsPlugin.
+ * `eslint-plugin-react-hooks` `recommended-latest` rules, natively ported under the `react` plugin, except `config` and `gating`, which have no native port, and `exhaustive-deps` and `immutability`, whose native ports report an unstable dependency on the hook instead of its declaration and miss a reassignment read after render; those run as the original rules through the `react-hooks-js` jsPlugin.
  */
 const reactHooksRules: DummyRuleMap = {
   'react-hooks-js/config': 'error',
   'react-hooks-js/gating': 'error',
   'react/rules-of-hooks': 'error',
-  'react/exhaustive-deps': 'warn',
+  'react-hooks-js/exhaustive-deps': 'warn',
   'react/static-components': 'error',
   'react/use-memo': 'error',
   'react/void-use-memo': 'error',
   'react/preserve-manual-memoization': 'error',
   'react/incompatible-library': 'warn',
-  'react/immutability': 'error',
+  'react-hooks-js/immutability': 'error',
   'react/globals': 'error',
   'react/refs': 'error',
   'react/set-state-in-effect': 'error',
@@ -590,7 +590,7 @@ const reactHooksRules: DummyRuleMap = {
 }
 
 /**
- * `typescript-eslint` `recommendedTypeChecked` plus the explicit options of the former ESLint config. Type-aware rules run on tsgolint. `no-unused-vars` spells out ESLint's defaults, which have no ignore patterns: Oxlint's own defaults skip `_`-prefixed names.
+ * `typescript-eslint` `recommendedTypeChecked` plus the explicit options of the former ESLint config. Type-aware rules run on tsgolint, except `no-unsafe-assignment`, which runs as the original rule through the `typescript-eslint-js` shim because tsgolint misses an `any` passed to an `any`-typed JSX prop (oxc-project/tsgolint#1302). `no-unused-vars` spells out ESLint's defaults, which have no ignore patterns: Oxlint's own defaults skip `_`-prefixed names. `reportVarsOnlyUsedAsTypes` matches `@typescript-eslint/no-unused-vars`, which reports a value used only in type positions.
  */
 const typescriptRules: DummyRuleMap = {
   'no-array-constructor': 'error',
@@ -602,6 +602,7 @@ const typescriptRules: DummyRuleMap = {
       argsIgnorePattern: '^$',
       caughtErrorsIgnorePattern: '^$',
       destructuredArrayIgnorePattern: '^$',
+      reportVarsOnlyUsedAsTypes: true,
       varsIgnorePattern: '^$',
     },
   ],
@@ -633,7 +634,7 @@ const typescriptRules: DummyRuleMap = {
   'typescript/no-unnecessary-type-assertion': 'error',
   'typescript/no-unnecessary-type-constraint': 'error',
   'typescript/no-unsafe-argument': 'error',
-  'typescript/no-unsafe-assignment': 'error',
+  'typescript-eslint-js/no-unsafe-assignment': 'error',
   'typescript/no-unsafe-call': 'error',
   'typescript/no-unsafe-declaration-merging': 'error',
   'typescript/no-unsafe-enum-comparison': 'error',
@@ -709,19 +710,19 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/require-returns-description': 'error',
   'jsdoc/require-returns-type': 'off',
   'jsdoc/require-throws-description': 'off',
-  'jsdoc/require-throws-type': 'error',
-  'jsdoc/require-yields': 'error',
   'jsdoc/require-yields-description': 'off',
   'jsdoc/require-yields-type': 'error',
 }
 
 /**
- * `eslint-plugin-jsdoc` rules with no native port, run as the original rules through the `jsdoc-js` jsPlugin. `no-defaults` has a native port, but it only checks `@param` defaults and misses the `@default` tag the original reports, so the original runs instead.
+ * `eslint-plugin-jsdoc` rules with no native port, run as the original rules through the `jsdoc-js` jsPlugin. `no-defaults` has a native port, but it only checks `@param` defaults and misses the `@default` tag the original reports, so the original runs instead. `require-throws-type` and `require-yields` have native ports that report on the tag or the declaration instead of the JSDoc block, so ESLint directives on the block would not match them; the originals run instead.
  */
 const jsdocOriginalRules: DummyRuleMap = {
   'jsdoc-js/no-defaults': 'error',
   'jsdoc-js/require-param': 'error',
   'jsdoc-js/require-returns': 'error',
+  'jsdoc-js/require-throws-type': 'error',
+  'jsdoc-js/require-yields': 'error',
   'jsdoc-js/check-alignment': 'error',
   'jsdoc-js/check-param-names': 'error',
   'jsdoc-js/check-types': 'error',
@@ -895,6 +896,10 @@ const overrides: OxlintOverride[] = [
     jsPlugins: [
       '@eslint-react/eslint-plugin',
       { name: 'typed-react', specifier: './oxlint-plugins/typed-react.mjs' },
+      {
+        name: 'typescript-eslint-js',
+        specifier: './oxlint-plugins/typed-typescript-eslint.mjs',
+      },
     ],
     rules: {
       ...typescriptRules,
@@ -1066,7 +1071,7 @@ export default defineConfig({
     },
   },
   jsPlugins: [
-    { name: 'unicorn-js', specifier: 'eslint-plugin-unicorn' },
+    { name: 'unicorn-js', specifier: './oxlint-plugins/typed-unicorn.mjs' },
     { name: 'jsx-a11y-js', specifier: 'eslint-plugin-jsx-a11y' },
     { name: 'react-js', specifier: 'eslint-plugin-react' },
     { name: 'react-hooks-js', specifier: 'eslint-plugin-react-hooks' },

@@ -1,0 +1,5 @@
+let resolve;
+const promise = new Promise(resolve_ => {
+	resolve = resolve_;
+});
+export const fixtureModule = true;

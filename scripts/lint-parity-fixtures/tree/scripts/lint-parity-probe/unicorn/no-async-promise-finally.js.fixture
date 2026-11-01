@@ -1,0 +1,4 @@
+promise.finally(async () => {
+	await cleanup();
+});
+export const fixtureModule = true;

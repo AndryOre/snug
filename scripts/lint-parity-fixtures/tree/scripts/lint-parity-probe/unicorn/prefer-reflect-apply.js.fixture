@@ -1,0 +1,2 @@
+foo.apply(null, [42]);
+export const fixtureModule = true;

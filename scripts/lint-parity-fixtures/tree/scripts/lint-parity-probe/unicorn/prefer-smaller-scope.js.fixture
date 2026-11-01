@@ -1,0 +1,8 @@
+function foo() {
+	let value;
+	while (condition) {
+		value = getValue();
+		console.log(value);
+	}
+}
+export const fixtureModule = true;

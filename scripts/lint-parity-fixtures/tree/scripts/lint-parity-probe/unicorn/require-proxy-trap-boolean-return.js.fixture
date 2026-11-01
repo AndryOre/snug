@@ -1,0 +1,6 @@
+new Proxy(target, {
+	set(target, property, value) {
+		target[property] = value;
+	}
+});
+export const fixtureModule = true;

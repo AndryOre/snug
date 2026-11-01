@@ -1,0 +1,2 @@
+element.querySelectorAll('.outer .inner');
+export const fixtureModule = true;

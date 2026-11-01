@@ -1,0 +1,4 @@
+if (Array.isArray(foo) === false) {
+	throw new Error('Array expected');
+}
+export const fixtureModule = true;

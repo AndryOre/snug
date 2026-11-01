@@ -1,0 +1,2 @@
+const getName = 'Sindre';
+export const fixtureModule = true;

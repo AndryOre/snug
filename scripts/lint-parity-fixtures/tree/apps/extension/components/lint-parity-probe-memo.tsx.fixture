@@ -1,0 +1,17 @@
+import { useMemo } from 'react'
+
+/**
+ * Violation of `react-hooks/preserve-manual-memoization`: a `useMemo`
+ * dependency that an alias mutates after the memo. A direct mutation is
+ * reported as `react-hooks/immutability` instead, and a dependency mismatch
+ * by the compiler's `memo-dependencies` check (off), which both stop the
+ * compiler before this rule's check.
+ */
+export function AliasedMutationProbe({ value }: { value: number }) {
+  const outer: unknown[] = []
+  const inner: number[] = []
+  outer.push(inner)
+  const first = useMemo(() => outer[0], [outer])
+  inner.push(value)
+  return <span>{String(first)}</span>
+}

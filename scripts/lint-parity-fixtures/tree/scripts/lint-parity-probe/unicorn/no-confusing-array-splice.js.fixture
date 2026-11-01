@@ -1,0 +1,2 @@
+array.splice(index, 1, element);
+export const fixtureModule = true;

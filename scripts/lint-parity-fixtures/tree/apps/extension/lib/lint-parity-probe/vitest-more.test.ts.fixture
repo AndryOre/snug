@@ -1,0 +1,19 @@
+import { describe, expect, it } from 'vitest'
+
+import { helper } from './__mocks__/helper'
+
+/**
+ * Violations of the `@vitest/eslint-plugin` recommended rules the first
+ * vitest probe does not reach.
+ */
+expect(helper).toBeDefined()
+
+describe('no callback')
+
+it('wraps a promise in an async function', async () => {
+  await expect(async () => await Promise.reject(new Error('x'))).rejects.toThrow()
+})
+
+it.concurrent('snapshots without a local context', () => {
+  expect(1).toMatchSnapshot()
+})

@@ -1,0 +1,2 @@
+new URL('https://example.com').toString();
+export const fixtureModule = true;

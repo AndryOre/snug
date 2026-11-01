@@ -1,0 +1,14 @@
+Iterator.from(values).filter(async value => isAllowed(value));
+
+Iterator.from(values).some(async value => isAllowed(value));
+
+Iterator.from(values).every(async value => isAllowed(value));
+
+Iterator.from(values).find(async value => isAllowed(value));
+
+Iterator.from(values).forEach(async value => {
+	await save(value);
+});
+
+Iterator.from(values).flatMap(async value => getChildren(value));
+export const fixtureModule = true;

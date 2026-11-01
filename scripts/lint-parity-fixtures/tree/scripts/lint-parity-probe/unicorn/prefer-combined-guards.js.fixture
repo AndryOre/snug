@@ -1,0 +1,10 @@
+function check(context) {
+	if (context.finished) {
+		return;
+	}
+
+	if (context.cancelled) {
+		return;
+	}
+}
+export const fixtureModule = true;

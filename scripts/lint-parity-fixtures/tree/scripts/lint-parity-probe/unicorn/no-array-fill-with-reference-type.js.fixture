@@ -1,0 +1,2 @@
+new Array(3).fill({});
+export const fixtureModule = true;

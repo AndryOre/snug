@@ -17,7 +17,9 @@ import ts from 'typescript'
 import {
   type AcceptedEntry,
   checkExpectedFixtures,
+  checkRuleCoverage,
   compareSection,
+  CORPUS_PREFIX,
   compareText,
   type Finding,
   fixtureTargetPath,
@@ -25,6 +27,7 @@ import {
   parseAccepted,
   parseEslintJson,
   parseOxlintJson,
+  partitionAccepted,
   renderReport,
   type SectionResult,
 } from './lint-parity'
@@ -36,6 +39,7 @@ const FIXTURES_DIRECTORY = path.join(
 const FIXTURE_TREE = path.join(FIXTURES_DIRECTORY, 'tree')
 const EXPECTED_FILE = path.join(FIXTURES_DIRECTORY, 'expected.json')
 const ACCEPTED_FILE = path.join(FIXTURES_DIRECTORY, 'accepted.json')
+const UNTRIGGERABLE_FILE = path.join(FIXTURES_DIRECTORY, 'untriggerable.json')
 const BASELINE_CONFIG_FIXTURE = path.join(
   FIXTURES_DIRECTORY,
   'baseline',
@@ -492,7 +496,13 @@ function enforcedRules(
   files: readonly string[],
 ): Set<string> {
   const enforced = new Set<string>()
-  for (const file of files) {
+  const representatives = new Map(
+    files.map((file) => {
+      const name = path.basename(file)
+      return [`${path.dirname(file)}|${name.slice(name.indexOf('.'))}`, file]
+    }),
+  )
+  for (const file of representatives.values()) {
     const { stdout, status, stderr } = run(
       'node',
       [
@@ -574,13 +584,25 @@ function collectFixtures(
       string[]
     >
     const exercised = new Set(baseline.map((item) => item.rule))
-    const uncoveredRules = [...enforcedRules(baselineDirectory, files)]
+    const enforced = enforcedRules(baselineDirectory, files)
+    const untriggerable = JSON.parse(
+      readFileSync(UNTRIGGERABLE_FILE, 'utf8'),
+    ) as Record<string, string>
+    const uncoveredRules = [...enforced]
       .filter((rule) => !exercised.has(rule))
       .toSorted(compareText)
+      .map((rule) =>
+        untriggerable[rule] === undefined
+          ? rule
+          : `${rule} (allow-listed: ${untriggerable[rule]})`,
+      )
     return {
       baseline,
       candidate: runCandidate(REPO_ROOT, files, ''),
-      problems: checkExpectedFixtures(expected, baseline, files),
+      problems: [
+        ...checkExpectedFixtures(expected, baseline, files),
+        ...checkRuleCoverage(enforced, baseline, untriggerable),
+      ],
       uncoveredRules,
     }
   } finally {
@@ -596,7 +618,7 @@ function collectCorpus(baselineDirectory: string, options: Options): Collected {
   for (const [index, checkout] of checkouts.entries()) {
     const source = CORPUS[index]
     if (source === undefined) continue
-    const prefix = `corpus/${source.name}/`
+    const prefix = `${CORPUS_PREFIX}${source.name}/`
     console.info(`Linting corpus ${source.name}`)
     collected.baseline.push(
       ...runBaseline(baselineDirectory, checkout, source.directories, prefix),
@@ -621,7 +643,7 @@ async function main(): Promise<number> {
     return 0
   }
   const baselineDirectory = ensureBaseline(options.workDirectory)
-  const accepted = loadAccepted()
+  const accepted = partitionAccepted(loadAccepted())
   const sections: SectionResult[] = []
   const problems: string[] = []
   let uncoveredRules: string[] = []
@@ -631,12 +653,22 @@ async function main(): Promise<number> {
     problems.push(...fixtures.problems)
     uncoveredRules = fixtures.uncoveredRules
     sections.push(
-      compareSection({ name: '(a) fixtures', ...fixtures, accepted }),
+      compareSection({
+        name: '(a) fixtures',
+        ...fixtures,
+        accepted: accepted.fixtures,
+      }),
     )
   }
   if (options.mode !== 'fixtures') {
     const corpus = collectCorpus(baselineDirectory, options)
-    sections.push(compareSection({ name: '(b) corpus', ...corpus, accepted }))
+    sections.push(
+      compareSection({
+        name: '(b) corpus',
+        ...corpus,
+        accepted: accepted.corpus,
+      }),
+    )
   }
   const report = renderReport({
     sections,

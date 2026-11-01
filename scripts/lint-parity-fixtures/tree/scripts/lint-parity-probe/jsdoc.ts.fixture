@@ -1,0 +1,122 @@
+/**
+ * Has an invalid access level.
+ * @access everyone
+ */
+export function invalidAccess(): void {}
+
+/**
+  * Misaligned asterisks.
+ */
+export function misaligned(): void {}
+
+/**
+ * Duplicated property names.
+ * @typedef {object} Shape
+ * @property {string} side The side.
+ * @property {string} side The side again.
+ */
+export type Shape = { side: string }
+
+/**
+ * Has content on an empty tag.
+ * @abstract with content
+ */
+export function emptyTagContent(): void {}
+
+/**
+ * Mentions @unescaped inline in its description.
+ */
+export function inlineTag(): void {}
+
+/**
+ * Implements on a plain function.
+ * @implements {Shape}
+ */
+export function implementsFunction(): void {}
+
+/**
+ * Uses the any type.
+ * @param {any} value The value.
+ */
+export function anyType(value: unknown): unknown {
+  return value
+}
+
+/**
+ * Uses the Function type.
+ * @returns {Function} A function.
+ */
+export function functionType(): () => void {
+  return () => {}
+}
+
+/**
+ * A generator with an untyped next.
+ * @yields {number} A number.
+ * @next
+ */
+export function* untypedNext(): Generator<number> {
+  yield 1
+}
+
+/**
+ * Parameter without description.
+ * @param value
+ * @returns The value.
+ */
+export function bareParameter(value: number): number {
+  return value
+}
+
+/**
+ * Parameter without name.
+ * @param
+ */
+export function namelessParameter(): void {}
+
+/**
+ * An object typedef without properties.
+ * @typedef {object} Empty
+ */
+export type Empty = Record<string, never>
+
+/**
+ * A property without a name.
+ * @typedef {object} Named
+ * @property {string}
+ */
+export type Named = { name: string }
+
+/**
+ * Yields documented but never yielded.
+ * @yields A number.
+ */
+export function* neverYields(): Generator<number> {
+  return
+}
+
+/**
+ * Yields without a type.
+ * @yields
+ */
+export function* untypedYields(): Generator<number> {
+  yield 1
+}
+
+/**
+ * Has a blank line between tags.
+ * @param first The first.
+ *
+ * @param second The second.
+ */
+export function spacedTags(first: number, second: number): number {
+  return first + second
+}
+
+/**
+ * Uses the empty object type.
+ * @param {{}} value The value.
+ */
+export function emptyObjectType(value: object): object {
+  return value
+}

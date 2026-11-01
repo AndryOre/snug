@@ -1,0 +1,2 @@
+if (array.length < 0) {}
+export const fixtureModule = true;

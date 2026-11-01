@@ -1,0 +1,2 @@
+const result = iterator.toArray().map(fn);
+export const fixtureModule = true;

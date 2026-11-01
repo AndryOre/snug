@@ -1,0 +1,4 @@
+if (object & object.property) {
+	// …
+}
+export const fixtureModule = true;

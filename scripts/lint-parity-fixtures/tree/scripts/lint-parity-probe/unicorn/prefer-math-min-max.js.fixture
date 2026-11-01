@@ -1,0 +1,2 @@
+height > 50 ? 50 : height;
+export const fixtureModule = true;

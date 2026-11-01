@@ -1,0 +1,2 @@
+const foo = Number.NaN;
+export const fixtureModule = true;

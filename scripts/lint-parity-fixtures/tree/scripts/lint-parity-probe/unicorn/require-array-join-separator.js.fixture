@@ -1,0 +1,2 @@
+const string = array.join();
+export const fixtureModule = true;

@@ -115,27 +115,43 @@ function resolveProgram(fileName) {
 
 /**
  * Finds the TypeScript node whose span is exactly `start`..`end`, preferring
- * the deepest match.
+ * the deepest match. When none matches exactly, falls back to the widest node
+ * that starts at `start` and ends inside the span: an ESTree `Identifier`
+ * covers its type annotation (`value: Type`), the TypeScript one does not.
+ * Failing that, takes the deepest node enclosing the span: a method's ESTree
+ * `FunctionExpression` starts at its parameters, inside the TypeScript
+ * `MethodDeclaration` that `@typescript-eslint/parser` maps it to.
  * @param sourceFile The TypeScript source file to search.
  * @param start Start offset of the ESTree node.
  * @param end End offset of the ESTree node.
  * @returns The matching TypeScript node, or `undefined`.
  */
 function findTypeScriptNode(sourceFile, start, end) {
-  let found
+  let exact
+  let prefix
+  let enclosing
   function visit(node) {
     const nodeStart = node.getStart(sourceFile)
     const nodeEnd = node.getEnd()
-    if (nodeStart > start || nodeEnd < end) {
+    if (nodeStart > start || nodeEnd < start) {
       return
     }
     if (nodeStart === start && nodeEnd === end) {
-      found = node
+      exact = node
+    } else if (
+      nodeStart === start &&
+      nodeEnd < end &&
+      (prefix === undefined || nodeEnd >= prefix.getEnd())
+    ) {
+      prefix = node
+    }
+    if (nodeEnd >= end) {
+      enclosing = node
     }
     ts.forEachChild(node, visit)
   }
   visit(sourceFile)
-  return found
+  return exact ?? prefix ?? enclosing
 }
 
 /**
@@ -184,7 +200,7 @@ function createParserServices(fileName) {
  * @param rule The original ESLint rule module.
  * @returns A rule with the same `meta` that runs `rule` with type information.
  */
-function withTypeInformation(rule) {
+export function withTypeInformation(rule) {
   return {
     meta: rule.meta,
     create(context) {

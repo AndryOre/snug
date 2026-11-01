@@ -1,0 +1,2 @@
+const minimum = array.sort((a, b) => a - b)[0];
+export const fixtureModule = true;

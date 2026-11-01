@@ -1,0 +1,2 @@
+await fetch('/', {});
+export const fixtureModule = true;

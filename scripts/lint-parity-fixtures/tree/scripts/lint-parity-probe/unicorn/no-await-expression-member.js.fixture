@@ -1,0 +1,2 @@
+const foo = (await import('./foo.js')).default;
+export const fixtureModule = true;

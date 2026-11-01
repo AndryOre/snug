@@ -22,6 +22,7 @@ const OXLINT_PLUGIN_PREFIX: Readonly<Record<string, string>> = {
   'eslint-js': '',
   typescript: '@typescript-eslint/',
   'typescript-eslint': '@typescript-eslint/',
+  'typescript-eslint-js': '@typescript-eslint/',
   unicorn: 'unicorn/',
   'unicorn-js': 'unicorn/',
   'jsx-a11y': 'jsx-a11y/',
@@ -237,6 +238,27 @@ export function parseAccepted(text: string): AcceptedEntry[] {
       reason: entry.reason,
     }
   })
+}
+
+/**
+ * Prefix of every corpus finding's path, ahead of the corpus repo's name.
+ */
+export const CORPUS_PREFIX = 'corpus/'
+
+/**
+ * Splits accepted gaps by the section they belong to, so a fixture entry is
+ * not reported as stale by the corpus section and the reverse.
+ * @param accepted - Every accepted gap.
+ * @returns The fixture entries and the corpus entries.
+ */
+export function partitionAccepted(accepted: readonly AcceptedEntry[]): {
+  fixtures: AcceptedEntry[]
+  corpus: AcceptedEntry[]
+} {
+  return {
+    fixtures: accepted.filter((entry) => !entry.file.startsWith(CORPUS_PREFIX)),
+    corpus: accepted.filter((entry) => entry.file.startsWith(CORPUS_PREFIX)),
+  }
 }
 
 /**
@@ -528,6 +550,47 @@ export function checkExpectedFixtures(
     .filter((file) => !Object.hasOwn(expected, file))
     .map((file) => `Fixture ${file} is missing from expected.json`)
   return [...missing, ...unlisted]
+}
+
+/**
+ * Harness check: every rule the baseline enforces on the fixtures must be
+ * triggered by at least one of them, so the comparison covers it. A rule that
+ * truly cannot be triggered may be allow-listed with a non-blank reason; an
+ * entry for a rule that is triggered or no longer enforced is stale.
+ * @param enforced - Rule ids the baseline enforces on the fixtures.
+ * @param baseline - The baseline's findings on the fixtures.
+ * @param untriggerable - Rule id to the reason it cannot be triggered.
+ * @returns One message per problem; empty when every rule is covered.
+ */
+export function checkRuleCoverage(
+  enforced: ReadonlySet<string>,
+  baseline: readonly Finding[],
+  untriggerable: Readonly<Record<string, string>>,
+): string[] {
+  const triggered = new Set(baseline.map((item) => item.rule))
+  const allowListProblems = Object.entries(untriggerable).flatMap(
+    ([rule, reason]) => {
+      if (reason.trim() === '') {
+        return [`Untriggerable rule ${rule} needs a reason`]
+      }
+      if (triggered.has(rule)) {
+        return [
+          `Untriggerable rule ${rule} is triggered by a fixture; drop its entry`,
+        ]
+      }
+      return enforced.has(rule)
+        ? []
+        : [`Untriggerable rule ${rule} is not enforced; drop its entry`]
+    },
+  )
+  const uncovered = [...enforced]
+    .filter(
+      (rule) =>
+        !triggered.has(rule) && (untriggerable[rule] ?? '').trim() === '',
+    )
+    .toSorted(compareText)
+    .map((rule) => `Enforced rule ${rule} is not triggered by any fixture`)
+  return [...allowListProblems, ...uncovered]
 }
 
 const formatFinding = (item: Finding): string =>

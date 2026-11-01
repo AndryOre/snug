@@ -1,0 +1,2 @@
+const result = array.reverse().find(isUnicorn);
+export const fixtureModule = true;

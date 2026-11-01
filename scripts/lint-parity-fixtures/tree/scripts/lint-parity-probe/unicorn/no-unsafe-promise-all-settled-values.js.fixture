@@ -1,0 +1,2 @@
+const values = (await Promise.allSettled(promises)).map(result => result.value);
+export const fixtureModule = true;

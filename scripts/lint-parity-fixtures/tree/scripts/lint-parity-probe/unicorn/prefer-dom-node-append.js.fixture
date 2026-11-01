@@ -1,0 +1,2 @@
+element.appendChild(child);
+export const fixtureModule = true;

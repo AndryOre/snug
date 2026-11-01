@@ -1,0 +1,9 @@
+Object.defineProperty(foo, 'bar', {
+	value: 1,
+	writable: true,
+});
+Object.defineProperty(foo, 'baz', {
+	value: 2,
+	writable: true,
+});
+export const fixtureModule = true;

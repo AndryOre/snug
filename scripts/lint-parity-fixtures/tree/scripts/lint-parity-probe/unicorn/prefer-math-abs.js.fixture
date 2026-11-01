@@ -1,0 +1,2 @@
+const absolute = value < 0 ? -value : value;
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+if ((foo ? bar : baz) && ready && enabled);
+export const fixtureModule = true;

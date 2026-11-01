@@ -1,0 +1,2 @@
+const biggest = Math.max(Math.max(a, b), c);
+export const fixtureModule = true;

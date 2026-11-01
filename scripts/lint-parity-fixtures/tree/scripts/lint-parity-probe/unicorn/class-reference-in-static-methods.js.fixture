@@ -1,0 +1,7 @@
+class Foo extends Bar {
+	static baz() {
+		Foo.qux();
+		Bar.qux();
+	}
+}
+export const fixtureModule = true;

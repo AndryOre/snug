@@ -1,0 +1,2 @@
+const string = number.toFixed();
+export const fixtureModule = true;

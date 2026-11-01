@@ -1,0 +1,2 @@
+const array = [firstElement, ...[secondElement], thirdElement];
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+const packageJson = JSON.parse(await fs.readFile('./package.json'));
+export const fixtureModule = true;

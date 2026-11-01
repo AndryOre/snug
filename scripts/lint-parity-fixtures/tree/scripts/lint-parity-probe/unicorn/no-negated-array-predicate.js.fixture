@@ -1,0 +1,2 @@
+const isMissing = !array.some(element => isUnicorn(element));
+export const fixtureModule = true;

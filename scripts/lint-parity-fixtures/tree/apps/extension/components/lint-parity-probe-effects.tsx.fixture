@@ -1,0 +1,84 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+
+/**
+ * Violations of the `@eslint-react` web-API and `useMemo` rules and the React
+ * Compiler rules of `react-hooks`, one component per rule so the compiler
+ * reaches each one.
+ */
+export function FetchProbe() {
+  const [data, setData] = useState('')
+  useEffect(() => {
+    void fetch('/api').then(() => setData('done'))
+  }, [])
+  return <span>{data}</span>
+}
+
+export function ObserverProbe({ target }: { target: Element }) {
+  useEffect(() => {
+    new IntersectionObserver(() => {}).observe(target)
+    new ResizeObserver(() => {}).observe(target)
+    setTimeout(() => {}, 100)
+  }, [target])
+  return null
+}
+
+export function MemoProbe({ value }: { value: number }) {
+  useMemo(() => {
+    console.info(value)
+  }, [value])
+  return null
+}
+
+let renderCount = 0
+
+export function GlobalsProbe() {
+  renderCount = renderCount + 1
+  return <span>{renderCount}</span>
+}
+
+export function ImmutabilityProbe() {
+  const [items, setItems] = useState<number[]>([])
+  const add = () => {
+    items.push(1)
+    setItems(items)
+  }
+  return (
+    <button type="button" onClick={add}>
+      {items.length}
+    </button>
+  )
+}
+
+export function RefsProbe() {
+  const reference = useRef(0)
+  return <span>{reference.current}</span>
+}
+
+export function ManualMemoProbe({ user }: { user: { name: string } }) {
+  const greet = useCallback(() => user.name, [user.name])
+  return <span>{greet()}</span>
+}
+
+export function MemoParameterProbe({ total }: { total: number }) {
+  const doubled = useMemo((factor: number) => total * factor, [total])
+  return <span>{doubled}</span>
+}
+
+export function ReassignProbe() {
+  let label = 'idle'
+  const update = () => {
+    label = 'busy'
+  }
+  return (
+    <button type="button" onClick={update}>
+      {label}
+    </button>
+  )
+}
+
+export function MutatedDependencyProbe() {
+  const list: number[] = []
+  const total = useMemo(() => list.length, [list])
+  list.push(1)
+  return <span>{total}</span>
+}

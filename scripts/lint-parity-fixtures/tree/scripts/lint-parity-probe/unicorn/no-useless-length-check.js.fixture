@@ -1,0 +1,2 @@
+if (array.length === 0 || array.every(Boolean));
+export const fixtureModule = true;

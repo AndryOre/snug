@@ -1,0 +1,6 @@
+element.addEventListener('click', event => {
+	setTimeout(() => {
+		event.currentTarget.click();
+	});
+});
+export const fixtureModule = true;

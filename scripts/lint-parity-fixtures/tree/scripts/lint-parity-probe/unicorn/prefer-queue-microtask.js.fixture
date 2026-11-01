@@ -1,0 +1,2 @@
+process.nextTick(callback);
+export const fixtureModule = true;

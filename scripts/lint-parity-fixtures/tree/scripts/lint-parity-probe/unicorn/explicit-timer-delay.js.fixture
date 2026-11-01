@@ -1,0 +1,2 @@
+setTimeout(() => console.log('Hello'));
+export const fixtureModule = true;

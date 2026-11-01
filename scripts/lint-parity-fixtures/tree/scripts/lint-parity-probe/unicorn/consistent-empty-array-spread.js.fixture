@@ -1,0 +1,5 @@
+const array = [
+	a,
+	...(foo ? [b, c] : ''),
+];
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+if (!(key === 'y' && !isEditable(target))) {}
+export const fixtureModule = true;

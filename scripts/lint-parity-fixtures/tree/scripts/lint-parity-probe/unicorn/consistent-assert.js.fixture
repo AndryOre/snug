@@ -1,0 +1,2 @@
+assert(divide(10, 2) === 5);
+export const fixtureModule = true;

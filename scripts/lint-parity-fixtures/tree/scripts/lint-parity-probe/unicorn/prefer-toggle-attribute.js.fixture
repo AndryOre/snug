@@ -1,0 +1,6 @@
+if (element.hasAttribute('hidden')) {
+	element.removeAttribute('hidden');
+} else {
+	element.setAttribute('hidden', '');
+}
+export const fixtureModule = true;

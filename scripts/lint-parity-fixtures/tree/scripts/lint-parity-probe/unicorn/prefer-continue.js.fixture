@@ -1,0 +1,8 @@
+for (const item of items) {
+	doSomethingBefore();
+	if (item.isActive) {
+		process(item);
+		save(item);
+	}
+}
+export const fixtureModule = true;

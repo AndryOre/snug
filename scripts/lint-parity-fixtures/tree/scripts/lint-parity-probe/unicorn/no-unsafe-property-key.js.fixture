@@ -1,0 +1,3 @@
+const key = {};
+object[key] = value;
+export const fixtureModule = true;

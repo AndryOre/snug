@@ -1,0 +1,8 @@
+element.classList.add('.active');
+element.classList.remove('.hidden');
+element.classList.contains('.selected');
+element.classList.toggle('.expanded');
+element.classList.replace('.old', '.new');
+document.getElementsByClassName('.item');
+document.getElementById('#app');
+export const fixtureModule = true;

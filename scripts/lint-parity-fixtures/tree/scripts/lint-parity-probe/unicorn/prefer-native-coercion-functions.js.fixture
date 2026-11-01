@@ -1,0 +1,2 @@
+const toBoolean = value => Boolean(value);
+export const fixtureModule = true;

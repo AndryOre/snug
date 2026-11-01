@@ -1,0 +1,4 @@
+items.values().map(transform);
+void items.values().filter(predicate);
+await items.values().flatMap(transform);
+export const fixtureModule = true;

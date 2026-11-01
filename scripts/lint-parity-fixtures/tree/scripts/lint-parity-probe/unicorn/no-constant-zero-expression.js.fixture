@@ -1,0 +1,2 @@
+const total = price * 0;
+export const fixtureModule = true;

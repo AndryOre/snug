@@ -1,0 +1,6 @@
+class Foo {
+	constructor() {}
+	#privateField = 1;
+	publicField = 1;
+}
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+const template = `$\{variableName}`;
+export const fixtureModule = true;

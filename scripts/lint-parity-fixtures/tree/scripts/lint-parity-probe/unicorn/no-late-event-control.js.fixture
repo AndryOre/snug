@@ -1,0 +1,5 @@
+element.addEventListener('click', async event => {
+	await save();
+	event.preventDefault();
+});
+export const fixtureModule = true;

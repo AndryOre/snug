@@ -1,0 +1,2 @@
+const hasErrors = messages.some(m => m.type === 'error') || messages.some(m => m.severity === 'critical');
+export const fixtureModule = true;

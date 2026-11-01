@@ -1,0 +1,2 @@
+[...map.values()].find(value => value.id === id);
+export const fixtureModule = true;

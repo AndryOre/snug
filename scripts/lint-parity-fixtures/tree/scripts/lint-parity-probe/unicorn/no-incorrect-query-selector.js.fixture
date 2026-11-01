@@ -1,0 +1,2 @@
+document.querySelectorAll('form')[0];
+export const fixtureModule = true;

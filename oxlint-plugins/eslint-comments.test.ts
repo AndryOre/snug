@@ -55,7 +55,15 @@ ruleTester.run(
       {
         name: 'unnamed block disable',
         code: '/* eslint-disable */\nconsole.log(1)\n',
-        errors: [{ messageId: 'unexpected' }],
+        errors: [
+          {
+            messageId: 'unexpected',
+            line: 1,
+            column: 0,
+            endLine: 1,
+            endColumn: 0,
+          },
+        ],
       },
     ],
   },

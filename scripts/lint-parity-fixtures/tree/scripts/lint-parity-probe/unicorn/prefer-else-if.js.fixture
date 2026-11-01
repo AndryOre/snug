@@ -1,0 +1,8 @@
+if (foo === 1) {
+	one();
+}
+
+if (foo === 2) {
+	two();
+}
+export const fixtureModule = true;

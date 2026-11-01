@@ -1,0 +1,2 @@
+globalThis.Array.from(items);
+export const fixtureModule = true;

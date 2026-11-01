@@ -1,0 +1,2 @@
+console.log(foo | 0);
+export const fixtureModule = true;

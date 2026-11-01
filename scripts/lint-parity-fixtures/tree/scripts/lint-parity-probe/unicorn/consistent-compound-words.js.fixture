@@ -1,0 +1,2 @@
+const passWord = 'secret';
+export const fixtureModule = true;

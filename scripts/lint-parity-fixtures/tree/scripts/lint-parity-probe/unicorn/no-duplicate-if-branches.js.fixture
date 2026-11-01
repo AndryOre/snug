@@ -1,0 +1,8 @@
+if (isAdmin) {
+	showDashboard();
+	loadStats();
+} else {
+	showDashboard();
+	loadStats();
+}
+export const fixtureModule = true;
