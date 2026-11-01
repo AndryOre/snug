@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process'
 import path from 'node:path'
 
-const DIAGNOSTIC_START = /^(\S.*)\((\d+),(\d+)\): error (TS\d+): (.*)$/
+const DIAGNOSTIC_START = /^(?:(\S.*)\((\d+),(\d+)\): )?error (TS\d+): (.*)$/
 
 const STARLIGHT_SEARCH_COMPONENT =
   /[\\/]@astrojs[\\/]starlight[\\/]dist[\\/]components[\\/]Search\.astro$/

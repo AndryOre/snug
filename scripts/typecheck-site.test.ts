@@ -82,6 +82,19 @@ describe('evaluateSiteTypecheck', () => {
     ])
   })
 
+  it('fails on a file-less error next to the known ones', () => {
+    const globalError =
+      "error TS2688: Cannot find type definition file for 'vite/client'."
+    const verdict = evaluateSiteTypecheck(
+      `${projectContextError}\n${globalError}\n${pagefindError}\n`,
+      2,
+    )
+    expect(verdict.exitCode).toBe(1)
+    expect(verdict.remaining.map((block) => block.headline)).toEqual([
+      globalError,
+    ])
+  })
+
   it('passes on a clean run', () => {
     expect(evaluateSiteTypecheck('', 0).exitCode).toBe(0)
   })
