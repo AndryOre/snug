@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { hydratedFaq } from './faq-helpers'
+import { blockUmami } from './umami-helpers'
 
 test.use({ reducedMotion: 'reduce' })
 
@@ -11,6 +12,7 @@ for (const path of PATHS) {
   test(`${path} hydrates without console errors or failed requests under reduced motion`, async ({
     page,
   }) => {
+    await blockUmami(page)
     const problems: string[] = []
     page.on('console', (message) => {
       if (message.type() === 'error')
