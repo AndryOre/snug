@@ -9,7 +9,7 @@ To add one, take the next number, write the file, and add a row below.
 | Number | Title                                                                                                                                  | Status     | Superseded or amended by |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------ |
 | 0001   | [Public repo security posture](0001-public-repo-security-posture.md)                                                                   | Accepted   | 0004 (partly)            |
-| 0002   | [TSDoc-only code comments](0002-tsdoc-only-code-comments.md)                                                                           | Accepted   | -                        |
+| 0002   | [TSDoc-only code comments](0002-tsdoc-only-code-comments.md)                                                                           | Accepted   | 0028 (partly)            |
 | 0003   | [E2E against the built extension](0003-e2e-against-built-extension.md)                                                                 | Accepted   | -                        |
 | 0004   | [Enable CodeQL SAST](0004-enable-codeql-sast.md)                                                                                       | Accepted   | -                        |
 | 0005   | [Store publishing via CWS API v2 from the release workflow](0005-store-publishing-via-cws-api-v2.md)                                   | Accepted   | -                        |
@@ -34,4 +34,5 @@ To add one, take the next number, write the file, and add a row below.
 | 0024   | [Cross-browser coverage runs on BrowserStack, informational and tiered](0024-cross-browser-coverage-on-browserstack.md)                | Accepted   | 0025 (partly)            |
 | 0025   | [A real iPhone is not automated on BrowserStack](0025-real-iphone-is-not-automated-on-browserstack.md)                                 | Accepted   | -                        |
 | 0026   | [A store release is gated on a verified tag](0026-store-release-is-gated-on-a-verified-tag.md)                                         | Accepted   | -                        |
-| 0027   | [Practices parity with Animated Fluent Emojis](0027-practices-parity-with-afe.md)                                                      | Accepted   | -                        |
+| 0027   | [Practices parity with Animated Fluent Emojis](0027-practices-parity-with-afe.md)                                                      | Accepted   | 0028 (partly)            |
+| 0028   | [Oxc toolchain replaces Prettier and most of ESLint](0028-oxc-toolchain-replaces-prettier-and-most-of-eslint.md)                       | Accepted   | -                        |
