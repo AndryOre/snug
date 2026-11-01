@@ -170,7 +170,7 @@ function SiteLinkButton(properties: SiteLinkButtonProperties) {
   return (
     <SidebarMenuButton
       tooltip={label}
-      // eslint-disable-next-line jsx-a11y/anchor-has-content -- SidebarMenuButton's render prop injects the children into this anchor
+      // eslint-disable-next-line jsx-a11y-js/anchor-has-content -- SidebarMenuButton's render prop injects the children into this anchor
       render={<a href={href} target="_blank" rel="noopener noreferrer" />}
     >
       <Icon />

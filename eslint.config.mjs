@@ -220,6 +220,27 @@ const eslintConfig = defineConfig([
   jsxA11y.flatConfigs.recommended,
   unicorn.configs.recommended,
   {
+    /**
+     * Temporary side-by-side measure (AO-2617, revert in AO-2620): Oxlint runs
+     * these rules as `jsPlugins` under the `-js` aliases, and a disable
+     * directive can only be valid in both linters if both use the same rule
+     * id. Same plugin, same severity and options, only the id changes.
+     */
+    plugins: { 'unicorn-js': unicorn, 'jsx-a11y-js': jsxA11y },
+    rules: {
+      'unicorn/isolated-functions': 'off',
+      'unicorn-js/isolated-functions': 'error',
+      'unicorn/prefer-https': 'off',
+      'unicorn-js/prefer-https': 'error',
+      'unicorn/prefer-iterator-to-array': 'off',
+      'unicorn-js/prefer-iterator-to-array': 'error',
+      'jsx-a11y/anchor-has-content': 'off',
+      'jsx-a11y-js/anchor-has-content': 'error',
+      'jsx-a11y/role-has-required-aria-props': 'off',
+      'jsx-a11y-js/role-has-required-aria-props': 'error',
+    },
+  },
+  {
     rules: {
       'unicorn/no-null': 'off',
       'unicorn/no-array-reduce': ['error', { allowSimpleOperations: false }],

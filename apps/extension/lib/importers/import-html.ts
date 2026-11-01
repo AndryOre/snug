@@ -99,9 +99,9 @@ export function parseHTMLWithLocation(
   const nestedToolbarFolders: ParsedBookmark[] = []
   const topLevelDts = outerDl.querySelectorAll(':scope > dt')
 
-  topLevelDts.forEach((dt) => {
+  for (const dt of topLevelDts) {
     const firstChild = dt.firstElementChild
-    if (!firstChild) return
+    if (!firstChild) continue
 
     if (firstChild.tagName === 'A') {
       otherBookmarks.push(parseBookmarkElement(firstChild as HTMLAnchorElement))
@@ -130,7 +130,7 @@ export function parseHTMLWithLocation(
         otherBookmarks.push(folder)
       }
     }
-  })
+  }
 
   for (const folder of nestedToolbarFolders) {
     hasLocationData = true
@@ -319,9 +319,9 @@ function parseFolderElement(
 
   if (childDl) {
     const childDts = childDl.querySelectorAll(':scope > dt')
-    childDts.forEach((childDt) => {
+    for (const childDt of childDts) {
       const firstChild = childDt.firstElementChild
-      if (!firstChild) return
+      if (!firstChild) continue
 
       if (firstChild.tagName === 'A') {
         folder.children!.push(
@@ -343,7 +343,7 @@ function parseFolderElement(
           folder.children!.push(childFolder)
         }
       }
-    })
+    }
   }
 
   return folder

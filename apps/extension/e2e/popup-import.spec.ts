@@ -323,7 +323,7 @@ async function dropOnImportSection(
   page: Page,
   files: DroppedFile[],
 ): Promise<void> {
-  /* eslint-disable unicorn/isolated-functions -- this callback runs in the popup's own browser context, where DOM globals are real */
+  /* eslint-disable unicorn-js/isolated-functions -- this callback runs in the popup's own browser context, where DOM globals are real */
   await page.evaluate((droppedFiles) => {
     const section = document
       .querySelector('input[type="file"]')
@@ -343,7 +343,7 @@ async function dropOnImportSection(
       )
     }
   }, files)
-  /* eslint-enable unicorn/isolated-functions -- scoped to the callback above only */
+  /* eslint-enable unicorn-js/isolated-functions -- scoped to the callback above only */
 }
 
 test('dropping one file on the Import section quick imports it', async ({

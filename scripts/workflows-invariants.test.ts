@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 import { parse } from 'yaml'
 
@@ -174,6 +175,26 @@ describe('ci.yml', () => {
       String(step.with?.path).includes('.eslintcache'),
     )
     expect(String(cacheStep?.with?.key)).toContain('eslint-rules/**')
+    expect(String(cacheStep?.with?.key)).toContain('oxlint-plugins/**')
+  })
+
+  test('runs both linters through the quality job', () => {
+    const quality = workflow.jobs?.['quality']
+    expect(
+      quality?.steps?.some((step) => step.run?.includes('check:root')),
+    ).toBe(true)
+    const rootScripts = JSON.parse(
+      readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+    ) as { scripts: Record<string, string> }
+    for (const script of ['lint', 'lint:fix']) {
+      const command = rootScripts.scripts[script] ?? ''
+      expect(command).toContain('oxlint')
+      expect(command).toContain('eslint')
+    }
+    expect(rootScripts.scripts['lint:oxlint']).toBe(
+      'oxlint --type-aware --deny-warnings',
+    )
+    expect(rootScripts.scripts['check:root']).toContain('bun run lint')
   })
 
   test('every checkout that feeds turbo fetches full history', () => {

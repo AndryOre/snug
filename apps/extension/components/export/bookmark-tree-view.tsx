@@ -402,7 +402,7 @@ function TreeRow({
 
   return (
     <div
-      // eslint-disable-next-line jsx-a11y/role-has-required-aria-props -- ARIA 1.2 makes aria-checked the supported selection state for a multiselectable tree; aria-selected is optional
+      // eslint-disable-next-line jsx-a11y-js/role-has-required-aria-props -- ARIA 1.2 makes aria-checked the supported selection state for a multiselectable tree; aria-selected is optional
       role="treeitem"
       aria-label={node.title}
       aria-level={level}

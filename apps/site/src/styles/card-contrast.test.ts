@@ -103,17 +103,16 @@ describe.each([
   })
 })
 
+function listSources(directory: URL): string[] {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory.pathname, entry.name)
+    if (entry.isDirectory()) return listSources(new URL(`file://${entryPath}/`))
+    return /\.(astro|tsx)$/.test(entry.name) ? [entryPath] : []
+  })
+}
+
 describe('card borders', () => {
   const sourceRoot = new URL('../', import.meta.url)
-
-  function listSources(directory: URL): string[] {
-    return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-      const entryPath = path.join(directory.pathname, entry.name)
-      if (entry.isDirectory())
-        return listSources(new URL(`file://${entryPath}/`))
-      return /\.(astro|tsx)$/.test(entry.name) ? [entryPath] : []
-    })
-  }
 
   it('never draws border-border on a bg-card element', () => {
     const offenders = listSources(sourceRoot).filter((path) =>
