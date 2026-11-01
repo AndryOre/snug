@@ -150,6 +150,8 @@ const EXEMPTIONS: Readonly<Record<string, string>> = {
   'apps/site/src/seo/store-facts.ts': SITE_MODULE_REASON,
   'apps/site/src/seo/structured-data.ts': SITE_MODULE_REASON,
   'apps/site/src/seo/umami.ts': SITE_MODULE_REASON,
+  'scripts/lint-parity-run.ts':
+    'CLI runner of the lint parity gate: it only orchestrates external processes (baseline ESLint install, Oxlint, git clones, corpus installs) and is exercised end to end by `bun run lint:parity`; its decision logic lives in the tested scripts/lint-parity.ts.',
   'scripts/workflow-files.ts':
     'Workflow loader used by workflows-invariants.test.ts, which exercises it against the real workflows.',
 }

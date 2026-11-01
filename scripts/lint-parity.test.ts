@@ -8,6 +8,7 @@ import {
   fixtureTargetPath,
   normalizeEslintRule,
   normalizeOxlintCode,
+  OXLINT_UNCODED_RULE,
   parseAccepted,
   parseEslintJson,
   parseOxlintJson,
@@ -416,6 +417,12 @@ describe('normalizeOxlintCode', () => {
     ['local(no-non-doc-comments)', 'local/no-non-doc-comments'],
   ])('maps %s to the ESLint id %s', (code, expected) => {
     expect(normalizeOxlintCode(code, '')).toBe(expected)
+  })
+
+  test('keeps any other uncoded diagnostic visible under its own id', () => {
+    expect(normalizeOxlintCode('', 'Invalid tsconfig')).toBe(
+      OXLINT_UNCODED_RULE,
+    )
   })
 
   test('maps an uncoded unused-directive report to the pseudo rule', () => {

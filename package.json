@@ -85,7 +85,7 @@
     "check:root": "bun run format:check && bun run lint && node node_modules/typescript7/bin/tsc --noEmit && bun run knip",
     "test:root": "vitest run",
     "test:coverage:root": "vitest run --coverage",
-    "lint:parity": "bun scripts/lint-parity.ts"
+    "lint:parity": "bun scripts/lint-parity-run.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.3",
