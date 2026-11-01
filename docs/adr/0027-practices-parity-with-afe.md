@@ -2,13 +2,18 @@
 
 ## Status
 
-Accepted.
+Accepted. Partly superseded by
+[0028](0028-oxc-toolchain-replaces-prettier-and-most-of-eslint.md): the ESLint
+and Prettier rows of the table.
 
 Date: 2026-10-19
 
 Revised: 2026-10-21, synced the table with AFE's ADR 0023: restricted the AFE
 column to the allowed values, corrected the style lint and package gates rows,
 and added the `llms.txt` generator and `@shadcn/lint` rows.
+
+Revised: 2026-11-01, the `jsx-no-literals`, import-sort and typescript-eslint
+rows now describe the Oxc toolchain (ADR 0028).
 
 ## Context
 
@@ -43,12 +48,12 @@ other.
 | Extension and store E2E                   | Applies                   | N/A        | AFE is a library, not an extension                                                                                                                                                   |
 | Umami analytics                           | Applies                   | N/A        | AFE has no analytics, same reason as the privacy page                                                                                                                                |
 | Cross-browser library tests               | N/A                       | Applies    | Snug is Chromium-only; AFE is a multi-browser library                                                                                                                                |
-| `jsx-no-literals` lint rule               | Applies                   | N/A        | Snug's UI copy is translatable; `@eslint-react` has no equivalent, so `eslint-plugin-react` stays for this one rule                                                                  |
-| Prettier import-sort plugin               | `@trivago`                | Equivalent | Different plugin, same job: Snug's `importOrder` is tuned to `@trivago`, AFE uses `@ianvs`; switching would reformat the repo for no gain                                            |
+| `jsx-no-literals` lint rule               | Applies                   | N/A        | Snug's UI copy is translatable; `@eslint-react` has no equivalent, so `eslint-plugin-react` stays for this one rule, loaded as an Oxlint jsPlugin                                    |
+| Import sort (Oxfmt `sortImports`)         | Applies                   | Applies    | Both repos sort imports with Oxfmt (ADR 0028): third-party, then `@/`, then relative, with Snug's extra group for `astro`                                                            |
 | `llms.txt` generator                      | Applies                   | Equivalent | AFE keeps `starlight-llms-txt` for the docs text and composes `llms.txt` and `llms-full.txt` with landing and emoji pages in `src/seo/llms.ts`                                       |
 | Style lint (no `<style>` in `.astro`)     | `shadcn/no-inline-styles` | Equivalent | Equivalent: Snug's `@shadcn/lint` rule reports `<style>` in `.astro`; AFE bans the blocks with `local/no-astro-style-blocks`, and also runs `shadcn/no-inline-styles` on `apps/site` |
 | Style lint (@shadcn/lint)                 | Applies                   | Applies    | Both repos enforce the same rule set; AFE scopes it to `apps/site` and exempts the generated ui layer                                                                                |
-| typescript-eslint preset                  | Deferred                  | Applies    | Snug is on `recommendedTypeChecked`; `strictTypeChecked` is a follow-up ramp                                                                                                         |
+| Type-aware lint preset (tsgolint)         | Deferred                  | Applies    | Snug mirrors typescript-eslint `recommendedTypeChecked` under Oxlint; `strictTypeChecked` is a follow-up ramp                                                                        |
 | PR template browser line                  | Chromium                  | N/A        | AFE's PR template has no browser line; Snug is Chromium-only and its line covers Chrome and Edge                                                                                     |
 | Issue template fields                     | Extension                 | Equivalent | Same four templates; the fields ask for extension or library details respectively                                                                                                    |
 

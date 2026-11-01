@@ -16,12 +16,14 @@ tokens of its own. The code map is
 ## Rules
 
 - `.astro` files are linted by the same `shadcn/*` rules and TSDoc-only comment
-  rule as `.ts`/`.tsx` (`eslint-plugin-astro` in the root `eslint.config.mjs`).
-  Fluid type sizes, line heights, gradients, the site max-width and the
-  `content-visibility` CSS are tokens and `@utility` entries in
-  `packages/ui/src/styles/globals.css`, never arbitrary values or `<style>`
-  blocks (`shadcn/no-inline-styles` rejects `<style>`). The React JSX rules do
-  not apply to `.astro` templates.
+  rule as `.ts`/`.tsx`. Oxlint cannot see `.astro` templates, so ESLint
+  (`eslint-plugin-astro`, root `eslint.config.mjs`) lints `.astro` files only.
+  `check` typechecks the site with `@astrojs/ts-content-mapper` and TypeScript 7
+  (`scripts/typecheck-site.ts`), not `astro check`. Fluid type sizes, line
+  heights, gradients, the site max-width and the `content-visibility` CSS are
+  tokens and `@utility` entries in `packages/ui/src/styles/globals.css`, never
+  arbitrary values or `<style>` blocks (`shadcn/no-inline-styles` rejects
+  `<style>`). The React JSX rules do not apply to `.astro` templates.
 
 - No third-party scripts, fonts, embeds or requests on page load, except the one
   Umami Cloud cookieless analytics script

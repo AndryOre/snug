@@ -18,8 +18,8 @@ pinned to one exact version together. See
   across the workspace boundary by relative path; never copy strings.
 - Run scripts from the repo root: `bun run video:studio`, `video:still`,
   `video:render`, `video:thumbnails`. `check` runs `tsc --noEmit` through
-  Turborepo and Prettier runs at the root. ESLint lints `apps/video` through a
-  scoped override in `eslint.config.mjs`: all `shadcn/*` rules are off (Remotion
+  Turborepo and Oxfmt runs at the root. Oxlint lints `apps/video` through a
+  scoped override in `oxlint.config.ts`: all `shadcn/*` rules are off (Remotion
   needs inline styles), as are `jsdoc/require-param`, `jsdoc/require-returns`,
   `unicorn/name-replacements` and `unicorn/consistent-boolean-name`. Everything
   else, including the TSDoc-only comment rule, applies. Scripts report failure
