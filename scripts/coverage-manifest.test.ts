@@ -9,6 +9,7 @@ const SOURCE_ROOTS = [
   'apps/site/src',
   'scripts',
   'eslint-rules',
+  'oxlint-plugins',
 ] as const
 
 const ASTRO_REASON =

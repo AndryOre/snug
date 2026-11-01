@@ -5,12 +5,21 @@ export default defineConfig({
     include: [
       'scripts/**/*.test.ts',
       'eslint-rules/**/*.test.ts',
+      'oxlint-plugins/**/*.test.ts',
       'docs/adr/**/*.test.ts',
     ],
     coverage: {
       provider: 'v8',
-      include: ['scripts/**/*.ts', 'eslint-rules/**/*.mjs'],
-      exclude: ['scripts/**/*.test.ts', 'eslint-rules/**/*.test.ts'],
+      include: [
+        'scripts/**/*.ts',
+        'eslint-rules/**/*.mjs',
+        'oxlint-plugins/**/*.mjs',
+      ],
+      exclude: [
+        'scripts/**/*.test.ts',
+        'eslint-rules/**/*.test.ts',
+        'oxlint-plugins/**/*.test.ts',
+      ],
       reporter: ['text', 'lcov'],
       thresholds: { lines: 65, statements: 65, branches: 63, functions: 83 },
     },

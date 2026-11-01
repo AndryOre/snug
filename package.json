@@ -67,6 +67,7 @@
     "lint": "bunx eslint . --max-warnings=0 --cache --cache-strategy content",
     "lint:commits": "bun scripts/lint-commits.ts",
     "lint:docs": "bun scripts/lint-docs.ts",
+    "lint:oxlint": "oxlint --type-aware",
     "lint:fix": "bunx eslint . --fix --max-warnings=0 --cache --cache-strategy content",
     "format:check": "oxfmt --check \"**/*.{ts,tsx,js,jsx,mjs,mdx,astro,json,json5,md,css,scss,yml,yaml}\"",
     "format:write": "oxfmt \"**/*.{ts,tsx,js,jsx,mjs,mdx,astro,json,json5,md,css,scss,yml,yaml}\"",
@@ -106,11 +107,13 @@
     "knip": "^6.39.0",
     "lint-staged": "^17.5.1",
     "oxfmt": "0.75.0",
+    "oxlint": "1.90.0",
+    "oxlint-tsgolint": "7.0.2005",
     "playwright": "^1.63.0",
     "turbo": "^2.11.7",
     "typescript": "catalog:",
-    "typescript7": "catalog:",
     "typescript-eslint": "^8.71.1",
+    "typescript7": "catalog:",
     "vitest": "catalog:",
     "yaml": "^2.9.1"
   }
