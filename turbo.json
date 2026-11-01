@@ -11,6 +11,7 @@
       "dependsOn": ["transit"],
       "inputs": [
         "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/scripts/typecheck-site.ts",
         "!.output/**",
         "!.wxt/**",
         "!dist/**",
