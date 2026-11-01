@@ -72,7 +72,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose wrap-anywhere'
       <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
       <header class="mt-8">
         <Eyebrow>{shared.eyebrow}</Eyebrow>
-        <SectionHeading as="h1" class="mt-3 hyphens-manual wrap-anywhere">
+        <SectionHeading as="h1" class="mt-3 wrap-anywhere hyphens-manual">
           {copy.title}
         </SectionHeading>
       </header>
@@ -152,7 +152,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose wrap-anywhere'
           </h2>
           <p class="mt-4 leading-prose">{fill(sample.intro)}</p>
           <pre
-            class="mt-4 rounded-xl border border-card-border bg-card p-4 text-sm leading-relaxed whitespace-pre-wrap wrap-anywhere"
+            class="mt-4 rounded-xl border border-card-border bg-card p-4 text-sm leading-relaxed wrap-anywhere whitespace-pre-wrap"
             lang="en"
             dir="ltr"
           ><code set:text={sample.code} /></pre>
@@ -233,7 +233,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose wrap-anywhere'
                 <TextLink
                   href={url}
                   rel="noopener nofollow"
-                  class="min-h-0 text-foreground wrap-anywhere"
+                  class="min-h-0 wrap-anywhere text-foreground"
                   lang="en"
                 >
                   {browser}: {new URL(url).hostname}

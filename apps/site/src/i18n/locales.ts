@@ -20,7 +20,9 @@ export type Locale = (typeof LOCALES)[number]
  * A font subset worth preloading for a locale's first paint.
  */
 export type FontPreload =
-  'space-grotesk-latin' | 'geist-latin' | 'geist-cyrillic'
+  | 'space-grotesk-latin'
+  | 'geist-latin'
+  | 'geist-cyrillic'
 
 const LATIN_PRELOAD: readonly FontPreload[] = [
   'space-grotesk-latin',

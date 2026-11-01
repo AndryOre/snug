@@ -20,7 +20,8 @@ type DuplicateReason = 'existing' | 'earlier-in-batch'
  * What the import does with a bookmark.
  */
 type ImportItemState =
-  { status: 'new' } | { status: 'duplicate'; reason: DuplicateReason }
+  | { status: 'new' }
+  | { status: 'duplicate'; reason: DuplicateReason }
 
 /**
  * A bookmark of the display tree. `id` is a synthetic path id, see

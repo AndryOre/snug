@@ -34,7 +34,7 @@ const crumbs = howToIndexCrumbs(locale).map((crumb, index, all) => ({
       <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
       <header class="mt-8">
         <Eyebrow>{shared.eyebrow}</Eyebrow>
-        <SectionHeading as="h1" class="mt-3 hyphens-manual wrap-anywhere">
+        <SectionHeading as="h1" class="mt-3 wrap-anywhere hyphens-manual">
           {shared.index.title}
         </SectionHeading>
         <p class="mt-5 max-w-2xl text-lead text-muted-foreground">
@@ -63,7 +63,7 @@ const crumbs = howToIndexCrumbs(locale).map((crumb, index, all) => ({
                       <h3 class="text-xl leading-tight break-words">
                         <TextLink
                           href={card.href}
-                          class="min-h-0 text-foreground wrap-anywhere"
+                          class="min-h-0 wrap-anywhere text-foreground"
                         >
                           {card.title}
                         </TextLink>

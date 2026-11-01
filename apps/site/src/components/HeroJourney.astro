@@ -47,7 +47,7 @@ const ribbonPath =
     {stages.device}
   </p>
   <div
-    class="hero-stage flex flex-col items-stretch gap-3 md:flex-row md:gap-4"
+    class="flex hero-stage flex-col items-stretch gap-3 md:flex-row md:gap-4"
     aria-hidden="true"
   >
     <Card size="sm" className="min-w-0 flex-1">
@@ -55,7 +55,7 @@ const ribbonPath =
         <CardTitle className="break-words">{stages.browser}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div class="hero-logos mb-3">
+        <div class="mb-3 hero-logos">
           {sourceBrowsers.map(({ name, logo }) => (
             <span
               class="flex items-center gap-2 text-sm font-medium"
@@ -72,13 +72,13 @@ const ribbonPath =
       </CardContent>
     </Card>
     <ArrowRight
-      className="hero-arrow hero-arrow-in size-5 shrink-0 rotate-90 self-center text-primary md:rotate-0"
+      className="hero-arrow-in size-5 shrink-0 rotate-90 hero-arrow self-center text-primary md:rotate-0"
       aria-hidden="true"
     />
     <div class="hero-track relative h-32 shrink-0 md:h-24 md:w-40 lg:w-48">
       <p
         translate="no"
-        class="hero-file absolute flex flex-col items-center gap-1 font-mono text-xs whitespace-nowrap text-foreground"
+        class="absolute hero-file flex flex-col items-center gap-1 font-mono text-xs whitespace-nowrap text-foreground"
       >
         <svg
           viewBox="0 0 84 84"
@@ -99,7 +99,7 @@ const ribbonPath =
       </p>
     </div>
     <ArrowRight
-      className="hero-arrow hero-arrow-out size-5 shrink-0 rotate-90 self-center text-primary md:rotate-0"
+      className="hero-arrow-out size-5 shrink-0 rotate-90 hero-arrow self-center text-primary md:rotate-0"
       aria-hidden="true"
     />
     <Card size="sm" className="min-w-0 flex-1 ring-primary/50">
@@ -107,7 +107,7 @@ const ribbonPath =
         <CardTitle className="break-words">{stages.target}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div class="hero-logos mb-3">
+        <div class="mb-3 hero-logos">
           {targetBrowsers.map(({ name, logo }) => (
             <span
               class="flex items-center gap-2 text-sm font-medium"

@@ -7,7 +7,12 @@ import { BlobMark } from './BlobMark'
 import { Icon, type IconName } from './Icon'
 
 export type NavId =
-  'export' | 'import' | 'duplicates' | 'autoExport' | 'settings' | 'whatsNew'
+  | 'export'
+  | 'import'
+  | 'duplicates'
+  | 'autoExport'
+  | 'settings'
+  | 'whatsNew'
 
 const NAV: { id: NavId; key: MessageKey; icon: IconName }[] = [
   { id: 'export', key: 'shell_navExport', icon: 'download' },

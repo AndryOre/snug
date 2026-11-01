@@ -1,15 +1,15 @@
 ---
 import '../styles/site.css'
-import { cn } from '@workspace/ui/lib/utils'
-
 import geistCyrillic from '@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2?url'
 import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
 import spaceGroteskLatin from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url'
+import { cn } from '@workspace/ui/lib/utils'
 
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import { bentoTitles } from '../i18n/bento'
 import { getContent, getPageMeta } from '../i18n/content'
+import { PROMO_VIDEO_IDS } from '../i18n/landing'
 import {
   DEFAULT_LOCALE,
   hreflangAlternates,
@@ -21,12 +21,11 @@ import {
   type FontPreload,
   type Locale,
 } from '../i18n/locales'
-import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
-import type { PageDescriptor } from '../seo/page-descriptor'
-import { PROMO_VIDEO_IDS } from '../i18n/landing'
-import { buildStructuredData } from '../seo/structured-data'
 import { THEME_COLORS } from '../scripts/theme-color'
 import { THEME_INIT_SCRIPT } from '../scripts/theme-init'
+import { OG_IMAGE, ogLocale, ogLocaleAlternates } from '../seo/open-graph'
+import type { PageDescriptor } from '../seo/page-descriptor'
+import { buildStructuredData } from '../seo/structured-data'
 import { UMAMI_DOMAINS, UMAMI_SCRIPT_URL, UMAMI_WEBSITE_ID } from '../seo/umami'
 
 const FONT_PRELOAD_URLS: Record<FontPreload, string> = {

@@ -117,11 +117,7 @@
     },
     {
       groupName: 'tailwindcss',
-      matchPackageNames: [
-        'tailwindcss',
-        '@tailwindcss/**',
-        'prettier-plugin-tailwindcss',
-      ],
+      matchPackageNames: ['tailwindcss', '@tailwindcss/**'],
     },
     {
       groupName: 'eslint',

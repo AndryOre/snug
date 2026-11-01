@@ -61,7 +61,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
       <ComparisonBreadcrumb label={shared.breadcrumb.label} crumbs={crumbs} />
       <header class="mt-8">
         <Eyebrow>{copy.eyebrow}</Eyebrow>
-        <SectionHeading as="h1" class="mt-3 hyphens-manual wrap-anywhere">
+        <SectionHeading as="h1" class="mt-3 wrap-anywhere hyphens-manual">
           {copy.title}
         </SectionHeading>
       </header>
@@ -169,7 +169,7 @@ const listClass = 'mt-4 list-disc space-y-2 pl-6 leading-prose'
         <TextLink
           href={facts.storeUrl}
           rel="noopener nofollow"
-          class="min-h-0 text-foreground wrap-anywhere"
+          class="min-h-0 wrap-anywhere text-foreground"
           lang="en"
         >
           {facts.name}

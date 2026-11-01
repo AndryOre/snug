@@ -70,12 +70,7 @@ export function markExternalLinks(html: string): string {
     .toArray()
   return html.replaceAll(
     ANCHOR,
-    (
-      match: string,
-      attributeSource: string,
-      content: string,
-      offset: number,
-    ) =>
+    (match: string, attributeSource: string, content: string, offset: number) =>
       protectedRanges.some(([start, end]) => offset >= start && offset < end)
         ? match
         : markAnchor(match, attributeSource, content),

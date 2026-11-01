@@ -114,7 +114,10 @@ const DAY_INTERVALS: Record<'1d' | '3d', number> = {
  *   update.
  */
 export type SyncAlarmTrigger =
-  'config-change' | 'startup' | 'install' | 'update'
+  | 'config-change'
+  | 'startup'
+  | 'install'
+  | 'update'
 
 /**
  * Pure computation of the next auto-export due time. `1h` and `12h` always

@@ -42,7 +42,7 @@ const groups = [
     {statKeys.map((key) => {
       const { target, format, separator } = countUpParts(stats[key].value)
       return (
-        <div class="flex flex-col-reverse gap-2 border-r px-5 py-5.5 last:border-r-0 max-md:nth-[n+3]:border-t max-md:even:border-r-0">
+        <div class="flex flex-col-reverse gap-2 border-r px-5 py-5.5 last:border-r-0 max-md:even:border-r-0 max-md:nth-[n+3]:border-t">
           <dt class="font-mono text-xs tracking-eyebrow text-muted-foreground uppercase">
             {stats[key].label}
           </dt>
