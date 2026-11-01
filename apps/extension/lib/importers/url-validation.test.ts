@@ -4,7 +4,7 @@ import { isAllowedBookmarkUrl } from './url-validation'
 
 describe('isAllowedBookmarkUrl', () => {
   it.each([
-    // eslint-disable-next-line unicorn/prefer-https -- the plain http scheme is exactly what is under test
+    // eslint-disable-next-line unicorn-js/prefer-https -- the plain http scheme is exactly what is under test
     'http://example.com',
     'https://example.com/path?q=1#hash',
     'ftp://files.example.com/pub',

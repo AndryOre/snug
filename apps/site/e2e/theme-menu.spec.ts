@@ -172,7 +172,7 @@ test('a theme switch runs no colour transition on the frame it flips', async ({
       globalThis.document.querySelector('a[data-install]'),
       globalThis.document.querySelector('[data-slot="accordion-trigger"]'),
     ]
-    // eslint-disable-next-line unicorn/isolated-functions -- runs in the browser, where MutationObserver exists
+    // eslint-disable-next-line unicorn-js/isolated-functions -- runs in the browser, where MutationObserver exists
     new MutationObserver(() => {
       if (!globalThis.document.documentElement.matches('.theme-switching')) {
         return

@@ -60,7 +60,7 @@ for (const path of PATHS) {
       const caption = await figures
         .nth(Math.floor(index / 2))
         .locator('figcaption')
-        .innerText()
+        .textContent()
       expect(alt).not.toBe(caption)
     }
 

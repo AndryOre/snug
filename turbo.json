@@ -94,7 +94,8 @@
         "eslint-rules/**",
         "docs/adr/**",
         ".github/workflows/**",
-        "vitest.config.ts"
+        "vitest.config.ts",
+        "package.json"
       ],
       "outputs": []
     },
@@ -104,7 +105,8 @@
         "eslint-rules/**",
         "docs/adr/**",
         ".github/workflows/**",
-        "vitest.config.ts"
+        "vitest.config.ts",
+        "package.json"
       ],
       "outputs": ["coverage/**"]
     }

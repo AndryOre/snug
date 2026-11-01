@@ -164,7 +164,7 @@ describe('2.0.2 entry', () => {
 describe('isExternalChangelogUrl', () => {
   it('treats http and https URLs as external', () => {
     expect(isExternalChangelogUrl('https://snug.andryore.dev/')).toBe(true)
-    // eslint-disable-next-line unicorn/prefer-https -- asserting that plain http is also external
+    // eslint-disable-next-line unicorn-js/prefer-https -- asserting that plain http is also external
     expect(isExternalChangelogUrl('http://example.com')).toBe(true)
   })
 

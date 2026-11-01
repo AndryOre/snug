@@ -95,7 +95,7 @@ async function waitForFaviconCached(
     .poll(
       () =>
         page.evaluate(
-          /* eslint-disable unicorn/isolated-functions -- this callback runs in the page's own browser context, where URL/fetch/FileReader are real globals, not the Node/ES-only set this rule checks against */
+          /* eslint-disable unicorn-js/isolated-functions -- this callback runs in the page's own browser context, where URL/fetch/FileReader are real globals, not the Node/ES-only set this rule checks against */
           async ({ extensionId, pageUrl }) => {
             const faviconUrl = new URL(
               `chrome-extension://${extensionId}/_favicon/?`,
@@ -115,7 +115,7 @@ async function waitForFaviconCached(
               reader.readAsDataURL(blob)
             })
           },
-          /* eslint-enable unicorn/isolated-functions -- scoped to the callback above only */
+          /* eslint-enable unicorn-js/isolated-functions -- scoped to the callback above only */
           { extensionId, pageUrl },
         ),
       { timeout: 20_000, intervals: [250, 500, 1000] },

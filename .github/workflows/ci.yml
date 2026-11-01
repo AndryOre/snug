@@ -44,7 +44,7 @@ jobs:
           path: .eslintcache
           key:
             ${{ runner.os }}-eslintcache-${{ hashFiles('bun.lock',
-            'eslint.config.mjs', 'eslint-rules/**') }}
+            'eslint.config.mjs', 'eslint-rules/**', 'oxlint-plugins/**') }}
           restore-keys: ${{ runner.os }}-eslintcache-
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -64,7 +64,8 @@ jobs:
           read -r -a affected_flags <<< "$AFFECTED"
           bunx turbo run check test:coverage "${affected_flags[@]}"
 
-      - name: Check and test repo-wide (format, lint, knip, script tests)
+      - name:
+          Check and test repo-wide (format, oxlint + eslint, knip, script tests)
         run: bunx turbo run check:root test:root
 
   build:

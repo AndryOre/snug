@@ -196,7 +196,7 @@ function FieldError({
       return null
     }
 
-    // eslint-disable-next-line unicorn/prefer-iterator-to-array -- shadcn-generated Map-based dedupe, kept verbatim
+    // eslint-disable-next-line unicorn-js/prefer-iterator-to-array -- shadcn-generated Map-based dedupe, kept verbatim
     const uniqueErrors = [
       ...new Map(errors.map((error) => [error?.message, error])).values(),
     ]

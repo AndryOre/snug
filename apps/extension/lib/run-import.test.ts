@@ -101,7 +101,7 @@ describe('runImport', () => {
       children: [
         {
           title: 'Existing again',
-          // eslint-disable-next-line unicorn/prefer-https -- exercises http/https normalization
+          // eslint-disable-next-line unicorn-js/prefer-https -- exercises http/https normalization
           url: 'http://www.existing.example',
           dateAdded: 0,
         },

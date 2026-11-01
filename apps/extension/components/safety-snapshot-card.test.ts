@@ -132,11 +132,11 @@ describe('SafetySnapshotCard', () => {
     await mountCard()
 
     await act(async () => {
-      document.body.querySelectorAll('button').forEach((button) => {
+      for (const button of document.body.querySelectorAll('button')) {
         if (button.textContent === en.safetySnapshot_take.message) {
           button.click()
         }
-      })
+      }
     })
 
     expect(document.body.textContent).toContain(

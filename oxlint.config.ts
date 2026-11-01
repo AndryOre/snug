@@ -110,7 +110,6 @@ const wxtGlobals: OxlintGlobals = Object.fromEntries(
  */
 const jsxA11yRules: DummyRuleMap = {
   'jsx-a11y/alt-text': 'error',
-  'jsx-a11y/anchor-has-content': 'error',
   'jsx-a11y/anchor-is-valid': 'error',
   'jsx-a11y/aria-activedescendant-has-tabindex': 'error',
   'jsx-a11y/aria-props': 'error',
@@ -221,10 +220,19 @@ const jsxA11yRules: DummyRuleMap = {
       ],
     },
   ],
-  'jsx-a11y/role-has-required-aria-props': 'error',
   'jsx-a11y/role-supports-aria-props': 'error',
   'jsx-a11y/scope': 'error',
   'jsx-a11y/tabindex-no-positive': 'error',
+}
+
+/**
+ * `eslint-plugin-jsx-a11y` rules whose native port diverges from the original
+ * on `render`-prop anchors and `treeitem` roles, run as the original ESLint
+ * rules through the `jsx-a11y-js` jsPlugin.
+ */
+const jsxA11yOriginalRules: DummyRuleMap = {
+  'jsx-a11y-js/anchor-has-content': 'error',
+  'jsx-a11y-js/role-has-required-aria-props': 'error',
 }
 
 /**
@@ -236,11 +244,9 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/consistent-date-clone': 'error',
   'unicorn/consistent-empty-array-spread': 'error',
   'unicorn/consistent-existence-index-check': 'error',
-  'unicorn/consistent-function-scoping': 'error',
   'unicorn/consistent-template-literal-escape': 'error',
   'unicorn/error-message': 'error',
   'unicorn/escape-case': 'error',
-  'unicorn/explicit-length-check': 'error',
   'unicorn/explicit-timer-delay': 'error',
   'unicorn/filename-case': [
     'error',
@@ -255,7 +261,6 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/no-abusive-eslint-disable': 'error',
   'unicorn/no-accessor-recursion': 'error',
   'unicorn/no-anonymous-default-export': 'error',
-  'unicorn/no-array-callback-reference': 'error',
   'unicorn/no-array-fill-with-reference-type': 'error',
   'unicorn/no-array-method-this-argument': 'error',
   'unicorn/no-array-reduce': ['error', { allowSimpleOperations: false }],
@@ -265,7 +270,6 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/no-await-in-promise-methods': 'error',
   'unicorn/no-confusing-array-with': 'error',
   'unicorn/no-console-spaces': 'error',
-  'unicorn/no-document-cookie': 'error',
   'unicorn/no-empty-file': 'error',
   'unicorn/no-immediate-mutation': 'error',
   'unicorn/no-instanceof-builtins': 'error',
@@ -297,7 +301,6 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/no-useless-promise-resolve-reject': 'error',
   'unicorn/no-useless-spread': 'error',
   'unicorn/no-useless-switch-case': 'error',
-  'unicorn/no-useless-undefined': 'error',
   'unicorn/no-zero-fractions': 'error',
   'unicorn/numeric-separators-style': 'error',
   'unicorn/prefer-add-event-listener': 'error',
@@ -316,10 +319,8 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/prefer-default-parameters': 'error',
   'unicorn/prefer-dom-node-append': 'error',
   'unicorn/prefer-dom-node-remove': 'error',
-  'unicorn/prefer-dom-node-text-content': 'error',
   'unicorn/prefer-event-target': 'error',
   'unicorn/prefer-export-from': 'error',
-  'unicorn/prefer-global-this': 'error',
   'unicorn/prefer-includes': 'error',
   'unicorn/prefer-keyboard-event-key': 'error',
   'unicorn/prefer-logical-operator-over-ternary': 'error',
@@ -332,11 +333,9 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/prefer-negative-index': 'error',
   'unicorn/prefer-node-protocol': 'error',
   'unicorn/prefer-number-coercion': 'error',
-  'unicorn/prefer-number-properties': 'error',
   'unicorn/prefer-object-from-entries': 'error',
   'unicorn/prefer-optional-catch-binding': 'error',
   'unicorn/prefer-prototype-methods': 'error',
-  'unicorn/prefer-query-selector': 'error',
   'unicorn/prefer-reflect-apply': 'error',
   'unicorn/prefer-regexp-test': 'error',
   'unicorn/prefer-response-static-json': 'error',
@@ -344,13 +343,9 @@ const unicornNativeRules: DummyRuleMap = {
   'unicorn/prefer-set-size': 'error',
   'unicorn/prefer-single-call': 'error',
   'unicorn/prefer-spread': 'error',
-  'unicorn/prefer-string-raw': 'error',
-  'unicorn/prefer-string-replace-all': 'error',
   'unicorn/prefer-string-slice': 'error',
-  'unicorn/prefer-string-starts-ends-with': 'error',
   'unicorn/prefer-string-trim-start-end': 'error',
   'unicorn/prefer-structured-clone': 'error',
-  'unicorn/prefer-ternary': 'error',
   'unicorn/prefer-top-level-await': 'error',
   'unicorn/prefer-type-error': 'error',
   'unicorn/relative-url-style': 'error',
@@ -368,6 +363,19 @@ const unicornNativeRules: DummyRuleMap = {
  * `eslint-plugin-unicorn` rules with no native Oxlint port, run as the original ESLint rules through the `unicorn-js` jsPlugin.
  */
 const unicornOriginalRules: DummyRuleMap = {
+  'unicorn-js/explicit-length-check': 'error',
+  'unicorn-js/no-useless-undefined': 'error',
+  'unicorn-js/consistent-function-scoping': 'error',
+  'unicorn-js/prefer-global-this': 'error',
+  'unicorn-js/no-document-cookie': 'error',
+  'unicorn-js/no-array-callback-reference': 'error',
+  'unicorn-js/prefer-ternary': 'error',
+  'unicorn-js/prefer-dom-node-text-content': 'error',
+  'unicorn-js/prefer-query-selector': 'error',
+  'unicorn-js/prefer-string-raw': 'error',
+  'unicorn-js/prefer-string-replace-all': 'error',
+  'unicorn-js/prefer-string-starts-ends-with': 'error',
+  'unicorn-js/prefer-number-properties': 'error',
   'unicorn-js/consistent-class-member-order': 'error',
   'unicorn-js/no-accidental-bitwise-operator': 'error',
   'unicorn-js/no-boolean-sort-comparator': 'error',
@@ -684,7 +692,6 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/implements-on-classes': 'error',
   'jsdoc/no-blank-blocks': 'off',
   'jsdoc/no-defaults': 'error',
-  'jsdoc/require-param': 'error',
   'jsdoc/require-param-description': 'error',
   'jsdoc/require-param-name': 'error',
   'jsdoc/require-param-type': 'off',
@@ -692,7 +699,6 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/require-property-description': 'error',
   'jsdoc/require-property-name': 'error',
   'jsdoc/require-property-type': 'off',
-  'jsdoc/require-returns': 'error',
   'jsdoc/require-returns-description': 'error',
   'jsdoc/require-returns-type': 'off',
   'jsdoc/require-throws-description': 'off',
@@ -706,6 +712,8 @@ const jsdocNativeRules: DummyRuleMap = {
  * `eslint-plugin-jsdoc` rules with no native port, run as the original rules through the `jsdoc-js` jsPlugin.
  */
 const jsdocOriginalRules: DummyRuleMap = {
+  'jsdoc-js/require-param': 'error',
+  'jsdoc-js/require-returns': 'error',
   'jsdoc-js/check-alignment': 'error',
   'jsdoc-js/check-param-names': 'error',
   'jsdoc-js/check-types': 'error',
@@ -913,7 +921,7 @@ const overrides: OxlintOverride[] = [
   {
     files: ['**/*.tsx'],
     rules: {
-      'react/jsx-no-literals': [
+      'react-js/jsx-no-literals': [
         'error',
         {
           noStrings: true,
@@ -989,8 +997,8 @@ const overrides: OxlintOverride[] = [
     rules: {
       ...shadcnRulesOff,
       '@eslint-react/no-array-index-key': 'off',
-      'jsdoc/require-param': 'off',
-      'jsdoc/require-returns': 'off',
+      'jsdoc-js/require-param': 'off',
+      'jsdoc-js/require-returns': 'off',
       'unicorn-js/name-replacements': 'off',
       'unicorn-js/consistent-boolean-name': 'off',
     },
@@ -1027,7 +1035,7 @@ const overrides: OxlintOverride[] = [
       'shadcn/no-restyle': 'off',
       'shadcn/no-arbitrary-values': 'off',
       'shadcn/require-static-classes': 'off',
-      'react/jsx-no-literals': 'off',
+      'react-js/jsx-no-literals': 'off',
       ...switchOff(commentPolicyRules),
     },
   },
@@ -1038,7 +1046,7 @@ export default defineConfig({
   categories: { correctness: 'off' },
   options: {
     typeAware: true,
-    reportUnusedDisableDirectives: 'warn',
+    reportUnusedDisableDirectives: 'error',
   },
   env: { builtin: true, es2026: true },
   globals: wxtGlobals,
@@ -1051,6 +1059,8 @@ export default defineConfig({
   },
   jsPlugins: [
     { name: 'unicorn-js', specifier: 'eslint-plugin-unicorn' },
+    { name: 'jsx-a11y-js', specifier: 'eslint-plugin-jsx-a11y' },
+    { name: 'react-js', specifier: 'eslint-plugin-react' },
     { name: 'react-hooks-js', specifier: 'eslint-plugin-react-hooks' },
   ],
   ignorePatterns: [
@@ -1066,6 +1076,7 @@ export default defineConfig({
     ...jsxA11yRules,
     ...unicornNativeRules,
     ...unicornOriginalRules,
+    ...jsxA11yOriginalRules,
     ...reactHooksRules,
   },
   overrides,

@@ -25,7 +25,7 @@ import { DOCS_UI } from '../../i18n/docs-ui'
 </button>
 
 <script>
-  const sidebar = document.getElementById('starlight__sidebar')
+  const sidebar = document.querySelector('#starlight__sidebar')
   const toggle = document.querySelector<HTMLElement>('[data-docs-menu-toggle]')
   const outsideDrawer = () =>
     document.querySelectorAll('.header, .main-frame, .sl-skip-link')
@@ -36,11 +36,11 @@ import { DOCS_UI } from '../../i18n/docs-ui'
    * returns focus to the Guide button on close.
    */
   sidebar?.addEventListener('beforetoggle', (event) => {
-    const opening = (event as ToggleEvent).newState === 'open'
+    const isOpening = (event as ToggleEvent).newState === 'open'
     for (const element of outsideDrawer()) {
-      element.toggleAttribute('inert', opening)
+      element.toggleAttribute('inert', isOpening)
     }
-    if (!opening) toggle?.removeAttribute('inert')
+    if (!isOpening) toggle?.removeAttribute('inert')
   })
 
   sidebar?.addEventListener('toggle', (event) => {

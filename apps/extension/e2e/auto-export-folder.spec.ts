@@ -22,7 +22,7 @@ const config = {
  * @returns The file names currently in the picked folder.
  */
 function listPickedFolderFiles(page: Page): Promise<string[]> {
-  /* eslint-disable unicorn/isolated-functions -- this callback runs in the page's own browser context, where navigator is a real global */
+  /* eslint-disable unicorn-js/isolated-functions -- this callback runs in the page's own browser context, where navigator is a real global */
   return page.evaluate(async (folderName) => {
     const root = await navigator.storage.getDirectory()
     const directory = await root.getDirectoryHandle(folderName, {
@@ -33,7 +33,7 @@ function listPickedFolderFiles(page: Page): Promise<string[]> {
     )
     return names
   }, PICKED_FOLDER_NAME)
-  /* eslint-enable unicorn/isolated-functions -- scoped to the callback above only */
+  /* eslint-enable unicorn-js/isolated-functions -- scoped to the callback above only */
 }
 
 test('choosing a Custom folder persists, Export now writes into it, Downloads clears it', async ({

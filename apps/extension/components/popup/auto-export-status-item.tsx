@@ -122,7 +122,7 @@ export function AutoExportStatusItem() {
             variant="outline"
             size="sm"
             render={
-              // eslint-disable-next-line jsx-a11y/anchor-has-content -- Button's render prop injects the children into this anchor
+              // eslint-disable-next-line jsx-a11y-js/anchor-has-content -- Button's render prop injects the children into this anchor
               <a
                 href={getAppUrl(APP_ROUTES.autoExport)}
                 target="_blank"
@@ -162,7 +162,7 @@ export function AutoExportStatusItem() {
       variant="muted"
       size="sm"
       render={
-        // eslint-disable-next-line jsx-a11y/anchor-has-content -- Item's render prop injects the children into this anchor
+        // eslint-disable-next-line jsx-a11y-js/anchor-has-content -- Item's render prop injects the children into this anchor
         <a
           href={getAppUrl(APP_ROUTES.autoExport)}
           target="_blank"
