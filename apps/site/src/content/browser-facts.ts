@@ -14,14 +14,21 @@ export interface SourcedFact<T> {
 }
 
 export type BrowserSlug =
-  'chrome' | 'edge' | 'brave' | 'opera' | 'firefox' | 'safari'
+  | 'chrome'
+  | 'edge'
+  | 'brave'
+  | 'opera'
+  | 'firefox'
+  | 'safari'
 
 /**
  * Where a browser puts imported bookmarks. The wording lives in the shared
  * How-to copy, so each locale describes it in its own language.
  */
 type ImportPlacement =
-  'importedFolderOrBar' | 'favoritesBarFolder' | 'sidebarDatedFolder'
+  | 'importedFolderOrBar'
+  | 'favoritesBarFolder'
+  | 'sidebarDatedFolder'
 
 type ProfileOs = 'windows' | 'macos' | 'linux'
 

@@ -4,7 +4,8 @@
  * started.
  */
 export type LatestOnlyResult<Value> =
-  { isCurrent: true; value: Value } | { isCurrent: false }
+  | { isCurrent: true; value: Value }
+  | { isCurrent: false }
 
 /**
  * Wraps an async loader so only the most recent call counts. Every call bumps

@@ -24,13 +24,17 @@ interface QuickStartAction {
   icon: LucideIcon
   route: string
   titleKey:
-    'welcome_exportTitle' | 'welcome_autoExportTitle' | 'welcome_importTitle'
+    | 'welcome_exportTitle'
+    | 'welcome_autoExportTitle'
+    | 'welcome_importTitle'
   descriptionKey:
     | 'welcome_exportDescription'
     | 'welcome_autoExportDescription'
     | 'welcome_importDescription'
   actionKey:
-    'welcome_exportAction' | 'welcome_autoExportAction' | 'welcome_importAction'
+    | 'welcome_exportAction'
+    | 'welcome_autoExportAction'
+    | 'welcome_importAction'
 }
 
 const QUICK_START_ACTIONS: QuickStartAction[] = [

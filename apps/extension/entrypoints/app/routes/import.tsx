@@ -63,7 +63,13 @@ import { useOperationProgress } from '@/lib/use-operation-progress'
 import { useStorageItem } from '@/lib/use-storage-item'
 
 type ImportStatus =
-  'idle' | 'importing' | 'canceled' | 'success' | 'undoing' | 'undone' | 'error'
+  | 'idle'
+  | 'importing'
+  | 'canceled'
+  | 'success'
+  | 'undoing'
+  | 'undone'
+  | 'error'
 
 /**
  * Ref callback that moves focus to an element when it mounts, so a result
@@ -98,7 +104,8 @@ interface RejectedFile {
 }
 
 type FileEntry =
-  ({ kind: 'valid' } & ChosenFile) | ({ kind: 'invalid' } & RejectedFile)
+  | ({ kind: 'valid' } & ChosenFile)
+  | ({ kind: 'invalid' } & RejectedFile)
 
 const FORMAT_LABELS: Record<BookmarkFormat, string> = {
   json: 'JSON',

@@ -198,9 +198,11 @@ describe('round trip: JSON', () => {
 
     const root = getFakeBookmarksRoot()
     const bar = root.children?.find((n) => n.id === '1') as
-      ExtendedBookmarkTreeNode | undefined
+      | ExtendedBookmarkTreeNode
+      | undefined
     const other = root.children?.find((n) => n.id === '2') as
-      ExtendedBookmarkTreeNode | undefined
+      | ExtendedBookmarkTreeNode
+      | undefined
 
     expect(collectUrls(bar)).toEqual(['https://github.example/repo'])
     expect(collectUrls(other)).toEqual(['https://reading.example/article'])

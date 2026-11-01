@@ -25,12 +25,12 @@ const { label, crumbs, class: className } = Astro.props
         {crumb.href ? (
           <TextLink
             href={crumb.href}
-            class="min-w-0 text-muted-foreground wrap-anywhere"
+            class="min-w-0 wrap-anywhere text-muted-foreground"
           >
             {crumb.name}
           </TextLink>
         ) : (
-          <span aria-current="page" class="text-foreground wrap-anywhere">
+          <span aria-current="page" class="wrap-anywhere text-foreground">
             {crumb.name}
           </span>
         )}

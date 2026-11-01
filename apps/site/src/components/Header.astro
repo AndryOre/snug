@@ -1,9 +1,9 @@
 ---
-import { DOCS_PATHS, DOCS_UI } from '../i18n/docs-ui'
-import { FOOTER_LINK_HREFS, getClosingCopy } from '../i18n/landing'
 import { buttonVariants } from '@workspace/ui/components/button'
 import { cn } from '@workspace/ui/lib/utils'
 
+import { DOCS_PATHS, DOCS_UI } from '../i18n/docs-ui'
+import { FOOTER_LINK_HREFS, getClosingCopy } from '../i18n/landing'
 import {
   languageTag,
   LOCALE_NAMES,
@@ -59,7 +59,7 @@ const options = LOCALES.map((code) => ({
     <div
       aria-hidden="true"
       data-header-surface
-      class="header-surface pointer-events-none absolute inset-0 border-b bg-background/80 backdrop-blur-md"
+      class="pointer-events-none absolute inset-0 border-b bg-background/80 header-surface backdrop-blur-md"
     />
   )}
   {skipLink && (
@@ -111,7 +111,7 @@ const options = LOCALES.map((code) => ({
           href={link.href}
           data-header-link={link.key}
           aria-current={Astro.url.pathname === link.href ? 'page' : undefined}
-          class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground hover:text-foreground focus-ring-solid aria-[current=page]:text-foreground"
+          class="flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-muted-foreground focus-ring-solid hover:text-foreground aria-[current=page]:text-foreground"
         >
           {link.label}
         </a>
