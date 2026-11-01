@@ -32,7 +32,7 @@
     "still": "remotion still src/index.ts",
     "render": "bun scripts/render-all.ts",
     "thumbnails": "bun scripts/render-thumbnails.ts",
-    "check": "tsc --noEmit",
+    "check": "node ../../node_modules/typescript7/bin/tsc --noEmit",
     "test": "vitest run"
   }
 }

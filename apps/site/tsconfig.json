@@ -18,7 +18,14 @@
     "vitest.config.ts",
     "e2e/**/*",
     "e2e-container/**/*",
-    "src/**/*"
+    "src/**/*",
+    "src/**/*.astro"
   ],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist"],
+  "contentMappers": [
+    {
+      "package": "@astrojs/ts-content-mapper",
+      "extensions": [".astro"]
+    }
+  ]
 }
