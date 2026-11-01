@@ -95,6 +95,8 @@
         "docs/adr/**",
         ".github/workflows/**",
         "vitest.config.ts",
+        "renovate.json5",
+        "lint-staged.config.mjs",
         "package.json"
       ],
       "outputs": []
@@ -106,6 +108,8 @@
         "docs/adr/**",
         ".github/workflows/**",
         "vitest.config.ts",
+        "renovate.json5",
+        "lint-staged.config.mjs",
         "package.json"
       ],
       "outputs": ["coverage/**"]

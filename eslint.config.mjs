@@ -92,13 +92,6 @@ const shadcnNoRestyleContracts = [
  * `informative-docs` turned on (rejects JSDoc that just restates the
  * declaration's name).
  */
-/**
- * `eslint-plugin-jsdoc`'s TypeScript-flavored recommended rules, with
- * `require-jsdoc` turned off (this repo documents only non-obvious
- * exports, not everything — see later wave-2/wave-3 tickets) and
- * `informative-docs` turned on (rejects JSDoc that just restates the
- * declaration's name).
- */
 const jsdocRules = {
   ...jsdoc.configs['flat/recommended-typescript-error'].rules,
   'jsdoc/require-jsdoc': 'off',
