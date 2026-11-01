@@ -1,0 +1,2 @@
+const bigint = BigInt(1);
+export const fixtureModule = true;

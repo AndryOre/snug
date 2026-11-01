@@ -1,0 +1,7 @@
+const regexp = /foo/g;
+const string = 'foofoo';
+let match;
+while ((match = regexp.exec(string)) !== null) {
+	console.log(match);
+}
+export const fixtureModule = true;

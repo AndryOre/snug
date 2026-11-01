@@ -1,0 +1,5 @@
+const abortController = new AbortController();
+setTimeout(() => abortController.abort(), 1000);
+
+await fetch(url, {signal: abortController.signal});
+export const fixtureModule = true;

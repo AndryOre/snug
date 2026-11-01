@@ -1,0 +1,2 @@
+const clone = JSON.parse(JSON.stringify(foo));
+export const fixtureModule = true;

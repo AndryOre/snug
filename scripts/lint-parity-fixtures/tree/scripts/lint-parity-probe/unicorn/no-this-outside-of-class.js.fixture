@@ -1,0 +1,4 @@
+function Foo(value) {
+	this.value = value;
+}
+export const fixtureModule = true;

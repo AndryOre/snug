@@ -1,0 +1,6 @@
+const grouped = items.reduce((groups, item) => {
+	groups[item.type] ??= [];
+	groups[item.type].push(item);
+	return groups;
+}, {});
+export const fixtureModule = true;

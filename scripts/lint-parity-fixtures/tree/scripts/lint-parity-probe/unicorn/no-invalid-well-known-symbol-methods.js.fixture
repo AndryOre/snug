@@ -1,0 +1,4 @@
+class Resource {
+	async [Symbol.dispose]() {}
+}
+export const fixtureModule = true;

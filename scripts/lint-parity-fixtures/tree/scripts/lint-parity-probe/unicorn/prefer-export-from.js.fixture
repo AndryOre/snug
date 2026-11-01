@@ -1,0 +1,2 @@
+import defaultExport from './foo.js';
+export default defaultExport;

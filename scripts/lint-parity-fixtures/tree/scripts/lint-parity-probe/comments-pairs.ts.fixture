@@ -1,0 +1,17 @@
+/**
+ * Violations of `eslint-comments/no-aggregating-enable` and
+ * `eslint-comments/disable-enable-pair`.
+ * @returns Nothing.
+ */
+export function noisy(): void {
+  /* eslint-disable no-console -- first block */
+  /* eslint-disable no-alert -- second block */
+  console.log(1)
+  alert('x')
+  /* eslint-enable -- closes both blocks at once */
+}
+
+/* eslint-disable no-debugger -- never re-enabled */
+export function paused(): void {
+  debugger
+}

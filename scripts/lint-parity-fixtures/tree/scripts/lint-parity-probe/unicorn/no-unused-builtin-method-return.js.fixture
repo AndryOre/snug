@@ -1,0 +1,2 @@
+array.map(element => transform(element));
+export const fixtureModule = true;

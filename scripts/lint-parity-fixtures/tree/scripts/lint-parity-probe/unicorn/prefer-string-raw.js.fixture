@@ -1,0 +1,2 @@
+const file = "C:\\windows\\style\\path\\to\\file.js";
+export const fixtureModule = true;

@@ -1,0 +1,6 @@
+let result = [];
+
+for (const chunk of chunks) {
+	result = result.concat(chunk);
+}
+export const fixtureModule = true;

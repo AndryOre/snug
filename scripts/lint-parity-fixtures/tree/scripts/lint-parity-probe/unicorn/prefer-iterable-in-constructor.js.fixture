@@ -1,0 +1,5 @@
+const set = new Set();
+for (const item of items) {
+	set.add(item);
+}
+export const fixtureModule = true;

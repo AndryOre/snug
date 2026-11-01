@@ -1,0 +1,4 @@
+const blob = new Blob();
+const file = new File([blob], 'image.jpg');
+URL.createObjectURL(file);
+export const fixtureModule = true;

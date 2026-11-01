@@ -1,0 +1,8 @@
+const abortController = new AbortController();
+
+for (const signal of signals) {
+	signal.addEventListener('abort', () => abortController.abort());
+}
+
+await fetch(url, {signal: abortController.signal});
+export const fixtureModule = true;

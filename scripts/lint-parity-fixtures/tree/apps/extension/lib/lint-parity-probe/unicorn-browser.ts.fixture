@@ -1,0 +1,19 @@
+/**
+ * Violations of the unicorn rules about browser globals, which ESLint only
+ * resolves where the TypeScript `dom` lib declares them.
+ * @param signals Signals to follow.
+ * @param url The URL to fetch.
+ * @returns The response.
+ */
+export async function browserGlobals(
+  signals: readonly AbortSignal[],
+  url: string,
+): Promise<Response> {
+  globalThis.document.cookie = 'foo=bar; Secure'
+
+  const abortController = new AbortController()
+  for (const signal of signals) {
+    signal.addEventListener('abort', () => abortController.abort())
+  }
+  return fetch(url, { signal: abortController.signal })
+}

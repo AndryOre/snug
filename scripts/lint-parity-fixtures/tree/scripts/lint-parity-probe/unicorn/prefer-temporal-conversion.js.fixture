@@ -1,0 +1,6 @@
+Temporal.Instant.from(zoned);
+Temporal.Instant.fromEpochMilliseconds(zoned.epochMilliseconds);
+Temporal.Instant.fromEpochNanoseconds(zoned.epochNanoseconds);
+Temporal.PlainDate.from(zoned.toString());
+new Temporal.PlainDate(zoned.year, zoned.month, zoned.day);
+export const fixtureModule = true;

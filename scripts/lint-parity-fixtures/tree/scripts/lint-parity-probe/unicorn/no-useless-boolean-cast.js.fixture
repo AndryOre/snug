@@ -1,0 +1,2 @@
+const enabledRecords = records.filter(record => Boolean(record.enabled));
+export const fixtureModule = true;

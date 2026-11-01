@@ -1,0 +1,5 @@
+for (const item of items) {
+	process(item);
+	continue;
+}
+export const fixtureModule = true;

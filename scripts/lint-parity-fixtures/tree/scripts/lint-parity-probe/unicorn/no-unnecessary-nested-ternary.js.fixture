@@ -1,0 +1,2 @@
+a ? (b ? c : d) : d;
+export const fixtureModule = true;

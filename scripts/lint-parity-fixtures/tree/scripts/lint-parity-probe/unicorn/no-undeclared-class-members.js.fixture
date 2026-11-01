@@ -1,0 +1,6 @@
+class Foo {
+	getName() {
+		return this.name;
+	}
+}
+export const fixtureModule = true;

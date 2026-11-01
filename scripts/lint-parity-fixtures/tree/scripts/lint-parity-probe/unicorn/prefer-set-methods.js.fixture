@@ -1,0 +1,2 @@
+const union = new Set([...set, ...otherSet]);
+export const fixtureModule = true;

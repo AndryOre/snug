@@ -1,0 +1,6 @@
+class Foo {
+	constructor() {
+		this.foo = 'foo';
+	}
+}
+export const fixtureModule = true;

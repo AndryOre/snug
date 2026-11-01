@@ -1,0 +1,2 @@
+const url = new URL('./foo', base);
+export const fixtureModule = true;

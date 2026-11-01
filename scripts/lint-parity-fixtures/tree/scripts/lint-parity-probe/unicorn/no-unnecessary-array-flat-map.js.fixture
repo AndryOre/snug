@@ -1,0 +1,2 @@
+const ids = array.flatMap(value => [value.id]);
+export const fixtureModule = true;

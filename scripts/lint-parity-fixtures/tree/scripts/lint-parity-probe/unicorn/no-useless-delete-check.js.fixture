@@ -1,0 +1,6 @@
+const object = {};
+
+if (key in object) {
+	delete object[key];
+}
+export const fixtureModule = true;

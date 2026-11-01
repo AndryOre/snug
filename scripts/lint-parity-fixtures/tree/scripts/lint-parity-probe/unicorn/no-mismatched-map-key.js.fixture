@@ -1,0 +1,2 @@
+const value = map.has(key) ? map.get(anotherKey) : fallback;
+export const fixtureModule = true;

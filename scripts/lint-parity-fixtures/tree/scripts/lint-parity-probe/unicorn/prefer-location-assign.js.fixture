@@ -1,0 +1,2 @@
+location.href = url;
+export const fixtureModule = true;

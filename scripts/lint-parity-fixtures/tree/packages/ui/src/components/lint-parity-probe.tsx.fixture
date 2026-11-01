@@ -1,0 +1,25 @@
+// packages/ui is exempt from the comment policy, so this comment is allowed.
+import { createContext, useContext, useState } from 'react'
+
+const Context = createContext(0)
+
+export function Probe({ items }: { items: string[] }) {
+  const value = useContext(Context)
+  const [open, change] = useState(false)
+  return (
+    <Context.Provider value={value}>
+      <div className={`p-[3px] ${open ? 'flex' : ''} text-red-500`}>
+        Plain copy is allowed in the registry layer
+        {items.map((item, index) => (
+          <span key={index}>{item}</span>
+        ))}
+        {items.length && <span>{String(change)}</span>}
+        <div style={{ color: 'red' }} />
+        <img src="/x.png" />
+      </div>
+    </Context.Provider>
+  )
+}
+
+var registryCounter = 1
+export { registryCounter }

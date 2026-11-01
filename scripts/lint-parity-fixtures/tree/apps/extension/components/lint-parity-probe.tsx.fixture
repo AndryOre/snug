@@ -1,0 +1,97 @@
+import { Button } from '@workspace/ui/components/button'
+import {
+  Children,
+  cloneElement,
+  createContext,
+  createRef,
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import type { ReactElement, ReactNode } from 'react'
+
+/**
+ * Violations of the `@eslint-react`, react-hooks, jsx-a11y, `react/jsx-no-literals`
+ * and `shadcn/*` rules in a `.tsx` component outside `packages/ui`.
+ */
+const ThemeContext = createContext('light')
+
+export function Inner({ items }: { items: string[] }) {
+  const theme = useContext(ThemeContext)
+  const [count, setCount] = useState(0)
+  const [flag] = useState(false)
+  const reference = createRef<HTMLDivElement>()
+  const doubled = useMemo(() => count * 2, [])
+  useEffect(() => {
+    setCount(count + 1)
+  }, [])
+  useEffect(() => {
+    globalThis.addEventListener('resize', () => setCount(1))
+    setInterval(() => setCount(2), 1000)
+  }, [])
+  if (flag) {
+    useState(1)
+  }
+  function Nested() {
+    return <span>{theme}</span>
+  }
+  return (
+    <ThemeContext.Provider value="dark">
+      <div ref={reference}>
+        Plain copy that should be translated
+        {items.map((item, index) => (
+          <span key={index}>{item}</span>
+        ))}
+        {items.map((item) => (
+          <span>{item}</span>
+        ))}
+        {items.length && <Nested />}
+        <img src="/x.png" />
+        <a href="https://example.com" target="_blank" />
+        <div onClick={() => setCount(0)} />
+        <div role="checkbox" />
+        <input autoFocus />
+        <label>{doubled}</label>
+        <Button className="bg-[#123456] text-red-500 not-a-real-class" />
+        <Button style={{ color: 'red' }} className={`p-${count}`} />
+        <div dangerouslySetInnerHTML={{ __html: '<b>x</b>' }} />
+        <a href="javascript:void(0)">{count}</a>
+        <iframe sandbox="allow-scripts allow-same-origin" title="t" />
+        <br>{count}</br>
+        <Inner children={items} items={items} />
+        {/* jsx comment as text */}
+        // not a comment
+      </div>
+    </ThemeContext.Provider>
+  )
+}
+
+export const Forwarded = forwardRef<HTMLDivElement>((_props, ref) => (
+  <div ref={ref} />
+))
+
+export function useNotAHook(): number {
+  return 1
+}
+
+export function childrenApis(children: ReactNode): number {
+  Children.forEach(children, () => {})
+  Children.map(children, (child) => child)
+  Children.only(children)
+  Children.toArray(children)
+  return Children.count(children)
+}
+
+export function clones(element: ReactElement): ReactElement {
+  return cloneElement(element)
+}
+
+export function passesAny(value: any) {
+  return <Inner items={value} />
+}
+
+export function leaked(items: string[]) {
+  return <div>{items.length && <span>{items[0]}</span>}</div>
+}

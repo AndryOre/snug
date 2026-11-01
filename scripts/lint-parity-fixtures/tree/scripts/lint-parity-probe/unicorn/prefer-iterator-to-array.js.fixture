@@ -1,0 +1,2 @@
+const values = [...map.values()];
+export const fixtureModule = true;

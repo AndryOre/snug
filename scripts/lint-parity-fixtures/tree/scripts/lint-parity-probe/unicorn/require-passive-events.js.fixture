@@ -1,0 +1,2 @@
+window.addEventListener('wheel', () => {});
+export const fixtureModule = true;

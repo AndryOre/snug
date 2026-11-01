@@ -19,6 +19,7 @@ export default defineConfig({
         'scripts/**/*.test.ts',
         'eslint-rules/**/*.test.ts',
         'oxlint-plugins/**/*.test.ts',
+        'scripts/lint-parity-run.ts',
       ],
       reporter: ['text', 'lcov'],
       thresholds: { lines: 65, statements: 65, branches: 63, functions: 83 },

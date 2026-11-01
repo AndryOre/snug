@@ -1,0 +1,14 @@
+import { useVirtualizer } from '@tanstack/react-virtual'
+
+/**
+ * Violation of `react-hooks/incompatible-library`: a hook React Compiler
+ * knows returns values it cannot memoize.
+ */
+export function VirtualProbe({ parent }: { parent: HTMLElement }) {
+  const virtualizer = useVirtualizer({
+    count: 10,
+    getScrollElement: () => parent,
+    estimateSize: () => 20,
+  })
+  return <span>{virtualizer.getTotalSize()}</span>
+}

@@ -1,0 +1,2 @@
+const slug = string.replaceAll('a', '-').replaceAll('b', '-').replaceAll('c', '-');
+export const fixtureModule = true;

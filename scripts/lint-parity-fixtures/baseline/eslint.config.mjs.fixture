@@ -1,0 +1,452 @@
+import eslintComments from '@eslint-community/eslint-plugin-eslint-comments'
+import eslintReact from '@eslint-react/eslint-plugin'
+import { plugin as shadcn } from '@shadcn/lint'
+import vitest from '@vitest/eslint-plugin'
+import prettierConfig from 'eslint-config-prettier'
+import astro from 'eslint-plugin-astro'
+import jsdoc from 'eslint-plugin-jsdoc'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import unicorn from 'eslint-plugin-unicorn'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
+import tseslint from 'typescript-eslint'
+
+/**
+ * Baseline snapshot of snug's `eslint.config.mjs` as it stood before the Oxc
+ * migration (commit d576b93), run by `scripts/lint-parity.ts` from an install
+ * outside the repo with exact-pinned plugins, so it keeps working after the
+ * repo's own ESLint config is reduced. Only three things differ from the
+ * original: the repo-local modules are imported from `LINT_PARITY_REPO_ROOT`,
+ * `tsconfigRootDir` and every block's `basePath` are `LINT_PARITY_BASE_PATH`
+ * (the repo root, or a corpus checkout), since this file does not live there.
+ */
+const repoRoot = process.env.LINT_PARITY_REPO_ROOT
+const basePath = process.env.LINT_PARITY_BASE_PATH
+if (repoRoot === undefined || basePath === undefined) {
+  throw new Error(
+    'LINT_PARITY_REPO_ROOT and LINT_PARITY_BASE_PATH must be set by scripts/lint-parity.ts',
+  )
+}
+const importFromRepo = async (relative) =>
+  (await import(pathToFileURL(path.join(repoRoot, relative)).href)).default
+
+const wxtAutoImports = await importFromRepo(
+  'apps/extension/.wxt/eslint-auto-imports.mjs',
+)
+const localPlugin = await importFromRepo('eslint-rules/index.mjs')
+
+/**
+ * Punctuation/symbol-only JSX text that `react/jsx-no-literals` (the one
+ * `eslint-plugin-react` rule still used; `@eslint-react` has no equivalent)
+ * would otherwise flag as copy — none of these carry translatable meaning.
+ */
+const JSX_NO_LITERALS_ALLOWED_STRINGS = [
+  '/',
+  /**
+   * The exported HTML file's fixed extension — a technical suffix, not
+   * translatable copy.
+   */
+  '.html',
+  '—',
+]
+
+/**
+ * Per-component exceptions to `shadcn/no-restyle`, each encoding one real,
+ * bounded design decision rather than disabling the rule outright.
+ *
+ * - `Input`: the popup/dialog UI has no responsive breakpoints, so every
+ *   `Input` locks in the `md:` text-sm size instead of also carrying the
+ *   mobile-only text-base. A few inputs also overlay a leading icon and
+ *   need matching start padding to keep typed text clear of it.
+ * - `Label`: the time-picker's Hours/Minutes/Period captions intentionally
+ *   use a smaller, muted treatment instead of Label's default typography —
+ *   there is no dedicated caption variant for this yet.
+ * - `CardTitle`/`CardDescription`: the settings and auto-export pages render a
+ *   deliberately compact title/description scale (bolder + smaller than
+ *   Card's own defaults).
+ * - `Button`, `DropdownMenuRadioItem`, `AccordionTrigger`: the light-theme
+ *   focus ring must reach 3:1, so the site's `focus-ring-solid` utility
+ *   replaces the registry's translucent `ring-ring/50`. The FAQ trigger also
+ *   takes `accordion-icon-sync` so its icon turns on the panel's 200ms curve.
+ */
+const shadcnNoRestyleContracts = [
+  {
+    pattern: '^Input$',
+    allow: ['layout', 'text-sm', 'pl-8'],
+  },
+  {
+    pattern: '^Label$',
+    allow: ['layout', 'text-xs', 'text-muted-foreground'],
+  },
+  {
+    pattern: '^Card$',
+    allow: ['layout', 'ring-primary/50', 'ring-destructive/40'],
+  },
+  {
+    pattern: '^CardTitle$',
+    allow: [
+      'layout',
+      'text-sm',
+      'font-semibold',
+      'text-2xl',
+      'leading-tight',
+      'hyphens-auto',
+    ],
+  },
+  {
+    pattern: '^Badge$',
+    allow: ['layout', 'font-mono'],
+  },
+  {
+    pattern: '^Button$',
+    allow: ['layout', 'focus-ring-solid'],
+  },
+  {
+    pattern: '^DropdownMenuRadioItem$',
+    allow: ['layout', 'focus-ring-solid'],
+  },
+  {
+    pattern: '^AccordionTrigger$',
+    allow: ['layout', 'focus-ring-solid', 'accordion-icon-sync'],
+  },
+  {
+    pattern: '^CardFooter$',
+    allow: ['layout', 'border-t-0', 'bg-transparent', 'pt-0'],
+  },
+  {
+    pattern: '^CardDescription$',
+    allow: ['layout', 'text-xs', 'text-base'],
+  },
+]
+
+/**
+ * `eslint-plugin-jsdoc`'s TypeScript-flavored recommended rules, with
+ * `require-jsdoc` turned off (this repo documents only non-obvious
+ * exports, not everything — see later wave-2/wave-3 tickets) and
+ * `informative-docs` turned on (rejects JSDoc that just restates the
+ * declaration's name).
+ */
+const jsdocRules = {
+  ...jsdoc.configs['flat/recommended-typescript-error'].rules,
+  'jsdoc/require-jsdoc': 'off',
+  'jsdoc/informative-docs': 'error',
+}
+
+/**
+ * `@eslint-community/eslint-plugin-eslint-comments`'s recommended rules,
+ * with `require-description` turned on so every `eslint-disable*` comment
+ * must say why.
+ */
+const eslintCommentsRules = {
+  ...eslintComments.configs.recommended.rules,
+  '@eslint-community/eslint-comments/require-description': 'error',
+}
+
+/**
+ * This repo's local `no-non-doc-comments` rule (see `eslint-rules/`),
+ * which bans `//` line comments and non-JSDoc `/* *\/` block comments.
+ */
+const localCommentRules = {
+  'local/no-non-doc-comments': 'error',
+}
+
+/**
+ * The three comment-policy rule groups this wave introduces, combined into
+ * one named object for reuse across the config below.
+ */
+const commentPolicyRules = {
+  ...jsdocRules,
+  ...eslintCommentsRules,
+  ...localCommentRules,
+}
+
+const eslintConfig = defineConfig([
+  wxtAutoImports,
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [tseslint.configs.recommendedTypeChecked],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: basePath,
+      },
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/only-throw-error': [
+        'error',
+        {
+          allow: [
+            {
+              from: 'package',
+              package: '@tanstack/router-core',
+              name: 'Redirect',
+            },
+          ],
+        },
+      ],
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { attributes: false } },
+      ],
+      '@typescript-eslint/no-deprecated': 'warn',
+    },
+  },
+  astro.configs['flat/base'],
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: { parser: tseslint.parser },
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [eslintReact.configs['recommended-type-checked']],
+    rules: {
+      '@eslint-react/naming-convention-ref-name': 'off',
+    },
+  },
+  {
+    /**
+     * `packages/ui/**` is shadcn-generated and re-synced from the registry,
+     * so the React 19 modernization and render-safety rules that its output
+     * does not follow are off there rather than patched by hand.
+     */
+    files: ['packages/ui/**'],
+    rules: {
+      '@eslint-react/no-array-index-key': 'off',
+      '@eslint-react/no-context-provider': 'off',
+      '@eslint-react/no-leaked-conditional-rendering': 'off',
+      '@eslint-react/no-use-context': 'off',
+      '@eslint-react/use-state': 'off',
+    },
+  },
+  {
+    /**
+     * Explicit plugin registration + rules extraction instead of spreading
+     * `reactHooks.configs['recommended-latest']` directly: combining that
+     * object as-is with a typescript-eslint `extends` block elsewhere in
+     * this same config array corrupts its `plugins` field down to the
+     * legacy eslintrc array shape (`['react-hooks']`) by the time ESLint
+     * validates the full config, which then throws "plugins key defined as
+     * an array of strings". Unclear which package's flat-config resolution
+     * causes it; this sidesteps it entirely.
+     */
+    plugins: { 'react-hooks': reactHooks },
+    rules: reactHooks.configs['recommended-latest'].rules,
+  },
+  jsxA11y.flatConfigs.recommended,
+  unicorn.configs.recommended,
+  {
+    /**
+     * Temporary side-by-side measure (AO-2617, revert in AO-2620): Oxlint runs
+     * these rules as `jsPlugins` under the `-js` aliases, and a disable
+     * directive can only be valid in both linters if both use the same rule
+     * id. Same plugin, same severity and options, only the id changes.
+     */
+    plugins: { 'unicorn-js': unicorn, 'jsx-a11y-js': jsxA11y },
+    rules: {
+      'unicorn/isolated-functions': 'off',
+      'unicorn-js/isolated-functions': 'error',
+      'unicorn/prefer-https': 'off',
+      'unicorn-js/prefer-https': 'error',
+      'unicorn/prefer-iterator-to-array': 'off',
+      'unicorn-js/prefer-iterator-to-array': 'error',
+      'jsx-a11y/anchor-has-content': 'off',
+      'jsx-a11y-js/anchor-has-content': 'error',
+      'jsx-a11y/role-has-required-aria-props': 'off',
+      'jsx-a11y-js/role-has-required-aria-props': 'error',
+    },
+  },
+  {
+    rules: {
+      'unicorn/no-null': 'off',
+      'unicorn/no-array-reduce': ['error', { allowSimpleOperations: false }],
+      'unicorn/filename-case': [
+        'error',
+        {
+          cases: { kebabCase: true, pascalCase: true },
+          ignore: [/^\[.+\]/, /^\(.+\)/],
+        },
+      ],
+      /**
+       * `lib/utils.ts` is shadcn/ui's own generated convention
+       * (`components.json` `aliases.utils` -> `@workspace/ui/lib/utils`) — renaming it
+       * would fight every future `shadcn add`. `scripts/lint-docs.ts`
+       * mirrors `.github/workflows/lint-docs.yml`'s name (and
+       * andryore-dev's own `scripts/lint-docs.ts`) — renaming it would
+       * break that parity. `eslint-rules/no-non-doc-comments.mjs` and its
+       * `local/no-non-doc-comments` rule id are named to match this
+       * ticket's (AO-837) spec verbatim.
+       */
+      'unicorn/name-replacements': [
+        'error',
+        { allowList: { utils: true, docs: true, doc: true } },
+      ],
+    },
+  },
+  {
+    /**
+     * `Props` is Astro's own convention for a component's props interface.
+     */
+    files: ['**/*.astro'],
+    rules: {
+      'unicorn/name-replacements': [
+        'error',
+        {
+          allowList: {
+            utils: true,
+            docs: true,
+            doc: true,
+            props: true,
+            Props: true,
+          },
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.astro'],
+    plugins: { react },
+    rules: { 'react/jsx-no-target-blank': 'error' },
+  },
+  {
+    files: ['**/*.{js,jsx,ts,tsx,astro}'],
+    plugins: { shadcn },
+    rules: {
+      'shadcn/no-restyle': [
+        'error',
+        { allow: ['layout'], contracts: shadcnNoRestyleContracts },
+      ],
+      'shadcn/no-raw-colors': 'error',
+      'shadcn/no-arbitrary-values': 'error',
+      'shadcn/no-inline-styles': 'error',
+      'shadcn/no-unknown-classes': 'error',
+      'shadcn/require-static-classes': 'error',
+    },
+  },
+  {
+    /**
+     * `packages/ui/**` is the shadcn/ui registry code itself — generated
+     * layer, exempt from these three rules for the same reasons as
+     * andryore-dev's eslint.config.mjs.
+     */
+    files: ['packages/ui/**'],
+    rules: {
+      'shadcn/no-restyle': 'off',
+      'shadcn/no-arbitrary-values': 'off',
+      'shadcn/require-static-classes': 'off',
+    },
+  },
+  {
+    files: ['**/*.tsx'],
+    ignores: ['packages/ui/**'],
+    plugins: { react },
+    rules: {
+      'react/jsx-no-literals': [
+        'error',
+        {
+          noStrings: true,
+          ignoreProps: true,
+          allowedStrings: JSX_NO_LITERALS_ALLOWED_STRINGS,
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.test.ts'],
+    plugins: { vitest },
+    rules: {
+      ...vitest.configs.recommended.rules,
+    },
+  },
+  {
+    /**
+     * Test doubles and helpers must keep the async signature of the API
+     * they stand in for (`vi.fn(async () => 1)`, `fakeBrowser.*`, a fake
+     * `FileSystemDirectoryHandle`), and `await act(async () => ...)` needs
+     * the async form to flush effects. They rarely contain an `await`, so
+     * `require-await` is off for tests and test helpers only.
+     */
+    files: ['**/*.test.{ts,tsx}', 'apps/extension/lib/testing/**'],
+    rules: {
+      '@typescript-eslint/require-await': 'off',
+    },
+  },
+  {
+    /**
+     * Playwright fixtures (`e2e/fixtures.ts`) take a `use` callback per the
+     * `@playwright/test` fixture API — an unrelated naming collision with
+     * React's `use` hook that `react-hooks/rules-of-hooks` otherwise flags
+     * as a misplaced hook call.
+     */
+    files: ['**/e2e/**'],
+    rules: {
+      'react-hooks/rules-of-hooks': 'off',
+      '@eslint-react/rules-of-hooks': 'off',
+    },
+  },
+  {
+    /**
+     * The comment-policy rule groups (local `no-non-doc-comments`,
+     * `eslint-plugin-jsdoc`'s TypeScript-flavored recommended rules plus
+     * `jsdoc/informative-docs`, and `@eslint-community/eslint-comments`'s
+     * recommended rules plus `require-description`) — banning non-doc
+     * comments and uninformative or undescribed directive comments.
+     * `packages/ui/**` is permanently exempt (shadcn-generated,
+     * untouched).
+     */
+    files: ['**/*.{ts,tsx,mjs,astro}'],
+    ignores: ['packages/ui/**'],
+    plugins: {
+      jsdoc: jsdoc.configs['flat/recommended-typescript-error'].plugins.jsdoc,
+      local: localPlugin,
+      '@eslint-community/eslint-comments': eslintComments,
+    },
+    rules: commentPolicyRules,
+  },
+  {
+    /**
+     * `apps/video/**` is linted with the full rule set except the groups
+     * that do not fit Remotion composition code: every `shadcn/*` rule is
+     * off because Remotion renders frames from inline styles, raw colors and
+     * arbitrary values rather than shadcn/ui components, and
+     * `@eslint-react/no-array-index-key` (scenes render fixed lists by frame
+     * index), `jsdoc/require-param`, `jsdoc/require-returns`,
+     * `unicorn/name-replacements` and `unicorn/consistent-boolean-name` are
+     * off because parameter docs and naming conventions are out of scope for
+     * composition code.
+     */
+    files: ['apps/video/**'],
+    rules: {
+      'shadcn/no-restyle': 'off',
+      'shadcn/no-raw-colors': 'off',
+      'shadcn/no-arbitrary-values': 'off',
+      'shadcn/no-inline-styles': 'off',
+      'shadcn/no-unknown-classes': 'off',
+      'shadcn/require-static-classes': 'off',
+      '@eslint-react/no-array-index-key': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-returns': 'off',
+      'unicorn/name-replacements': 'off',
+      'unicorn/consistent-boolean-name': 'off',
+    },
+  },
+  prettierConfig,
+  globalIgnores([
+    '**/.output/**',
+    '**/.wxt/**',
+    '**/.astro/**',
+    'apps/site/dist/**',
+    '**/coverage/**',
+    '.claude/skills/**',
+    '.claude/worktrees/**',
+  ]),
+])
+
+export default eslintConfig.map((block) => ({ ...block, basePath }))

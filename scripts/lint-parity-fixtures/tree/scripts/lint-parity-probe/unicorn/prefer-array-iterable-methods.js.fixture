@@ -1,0 +1,4 @@
+for (const [, value] of array.entries()) {
+	foo(value);
+}
+export const fixtureModule = true;

@@ -1,0 +1,13 @@
+function draw() {
+	context.moveTo(220, 60);
+	context.arc(170, 60, 50, 0, 2 * Math.PI);
+	context.stroke();
+}
+
+function step() {
+	draw();
+	requestAnimationFrame(step);
+}
+
+requestAnimationFrame(step);
+export const fixtureModule = true;

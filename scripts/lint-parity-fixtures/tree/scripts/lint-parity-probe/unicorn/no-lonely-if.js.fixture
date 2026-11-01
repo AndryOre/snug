@@ -1,0 +1,6 @@
+if (foo) {
+	if (bar) {
+		// …
+	}
+}
+export const fixtureModule = true;

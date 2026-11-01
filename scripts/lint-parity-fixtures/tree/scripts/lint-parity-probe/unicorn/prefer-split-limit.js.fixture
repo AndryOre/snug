@@ -1,0 +1,2 @@
+const protocol = url.split(':')[0]; // Could be long URL
+export const fixtureModule = true;

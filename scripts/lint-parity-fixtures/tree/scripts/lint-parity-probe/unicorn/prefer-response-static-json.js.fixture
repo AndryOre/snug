@@ -1,0 +1,2 @@
+const response = new Response(JSON.stringify(data));
+export const fixtureModule = true;

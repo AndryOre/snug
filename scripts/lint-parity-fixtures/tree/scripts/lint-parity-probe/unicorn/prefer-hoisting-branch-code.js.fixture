@@ -1,0 +1,8 @@
+if (isAdmin) {
+	log('access');
+	showDashboard();
+} else {
+	log('access');
+	showLogin();
+}
+export const fixtureModule = true;

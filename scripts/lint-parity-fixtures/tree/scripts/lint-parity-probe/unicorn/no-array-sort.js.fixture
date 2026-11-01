@@ -1,0 +1,2 @@
+const sorted = [...array].sort();
+export const fixtureModule = true;

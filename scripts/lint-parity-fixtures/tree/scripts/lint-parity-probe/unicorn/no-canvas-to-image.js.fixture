@@ -1,0 +1,3 @@
+const image = await loadImage(canvas.toDataURL());
+context.drawImage(image, 0, 0);
+export const fixtureModule = true;

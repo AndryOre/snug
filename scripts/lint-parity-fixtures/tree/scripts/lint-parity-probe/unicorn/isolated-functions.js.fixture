@@ -1,0 +1,5 @@
+makeSynchronous(async () => {
+	fetch = null; // ❌ 'fetch' is readonly
+	console.log('Starting...');
+});
+export const fixtureModule = true;

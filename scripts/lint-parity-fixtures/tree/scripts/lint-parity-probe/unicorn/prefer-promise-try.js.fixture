@@ -1,0 +1,2 @@
+new Promise(resolve => resolve(fn()));
+export const fixtureModule = true;

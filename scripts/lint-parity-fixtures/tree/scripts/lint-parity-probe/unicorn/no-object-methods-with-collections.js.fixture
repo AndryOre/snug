@@ -1,0 +1,7 @@
+const map = new Map([
+	['a', 1],
+	['b', 2],
+]);
+
+Object.keys(map);
+export const fixtureModule = true;

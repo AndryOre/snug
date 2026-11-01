@@ -1,0 +1,6 @@
+let cache;
+
+function build() {
+	cache = new Map();
+}
+export const fixtureModule = true;

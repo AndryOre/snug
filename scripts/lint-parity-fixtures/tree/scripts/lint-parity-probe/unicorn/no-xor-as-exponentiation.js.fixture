@@ -1,0 +1,2 @@
+const kibibyte = 2 ^ 10; // 8, not 1024
+export const fixtureModule = true;

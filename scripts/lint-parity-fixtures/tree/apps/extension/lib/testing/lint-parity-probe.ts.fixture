@@ -1,0 +1,11 @@
+/**
+ * Test helpers keep async signatures: `require-await` is off here, while the
+ * rest of the rule set still applies (`no-var`).
+ * @returns A number.
+ */
+export async function fakeHandle(): Promise<number> {
+  return 1
+}
+
+var helperCounter = 1
+export { helperCounter }

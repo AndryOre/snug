@@ -1,0 +1,5 @@
+const object = pairs.reduce(
+	(object, [key, value]) => ({...object, [key]: value}),
+	{}
+);
+export const fixtureModule = true;

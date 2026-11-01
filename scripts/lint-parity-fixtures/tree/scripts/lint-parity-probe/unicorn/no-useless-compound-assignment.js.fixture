@@ -1,0 +1,3 @@
+let total = getTotal();
+total += 0;
+export const fixtureModule = true;

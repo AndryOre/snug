@@ -1,0 +1,6 @@
+class MyError extends Error {
+	constructor() {
+		Error.captureStackTrace(this, MyError);
+	}
+}
+export const fixtureModule = true;

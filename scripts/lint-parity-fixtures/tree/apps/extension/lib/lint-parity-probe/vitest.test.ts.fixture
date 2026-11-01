@@ -1,0 +1,67 @@
+import { test as nodeTest } from 'node:test'
+import { describe, expect, it, test, vi } from 'vitest'
+
+/**
+ * Violations of the `@vitest/eslint-plugin` recommended rules; the
+ * `require-await` exemption for tests means `asyncDouble` is not flagged.
+ */
+const asyncDouble = vi.fn(async () => 1)
+
+test('no expect', () => {
+  asyncDouble()
+})
+
+test('no expect', () => {
+  expect(1).toBe(1)
+})
+
+test.only('focused', () => {
+  expect(1).toBe(1)
+})
+
+test.skip('disabled', () => {
+  expect(1).toBe(1)
+})
+
+// test('commented out', () => {})
+
+test('conditional expect', () => {
+  if (Math.random() > 0.5) {
+    expect(1).toBe(1)
+  }
+})
+
+expect(1).toBe(1)
+
+describe('async describe', async () => {
+  it('runs', () => {
+    expect(1).toBe(1)
+  })
+})
+
+test('', () => {
+  expect(1)
+})
+
+test('called once with', () => {
+  const spy = vi.fn()
+  expect(spy).toHaveBeenCalledOnce()
+  expect(spy).toHaveBeenCalledWith(1)
+})
+
+test('promise', () => {
+  const promise = Promise.resolve(1)
+  promise.then((value) => {
+    expect(value).toBe(1)
+  })
+})
+
+test('snapshot interpolation', () => {
+  expect({ a: 1 }).toMatchInlineSnapshot(`{ a: ${1} }`)
+})
+
+test('async expect function', async () => {
+  await expect(async () => Promise.reject(new Error('x'))).rejects.toThrow()
+})
+
+nodeTest('node test', () => {})

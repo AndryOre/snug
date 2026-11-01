@@ -1,0 +1,2 @@
+template.replace('{url}', htmlEscape(url));
+export const fixtureModule = true;

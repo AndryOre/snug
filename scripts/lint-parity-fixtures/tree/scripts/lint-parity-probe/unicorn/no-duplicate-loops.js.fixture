@@ -1,0 +1,4 @@
+for (const value of values.map(value => value.property)) {
+	console.log(value);
+}
+export const fixtureModule = true;

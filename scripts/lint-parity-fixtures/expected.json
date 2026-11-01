@@ -1,0 +1,1540 @@
+{
+  "apps/extension/components/lint-parity-probe-a11y.tsx": [
+    "jsdoc/require-param",
+    "jsdoc/require-returns",
+    "jsx-a11y/aria-activedescendant-has-tabindex",
+    "jsx-a11y/aria-props",
+    "jsx-a11y/aria-proptypes",
+    "jsx-a11y/aria-role",
+    "jsx-a11y/aria-unsupported-elements",
+    "jsx-a11y/autocomplete-valid",
+    "jsx-a11y/click-events-have-key-events",
+    "jsx-a11y/heading-has-content",
+    "jsx-a11y/html-has-lang",
+    "jsx-a11y/iframe-has-title",
+    "jsx-a11y/img-redundant-alt",
+    "jsx-a11y/interactive-supports-focus",
+    "jsx-a11y/label-has-associated-control",
+    "jsx-a11y/media-has-caption",
+    "jsx-a11y/mouse-events-have-key-events",
+    "jsx-a11y/no-access-key",
+    "jsx-a11y/no-distracting-elements",
+    "jsx-a11y/no-interactive-element-to-noninteractive-role",
+    "jsx-a11y/no-noninteractive-element-interactions",
+    "jsx-a11y/no-noninteractive-element-to-interactive-role",
+    "jsx-a11y/no-noninteractive-tabindex",
+    "jsx-a11y/no-redundant-roles",
+    "jsx-a11y/role-supports-aria-props",
+    "jsx-a11y/scope",
+    "jsx-a11y/tabindex-no-positive"
+  ],
+  "apps/extension/components/lint-parity-probe-effects.tsx": [
+    "@eslint-react/exhaustive-deps",
+    "@eslint-react/use-memo",
+    "@eslint-react/web-api-no-leaked-fetch",
+    "@eslint-react/web-api-no-leaked-intersection-observer",
+    "@eslint-react/web-api-no-leaked-resize-observer",
+    "@eslint-react/web-api-no-leaked-timeout",
+    "jsdoc/require-returns",
+    "react-hooks/exhaustive-deps",
+    "react-hooks/globals",
+    "react-hooks/immutability",
+    "react-hooks/refs",
+    "react-hooks/use-memo",
+    "react-hooks/void-use-memo",
+    "unicorn/name-replacements",
+    "unicorn/no-top-level-assignment-in-function",
+    "unicorn/operator-assignment"
+  ],
+  "apps/extension/components/lint-parity-probe-library.tsx": [
+    "jsdoc/require-param",
+    "jsdoc/require-returns",
+    "react-hooks/incompatible-library"
+  ],
+  "apps/extension/components/lint-parity-probe-memo.tsx": [
+    "@eslint-react/exhaustive-deps",
+    "jsdoc/require-param",
+    "jsdoc/require-returns",
+    "react-hooks/exhaustive-deps",
+    "react-hooks/preserve-manual-memoization"
+  ],
+  "apps/extension/components/lint-parity-probe-react-class.tsx": [
+    "@eslint-react/dom-no-dangerously-set-innerhtml",
+    "@eslint-react/dom-no-dangerously-set-innerhtml-with-children",
+    "@eslint-react/dom-no-find-dom-node",
+    "@eslint-react/dom-no-flush-sync",
+    "@eslint-react/dom-no-hydrate",
+    "@eslint-react/dom-no-render",
+    "@eslint-react/dom-no-render-return-value",
+    "@eslint-react/dom-no-use-form-state",
+    "@eslint-react/error-boundaries",
+    "@eslint-react/jsx-no-children-prop-with-children",
+    "@eslint-react/jsx-no-key-after-spread",
+    "@eslint-react/jsx-no-leaked-dollar",
+    "@eslint-react/jsx-no-leaked-semicolon",
+    "@eslint-react/jsx-no-namespace",
+    "@eslint-react/naming-convention-context-name",
+    "@eslint-react/naming-convention-id-name",
+    "@eslint-react/no-access-state-in-setstate",
+    "@eslint-react/no-component-will-mount",
+    "@eslint-react/no-component-will-receive-props",
+    "@eslint-react/no-component-will-update",
+    "@eslint-react/no-direct-mutation-state",
+    "@eslint-react/no-nested-lazy-component-declarations",
+    "@eslint-react/no-set-state-in-component-did-mount",
+    "@eslint-react/no-set-state-in-component-did-update",
+    "@eslint-react/no-set-state-in-component-will-update",
+    "@eslint-react/no-unsafe-component-will-mount",
+    "@eslint-react/no-unsafe-component-will-receive-props",
+    "@eslint-react/no-unsafe-component-will-update",
+    "@eslint-react/no-unused-class-component-members",
+    "@eslint-react/purity",
+    "@eslint-react/rules-of-hooks",
+    "@eslint-react/set-state-in-render",
+    "@eslint-react/static-components",
+    "@eslint-react/unsupported-syntax",
+    "@typescript-eslint/no-unsafe-assignment",
+    "@typescript-eslint/no-unsafe-call",
+    "@typescript-eslint/no-unsafe-return",
+    "react-hooks/error-boundaries",
+    "react-hooks/purity",
+    "react-hooks/rules-of-hooks",
+    "react-hooks/set-state-in-render",
+    "react-hooks/static-components",
+    "react-hooks/unsupported-syntax",
+    "react/jsx-no-literals"
+  ],
+  "apps/extension/components/lint-parity-probe-server.ts": [
+    "@eslint-react/rsc-function-definition"
+  ],
+  "apps/extension/components/lint-parity-probe.tsx": [
+    "@eslint-react/dom-no-dangerously-set-innerhtml",
+    "@eslint-react/dom-no-script-url",
+    "@eslint-react/dom-no-unsafe-iframe-sandbox",
+    "@eslint-react/dom-no-void-elements-with-children",
+    "@eslint-react/exhaustive-deps",
+    "@eslint-react/jsx-no-children-prop",
+    "@eslint-react/jsx-no-comment-textnodes",
+    "@eslint-react/no-array-index-key",
+    "@eslint-react/no-children-count",
+    "@eslint-react/no-children-for-each",
+    "@eslint-react/no-children-map",
+    "@eslint-react/no-children-only",
+    "@eslint-react/no-children-to-array",
+    "@eslint-react/no-clone-element",
+    "@eslint-react/no-context-provider",
+    "@eslint-react/no-create-ref",
+    "@eslint-react/no-forward-ref",
+    "@eslint-react/no-leaked-conditional-rendering",
+    "@eslint-react/no-missing-key",
+    "@eslint-react/no-nested-component-definitions",
+    "@eslint-react/no-unnecessary-use-prefix",
+    "@eslint-react/no-use-context",
+    "@eslint-react/rules-of-hooks",
+    "@eslint-react/set-state-in-effect",
+    "@eslint-react/static-components",
+    "@eslint-react/use-state",
+    "@eslint-react/web-api-no-leaked-event-listener",
+    "@eslint-react/web-api-no-leaked-interval",
+    "@typescript-eslint/no-explicit-any",
+    "@typescript-eslint/no-floating-promises",
+    "@typescript-eslint/no-unsafe-assignment",
+    "jsx-a11y/alt-text",
+    "jsx-a11y/anchor-has-content",
+    "jsx-a11y/anchor-is-valid",
+    "jsx-a11y/click-events-have-key-events",
+    "jsx-a11y/no-autofocus",
+    "jsx-a11y/no-static-element-interactions",
+    "jsx-a11y/role-has-required-aria-props",
+    "local/no-non-doc-comments",
+    "react-hooks/exhaustive-deps",
+    "react-hooks/rules-of-hooks",
+    "react-hooks/set-state-in-effect",
+    "react-hooks/static-components",
+    "react/jsx-no-literals",
+    "shadcn/no-arbitrary-values",
+    "shadcn/no-inline-styles",
+    "shadcn/no-raw-colors",
+    "shadcn/no-restyle",
+    "shadcn/no-unknown-classes",
+    "shadcn/require-static-classes",
+    "unicorn/explicit-length-check",
+    "unicorn/name-replacements"
+  ],
+  "apps/extension/e2e/lint-parity-probe.ts": ["no-var"],
+  "apps/extension/lib/lint-parity-probe/[Ignored_Name].ts": ["no-var"],
+  "apps/extension/lib/lint-parity-probe/Bad_fileName.ts": [
+    "unicorn/filename-case"
+  ],
+  "apps/extension/lib/lint-parity-probe/comments.ts": [
+    "@eslint-community/eslint-comments/no-duplicate-disable",
+    "@eslint-community/eslint-comments/no-unlimited-disable",
+    "@eslint-community/eslint-comments/no-unused-enable",
+    "@eslint-community/eslint-comments/require-description",
+    "jsdoc/check-param-names",
+    "jsdoc/check-tag-names",
+    "jsdoc/check-types",
+    "jsdoc/check-values",
+    "jsdoc/informative-docs",
+    "jsdoc/multiline-blocks",
+    "jsdoc/no-defaults",
+    "jsdoc/no-multi-asterisks",
+    "jsdoc/no-types",
+    "jsdoc/require-param",
+    "jsdoc/require-property-description",
+    "jsdoc/require-returns",
+    "jsdoc/require-returns-check",
+    "jsdoc/require-returns-description",
+    "jsdoc/require-throws-type",
+    "jsdoc/require-yields",
+    "jsdoc/valid-types",
+    "local/no-non-doc-comments",
+    "unicorn/no-abusive-eslint-disable",
+    "unicorn/single-line-block-comment-style",
+    "unused-disable-directive"
+  ],
+  "apps/extension/lib/lint-parity-probe/unicorn-browser.ts": [
+    "unicorn/no-document-cookie",
+    "unicorn/prefer-abort-signal-any"
+  ],
+  "apps/extension/lib/lint-parity-probe/unicorn.ts": [
+    "@typescript-eslint/no-deprecated",
+    "@typescript-eslint/no-unused-expressions",
+    "@typescript-eslint/no-unused-vars",
+    "unicorn/consistent-boolean-name",
+    "unicorn/error-message",
+    "unicorn/name-replacements",
+    "unicorn/no-array-reduce",
+    "unicorn/no-static-only-class",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-useless-else",
+    "unicorn/no-useless-promise-resolve-reject",
+    "unicorn/prefer-array-find",
+    "unicorn/prefer-array-flat-map",
+    "unicorn/prefer-classlist-toggle",
+    "unicorn/prefer-code-point",
+    "unicorn/prefer-date-now",
+    "unicorn/prefer-dom-node-text-content",
+    "unicorn/prefer-includes",
+    "unicorn/prefer-number-coercion",
+    "unicorn/prefer-number-properties",
+    "unicorn/prefer-optional-catch-binding",
+    "unicorn/prefer-query-selector",
+    "unicorn/prefer-string-replace-all",
+    "unicorn/prefer-string-slice",
+    "unicorn/prefer-string-trim-start-end",
+    "unicorn/prefer-ternary",
+    "unicorn/prefer-unicode-code-point-escapes",
+    "unicorn/switch-case-braces",
+    "unicorn/text-encoding-identifier-case"
+  ],
+  "apps/extension/lib/lint-parity-probe/vitest-more.test.ts": [
+    "unicorn/no-useless-promise-resolve-reject",
+    "vitest/no-mocks-import",
+    "vitest/no-standalone-expect",
+    "vitest/no-unneeded-async-expect-function",
+    "vitest/require-local-test-context-for-concurrent-snapshots",
+    "vitest/valid-describe-callback"
+  ],
+  "apps/extension/lib/lint-parity-probe/vitest.test.ts": [
+    "@typescript-eslint/no-floating-promises",
+    "local/no-non-doc-comments",
+    "unicorn/no-useless-promise-resolve-reject",
+    "unicorn/no-useless-template-literals",
+    "unicorn/prefer-await",
+    "vitest/expect-expect",
+    "vitest/no-commented-out-tests",
+    "vitest/no-conditional-expect",
+    "vitest/no-disabled-tests",
+    "vitest/no-focused-tests",
+    "vitest/no-identical-title",
+    "vitest/no-import-node-test",
+    "vitest/no-interpolation-in-snapshots",
+    "vitest/prefer-called-exactly-once-with",
+    "vitest/valid-expect",
+    "vitest/valid-expect-in-promise",
+    "vitest/valid-title"
+  ],
+  "apps/extension/lib/testing/lint-parity-probe.ts": ["no-var"],
+  "apps/site/src/components/LintParityProbe.astro": [
+    "jsx-a11y/alt-text",
+    "jsx-a11y/click-events-have-key-events",
+    "jsx-a11y/no-static-element-interactions",
+    "jsx-a11y/role-has-required-aria-props",
+    "local/no-non-doc-comments",
+    "react/jsx-no-target-blank",
+    "shadcn/no-arbitrary-values",
+    "shadcn/no-raw-colors",
+    "shadcn/no-unknown-classes",
+    "unicorn/name-replacements"
+  ],
+  "apps/video/src/lint-parity-probe.tsx": ["no-var", "react/jsx-no-literals"],
+  "packages/ui/src/components/lint-parity-probe.tsx": [
+    "jsx-a11y/alt-text",
+    "no-var",
+    "shadcn/no-inline-styles",
+    "shadcn/no-raw-colors",
+    "unicorn/explicit-length-check"
+  ],
+  "scripts/lint-parity-probe/comments-pairs.ts": [
+    "@eslint-community/eslint-comments/disable-enable-pair",
+    "@eslint-community/eslint-comments/no-aggregating-enable",
+    "jsdoc/require-returns-check",
+    "unused-disable-directive"
+  ],
+  "scripts/lint-parity-probe/core.ts": [
+    "@typescript-eslint/consistent-type-imports",
+    "@typescript-eslint/no-array-constructor",
+    "@typescript-eslint/no-unnecessary-type-assertion",
+    "@typescript-eslint/triple-slash-reference",
+    "jsdoc/informative-docs",
+    "prefer-rest-params",
+    "prefer-spread"
+  ],
+  "scripts/lint-parity-probe/jsdoc.ts": [
+    "jsdoc/check-access",
+    "jsdoc/check-alignment",
+    "jsdoc/check-param-names",
+    "jsdoc/check-property-names",
+    "jsdoc/check-tag-names",
+    "jsdoc/empty-tags",
+    "jsdoc/escape-inline-tags",
+    "jsdoc/implements-on-classes",
+    "jsdoc/informative-docs",
+    "jsdoc/no-types",
+    "jsdoc/reject-any-type",
+    "jsdoc/reject-function-type",
+    "jsdoc/require-next-type",
+    "jsdoc/require-param-description",
+    "jsdoc/require-param-name",
+    "jsdoc/require-property",
+    "jsdoc/require-property-description",
+    "jsdoc/require-property-name",
+    "jsdoc/require-returns",
+    "jsdoc/require-yields-check",
+    "jsdoc/require-yields-type",
+    "jsdoc/tag-lines",
+    "jsdoc/ts-no-empty-object-type",
+    "unicorn/consistent-function-scoping"
+  ],
+  "scripts/lint-parity-probe/module.mjs": [
+    "jsdoc/require-returns",
+    "local/no-non-doc-comments",
+    "unicorn/consistent-boolean-name",
+    "unicorn/explicit-length-check",
+    "unicorn/name-replacements",
+    "unicorn/new-for-builtins",
+    "unicorn/no-array-reduce",
+    "unicorn/no-for-each",
+    "unicorn/no-for-loop",
+    "unicorn/no-typeof-undefined",
+    "unicorn/no-useless-undefined",
+    "unicorn/no-zero-fractions",
+    "unicorn/prefer-https",
+    "unicorn/prefer-node-protocol",
+    "unicorn/prefer-spread",
+    "unicorn/prefer-string-slice",
+    "unicorn/prefer-string-starts-ends-with",
+    "unicorn/prefer-ternary",
+    "unicorn/text-encoding-identifier-case",
+    "unicorn/throw-new-error"
+  ],
+  "scripts/lint-parity-probe/typescript.ts": [
+    "@typescript-eslint/await-thenable",
+    "@typescript-eslint/ban-ts-comment",
+    "@typescript-eslint/no-array-delete",
+    "@typescript-eslint/no-base-to-string",
+    "@typescript-eslint/no-deprecated",
+    "@typescript-eslint/no-duplicate-enum-values",
+    "@typescript-eslint/no-duplicate-type-constituents",
+    "@typescript-eslint/no-empty-object-type",
+    "@typescript-eslint/no-explicit-any",
+    "@typescript-eslint/no-extra-non-null-assertion",
+    "@typescript-eslint/no-floating-promises",
+    "@typescript-eslint/no-for-in-array",
+    "@typescript-eslint/no-implied-eval",
+    "@typescript-eslint/no-misused-new",
+    "@typescript-eslint/no-misused-promises",
+    "@typescript-eslint/no-namespace",
+    "@typescript-eslint/no-non-null-asserted-optional-chain",
+    "@typescript-eslint/no-redundant-type-constituents",
+    "@typescript-eslint/no-require-imports",
+    "@typescript-eslint/no-this-alias",
+    "@typescript-eslint/no-unnecessary-type-constraint",
+    "@typescript-eslint/no-unsafe-argument",
+    "@typescript-eslint/no-unsafe-assignment",
+    "@typescript-eslint/no-unsafe-call",
+    "@typescript-eslint/no-unsafe-declaration-merging",
+    "@typescript-eslint/no-unsafe-enum-comparison",
+    "@typescript-eslint/no-unsafe-function-type",
+    "@typescript-eslint/no-unsafe-member-access",
+    "@typescript-eslint/no-unsafe-return",
+    "@typescript-eslint/no-unsafe-unary-minus",
+    "@typescript-eslint/no-unused-expressions",
+    "@typescript-eslint/no-unused-vars",
+    "@typescript-eslint/no-wrapper-object-types",
+    "@typescript-eslint/only-throw-error",
+    "@typescript-eslint/prefer-as-const",
+    "@typescript-eslint/prefer-namespace-keyword",
+    "@typescript-eslint/prefer-promise-reject-errors",
+    "@typescript-eslint/require-await",
+    "@typescript-eslint/restrict-plus-operands",
+    "@typescript-eslint/restrict-template-expressions",
+    "@typescript-eslint/unbound-method",
+    "no-var",
+    "prefer-const",
+    "unicorn/no-for-each",
+    "unicorn/no-this-assignment",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unnecessary-await",
+    "unicorn/no-useless-template-literals",
+    "unicorn/prefer-includes"
+  ],
+  "scripts/lint-parity-probe/unicorn-context.ts": [
+    "jsdoc/require-returns-check",
+    "unicorn/consistent-assert",
+    "unicorn/consistent-existence-index-check",
+    "unicorn/consistent-function-scoping",
+    "unicorn/explicit-timer-delay",
+    "unicorn/no-collection-bracket-access",
+    "unicorn/no-invalid-argument-count",
+    "unicorn/no-non-function-verb-prefix",
+    "unicorn/no-unnecessary-array-splice-count",
+    "unicorn/no-unsafe-sqlite-interpolation",
+    "unicorn/no-useless-set-construction",
+    "unicorn/no-using-resource-escape",
+    "unicorn/prefer-array-iterable-methods",
+    "unicorn/prefer-set-methods",
+    "unicorn/prefer-temporal-conversion"
+  ],
+  "scripts/lint-parity-probe/unicorn/better-dom-traversing.js": [
+    "unicorn/better-dom-traversing",
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/catch-error-name.js": [
+    "unicorn/catch-error-name",
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-optional-catch-binding"
+  ],
+  "scripts/lint-parity-probe/unicorn/class-reference-in-static-methods.js": [
+    "unicorn/class-reference-in-static-methods",
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-assert.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-class-member-order.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-class-member-order"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-compound-words.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-compound-words"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-conditional-object-spread.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-conditional-object-spread"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-date-clone.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-date-clone",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-empty-array-spread.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-empty-array-spread"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-existence-index-check.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-export-decorator-position.ts": [
+    "unicorn/consistent-export-decorator-position"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-function-scoping.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-function-scoping"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-json-file-read.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-json-file-read"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-optional-chaining.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-optional-chaining",
+    "unicorn/no-optional-chaining-on-undeclared-variable"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-template-literal-escape.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/consistent-template-literal-escape"
+  ],
+  "scripts/lint-parity-probe/unicorn/consistent-tuple-labels.ts": [
+    "@typescript-eslint/no-unused-vars",
+    "unicorn/consistent-tuple-labels"
+  ],
+  "scripts/lint-parity-probe/unicorn/default-export-style.js": [
+    "unicorn/default-export-style"
+  ],
+  "scripts/lint-parity-probe/unicorn/dom-node-dataset.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/dom-node-dataset"
+  ],
+  "scripts/lint-parity-probe/unicorn/escape-case.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/escape-case",
+    "unicorn/prefer-unicode-code-point-escapes"
+  ],
+  "scripts/lint-parity-probe/unicorn/expiring-todo-comments.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/expiring-todo-comments"
+  ],
+  "scripts/lint-parity-probe/unicorn/explicit-timer-delay.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/import-style.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/import-style"
+  ],
+  "scripts/lint-parity-probe/unicorn/isolated-functions.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/isolated-functions",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/logical-assignment-operators.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/max-nested-calls.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/max-nested-calls",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-accessor-recursion.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-accessor-recursion",
+    "unicorn/no-this-outside-of-class"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-accidental-bitwise-operator.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-accidental-bitwise-operator"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-anonymous-default-export.js": [
+    "unicorn/no-anonymous-default-export"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-callback-reference.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-callback-reference"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-concat-in-loop.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-concat-in-loop"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-fill-with-reference-type.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-fill-with-reference-type",
+    "unicorn/no-new-array",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-from-fill.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-from-fill",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-method-this-argument.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-method-this-argument"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-reverse.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-reverse"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-sort-for-min-max.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-sort",
+    "unicorn/no-array-sort-for-min-max"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-sort.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-sort",
+    "unicorn/require-array-sort-compare"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-array-splice.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-splice",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-async-iterator-callback.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-async-iterator-callback",
+    "unicorn/no-for-each",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return",
+    "unicorn/no-unused-iterator-helper"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-async-promise-finally.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-async-promise-finally",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-await",
+    "unicorn/prefer-top-level-await"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-await-expression-member.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-await-expression-member"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-await-in-promise-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-await-in-promise-methods",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-blob-to-file.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-blob-to-file",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-boolean-sort-comparator.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-boolean-sort-comparator",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-break-in-nested-loop.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-break-in-nested-loop"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-canvas-to-image.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-canvas-to-image",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-chained-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-chained-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-collection-bracket-access.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-computed-property-existence-check.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-computed-property-existence-check"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-confusing-array-splice.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-confusing-array-splice",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-confusing-array-with.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-confusing-array-with"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-console-spaces.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-console-spaces",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-constant-zero-expression.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-constant-zero-expression"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-declarations-before-early-exit.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-declarations-before-early-exit"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-document-cookie.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-double-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-double-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-duplicate-if-branches.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-duplicate-if-branches"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-duplicate-logical-operands.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-duplicate-logical-operands"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-duplicate-loops.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-duplicate-loops"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-duplicate-set-values.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-duplicate-set-values"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-empty-file.js": [
+    "unicorn/no-empty-file"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-error-property-assignment.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-error-property-assignment",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-exports-in-scripts.js": [
+    "unicorn/no-exports-in-scripts"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-global-object-property-assignment.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-global-object-property-assignment"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-immediate-mutation.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-immediate-mutation",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-impossible-length-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-impossible-length-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-incorrect-query-selector.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-incorrect-query-selector",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-incorrect-template-string-interpolation.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-incorrect-template-string-interpolation"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-instanceof-builtins.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-instanceof-builtins"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-invalid-argument-count.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-invalid-character-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-invalid-character-comparison",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-invalid-fetch-options.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-invalid-fetch-options"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-invalid-remove-event-listener.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-invalid-remove-event-listener",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-global-this"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-invalid-well-known-symbol-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-invalid-well-known-symbol-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-late-current-target-access.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-late-current-target-access",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-late-event-control.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-late-event-control",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-lonely-if.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-lonely-if"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-loop-iterable-mutation.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-loop-iterable-mutation"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-magic-array-flat-depth.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-magic-array-flat-depth"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-mismatched-map-key.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-mismatched-map-key"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-misrefactored-assignment.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-misrefactored-assignment"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-multiple-promise-resolver-calls.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-multiple-promise-resolver-calls",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-named-default.js": [
+    "unicorn/no-named-default"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-negated-array-predicate.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-negated-array-predicate"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-negated-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-negated-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-negated-condition.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-negated-condition"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-negation-in-equality-check.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-negation-in-equality-check"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-new-array.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-new-array"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-new-buffer.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-new-buffer"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-non-function-verb-prefix.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-nonstandard-builtin-properties.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-nonstandard-builtin-properties",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-object-as-default-parameter.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-object-as-default-parameter"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-object-methods-with-collections.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-object-methods-with-collections",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-optional-chaining-on-undeclared-variable.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-optional-chaining-on-undeclared-variable"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-process-exit.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-process-exit",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-redundant-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-redundant-comparison",
+    "unicorn/prefer-simple-condition-first"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-return-array-push.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-return-array-push"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-selector-as-dom-name.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-selector-as-dom-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-query-selector"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-single-promise-in-promise-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-single-promise-in-promise-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-subtraction-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-subtraction-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-thenable.js": ["unicorn/no-thenable"],
+  "scripts/lint-parity-probe/unicorn/no-this-outside-of-class.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-this-outside-of-class"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-top-level-assignment-in-function.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-assignment-in-function"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-uncalled-method.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-uncalled-method"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-undeclared-class-members.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-undeclared-class-members"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-array-flat-depth.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unnecessary-array-flat-depth",
+    "unicorn/no-unused-builtin-method-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-array-flat-map.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-array-flat-map"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-array-splice-count.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-boolean-comparison.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-boolean-comparison"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-fetch-options.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unnecessary-fetch-options"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-global-this.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unnecessary-global-this"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-nested-ternary.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-nested-ternary"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-polyfills.js": [
+    "unicorn/no-unnecessary-polyfills"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-slice-end.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-slice-end"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-splice.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unnecessary-splice"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unnecessary-string-trim.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-string-trim"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unreadable-array-destructuring.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unreadable-array-destructuring"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unreadable-for-of-expression.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unreadable-for-of-expression"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unreadable-iife.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unreadable-iife"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unreadable-object-destructuring.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unreadable-object-destructuring"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unsafe-buffer-conversion.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unsafe-buffer-conversion"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unsafe-promise-all-settled-values.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-await-expression-member",
+    "unicorn/no-unsafe-promise-all-settled-values"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unsafe-property-key.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unsafe-property-key"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unsafe-sqlite-interpolation.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unsafe-string-replacement.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unsafe-string-replacement"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unused-builtin-method-return.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-unused-iterator-helper.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-callback-reference",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-iterator-helper"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-boolean-cast.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-boolean-cast"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-coercion.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-coercion"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-collection-argument.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-collection-argument"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-compound-assignment.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-compound-assignment"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-concat.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-concat"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-continue.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-continue"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-delete-check.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-computed-property-existence-check",
+    "unicorn/no-useless-delete-check"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-error-capture-stack-trace.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-nonstandard-builtin-properties",
+    "unicorn/no-useless-error-capture-stack-trace"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-fallback-in-spread.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-fallback-in-spread"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-iterator-to-array.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-iterator-to-array"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-length-check.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-length-check"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-logical-operand.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-logical-operand"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-override.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-override"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-re-export.js": [
+    "unicorn/no-useless-re-export"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-recursion.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-recursion",
+    "unicorn/prefer-ternary"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-set-construction.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-spread.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-spread"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-useless-switch-case.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-useless-switch-case",
+    "unicorn/switch-case-braces"
+  ],
+  "scripts/lint-parity-probe/unicorn/no-xor-as-exponentiation.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-xor-as-exponentiation"
+  ],
+  "scripts/lint-parity-probe/unicorn/numeric-separators-style.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/numeric-separators-style"
+  ],
+  "scripts/lint-parity-probe/unicorn/operator-assignment.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/operator-assignment"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-abort-signal-any.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-abort-signal-timeout.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-abort-signal-timeout"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-add-event-listener-options.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-add-event-listener-options"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-add-event-listener.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-add-event-listener"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-aggregate-error.ts": [
+    "unicorn/prefer-aggregate-error"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-flat.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-flat"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-from-async.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-from-async"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-from-map.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-from-map",
+    "unicorn/prefer-spread"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-from-range.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/new-for-builtins",
+    "unicorn/prefer-array-from-range",
+    "unicorn/prefer-iterator-to-array"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-index-of.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-index-of"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-iterable-methods.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-last-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-callback-reference",
+    "unicorn/no-array-reverse",
+    "unicorn/prefer-array-last-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-slice.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-slice"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-array-some.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-array-some"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-at.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-at"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-bigint-literals.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-bigint-literals"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-blob-reading-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-blob-reading-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-block-statement-over-iife.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-block-statement-over-iife"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-boolean-return.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-boolean-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-class-fields.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-class-fields"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-combined-guards.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-combined-guards"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-continue.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-continue"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-default-parameters.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/logical-assignment-operators",
+    "unicorn/prefer-default-parameters"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-direct-iteration.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-direct-iteration"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-dom-node-append.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-dom-node-append"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-dom-node-html-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-dom-node-html-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-dom-node-remove.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-dom-node-remove"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-dom-node-replace-children.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-dom-node-replace-children"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-early-return.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-early-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-else-if.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-else-if"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-event-target.js": [
+    "unicorn/prefer-event-target"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-export-from.js": [
+    "unicorn/prefer-export-from"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-flat-math-min-max.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-flat-math-min-max"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-get-or-insert-computed.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-get-or-insert-computed"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-global-number-constants.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-global-number-constants"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-global-this.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-global-this"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-group-by.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-reduce",
+    "unicorn/prefer-group-by"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-has-check.ts": [
+    "@typescript-eslint/no-unsafe-argument",
+    "local/no-non-doc-comments",
+    "unicorn/prefer-has-check"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-hoisting-branch-code.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-hoisting-branch-code"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-identifier-import-export-specifiers.js": [
+    "unicorn/prefer-identifier-import-export-specifiers"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-includes-over-repeated-comparisons.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-includes-over-repeated-comparisons"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-iterable-in-constructor.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-iterable-in-constructor"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-iterator-helpers.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return",
+    "unicorn/prefer-iterator-helpers",
+    "unicorn/prefer-iterator-to-array"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-iterator-to-array-at-end.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-callback-reference",
+    "unicorn/prefer-iterator-to-array-at-end"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-iterator-to-array.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-iterator-to-array"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-iterator-zip.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-iterator-zip"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-keyboard-event-key.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-global-this",
+    "unicorn/prefer-keyboard-event-key"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-location-assign.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-location-assign"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-logical-operator-over-ternary.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-logical-operator-over-ternary"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-map-from-entries.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-map-from-entries"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-math-abs.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-math-abs"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-math-constants.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-math-constants"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-math-min-max.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-math-min-max"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-math-trunc.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-math-trunc"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-minimal-ternary.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-minimal-ternary"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-modern-dom-apis.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-modern-dom-apis"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-modern-math-apis.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-modern-math-apis"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-module.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-module"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-native-coercion-functions.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-native-coercion-functions"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-negative-index.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return",
+    "unicorn/prefer-negative-index"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-number-is-safe-integer.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-number-is-safe-integer",
+    "unicorn/prefer-type-error"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-object-define-properties.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-object-define-properties"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-object-destructuring-defaults.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-object-destructuring-defaults"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-object-from-entries.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-array-reduce",
+    "unicorn/prefer-object-from-entries"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-object-iterable-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-object-iterable-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-observer-apis.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-observer-apis"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-path2d.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-path2d"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-private-class-fields.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-private-class-fields"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-promise-try.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-promise-try"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-promise-with-resolvers.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-assignment-in-function",
+    "unicorn/prefer-promise-with-resolvers"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-prototype-methods.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-prototype-methods"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-queue-microtask.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-queue-microtask"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-reflect-apply.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-reflect-apply"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-regexp-test.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-regexp-test"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-response-static-json.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-response-static-json"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-scoped-selector.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-scoped-selector"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-set-has.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-set-has"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-set-methods.js": [
+    "unicorn/consistent-boolean-name"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-set-size.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-set-size"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-simple-condition-first.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-simple-condition-first"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-simple-sort-comparator.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-simple-sort-comparator",
+    "unicorn/prefer-ternary"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-simplified-conditions.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-simplified-conditions"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-single-array-predicate.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-single-array-predicate"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-single-call.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-single-call"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-single-object-destructuring.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-single-object-destructuring"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-single-replace.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-single-replace"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-smaller-scope.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-smaller-scope"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-split-limit.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-split-limit"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-string-match-all.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-string-match-all"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-string-pad-start-end.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-string-pad-start-end"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-string-raw.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-string-raw"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-string-repeat.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-string-repeat"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-structured-clone.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-structured-clone"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-switch.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-switch"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-temporal-conversion.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-then-catch.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-await",
+    "unicorn/prefer-then-catch",
+    "unicorn/prefer-top-level-await"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-toggle-attribute.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-toggle-attribute"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-top-level-await.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-process-exit",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-top-level-await"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-type-error.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-unnecessary-boolean-comparison",
+    "unicorn/prefer-type-error"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-type-literal-last.ts": [
+    "@typescript-eslint/no-redundant-type-constituents",
+    "@typescript-eslint/no-unused-vars",
+    "unicorn/prefer-type-literal-last"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-unary-minus.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-unary-minus"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-url-can-parse.js": [
+    "unicorn/prefer-url-can-parse"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-url-href.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/prefer-url-href"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-url-search-parameters.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-url-search-parameters"
+  ],
+  "scripts/lint-parity-probe/unicorn/prefer-while-loop-condition.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/prefer-while-loop-condition"
+  ],
+  "scripts/lint-parity-probe/unicorn/relative-url-style.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/relative-url-style"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-array-join-separator.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/require-array-join-separator"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-array-sort-compare.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/no-unused-builtin-method-return",
+    "unicorn/require-array-sort-compare"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-css-escape.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/require-css-escape"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-module-attributes.js": [
+    "unicorn/require-module-attributes"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-module-specifiers.js": [
+    "unicorn/require-module-specifiers"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-number-to-fixed-digits-argument.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/require-number-to-fixed-digits-argument"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-passive-events.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/require-passive-events"
+  ],
+  "scripts/lint-parity-probe/unicorn/require-proxy-trap-boolean-return.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/no-top-level-side-effects",
+    "unicorn/require-proxy-trap-boolean-return"
+  ],
+  "scripts/lint-parity-probe/unicorn/switch-case-break-position.js": [
+    "unicorn/consistent-boolean-name",
+    "unicorn/switch-case-braces",
+    "unicorn/switch-case-break-position"
+  ]
+}

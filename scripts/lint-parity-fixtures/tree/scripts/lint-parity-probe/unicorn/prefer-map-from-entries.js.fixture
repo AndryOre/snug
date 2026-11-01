@@ -1,0 +1,6 @@
+const object = Object.fromEntries(Object.entries(source));
+
+if (Object.hasOwn(object, 'foo')) {
+	console.log(object.foo);
+}
+export const fixtureModule = true;

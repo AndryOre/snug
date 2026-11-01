@@ -1,0 +1,6 @@
+{
+  "react-hooks/config": "Validates the React Compiler options passed to the rule. Both configs enable it with no options, so there is no compiler configuration for it to reject from any source file.",
+  "react-hooks/gating": "Validates the React Compiler `gating` option passed to the rule. Both configs enable it without that option, so no source file can make it report.",
+  "unicorn/no-shorthand-property-overrides": "A CSS rule (`meta.languages: ['css/css']`, needs `@eslint/css`). Neither config lints CSS files, so ESLint never runs it on the JavaScript and TypeScript files it is enabled for.",
+  "unicorn/no-transition-all": "A CSS rule (`meta.languages: ['css/css']`, needs `@eslint/css`). Neither config lints CSS files, so ESLint never runs it on the JavaScript and TypeScript files it is enabled for."
+}

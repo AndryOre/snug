@@ -1,0 +1,6 @@
+const set = new Set([
+	'foo',
+	'bar',
+	'foo',
+]);
+export const fixtureModule = true;

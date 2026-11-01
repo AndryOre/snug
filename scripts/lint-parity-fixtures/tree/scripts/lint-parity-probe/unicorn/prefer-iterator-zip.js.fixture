@@ -1,0 +1,4 @@
+for (let index = 0; index < Math.min(names.length, scores.length); index++) {
+	save(names[index], scores[index]);
+}
+export const fixtureModule = true;

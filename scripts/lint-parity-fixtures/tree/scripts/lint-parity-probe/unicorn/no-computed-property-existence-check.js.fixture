@@ -1,0 +1,2 @@
+if (object[key]) {}
+export const fixtureModule = true;

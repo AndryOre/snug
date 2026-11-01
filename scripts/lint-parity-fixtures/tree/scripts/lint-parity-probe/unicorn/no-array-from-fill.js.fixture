@@ -1,0 +1,2 @@
+Array.from({length: 3}).fill().map((_, index) => index);
+export const fixtureModule = true;

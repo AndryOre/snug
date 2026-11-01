@@ -1,0 +1,5 @@
+(() => {
+	const value = getValue();
+	run(value);
+})();
+export const fixtureModule = true;

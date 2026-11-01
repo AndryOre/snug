@@ -1,0 +1,2 @@
+const area = 3.14 * radius ** 2;
+export const fixtureModule = true;

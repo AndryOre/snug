@@ -1,0 +1,6 @@
+class Foo extends Bar {
+	doThing(a, b) {
+		return super.doThing(a, b);
+	}
+}
+export const fixtureModule = true;

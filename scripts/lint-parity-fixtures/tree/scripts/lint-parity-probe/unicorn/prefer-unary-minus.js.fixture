@@ -1,0 +1,2 @@
+const inverted = value * -1;
+export const fixtureModule = true;

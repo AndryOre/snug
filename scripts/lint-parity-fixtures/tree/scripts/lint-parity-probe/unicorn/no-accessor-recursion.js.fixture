@@ -1,0 +1,6 @@
+const foo = {
+	get bar() {
+		return this.bar;
+	}
+};
+export const fixtureModule = true;

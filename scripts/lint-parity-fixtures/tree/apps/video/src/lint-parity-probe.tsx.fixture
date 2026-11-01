@@ -1,0 +1,25 @@
+/**
+ * Remotion composition code: `shadcn/*`, `no-array-index-key`,
+ * `jsdoc/require-param`, `jsdoc/require-returns`, `unicorn/name-replacements`
+ * and `unicorn/consistent-boolean-name` are off here; the rest still applies.
+ */
+export function Scene({ items, visible }: { items: string[]; visible: boolean }) {
+  const props = { color: 'red' }
+  return (
+    <div style={{ color: '#ff0000' }} className="bg-[#123456]">
+      Plain copy still needs translation keys
+      {visible && items.map((item, index) => <span key={index}>{item}</span>)}
+      <span style={props} />
+    </div>
+  )
+}
+
+/**
+ * Documented without params or returns.
+ */
+export function frameOf(fps: number): number {
+  return fps * 2
+}
+
+var videoCounter = 1
+export { videoCounter }

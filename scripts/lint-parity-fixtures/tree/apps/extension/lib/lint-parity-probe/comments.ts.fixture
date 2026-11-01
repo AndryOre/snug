@@ -1,0 +1,100 @@
+// A line comment the comment policy bans.
+/* A non-JSDoc block comment the comment policy bans. */
+
+/**
+ * The add function.
+ */
+export function add(left: number, right: number): number {
+  return left + right
+}
+
+/**
+ * Sums two numbers.
+ * @param left The first number.
+ * @param wrongName The second number.
+ * @returns
+ */
+export function sum(left: number, right: number): number {
+  return left + right
+}
+
+/**
+ * Typed tags are redundant in TypeScript.
+ * @param {number} value - A value.
+ * @returns {number} The value.
+ * @unknownTag something
+ * @access private
+ * @property {string} missing
+ */
+export function identity(value: number): number {
+  return value
+}
+
+/**
+ *Misaligned and multi-asterisk block.
+ ** with a second asterisk.
+ * @default 3
+ * @param value - A value.
+ * @returns A value.
+ */
+export function misaligned(value: number): number {
+  return value
+}
+
+/**
+ * Yields without a doc.
+ * @param value - A value.
+ * @returns Nothing.
+ */
+export function* generator(value: number): Generator<number> {
+  yield value
+}
+
+/**
+ * Throws without type.
+ * @param value - Any value.
+ * @returns The value.
+ * @throws
+ * @type {Object}
+ * @see {@link }
+ * @version not-semver
+ * @license NOT-A-LICENSE
+ */
+export function throwing(value: unknown): unknown {
+  return value
+}
+
+/** Single line block with a typo in the type.
+ * @param value - A value.
+ * @returns {Array<} Broken.
+ */
+export function brokenType(value: number): number[] {
+  return [value]
+}
+
+/**
+ * Has a returns tag but no return value.
+ * @returns A number.
+ */
+export function noReturn(): void {}
+
+/* eslint-disable */
+export const unlimited = 1
+/* eslint-enable */
+
+/* eslint-disable no-console */
+export const pairless = 1
+
+// eslint-disable-next-line no-var
+export const undescribed = 2
+
+/* eslint-enable no-alert, no-console -- aggregated enable */
+
+/* eslint-enable no-debugger -- enabling something never disabled */
+
+// eslint-disable-next-line no-var, no-var -- duplicated rule
+var duplicated = 1
+export { duplicated }
+
+// eslint-disable-next-line prefer-const -- nothing to suppress here
+export const unusedDirective = 3

@@ -1,0 +1,2 @@
+const foo = 1_23_4444;
+export const fixtureModule = true;

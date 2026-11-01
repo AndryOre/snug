@@ -1,0 +1,6 @@
+function sum(first, second) {
+	return first + second;
+}
+
+sum(1);
+export const fixtureModule = true;

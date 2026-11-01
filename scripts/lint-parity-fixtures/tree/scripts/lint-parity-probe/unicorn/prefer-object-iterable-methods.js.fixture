@@ -1,0 +1,4 @@
+for (const key of Object.keys(object)) {
+	foo(object[key]);
+}
+export const fixtureModule = true;

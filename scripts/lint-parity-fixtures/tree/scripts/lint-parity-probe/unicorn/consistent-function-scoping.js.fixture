@@ -1,0 +1,8 @@
+export function doFoo(foo) {
+	// Does not capture anything from the scope, can be moved to the outer scope
+	function doBar(bar) {
+		return bar === 'bar';
+	}
+
+	return doBar;
+}

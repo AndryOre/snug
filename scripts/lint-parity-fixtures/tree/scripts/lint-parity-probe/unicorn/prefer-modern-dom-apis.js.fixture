@@ -1,0 +1,2 @@
+parentNode.replaceChild(newNode, oldNode);
+export const fixtureModule = true;

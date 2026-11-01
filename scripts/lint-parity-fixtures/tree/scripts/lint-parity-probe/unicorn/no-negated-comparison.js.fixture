@@ -1,0 +1,2 @@
+const isDifferent = !(a === b);
+export const fixtureModule = true;

@@ -1,0 +1,2 @@
+const set = new Set([]);
+export const fixtureModule = true;

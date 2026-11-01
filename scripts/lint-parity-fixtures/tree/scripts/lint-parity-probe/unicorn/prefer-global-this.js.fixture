@@ -1,0 +1,2 @@
+window;
+export const fixtureModule = true;

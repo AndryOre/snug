@@ -1,0 +1,2 @@
+Math.log(x) * Math.LOG10E
+export const fixtureModule = true;

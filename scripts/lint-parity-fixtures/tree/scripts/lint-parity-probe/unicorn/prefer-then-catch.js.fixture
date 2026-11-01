@@ -1,0 +1,7 @@
+fetch(url).then(
+	response => JSON.parse(response),
+	error => {
+		log(error);
+	},
+);
+export const fixtureModule = true;

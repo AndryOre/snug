@@ -1,0 +1,2 @@
+function foo({a} = {a: false}) {}
+export const fixtureModule = true;

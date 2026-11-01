@@ -1,0 +1,2 @@
+const result = value.trim().startsWith('-');
+export const fixtureModule = true;

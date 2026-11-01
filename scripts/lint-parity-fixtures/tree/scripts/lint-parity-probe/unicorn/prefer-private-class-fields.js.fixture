@@ -1,0 +1,9 @@
+class Foo {
+	static _PRIVATE_STATIC_FIELD;
+	_privateField;
+
+	_privateMethod() {
+		return 'hello world';
+	}
+}
+export const fixtureModule = true;

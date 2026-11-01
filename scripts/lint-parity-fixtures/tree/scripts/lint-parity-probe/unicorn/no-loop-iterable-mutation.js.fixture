@@ -1,0 +1,4 @@
+for (const item of items) {
+	items.push(item.clone());
+}
+export const fixtureModule = true;

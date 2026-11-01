@@ -1,0 +1,4 @@
+function add(item) {
+	return items.push(item);
+}
+export const fixtureModule = true;

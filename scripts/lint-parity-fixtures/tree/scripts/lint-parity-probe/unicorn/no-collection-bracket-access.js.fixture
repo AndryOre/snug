@@ -1,0 +1,2 @@
+map['foo'] = 'bar';
+export const fixtureModule = true;

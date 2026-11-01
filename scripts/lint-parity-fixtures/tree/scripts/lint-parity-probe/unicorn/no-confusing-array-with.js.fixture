@@ -1,0 +1,2 @@
+const result = array.with(-1, value);
+export const fixtureModule = true;

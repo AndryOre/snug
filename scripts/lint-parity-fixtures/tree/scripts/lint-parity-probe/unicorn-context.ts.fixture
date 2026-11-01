@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict'
+import { DatabaseSync } from 'node:sqlite'
+
+/**
+ * Violations of the unicorn rules that need declared bindings or type
+ * information to report, which the generated per-rule snippets lack.
+ * @param value A value to assert on.
+ * @param items Items to search.
+ * @param identifier A row id.
+ * @returns Nothing.
+ */
+export function unicornContext(
+  value: number,
+  items: readonly string[],
+  identifier: string,
+): void {
+  assert(value === 5)
+
+  const index = items.indexOf('bar')
+  if (index < 0) {
+    return
+  }
+
+  const lookup = new Map<string, string>()
+  lookup['foo'] = 'bar'
+
+  const sum = (first: number, second: number) => first + second
+  sum(1, 2, 3)
+
+  const getName = 'Sindre'
+  console.info(getName)
+
+  const spliced = items.toSpliced(1, items.length)
+  console.info(spliced)
+
+  const database = new DatabaseSync(':memory:')
+  database.exec(`SELECT * FROM users WHERE id = ${identifier}`)
+
+  const selected = new Set([1, 2])
+  const other = new Set([2, 3])
+  console.info(selected.union(new Set(other)))
+
+  for (const [, item] of items.entries()) {
+    console.info(item)
+  }
+
+  const union = new Set([...selected, ...other])
+  console.info(union)
+
+  globalThis.setTimeout(() => {})
+}
+
+/**
+ * Returns a resource after `using` disposed it.
+ * @param acquire Opens the resource.
+ * @returns The disposed resource.
+ */
+export function openResource(acquire: () => Disposable): Disposable {
+  using resource = acquire()
+  return resource
+}
+
+/**
+ * Converts a zoned date time through its epoch milliseconds.
+ * @param zoned The zoned date time.
+ * @returns The same instant.
+ */
+export function toInstant(zoned: Temporal.ZonedDateTime): Temporal.Instant {
+  return Temporal.Instant.fromEpochMilliseconds(zoned.epochMilliseconds)
+}

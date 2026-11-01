@@ -1,0 +1,2 @@
+if (string.match(/unicorn/)) {}
+export const fixtureModule = true;

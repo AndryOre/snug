@@ -1,0 +1,6 @@
+window.addEventListener('keydown', event => {
+	if (event.keyCode === 8) {
+		console.log('Backspace was pressed');
+	}
+});
+export const fixtureModule = true;

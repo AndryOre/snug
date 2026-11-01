@@ -1,0 +1,2 @@
+foo instanceof String;
+export const fixtureModule = true;

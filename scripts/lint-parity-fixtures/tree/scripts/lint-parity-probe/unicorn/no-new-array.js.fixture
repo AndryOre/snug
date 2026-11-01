@@ -1,0 +1,3 @@
+const length = 10;
+const array = new Array(length);
+export const fixtureModule = true;

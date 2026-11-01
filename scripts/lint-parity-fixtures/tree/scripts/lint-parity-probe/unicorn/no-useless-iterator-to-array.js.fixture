@@ -1,0 +1,2 @@
+const set = new Set(iterator.toArray());
+export const fixtureModule = true;

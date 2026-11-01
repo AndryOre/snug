@@ -1,0 +1,9 @@
+function foo(bar) {
+	const result = 1;
+	if (!bar) {
+		return;
+	}
+
+	console.log(result);
+}
+export const fixtureModule = true;

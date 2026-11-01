@@ -1,0 +1,2 @@
+const unicorn = element.getAttribute('data-unicorn');
+export const fixtureModule = true;

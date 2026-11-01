@@ -1,0 +1,8 @@
+for (const item of items) {
+	for (const child of item.children) {
+		if (child.done) {
+			break;
+		}
+	}
+}
+export const fixtureModule = true;

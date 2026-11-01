@@ -1,0 +1,2 @@
+Promise.all([await promise, anotherPromise]);
+export const fixtureModule = true;

@@ -1,0 +1,5 @@
+const errors: Error[] = [new Error('Email is required.')];
+
+if (errors.length > 0) {
+	throw new Error('Validation failed.');
+}
