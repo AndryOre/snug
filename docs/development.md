@@ -28,8 +28,8 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                                                                 |
 | `bun run clean`             | Removes build output, `.turbo` and every workspace's `node_modules`.                                                                                             |
 | `bun run cache:clear`       | Clears ESLint, Turborepo and `node_modules/.cache` caches.                                                                                                       |
-| `bun run format:check`      | Checks formatting with Prettier (no writes).                                                                                                                     |
-| `bun run format:write`      | Formats the repo with Prettier.                                                                                                                                  |
+| `bun run format:check`      | Checks formatting with Oxfmt (no writes).                                                                                                                        |
+| `bun run format:write`      | Formats the repo with Oxfmt.                                                                                                                                     |
 | `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                        |
 | `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                        |
 | `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                           |
@@ -52,9 +52,9 @@ indexed in [how-to](how-to/README.md).
 
 Hooks are installed via Husky and live in `.husky/`:
 
-- **`pre-commit`** — runs `bunx lint-staged`, which applies Prettier + ESLint to
+- **`pre-commit`** — runs `bunx lint-staged`, which applies Oxfmt + ESLint to
   staged `*.{js,jsx,ts,tsx,mjs}` files, ESLint alone to staged `*.astro` files,
-  and Prettier alone to staged `*.{json,md,mdx,css,scss,yml,yaml}` files (see
+  and Oxfmt alone to staged `*.{json,md,mdx,css,scss,yml,yaml}` files (see
   `lint-staged.config.mjs`).
 - **`commit-msg`** — runs `bunx commitlint --edit $1` against
   `commitlint.config.mjs`, which only extends `@commitlint/config-conventional`.
@@ -525,8 +525,8 @@ place on a non-obvious export — never restating what a signature already says.
 Plain `//` line comments and non-JSDoc `/* */` block comments are disallowed;
 the only exceptions are directive comments a tool reads rather than a human:
 `eslint*` (`eslint-disable`, `eslint-enable`, ...), `global`, `@ts-*`
-(`@ts-expect-error`, ...), `prettier-ignore`, `@vitest-environment`, and
-TypeScript triple-slash reference directives.
+(`@ts-expect-error`, ...), `oxfmt-ignore`, `@vitest-environment`, and TypeScript
+triple-slash reference directives.
 
 This is enforced by ESLint: the local `local/no-non-doc-comments` rule bans
 non-doc comments, `jsdoc/informative-docs` rejects a TSDoc block that only

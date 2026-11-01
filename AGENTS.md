@@ -6,7 +6,7 @@ Instructions for coding agents working in this repository.
 
 Snug is a bun-workspaces monorepo orchestrated by Turborepo
 ([ADR 0010](docs/adr/0010-bun-workspaces-monorepo.md)). The root is tooling only
-(husky, commitlint, prettier, eslint, turbo, knip). Stack rules live next to the
+(husky, commitlint, oxfmt, eslint, turbo, knip). Stack rules live next to the
 code they govern, and apply on top of this file:
 
 - [`apps/extension/AGENTS.md`](apps/extension/AGENTS.md) — the Chrome MV3
