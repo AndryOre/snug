@@ -1,0 +1,4 @@
+/**
+ * `unicorn/filename-case` flags this file name (neither kebab nor Pascal case).
+ */
+export const badName = 1

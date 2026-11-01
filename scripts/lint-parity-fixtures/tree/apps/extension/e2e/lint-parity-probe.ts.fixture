@@ -1,0 +1,11 @@
+/**
+ * Playwright fixtures call a `use` callback: `rules-of-hooks` is off under
+ * `e2e/`, while the rest of the rule set still applies (`no-var`).
+ * @param use - The Playwright fixture callback.
+ */
+export async function fixture(use: (value: number) => Promise<void>) {
+  await use(1)
+}
+
+var e2eCounter = 1
+export { e2eCounter }

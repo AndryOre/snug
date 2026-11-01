@@ -1,0 +1,6 @@
+/**
+ * `unicorn/filename-case` ignores `^\[.+\]` names, so this file is clean
+ * apart from `no-var`.
+ */
+var bracketCounter = 1
+export { bracketCounter }

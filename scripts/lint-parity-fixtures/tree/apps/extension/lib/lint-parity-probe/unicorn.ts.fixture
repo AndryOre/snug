@@ -1,0 +1,73 @@
+/**
+ * Violations of `eslint-plugin-unicorn` recommended rules with snug's
+ * overrides (`no-null` off, `no-array-reduce` without simple operations,
+ * `name-replacements` allowing `utils`/`docs`/`doc`).
+ */
+export const utils = null
+export const docs = 1
+export const btn = document.querySelector('button')
+export const total = [1, 2].reduce((sum, value) => sum + value, 0)
+export const element = document.getElementById('root')
+element?.classList.contains('x') ? element.classList.remove('x') : element?.classList.add('x')
+export const last = [1, 2].at(-1) ?? [1, 2][[1, 2].length - 1]
+export const flat = [[1], [2]].map((item) => item).flat()
+export const found = [1, 2].filter((value) => value > 1)[0]
+export const has = [1, 2].indexOf(1) !== -1
+export const replaced = 'aaa'.replace(/a/g, 'b')
+export const sliced = 'abc'.substring(1)
+export const trimmed = 'abc'.trimLeft()
+export const codePoint = 'a'.charCodeAt(0)
+export const now = new Date().getTime()
+export const parsed = parseInt('1', 10)
+export const isNan = isNaN(1)
+export const max = Number.MAX_SAFE_INTEGER > Infinity
+export const set = new Set([1, 2])
+export const isIn = [1, 2].includes(1) || [1, 2].some((value) => value === 2)
+export const arrayFrom = Array.from({ length: 3 })
+export const message = new Error()
+export const negative = [1, 2].slice([1, 2].length - 1)
+export const spreadString = [...'abc']
+export const objectEntries = Object.fromEntries([['a', 1]])
+export const text = element?.innerText
+export const assign = Object.assign({}, { a: 1 })
+export function useless(value: number): number | undefined {
+  if (value) {
+    return undefined
+  }
+  return value
+}
+export function lonely(value: boolean): number {
+  if (value) {
+    return 1
+  } else {
+    if (!value) {
+      return 2
+    }
+  }
+  return 3
+}
+export class Static {
+  static only(): number {
+    return 1
+  }
+}
+export async function promiseResolve(): Promise<number> {
+  return Promise.resolve(1)
+}
+export const err = new Error('x')
+try {
+  JSON.parse('{')
+} catch (error_) {
+  console.info('ignored')
+}
+export const switched = (value: number): number => {
+  switch (value) {
+    case 1:
+      return 1
+    default:
+  }
+  return 0
+}
+export const hex = '\xA9'
+export const regex = /[0-9]/
+export const encoded = new TextEncoder().encode('utf-8') && 'UTF8'

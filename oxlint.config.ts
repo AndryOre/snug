@@ -590,13 +590,21 @@ const reactHooksRules: DummyRuleMap = {
 }
 
 /**
- * `typescript-eslint` `recommendedTypeChecked` plus the explicit options of the former ESLint config. Type-aware rules run on tsgolint.
+ * `typescript-eslint` `recommendedTypeChecked` plus the explicit options of the former ESLint config. Type-aware rules run on tsgolint. `no-unused-vars` spells out ESLint's defaults, which have no ignore patterns: Oxlint's own defaults skip `_`-prefixed names.
  */
 const typescriptRules: DummyRuleMap = {
   'no-array-constructor': 'error',
   'no-implied-eval': 'off',
   'no-unused-expressions': 'error',
-  'no-unused-vars': 'error',
+  'no-unused-vars': [
+    'error',
+    {
+      argsIgnorePattern: '^$',
+      caughtErrorsIgnorePattern: '^$',
+      destructuredArrayIgnorePattern: '^$',
+      varsIgnorePattern: '^$',
+    },
+  ],
   'no-throw-literal': 'off',
   'prefer-promise-reject-errors': 'off',
   'require-await': 'off',
@@ -691,7 +699,6 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/empty-tags': 'error',
   'jsdoc/implements-on-classes': 'error',
   'jsdoc/no-blank-blocks': 'off',
-  'jsdoc/no-defaults': 'error',
   'jsdoc/require-param-description': 'error',
   'jsdoc/require-param-name': 'error',
   'jsdoc/require-param-type': 'off',
@@ -709,9 +716,10 @@ const jsdocNativeRules: DummyRuleMap = {
 }
 
 /**
- * `eslint-plugin-jsdoc` rules with no native port, run as the original rules through the `jsdoc-js` jsPlugin.
+ * `eslint-plugin-jsdoc` rules with no native port, run as the original rules through the `jsdoc-js` jsPlugin. `no-defaults` has a native port, but it only checks `@param` defaults and misses the `@default` tag the original reports, so the original runs instead.
  */
 const jsdocOriginalRules: DummyRuleMap = {
+  'jsdoc-js/no-defaults': 'error',
   'jsdoc-js/require-param': 'error',
   'jsdoc-js/require-returns': 'error',
   'jsdoc-js/check-alignment': 'error',

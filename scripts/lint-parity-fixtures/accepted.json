@@ -1,0 +1,20 @@
+[
+  {
+    "file": "apps/extension/lib/lint-parity-probe/comments.ts",
+    "line": 44,
+    "rule": "jsdoc/require-yields",
+    "reason": "Location only: the native port reports the same missing @yields on the generator declaration (line 49) instead of the JSDoc block's first line; it is listed as Oxlint-only there."
+  },
+  {
+    "file": "apps/extension/lib/lint-parity-probe/comments.ts",
+    "line": 53,
+    "rule": "jsdoc/require-throws-type",
+    "reason": "Location only: the native port reports the same untyped @throws on the tag's own line (57) instead of the JSDoc block's first line; it is listed as Oxlint-only there."
+  },
+  {
+    "file": "scripts/lint-parity-probe/typescript.ts",
+    "line": 114,
+    "rule": "@typescript-eslint/no-unsafe-declaration-merging",
+    "reason": "Same violation, one report fewer: typescript-eslint reports the unsafe interface/class merge on both declarations (lines 111 and 114), the native port only on the first (111, common), so the merge is still rejected."
+  }
+]

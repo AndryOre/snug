@@ -1,0 +1,31 @@
+// A line comment the comment policy bans in .mjs too.
+import fs from 'fs'
+
+/**
+ * The read function.
+ * @param file - A path.
+ */
+export function read(file) {
+  const e = fs.readFileSync(file, 'utf-8')
+  for (let index = 0; index < e.length; index++) {
+    console.info(e[index])
+  }
+  if (!(e.length > 0)) {
+    return undefined
+  }
+  return [1, 2, 3].reduce((total, value) => total + value, 0)
+}
+
+export const url = 'http://example.com'
+export const isEmpty = [].length === 0
+export const nested = 1 ? (2 ? 3 : 4) : 5
+export const thrown = () => {
+  throw Error('missing new')
+}
+export const big = 0XFF
+export const zero = 1.0
+export const spread = Array.from([1, 2])
+export const lower = 'ABC'.substr(1)
+export const start = 'abc'.indexOf('a') === 0
+export const typeCheck = typeof url === 'undefined'
+export const keys = Object.keys({}).forEach((key) => key)

@@ -1,0 +1,175 @@
+import { readFileSync } from 'node:fs'
+import type { Stats } from 'node:fs'
+
+/**
+ * Violations of the typescript-eslint `recommendedTypeChecked` rules and the
+ * core rules its `eslint-recommended` block turns on.
+ */
+export namespace Legacy {
+  export const value = 1
+}
+
+export const list = new Array<number>(1, 2)
+export const anything: any = JSON.parse('{}')
+export const inferred: Stats | undefined = undefined
+
+var counter = 1
+let neverReassigned = counter + 1
+export { neverReassigned }
+
+export function spreadLike() {
+  return Math.max.apply(Math, [1, 2])
+}
+
+export function argumentsLike() {
+  return arguments.length
+}
+
+const unused = 3
+
+export async function noAwait() {
+  return 1
+}
+
+export function floating(): void {
+  noAwait()
+  Promise.resolve(1)
+}
+
+export async function awaitsNonThenable() {
+  await 1
+}
+
+export function deletesFromArray(values: number[]): void {
+  delete values[0]
+}
+
+export function stringifiesObject(value: { a: number }): string {
+  return `${value}` + String(value)
+}
+
+export enum Duplicated {
+  A = 1,
+  B = 1,
+}
+
+export type Redundant = string | unknown
+export type DuplicateUnion = string | string
+
+export interface Empty {}
+
+export const nonNull = anything!!
+export const optionalNonNull = anything?.foo!
+
+export function iteratesArrayKeys(values: number[]): void {
+  for (const key in values) {
+    console.info(key)
+  }
+}
+
+export function impliedEval(): void {
+  setTimeout('alert(1)', 10)
+}
+
+export interface Constructs {
+  new (): Constructs
+}
+
+export function misusedPromise(): void {
+  if (noAwait()) {
+    console.info('promise is always truthy')
+  }
+  ;[1, 2].forEach(async (value) => {
+    await noAwait()
+    console.info(value)
+  })
+}
+
+export const required = require('node:path')
+
+export class Aliased {
+  run(): void {
+    const self = this
+    console.info(self)
+  }
+}
+
+export const assertion = 'text' as string
+
+export function constrained<T extends unknown>(value: T): T {
+  return value
+}
+
+export function unsafe(): string {
+  const loose = anything
+  loose.method()
+  console.info(loose.deep.member)
+  readFileSync(anything)
+  return anything
+}
+
+export interface Merged {
+  a: number
+}
+export class Merged {}
+
+export enum Fruit {
+  Apple = 'apple',
+}
+export const isApple = (value: string): boolean => value === Fruit.Apple
+
+export const callable: Function = () => 1
+export const negated = -('1' as unknown as string)
+export const wrapped: String = 'x'
+
+export function throwsLiteral(): never {
+  throw 'boom'
+}
+
+export const asConst = { kind: 'a' as 'a' }
+
+export module Other {
+  export const value = 2
+}
+
+export function rejectsLiteral(): Promise<never> {
+  return Promise.reject('boom')
+}
+
+export const added = 1 + ('2' as unknown as bigint)
+export const template = `${anything as unknown as symbol}`
+
+/// <reference types="node" />
+
+export class Bound {
+  method(): void {
+    console.info(this)
+  }
+}
+export const { method } = new Bound()
+
+// @ts-ignore
+export const ignored: number = 'x'
+
+export const unusedExpression = () => {
+  counter === 2
+}
+
+/**
+ * @deprecated Use `freshApi` instead.
+ */
+export function staleApi(): void {}
+staleApi()
+
+export function ignoresLastParameter(value: number, _unused: number): number {
+  return value
+}
+
+const onlyUsedAsType = { a: 'a' }
+export type OnlyUsedAsType = typeof onlyUsedAsType
+
+export function typedTemplate(): string {
+  return `${String(1)}`
+}
+
+export const isListed = [1, 2].some((value) => value === 2)

@@ -1,0 +1,18 @@
+---
+// A frontmatter line comment the comment policy bans.
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+const props = { title }
+const e = new Error(title)
+---
+
+<div class="bg-[#123456] text-red-500 not-a-real-class" style="color: red">
+  <a href="https://example.com" target="_blank">{props.title}</a>
+  <img src="/x.png" />
+  <div onclick="void 0"></div>
+  <div role="checkbox"></div>
+  <span>{e.message}</span>
+</div>
