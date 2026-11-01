@@ -27,13 +27,13 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run knip`              | Finds unused files, exports, and dependencies (`bunx knip`).                                                                                                     |
 | `bun run ci:local`          | Reproduces CI locally: frozen-lockfile install → `check` → `lint:docs` → `test`.                                                                                 |
 | `bun run clean`             | Removes build output, `.turbo` and every workspace's `node_modules`.                                                                                             |
-| `bun run cache:clear`       | Clears ESLint, Turborepo and `node_modules/.cache` caches.                                                                                                       |
+| `bun run cache:clear`       | Clears the `.astro` ESLint, Turborepo and `node_modules/.cache` caches.                                                                                          |
 | `bun run format:check`      | Checks formatting with Oxfmt (no writes).                                                                                                                        |
 | `bun run format:write`      | Formats the repo with Oxfmt.                                                                                                                                     |
-| `bun run lint`              | Runs ESLint (`--max-warnings=0`, cached).                                                                                                                        |
+| `bun run lint`              | Runs Oxlint (`--type-aware --deny-warnings`), then ESLint on `**/*.astro` only (`--max-warnings=0`, cached).                                                     |
 | `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                        |
-| `bun run lint:fix`          | Runs ESLint with `--fix` (`--max-warnings=0`, cached).                                                                                                           |
-| `bun run typecheck`         | Runs `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                               |
+| `bun run lint:fix`          | Runs Oxlint and the `.astro` ESLint run with `--fix`.                                                                                                            |
+| `bun run typecheck`         | Runs TypeScript 7.1 `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                |
 | `bun run test`              | Turborepo runs each workspace's Vitest suite once, plus the root tooling tests.                                                                                  |
 | `bun run test:coverage`     | Turborepo runs each workspace's Vitest suite with v8 coverage, plus the root tooling tests. Thresholds are in [Coverage ramp](#coverage-ramp).                   |
 | `bun run test:watch`        | Runs Vitest in watch mode.                                                                                                                                       |
@@ -45,6 +45,14 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run video:thumbnails`  | Renders the localized YouTube thumbnails into `docs/brand/youtube/thumbnails/`.                                                                                  |
 | `bun run brand:export`      | Exports the brand tiles and icons from `docs/brand`.                                                                                                             |
 
+Lint, format and typecheck run on the Oxc toolchain
+([ADR 0028](adr/0028-oxc-toolchain-replaces-prettier-and-most-of-eslint.md)):
+Oxlint (`oxlint.config.ts`, type-aware through tsgolint), Oxfmt
+(`.oxfmtrc.json`) and TypeScript 7.1 (`typescript7`) for every `tsc --noEmit`,
+with `typescript` 6.x kept for tools that need the classic JS API. ESLint
+remains only for `**/*.astro`. `bun run lint:parity` compares the old ESLint
+config with Oxlint per file, line and rule.
+
 If something fails, see [troubleshooting](troubleshooting.md). Task recipes are
 indexed in [how-to](how-to/README.md).
 
@@ -52,10 +60,10 @@ indexed in [how-to](how-to/README.md).
 
 Hooks are installed via Husky and live in `.husky/`:
 
-- **`pre-commit`** — runs `bunx lint-staged`, which applies Oxfmt + ESLint to
-  staged `*.{js,jsx,ts,tsx,mjs}` files, ESLint alone to staged `*.astro` files,
-  and Oxfmt alone to staged `*.{json,md,mdx,css,scss,yml,yaml}` files (see
-  `lint-staged.config.mjs`).
+- **`pre-commit`** — runs `bunx lint-staged`, which applies Oxfmt + Oxlint to
+  staged `*.{js,jsx,ts,tsx,mjs}` files, Oxfmt + Oxlint + ESLint to staged
+  `*.astro` files, and Oxfmt alone to staged `*.{json,md,mdx,css,scss,yml,yaml}`
+  files (see `lint-staged.config.mjs`).
 - **`commit-msg`** — runs `bunx commitlint --edit $1` against
   `commitlint.config.mjs`, which only extends `@commitlint/config-conventional`.
   It enforces the Conventional Commits `<type>: <subject>` shape and the type
@@ -125,7 +133,7 @@ e.g. `feat/csv-export`, `fix/popup-crash`, `chore/bump-deps`.
 
 ## Adding a `@shadcn/lint` contract
 
-The root `eslint.config.mjs` defines `shadcnNoRestyleContracts` — a list of
+The root `oxlint.config.ts` defines `shadcnNoRestyleContracts` — a list of
 per-component exceptions to the `shadcn/no-restyle` rule. Each entry pairs a
 component name `pattern` (regex) with an `allow` list of class
 categories/literal classes that component is permitted to add on top of its
@@ -133,7 +141,7 @@ shadcn/ui defaults.
 
 To add a new contract:
 
-1. Add an entry to `shadcnNoRestyleContracts` in `eslint.config.mjs`:
+1. Add an entry to `shadcnNoRestyleContracts` in `oxlint.config.ts`:
    ```js
    {
      pattern: '^ComponentName$',
@@ -401,10 +409,11 @@ Motion utilities apply only under `prefers-reduced-motion: no-preference` and
 ## Accessibility
 
 - **Linting**: `eslint-plugin-jsx-a11y`'s `recommended` config is enabled in
-  `eslint.config.mjs` and runs as part of `bun run lint` (`--max-warnings=0`, so
-  an a11y violation fails the same way any other lint error does). It catches
-  issues like missing alt text, non-interactive elements with click handlers but
-  no keyboard equivalent, and invalid ARIA attributes.
+  `oxlint.config.ts` (and in `eslint.config.mjs` for `.astro`) and runs as part
+  of `bun run lint` (`--deny-warnings` and `--max-warnings=0`, so an a11y
+  violation fails the same way any other lint error does). It catches issues
+  like missing alt text, non-interactive elements with click handlers but no
+  keyboard equivalent, and invalid ARIA attributes.
 - **Accessible primitives**: interactive UI is built from
   `packages/ui/src/components/**` (shadcn/ui components on top of Base UI
   primitives), which ship correct ARIA roles, keyboard handling, and focus
@@ -425,19 +434,22 @@ Motion utilities apply only under `prefers-reduced-motion: no-preference` and
 
 ## Linting `.astro` files
 
-`.astro` files (almost all of `apps/site`) are linted through
-`eslint-plugin-astro` and `astro-eslint-parser`, with the same `shadcn/*` rules
-and the same TSDoc-only comment rules as `.ts`/`.tsx`. The React rules
-(`@eslint-react`, type-checked) apply to `.ts`/`.tsx` only, and `Props` is
-allowed as Astro's component-props interface name. Anything the rules flag in a
-template (arbitrary type sizes, gradients, `<style>` blocks, which
-`shadcn/no-inline-styles` rejects) moves into `@theme` or `@utility` entries in
+`.astro` files (almost all of `apps/site`) are the one thing Oxlint cannot lint
+(it cannot see templates or `<style>`,
+[oxc#23207](https://github.com/oxc-project/oxc/issues/23207)), so the
+`**/*.astro`-only ESLint config lints them through `eslint-plugin-astro` and
+`astro-eslint-parser`, with the same `shadcn/*` rules and the same TSDoc-only
+comment rules as `.ts`/`.tsx`. The React rules (`@eslint-react`, type-checked)
+apply to `.ts`/`.tsx` only (Oxlint), and `Props` is allowed as Astro's
+component-props interface name. Anything the rules flag in a template (arbitrary
+type sizes, gradients, `<style>` blocks, which `shadcn/no-inline-styles`
+rejects) moves into `@theme` or `@utility` entries in
 `packages/ui/src/styles/globals.css`.
 
 ## Linting `apps/video`
 
-ESLint lints `apps/video` with the full root rule set plus one scoped override
-in `eslint.config.mjs` (`files: ['apps/video/**']`). The override turns off:
+Oxlint lints `apps/video` with the full root rule set plus one scoped override
+in `oxlint.config.ts` (`files: ['apps/video/**']`). The override turns off:
 
 - every `shadcn/*` rule (`no-restyle`, `no-raw-colors`, `no-arbitrary-values`,
   `no-inline-styles`, `no-unknown-classes`, `require-static-classes`) — Remotion
@@ -524,13 +536,13 @@ shadcn/ui-generated layer) is a `/**` TSDoc block, added only where it earns its
 place on a non-obvious export — never restating what a signature already says.
 Plain `//` line comments and non-JSDoc `/* */` block comments are disallowed;
 the only exceptions are directive comments a tool reads rather than a human:
-`eslint*` (`eslint-disable`, `eslint-enable`, ...), `global`, `@ts-*`
-(`@ts-expect-error`, ...), `prettier-ignore` (Oxfmt honours it),
+`eslint*` and `oxlint*` (`eslint-disable`, `oxlint-disable`, ...), `global`,
+`@ts-*` (`@ts-expect-error`, ...), `prettier-ignore` (Oxfmt honours it),
 `@vitest-environment`, and TypeScript triple-slash reference directives.
 
-This is enforced by ESLint: the local `local/no-non-doc-comments` rule bans
-non-doc comments, `jsdoc/informative-docs` rejects a TSDoc block that only
-repeats its symbol's name back, and
+This is enforced by Oxlint (and ESLint in `.astro`): the local
+`local/no-non-doc-comments` rule bans non-doc comments, `jsdoc/informative-docs`
+rejects a TSDoc block that only repeats its symbol's name back, and
 `@eslint-community/eslint-comments/require-description` requires every
 `eslint-disable*` comment to say why. See
 [`docs/adr/0002-tsdoc-only-code-comments.md`](adr/0002-tsdoc-only-code-comments.md)

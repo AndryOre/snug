@@ -6,8 +6,9 @@ Instructions for coding agents working in this repository.
 
 Snug is a bun-workspaces monorepo orchestrated by Turborepo
 ([ADR 0010](docs/adr/0010-bun-workspaces-monorepo.md)). The root is tooling only
-(husky, commitlint, oxfmt, eslint, turbo, knip). Stack rules live next to the
-code they govern, and apply on top of this file:
+(husky, commitlint, oxfmt, oxlint, eslint for `.astro` only, turbo, knip;
+[ADR 0028](docs/adr/0028-oxc-toolchain-replaces-prettier-and-most-of-eslint.md)).
+Stack rules live next to the code they govern, and apply on top of this file:
 
 - [`apps/extension/AGENTS.md`](apps/extension/AGENTS.md) — the Chrome MV3
   extension (WXT, React 19, Tailwind CSS v4).
@@ -65,10 +66,11 @@ file-wide or project-wide:
 1. Use an existing shadcn/ui variant that already covers the styling you need.
 2. Add a new variant to the component if no existing one fits.
 3. Add or change a `no-restyle` contract in `shadcnNoRestyleContracts`
-   (`eslint.config.mjs`), encoding one real, bounded design decision. Detail:
+   (`oxlint.config.ts`), encoding one real, bounded design decision. Detail:
    [`docs/development.md#adding-a-shadcnlint-contract`](docs/development.md#adding-a-shadcnlint-contract).
-4. Last resort: a single-line `eslint-disable-next-line -- <reason>` on the
-   exact offending line. Never a file-level or project-level disable.
+4. Last resort: a single-line `oxlint-disable-next-line -- <reason>`
+   (`eslint-disable-next-line` in `.astro`) on the exact offending line. Never a
+   file-level or project-level disable.
 
 ## Quirks and gotchas
 

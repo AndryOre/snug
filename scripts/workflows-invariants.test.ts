@@ -175,7 +175,6 @@ describe('ci.yml', () => {
       String(step.with?.path).includes('.eslintcache'),
     )
     expect(String(cacheStep?.with?.key)).toContain('eslint-rules/**')
-    expect(String(cacheStep?.with?.key)).toContain('oxlint-plugins/**')
   })
 
   test('runs both linters through the quality job', () => {
@@ -191,10 +190,32 @@ describe('ci.yml', () => {
       expect(command).toContain('oxlint')
       expect(command).toContain('eslint')
     }
+    for (const script of ['lint:eslint', 'lint:fix']) {
+      const eslintInvocations = (rootScripts.scripts[script] ?? '')
+        .split('&&')
+        .filter((part) => /\beslint\b/.test(part))
+      expect(eslintInvocations.length).toBeGreaterThan(0)
+      for (const invocation of eslintInvocations) {
+        expect(invocation).toContain('"**/*.astro"')
+      }
+    }
     expect(rootScripts.scripts['lint:oxlint']).toBe(
       'oxlint --type-aware --deny-warnings',
     )
     expect(rootScripts.scripts['check:root']).toContain('bun run lint')
+  })
+
+  test('lint-staged runs eslint only on staged astro files', async () => {
+    const lintStagedUrl = new URL('../lint-staged.config.mjs', import.meta.url)
+    const { default: lintStaged } = (await import(lintStagedUrl.href)) as {
+      default: Record<string, string[]>
+    }
+    for (const [glob, commands] of Object.entries(lintStaged)) {
+      const isEslintCommand = commands.some((command) =>
+        /\beslint\b/.test(command),
+      )
+      expect(isEslintCommand).toBe(glob === '*.astro')
+    }
   })
 
   test('every checkout that feeds turbo fetches full history', () => {

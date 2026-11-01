@@ -1,8 +1,5 @@
 import eslintComments from '@eslint-community/eslint-plugin-eslint-comments'
-import eslintReact from '@eslint-react/eslint-plugin'
 import { plugin as shadcn } from '@shadcn/lint'
-import vitest from '@vitest/eslint-plugin'
-import prettierConfig from 'eslint-config-prettier'
 import astro from 'eslint-plugin-astro'
 import jsdoc from 'eslint-plugin-jsdoc'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
@@ -12,23 +9,12 @@ import unicorn from 'eslint-plugin-unicorn'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 
-import wxtAutoImports from './apps/extension/.wxt/eslint-auto-imports.mjs'
 import localPlugin from './eslint-rules/index.mjs'
 
 /**
- * Punctuation/symbol-only JSX text that `react/jsx-no-literals` (the one
- * `eslint-plugin-react` rule still used; `@eslint-react` has no equivalent)
- * would otherwise flag as copy — none of these carry translatable meaning.
+ * ESLint lints only `.astro` files: Oxlint cannot see `.astro` templates or
+ * `<style>` blocks (oxc#23207), and lints everything else.
  */
-const JSX_NO_LITERALS_ALLOWED_STRINGS = [
-  '/',
-  /**
-   * The exported HTML file's fixed extension — a technical suffix, not
-   * translatable copy.
-   */
-  '.html',
-  '—',
-]
 
 /**
  * Per-component exceptions to `shadcn/no-restyle`, each encoding one real,
@@ -141,39 +127,6 @@ const commentPolicyRules = {
 }
 
 const eslintConfig = defineConfig([
-  wxtAutoImports,
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [tseslint.configs.recommendedTypeChecked],
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    rules: {
-      '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/only-throw-error': [
-        'error',
-        {
-          allow: [
-            {
-              from: 'package',
-              package: '@tanstack/router-core',
-              name: 'Redirect',
-            },
-          ],
-        },
-      ],
-      '@typescript-eslint/no-floating-promises': 'error',
-      '@typescript-eslint/await-thenable': 'error',
-      '@typescript-eslint/no-misused-promises': [
-        'error',
-        { checksVoidReturn: { attributes: false } },
-      ],
-      '@typescript-eslint/no-deprecated': 'warn',
-    },
-  },
   astro.configs['flat/base'],
   {
     files: ['**/*.astro'],
@@ -182,67 +135,24 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [eslintReact.configs['recommended-type-checked']],
-    rules: {
-      '@eslint-react/naming-convention-ref-name': 'off',
-    },
-  },
-  {
-    /**
-     * `packages/ui/**` is shadcn-generated and re-synced from the registry,
-     * so the React 19 modernization and render-safety rules that its output
-     * does not follow are off there rather than patched by hand.
-     */
-    files: ['packages/ui/**'],
-    rules: {
-      '@eslint-react/no-array-index-key': 'off',
-      '@eslint-react/no-context-provider': 'off',
-      '@eslint-react/no-leaked-conditional-rendering': 'off',
-      '@eslint-react/no-use-context': 'off',
-      '@eslint-react/use-state': 'off',
-    },
-  },
-  {
-    /**
-     * Explicit plugin registration + rules extraction instead of spreading
-     * `reactHooks.configs['recommended-latest']` directly: combining that
-     * object as-is with a typescript-eslint `extends` block elsewhere in
-     * this same config array corrupts its `plugins` field down to the
-     * legacy eslintrc array shape (`['react-hooks']`) by the time ESLint
-     * validates the full config, which then throws "plugins key defined as
-     * an array of strings". Unclear which package's flat-config resolution
-     * causes it; this sidesteps it entirely.
-     */
+    files: ['**/*.astro'],
     plugins: { 'react-hooks': reactHooks },
     rules: reactHooks.configs['recommended-latest'].rules,
   },
-  jsxA11y.flatConfigs.recommended,
-  unicorn.configs.recommended,
+  { files: ['**/*.astro'], ...jsxA11y.flatConfigs.recommended },
+  { files: ['**/*.astro'], ...unicorn.configs.recommended },
   {
-    /**
-     * Temporary side-by-side measure (AO-2617, revert in AO-2620): Oxlint runs
-     * these rules as `jsPlugins` under the `-js` aliases, and a disable
-     * directive can only be valid in both linters if both use the same rule
-     * id. Same plugin, same severity and options, only the id changes.
-     */
-    plugins: { 'unicorn-js': unicorn, 'jsx-a11y-js': jsxA11y },
-    rules: {
-      'unicorn/isolated-functions': 'off',
-      'unicorn-js/isolated-functions': 'error',
-      'unicorn/prefer-https': 'off',
-      'unicorn-js/prefer-https': 'error',
-      'unicorn/prefer-iterator-to-array': 'off',
-      'unicorn-js/prefer-iterator-to-array': 'error',
-      'jsx-a11y/anchor-has-content': 'off',
-      'jsx-a11y-js/anchor-has-content': 'error',
-      'jsx-a11y/role-has-required-aria-props': 'off',
-      'jsx-a11y-js/role-has-required-aria-props': 'error',
-    },
-  },
-  {
+    files: ['**/*.astro'],
     rules: {
       'unicorn/no-null': 'off',
+      /**
+       * Formatting-owned rules that `eslint-config-prettier` used to switch
+       * off; Oxfmt owns formatting now, so they stay off explicitly.
+       */
+      'unicorn/empty-brace-spaces': 'off',
+      'unicorn/no-nested-ternary': 'off',
+      'unicorn/number-literal-case': 'off',
+      'unicorn/template-indent': 'off',
       'unicorn/no-array-reduce': ['error', { allowSimpleOperations: false }],
       'unicorn/filename-case': [
         'error',
@@ -252,27 +162,8 @@ const eslintConfig = defineConfig([
         },
       ],
       /**
-       * `lib/utils.ts` is shadcn/ui's own generated convention
-       * (`components.json` `aliases.utils` -> `@workspace/ui/lib/utils`) — renaming it
-       * would fight every future `shadcn add`. `scripts/lint-docs.ts`
-       * mirrors `.github/workflows/lint-docs.yml`'s name (and
-       * andryore-dev's own `scripts/lint-docs.ts`) — renaming it would
-       * break that parity. `eslint-rules/no-non-doc-comments.mjs` and its
-       * `local/no-non-doc-comments` rule id are named to match this
-       * ticket's (AO-837) spec verbatim.
+       * `Props` is Astro's own convention for a component's props interface.
        */
-      'unicorn/name-replacements': [
-        'error',
-        { allowList: { utils: true, docs: true, doc: true } },
-      ],
-    },
-  },
-  {
-    /**
-     * `Props` is Astro's own convention for a component's props interface.
-     */
-    files: ['**/*.astro'],
-    rules: {
       'unicorn/name-replacements': [
         'error',
         {
@@ -293,7 +184,7 @@ const eslintConfig = defineConfig([
     rules: { 'react/jsx-no-target-blank': 'error' },
   },
   {
-    files: ['**/*.{js,jsx,ts,tsx,astro}'],
+    files: ['**/*.astro'],
     plugins: { shadcn },
     rules: {
       'shadcn/no-restyle': [
@@ -309,77 +200,13 @@ const eslintConfig = defineConfig([
   },
   {
     /**
-     * `packages/ui/**` is the shadcn/ui registry code itself — generated
-     * layer, exempt from these three rules for the same reasons as
-     * andryore-dev's eslint.config.mjs.
-     */
-    files: ['packages/ui/**'],
-    rules: {
-      'shadcn/no-restyle': 'off',
-      'shadcn/no-arbitrary-values': 'off',
-      'shadcn/require-static-classes': 'off',
-    },
-  },
-  {
-    files: ['**/*.tsx'],
-    ignores: ['packages/ui/**'],
-    plugins: { react },
-    rules: {
-      'react/jsx-no-literals': [
-        'error',
-        {
-          noStrings: true,
-          ignoreProps: true,
-          allowedStrings: JSX_NO_LITERALS_ALLOWED_STRINGS,
-        },
-      ],
-    },
-  },
-  {
-    files: ['**/*.test.ts'],
-    plugins: { vitest },
-    rules: {
-      ...vitest.configs.recommended.rules,
-    },
-  },
-  {
-    /**
-     * Test doubles and helpers must keep the async signature of the API
-     * they stand in for (`vi.fn(async () => 1)`, `fakeBrowser.*`, a fake
-     * `FileSystemDirectoryHandle`), and `await act(async () => ...)` needs
-     * the async form to flush effects. They rarely contain an `await`, so
-     * `require-await` is off for tests and test helpers only.
-     */
-    files: ['**/*.test.{ts,tsx}', 'apps/extension/lib/testing/**'],
-    rules: {
-      '@typescript-eslint/require-await': 'off',
-    },
-  },
-  {
-    /**
-     * Playwright fixtures (`e2e/fixtures.ts`) take a `use` callback per the
-     * `@playwright/test` fixture API — an unrelated naming collision with
-     * React's `use` hook that `react-hooks/rules-of-hooks` otherwise flags
-     * as a misplaced hook call.
-     */
-    files: ['**/e2e/**'],
-    rules: {
-      'react-hooks/rules-of-hooks': 'off',
-      '@eslint-react/rules-of-hooks': 'off',
-    },
-  },
-  {
-    /**
      * The comment-policy rule groups (local `no-non-doc-comments`,
      * `eslint-plugin-jsdoc`'s TypeScript-flavored recommended rules plus
      * `jsdoc/informative-docs`, and `@eslint-community/eslint-comments`'s
      * recommended rules plus `require-description`) — banning non-doc
      * comments and uninformative or undescribed directive comments.
-     * `packages/ui/**` is permanently exempt (shadcn-generated,
-     * untouched).
      */
-    files: ['**/*.{ts,tsx,mjs,astro}'],
-    ignores: ['packages/ui/**'],
+    files: ['**/*.astro'],
     plugins: {
       jsdoc: jsdoc.configs['flat/recommended-typescript-error'].plugins.jsdoc,
       local: localPlugin,
@@ -387,34 +214,6 @@ const eslintConfig = defineConfig([
     },
     rules: commentPolicyRules,
   },
-  {
-    /**
-     * `apps/video/**` is linted with the full rule set except the groups
-     * that do not fit Remotion composition code: every `shadcn/*` rule is
-     * off because Remotion renders frames from inline styles, raw colors and
-     * arbitrary values rather than shadcn/ui components, and
-     * `@eslint-react/no-array-index-key` (scenes render fixed lists by frame
-     * index), `jsdoc/require-param`, `jsdoc/require-returns`,
-     * `unicorn/name-replacements` and `unicorn/consistent-boolean-name` are
-     * off because parameter docs and naming conventions are out of scope for
-     * composition code.
-     */
-    files: ['apps/video/**'],
-    rules: {
-      'shadcn/no-restyle': 'off',
-      'shadcn/no-raw-colors': 'off',
-      'shadcn/no-arbitrary-values': 'off',
-      'shadcn/no-inline-styles': 'off',
-      'shadcn/no-unknown-classes': 'off',
-      'shadcn/require-static-classes': 'off',
-      '@eslint-react/no-array-index-key': 'off',
-      'jsdoc/require-param': 'off',
-      'jsdoc/require-returns': 'off',
-      'unicorn/name-replacements': 'off',
-      'unicorn/consistent-boolean-name': 'off',
-    },
-  },
-  prettierConfig,
   globalIgnores([
     '**/.output/**',
     '**/.wxt/**',
