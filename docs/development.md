@@ -525,8 +525,8 @@ place on a non-obvious export — never restating what a signature already says.
 Plain `//` line comments and non-JSDoc `/* */` block comments are disallowed;
 the only exceptions are directive comments a tool reads rather than a human:
 `eslint*` (`eslint-disable`, `eslint-enable`, ...), `global`, `@ts-*`
-(`@ts-expect-error`, ...), `oxfmt-ignore`, `@vitest-environment`, and TypeScript
-triple-slash reference directives.
+(`@ts-expect-error`, ...), `prettier-ignore` (Oxfmt honours it),
+`@vitest-environment`, and TypeScript triple-slash reference directives.
 
 This is enforced by ESLint: the local `local/no-non-doc-comments` rule bans
 non-doc comments, `jsdoc/informative-docs` rejects a TSDoc block that only
