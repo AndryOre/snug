@@ -64,5 +64,4 @@ export const SFX_CUES: readonly SfxCue[] = [
   ...atScene('import', IMPORT_AUDIO_FRAMES.clicks, 'click'),
   ...atScene('import', [IMPORT_AUDIO_FRAMES.toast], 'chime'),
   cue(SCENE_RANGES.cta.from + 14, 'chime'),
-  // eslint-disable-next-line unicorn/no-array-sort -- toSorted is not in the ES2022 lib; the array literal is a fresh copy
-].sort((a, b) => a.frame - b.frame)
+].toSorted((a, b) => a.frame - b.frame)

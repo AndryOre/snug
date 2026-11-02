@@ -31,8 +31,7 @@ export const cameraStateAt = (
   fps: number,
   moveFrames: number,
 ): CameraState => {
-  // eslint-disable-next-line unicorn/no-array-sort -- toSorted is not in the ES2022 lib; this sorts a fresh copy
-  const sorted = [...keyframes].sort((a, b) => a.frame - b.frame)
+  const sorted = keyframes.toSorted((a, b) => a.frame - b.frame)
   const first = sorted[0]
   if (!first) return { x: 0, y: 0, zoom: 1 }
   let index = 0
