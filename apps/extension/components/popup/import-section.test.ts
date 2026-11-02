@@ -19,9 +19,9 @@ import {
 
 import { ImportSection } from './import-section'
 
-type RunImportModule = typeof RunImportNamespace
-
 vi.mock('@/lib/run-import', async (importOriginal) => {
+  type RunImportModule = typeof RunImportNamespace
+
   const original = await importOriginal<RunImportModule>()
   return { ...original, runImport: vi.fn(original.runImport) }
 })

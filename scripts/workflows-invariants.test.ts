@@ -35,7 +35,7 @@ function needsList(needs: unknown): string[] {
 function usesReferences(source: string): { target: string; rest: string }[] {
   return source.split('\n').flatMap((line) => {
     const match = USES_LINE_PATTERN.exec(line)
-    return match ? [{ target: match[1] ?? '', rest: match[2] ?? '' }] : []
+    return match ? { target: match[1] ?? '', rest: match[2] ?? '' } : []
   })
 }
 

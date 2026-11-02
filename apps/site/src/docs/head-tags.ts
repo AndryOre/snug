@@ -96,15 +96,13 @@ export function buildPaginationHead(
   ] as const
   return neighbours.flatMap(([direction, neighbour]) =>
     neighbour
-      ? [
-          {
-            tag: 'link' as const,
-            attrs: {
-              rel: direction,
-              href: new URL(neighbour.href, SITE_ORIGIN).href,
-            },
+      ? {
+          tag: 'link' as const,
+          attrs: {
+            rel: direction,
+            href: new URL(neighbour.href, SITE_ORIGIN).href,
           },
-        ]
+        }
       : [],
   )
 }

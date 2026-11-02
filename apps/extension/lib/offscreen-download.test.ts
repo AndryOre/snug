@@ -21,8 +21,6 @@ import {
   REVOKE_BLOB_URL_MESSAGE_TYPE,
 } from './offscreen-download'
 
-type OnChangedListener = (delta: Browser.downloads.DownloadDelta) => void
-
 /**
  * Replaces `chrome.offscreen` (unimplemented in `fakeBrowser`) with `vi.fn`
  * stubs for `createDocument`/`closeDocument`, and `chrome.runtime.getContexts`.
@@ -83,6 +81,8 @@ function mockRuntimeSendMessage() {
 function mockDownloadsApi() {
   let nextId = 1
   const download = vi.fn(async () => nextId++)
+  type OnChangedListener = (delta: Browser.downloads.DownloadDelta) => void
+
   const listeners: OnChangedListener[] = []
   const addListener = vi.fn((listener: OnChangedListener) => {
     listeners.push(listener)

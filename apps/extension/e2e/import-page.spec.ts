@@ -403,7 +403,6 @@ test.describe('Import page', () => {
         {
           title: 'Reading',
           children: [
-            // eslint-disable-next-line unicorn-js/prefer-https -- exercises http/https normalization
             { title: 'Already', url: 'http://www.html-bar-a.example/page/' },
           ],
         },

@@ -63,9 +63,11 @@ const fitFontSize = (
       validateFontIsLoaded: false,
     }).fontSize
   const oneLine = Math.min(preferred, measure(maxWidth))
-  return oneLine >= preferred * WRAP_THRESHOLD
-    ? Math.floor(oneLine)
-    : Math.floor(Math.min(preferred, measure(maxWidth * WRAP_WIDTH_FACTOR)))
+  return Math.floor(
+    oneLine >= preferred * WRAP_THRESHOLD
+      ? oneLine
+      : Math.min(preferred, measure(maxWidth * WRAP_WIDTH_FACTOR)),
+  )
 }
 
 /**

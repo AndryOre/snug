@@ -80,13 +80,11 @@ export function guideLlmsFullSections(): LlmsFullSection[] {
     (source) => {
       const entry = entries.get(source.id)
       if (!entry) return []
-      return [
-        {
-          title: entry.title,
-          url: `${SITE_ORIGIN}${publishedRoute(source, DEFAULT_LOCALE)}`,
-          body: demoteHeadings(entry.body),
-        },
-      ]
+      return {
+        title: entry.title,
+        url: `${SITE_ORIGIN}${publishedRoute(source, DEFAULT_LOCALE)}`,
+        body: demoteHeadings(entry.body),
+      }
     },
   )
 }

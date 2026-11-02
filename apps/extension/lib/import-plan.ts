@@ -292,7 +292,7 @@ export function collectDuplicateIds(
       const isListed =
         node.state.reason === 'existing' ||
         checkedUrls.has(normalizeUrl(node.url))
-      return isListed ? [node.id] : []
+      return isListed ? node.id : []
     })
   return collect(nodes)
 }

@@ -60,15 +60,6 @@ import {
 import type { SafetySnapshot } from '@/lib/safety-snapshot'
 import { useStorageItem } from '@/lib/use-storage-item'
 
-type CardStatus =
-  | 'idle'
-  | 'restoring'
-  | 'restored'
-  | 'taking'
-  | 'take-error'
-  | 'download-error'
-  | 'restore-error'
-
 /**
  * The Settings card for Safety snapshots: a Take a snapshot now button and
  * the stored list, newest first, each row with its date, bookmark count and
@@ -101,6 +92,15 @@ export function SafetySnapshotCard({
   const [restoreTarget, setRestoreTarget] = useState<SafetySnapshot | null>(
     null,
   )
+  type CardStatus =
+    | 'idle'
+    | 'restoring'
+    | 'restored'
+    | 'taking'
+    | 'take-error'
+    | 'download-error'
+    | 'restore-error'
+
   const [status, setStatus] = useState<CardStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const busyGuard = useRef(false)

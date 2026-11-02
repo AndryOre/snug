@@ -65,16 +65,16 @@ export function rewriteLink(href: string, context: LinkContext): string {
     path.posix.join(path.posix.dirname(context.sourcePath), target),
   )
   if (resolved === '..' || resolved.startsWith('../')) return href
-  const repoPath = resolved.replace(/\/$/, '')
+  const repositoryPath = resolved.replace(/\/$/, '')
 
   const legacyPath =
-    repoPath === USAGE_SOURCE_PATH
+    repositoryPath === USAGE_SOURCE_PATH
       ? LEGACY_USAGE_ANCHORS[fragment.slice(1)]
       : undefined
-  const source = findPublishedSource(legacyPath ?? repoPath)
+  const source = findPublishedSource(legacyPath ?? repositoryPath)
   return source
     ? `${publishedRoute(source, context.locale ?? DEFAULT_LOCALE)}${fragment}`
-    : `${githubViewUrl(repoPath, target.endsWith('/'))}${fragment}`
+    : `${githubViewUrl(repositoryPath, target.endsWith('/'))}${fragment}`
 }
 
 /**

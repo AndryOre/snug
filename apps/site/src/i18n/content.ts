@@ -20,7 +20,7 @@ export function flattenKeys(tree: ContentTree, prefix = ''): string[] {
   return Object.entries(tree)
     .flatMap(([key, value]) => {
       const path = prefix === '' ? key : `${prefix}.${key}`
-      return typeof value === 'string' ? [path] : flattenKeys(value, path)
+      return typeof value === 'string' ? path : flattenKeys(value, path)
     })
     .toSorted((a, b) => a.localeCompare(b))
 }

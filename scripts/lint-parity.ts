@@ -395,14 +395,13 @@ interface RuleSummary {
   explained: number
 }
 
-type RuleCount = Exclude<keyof RuleSummary, 'rule'>
-
 /**
  * Groups a section's findings per rule, sorted by rule id.
  * @param result - A compared section.
  * @returns One row per rule that appears anywhere in the section.
  */
 export function summarizeByRule(result: SectionResult): RuleSummary[] {
+  type RuleCount = Exclude<keyof RuleSummary, 'rule'>
   const rows = new Map<string, RuleSummary>()
   const tally = (rule: string, column: RuleCount): void => {
     const row = rows.get(rule) ?? {
@@ -571,16 +570,14 @@ export function checkRuleCoverage(
   const allowListProblems = Object.entries(untriggerable).flatMap(
     ([rule, reason]) => {
       if (reason.trim() === '') {
-        return [`Untriggerable rule ${rule} needs a reason`]
+        return `Untriggerable rule ${rule} needs a reason`
       }
       if (triggered.has(rule)) {
-        return [
-          `Untriggerable rule ${rule} is triggered by a fixture; drop its entry`,
-        ]
+        return `Untriggerable rule ${rule} is triggered by a fixture; drop its entry`
       }
       return enforced.has(rule)
         ? []
-        : [`Untriggerable rule ${rule} is not enforced; drop its entry`]
+        : `Untriggerable rule ${rule} is not enforced; drop its entry`
     },
   )
   const uncovered = [...enforced]
@@ -787,7 +784,7 @@ export function checkOxlintShards(
   )
   const problems = shards.flatMap((shard) => shard.problems)
   const roots = shards.flatMap((shard) =>
-    shard.root === undefined ? [] : [shard.root],
+    shard.root === undefined ? [] : shard.root,
   )
   const catchAllCount = shards.length - roots.length
   if (catchAllCount !== 1) {

@@ -2,14 +2,14 @@ interface LockOptions {
   ifAvailable?: boolean
 }
 
-type LockCallback = (lock: object | null) => unknown
-
 /**
  * Installs a minimal in-memory `navigator.locks` (exclusive locks with the
  * `ifAvailable` option) for tests, since neither Node nor jsdom provides one.
  * Idempotent; held locks are shared across the whole test file's module state.
  */
 export function installFakeLocks(): void {
+  type LockCallback = (lock: object | null) => unknown
+
   const held = new Set<string>()
   const locks = {
     async request(

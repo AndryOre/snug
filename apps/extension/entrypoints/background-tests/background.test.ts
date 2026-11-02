@@ -32,12 +32,6 @@ const { syncAlarm, runAutoExport } = await import('@/lib/auto-export')
 const { checkFolderAccessAtStartup } =
   await import('@/lib/folder-access-startup')
 
-type OnMessageListener = (
-  message: unknown,
-  sender: Browser.runtime.MessageSender,
-  sendResponse: (response?: unknown) => void,
-) => boolean | undefined
-
 /**
  * `fakeBrowser`'s `runtime.onMessage` throws "not implemented" on
  * `addListener` (unlike `alarms.onAlarm`, which it does implement), so this
@@ -51,6 +45,12 @@ type OnMessageListener = (
 function mockRuntimeOnMessage(): {
   trigger: (message: unknown) => Promise<unknown>
 } {
+  type OnMessageListener = (
+    message: unknown,
+    sender: Browser.runtime.MessageSender,
+    sendResponse: (response?: unknown) => void,
+  ) => boolean | undefined
+
   let listener: OnMessageListener | undefined
   browser.runtime.onMessage.addListener = vi.fn((l: unknown) => {
     listener = l as OnMessageListener

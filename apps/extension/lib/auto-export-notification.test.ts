@@ -16,12 +16,12 @@ function mockNotificationsApi() {
     void rest
     return id
   })
-  const clear = vi.fn(async () => true)
+  const clearSpy = vi.fn(async () => {})
   browser.notifications = {
     create,
-    clear,
+    clear: clearSpy,
   } as unknown as typeof browser.notifications
-  return { create, clear }
+  return { create, clearSpy }
 }
 
 beforeEach(() => {
@@ -81,7 +81,7 @@ describe('notifyAutoExportFailure', () => {
 
 describe('handleNotificationClick', () => {
   it('opens the Auto-export page and clears the notification', async () => {
-    const { clear } = mockNotificationsApi()
+    const { clearSpy } = mockNotificationsApi()
     const createTab = vi.spyOn(browser.tabs, 'create')
 
     await handleNotificationClick(FAILURE_NOTIFICATION_ID)
@@ -89,7 +89,7 @@ describe('handleNotificationClick', () => {
     expect(createTab).toHaveBeenCalledWith({
       url: expect.stringMatching(/\/app\.html#\/auto-export$/) as string,
     })
-    expect(clear).toHaveBeenCalledWith(FAILURE_NOTIFICATION_ID)
+    expect(clearSpy).toHaveBeenCalledWith(FAILURE_NOTIFICATION_ID)
   })
 
   it('ignores other notifications', async () => {

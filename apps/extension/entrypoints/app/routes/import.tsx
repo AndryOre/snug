@@ -62,15 +62,6 @@ import type { BookmarkFormat, ImportMode, ImportPreview } from '@/lib/types'
 import { useOperationProgress } from '@/lib/use-operation-progress'
 import { useStorageItem } from '@/lib/use-storage-item'
 
-type ImportStatus =
-  | 'idle'
-  | 'importing'
-  | 'canceled'
-  | 'success'
-  | 'undoing'
-  | 'undone'
-  | 'error'
-
 /**
  * Ref callback that moves focus to an element when it mounts, so a result
  * view keeps keyboard focus after the form that triggered it unmounts.
@@ -203,6 +194,15 @@ export function ImportRoute() {
   const [storedMode, setStoredMode] = useStorageItem(defaultImportModeStore)
   const [skipDuplicates, setSkipDuplicates] =
     useStorageItem(skipDuplicatesStore)
+  type ImportStatus =
+    | 'idle'
+    | 'importing'
+    | 'canceled'
+    | 'success'
+    | 'undoing'
+    | 'undone'
+    | 'error'
+
   const [status, setStatus] = useState<ImportStatus>('idle')
   const [analyzingCount, setAnalyzingCount] = useState(0)
   const [leftOutFiles, setLeftOutFiles] = useState<RejectedFile[]>([])

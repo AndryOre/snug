@@ -304,6 +304,6 @@ export function sourcedFacts(
     ]) as [string, Listed<SourcedFact<unknown>>][]),
   ]
   return entries.flatMap(([label, fact]) =>
-    fact === 'not-listed' ? [] : [{ label, fact }],
+    fact === 'not-listed' ? [] : { label, fact },
   )
 }

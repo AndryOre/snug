@@ -1,7 +1,6 @@
 import { defineConfig } from 'oxlint'
 import type { DummyRuleMap, OxlintGlobals, OxlintOverride } from 'oxlint'
 
-// @ts-expect-error -- WXT generates this module without type declarations
 import wxtAutoImports from './apps/extension/.wxt/eslint-auto-imports.mjs'
 
 /**
