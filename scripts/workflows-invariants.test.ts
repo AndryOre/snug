@@ -199,9 +199,19 @@ describe('ci.yml', () => {
         expect(invocation).toContain('"**/*.astro"')
       }
     }
-    expect(rootScripts.scripts['lint:oxlint']).toBe(
-      'oxlint --type-aware --deny-warnings',
+    const oxlintShards = Object.keys(rootScripts.scripts).filter((script) =>
+      script.startsWith('lint:oxlint:'),
     )
+    expect(oxlintShards.length).toBeGreaterThan(0)
+    for (const shard of oxlintShards) {
+      expect(rootScripts.scripts[shard]).toMatch(
+        /^oxlint --type-aware --deny-warnings(?: |$)/,
+      )
+      expect((rootScripts.scripts['lint:oxlint'] ?? '').split(/\s+/)).toContain(
+        shard,
+      )
+    }
+    expect(rootScripts.scripts['lint']).toContain('bun run lint:oxlint')
     expect(rootScripts.scripts['check:root']).toContain('bun run lint')
   })
 

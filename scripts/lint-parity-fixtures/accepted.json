@@ -3,12 +3,12 @@
     "file": "apps/extension/lib/lint-parity-probe/comments.ts",
     "line": 85,
     "rule": "unused-disable-directive",
-    "reason": "Location only, upstream Oxlint behaviour with no config or plugin fix (no oxc issue filed yet): Oxlint reports an unused `/* eslint-disable rule */ ... /* eslint-enable rule */` block on the closing enable comment (line 91) instead of the disable comment, with the same 'Unused eslint-disable directive' message, so the unused block is still rejected. Directive reporting happens in Oxlint's Rust core, which no jsPlugin or option reaches."
+    "reason": "Location only, upstream Oxlint behaviour with no config or plugin fix (no oxc issue filed yet): Oxlint reports an unused `/* eslint-disable rule */ ... /* eslint-enable rule */` block on the closing enable comment (line 91) instead of the disable comment, with the same 'Unused eslint-disable directive' message, so the unused block is still rejected. Directive reporting happens in Oxlint's Rust core, which no jsPlugin or option reaches. Re-checked 2026-11-02 against Oxlint 1.90.0: the gap remains."
   },
   {
     "file": "scripts/lint-parity-probe/typescript.ts",
     "line": 114,
     "rule": "@typescript-eslint/no-unsafe-declaration-merging",
-    "reason": "Same violation, one report fewer: typescript-eslint reports the unsafe interface/class merge on both declarations (lines 111 and 114), the native port only on the first (111, common), so the merge is still rejected."
+    "reason": "Same violation, one report fewer: typescript-eslint reports the unsafe interface/class merge on both declarations (lines 111 and 114), the native port only on the first (111, common), so the merge is still rejected. Re-checked 2026-11-02 against oxlint-tsgolint 7.0.2005: the gap remains."
   }
 ]

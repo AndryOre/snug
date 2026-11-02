@@ -8,6 +8,10 @@ parts.
 
 Date: 2026-11-01
 
+Revised: 2026-11-02, `lint:oxlint` runs four parallel Oxlint shards with the
+same flags and config instead of one pass. On a loaded 16-core host the median
+went from 61.5 s to 30.4 s.
+
 ## Context
 
 `bun run lint` (ESLint with typescript-eslint `recommendedTypeChecked`,
@@ -37,6 +41,19 @@ Measured in a scratch copy before the migration:
   per-directory exemptions (`packages/ui/**`, `apps/video/**`, tests,
   `**/e2e/**`) are `overrides` entries that turn rules off.
   `reportUnusedDisableDirectives` is `error`.
+- **`lint:oxlint` runs as parallel shards.** jsPlugins run on Node's single main
+  thread, and the TypeScript 6 checker behind the typed shims takes most of that
+  time, so one pass is bound by a single core (about 54 s; 49 s of it JS plugin
+  runtime). `lint:oxlint` runs `bun run --parallel --no-exit-on-error` over
+  `lint:oxlint:*` shards (`apps/extension/lib`, the rest of `apps/extension`,
+  `apps/site`, and the rest of the repo). Every shard runs
+  `oxlint --type-aware --deny-warnings` with the same `oxlint.config.ts`, so no
+  rule, option, severity or scope changes. The shards only differ in their path
+  argument and `--ignore-pattern` flags. `checkOxlintShards`
+  (`scripts/lint-parity.ts`) fails the tests unless the shards lint every file
+  exactly once. Each shard builds its own TypeScript program, which costs
+  memory: peak RSS goes from about 3.5 GB to about 5.3 GB. `lint:fix` stays a
+  single pass.
 - **Oxfmt replaces Prettier** (`.oxfmtrc.json`) with the same style options,
   Tailwind class sorting, import groups and ignore patterns. The one reformat
   commit is listed in `.git-blame-ignore-revs`.

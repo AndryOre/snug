@@ -702,3 +702,117 @@ export function renderReport(input: ReportInput): string {
     '',
   ].join('\n')
 }
+
+const OXLINT_SHARD_BASE = 'oxlint --type-aware --deny-warnings'
+
+const OXLINT_SHARD_RUNNER = 'bun run --parallel --no-exit-on-error'
+
+/**
+ * One parallel Oxlint pass of `lint:oxlint`: the path it lints (none for the
+ * catch-all pass) and the `--ignore-pattern` globs it skips.
+ */
+interface OxlintShard {
+  name: string
+  root: string | undefined
+  ignores: string[]
+  problems: string[]
+}
+
+function parseOxlintShard(name: string, command: string): OxlintShard {
+  const shard: OxlintShard = {
+    name,
+    root: undefined,
+    ignores: [],
+    problems: [],
+  }
+  const extraArgumentProblem = `${name} may only add one path and --ignore-pattern flags`
+  const hasBase =
+    command.startsWith(`${OXLINT_SHARD_BASE} `) || command === OXLINT_SHARD_BASE
+  if (!hasBase) {
+    shard.problems.push(`${name} must start with "${OXLINT_SHARD_BASE}"`)
+  }
+  const tokens = (hasBase ? command.slice(OXLINT_SHARD_BASE.length) : command)
+    .split(/\s+/)
+    .filter((token) => token !== '')
+    .slice(hasBase ? 0 : 1)
+    .map((token) => token.replaceAll("'", ''))
+  for (let index = 0; index < tokens.length; index++) {
+    const token = tokens[index] ?? ''
+    if (token === '--ignore-pattern') {
+      index++
+      shard.ignores.push(tokens[index] ?? '')
+    } else if (token.startsWith('-')) {
+      if (hasBase) {
+        shard.problems.push(extraArgumentProblem)
+      }
+    } else if (shard.root === undefined) {
+      shard.root = token.replace(/\/+$/, '')
+    } else {
+      shard.problems.push(extraArgumentProblem)
+    }
+  }
+  return shard
+}
+
+function isInside(child: string, parent: string | undefined): boolean {
+  return parent === undefined || child.startsWith(`${parent}/`)
+}
+
+/**
+ * Checks that `lint:oxlint` runs disjoint Oxlint passes that together lint
+ * every file exactly once: each `lint:oxlint:*` shard runs the same flags on
+ * one path (or, for the single catch-all, on the whole repo) and ignores
+ * exactly the outermost shard paths inside it. Same flags and config on every
+ * shard means splitting the run changes no rule, option, severity or scope.
+ * @param scripts - The root `package.json` scripts.
+ * @returns One message per problem; empty when the shards partition the repo.
+ */
+export function checkOxlintShards(
+  scripts: Readonly<Record<string, string>>,
+): string[] {
+  const runner = scripts['lint:oxlint'] ?? ''
+  const names = runner.startsWith(`${OXLINT_SHARD_RUNNER} `)
+    ? runner.slice(OXLINT_SHARD_RUNNER.length).trim().split(/\s+/)
+    : []
+  if (
+    names.length === 0 ||
+    names.some((name) => !name.startsWith('lint:oxlint:'))
+  ) {
+    return [
+      `lint:oxlint must be "${OXLINT_SHARD_RUNNER}" followed by its lint:oxlint:* shards`,
+    ]
+  }
+  const shards = names.map((name) =>
+    parseOxlintShard(name, scripts[name] ?? ''),
+  )
+  const problems = shards.flatMap((shard) => shard.problems)
+  const roots = shards.flatMap((shard) =>
+    shard.root === undefined ? [] : [shard.root],
+  )
+  const catchAllCount = shards.length - roots.length
+  if (catchAllCount !== 1) {
+    problems.push(
+      `lint:oxlint needs exactly one shard without a path (found ${String(catchAllCount)})`,
+    )
+  }
+  for (const shard of shards) {
+    const nested = roots.filter((root) => isInside(root, shard.root))
+    const outermost = nested.filter((root) =>
+      nested.every((other) => other === root || !isInside(root, other)),
+    )
+    const expected = outermost
+      .map((root) => `${root}/**`)
+      .toSorted((left, right) => left.localeCompare(right))
+    const actual = shard.ignores.toSorted((left, right) =>
+      left.localeCompare(right),
+    )
+    if (expected.join('\n') === actual.join('\n')) {
+      continue
+    }
+    const found = actual.length === 0 ? 'nothing' : actual.join(', ')
+    problems.push(
+      `${shard.name} must ignore exactly ${expected.join(', ')} (it ignores ${found})`,
+    )
+  }
+  return problems
+}
