@@ -14,6 +14,9 @@ const isLeanTier = process.env.BROWSERSTACK_TIER === 'lean'
  * every layout spec. In CI the `list` reporter prints failures in the job log
  * and `browserstack-timing-reporter.ts` records per-test durations.
  *
+ * Remote sessions cross a tunnel, so the test timeout is 60 s and navigation
+ * gets 45 s; a slow first load there is latency, not a regression.
+ *
  * `fullyParallel` lets `--shard` split inside a file: without it every test of
  * `accessibility.spec.ts` lands in one shard, which the real iPhone cannot
  * finish. Each job still runs a single worker, so tests execute one at a time.
@@ -23,6 +26,7 @@ export default defineConfig({
   fullyParallel: true,
   testMatch: isLeanTier ? LEAN_LAYOUT_SPECS : LAYOUT_SPECS,
   forbidOnly: !!process.env.CI,
+  timeout: 60_000,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI
     ? [
@@ -31,7 +35,7 @@ export default defineConfig({
         ['./browserstack-timing-reporter.ts'],
       ]
     : 'list',
-  use: { baseURL: 'http://localhost:4399' },
+  use: { baseURL: 'http://localhost:4399', navigationTimeout: 45_000 },
   projects: [{ name: 'browserstack' }],
   webServer: {
     command: 'bun run preview --port 4399 --ignore-lock',

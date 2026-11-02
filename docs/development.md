@@ -261,8 +261,9 @@ is informational: it never blocks a merge and is not part of `CI passed`.
 - Tiers run the same tests on different triggers. **Lean** (204 tests per
   platform, no `accessibility.spec.ts`; Safari, Firefox, Edge, Pixel 8; about 20
   minutes) runs on PRs touching `apps/site/**` or `packages/ui/**`. **Full**
-  (all 932 tests per platform) runs nightly, on pushes to `main` and on manual
-  dispatch.
+  (all 932 tests per platform, in three consecutive shards) runs nightly and on
+  manual dispatch; a push to `main` runs the lean tier. All runs share one
+  queue.
 - Measured per test: Edge ~3s, Firefox ~4s, Safari ~5s, Pixel 8 ~6s. The timing
   reporter logs per-test durations and a mean/p50/p95 summary in each job's
   summary.

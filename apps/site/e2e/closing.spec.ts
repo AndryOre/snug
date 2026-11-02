@@ -1,7 +1,8 @@
-import { expect, type Page, test } from '@playwright/test'
+import { type Page } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger, hydratedFaq } from './faq-helpers'
+import { expect, test } from './fixtures'
 import {
   expectNoHorizontalOverflow,
   hasFinePointer,
@@ -9,6 +10,7 @@ import {
   languageTrigger,
   linkTabKey,
   MIN_TOUCH_TARGET,
+  openLanguageMenu,
   setViewportOrSkip,
 } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
@@ -228,34 +230,11 @@ test('FAQ questions are headings and only one answer is open', async ({
 
 const MENU = '[data-language-menu]'
 
-async function waitForLanguageIsland(page: Page): Promise<void> {
-  await hydrateHeaderIsland(page)
-}
-
-async function openLanguageMenu(page: Page): Promise<void> {
-  await waitForLanguageIsland(page)
-  await languageTrigger(page).click()
-  await expect(page.locator(MENU)).toBeVisible()
-  await page.evaluate(() =>
-    Promise.all(
-      globalThis.document
-        .getAnimations()
-        .filter(
-          (a) =>
-            a.timeline === globalThis.document.timeline &&
-            a.playState === 'running' &&
-            a.effect?.getComputedTiming().iterations !== Infinity,
-        )
-        .map((a) => a.finished),
-    ),
-  )
-}
-
 test('language switcher moves between locales without redirecting', async ({
   page,
 }) => {
   await page.goto('/')
-  await waitForLanguageIsland(page)
+  await hydrateHeaderIsland(page)
   await languageTrigger(page).focus()
   await page.keyboard.press('Enter')
   const links = page.locator(`${MENU} a`)
@@ -276,7 +255,7 @@ test('language switcher menu moves focus through items with Tab', async ({
   page,
 }) => {
   await page.goto('/')
-  await waitForLanguageIsland(page)
+  await hydrateHeaderIsland(page)
   await languageTrigger(page).focus()
   await page.keyboard.press('Enter')
   const links = page.locator(`${MENU} a`)
@@ -448,6 +427,6 @@ test('language trigger is announced as the label plus the language name', async 
   page,
 }) => {
   await page.goto('/')
-  await waitForLanguageIsland(page)
+  await hydrateHeaderIsland(page)
   await expect(languageTrigger(page)).toHaveAccessibleName('Language: English')
 })

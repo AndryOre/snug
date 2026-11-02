@@ -1,8 +1,11 @@
-import { expect, test } from '@playwright/test'
-
 import { localePath, LOCALES } from '../src/i18n/locales'
 import { firstFaqTrigger } from './faq-helpers'
-import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
+import { expect, test } from './fixtures'
+import {
+  expectNoHorizontalOverflow,
+  openLanguageMenu,
+  setViewportOrSkip,
+} from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))
 
@@ -23,8 +26,7 @@ for (const path of PATHS) {
     page,
   }) => {
     await page.goto(path)
-    await page.locator('[data-language-switcher]').getByRole('button').click()
-    await expect(page.locator('[data-language-menu]')).toBeVisible()
+    await openLanguageMenu(page)
     await expectNoHorizontalOverflow(page)
   })
 

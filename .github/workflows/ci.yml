@@ -212,9 +212,9 @@ jobs:
           fi
 
   # Informational: deliberately absent from `CI passed` needs, so it never
-  # blocks a merge. Only PRs run it from here, with the lean tier; the full tier
-  # runs from browserstack.yml's own push, schedule and dispatch triggers so its
-  # hours-long run never holds this workflow's concurrency group on main.
+  # blocks a merge. Only PRs run it from here, with the lean tier; main's push
+  # (lean) and the nightly and dispatch full runs come from browserstack.yml's
+  # own triggers so a long run never holds this workflow's concurrency group.
   browserstack:
     name: BrowserStack (site layout)
     needs: [changes]

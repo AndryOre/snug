@@ -43,13 +43,14 @@ on:
 permissions:
   contents: read
 
-# PRs supersede their own earlier lean runs. Full runs are never cancelled and
-# queue behind each other, so the plan's 5 parallels are not oversubscribed.
+# One queue for every BrowserStack run. Each run opens up to 4 sessions and the
+# plan has 5 parallels, so two overlapping runs oversubscribe it and every
+# worker after the first rejection fails with BROWSERSTACK_QUEUE_SIZE_EXCEEDED.
+# Nothing is cancelled: a run waits its turn. GitHub keeps only the newest
+# waiting run, so a newer PR push replaces an older waiting one.
 concurrency:
-  group:
-    browserstack-${{ github.event_name == 'pull_request' && github.ref || 'full'
-    }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  group: browserstack-queue
+  cancel-in-progress: false
 
 jobs:
   plan:
@@ -65,7 +66,8 @@ jobs:
     env:
       BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
       BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-      REQUESTED_TIER: ${{ inputs.tier || 'full' }}
+      REQUESTED_TIER:
+        ${{ inputs.tier || (github.event_name == 'push' && 'lean') || 'full' }}
       REQUESTED_PLATFORM: ${{ inputs.platform || 'all' }}
     steps:
       - name: Build the platform matrix
@@ -151,6 +153,9 @@ jobs:
           test "$(yq '.platforms | length' browserstack.yml)" = "1"
           yq '.platforms' browserstack.yml
 
+      # A remote Firefox session dies after about 500 tests, so the full tier
+      # runs three consecutive shards, each in a fresh session, and every shard
+      # runs even when an earlier one fails.
       - name: Run layout specs on BrowserStack
         working-directory: apps/site
         env:
@@ -158,6 +163,12 @@ jobs:
         run: |
           if [[ -n "${SHARD}" ]]; then
             bun run test:e2e:browserstack -- "--shard=${SHARD}"
+          elif [[ "${BROWSERSTACK_TIER}" == "full" ]]; then
+            status=0
+            for index in 1 2 3; do
+              BROWSERSTACK_SHARD_LABEL="shard-${index}" bun run test:e2e:browserstack -- "--shard=${index}/3" || status=1
+            done
+            exit "${status}"
           else
             bun run test:e2e:browserstack
           fi
@@ -167,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: browserstack-timings-${{ matrix.id }}
-          path: apps/site/test-results/browserstack-timings.json
+          path: apps/site/test-results/browserstack-timings*.json
           if-no-files-found: ignore
           retention-days: 14
 
