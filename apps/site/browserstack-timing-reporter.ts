@@ -14,7 +14,10 @@ interface TestTiming {
   otherMs: number
 }
 
-const TIMINGS_PATH = 'test-results/browserstack-timings.json'
+function timingsPath(): string {
+  const shard = process.env.BROWSERSTACK_SHARD_LABEL
+  return `test-results/browserstack-timings${shard ? `-${shard}` : ''}.json`
+}
 
 function percentile(sortedValues: number[], fraction: number): number {
   if (sortedValues.length === 0) return 0
@@ -92,11 +95,16 @@ export default class BrowserStackTimingReporter implements Reporter {
     console.log(summary)
 
     mkdirSync('test-results', { recursive: true })
-    writeFileSync(TIMINGS_PATH, JSON.stringify(this.timings, null, 2))
+    writeFileSync(timingsPath(), JSON.stringify(this.timings, null, 2))
 
     const summaryFile = process.env.GITHUB_STEP_SUMMARY
     if (!summaryFile) return
-    const platform = process.env.BROWSERSTACK_PLATFORM_LABEL ?? 'platform'
+    const platform = [
+      process.env.BROWSERSTACK_PLATFORM_LABEL ?? 'platform',
+      process.env.BROWSERSTACK_SHARD_LABEL,
+    ]
+      .filter(Boolean)
+      .join(' ')
     appendFileSync(
       summaryFile,
       `### Timing: ${platform}\n\n| Metric | Value |\n| --- | --- |\n| Test attempts | ${count} |\n| Mean | ${seconds(meanTotal)} |\n| p50 | ${seconds(percentile(totals, 0.5))} |\n| p95 | ${seconds(percentile(totals, 0.95))} |\n| Mean pw:api | ${seconds(meanApi)} |\n| Mean fixtures | ${seconds(meanFixture)} |\n| Mean other | ${seconds(meanOther)} |\n\n`,

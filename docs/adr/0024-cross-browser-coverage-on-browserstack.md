@@ -11,6 +11,10 @@ Date: 2026-10-15
 Revised: 2026-10-21, four platforms instead of five (the iPhone left, see ADR
 0025), test counts recounted, and the pending iPhone timing finding resolved.
 
+Revised: 2026-11-02, one queue for every run, pushes to `main` run the lean
+tier, the full tier runs three sequential shards, and the layout specs block
+Umami.
+
 Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
 recorded on both sides.
 
@@ -45,22 +49,30 @@ Automate (5 parallels, unlimited minutes) and Percy.
   `CI passed`.
 - `fullyParallel` is on in the BrowserStack Playwright config so `--shard` can
   split inside `accessibility.spec.ts`; without it all 330 of its tests land in
-  one shard. No job is sharded today.
+  one shard. The full tier runs three consecutive shards per job, each in a
+  fresh remote session: a Firefox session died at test 499 on every nightly run
+  with `Browser closed`, and the retry hid it from GitHub while BrowserStack
+  still counted the failed attempt.
 - Nothing is skipped; the same tests run on different triggers (tiers):
   - **Lean** (207 tests per platform: every layout spec except
     `accessibility.spec.ts`, via `BROWSERSTACK_TIER=lean`): PRs touching
     `apps/site/**` or `packages/ui/**`, on Safari, Firefox, Edge and Pixel 8.
     About 10 to 20 minutes per platform, all four in parallel.
-  - **Full** (all 537 tests per platform, accessibility included): nightly,
-    pushes to `main` and manual dispatch.
+  - **Full** (all 537 tests per platform, accessibility included): nightly and
+    manual dispatch. A push to `main` runs the lean tier, so it never overlaps a
+    multi-hour full run.
 - `workflow_dispatch` takes `tier` (`lean`|`full`) and `platform`
   (`all`|`safari`|`firefox`|`edge`|`pixel`), so one platform can be run on
   demand.
 - A `plan` job builds a matrix of single-platform jobs (the SDK config is
   narrowed to that platform with `yq`), capped at `max-parallel: 5` to match the
-  plan's parallels (four jobs today). Full-tier runs share one non-cancelling
-  concurrency group so they queue instead of oversubscribing; lean PR runs
-  cancel superseded runs of the same PR.
+  plan's parallels (four jobs today). Every run shares one non-cancelling
+  concurrency group, so runs queue instead of oversubscribing the plan: a full
+  run (4 sessions) overlapping lean PR runs (4 sessions each) went over the 5
+  parallels and BrowserStack rejected the rest with
+  `BROWSERSTACK_QUEUE_SIZE_EXCEEDED`. GitHub keeps only the newest waiting run,
+  so a newer push replaces an older waiting one, and a long full dispatch can
+  delay PR runs.
 - When the secrets are unavailable (fork PRs), the plan job skips everything
   with a notice.
 
@@ -110,7 +122,11 @@ matrix. The reporter still runs for the four remaining platforms.
   2027-10-10 and is not renewed, the workflow must be removed.
 - Fork PRs get no cross-browser signal until a maintainer re-runs the workflow
   with secrets available.
-- Several concurrent PRs can exceed 5 parallels (4 sessions per lean run);
-  BrowserStack queues the extra sessions, which only lengthens wall time.
+- Runs wait in one queue, so a PR can wait behind a full run. A waiting nightly
+  run can be replaced by a newer waiting run, which is rare because lean runs
+  are short.
+- The layout specs use the `test` from `apps/site/e2e/fixtures.ts`, which
+  answers Umami requests locally, so a page load never waits on the real script
+  through the tunnel. Remote runs allow 60 s per test and 45 s per navigation.
 - Failures print in the job log (`list` reporter) and the HTML report is
   uploaded on failure.
