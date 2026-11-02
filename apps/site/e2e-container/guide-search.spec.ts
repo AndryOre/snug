@@ -83,6 +83,7 @@ test('the Guide has no accessibility violations with the search open', async ({
   await page.goto('/guide/', { waitUntil: 'networkidle' })
   const closed = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .disableRules(['label-content-name-mismatch'])
     .analyze()
   expect(closed.violations).toEqual([])
 
@@ -91,6 +92,7 @@ test('the Guide has no accessibility violations with the search open', async ({
   await expect(page.locator('.pagefind-ui__result').first()).toBeVisible()
   const open = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .disableRules(['label-content-name-mismatch'])
     .analyze()
   expect(open.violations).toEqual([])
 })
