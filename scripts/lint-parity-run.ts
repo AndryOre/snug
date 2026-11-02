@@ -459,11 +459,6 @@ interface LoadedPlugin {
   rules?: unknown
 }
 
-type RuleModules = Record<
-  string,
-  { meta?: { docs?: { requiresTypeChecking?: boolean } } }
->
-
 async function typeAwareRuleIds(
   baselineDirectory: string,
 ): Promise<Set<string>> {
@@ -473,6 +468,10 @@ async function typeAwareRuleIds(
   ]
   const ids = await Promise.all(
     plugins.map(async ([prefix, name]) => {
+      type RuleModules = Record<
+        string,
+        { meta?: { docs?: { requiresTypeChecking?: boolean } } }
+      >
       const loaded = (await import(
         Bun.resolveSync(name, baselineDirectory)
       )) as LoadedPlugin

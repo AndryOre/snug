@@ -7,8 +7,6 @@ import {
   copyMarkdownTwin,
 } from '../docs/copy-markdown'
 
-type CopyState = 'idle' | 'copied' | 'failed'
-
 const STATE_ICONS = {
   idle: CopyIcon,
   copied: CheckIcon,
@@ -39,6 +37,7 @@ export default function CopyMarkdownButton({
   twinHref,
   copy,
 }: CopyMarkdownButtonProperties) {
+  type CopyState = 'idle' | 'copied' | 'failed'
   const [state, setState] = useState<CopyState>('idle')
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 

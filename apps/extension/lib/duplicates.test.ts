@@ -122,7 +122,6 @@ describe('findDuplicateGroups', () => {
   it('groups two copies and carries title, folder path and date', () => {
     const tree = treeWith([
       bookmark('10', 'https://a.example/', 100),
-      // eslint-disable-next-line unicorn-js/prefer-https -- http is the scheme under test
       folder('20', 'Sub', [bookmark('11', 'http://www.a.example', 50)]),
     ])
     const groups = findDuplicateGroups(tree)

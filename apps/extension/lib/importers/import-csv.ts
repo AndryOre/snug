@@ -85,7 +85,7 @@ export function parseCSVTree(csv: string): {
 
   const malformedRows = new Set(
     parsed.errors.flatMap((error) =>
-      error.row === undefined ? [] : [error.row],
+      error.row === undefined ? [] : error.row,
     ),
   )
   const rows = parsed.data.filter((_, index) => !malformedRows.has(index))

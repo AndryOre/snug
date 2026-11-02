@@ -18,7 +18,6 @@ describe('collectExistingUrls', () => {
             id: '1',
             title: 'Bar',
             children: [
-              // eslint-disable-next-line unicorn-js/prefer-https -- exercises http/https normalization
               { id: '5', title: 'A', url: 'http://www.a.example/' },
               {
                 id: '6',
@@ -44,7 +43,6 @@ describe('dropDuplicateBookmarks', () => {
           title: 'Folder',
           dateAdded: 0,
           children: [
-            // eslint-disable-next-line unicorn-js/prefer-https -- exercises http/https normalization
             bookmark('A2', 'http://a.example'),
             bookmark('C', 'https://c.example'),
           ],

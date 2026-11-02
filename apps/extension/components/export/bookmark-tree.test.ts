@@ -82,7 +82,12 @@ describe('BookmarkTree', () => {
     fakeBrowser.reset()
     fakeBrowser.i18n.getMessage = vi.fn((key: string) => key)
     seed()
-    for (const property of ['offsetHeight', 'offsetWidth']) {
+    for (const property of [
+      'offsetHeight',
+      'offsetWidth',
+      'clientHeight',
+      'clientWidth',
+    ]) {
       Object.defineProperty(HTMLElement.prototype, property, {
         configurable: true,
         value: 600,

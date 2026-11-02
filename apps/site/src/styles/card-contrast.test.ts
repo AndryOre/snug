@@ -107,7 +107,7 @@ function listSources(directory: URL): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = path.join(directory.pathname, entry.name)
     if (entry.isDirectory()) return listSources(new URL(`file://${entryPath}/`))
-    return /\.(astro|tsx)$/.test(entry.name) ? [entryPath] : []
+    return /\.(astro|tsx)$/.test(entry.name) ? entryPath : []
   })
 }
 

@@ -62,7 +62,7 @@ export type SourceReader = (sourcePath: string) => string
  * @param sourcePath - Path relative to the repository root, using `/`.
  * @returns The file's UTF-8 text.
  */
-function readRepoSource(sourcePath: string): string {
+function readRepositorySource(sourcePath: string): string {
   return readFileSync(path.join(REPOSITORY_ROOT, sourcePath), 'utf8')
 }
 
@@ -118,7 +118,7 @@ export function buildCatalogEntry(
  * @returns One entry per published source.
  */
 export function loadCatalog(
-  readSource: SourceReader = readRepoSource,
+  readSource: SourceReader = readRepositorySource,
 ): CatalogEntry[] {
   return PUBLISHED_SOURCES.map((source) =>
     buildCatalogEntry(source, readSource(source.sourcePath)),
@@ -203,7 +203,7 @@ export function buildLocalizedPage(
  * @throws {MalformedTranslationError} When a translation is unusable.
  */
 export function loadLocalizedCatalog(
-  readSource: SourceReader = readRepoSource,
+  readSource: SourceReader = readRepositorySource,
   readTranslation: TranslationReader = readTranslationFile,
 ): LocalizedPage[] {
   return PUBLISHED_SOURCES.flatMap((source) => {

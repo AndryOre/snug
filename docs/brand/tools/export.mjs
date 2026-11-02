@@ -37,7 +37,7 @@ const brandRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 )
-const repoRoot = path.resolve(brandRoot, '../..')
+const repositoryRoot = path.resolve(brandRoot, '../..')
 const fontsRoot = path.join(brandRoot, 'brandbook/fonts')
 
 const GROUND = '#17120A'
@@ -98,7 +98,7 @@ async function renderIcon(browser, size, outPath) {
   await mkdir(path.dirname(outPath), { recursive: true })
   await page.screenshot({ path: outPath, omitBackground: true })
   await page.close()
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderBanner(
@@ -125,7 +125,7 @@ async function finishPage(page, outPath) {
   await page.close()
   const { size } = await stat(outPath)
   console.log(
-    `${path.relative(repoRoot, outPath)} ${(size / 1024).toFixed(0)} KB`,
+    `${path.relative(repositoryRoot, outPath)} ${(size / 1024).toFixed(0)} KB`,
   )
   return size
 }
@@ -270,7 +270,7 @@ async function renderYoutubeBanner(browser, outPath) {
   await page.screenshot({ path: outPath })
   await page.close()
   await assertPngSpec(outPath, { width, height, maxBytes: 6 * MB })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderYoutubeAvatar(browser, outPath) {
@@ -290,7 +290,7 @@ async function renderYoutubeAvatar(browser, outPath) {
   await page.screenshot({ path: outPath })
   await page.close()
   await assertPngSpec(outPath, { width: size, height: size, maxBytes: 2 * MB })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderYoutubeWatermark(browser, outPath) {
@@ -308,7 +308,7 @@ async function renderYoutubeWatermark(browser, outPath) {
   await page.screenshot({ path: outPath, omitBackground: true })
   await page.close()
   await assertPngSpec(outPath, { width: size, height: size, maxBytes: 1 * MB })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderProductHuntThumbnail(browser, outPath) {
@@ -332,7 +332,7 @@ async function renderProductHuntThumbnail(browser, outPath) {
     height: size,
     maxBytes: LAUNCH_MAX_BYTES,
   })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderProductHuntGallery(browser, screenshotPath, outPath) {
@@ -355,7 +355,7 @@ async function renderProductHuntGallery(browser, screenshotPath, outPath) {
     height,
     maxBytes: LAUNCH_MAX_BYTES,
   })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderXHeader(browser, outPath) {
@@ -386,17 +386,17 @@ async function renderXHeader(browser, outPath) {
   await page.screenshot({ path: outPath })
   await page.close()
   await assertPngSpec(outPath, { width, height, maxBytes: LAUNCH_MAX_BYTES })
-  console.log(path.relative(repoRoot, outPath))
+  console.log(path.relative(repositoryRoot, outPath))
 }
 
 async function renderLaunchAssets(browser) {
-  const launchRoot = path.join(repoRoot, 'docs/launch/assets')
+  const launchRoot = path.join(repositoryRoot, 'docs/launch/assets')
   await renderProductHuntThumbnail(
     browser,
     path.join(launchRoot, 'producthunt-thumbnail-240.png'),
   )
   const screenshotsRoot = path.join(
-    repoRoot,
+    repositoryRoot,
     'docs/store/assets/screenshots/en',
   )
   const entries = await readdir(screenshotsRoot)
@@ -430,7 +430,7 @@ function escapeHtml(text) {
 }
 
 async function readOgTaglines() {
-  const localesRoot = path.join(repoRoot, 'apps/extension/locales')
+  const localesRoot = path.join(repositoryRoot, 'apps/extension/locales')
   const entries = await readdir(localesRoot)
   const fileNames = entries
     .filter((name) => name.endsWith('.json'))
@@ -448,7 +448,7 @@ async function readOgTaglines() {
 }
 
 async function renderOgImages(browser) {
-  const ogRoot = path.join(repoRoot, 'apps/site/public/og')
+  const ogRoot = path.join(repositoryRoot, 'apps/site/public/og')
   await rm(ogRoot, { recursive: true, force: true })
   const taglines = await readOgTaglines()
   for (const { locale, tagline } of taglines) {
@@ -478,10 +478,10 @@ try {
   await renderIcon(
     browser,
     512,
-    path.join(repoRoot, 'apps/extension/assets/icon.png'),
+    path.join(repositoryRoot, 'apps/extension/assets/icon.png'),
   )
 
-  const storeAssets = path.join(repoRoot, 'docs/store/assets')
+  const storeAssets = path.join(repositoryRoot, 'docs/store/assets')
   await renderIcon(browser, 128, path.join(storeAssets, 'store-icon-128.png'))
   await renderIcon(browser, 300, path.join(storeAssets, 'edge-logo-300.png'))
   await renderSmallTile(
@@ -490,12 +490,15 @@ try {
   )
   const marqueePath = path.join(storeAssets, 'marquee-1400x560.png')
   await renderMarquee(browser, marqueePath)
-  const readmeBannerPath = path.join(repoRoot, 'docs/assets/readme-banner.png')
+  const readmeBannerPath = path.join(
+    repositoryRoot,
+    'docs/assets/readme-banner.png',
+  )
   await mkdir(path.dirname(readmeBannerPath), { recursive: true })
   await copyFile(marqueePath, readmeBannerPath)
 
   const githubPreviewPath = path.join(
-    repoRoot,
+    repositoryRoot,
     'docs/assets/github-social-preview-1280x640.png',
   )
   await renderGithubSocialPreview(browser, githubPreviewPath)

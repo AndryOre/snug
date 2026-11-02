@@ -10,7 +10,7 @@ import {
 } from './published'
 import { buildSidebar, readSidebarLabels } from './sidebar'
 
-const repoRoot = path.resolve(import.meta.dirname, '../../../..')
+const repositoryRoot = path.resolve(import.meta.dirname, '../../../..')
 
 describe('published allowlist', () => {
   it('lists exactly the usage overview, the five area pages and the changelog', () => {
@@ -44,7 +44,7 @@ describe('published allowlist', () => {
   it('has every published file on disk', () => {
     for (const source of PUBLISHED_SOURCES) {
       expect(() =>
-        readFileSync(path.join(repoRoot, source.sourcePath), 'utf8'),
+        readFileSync(path.join(repositoryRoot, source.sourcePath), 'utf8'),
       ).not.toThrow()
     }
   })

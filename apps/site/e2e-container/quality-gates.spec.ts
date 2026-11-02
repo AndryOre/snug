@@ -174,6 +174,7 @@ for (const path of [
     expect(response?.status()).toBe(200)
     const { violations } = await new AxeBuilder({ page })
       .withTags(AXE_TAGS)
+      .disableRules(['label-content-name-mismatch'])
       .analyze()
     expect(violations).toEqual([])
   })

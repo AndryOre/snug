@@ -33,8 +33,6 @@ import {
   DOWNLOAD_SETTLE_TIMEOUT_MS,
 } from './offscreen-download'
 
-type OnChangedListener = (delta: Browser.downloads.DownloadDelta) => void
-
 /**
  * Replaces `chrome.offscreen` (unimplemented in `fakeBrowser`) with `vi.fn`
  * stubs so `downloadViaOffscreenDocument` can create/close the offscreen
@@ -92,6 +90,8 @@ function mockDownload(
 ) {
   let nextId = 1
   const issuedIds: number[] = []
+  type OnChangedListener = (delta: Browser.downloads.DownloadDelta) => void
+
   const listeners: OnChangedListener[] = []
 
   const mock = vi.fn(

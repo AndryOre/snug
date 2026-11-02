@@ -33,7 +33,7 @@ function listHtmlFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const entryPath = path.join(directory, entry.name)
     if (entry.isDirectory()) return listHtmlFiles(entryPath)
-    return entry.name.endsWith('.html') ? [entryPath] : []
+    return entry.name.endsWith('.html') ? entryPath : []
   })
 }
 

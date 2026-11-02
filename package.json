@@ -27,9 +27,9 @@
   "author": "Andry Orellana <hello@andryore.dev>",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.4.2",
+  "packageManager": "bun@1.4.4",
   "engines": {
-    "bun": "1.4.2"
+    "bun": "1.4.4"
   },
   "workspaces": {
     "packages": [
@@ -37,18 +37,18 @@
       "packages/*"
     ],
     "catalog": {
-      "react": "^19.2.5",
-      "react-dom": "^19.2.5",
+      "react": "^19.3.1",
+      "react-dom": "^19.3.1",
       "typescript": "^6.0.3",
       "typescript7": "npm:typescript@7.1.0-beta",
       "tailwindcss": "^4.2.4",
       "@tailwindcss/vite": "^4.2.4",
       "@types/react": "^19.2.14",
       "@types/react-dom": "^19.2.3",
-      "lucide-react": "^1.49.0",
-      "cn": "^0.4.0",
-      "vitest": "^5.0.3",
-      "@types/bun": "^1.4.2"
+      "lucide-react": "^1.66.0",
+      "cn": "^0.5.1",
+      "vitest": "^5.0.5",
+      "@types/bun": "^1.4.4"
     }
   },
   "scripts": {
@@ -92,32 +92,32 @@
     "lint:parity": "bun scripts/lint-parity-run.ts"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.2.3",
-    "@commitlint/config-conventional": "^21.2.3",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
-    "@eslint-react/eslint-plugin": "^5.24.4",
-    "@shadcn/lint": "^0.2.0",
+    "@eslint-react/eslint-plugin": "^5.28.8",
+    "@shadcn/lint": "^0.2.3",
     "@types/bun": "catalog:",
     "@vitest/coverage-v8": "^5.0.4",
-    "bun-types": "^1.4.2",
-    "eslint": "^10.12.0",
+    "bun-types": "^1.4.4",
+    "eslint": "^10.14.0",
     "eslint-plugin-astro": "^3.2.1",
-    "eslint-plugin-jsdoc": "^65.3.1",
+    "eslint-plugin-jsdoc": "^65.4.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-unicorn": "^76.0.0",
+    "eslint-plugin-unicorn": "^79.0.0",
     "husky": "^9.1.7",
     "json5": "^2.2.3",
-    "knip": "^6.39.0",
+    "knip": "^6.44.1",
     "lint-staged": "^17.5.1",
     "oxfmt": "0.75.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
-    "playwright": "^1.63.0",
-    "turbo": "^2.11.7",
+    "playwright": "^1.64.1",
+    "turbo": "^2.11.10",
     "typescript": "catalog:",
-    "typescript-eslint": "^8.71.1",
+    "typescript-eslint": "^8.72.1",
     "typescript7": "catalog:",
     "vitest": "catalog:",
     "yaml": "^2.9.1"

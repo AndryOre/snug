@@ -9,7 +9,7 @@ export const getStaticPaths = (async () => {
     const entry = entries.find((candidate) => candidate.id === slug)
     if (!entry) return []
     const markdown = buildMarkdownTwin(entry.data.title, entry.body ?? '')
-    return [{ params: { slug }, props: { markdown } }]
+    return { params: { slug }, props: { markdown } }
   })
 }) satisfies GetStaticPaths
 

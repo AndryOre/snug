@@ -257,7 +257,7 @@ async function pruneFolderIdentitiesSafely(
   runs: AutoExportRun[],
 ): Promise<void> {
   const referenced = runs.flatMap((run) =>
-    run.destination === 'folder' ? [run.folderId] : [],
+    run.destination === 'folder' ? run.folderId : [],
   )
   try {
     await pruneFolderIdentities(referenced)

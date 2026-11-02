@@ -3,9 +3,15 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-const repoRoot = path.resolve(import.meta.dirname, '..')
-const typescript7Bin = path.join(repoRoot, 'node_modules/typescript7/bin/tsc')
-const typescript6Bin = path.join(repoRoot, 'node_modules/typescript/bin/tsc')
+const repositoryRoot = path.resolve(import.meta.dirname, '..')
+const typescript7Bin = path.join(
+  repositoryRoot,
+  'node_modules/typescript7/bin/tsc',
+)
+const typescript6Bin = path.join(
+  repositoryRoot,
+  'node_modules/typescript/bin/tsc',
+)
 
 const typecheckScripts = [
   ['package.json', 'check:root'],
@@ -41,7 +47,7 @@ describe('TypeScript 7 typecheck alias', () => {
     'calls the typescript7 bin explicitly in %s "%s"',
     (manifestPath, scriptName) => {
       const manifest = JSON.parse(
-        readFileSync(path.join(repoRoot, manifestPath), 'utf8'),
+        readFileSync(path.join(repositoryRoot, manifestPath), 'utf8'),
       ) as { scripts: Record<string, string> }
       const script = manifest.scripts[scriptName] ?? ''
       expect(script).toContain('node_modules/typescript7/bin/tsc --noEmit')

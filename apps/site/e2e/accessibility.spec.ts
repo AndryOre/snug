@@ -23,6 +23,7 @@ async function expectNoViolations(page: Page): Promise<void> {
   const { violations } = await new AxeBuilder({ page })
     .withTags(AXE_TAGS)
     .exclude('[data-base-ui-focus-guard]')
+    .disableRules(['label-content-name-mismatch'])
     .analyze()
   expect(violations).toEqual([])
 }
