@@ -30,7 +30,8 @@ repo-wide rules, and `apps/extension/AGENTS.md`, `packages/ui/AGENTS.md` and
 | `bun run cache:clear`       | Clears the `.astro` ESLint, Turborepo and `node_modules/.cache` caches.                                                                                          |
 | `bun run format:check`      | Checks formatting with Oxfmt (no writes).                                                                                                                        |
 | `bun run format:write`      | Formats the repo with Oxfmt.                                                                                                                                     |
-| `bun run lint`              | Runs Oxlint (`--type-aware --deny-warnings`), then ESLint on `**/*.astro` only (`--max-warnings=0`, cached).                                                     |
+| `bun run lint`              | Runs Oxlint (`--type-aware --deny-warnings`) as parallel `lint:oxlint:*` shards, then ESLint on `**/*.astro` only (`--max-warnings=0`, cached).                  |
+| `bun run lint:oxlint`       | Runs the Oxlint shards in parallel (`bun run --parallel`): same flags and config, one path per shard. Run one shard alone with `bun run lint:oxlint:<shard>`.    |
 | `bun run lint:docs`         | Local `lychee` link check, matching `lint-docs.yml`'s markdown link gate.                                                                                        |
 | `bun run lint:fix`          | Runs Oxlint and the `.astro` ESLint run with `--fix`.                                                                                                            |
 | `bun run typecheck`         | Runs TypeScript 7.1 `tsc --noEmit` at the root, in `packages/ui`, `apps/extension`, `apps/video` and `apps/site`.                                                |
@@ -52,6 +53,16 @@ Oxlint (`oxlint.config.ts`, type-aware through tsgolint), Oxfmt
 with `typescript` 6.x kept for tools that need the classic JS API. ESLint
 remains only for `**/*.astro`. `bun run lint:parity` compares the old ESLint
 config with Oxlint per file, line and rule.
+
+`lint:oxlint` is split into shards because Oxlint runs jsPlugins on one Node
+thread, so one pass is bound by a single core. When you add a shard, list it in
+`lint:oxlint`, give it one path, and add `--ignore-pattern '<path>/**'` to the
+shard that would otherwise also lint that path. The catch-all `lint:oxlint:rest`
+needs one too. `checkOxlintShards` (`scripts/lint-parity.test.ts`) fails until
+every file is linted exactly once. To see where Oxlint spends its time, run one
+pass with `oxlint --type-aware --deny-warnings -f default --debug=timings`. Pass
+`-f default` explicitly: inside an AI agent session Oxlint switches to a quiet
+formatter that hides the timing table.
 
 If something fails, see [troubleshooting](troubleshooting.md). Task recipes are
 indexed in [how-to](how-to/README.md).
