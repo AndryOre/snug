@@ -594,7 +594,6 @@ const reactHooksRules: DummyRuleMap = {
  */
 const typescriptRules: DummyRuleMap = {
   'no-array-constructor': 'error',
-  'no-implied-eval': 'off',
   'no-unused-expressions': 'error',
   'no-unused-vars': [
     'error',
@@ -606,9 +605,6 @@ const typescriptRules: DummyRuleMap = {
       varsIgnorePattern: '^$',
     },
   ],
-  'no-throw-literal': 'off',
-  'prefer-promise-reject-errors': 'off',
-  'require-await': 'off',
   'typescript/await-thenable': 'error',
   'typescript/ban-ts-comment': 'error',
   'typescript/no-array-delete': 'error',
@@ -702,13 +698,10 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/no-blank-blocks': 'off',
   'jsdoc/require-param-description': 'error',
   'jsdoc/require-param-name': 'error',
-  'jsdoc/require-param-type': 'off',
   'jsdoc/require-property': 'error',
   'jsdoc/require-property-description': 'error',
   'jsdoc/require-property-name': 'error',
-  'jsdoc/require-property-type': 'off',
   'jsdoc/require-returns-description': 'error',
-  'jsdoc/require-returns-type': 'off',
   'jsdoc/require-throws-description': 'off',
   'jsdoc/require-yields-description': 'off',
   'jsdoc/require-yields-type': 'error',
