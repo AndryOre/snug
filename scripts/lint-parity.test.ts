@@ -1,7 +1,9 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, test } from 'vitest'
 
 import {
   checkExpectedFixtures,
+  checkOxlintShards,
   checkRuleCoverage,
   compareSection,
   diffFindings,
@@ -536,5 +538,93 @@ describe('normalizeEslintRule', () => {
     expect(
       normalizeEslintRule(null, 'File ignored by default.'),
     ).toBeUndefined()
+  })
+})
+
+const sharded = (
+  shards: Readonly<Record<string, string>>,
+): Record<string, string> => ({
+  'lint:oxlint': `bun run --parallel --no-exit-on-error ${Object.keys(shards).join(' ')}`,
+  ...shards,
+})
+
+describe('checkOxlintShards', () => {
+  const base = 'oxlint --type-aware --deny-warnings'
+
+  test('shards that lint every file exactly once pass', () => {
+    expect(
+      checkOxlintShards(
+        sharded({
+          'lint:oxlint:lib': `${base} apps/extension/lib`,
+          'lint:oxlint:extension': `${base} apps/extension --ignore-pattern 'apps/extension/lib/**'`,
+          'lint:oxlint:site': `${base} apps/site`,
+          'lint:oxlint:rest': `${base} --ignore-pattern 'apps/extension/**' --ignore-pattern 'apps/site/**'`,
+        }),
+      ),
+    ).toEqual([])
+  })
+
+  test('a catch-all that does not ignore a path shard lints its files twice', () => {
+    expect(
+      checkOxlintShards(
+        sharded({
+          'lint:oxlint:site': `${base} apps/site`,
+          'lint:oxlint:rest': base,
+        }),
+      ),
+    ).toEqual([
+      'lint:oxlint:rest must ignore exactly apps/site/** (it ignores nothing)',
+    ])
+  })
+
+  test('a path shard that does not ignore a nested shard lints its files twice', () => {
+    expect(
+      checkOxlintShards(
+        sharded({
+          'lint:oxlint:lib': `${base} apps/extension/lib`,
+          'lint:oxlint:extension': `${base} apps/extension`,
+          'lint:oxlint:rest': `${base} --ignore-pattern 'apps/extension/**'`,
+        }),
+      ),
+    ).toEqual([
+      'lint:oxlint:extension must ignore exactly apps/extension/lib/** (it ignores nothing)',
+    ])
+  })
+
+  test('an ignore that no shard covers drops files from the lint', () => {
+    expect(
+      checkOxlintShards(
+        sharded({
+          'lint:oxlint:site': `${base} apps/site`,
+          'lint:oxlint:rest': `${base} --ignore-pattern 'apps/site/**' --ignore-pattern 'apps/video/**'`,
+        }),
+      ),
+    ).toEqual([
+      'lint:oxlint:rest must ignore exactly apps/site/** (it ignores apps/site/**, apps/video/**)',
+    ])
+  })
+
+  test('every shard runs the same Oxlint flags, and one shard is the catch-all', () => {
+    expect(
+      checkOxlintShards(
+        sharded({ 'lint:oxlint:site': 'oxlint --deny-warnings apps/site' }),
+      ),
+    ).toEqual([
+      `lint:oxlint:site must start with "${base}"`,
+      'lint:oxlint needs exactly one shard without a path (found 0)',
+    ])
+  })
+
+  test('lint:oxlint must run its shards in parallel through bun', () => {
+    expect(checkOxlintShards({ 'lint:oxlint': base })).toEqual([
+      'lint:oxlint must be "bun run --parallel --no-exit-on-error" followed by its lint:oxlint:* shards',
+    ])
+  })
+
+  test('the repo lint:oxlint shards lint every file exactly once', () => {
+    const rootScripts = JSON.parse(
+      readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+    ) as { scripts: Record<string, string> }
+    expect(checkOxlintShards(rootScripts.scripts)).toEqual([])
   })
 })
