@@ -77,10 +77,14 @@ jobs:
           bun run build
           bun run test src/seo/distribution-audit.test.ts
 
+      - name: Install the Playwright 1.63 Chromium for Lighthouse
+        working-directory: apps/site
+        run: bunx playwright@1.63.0 install chromium
+
       - name: Enforce the Lighthouse budget
         working-directory: apps/site
         run: |
-          CHROME_PATH="$(bun -e "import { chromium } from '@playwright/test'; console.log(chromium.executablePath())")"
+          CHROME_PATH="$HOME/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome"
           export CHROME_PATH
           bun run lighthouse
 
