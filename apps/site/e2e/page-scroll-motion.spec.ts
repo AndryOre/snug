@@ -1,6 +1,7 @@
-import { expect, type Page, test } from '@playwright/test'
+import { type Page } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { expect, test } from './fixtures'
 import { setViewportOrSkip } from './layout-helpers'
 
 const PATHS = LOCALES.map((locale) => localePath(locale))

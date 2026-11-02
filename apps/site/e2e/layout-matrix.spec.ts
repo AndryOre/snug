@@ -1,6 +1,5 @@
-import { expect, test } from '@playwright/test'
-
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { expect, test } from './fixtures'
 import {
   expectNoElementOverflow,
   hydrateHeaderIsland,

@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, test } from '@playwright/test'
 
 import { localePath, LOCALES } from '../src/i18n/locales'
+import { expect, test } from './fixtures'
 import { hasFinePointer, linkTabKey, setViewportOrSkip } from './layout-helpers'
 import { blockUmami, isUmamiOrigin } from './umami-helpers'
 

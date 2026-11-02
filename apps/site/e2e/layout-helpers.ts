@@ -45,15 +45,19 @@ export async function hydrateHeaderIsland(page: Page): Promise<void> {
   await expect(
     page.locator('astro-island:has([data-language-switcher])'),
   ).not.toHaveAttribute('ssr', '')
-  await page.waitForFunction(() => {
-    const button = globalThis.document.querySelector(
-      '[data-language-switcher] button',
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const button = globalThis.document.querySelector(
+          '[data-language-switcher] button',
+        )
+        return (
+          button !== null &&
+          Object.keys(button).some((key) => key.startsWith('__reactProps$'))
+        )
+      }),
     )
-    return (
-      button !== null &&
-      Object.keys(button).some((key) => key.startsWith('__reactProps$'))
-    )
-  })
+    .toBe(true)
   await page.evaluate(
     () =>
       new Promise<void>((resolve) => {
@@ -63,6 +67,32 @@ export async function hydrateHeaderIsland(page: Page): Promise<void> {
           })
         })
       }),
+  )
+}
+
+/**
+ * Open the header language menu the way a visitor does: hydrate the header
+ * island first, because a click on the server-rendered button before hydration
+ * is lost, then click the trigger and wait for the menu and its animations to
+ * settle.
+ * @param page - A page with the site header.
+ */
+export async function openLanguageMenu(page: Page): Promise<void> {
+  await hydrateHeaderIsland(page)
+  await languageTrigger(page).click()
+  await expect(page.locator('[data-language-menu]')).toBeVisible()
+  await page.evaluate(() =>
+    Promise.all(
+      globalThis.document
+        .getAnimations()
+        .filter(
+          (a) =>
+            a.timeline === globalThis.document.timeline &&
+            a.playState === 'running' &&
+            a.effect?.getComputedTiming().iterations !== Infinity,
+        )
+        .map((a) => a.finished),
+    ),
   )
 }
 

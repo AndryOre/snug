@@ -1,8 +1,13 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, type Page, test } from '@playwright/test'
+import { type Page } from '@playwright/test'
 
 import { firstFaqTrigger } from './faq-helpers'
-import { expectNoHorizontalOverflow, setViewportOrSkip } from './layout-helpers'
+import { expect, test } from './fixtures'
+import {
+  expectNoHorizontalOverflow,
+  openLanguageMenu,
+  setViewportOrSkip,
+} from './layout-helpers'
 import { CONTENT_PATHS, SCANNED_PATHS, WIDTH_CHECK_PATHS } from './routes'
 
 const AXE_TAGS = [
@@ -137,8 +142,7 @@ test.describe('opened states', () => {
     page,
   }) => {
     await page.goto('/')
-    await page.locator('[data-language-switcher]').getByRole('button').click()
-    await expect(page.locator('[data-language-menu]')).toBeVisible()
+    await openLanguageMenu(page)
     await expectNoViolations(page)
   })
 
