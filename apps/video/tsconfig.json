@@ -5,7 +5,7 @@
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2023", "DOM"],
     "types": ["bun"],
     "resolveJsonModule": true,
     "esModuleInterop": true,

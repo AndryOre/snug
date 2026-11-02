@@ -695,15 +695,12 @@ const jsdocNativeRules: DummyRuleMap = {
   'jsdoc/check-tag-names': ['error', { typed: true }],
   'jsdoc/empty-tags': 'error',
   'jsdoc/implements-on-classes': 'error',
-  'jsdoc/no-blank-blocks': 'off',
   'jsdoc/require-param-description': 'error',
   'jsdoc/require-param-name': 'error',
   'jsdoc/require-property': 'error',
   'jsdoc/require-property-description': 'error',
   'jsdoc/require-property-name': 'error',
   'jsdoc/require-returns-description': 'error',
-  'jsdoc/require-throws-description': 'off',
-  'jsdoc/require-yields-description': 'off',
   'jsdoc/require-yields-type': 'error',
 }
 
