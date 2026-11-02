@@ -1,3 +1,4 @@
+import { runInNewContext } from 'node:vm'
 import { describe, expect, it } from 'vitest'
 
 import { THEME_COLORS } from './theme-color'
@@ -37,14 +38,11 @@ function runInit(options: { stored: string | null; systemDark: boolean }) {
       changeListeners.push(listener)
     },
   })
-  // eslint-disable-next-line @typescript-eslint/no-implied-eval -- executes the shipped inline script source under fakes
-  const runThemeInit = new Function(
-    'document',
-    'localStorage',
-    'matchMedia',
-    THEME_INIT_SCRIPT,
-  ) as (...arguments_: unknown[]) => void
-  runThemeInit(fakeDocument, fakeStorage, fakeMatchMedia)
+  runInNewContext(THEME_INIT_SCRIPT, {
+    document: fakeDocument,
+    localStorage: fakeStorage,
+    matchMedia: fakeMatchMedia,
+  })
   const changeSystem = (isDark: boolean) => {
     for (const listener of changeListeners) listener({ matches: isDark })
   }
