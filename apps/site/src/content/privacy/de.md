@@ -69,10 +69,11 @@ Netzwerkkontakt ist die optionale Abschiedsseite, die unter
   der Seite Auto-Export deaktivieren. Erfolgreiche Exporte benachrichtigen nie,
   und kein Inhalt der Benachrichtigungen verlässt dein Gerät.
 - Optionale Berechtigungen: Die Berechtigungen `downloads` und `notifications`
-  sind optional. Snug fordert `downloads` nur an, wenn du den automatischen
-  Export aktivierst, und `notifications` nur, wenn du Benachrichtigungen bei
-  Fehlern aktivierst. Lehnst du ab, bleibt die Funktion ausgeschaltet und sonst
-  ändert sich nichts.
+  sind optional. Snug fordert `downloads` an, wenn du den automatischen Export
+  mit dem Ziel Downloads aktivierst, wenn du das Ziel auf Downloads umstellst
+  oder wenn du „Jetzt exportieren“ ohne Zugriff auf Downloads verwendest, und
+  `notifications` nur, wenn du Benachrichtigungen bei Fehlern aktivierst. Lehnst
+  du ab, bleibt die Funktion ausgeschaltet und sonst ändert sich nichts.
 
 ### Deinstallationsseite
 
@@ -93,11 +94,11 @@ Netzwerkkontakt ist die optionale Abschiedsseite, die unter
   auf deinem lokalen Gerät gespeichert: in deinem Download-Ordner über die
   Download-Funktion deines Browsers oder, bei automatischen Exporten, in dem
   benutzerdefinierten Ordner, den du gewählt hast, über die File System Access
-  API des Browsers. Manuelle Exporte verwenden einen Standard-Link
-  `<a download>` und benötigen die Berechtigung `downloads` nicht; automatische
-  Exporte und die Sicherheits-Snapshot-Datei verwenden die Berechtigung
-  `downloads`, die optional ist und nur angefordert wird, wenn du den
-  automatischen Export aktivierst.
+  API des Browsers. Manuelle Exporte und die Sicherheits-Snapshot-Datei
+  verwenden einen Standard-Link `<a download>` und benötigen die Berechtigung
+  `downloads` nicht; nur automatische Exporte, die in deinem Download-Ordner
+  gespeichert werden, verwenden die Berechtigung `downloads`, die optional ist
+  und wie oben beschrieben angefordert wird.
 - Die Erweiterung speichert deine lokalen Einstellungen und Präferenzen, etwa
   das Design, Anzeigeoptionen, Exportoptionen, die Dateinamenvorlage und deine
   Einstellungen für den automatischen Export, im lokalen Speicher des Browsers
@@ -131,16 +132,16 @@ Netzwerkkontakt ist die optionale Abschiedsseite, die unter
 Snug fordert die folgenden Browser-Berechtigungen an, die jeweils nur für den
 beschriebenen Zweck verwendet werden:
 
-| Berechtigung       | Zweck                                                                                                                                                                                                                       |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Die Lesezeichen deines Browsers lesen und schreiben, um Import und Export zu ermöglichen.                                                                                                                                   |
-| `favicon`          | Website-Symbole neben den Lesezeichen über die im Browser integrierte `_favicon`-API anzeigen.                                                                                                                              |
-| `storage`          | Deine lokalen Einstellungen und Präferenzen auf deinem Gerät speichern.                                                                                                                                                     |
-| `alarms`           | Automatische Lesezeichen-Exporte im konfigurierten Intervall planen und auslösen.                                                                                                                                           |
-| `downloads`        | Optional. Wird nur angefordert, wenn du den automatischen Export aktivierst. Automatische Exporte und Sicherheits-Snapshot-Dateien auf deinem Gerät speichern und alte Auto-Export-Dateien von Snug löschen (Aufbewahrung). |
-| `notifications`    | Optional. Wird nur angefordert, wenn du Benachrichtigungen bei Fehlern aktivierst. Eine Benachrichtigung auf deinem Gerät anzeigen, wenn ein automatischer Export fehlschlägt. Du kannst sie deaktivieren.                  |
-| `unlimitedStorage` | Die fünf neuesten Sicherheits-Snapshots deiner Lesezeichen auf deinem Gerät behalten, die bei großen Bibliotheken umfangreich sein können.                                                                                  |
-| `offscreen`        | Ein kurzlebiges verstecktes Dokument erstellen, damit ein automatischer Export in eine herunterladbare Datei umgewandelt werden kann. Es hat keine Oberfläche und lädt keine Remote-Inhalte.                                |
+| Berechtigung       | Zweck                                                                                                                                                                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Die Lesezeichen deines Browsers lesen und schreiben, um Import und Export zu ermöglichen.                                                                                                                                                                                                                        |
+| `favicon`          | Website-Symbole neben den Lesezeichen über die im Browser integrierte `_favicon`-API anzeigen.                                                                                                                                                                                                                   |
+| `storage`          | Deine lokalen Einstellungen und Präferenzen auf deinem Gerät speichern.                                                                                                                                                                                                                                          |
+| `alarms`           | Automatische Lesezeichen-Exporte im konfigurierten Intervall planen und auslösen.                                                                                                                                                                                                                                |
+| `downloads`        | Optional. Wird angefordert, wenn du den automatischen Export mit dem Ziel Downloads aktivierst, das Ziel auf Downloads umstellst oder „Jetzt exportieren“ ohne Zugriff auf Downloads verwendest. Automatische Exporte im Download-Ordner speichern und alte Auto-Export-Dateien von Snug löschen (Aufbewahrung). |
+| `notifications`    | Optional. Wird nur angefordert, wenn du Benachrichtigungen bei Fehlern aktivierst. Eine Benachrichtigung auf deinem Gerät anzeigen, wenn ein automatischer Export fehlschlägt. Du kannst sie deaktivieren.                                                                                                       |
+| `unlimitedStorage` | Die fünf neuesten Sicherheits-Snapshots deiner Lesezeichen auf deinem Gerät behalten, die bei großen Bibliotheken umfangreich sein können.                                                                                                                                                                       |
+| `offscreen`        | Ein kurzlebiges verstecktes Dokument erstellen, damit ein automatischer Export in eine herunterladbare Datei umgewandelt werden kann. Es hat keine Oberfläche und lädt keine Remote-Inhalte.                                                                                                                     |
 
 ## Dienste von Drittanbietern
 

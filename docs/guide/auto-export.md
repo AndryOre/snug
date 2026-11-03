@@ -16,13 +16,22 @@ Snug can export your bookmarks on a schedule, without any manual action:
    shortly after the browser next starts, instead of waiting for the next
    scheduled time.
 
-Snug asks for Downloads access only when you turn Auto-export on. The browser
-shows its own permission prompt, and the Auto-export page shows an alert titled
-"Snug needs permission to save to Downloads". Its description reads "Auto-export
-can't run until you allow it. Files you already saved are not affected." Select
-**Allow** to grant it. If the permission isn't granted, the page says
+Snug asks for Downloads access in three cases: when you turn Auto-export on with
+Downloads as the destination, when you switch **Save to** to **Downloads**, and
+when you run **Export now** without that access. The browser shows its own
+permission prompt. If you decline, nothing is saved: Auto-export stays off, the
+destination stays as it was, and the export doesn't run. The page says
 "Auto-export stays off because the permission wasn't granted. You can turn it on
-again anytime." The popup then shows "Allow Downloads access to keep backing up"
+again anytime.", "The destination stays as it was because the permission wasn't
+granted." or "Export now needs permission to save to Downloads, and it wasn't
+granted.", respectively. The popup keeps showing Auto-export as off.
+
+If Auto-export is already on with Downloads as the destination and the access
+goes missing later, for example because you revoked it in the browser's
+settings, the **Auto-export** page shows an alert titled "Snug needs permission
+to save to Downloads". Its description reads "Auto-export can't run until you
+allow it. Files you already saved are not affected." Select **Allow access** to
+grant it again. The popup then shows "Allow Downloads access to keep backing up"
 with an **Open Auto-export** button that takes you back to the page.
 
 **Save to** sets the destination. **Downloads** (the default) saves into your

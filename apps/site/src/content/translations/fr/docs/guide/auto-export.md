@@ -1,6 +1,6 @@
 ---
 title: Exportation automatique
-sourceHash: 822155e8c27f729d
+sourceHash: f658d7e50cc058b1
 description:
   "Planifiez l'exportation automatique de vos favoris dans Chrome. Choisissez
   formats, intervalle et dossier, et Snug enregistre sans dialogue."
@@ -26,18 +26,29 @@ Snug peut exporter vos favoris selon un calendrier, sans action manuelle :
    exportation planifiée, elle se rattrape automatiquement peu après le prochain
    démarrage du navigateur, au lieu d'attendre l'heure planifiée suivante.
 
-Snug ne demande l'accès aux Téléchargements que lorsque vous activez l'export
-automatique. Le navigateur affiche sa propre demande d'autorisation, et la page
-**Exportation automatique** affiche une alerte intitulée « Snug a besoin de
-l'autorisation d'enregistrer dans Téléchargements ». Sa description indique «
-L'export automatique ne peut pas s'exécuter tant que vous ne l'autorisez pas.
-Les fichiers déjà enregistrés ne sont pas concernés. » Sélectionnez
-**Autoriser** pour l'accorder. Si l'autorisation n'est pas accordée, la page
-indique « L'export automatique reste désactivé, car l'autorisation n'a pas été
-accordée. Vous pouvez le réactiver à tout moment. » La fenêtre contextuelle
-affiche alors « Autorisez l'accès aux Téléchargements pour continuer à
-sauvegarder » avec un bouton **Ouvrir Exportation automatique** qui vous ramène
-à la page.
+Snug demande l'accès aux Téléchargements dans trois cas : lorsque vous activez
+l'export automatique avec Téléchargements comme destination, lorsque vous passez
+**Enregistrer dans** sur **Téléchargements**, et lorsque vous utilisez
+**Exporter maintenant** sans cet accès. Le navigateur affiche sa propre demande
+d'autorisation. Si vous refusez, rien n'est enregistré : l'export automatique
+reste désactivé, la destination reste inchangée et l'export ne s'exécute pas. La
+page indique alors « L'export automatique reste désactivé car l'autorisation n'a
+pas été accordée. Vous pouvez le réactiver à tout moment. », « La destination
+reste inchangée car l'autorisation n'a pas été accordée. » ou « Exporter
+maintenant nécessite l'autorisation d'enregistrer dans Téléchargements, et elle
+n'a pas été accordée. », selon le cas. La fenêtre contextuelle continue
+d'afficher l'export automatique comme désactivé.
+
+Si l'export automatique est déjà activé avec Téléchargements comme destination
+et que l'accès vient à manquer, par exemple parce que vous l'avez révoqué dans
+les paramètres du navigateur, la page **Exportation automatique** affiche une
+alerte intitulée « Snug a besoin de l'autorisation d'enregistrer dans
+Téléchargements ». Sa description indique « L'export automatique ne peut pas
+s'exécuter tant que vous ne l'autorisez pas. Les fichiers déjà enregistrés ne
+sont pas affectés. » Sélectionnez **Autoriser l'accès** pour l'accorder de
+nouveau. La fenêtre contextuelle affiche alors « Autorisez l'accès à
+Téléchargements pour continuer la sauvegarde » avec un bouton **Ouvrir l'export
+automatique** qui vous ramène à la page.
 
 **Enregistrer dans** définit la destination. **Téléchargements** (par défaut)
 enregistre dans le dossier Téléchargements du navigateur. **Dossier
@@ -80,7 +91,7 @@ planifiée ou de rattrapage échouée affiche aussi un badge « ! » sur l'icôn
 la barre d'outils jusqu'à ce qu'une exécution réussisse. L'activation de ce
 commutateur demande l'autorisation d'afficher des notifications. Si vous
 refusez, il reste désactivé et la page indique « Les notifications restent
-désactivées. Une exécution échouée apparaîtra quand même dans l'état. »
+désactivées. Une exécution en échec apparaîtra toujours dans l'état. »
 
 Les modifications de la page **Exportation automatique** sont enregistrées
 automatiquement. Sa carte d'état affiche toujours l'état réel du calendrier,

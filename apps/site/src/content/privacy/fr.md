@@ -70,10 +70,12 @@ de désinstallation ».
   déclenchent jamais de notification, et aucun contenu des notifications ne
   quitte votre appareil.
 - Autorisations facultatives : les autorisations `downloads` et `notifications`
-  sont facultatives. Snug demande `downloads` uniquement lorsque vous activez
-  l'export automatique, et `notifications` uniquement lorsque vous activez les
-  notifications d'échec. Si vous refusez, la fonctionnalité reste désactivée et
-  rien d'autre ne change.
+  sont facultatives. Snug demande `downloads` lorsque vous activez l'export
+  automatique avec la destination Téléchargements, lorsque vous passez la
+  destination sur Téléchargements ou lorsque vous utilisez « Exporter maintenant
+  » sans accès à Téléchargements, et `notifications` uniquement lorsque vous
+  activez les notifications d'échec. Si vous refusez, la fonctionnalité reste
+  désactivée et rien d'autre ne change.
 
 ### Page de désinstallation
 
@@ -94,11 +96,11 @@ de désinstallation ».
   directement sur votre appareil local : dans votre dossier Téléchargements via
   la fonction de téléchargement de votre navigateur ou, pour les exports
   automatiques, dans le dossier personnalisé que vous avez choisi via l'API File
-  System Access du navigateur. Les exports manuels utilisent un lien standard
-  `<a download>` et n'ont pas besoin de l'autorisation `downloads` ; les exports
-  automatiques et le fichier d'instantané de sécurité utilisent l'autorisation
-  `downloads`, qui est facultative et n'est demandée que lorsque vous activez
-  l'export automatique.
+  System Access du navigateur. Les exports manuels et le fichier d'instantané de
+  sécurité utilisent un lien standard `<a download>` et n'ont pas besoin de
+  l'autorisation `downloads` ; seuls les exports automatiques enregistrés dans
+  votre dossier Téléchargements utilisent l'autorisation `downloads`, qui est
+  facultative et demandée comme décrit ci-dessus.
 - L'extension stocke vos préférences et réglages locaux — tels que le thème, les
   options d'affichage, les options d'export, le modèle de nom de fichier et
   votre configuration d'exportation automatique — dans le stockage local du
@@ -133,16 +135,16 @@ de désinstallation ».
 Snug demande les autorisations de navigateur suivantes, chacune utilisée
 uniquement pour la finalité décrite :
 
-| Autorisation       | Finalité                                                                                                                                                                                                                                                               |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Lire et écrire les favoris de votre navigateur pour prendre en charge l'import et l'export.                                                                                                                                                                            |
-| `favicon`          | Afficher les icônes des sites à côté des favoris via l'API `_favicon` intégrée au navigateur.                                                                                                                                                                          |
-| `storage`          | Enregistrer vos préférences et réglages locaux sur votre appareil.                                                                                                                                                                                                     |
-| `alarms`           | Planifier et déclencher les exportations automatiques de favoris à l'intervalle configuré.                                                                                                                                                                             |
-| `downloads`        | Facultative. Demandée uniquement lorsque vous activez l'export automatique. Enregistrer sur votre appareil les exportations automatiques et les fichiers d'instantané de sécurité, et supprimer les anciens fichiers d'exportation automatique de Snug (Conservation). |
-| `notifications`    | Facultative. Demandée uniquement lorsque vous activez les notifications d'échec. Afficher une notification sur votre appareil lorsqu'une exportation automatique échoue. Vous pouvez la désactiver.                                                                    |
-| `unlimitedStorage` | Conserver sur votre appareil les cinq derniers instantanés de sécurité de vos favoris, qui peuvent être volumineux pour les grandes bibliothèques.                                                                                                                     |
-| `offscreen`        | Créer un document masqué de courte durée afin qu'une exportation automatique puisse être transformée en fichier téléchargeable. Il n'a pas d'interface et ne charge aucun contenu distant.                                                                             |
+| Autorisation       | Finalité                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Lire et écrire les favoris de votre navigateur pour prendre en charge l'import et l'export.                                                                                                                                                                                                                                                                                       |
+| `favicon`          | Afficher les icônes des sites à côté des favoris via l'API `_favicon` intégrée au navigateur.                                                                                                                                                                                                                                                                                     |
+| `storage`          | Enregistrer vos préférences et réglages locaux sur votre appareil.                                                                                                                                                                                                                                                                                                                |
+| `alarms`           | Planifier et déclencher les exportations automatiques de favoris à l'intervalle configuré.                                                                                                                                                                                                                                                                                        |
+| `downloads`        | Facultative. Demandée lorsque vous activez l'export automatique avec la destination Téléchargements, passez la destination sur Téléchargements ou utilisez « Exporter maintenant » sans accès à Téléchargements. Enregistrer les exportations automatiques dans votre dossier Téléchargements et supprimer les anciens fichiers d'exportation automatique de Snug (Conservation). |
+| `notifications`    | Facultative. Demandée uniquement lorsque vous activez les notifications d'échec. Afficher une notification sur votre appareil lorsqu'une exportation automatique échoue. Vous pouvez la désactiver.                                                                                                                                                                               |
+| `unlimitedStorage` | Conserver sur votre appareil les cinq derniers instantanés de sécurité de vos favoris, qui peuvent être volumineux pour les grandes bibliothèques.                                                                                                                                                                                                                                |
+| `offscreen`        | Créer un document masqué de courte durée afin qu'une exportation automatique puisse être transformée en fichier téléchargeable. Il n'a pas d'interface et ne charge aucun contenu distant.                                                                                                                                                                                        |
 
 ## Services tiers
 

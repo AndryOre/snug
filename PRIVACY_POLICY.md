@@ -55,9 +55,11 @@ optional Goodbye page described under "Uninstall Page" below.
   it again. Files are never sent to any server, and choosing a folder does not
   require any additional permission.
 - Optional permissions: the `downloads` and `notifications` permissions are
-  optional. Snug requests `downloads` only when you turn on Auto-export, and
-  `notifications` only when you turn on failure notifications. If you decline,
-  the feature stays off and nothing else changes.
+  optional. Snug requests `downloads` when you turn on Auto-export with the
+  Downloads destination, when you switch the destination to Downloads, or when
+  you use Export now without Downloads access, and `notifications` only when you
+  turn on failure notifications. If you decline, the feature stays off and
+  nothing else changes.
 - Notifications: if an automatic export fails, Snug shows a system notification
   on your device with the reason. You can turn this off on the Auto-export page.
   Successful exports never notify, and no notification content leaves your
@@ -80,10 +82,11 @@ optional Goodbye page described under "Uninstall Page" below.
 - Any files created during export (manual or automatic) are saved directly to
   your local device: to your Downloads folder through your browser's download
   functionality, or, for automatic exports, to the Custom folder you chose
-  through the browser's File System Access API. Manual exports use a standard
-  `<a download>` link and do not need the `downloads` permission; automatic
-  exports and the safety snapshot file use the `downloads` permission, which is
-  optional and requested only when you turn on Auto-export.
+  through the browser's File System Access API. Manual exports and the safety
+  snapshot file use a standard `<a download>` link and do not need the
+  `downloads` permission; only automatic exports saved to your Downloads folder
+  use the `downloads` permission, which is optional and requested as described
+  above.
 - The extension stores your local preferences and settings — such as theme,
   display options, export options, the filename template, and your automatic
   export configuration — using the browser's local storage (`storage.local`).
@@ -112,16 +115,16 @@ optional Goodbye page described under "Uninstall Page" below.
 Snug requests the following browser permissions, each used solely for the
 purpose described:
 
-| Permission         | Purpose                                                                                                                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Read and write your browser bookmarks to support import and export.                                                                                                                   |
-| `favicon`          | Display site icons next to bookmarks via the browser's built-in `_favicon` API.                                                                                                       |
-| `storage`          | Save your local preferences and settings on your device.                                                                                                                              |
-| `alarms`           | Schedule and trigger automatic bookmark exports at the configured interval.                                                                                                           |
-| `downloads`        | Optional. Requested only when you turn on Auto-export. Save automatic exports and safety snapshot files to your device, and delete Snug's own old automatic export files (Retention). |
-| `notifications`    | Optional. Requested only when you turn on failure notifications. Show a notification on your device when an automatic export fails.                                                   |
-| `unlimitedStorage` | Keep the latest five safety snapshots of your bookmarks on your device, which can be large for big libraries.                                                                         |
-| `offscreen`        | Create a short-lived hidden document so an automatic export can be turned into a downloadable file. It has no UI and loads no remote content.                                         |
+| Permission         | Purpose                                                                                                                                                                                                                                                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Read and write your browser bookmarks to support import and export.                                                                                                                                                                                                              |
+| `favicon`          | Display site icons next to bookmarks via the browser's built-in `_favicon` API.                                                                                                                                                                                                  |
+| `storage`          | Save your local preferences and settings on your device.                                                                                                                                                                                                                         |
+| `alarms`           | Schedule and trigger automatic bookmark exports at the configured interval.                                                                                                                                                                                                      |
+| `downloads`        | Optional. Requested when you turn on Auto-export with the Downloads destination, switch the destination to Downloads, or use Export now without Downloads access. Save automatic exports to your Downloads folder, and delete Snug's own old automatic export files (Retention). |
+| `notifications`    | Optional. Requested only when you turn on failure notifications. Show a notification on your device when an automatic export fails.                                                                                                                                              |
+| `unlimitedStorage` | Keep the latest five safety snapshots of your bookmarks on your device, which can be large for big libraries.                                                                                                                                                                    |
+| `offscreen`        | Create a short-lived hidden document so an automatic export can be turned into a downloadable file. It has no UI and loads no remote content.                                                                                                                                    |
 
 ## Third-Party Services
 

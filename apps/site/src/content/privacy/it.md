@@ -70,9 +70,11 @@ in «Pagina di disinstallazione».
   Esportazione automatica. Le esportazioni riuscite non generano mai notifiche e
   nessun contenuto delle notifiche lascia il tuo dispositivo.
 - Permessi facoltativi: i permessi `downloads` e `notifications` sono
-  facoltativi. Snug richiede `downloads` solo quando attivi l'esportazione
-  automatica e `notifications` solo quando attivi le notifiche di errore. Se
-  rifiuti, la funzione resta disattivata e non cambia nient'altro.
+  facoltativi. Snug richiede `downloads` quando attivi l'esportazione automatica
+  con la destinazione Download, quando imposti la destinazione su Download o
+  quando usi «Esporta ora» senza accesso a Download, e `notifications` solo
+  quando attivi le notifiche di errore. Se rifiuti, la funzione resta
+  disattivata e non cambia nient'altro.
 
 ### Pagina di disinstallazione
 
@@ -93,11 +95,11 @@ in «Pagina di disinstallazione».
   salvati direttamente sul tuo dispositivo locale: nella cartella Download
   tramite la funzione di download del browser oppure, per le esportazioni
   automatiche, nella cartella personalizzata che hai scelto tramite la File
-  System Access API del browser. Le esportazioni manuali usano un normale link
-  `<a download>` e non richiedono il permesso `downloads`; le esportazioni
-  automatiche e il file dell'istantanea di sicurezza usano il permesso
-  `downloads`, che è facoltativo e viene richiesto solo quando attivi
-  l'esportazione automatica.
+  System Access API del browser. Le esportazioni manuali e il file
+  dell'istantanea di sicurezza usano un normale link `<a download>` e non
+  richiedono il permesso `downloads`; solo le esportazioni automatiche salvate
+  nella cartella Download usano il permesso `downloads`, che è facoltativo e
+  viene richiesto come descritto sopra.
 - L'estensione memorizza le tue preferenze e impostazioni locali — come il tema,
   le opzioni di visualizzazione, le opzioni di esportazione, il modello del nome
   del file e la configurazione dell'esportazione automatica — usando
@@ -131,16 +133,16 @@ in «Pagina di disinstallazione».
 Snug richiede i seguenti permessi del browser, ciascuno usato esclusivamente per
 lo scopo descritto:
 
-| Permesso           | Scopo                                                                                                                                                                                                                                               |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Leggere e scrivere i segnalibri del tuo browser per supportare l'importazione e l'esportazione.                                                                                                                                                     |
-| `favicon`          | Mostrare le icone dei siti accanto ai segnalibri tramite l'API `_favicon` integrata nel browser.                                                                                                                                                    |
-| `storage`          | Salvare le tue preferenze e impostazioni locali sul tuo dispositivo.                                                                                                                                                                                |
-| `alarms`           | Pianificare e avviare le esportazioni automatiche dei segnalibri con l'intervallo configurato.                                                                                                                                                      |
-| `downloads`        | Facoltativo. Richiesto solo quando attivi l'esportazione automatica. Salvare sul tuo dispositivo le esportazioni automatiche e i file delle istantanee di sicurezza, ed eliminare i vecchi file di esportazione automatica di Snug (Conservazione). |
-| `notifications`    | Facoltativo. Richiesto solo quando attivi le notifiche di errore. Mostrare una notifica sul tuo dispositivo quando un'esportazione automatica non riesce. Puoi disattivarla.                                                                        |
-| `unlimitedStorage` | Conservare sul tuo dispositivo le ultime cinque istantanee di sicurezza dei tuoi segnalibri, che possono essere grandi per le raccolte voluminose.                                                                                                  |
-| `offscreen`        | Creare un documento nascosto di breve durata affinché un'esportazione automatica possa essere trasformata in un file scaricabile. Non ha interfaccia e non carica contenuti remoti.                                                                 |
+| Permesso           | Scopo                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Leggere e scrivere i segnalibri del tuo browser per supportare l'importazione e l'esportazione.                                                                                                                                                                                                                           |
+| `favicon`          | Mostrare le icone dei siti accanto ai segnalibri tramite l'API `_favicon` integrata nel browser.                                                                                                                                                                                                                          |
+| `storage`          | Salvare le tue preferenze e impostazioni locali sul tuo dispositivo.                                                                                                                                                                                                                                                      |
+| `alarms`           | Pianificare e avviare le esportazioni automatiche dei segnalibri con l'intervallo configurato.                                                                                                                                                                                                                            |
+| `downloads`        | Facoltativo. Richiesto quando attivi l'esportazione automatica con la destinazione Download, imposti la destinazione su Download o usi «Esporta ora» senza accesso a Download. Salvare le esportazioni automatiche nella cartella Download ed eliminare i vecchi file di esportazione automatica di Snug (Conservazione). |
+| `notifications`    | Facoltativo. Richiesto solo quando attivi le notifiche di errore. Mostrare una notifica sul tuo dispositivo quando un'esportazione automatica non riesce. Puoi disattivarla.                                                                                                                                              |
+| `unlimitedStorage` | Conservare sul tuo dispositivo le ultime cinque istantanee di sicurezza dei tuoi segnalibri, che possono essere grandi per le raccolte voluminose.                                                                                                                                                                        |
+| `offscreen`        | Creare un documento nascosto di breve durata affinché un'esportazione automatica possa essere trasformata in un file scaricabile. Non ha interfaccia e non carica contenuti remoti.                                                                                                                                       |
 
 ## Servizi di terze parti
 

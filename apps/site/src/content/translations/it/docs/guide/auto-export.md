@@ -1,6 +1,6 @@
 ---
 title: Esportazione automatica
-sourceHash: 822155e8c27f729d
+sourceHash: f658d7e50cc058b1
 description:
   "Pianifica l'esportazione automatica dei segnalibri in Chrome. Scegli formati,
   intervallo e cartella, e Snug salva i file senza finestre di dialogo."
@@ -26,16 +26,27 @@ manuale:
    dopo il successivo avvio del browser, senza aspettare la pianificazione
    successiva.
 
-Snug chiede l'accesso a Download solo quando attivi l'esportazione automatica.
-Il browser mostra la propria richiesta di permesso e la pagina **Esportazione
-automatica** mostra un avviso intitolato «Snug ha bisogno del permesso di
-salvare in Download». La descrizione dice «L'esportazione automatica non può
-funzionare finché non lo consenti. I file già salvati non sono interessati.»
-Seleziona **Consenti** per concederlo. Se il permesso non viene concesso, la
-pagina indica «L'esportazione automatica resta disattivata perché il permesso
-non è stato concesso. Puoi riattivarla in qualsiasi momento.» Il popup mostra
-allora «Consenti l'accesso a Download per continuare a fare il backup» con un
-pulsante **Apri Esportazione automatica** che ti riporta alla pagina.
+Snug chiede l'accesso a Download in tre casi: quando attivi l'esportazione
+automatica con Download come destinazione, quando passi **Salva in** a
+**Download** e quando usi **Esporta ora** senza questo accesso. Il browser
+mostra la propria richiesta di permesso. Se rifiuti, non viene salvato nulla:
+l'esportazione automatica resta disattivata, la destinazione resta invariata e
+l'esportazione non viene eseguita. La pagina indica allora «L'esportazione
+automatica resta disattivata perché il permesso non è stato concesso. Puoi
+riattivarla in qualsiasi momento.», «La destinazione resta invariata perché il
+permesso non è stato concesso.» oppure «Esporta ora richiede il permesso di
+salvare in Download, che non è stato concesso.», a seconda del caso. Il popup
+continua a mostrare l'esportazione automatica come disattivata.
+
+Se l'esportazione automatica è già attiva con Download come destinazione e
+l'accesso viene a mancare in seguito, per esempio perché lo hai revocato nelle
+impostazioni del browser, la pagina **Esportazione automatica** mostra un avviso
+intitolato «Snug ha bisogno del permesso di salvare in Download». La descrizione
+dice «L'esportazione automatica non può partire finché non lo consenti. I file
+già salvati non sono interessati.» Seleziona **Consenti accesso** per concederlo
+di nuovo. Il popup mostra allora «Consenti l'accesso a Download per continuare
+il backup» con un pulsante **Apri l'esportazione automatica** che ti riporta
+alla pagina.
 
 **Salva in** imposta la destinazione. **Download** (predefinito) salva nella
 cartella Download del browser. **Cartella personalizzata** salva in una cartella
@@ -75,8 +86,8 @@ invece di accumularsi. Un'esecuzione pianificata o di recupero non riuscita
 aggiunge anche un badge "!" sull'icona della barra degli strumenti finché
 un'esecuzione non riesce. Attivando questo interruttore viene richiesto il
 permesso per le notifiche. Se rifiuti, l'interruttore resta disattivato e la
-pagina indica «Le notifiche restano disattivate. Un'esecuzione non riuscita sarà
-comunque visibile nello stato.»
+pagina indica «Le notifiche restano disattivate. Un'esecuzione non riuscita
+comparirà comunque nello stato.»
 
 Le modifiche nella pagina **Esportazione automatica** vengono salvate
 automaticamente. La sua scheda di stato mostra sempre lo stato reale della

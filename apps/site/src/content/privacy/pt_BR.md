@@ -68,9 +68,11 @@ de desinstalação”.
   na página Exportação automática. Exportações bem-sucedidas nunca notificam, e
   nenhum conteúdo das notificações sai do seu dispositivo.
 - Permissões opcionais: as permissões `downloads` e `notifications` são
-  opcionais. O Snug solicita `downloads` somente quando você ativa a exportação
-  automática e `notifications` somente quando você ativa as notificações de
-  falha. Se você recusar, o recurso permanece desativado e nada mais muda.
+  opcionais. O Snug solicita `downloads` quando você ativa a exportação
+  automática com o destino Downloads, quando muda o destino para Downloads ou
+  quando usa “Exportar agora” sem acesso a Downloads, e `notifications` somente
+  quando você ativa as notificações de falha. Se você recusar, o recurso
+  permanece desativado e nada mais muda.
 
 ### Página de desinstalação
 
@@ -91,10 +93,10 @@ de desinstalação”.
   salvos diretamente no seu dispositivo local: na pasta Downloads, por meio do
   recurso de download do navegador, ou, nas exportações automáticas, na pasta
   personalizada que você escolheu, por meio da File System Access API do
-  navegador. As exportações manuais usam um link `<a download>` padrão e não
-  precisam da permissão `downloads`; as exportações automáticas e o arquivo de
-  instantâneo de segurança usam a permissão `downloads`, que é opcional e só é
-  solicitada quando você ativa a exportação automática.
+  navegador. As exportações manuais e o arquivo de instantâneo de segurança usam
+  um link `<a download>` padrão e não precisam da permissão `downloads`; somente
+  as exportações automáticas salvas na pasta Downloads usam a permissão
+  `downloads`, que é opcional e solicitada como descrito acima.
 - A extensão armazena suas preferências e configurações locais — como tema,
   opções de exibição, opções de exportação, o modelo de nome de arquivo e a
   configuração da exportação automática — usando o armazenamento local do
@@ -127,16 +129,16 @@ de desinstalação”.
 O Snug solicita as seguintes permissões do navegador, cada uma usada apenas para
 a finalidade descrita:
 
-| Permissão          | Finalidade                                                                                                                                                                                                                                         |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Ler e gravar os favoritos do seu navegador para permitir a importação e a exportação.                                                                                                                                                              |
-| `favicon`          | Exibir os ícones dos sites ao lado dos favoritos por meio da API `_favicon` integrada ao navegador.                                                                                                                                                |
-| `storage`          | Salvar suas preferências e configurações locais no seu dispositivo.                                                                                                                                                                                |
-| `alarms`           | Agendar e disparar as exportações automáticas de favoritos no intervalo configurado.                                                                                                                                                               |
-| `downloads`        | Opcional. Solicitada somente quando você ativa a exportação automática. Salvar no seu dispositivo as exportações automáticas e os arquivos de instantâneo de segurança, e excluir os arquivos de exportação automática antigos do Snug (Retenção). |
-| `notifications`    | Opcional. Solicitada somente quando você ativa as notificações de falha. Mostrar uma notificação no seu dispositivo quando uma exportação automática falhar. Você pode desativá-la.                                                                |
-| `unlimitedStorage` | Manter no seu dispositivo os cinco instantâneos de segurança mais recentes dos seus favoritos, que podem ser grandes em bibliotecas extensas.                                                                                                      |
-| `offscreen`        | Criar um documento oculto de curta duração para que uma exportação automática seja convertida em um arquivo para download. Ele não tem interface e não carrega conteúdo remoto.                                                                    |
+| Permissão          | Finalidade                                                                                                                                                                                                                                                                                            |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Ler e gravar os favoritos do seu navegador para permitir a importação e a exportação.                                                                                                                                                                                                                 |
+| `favicon`          | Exibir os ícones dos sites ao lado dos favoritos por meio da API `_favicon` integrada ao navegador.                                                                                                                                                                                                   |
+| `storage`          | Salvar suas preferências e configurações locais no seu dispositivo.                                                                                                                                                                                                                                   |
+| `alarms`           | Agendar e disparar as exportações automáticas de favoritos no intervalo configurado.                                                                                                                                                                                                                  |
+| `downloads`        | Opcional. Solicitada quando você ativa a exportação automática com o destino Downloads, muda o destino para Downloads ou usa “Exportar agora” sem acesso a Downloads. Salvar as exportações automáticas na pasta Downloads e excluir os arquivos de exportação automática antigos do Snug (Retenção). |
+| `notifications`    | Opcional. Solicitada somente quando você ativa as notificações de falha. Mostrar uma notificação no seu dispositivo quando uma exportação automática falhar. Você pode desativá-la.                                                                                                                   |
+| `unlimitedStorage` | Manter no seu dispositivo os cinco instantâneos de segurança mais recentes dos seus favoritos, que podem ser grandes em bibliotecas extensas.                                                                                                                                                         |
+| `offscreen`        | Criar um documento oculto de curta duração para que uma exportação automática seja convertida em um arquivo para download. Ele não tem interface e não carrega conteúdo remoto.                                                                                                                       |
 
 ## Serviços de terceiros
 
