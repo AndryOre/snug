@@ -2,11 +2,11 @@ import { i18n } from '#i18n'
 import { storage } from '#imports'
 
 import { countBookmarks } from '@/lib/count-bookmarks'
+import { triggerDownload } from '@/lib/export-all-bookmarks'
 import { markImportRestored } from '@/lib/import-control'
 import { withImportLock } from '@/lib/import-lock'
 import { importFromJSON } from '@/lib/importers/import-json'
 import { resolveImportRoots } from '@/lib/importers/resolve-roots'
-import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
 import { ROOT_FOLDER_IDS } from '@/lib/root-folders'
 import type { ParsedBookmark } from '@/lib/types'
 
@@ -162,35 +162,55 @@ export function snapshotFileName(takenAt: number): string {
 }
 
 /**
- * Saves a snapshot's roots as a JSON file in Downloads.
+ * Saves a snapshot's roots as a JSON file through a page-context
+ * `<a download>` click (no `downloads` permission involved).
  * @param snapshot The snapshot to save.
- * @returns Resolves once the download was handed to the browser.
+ * @returns Resolves once the download link was clicked.
+ * @throws {Error} When the link cannot be created or clicked.
  */
-export async function downloadSafetySnapshot(
+export function downloadSafetySnapshot(
   snapshot: SafetySnapshot,
 ): Promise<void> {
-  await downloadViaOffscreenDocument(
-    JSON.stringify(snapshot.roots, null, 2),
-    'application/json',
-    snapshotFileName(snapshot.takenAt),
-  )
+  return new Promise((resolve) => {
+    triggerDownload(
+      JSON.stringify(snapshot.roots, null, 2),
+      'application/json',
+      snapshotFileName(snapshot.takenAt),
+    )
+    resolve()
+  })
 }
 
 /**
- * Takes a Safety snapshot: captures the roots, saves them as a JSON file in
- * Downloads, then adds them to the stored list in `chrome.storage.local`
- * (see {@link addSnapshotToList} for retention). The file goes first so a
- * failed download leaves the stored list untouched.
+ * Saves the file copy of a snapshot on a best-effort basis: a failure is
+ * reported with `console.error` and never blocks the stored copy or Replace.
+ * @param snapshot The snapshot whose file copy is saved.
+ */
+async function saveSnapshotFileBestEffort(
+  snapshot: SafetySnapshot,
+): Promise<void> {
+  try {
+    await downloadSafetySnapshot(snapshot)
+  } catch (error) {
+    console.error('Safety snapshot file could not be saved', error)
+  }
+}
+
+/**
+ * Takes a Safety snapshot: captures the roots, adds them to the stored
+ * list in `chrome.storage.local` (see {@link addSnapshotToList} for
+ * retention), then saves them as a JSON file. The file save is best effort: a
+ * failed one is logged and never blocks the stored copy or the caller.
  * @returns The snapshot that was saved.
  * @throws {Error} With a localized message when the snapshot cannot be saved.
  */
 export async function takeSafetySnapshot(): Promise<SafetySnapshot> {
   try {
     const snapshot = await captureSafetySnapshot()
-    await downloadSafetySnapshot(snapshot)
     await safetySnapshotStore.setValue(
       addSnapshotToList(await safetySnapshotStore.getValue(), snapshot),
     )
+    await saveSnapshotFileBestEffort(snapshot)
     return snapshot
   } catch (error) {
     throw new Error(

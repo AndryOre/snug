@@ -52,7 +52,14 @@ async function buildContent(
   })
 }
 
-function triggerDownload(
+/**
+ * Saves content as a file by clicking a temporary `<a download>` link in the
+ * current page.
+ * @param content The file content.
+ * @param mimeType The MIME type of the file.
+ * @param fileName The suggested file name.
+ */
+export function triggerDownload(
   content: string,
   mimeType: string,
   fileName: string,
