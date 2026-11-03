@@ -474,7 +474,14 @@ export function AutoExportRoute() {
         notifyOnFailure ? ['downloads', 'notifications'] : ['downloads'],
         () => save({ enabled: true }),
       )
-      if (!isGranted) setAccessMessage('enable')
+      if (isGranted) return
+      if (notifyOnFailure && (await hasDownloadsAccess())) {
+        await setNotifyOnFailure(false)
+        await save({ enabled: true })
+        setAccessMessage('notify')
+        return
+      }
+      setAccessMessage('enable')
     } finally {
       setIsRequestingEnable(false)
     }
