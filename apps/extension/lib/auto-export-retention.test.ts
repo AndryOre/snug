@@ -187,6 +187,29 @@ describe('applyRetention', () => {
     ])
   })
 
+  it('leaves Downloads files alone without Downloads access and retries on the next run', async () => {
+    const { removeFile } = mockDownloadsCleanup()
+    await recordRun(1, [1, 2])
+    await recordRun(2, [3])
+    await recordRun(3, [4])
+    browser.permissions.contains = vi.fn(async () => false)
+
+    await expect(applyRetention(1)).resolves.toBeUndefined()
+
+    expect(removeFile).not.toHaveBeenCalled()
+    expect(await autoExportRunsStore.getValue()).toEqual(
+      runsOf([1, 2], [3], [4]),
+    )
+
+    browser.permissions.contains = vi.fn(async () => true)
+    await applyRetention(1)
+
+    expect(removeFile.mock.calls.map(([id]) => id)).toEqual([1, 2, 3])
+    expect(await autoExportRunsStore.getValue()).toEqual([
+      { destination: 'downloads', runAt: 3, ids: [4] },
+    ])
+  })
+
   it('keeps all files of the previous run when a run has more files than the limit', async () => {
     const { removeFile } = mockDownloadsCleanup()
     await recordRun(1, [1, 2, 3, 4, 5, 6])
