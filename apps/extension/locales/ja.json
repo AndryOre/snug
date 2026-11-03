@@ -839,6 +839,10 @@
     "message": "読み込み",
     "description": "Welcome page quick-start item button"
   },
+  "whatsNew_intro": {
+    "message": "Snug(旧 Bookmarks Import & Export)は、ブックマークのエクスポート、インポート、バックアップをすべてお使いのデバイス上で行います。",
+    "description": "What's new screen intro line saying what Snug is"
+  },
   "whatsNew_current": {
     "message": "現在",
     "description": "What's new screen string"

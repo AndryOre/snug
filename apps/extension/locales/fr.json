@@ -850,6 +850,10 @@
     "message": "Importer",
     "description": "Welcome page quick-start item button"
   },
+  "whatsNew_intro": {
+    "message": "Snug (anciennement Bookmarks Import & Export) exporte, importe et sauvegarde vos favoris, le tout sur votre appareil.",
+    "description": "What's new screen intro line saying what Snug is"
+  },
   "whatsNew_current": {
     "message": "Actuelle",
     "description": "What's new screen string"
