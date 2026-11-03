@@ -150,6 +150,13 @@ export interface AutoExportConfig {
 export type AutoExportTrigger = 'scheduled' | 'catch-up' | 'manual'
 
 /**
+ * Typed reasons an Auto-export run fails that the UI treats specially:
+ * `downloads-access-needed` means the Export destination is Downloads but
+ * Downloads access is missing.
+ */
+export type AutoExportErrorCode = 'downloads-access-needed'
+
+/**
  * The outcome of the most recent {@link runAutoExport} call, persisted so
  * settings/popup UI (a later ticket) can show status. A legacy plain
  * `number` (this store's shape before next-run tracking was added) is
@@ -160,6 +167,11 @@ export interface AutoExportLastRun {
   at: number
   ok: boolean
   error?: string
+  /**
+   * Set when the run failed for a typed reason the UI can explain without
+   * parsing `error`.
+   */
+  errorCode?: AutoExportErrorCode
   trigger: AutoExportTrigger
 }
 
