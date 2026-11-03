@@ -839,6 +839,10 @@
     "message": "导入",
     "description": "Welcome page quick-start item button"
   },
+  "whatsNew_intro": {
+    "message": "Snug(原名 Bookmarks Import & Export)可导出、导入和备份你的书签,一切都在你的设备上完成。",
+    "description": "What's new screen intro line saying what Snug is"
+  },
   "whatsNew_current": {
     "message": "当前版本",
     "description": "What's new screen string"

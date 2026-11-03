@@ -19,6 +19,7 @@ import {
   lastSeenVersionStore,
 } from '@/lib/storage'
 import type { AutoExportConfig } from '@/lib/types'
+import { registerUninstallUrl } from '@/lib/uninstall-url'
 import { isMinorOrMajorUpdate } from '@/lib/version'
 
 /**
@@ -144,12 +145,16 @@ function attachNotificationClickListenerWhenGranted(): void {
  * folder needs the user's permission again, and on every `onInstalled` reason (both may need to arm a
  * catch-up run for a due time that passed while the browser/extension was
  * unavailable), and again whenever the auto-export config changes in a way
- * that affects scheduling (see {@link isScheduleRelevantChange}).
+ * that affects scheduling (see {@link isScheduleRelevantChange}). The Goodbye
+ * page uninstall URL is registered at the same moments (see
+ * {@link registerUninstallUrl}).
  */
 export default defineBackground(() => {
   void restoreMissingAlarm()
+  void registerUninstallUrl()
 
   browser.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
+    void registerUninstallUrl()
     switch (reason) {
       case 'install': {
         console.log(i18n.t('extensionInstalled'))
@@ -186,6 +191,7 @@ export default defineBackground(() => {
 
   autoExportConfigStore.watch((next, previous) => {
     if (!isScheduleRelevantChange(previous, next)) return
+    void registerUninstallUrl()
     void syncAlarmSafely('config-change')
   })
 
