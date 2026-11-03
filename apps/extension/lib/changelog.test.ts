@@ -31,7 +31,7 @@ describe('getChangelog', () => {
     const entries = getChangelog()
 
     const versions = entries.map((entry) => entry.version)
-    expect(versions[0]).toBe('2.2.0')
+    expect(versions[0]).toBe('2.3.0')
     expect(versions.at(-1)).toBe('0.1.0')
     expect(versions).toEqual(
       versions.toSorted((a, b) => compareVersions(a, b)).toReversed(),

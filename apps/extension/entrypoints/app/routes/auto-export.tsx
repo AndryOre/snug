@@ -603,9 +603,11 @@ export function AutoExportRoute() {
             {(accessMessage === 'enable' ||
               accessMessage === 'destination') && (
               <AccessInlineMessage>
-                {accessMessage === 'enable'
-                  ? i18n.t('autoExportPage_accessDeniedEnable')
-                  : i18n.t('autoExportPage_accessDeniedDestination')}
+                {i18n.t(
+                  accessMessage === 'enable'
+                    ? 'autoExportPage_accessDeniedEnable'
+                    : 'autoExportPage_accessDeniedDestination',
+                )}
               </AccessInlineMessage>
             )}
 

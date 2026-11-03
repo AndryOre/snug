@@ -1412,6 +1412,15 @@
   "changelog_2_2_0_3": {
     "message": "Retención conserva solo las ejecuciones más recientes, contadas entre Descargas y la Carpeta personalizada."
   },
+  "changelog_2_3_0_1": {
+    "message": "El acceso a Descargas y a Notificaciones ahora es opcional, así que las actualizaciones ya no muestran nuevas advertencias de permisos. Snug lo pide solo cuando activas la exportación automática a Descargas o los avisos de fallo."
+  },
+  "changelog_2_3_0_2": {
+    "message": "Se añadió una página de despedida que se abre al quitar Snug: pregunta el motivo con un clic y te ayuda según tu respuesta."
+  },
+  "changelog_2_3_0_3": {
+    "message": "La página Novedades ahora empieza con una línea que explica qué es Snug."
+  },
   "reviewPrompt_title": {
     "message": "¿Snug te funciona bien?",
     "description": "Popup Review prompt card title (also its accessible name)"

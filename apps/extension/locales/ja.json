@@ -1395,6 +1395,15 @@
   "changelog_2_2_0_3": {
     "message": "保持設定は、ダウンロードとカスタムフォルダをまとめて数え、最新の実行分だけを残します。"
   },
+  "changelog_2_3_0_1": {
+    "message": "ダウンロードと通知へのアクセスは任意になり、アップデートで新しい権限の警告が表示されなくなりました。Snug は、ダウンロードへの自動エクスポートまたは失敗通知をオンにしたときだけ許可を求めます。"
+  },
+  "changelog_2_3_0_2": {
+    "message": "Snug を削除したときに開くお別れページを追加しました。ワンクリックで理由をたずね、回答に応じてサポートします。"
+  },
+  "changelog_2_3_0_3": {
+    "message": "新機能ページの冒頭に、Snug が何かを説明する一文を追加しました。"
+  },
   "reviewPrompt_title": {
     "message": "Snug は役に立っていますか？",
     "description": "Popup Review prompt card title (also its accessible name)"

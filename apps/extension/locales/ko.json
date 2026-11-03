@@ -1395,6 +1395,15 @@
   "changelog_2_2_0_3": {
     "message": "보존 설정은 다운로드와 사용자 지정 폴더를 합산해 최신 실행분만 남겨요."
   },
+  "changelog_2_3_0_1": {
+    "message": "다운로드 및 알림 접근 권한이 선택 사항으로 바뀌어, 업데이트 시 새 권한 경고가 더 이상 표시되지 않습니다. Snug는 다운로드로의 자동 내보내기 또는 실패 알림을 켤 때만 권한을 요청합니다."
+  },
+  "changelog_2_3_0_2": {
+    "message": "Snug를 삭제하면 열리는 작별 페이지를 추가했습니다. 한 번의 클릭으로 이유를 묻고 답변에 맞춰 도와드립니다."
+  },
+  "changelog_2_3_0_3": {
+    "message": "새로운 기능 페이지가 이제 Snug가 무엇인지 설명하는 한 줄로 시작합니다."
+  },
   "reviewPrompt_title": {
     "message": "Snug가 잘 작동하나요?",
     "description": "Popup Review prompt card title (also its accessible name)"
