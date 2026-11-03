@@ -8,6 +8,14 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [2.3.1] - 2026-11-03
+
+- Clearer messages now appear when Snug needs Downloads access, instead of a raw
+  error code.
+- The failure notification switch now shows as off when Notification access is
+  missing, with an Allow button to turn it back on.
+- The Goodbye page now understands more spellings of language codes.
+
 ## [2.3.0] - 2026-11-03
 
 - Downloads and Notification access are now optional, so updates no longer show

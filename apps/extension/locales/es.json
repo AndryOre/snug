@@ -1421,6 +1421,15 @@
   "changelog_2_3_0_3": {
     "message": "La página Novedades ahora empieza con una línea que explica qué es Snug."
   },
+  "changelog_2_3_1_1": {
+    "message": "Ahora aparecen mensajes más claros cuando Snug necesita acceso a Descargas, en lugar de un código de error sin formato."
+  },
+  "changelog_2_3_1_2": {
+    "message": "El interruptor de avisos de fallo ahora aparece desactivado cuando falta el acceso a Notificaciones, con un botón Permitir."
+  },
+  "changelog_2_3_1_3": {
+    "message": "La página de despedida ahora entiende más formas de escribir los códigos de idioma."
+  },
   "reviewPrompt_title": {
     "message": "¿Snug te funciona bien?",
     "description": "Popup Review prompt card title (also its accessible name)"

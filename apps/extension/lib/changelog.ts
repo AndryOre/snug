@@ -67,6 +67,15 @@ export function getChangelog(): ChangelogEntry[] {
 
   return [
     {
+      version: '2.3.1',
+      isoDate: '2026-11-03',
+      items: [
+        { textKey: 'changelog_2_3_1_1' },
+        { textKey: 'changelog_2_3_1_2' },
+        { textKey: 'changelog_2_3_1_3' },
+      ],
+    },
+    {
       version: '2.3.0',
       isoDate: '2026-11-03',
       items: [

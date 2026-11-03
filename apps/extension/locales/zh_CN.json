@@ -1404,6 +1404,15 @@
   "changelog_2_3_0_3": {
     "message": "“新功能”页面现在以一句话开头，说明 Snug 是什么。"
   },
+  "changelog_2_3_1_1": {
+    "message": "当 Snug 需要下载访问权限时，现在会显示更清晰的提示，而不是原始错误代码。"
+  },
+  "changelog_2_3_1_2": {
+    "message": "缺少通知访问权限时，失败通知开关现在显示为关闭，并带有“允许”按钮。"
+  },
+  "changelog_2_3_1_3": {
+    "message": "告别页面现在能识别更多种语言代码的写法。"
+  },
   "reviewPrompt_title": {
     "message": "Snug 好用吗？",
     "description": "Popup Review prompt card title (also its accessible name)"

@@ -38,7 +38,7 @@
     },
     "apps/extension": {
       "name": "@snug/extension",
-      "version": "2.2.0",
+      "version": "2.3.1",
       "dependencies": {
         "@tanstack/react-router": "^1.170.46",
         "@tanstack/react-virtual": "^3.14.25",

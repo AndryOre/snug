@@ -1404,6 +1404,15 @@
   "changelog_2_3_0_3": {
     "message": "새로운 기능 페이지가 이제 Snug가 무엇인지 설명하는 한 줄로 시작합니다."
   },
+  "changelog_2_3_1_1": {
+    "message": "Snug에 다운로드 접근 권한이 필요할 때 원시 오류 코드 대신 더 알기 쉬운 메시지가 표시됩니다."
+  },
+  "changelog_2_3_1_2": {
+    "message": "알림 접근 권한이 없으면 실패 알림 스위치가 꺼진 상태로 표시되며 허용 버튼이 함께 나타납니다."
+  },
+  "changelog_2_3_1_3": {
+    "message": "작별 페이지가 언어 코드의 더 다양한 표기를 인식합니다."
+  },
   "reviewPrompt_title": {
     "message": "Snug가 잘 작동하나요?",
     "description": "Popup Review prompt card title (also its accessible name)"
