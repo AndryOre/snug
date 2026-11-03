@@ -5,12 +5,16 @@
 Accepted. Amends [0008](0008-safety-snapshot-in-extension-storage.md): its "only
 the latest snapshot is kept" clause no longer holds. The rest of 0008 (a file in
 Downloads plus a copy in `chrome.storage.local` under `unlimitedStorage`) still
-stands.
+stands. Amended by [0030](0030-optional-downloads-and-notification-access.md):
+the file no longer needs the `downloads` permission.
 
 Date: 2026-10-07
 
 Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
 recorded on both sides.
+
+Revised: 2026-11-03, the Safety snapshot file is saved with a download link, not
+the `downloads` permission (see ADR 0030). The five-snapshot rule is unchanged.
 
 ## Context
 

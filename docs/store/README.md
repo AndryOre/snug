@@ -33,7 +33,10 @@ pack. Each one still needs its manual dashboard step (see the checklist).
 
 1. **Resolved in the pack:** six permissions are new since v1.3.0 (`storage`,
    `alarms`, `downloads`, `offscreen`, `unlimitedStorage`, `notifications`) and
-   each has a justification below. Enter them on the Privacy tab.
+   each has a justification below. Enter them on the Privacy tab. `downloads`
+   and `notifications` are optional permissions: the install and update prompts
+   do not show them, and Snug asks when the user turns on Auto-export or the
+   failure notification.
 2. **Resolved in the pack:** the single-purpose text now covers exporting,
    importing, backing up and cleaning up bookmarks.
 3. **Resolved in the pack:** the homepage and privacy URLs point to the live
@@ -296,19 +299,20 @@ Code: `lib/auto-export.ts` creates and clears the `auto-export` alarm
 `browser.alarms.onAlarm` and also re-syncs the alarm on install, startup and
 config changes.
 
-`downloads` (475 chars):
+`downloads` (optional, 619 chars):
 
 ```text
-Snug uses the downloads API to save scheduled backups and "Export now" runs to the user's Downloads folder, in a configurable subfolder. When the user turns on Retention, it also removes the oldest backup files that Snug itself saved, and nothing else, so only the latest ones remain. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. It only downloads files that Snug generated on the device from the user's own bookmarks.
+This permission is optional. Snug asks for it only when the user turns on scheduled backups to the Downloads folder or runs "Export now" there. Snug uses the downloads API to save scheduled backups and "Export now" runs to the user's Downloads folder, in a configurable subfolder. When the user turns on Retention, it also removes the oldest backup files that Snug itself saved, and nothing else, so only the latest ones remain. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. It only downloads files that Snug generated on the device from the user's own bookmarks.
 ```
 
 Code: `lib/offscreen-download.ts` calls `browser.downloads.download` and watches
 `browser.downloads.onChanged`; `lib/auto-export-retention.ts` calls
 `downloads.search`, `downloads.removeFile` and `downloads.erase` for Retention;
 `lib/auto-export.ts` builds the filename and folder prefix passed to it. Exports
-started from the Export page and the popup do not use this permission: they save
-through an `<a download>` click in `triggerDownload`
-(`lib/export-all-bookmarks.ts`).
+started from the Export page and the popup, and the Safety snapshot file, do not
+use this permission: they save through an `<a download>` click in
+`triggerDownload` (`lib/export-all-bookmarks.ts`). `lib/permission-access.ts`
+checks and requests the permission.
 
 `offscreen` (307 chars):
 
@@ -320,15 +324,16 @@ Code: `lib/offscreen-download.ts` calls `chrome.offscreen.createDocument` with
 the `BLOBS` reason and closes it with `chrome.offscreen.closeDocument`;
 `entrypoints/offscreen/main.ts` handles the create and revoke messages.
 
-`notifications` (222 chars):
+`notifications` (optional, 322 chars):
 
 ```text
-Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed.
+This permission is optional. Snug asks for it only when the user turns on the failure notification. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed.
 ```
 
 Code: `lib/auto-export-notification.ts` calls `browser.notifications.create` for
 the failure notification and `browser.notifications.clear` when the user clicks
-it; `entrypoints/background.ts` wires the click listener.
+it; `entrypoints/background.ts` wires the click listener only while the
+permission is granted.
 
 ### Other privacy fields
 

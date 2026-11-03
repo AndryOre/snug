@@ -84,8 +84,8 @@ parent folders, and the filename template. They are shared by the Export page
 and the Auto-export page. _Avoid_: export settings, export preferences.
 
 **Safety snapshot** A copy of the bookmarks bar and other-bookmarks roots that
-Snug takes automatically before every Restore-replace, kept both as a file in
-the user's downloads and inside the extension so the import can be undone. The
+Snug takes automatically before every Restore-replace, kept both as a file saved
+like a manual export and inside the extension so the import can be undone. The
 latest five are kept, and the newest one that holds any bookmarks is never
 dropped. The user can also take one at any time. _Avoid_: backup, restore point,
 undo file.
@@ -123,6 +123,17 @@ folder, directory.
 The browser can withdraw it (always once, after the first restart), and the user
 then allows it again. _Avoid_: folder permission, grant, authorization.
 
+**Downloads access** The optional permission that lets Snug save Auto-export
+files to the Downloads folder and clean them up. Snug asks for it when the user
+turns on Auto-export with the Downloads destination, picks that destination or
+runs Export now without it, and the user can refuse. _Avoid_: downloads
+permission, download rights.
+
+**Notification access** The optional permission that lets Snug show the Failure
+notification. Snug asks for it when the user turns on that notification, and the
+user can refuse. Without it Snug stays silent. _Avoid_: notifications
+permission, alert permission.
+
 **Filename template** A user-configurable pattern for naming exported files,
 made of placeholders that get replaced with parts of the current date and time
 when a file is generated. _Avoid_: naming pattern, filename format, export
@@ -138,6 +149,16 @@ run, retry.
 
 **Failure notification** The system notification Snug shows when an Auto-export
 run fails; successful runs never notify. _Avoid_: alert, error toast, warning.
+
+**Goodbye page** The page on the Website that the browser opens when someone
+removes Snug. It asks once why they left, replies according to the answer, says
+when scheduled backups have stopped and shows exactly what it received. It
+collects nothing that identifies a person. _Avoid_: exit survey, uninstall page,
+feedback form.
+
+**Leaving reason** The one answer a visitor picks on the Goodbye page to say why
+they removed Snug. Answering is optional, and each answer is counted without
+cookies. _Avoid_: uninstall reason, feedback, survey answer.
 
 **Review prompt** A one-time, dismissible invitation in the popup to leave an
 honest review on the store listing for the browser in use, offered only after

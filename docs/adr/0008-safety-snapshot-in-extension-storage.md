@@ -3,12 +3,18 @@
 ## Status
 
 Accepted. Amended by [0016](0016-keep-five-safety-snapshots.md): the latest five
-snapshots are kept, not only one.
+snapshots are kept, not only one. Amended by
+[0030](0030-optional-downloads-and-notification-access.md): the file is saved
+with a download link, not the downloads permission.
 
 Date: 2026-10-02
 
 Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
 recorded on both sides.
+
+Revised: 2026-11-03, the Safety snapshot file is saved with a normal download
+link from the page, so it no longer depends on the `downloads` permission (see
+ADR 0030).
 
 ## Context
 

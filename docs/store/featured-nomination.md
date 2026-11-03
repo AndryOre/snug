@@ -188,7 +188,9 @@ Shared assets, once:
 - [x] Single purpose text matches [`README.md`](README.md) "Single purpose".
 - [x] One justification per permission in `apps/extension/wxt.config.ts`:
       `bookmarks`, `favicon`, `storage`, `alarms`, `downloads`, `offscreen`,
-      `unlimitedStorage`, `notifications`.
+      `unlimitedStorage`, `notifications`. `downloads` and `notifications` are
+      optional permissions, requested when the user turns on Auto-export to
+      Downloads or the failure notification.
 - [x] Remote code is No.
 - [x] No data usage categories are checked.
 - [x] All three certifications are ticked.
