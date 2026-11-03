@@ -8,6 +8,15 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-11-03
+
+- Downloads and Notification access are now optional, so updates no longer show
+  new permission warnings. Snug asks only when you turn on Auto-export to
+  Downloads or failure notifications.
+- Added a Goodbye page that opens when Snug is removed, asking why with one
+  click and helping according to your answer.
+- The What’s new page now opens with a line saying what Snug is.
+
 ## [2.2.0] - 2026-10-10
 
 - Auto-export can now save to a Custom folder you choose, anywhere on your

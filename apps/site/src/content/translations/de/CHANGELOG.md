@@ -1,11 +1,24 @@
 ---
 title: Neuigkeiten
-sourceHash: 15fa3a9f711f42d1
+sourceHash: ee6130c5fed81df2
 description:
   'Versionshinweise zur Snug-Erweiterung für Chrome: was sich in jeder Version
   geändert hat, von neuen Auto-Export-Optionen bis zu Korrekturen.'
 seoTitle: 'Neuigkeiten in Snug: Versionshinweise und Änderungen'
 ---
+
+## 2.3.0
+
+2026-11-03
+
+- Der Zugriff auf Downloads und Benachrichtigungen ist jetzt optional, daher
+  zeigen Updates keine neuen Berechtigungswarnungen mehr. Snug fragt nur, wenn
+  du den automatischen Export in Downloads oder Fehlerbenachrichtigungen
+  aktivierst.
+- Neue Abschiedsseite, die sich beim Entfernen von Snug öffnet: Sie fragt mit
+  einem Klick nach dem Grund und hilft passend zu deiner Antwort.
+- Die Seite „Neuigkeiten“ beginnt jetzt mit einer Zeile, die erklärt, was Snug
+  ist.
 
 ## 2.2.0
 

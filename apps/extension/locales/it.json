@@ -1412,6 +1412,15 @@
   "changelog_2_2_0_3": {
     "message": "La Conservazione tiene solo le esecuzioni più recenti, contate tra Download e la Cartella personalizzata."
   },
+  "changelog_2_3_0_1": {
+    "message": "L’accesso a Download e Notifiche ora è facoltativo, quindi gli aggiornamenti non mostrano più nuovi avvisi sui permessi. Snug lo chiede solo quando attivi l’esportazione automatica in Download o le notifiche di errore."
+  },
+  "changelog_2_3_0_2": {
+    "message": "Aggiunta una pagina di addio che si apre quando Snug viene rimosso: chiede il motivo con un clic e ti aiuta in base alla risposta."
+  },
+  "changelog_2_3_0_3": {
+    "message": "La pagina Novità ora si apre con una riga che spiega cos’è Snug."
+  },
   "reviewPrompt_title": {
     "message": "Snug ti sta funzionando?",
     "description": "Popup Review prompt card title (also its accessible name)"

@@ -1424,6 +1424,15 @@
   "changelog_2_2_0_3": {
     "message": "A Retenção mantém só as execuções mais recentes, contadas entre Downloads e a Pasta personalizada."
   },
+  "changelog_2_3_0_1": {
+    "message": "O acesso a Downloads e a Notificações agora é opcional, então as atualizações não mostram mais novos avisos de permissão. O Snug só pede quando você ativa a exportação automática para Downloads ou os avisos de falha."
+  },
+  "changelog_2_3_0_2": {
+    "message": "Adicionamos uma página de despedida que abre quando o Snug é removido: ela pergunta o motivo com um clique e ajuda de acordo com a sua resposta."
+  },
+  "changelog_2_3_0_3": {
+    "message": "A página Novidades agora começa com uma linha que explica o que é o Snug."
+  },
   "reviewPrompt_title": {
     "message": "O Snug está funcionando para você?",
     "description": "Popup Review prompt card title (also its accessible name)"

@@ -1,11 +1,22 @@
 ---
 title: Novità
-sourceHash: 15fa3a9f711f42d1
+sourceHash: ee6130c5fed81df2
 description:
   "Note di rilascio dell'estensione Snug per Chrome: cosa è cambiato in ogni
   versione, dalle nuove opzioni di esportazione automatica alle correzioni."
 seoTitle: 'Novità di Snug: note di rilascio e modifiche'
 ---
+
+## 2.3.0
+
+2026-11-03
+
+- L’accesso a Download e Notifiche ora è facoltativo, quindi gli aggiornamenti
+  non mostrano più nuovi avvisi sui permessi. Snug lo chiede solo quando attivi
+  l’esportazione automatica in Download o le notifiche di errore.
+- Aggiunta una pagina di addio che si apre quando Snug viene rimosso: chiede il
+  motivo con un clic e ti aiuta in base alla risposta.
+- La pagina Novità ora si apre con una riga che spiega cos’è Snug.
 
 ## 2.2.0
 

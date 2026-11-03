@@ -1411,6 +1411,15 @@
   "changelog_2_2_0_3": {
     "message": "Retention keeps only the newest runs, counted across Downloads and the Custom folder."
   },
+  "changelog_2_3_0_1": {
+    "message": "Downloads and Notification access are now optional, so updates no longer show new permission warnings. Snug asks only when you turn on Auto-export to Downloads or failure notifications."
+  },
+  "changelog_2_3_0_2": {
+    "message": "Added a Goodbye page that opens when Snug is removed, asking why with one click and helping according to your answer."
+  },
+  "changelog_2_3_0_3": {
+    "message": "The What’s new page now opens with a line saying what Snug is."
+  },
   "reviewPrompt_title": {
     "message": "Is Snug working for you?",
     "description": "Popup Review prompt card title (also its accessible name)"
