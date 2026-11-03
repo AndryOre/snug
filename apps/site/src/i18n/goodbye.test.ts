@@ -72,15 +72,44 @@ describe('goodbye copy', () => {
     }
   })
 
-  it('falls back to English for every locale until translated', () => {
+  it('has a translation for every locale but English', () => {
+    expect(getGoodbyeCopy('en')).toBe(GOODBYE_COPY_EN)
+    const translated = LOCALES.filter((entry) => entry !== 'en')
+    expect(translated).toHaveLength(LOCALES.length - 1)
+    expect(
+      translated.every((locale) => getGoodbyeCopy(locale) !== GOODBYE_COPY_EN),
+    ).toBe(true)
+  })
+
+  it('keeps the English shape and non-empty strings in every locale', () => {
+    const shape = (value: unknown): unknown =>
+      typeof value === 'string'
+        ? 'string'
+        : Object.fromEntries(
+            Object.entries(value as Record<string, unknown>).map(
+              ([key, child]) => [key, shape(child)],
+            ),
+          )
+    const strings = (value: unknown): string[] =>
+      typeof value === 'string'
+        ? [value]
+        : Object.values(value as Record<string, unknown>).flatMap((child) =>
+            strings(child),
+          )
     for (const locale of LOCALES) {
-      expect(getGoodbyeCopy(locale)).toBe(GOODBYE_COPY_EN)
+      const copy = getGoodbyeCopy(locale)
+      expect(shape(copy)).toEqual(shape(GOODBYE_COPY_EN))
+      for (const text of strings(copy)) {
+        expect(text.trim().length).toBeGreaterThan(0)
+      }
     }
   })
 
   it('keeps all three disclosure tokens in the template', () => {
-    for (const token of ['{version}', '{language}', '{backups}']) {
-      expect(GOODBYE_COPY_EN.disclosure.template).toContain(token)
+    for (const locale of LOCALES) {
+      for (const token of ['{version}', '{language}', '{backups}']) {
+        expect(getGoodbyeCopy(locale).disclosure.template).toContain(token)
+      }
     }
   })
 })
