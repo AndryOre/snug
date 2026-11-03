@@ -839,6 +839,10 @@
     "message": "가져오기",
     "description": "Welcome page quick-start item button"
   },
+  "whatsNew_intro": {
+    "message": "Snug(이전 이름 Bookmarks Import & Export)는 북마크를 내보내고, 가져오고, 백업하며, 모든 작업은 기기 안에서 이루어집니다.",
+    "description": "What's new screen intro line saying what Snug is"
+  },
   "whatsNew_current": {
     "message": "현재",
     "description": "What's new screen string"

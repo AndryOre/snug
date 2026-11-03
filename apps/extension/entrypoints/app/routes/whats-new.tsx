@@ -35,6 +35,9 @@ export function WhatsNewRoute() {
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
+      <p className="text-xs leading-normal text-muted-foreground">
+        {i18n.t('whatsNew_intro')}
+      </p>
       <ol className="flex flex-col">
         {changelog.map(({ version, isoDate, items }, index) => {
           const isLast = index === changelog.length - 1
