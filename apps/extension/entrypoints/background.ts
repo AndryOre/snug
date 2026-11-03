@@ -13,6 +13,10 @@ import {
 import { handleNotificationClick } from '@/lib/auto-export-notification'
 import { checkFolderAccessAtStartup } from '@/lib/folder-access-startup'
 import {
+  hasNotificationAccess,
+  watchAccessChanges,
+} from '@/lib/permission-access'
+import {
   autoExportConfigStore,
   autoExportNextRunStore,
   lastSeenVersionStore,
@@ -109,6 +113,30 @@ async function restoreMissingAlarm(): Promise<void> {
 }
 
 /**
+ * Registers the Failure notification click handler once Notification access
+ * exists: immediately when already granted, otherwise when
+ * `permissions.onAdded` reports the grant. Attaches at most once per worker
+ * start and never throws, so a worker without Notification access starts
+ * cleanly.
+ */
+function attachNotificationClickListenerWhenGranted(): void {
+  let isAttached = false
+  const attach = () => {
+    if (isAttached || !browser.notifications) return
+    isAttached = true
+    browser.notifications.onClicked.addListener((notificationId) => {
+      void handleNotificationClick(notificationId).catch(console.error)
+    })
+  }
+  void hasNotificationAccess().then((isGranted) => {
+    if (isGranted) attach()
+  })
+  watchAccessChanges(({ permission, isGranted }) => {
+    if (permission === 'notifications' && isGranted) attach()
+  })
+}
+
+/**
  * Extension service worker entrypoint. On first install it opens the
  * App's Welcome route (and marks that version's changelog as seen); on a
  * minor or major update it opens the App's What's new route (patch updates
@@ -179,9 +207,7 @@ export default defineBackground(() => {
     })()
   })
 
-  browser.notifications.onClicked.addListener((notificationId) => {
-    void handleNotificationClick(notificationId).catch(console.error)
-  })
+  attachNotificationClickListenerWhenGranted()
 
   browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (
