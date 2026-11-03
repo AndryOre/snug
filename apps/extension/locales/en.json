@@ -1551,6 +1551,18 @@
     "message": "Auto-export stays off because the permission wasn't granted. You can turn it on again anytime.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug needs permission to show notifications",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "Failed exports can't notify you until you allow it. The switch stays off in the meantime.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "Allow",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "Notifications stay off. A failed run will still show in the status.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

@@ -1535,6 +1535,18 @@
     "message": "Автоэкспорт остаётся выключенным, так как разрешение не было получено. Вы можете включить его снова в любое время.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug нужно разрешение на показ уведомлений",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "Пока вы не разрешите, сбои экспорта не будут вызывать уведомления. Переключатель остаётся выключенным.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "Разрешить",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "Уведомления остаются выключенными. Неудачный запуск по-прежнему будет виден в статусе.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

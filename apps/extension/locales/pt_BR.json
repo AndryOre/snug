@@ -1564,6 +1564,18 @@
     "message": "A exportação automática continua desativada porque a permissão não foi concedida. Você pode ativá-la novamente quando quiser.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "O Snug precisa de permissão para mostrar notificações",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "Exportações com falha não poderão avisar você até que permita. Enquanto isso, a chave permanece desativada.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "Permitir",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "As notificações continuam desativadas. Uma execução com falha ainda aparecerá no status.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

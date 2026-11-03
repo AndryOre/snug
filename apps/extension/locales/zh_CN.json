@@ -1535,6 +1535,18 @@
     "message": "由于未授予权限，自动导出保持关闭。你可以随时重新开启。",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug 需要权限才能显示通知",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "在你允许之前，导出失败时无法通知你。开关会保持关闭。",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "允许",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "通知保持关闭。失败的运行仍会显示在状态中。",
     "description": "Inline message after the user declined Notification access for the failure notification switch"
