@@ -12,8 +12,8 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test:e2e": "wxt build && playwright test",
-    "store:screenshots": "wxt build && playwright test -c playwright.store.config.ts",
+    "test:e2e": "SNUG_E2E_REQUIRED_PERMISSIONS=1 wxt build && playwright test",
+    "store:screenshots": "SNUG_E2E_REQUIRED_PERMISSIONS=1 wxt build && playwright test -c playwright.store.config.ts",
     "postinstall": "wxt prepare",
     "clean": "rm -rf .output .wxt"
   },

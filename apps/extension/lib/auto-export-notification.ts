@@ -1,6 +1,7 @@
 import { i18n } from '#i18n'
 
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
+import { hasNotificationAccess } from '@/lib/permission-access'
 import { autoExportNotifyOnFailureStore } from '@/lib/storage'
 
 /**
@@ -11,14 +12,18 @@ export const FAILURE_NOTIFICATION_ID = 'auto-export-failure'
 
 /**
  * Shows the Failure notification for a failed Auto-export run, unless the
- * user turned it off. Never throws: a notification problem must not mask the
+ * user turned it off or Notification access is missing (skipped silently). Never throws: a notification problem must not mask the
  * export error that triggered it.
  * @param reason The error message of the failed run.
  * @returns Resolves once the notification was created or skipped.
  */
 export async function notifyAutoExportFailure(reason: string): Promise<void> {
   try {
-    if (!(await autoExportNotifyOnFailureStore.getValue())) return
+    if (
+      !(await autoExportNotifyOnFailureStore.getValue()) ||
+      !(await hasNotificationAccess())
+    )
+      return
     await browser.notifications.create(FAILURE_NOTIFICATION_ID, {
       type: 'basic',
       iconUrl: browser.runtime.getURL('/icons/128.png'),

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import wxtConfig from '../wxt.config'
 
@@ -52,7 +52,10 @@ function listingTitle(markdown: string): string | undefined {
   return /^## Title\s+(.+)$/m.exec(markdown)?.[1]
 }
 
-type TestManifest = Record<string, unknown> & { permissions: string[] }
+type TestManifest = Record<string, unknown> & {
+  permissions: string[]
+  optional_permissions?: string[]
+}
 type ManifestFactory = (environment: { browser: string }) => TestManifest
 
 const buildManifest = wxtConfig.manifest as ManifestFactory
@@ -71,6 +74,30 @@ describe('manifest', () => {
 
   it('has no tabs permission', () => {
     expect(manifest.permissions).not.toContain('tabs')
+  })
+
+  it('keeps Downloads and Notification access optional', () => {
+    expect(manifest.permissions).not.toContain('downloads')
+    expect(manifest.permissions).not.toContain('notifications')
+    expect(manifest.optional_permissions).toEqual([
+      'downloads',
+      'notifications',
+    ])
+    expect(buildManifest({ browser: 'edge' }).optional_permissions).toEqual([
+      'downloads',
+      'notifications',
+    ])
+  })
+
+  it('requires both permissions on the e2e build', () => {
+    vi.stubEnv('SNUG_E2E_REQUIRED_PERMISSIONS', '1')
+    const e2eManifest = buildManifest({ browser: 'chrome' })
+    vi.unstubAllEnvs()
+
+    expect(e2eManifest.permissions).toEqual(
+      expect.arrayContaining(['downloads', 'notifications']),
+    )
+    expect(e2eManifest.optional_permissions).toBeUndefined()
   })
 
   it('requires Chrome 119 and links the live site', () => {
