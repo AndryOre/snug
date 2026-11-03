@@ -67,6 +67,7 @@ import {
   AutoExportAccessAlert,
   didCommitWithAccess,
 } from '@/components/auto-export-access-alert'
+import { NotificationAccessAlert } from '@/components/notification-access-alert'
 import { TimePicker } from '@/components/time-picker'
 import {
   readAutoExportLastRun,
@@ -102,6 +103,7 @@ import { resolveNextRunStatus } from '@/lib/next-run-status'
 import {
   didUserGrantAccess,
   hasDownloadsAccess,
+  hasNotificationAccess,
   watchAccessChanges,
 } from '@/lib/permission-access'
 import {
@@ -385,6 +387,9 @@ export function AutoExportRoute() {
   const [folderAccess, setFolderAccess] = useState<FolderAccess | null>(null)
   const [wasAccessRefused, setWasAccessRefused] = useState(false)
   const [downloadsAccess, setDownloadsAccess] = useState<boolean | null>(null)
+  const [notificationAccess, setNotificationAccess] = useState<boolean | null>(
+    null,
+  )
   const [accessMessage, setAccessMessage] = useState<
     'enable' | 'destination' | 'notify' | null
   >(null)
@@ -419,13 +424,20 @@ export function AutoExportRoute() {
   useEffect(() => {
     let isMounted = true
     const refresh = async () => {
-      const hasAccess = await hasDownloadsAccess()
-      if (isMounted) setDownloadsAccess(hasAccess)
+      const [hasDownloads, hasNotifications] = await Promise.all([
+        hasDownloadsAccess(),
+        hasNotificationAccess(),
+      ])
+      if (!isMounted) return
+      setDownloadsAccess(hasDownloads)
+      setNotificationAccess(hasNotifications)
     }
     void refresh()
     const unwatch = watchAccessChanges((change) => {
       if (change.permission === 'downloads') {
         setDownloadsAccess(change.isGranted)
+      } else {
+        setNotificationAccess(change.isGranted)
       }
     })
     return () => {
@@ -435,6 +447,8 @@ export function AutoExportRoute() {
   }, [])
   const isDownloadsAccessMissing =
     destination === 'downloads' && downloadsAccess === false
+  const isNotificationAccessMissing = notificationAccess === false
+  const isNotifySwitchOn = notifyOnFailure && !isNotificationAccessMissing
   const keepLast = config.keepLast ?? 10
   const keepLastText = keepLastDraft ?? String(keepLast)
   const isKeepLastInvalid = parseKeepLast(keepLastText) === null
@@ -498,9 +512,17 @@ export function AutoExportRoute() {
     }
     setAccessMessage(null)
     const isGranted = await didCommitWithAccess(['notifications'], async () => {
-      await setNotifyOnFailure(true)
+      if (!notifyOnFailure) await setNotifyOnFailure(true)
       notifySaved()
     })
+    if (isGranted) setNotificationAccess(true)
+    else setAccessMessage('notify')
+  }
+
+  const allowNotificationAccess = async () => {
+    setAccessMessage(null)
+    const isGranted = await didUserGrantAccess('notifications')
+    setNotificationAccess(isGranted)
     if (!isGranted) setAccessMessage('notify')
   }
 
@@ -895,10 +917,16 @@ export function AutoExportRoute() {
               </FieldContent>
               <Switch
                 id="auto-export-notify-on-failure"
-                checked={notifyOnFailure}
+                checked={isNotifySwitchOn}
                 onCheckedChange={(isOn) => void changeNotifyOnFailure(isOn)}
               />
             </Field>
+
+            {!isOff && notifyOnFailure && isNotificationAccessMissing && (
+              <NotificationAccessAlert
+                onAllow={() => void allowNotificationAccess()}
+              />
+            )}
 
             {accessMessage === 'notify' && (
               <AccessInlineMessage>

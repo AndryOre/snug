@@ -94,6 +94,12 @@ function findByText(text: string): Element | null {
   )
 }
 
+function notifySwitchState() {
+  return document
+    .querySelector('#auto-export-notify-on-failure')
+    ?.matches(':checked')
+}
+
 beforeEach(() => {
   fakeBrowser.reset()
   resetFakeI18n()
@@ -265,5 +271,108 @@ describe('AutoExportRoute typed failure', () => {
     await click(findByText(en.exportNow.message))
 
     expect(document.body.textContent).not.toContain('downloads-access-needed')
+  })
+})
+
+describe('AutoExportRoute Downloads access alert', () => {
+  it('shows the Downloads access alert when Downloads access is missing', async () => {
+    installPermissions({ held: ['notifications'], isRequestGranted: true })
+    await mountRoute({ enabled: true, destination: 'downloads' })
+
+    expect(document.body.textContent).toContain(
+      en.autoExportPage_downloadsAccessTitle.message,
+    )
+  })
+
+  it('hides the Downloads access alert when Downloads access is held', async () => {
+    installPermissions({
+      held: ['downloads', 'notifications'],
+      isRequestGranted: true,
+    })
+    await mountRoute({ enabled: true, destination: 'downloads' })
+
+    expect(document.body.textContent).not.toContain(
+      en.autoExportPage_downloadsAccessTitle.message,
+    )
+  })
+})
+
+describe('AutoExportRoute Notification access alert', () => {
+  it('reads the switch off and shows the alert while Notification access is missing', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: true })
+    await mountRoute({ enabled: true, destination: 'downloads' }, true)
+
+    expect(notifySwitchState()).toBe(false)
+    expect(document.body.textContent).toContain(
+      en.autoExportPage_notificationAccessTitle.message,
+    )
+    expect(await autoExportNotifyOnFailureStore.getValue()).toBe(true)
+  })
+
+  it('hides the alert while Auto-export is off', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: true })
+    await mountRoute({ enabled: false, destination: 'downloads' }, true)
+
+    expect(document.body.textContent).not.toContain(
+      en.autoExportPage_notificationAccessTitle.message,
+    )
+  })
+
+  it('requests before any await, turns the switch on on grant and never rewrites the setting', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: true })
+    await mountRoute({ enabled: true, destination: 'downloads' }, true)
+    const setNotify = vi.spyOn(autoExportNotifyOnFailureStore, 'setValue')
+
+    await click(findByText(en.autoExportPage_notificationAccessAllow.message))
+
+    expect(events[0]).toBe('request')
+    expect(browser.permissions.request).toHaveBeenCalledExactlyOnceWith({
+      permissions: ['notifications'],
+    })
+    expect(setNotify).not.toHaveBeenCalled()
+    expect(document.body.textContent).not.toContain(
+      en.autoExportPage_notificationAccessTitle.message,
+    )
+    expect(notifySwitchState()).toBe(true)
+  })
+
+  it('keeps the switch off with an inline message on denial', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: false })
+    await mountRoute({ enabled: true, destination: 'downloads' }, true)
+
+    await click(findByText(en.autoExportPage_notificationAccessAllow.message))
+
+    expect(events[0]).toBe('request')
+    expect(notifySwitchState()).toBe(false)
+    expect(document.body.textContent).toContain(
+      en.autoExportPage_accessDeniedNotify.message,
+    )
+    expect(await autoExportNotifyOnFailureStore.getValue()).toBe(true)
+  })
+
+  it('updates the page when access is revoked', async () => {
+    installPermissions({
+      held: ['downloads', 'notifications'],
+      isRequestGranted: true,
+    })
+    const addListener = vi.fn()
+    Object.assign(browser.permissions, {
+      onAdded: { addListener: vi.fn(), removeListener: vi.fn() },
+      onRemoved: { addListener, removeListener: vi.fn() },
+    })
+    await mountRoute({ enabled: true, destination: 'downloads' }, true)
+    expect(notifySwitchState()).toBe(true)
+
+    await act(async () => {
+      const [onRemoved] = addListener.mock.calls[0] as [
+        (changed: { permissions: string[] }) => void,
+      ]
+      onRemoved({ permissions: ['notifications'] })
+    })
+
+    expect(notifySwitchState()).toBe(false)
+    expect(document.body.textContent).toContain(
+      en.autoExportPage_notificationAccessTitle.message,
+    )
   })
 })

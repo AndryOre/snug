@@ -1564,6 +1564,18 @@
     "message": "L'export automatique reste désactivé car l'autorisation n'a pas été accordée. Vous pouvez le réactiver à tout moment.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug a besoin de l’autorisation d’afficher des notifications",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "Les exports échoués ne pourront pas vous prévenir tant que vous ne l’autorisez pas. Le commutateur reste désactivé en attendant.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "Autoriser",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "Les notifications restent désactivées. Une exécution en échec apparaîtra toujours dans l'état.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

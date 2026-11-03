@@ -1535,6 +1535,18 @@
     "message": "権限が許可されなかったため、自動エクスポートはオフのままです。いつでもオンに戻せます。",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug が通知を表示するには許可が必要です",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "許可するまで、エクスポートの失敗を通知できません。それまでスイッチはオフのままです。",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "許可",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "通知はオフのままです。失敗した実行はステータスに表示されます。",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

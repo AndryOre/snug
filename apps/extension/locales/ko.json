@@ -1535,6 +1535,18 @@
     "message": "권한이 허용되지 않아 자동 내보내기는 꺼진 상태로 유지됩니다. 언제든 다시 켤 수 있습니다.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug가 알림을 표시하려면 권한이 필요합니다",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "허용하기 전에는 내보내기 실패를 알려 드릴 수 없습니다. 그동안 스위치는 꺼진 상태로 유지됩니다.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "허용",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "알림은 꺼진 상태로 유지됩니다. 실패한 실행은 상태에 계속 표시됩니다.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"

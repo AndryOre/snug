@@ -1544,6 +1544,18 @@
     "message": "Der automatische Export bleibt aus, weil die Berechtigung nicht erteilt wurde. Du kannst ihn jederzeit wieder einschalten.",
     "description": "Inline message after the user declined the permission request when turning on Auto-export"
   },
+  "autoExportPage_notificationAccessTitle": {
+    "message": "Snug braucht die Berechtigung, Benachrichtigungen anzuzeigen",
+    "description": "Title of the alert shown when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessDescription": {
+    "message": "Fehlgeschlagene Exporte können dich erst benachrichtigen, wenn du das erlaubst. Bis dahin bleibt der Schalter aus.",
+    "description": "Alert body when Notification access is missing"
+  },
+  "autoExportPage_notificationAccessAllow": {
+    "message": "Erlauben",
+    "description": "Button that asks the browser for Notification access"
+  },
   "autoExportPage_accessDeniedNotify": {
     "message": "Benachrichtigungen bleiben aus. Ein fehlgeschlagener Lauf erscheint weiterhin im Status.",
     "description": "Inline message after the user declined Notification access for the failure notification switch"
