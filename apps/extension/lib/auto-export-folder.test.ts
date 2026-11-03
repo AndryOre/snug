@@ -86,6 +86,22 @@ describe('runAutoExport with the Custom folder destination', () => {
     })
   })
 
+  it('runs without Downloads access because the Custom folder never needs it', async () => {
+    const root = new FakeDirectoryHandle('Backups')
+    folderHandleMock.handle = root
+    await autoExportConfigStore.setValue(folderConfig())
+    mockDownloadsAndBadge()
+    fakeBrowser.permissions.contains = vi.fn(async () => false)
+
+    await runAutoExport('manual')
+
+    const subfolder = root.directories.get('backups')?.directories.get('snug')
+    expect(subfolder?.files.size).toBeGreaterThan(0)
+    expect(await autoExportLastRunStore.getValue()).toMatchObject({
+      ok: true,
+    })
+  })
+
   it('uses a destination override instead of the stored one', async () => {
     const root = new FakeDirectoryHandle('Backups')
     folderHandleMock.handle = root

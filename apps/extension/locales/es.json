@@ -846,6 +846,10 @@
     "message": "Importar",
     "description": "Welcome page quick-start item button"
   },
+  "whatsNew_intro": {
+    "message": "Snug (antes Bookmarks Import & Export) exporta, importa y respalda tus marcadores, todo en tu dispositivo.",
+    "description": "What's new screen intro line saying what Snug is"
+  },
   "whatsNew_current": {
     "message": "Actual",
     "description": "What's new screen string"

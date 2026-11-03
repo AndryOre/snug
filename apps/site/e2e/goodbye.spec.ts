@@ -71,7 +71,7 @@ test('ae=1 shows the backups notice and the disclosure shows the values', async 
   await page.goto(`/es/goodbye/${QUERY}`)
   await expect(page.locator('[data-goodbye-notice]')).toBeVisible()
   await expect(page.locator('[data-goodbye-disclosure]')).toHaveText(
-    'This page received only: version 2.2.0, language es, scheduled backups yes. No identifier. Umami counts this visit and the reason you pick, without cookies.',
+    'Esta página recibió solo: versión 2.2.0, idioma es, copias programadas sí. Ningún identificador. Umami cuenta esta visita y el motivo que elijas, sin cookies.',
   )
 })
 
