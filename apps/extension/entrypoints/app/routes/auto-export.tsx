@@ -74,6 +74,7 @@ import {
   type RunManualExportMessage,
   type RunManualExportResponse,
 } from '@/lib/auto-export'
+import { getAutoExportErrorMessage } from '@/lib/auto-export-error'
 import {
   parseKeepLast,
   resolveEffectiveDestination,
@@ -188,7 +189,6 @@ interface StatusCardProperties {
   folder: string
   destination: ExportDestination
   isFolderMissing: boolean
-  isDownloadsAccessMissing: boolean
 }
 
 /**
@@ -201,8 +201,6 @@ interface StatusCardProperties {
  * @param properties.destination The Export destination in effect on screen.
  * @param properties.isFolderMissing Whether Custom folder is selected without
  *   a chosen folder, which blocks Export now.
- * @param properties.isDownloadsAccessMissing Whether the destination is
- *   Downloads and Downloads access is missing, so Export now asks for it first.
  * @returns The status card element.
  */
 function StatusCard({
@@ -210,7 +208,6 @@ function StatusCard({
   folder,
   destination,
   isFolderMissing,
-  isDownloadsAccessMissing,
 }: StatusCardProperties) {
   const [nextRun] = useStorageItem(autoExportNextRunStore)
   const lastRun = useLastRun()
@@ -238,7 +235,10 @@ function StatusCard({
       } else {
         toast.add({
           title: i18n.t('exportNowFailed'),
-          description: response?.error,
+          description: getAutoExportErrorMessage(
+            response?.error,
+            response?.error ?? '',
+          ),
           type: 'error',
         })
       }
@@ -254,7 +254,7 @@ function StatusCard({
   }
 
   const handleExportNow = async () => {
-    if (!isDownloadsAccessMissing) {
+    if (destination !== 'downloads') {
       setIsAccessDenied(false)
       await runExport()
       return
@@ -327,7 +327,10 @@ function StatusCard({
               <CircleAlertIcon />
               <AlertTitle>{i18n.t('autoExportPage_failureTitle')}</AlertTitle>
               <AlertDescription>
-                {lastRun.error || i18n.t('exportNowFailed')}
+                {getAutoExportErrorMessage(
+                  lastRun.errorCode,
+                  lastRun.error || i18n.t('exportNowFailed'),
+                )}
               </AlertDescription>
             </Alert>
           )}
@@ -562,7 +565,6 @@ export function AutoExportRoute() {
         folder={folder}
         destination={destination}
         isFolderMissing={isFolderMissing}
-        isDownloadsAccessMissing={isDownloadsAccessMissing}
       />
       <Card>
         <CardHeader>

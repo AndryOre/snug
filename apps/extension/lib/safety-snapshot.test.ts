@@ -94,6 +94,16 @@ describe('takeSafetySnapshot', () => {
     expect(await readLatestSafetySnapshot()).toEqual(snapshot)
   })
 
+  it('never touches browser.downloads, so it needs no Downloads access', async () => {
+    const download = vi.fn()
+    Object.assign(browser, { downloads: { download } })
+    seedSample()
+
+    await takeSafetySnapshot()
+
+    expect(download).not.toHaveBeenCalled()
+  })
+
   it('prepends each capture so the newest comes first', async () => {
     seedSample()
     const first = await takeSafetySnapshot()

@@ -18,7 +18,9 @@ import { useEffect, useState } from 'react'
 
 import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { readAutoExportLastRun } from '@/lib/auto-export'
-import { queryStoredFolderAccess } from '@/lib/folder-handle'
+import { getAutoExportErrorMessage } from '@/lib/auto-export-error'
+import { resolveEffectiveDestination } from '@/lib/auto-export-form'
+import { canPickFolder, queryStoredFolderAccess } from '@/lib/folder-handle'
 import type { FolderAccess } from '@/lib/folder-handle'
 import { hasDownloadsAccess, watchAccessChanges } from '@/lib/permission-access'
 import { resolvePopupStatus } from '@/lib/popup-status'
@@ -132,13 +134,21 @@ export function AutoExportStatusItem() {
   const [config] = useStorageItem(autoExportConfigStore)
   const [nextRun] = useStorageItem(autoExportNextRunStore)
   const lastRun = useAutoExportLastRun()
-  const folderAccess = useFolderAccess(config.destination === 'folder')
-  const status = resolvePopupStatus({ config, nextRun, lastRun, folderAccess })
-  const hasDownloads = useHasDownloadsAccess(
-    config.enabled && config.destination === 'downloads',
+  const destination = resolveEffectiveDestination(
+    config.destination,
+    canPickFolder(),
   )
+  const folderAccess = useFolderAccess(destination === 'folder')
+  const status = resolvePopupStatus({
+    config: { ...config, destination },
+    nextRun,
+    lastRun,
+    folderAccess,
+  })
+  const isDownloadsExport = config.enabled && destination === 'downloads'
+  const hasDownloads = useHasDownloadsAccess(isDownloadsExport)
 
-  if (!hasDownloads && config.enabled && config.destination === 'downloads') {
+  if (!hasDownloads && isDownloadsExport) {
     return (
       <Item variant="muted" size="sm">
         <ItemMedia variant="icon">
@@ -203,7 +213,10 @@ export function AutoExportStatusItem() {
   switch (status.kind) {
     case 'failed': {
       title = i18n.t('popup_statusFailedTitle')
-      description = i18n.t('popup_statusFailedDescription')
+      description = getAutoExportErrorMessage(
+        lastRun?.errorCode,
+        i18n.t('popup_statusFailedDescription'),
+      )
       break
     }
     case 'next-run': {

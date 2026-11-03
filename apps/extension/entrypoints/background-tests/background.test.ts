@@ -24,11 +24,16 @@ vi.mock('@/lib/auto-export', async () => {
   }
 })
 
+vi.mock('@/lib/uninstall-url', () => ({
+  registerUninstallUrl: vi.fn(async () => {}),
+}))
+
 vi.mock('@/lib/folder-access-startup', () => ({
   checkFolderAccessAtStartup: vi.fn(async () => {}),
 }))
 
 const { syncAlarm, runAutoExport } = await import('@/lib/auto-export')
+const { registerUninstallUrl } = await import('@/lib/uninstall-url')
 const { checkFolderAccessAtStartup } =
   await import('@/lib/folder-access-startup')
 
@@ -610,5 +615,42 @@ describe('Failure notification click listener', () => {
     background.main?.()
 
     expect(addListener).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('uninstall URL registration', () => {
+  it('registers at worker start', () => {
+    expect(registerUninstallUrl).toHaveBeenCalledOnce()
+  })
+
+  it('registers again on every onInstalled reason', async () => {
+    vi.clearAllMocks()
+
+    await triggerOnInstalled('update', '1.0.0')
+
+    await vi.waitFor(() => {
+      expect(registerUninstallUrl).toHaveBeenCalledOnce()
+    })
+  })
+
+  it('registers when a scheduling-relevant config change lands', async () => {
+    await autoExportConfigStore.setValue(baseConfig({ enabled: false }))
+    vi.clearAllMocks()
+
+    await autoExportConfigStore.setValue(baseConfig({ enabled: true }))
+
+    await vi.waitFor(() => {
+      expect(registerUninstallUrl).toHaveBeenCalledOnce()
+    })
+  })
+
+  it('does not register when only an irrelevant config field changes', async () => {
+    await autoExportConfigStore.setValue(baseConfig({ path: 'a/' }))
+    vi.clearAllMocks()
+
+    await autoExportConfigStore.setValue(baseConfig({ path: 'b/' }))
+
+    await new Promise((resolve) => setTimeout(resolve, 10))
+    expect(registerUninstallUrl).not.toHaveBeenCalled()
   })
 })
