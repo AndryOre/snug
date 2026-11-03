@@ -18,11 +18,11 @@ const ACCESS_PERMISSIONS: readonly AccessPermission[] = [
 ]
 
 /**
- * Whether every named permission is currently isGranted. Never throws: a missing
- * `browser.permissions` API or a rejected lookup counts as not isGranted (the
+ * Whether every named permission is currently granted. Never throws: a missing
+ * `browser.permissions` API or a rejected lookup counts as not granted (the
  * rejection is logged).
  * @param permissions The permissions to check.
- * @returns `true` only when all of them are isGranted.
+ * @returns `true` only when all of them are granted.
  */
 async function hasAccess(...permissions: AccessPermission[]): Promise<boolean> {
   try {
@@ -34,7 +34,7 @@ async function hasAccess(...permissions: AccessPermission[]): Promise<boolean> {
 }
 
 /**
- * Whether Downloads access is isGranted.
+ * Whether Downloads access is granted.
  * @returns `true` when the `downloads` permission is held.
  */
 export function hasDownloadsAccess(): Promise<boolean> {
@@ -42,7 +42,7 @@ export function hasDownloadsAccess(): Promise<boolean> {
 }
 
 /**
- * Whether Notification access is isGranted.
+ * Whether Notification access is granted.
  * @returns `true` when the `notifications` permission is held.
  */
 export function hasNotificationAccess(): Promise<boolean> {

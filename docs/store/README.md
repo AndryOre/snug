@@ -36,7 +36,8 @@ pack. Each one still needs its manual dashboard step (see the checklist).
    each has a justification below. Enter them on the Privacy tab. `downloads`
    and `notifications` are optional permissions: the install and update prompts
    do not show them, and Snug asks when the user turns on Auto-export or the
-   failure notification.
+   failure notification. The uninstall URL carries the extension version, the
+   browser language and whether scheduled backups are on, and no identifier.
 2. **Resolved in the pack:** the single-purpose text now covers exporting,
    importing, backing up and cleaning up bookmarks.
 3. **Resolved in the pack:** the homepage and privacy URLs point to the live
@@ -324,10 +325,10 @@ Code: `lib/offscreen-download.ts` calls `chrome.offscreen.createDocument` with
 the `BLOBS` reason and closes it with `chrome.offscreen.closeDocument`;
 `entrypoints/offscreen/main.ts` handles the create and revoke messages.
 
-`notifications` (optional, 322 chars):
+`notifications` (optional, 462 chars):
 
 ```text
-This permission is optional. Snug asks for it only when the user turns on the failure notification. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed.
+This permission is optional. Snug asks for it together with Downloads access when the user enables Auto-export to Downloads while the failure notification is on (the default), and on its own when the user turns the failure notification on. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed.
 ```
 
 Code: `lib/auto-export-notification.ts` calls `browser.notifications.create` for

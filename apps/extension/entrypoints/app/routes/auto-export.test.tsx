@@ -7,6 +7,7 @@ import type * as FolderAccessRecoveryModule from '@/lib/folder-access-recovery'
 import type * as FolderHandleModule from '@/lib/folder-handle'
 import {
   autoExportConfigStore,
+  autoExportLastRunStore,
   autoExportNotifyOnFailureStore,
 } from '@/lib/storage'
 import { createDomHarness } from '@/lib/testing/dom-harness'
@@ -200,6 +201,24 @@ describe('AutoExportRoute permission requests', () => {
     )
   })
 
+  it('requests access synchronously on Export now while the access check is still loading', async () => {
+    installPermissions({ held: [], isRequestGranted: true })
+    Object.assign(browser.permissions, {
+      contains: vi.fn(() => new Promise<boolean>(() => {})),
+    })
+    await mountRoute({ enabled: false, destination: 'downloads' })
+
+    const button = findByText(en.exportNow.message)
+    if (!button) throw new Error('button missing')
+    ;(button as HTMLElement).click()
+
+    expect(browser.permissions.request).toHaveBeenCalledExactlyOnceWith({
+      permissions: ['downloads'],
+    })
+    await act(async () => {})
+    expect(browser.runtime.sendMessage).toHaveBeenCalledOnce()
+  })
+
   it('runs the export after Export now access is granted', async () => {
     installPermissions({ held: [], isRequestGranted: true })
     await mountRoute({ enabled: false, destination: 'downloads' })
@@ -221,5 +240,30 @@ describe('AutoExportRoute without prompts', () => {
     expect(browser.permissions.request).not.toHaveBeenCalled()
     const stored = await autoExportConfigStore.getValue()
     expect(stored.enabled).toBe(false)
+  })
+})
+
+describe('AutoExportRoute typed failure', () => {
+  it('shows the localized sentence in the failure alert and the toast, never the raw code', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: true })
+    await autoExportLastRunStore.setValue({
+      ok: false,
+      at: 1,
+      error: 'downloads-access-needed',
+      errorCode: 'downloads-access-needed',
+      trigger: 'scheduled',
+    })
+    vi.spyOn(fakeBrowser.runtime, 'sendMessage').mockResolvedValue({
+      ok: false,
+      error: 'downloads-access-needed',
+    } as never)
+    await mountRoute({ enabled: false, destination: 'downloads' })
+
+    expect(document.body.textContent).toContain(
+      en.autoExportError_downloadsAccessNeeded.message,
+    )
+    await click(findByText(en.exportNow.message))
+
+    expect(document.body.textContent).not.toContain('downloads-access-needed')
   })
 })

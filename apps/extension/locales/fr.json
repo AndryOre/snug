@@ -1583,5 +1583,9 @@
   "popup_statusDownloadsAccessAction": {
     "message": "Ouvrir l'export automatique",
     "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
+  },
+  "autoExportError_downloadsAccessNeeded": {
+    "message": "L'export automatique a besoin de l'accès aux Téléchargements. Autorisez-le sur la page d'export automatique.",
+    "description": "Shown instead of the raw error code when the last Auto-export run failed because Downloads access is missing"
   }
 }

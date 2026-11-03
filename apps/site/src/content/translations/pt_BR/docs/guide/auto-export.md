@@ -1,6 +1,6 @@
 ---
 title: Exportação automática
-sourceHash: f658d7e50cc058b1
+sourceHash: 91674afc656322e9
 description:
   'Agende a exportação automática dos seus favoritos no Chrome. Escolha
   formatos, intervalo e pasta, e o Snug salva os arquivos sem janela de
@@ -28,7 +28,9 @@ O Snug pode exportar seus favoritos em um agendamento, sem nenhuma ação manual
 O Snug pede acesso a Downloads em três casos: quando você ativa a exportação
 automática com Downloads como destino, quando você muda **Salvar em** para
 **Downloads** e quando você usa **Exportar agora** sem esse acesso. O navegador
-mostra o próprio aviso de permissão. Se você recusar, nada é salvo: a exportação
+mostra o próprio aviso de permissão. Se **Avisar-me quando uma exportação
+falhar** estiver ativada (padrão), o primeiro caso também pede acesso às
+notificações no mesmo aviso. Se você recusar, nada é salvo: a exportação
 automática continua desativada, o destino continua como estava e a exportação
 não é executada. A página informa, respectivamente, “A exportação automática
 continua desativada porque a permissão não foi concedida. Você pode ativá-la
@@ -81,10 +83,13 @@ motivo, quando uma execução falha. Ao clicar nela, a página Exportação
 automática abre. Execuções bem-sucedidas nunca notificam, e falhas repetidas
 substituem a notificação anterior em vez de se empilhar. Uma execução agendada
 ou de recuperação com falha também coloca um selo "!" no ícone da barra de
-ferramentas até que uma execução seja bem-sucedida. Ao ativar esta chave, o Snug
-pede a permissão de notificações. Se você recusar, ela continua desativada e a
-página informa “As notificações continuam desativadas. Uma execução com falha
-ainda aparecerá no status.”
+ferramentas até que uma execução seja bem-sucedida. A permissão de notificações
+é pedida junto com o acesso a Downloads quando você ativa a exportação
+automática com esta chave ativada, e separadamente quando você ativa a chave ou
+clica em **Permitir**. Enquanto o acesso estiver faltando, a chave aparece
+desativada. Se você recusar, ela continua desativada e a página informa “As
+notificações continuam desativadas. Uma execução com falha ainda aparecerá no
+status.”
 
 As alterações na página **Exportação automática** são salvas automaticamente. O
 cartão de status mostra sempre o estado real do agendamento, independentemente

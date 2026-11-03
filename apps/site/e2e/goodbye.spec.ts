@@ -110,6 +110,29 @@ test('lang on the English page moves to that locale and keeps the query', async 
   await expect(page.locator('html')).toHaveAttribute('lang', 'es')
 })
 
+for (const [raw, expected, tag] of [
+  ['pt-BR', 'pt_BR', 'pt-BR'],
+  ['PT_BR', 'pt_BR', 'pt-BR'],
+  ['zh-cn', 'zh_CN', 'zh-CN'],
+  ['ES', 'es', 'es'],
+] as const) {
+  test(`lang=${raw} renders the ${expected} page`, async ({ page }) => {
+    await page.goto(`/goodbye/?lang=${raw}`)
+    await expect(page.locator('html')).toHaveAttribute('lang', tag)
+    await expect(page.locator('[data-goodbye-disclosure]')).toContainText(
+      expected,
+    )
+  })
+}
+
+test('an unknown lang stays on the English page', async ({ page }) => {
+  await page.goto('/goodbye/?lang=klingon')
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.locator('[data-goodbye-disclosure]')).toContainText(
+    'language not provided',
+  )
+})
+
 test('the Goodbye page stays out of the llms files', async ({ request }) => {
   for (const file of ['/llms.txt', '/llms-full.txt']) {
     const response = await request.get(file)

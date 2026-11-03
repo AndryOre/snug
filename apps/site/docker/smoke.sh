@@ -94,6 +94,20 @@ done
 [ "$(status "$base/de")" = 301 ] || fail "/de is not 301"
 [ "$(location "$base/de")" = "/de/" ] || fail "/de does not redirect to /de/"
 [ "$(status "$base/de/")" = 200 ] || fail "/de/ is not 200"
+[ "$(status "$base/goodbye")" = 301 ] || fail "/goodbye is not 301"
+[ "$(location "$base/goodbye")" = "/goodbye/" ] || fail "/goodbye does not redirect to /goodbye/"
+[ "$(location "$base/goodbye?lang=es&v=2.3.0&ae=1")" = "/goodbye/?lang=es&v=2.3.0&ae=1" ] || fail "/goodbye drops the query string"
+[ "$(status "$base/goodbye/?lang=en&v=2.3.0&ae=1")" = 200 ] || fail "/goodbye/ is not 200"
+for pair in "es:es" "ES:es" "pt-BR:pt-br" "PT_br:pt-br" "zh_CN:zh-cn" "zh-cn:zh-cn" "ru:ru"; do
+  raw="${pair%%:*}"
+  prefix="${pair##*:}"
+  [ "$(location "$base/goodbye/?lang=$raw&v=2.3.0&ae=1")" = "/$prefix/goodbye/?lang=$raw&v=2.3.0&ae=1" ] || fail "/goodbye/?lang=$raw does not redirect to /$prefix/goodbye/"
+done
+for raw in en xx pt "es%00"; do
+  [ "$(status "$base/goodbye/?lang=$raw")" = 200 ] || fail "/goodbye/?lang=$raw is not 200"
+done
+[ "$(status "$base/es/goodbye/?lang=es")" = 200 ] || fail "/es/goodbye/?lang=es is not 200"
+[ "$(location "$base/install?c=goodbye")" = "$store?utm_source=landing&utm_medium=web&utm_campaign=goodbye" ] || fail "/install?c=goodbye"
 for file in robots.txt sitemap.xml llms.txt; do
   [ "$(status "$base/$file")" = 200 ] || fail "$file is not 200"
 done

@@ -3,7 +3,7 @@ import { act } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
-import { autoExportConfigStore } from '@/lib/storage'
+import { autoExportConfigStore, autoExportLastRunStore } from '@/lib/storage'
 import { createDomHarness } from '@/lib/testing/dom-harness'
 import type { DomHarness } from '@/lib/testing/dom-harness'
 import { resetFakeI18n } from '@/lib/testing/fake-i18n'
@@ -87,5 +87,36 @@ describe('AutoExportStatusItem Downloads access row', () => {
       en.popup_statusDownloadsAccessTitle.message,
     )
     expect(document.body.textContent).toContain(en.popup_statusOffTitle.message)
+  })
+})
+
+describe('AutoExportStatusItem effective destination', () => {
+  it('judges Downloads access when a stored Custom folder is unavailable', async () => {
+    vi.stubGlobal('showDirectoryPicker', undefined)
+    vi.mocked(browser.permissions.contains).mockResolvedValue(false as never)
+    await mountItem({ enabled: true, destination: 'folder' })
+
+    expect(document.body.textContent).toContain(
+      en.popup_statusDownloadsAccessTitle.message,
+    )
+  })
+})
+
+describe('AutoExportStatusItem failed run', () => {
+  it('shows the localized sentence, never the raw code', async () => {
+    vi.mocked(browser.permissions.contains).mockResolvedValue(true as never)
+    await autoExportLastRunStore.setValue({
+      ok: false,
+      at: 1,
+      error: 'downloads-access-needed',
+      errorCode: 'downloads-access-needed',
+      trigger: 'scheduled',
+    })
+    await mountItem({ enabled: true, destination: 'downloads' })
+
+    expect(document.body.textContent).toContain(
+      en.autoExportError_downloadsAccessNeeded.message,
+    )
+    expect(document.body.textContent).not.toContain('downloads-access-needed')
   })
 })

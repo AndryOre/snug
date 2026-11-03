@@ -7,6 +7,7 @@ import {
   getGoodbyeCopy,
   goodbyePath,
   goodbyeRedirectTarget,
+  normalizeGoodbyeLang,
   parseGoodbyeParameters,
 } from './goodbye'
 import { LOCALES } from './locales'
@@ -40,6 +41,32 @@ describe('goodbye parameters', () => {
     })
     expect(parseGoodbyeParameters('?v=1.2.3.4.5').version).toBeNull()
     expect(parseGoodbyeParameters('?lang=xx').language).toBeNull()
+  })
+})
+
+describe('goodbye language normalization', () => {
+  it.each([
+    ['pt-BR', 'pt_BR'],
+    ['PT_BR', 'pt_BR'],
+    ['pt_br', 'pt_BR'],
+    ['zh-cn', 'zh_CN'],
+    ['ZH-CN', 'zh_CN'],
+    ['ES', 'es'],
+    ['en', 'en'],
+  ])('maps %s to %s', (raw, expected) => {
+    expect(normalizeGoodbyeLang(raw)).toBe(expected)
+    expect(parseGoodbyeParameters(`?lang=${raw}`).language).toBe(expected)
+  })
+
+  it.each([null, '', 'xx', 'pt', 'pt--br', ' es', '<b>x</b>'])(
+    'rejects %s',
+    (raw) => {
+      expect(normalizeGoodbyeLang(raw)).toBeNull()
+    },
+  )
+
+  it('names the bookmarks permission in the English permissions reply', () => {
+    expect(GOODBYE_COPY_EN.replies.permissions).toContain('bookmarks')
   })
 })
 
