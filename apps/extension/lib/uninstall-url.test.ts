@@ -92,6 +92,15 @@ describe('registerUninstallUrl', () => {
     expect(console.error).toHaveBeenCalled()
   })
 
+  it('falls back to the bare URL when the built URL is at or over the length limit', async () => {
+    vi.spyOn(fakeBrowser.runtime, 'getManifest').mockReturnValue({
+      version: '1'.repeat(1100),
+    } as ReturnType<typeof fakeBrowser.runtime.getManifest>)
+    await registerUninstallUrl()
+    expect(uninstallUrlSpy).toHaveBeenCalledTimes(1)
+    expect(uninstallUrlSpy).toHaveBeenCalledWith(BARE_URL)
+  })
+
   it('registers an empty string in dev builds', async () => {
     vi.stubEnv('DEV', true)
     await registerUninstallUrl()
