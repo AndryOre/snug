@@ -1513,5 +1513,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "접근이 허용되지 않았습니다. 허용하기 전까지 자동 내보내기는 저장할 수 없습니다.",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug가 다운로드 폴더에 저장하려면 권한이 필요합니다",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "허용하기 전에는 자동 내보내기가 실행되지 않습니다. 이미 저장한 파일에는 영향이 없습니다.",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "권한이 허용되지 않아 자동 내보내기는 꺼진 상태로 유지됩니다. 언제든 다시 켤 수 있습니다.",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "알림은 꺼진 상태로 유지됩니다. 실패한 실행은 상태에 계속 표시됩니다.",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "권한이 허용되지 않아 저장 위치는 그대로 유지됩니다.",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "지금 내보내기에는 다운로드 폴더에 저장할 권한이 필요하지만 허용되지 않았습니다.",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "백업을 계속하려면 다운로드 접근을 허용하세요",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "자동 내보내기 열기",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

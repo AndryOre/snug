@@ -20,6 +20,7 @@ import { APP_ROUTES, getAppUrl } from '@/lib/app-url'
 import { readAutoExportLastRun } from '@/lib/auto-export'
 import { queryStoredFolderAccess } from '@/lib/folder-handle'
 import type { FolderAccess } from '@/lib/folder-handle'
+import { hasDownloadsAccess, watchAccessChanges } from '@/lib/permission-access'
 import { resolvePopupStatus } from '@/lib/popup-status'
 import {
   autoExportConfigStore,
@@ -84,6 +85,35 @@ function useFolderAccess(isFolderDestination: boolean): FolderAccess | null {
   return isFolderDestination ? folderAccess : null
 }
 
+/**
+ * Reads whether Downloads access is held, and keeps it current as the user
+ * grants or revokes it.
+ * @param isDownloadsDestination Whether the Export destination is Downloads.
+ * @returns `false` only once Downloads access is known to be missing.
+ */
+function useHasDownloadsAccess(isDownloadsDestination: boolean): boolean {
+  const [hasAccess, setHasAccess] = useState(true)
+
+  useEffect(() => {
+    if (!isDownloadsDestination) return
+    let isMounted = true
+    const load = async () => {
+      const isHeld = await hasDownloadsAccess()
+      if (isMounted) setHasAccess(isHeld)
+    }
+    void load()
+    const unwatch = watchAccessChanges((change) => {
+      if (change.permission === 'downloads') setHasAccess(change.isGranted)
+    })
+    return () => {
+      isMounted = false
+      unwatch()
+    }
+  }, [isDownloadsDestination])
+
+  return hasAccess
+}
+
 function formatShortDateTime(at: number): string {
   return new Intl.DateTimeFormat(undefined, {
     dateStyle: 'short',
@@ -104,6 +134,37 @@ export function AutoExportStatusItem() {
   const lastRun = useAutoExportLastRun()
   const folderAccess = useFolderAccess(config.destination === 'folder')
   const status = resolvePopupStatus({ config, nextRun, lastRun, folderAccess })
+  const hasDownloads = useHasDownloadsAccess(
+    config.enabled && config.destination === 'downloads',
+  )
+
+  if (!hasDownloads && config.enabled && config.destination === 'downloads') {
+    return (
+      <Item variant="muted" size="sm">
+        <ItemMedia variant="icon">
+          <TriangleAlertIcon className="size-3.5 text-destructive" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{i18n.t('popup_statusDownloadsAccessTitle')}</ItemTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-1 self-start"
+            render={
+              // eslint-disable-next-line jsx-a11y-js/anchor-has-content -- Button's render prop injects the children into this anchor
+              <a
+                href={getAppUrl(APP_ROUTES.autoExport)}
+                target="_blank"
+                rel="noreferrer"
+              />
+            }
+          >
+            {i18n.t('popup_statusDownloadsAccessAction')}
+          </Button>
+        </ItemContent>
+      </Item>
+    )
+  }
 
   if (status.kind === 'folder-access') {
     return (

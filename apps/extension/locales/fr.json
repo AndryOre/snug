@@ -1542,5 +1542,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "L'accès n'a pas été autorisé. L'export automatique ne peut pas enregistrer tant que vous ne l'autorisez pas.",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug a besoin de l'autorisation d'enregistrer dans Téléchargements",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "L'export automatique ne peut pas s'exécuter tant que vous ne l'autorisez pas. Les fichiers déjà enregistrés ne sont pas affectés.",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "L'export automatique reste désactivé car l'autorisation n'a pas été accordée. Vous pouvez le réactiver à tout moment.",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "Les notifications restent désactivées. Une exécution en échec apparaîtra toujours dans l'état.",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "La destination reste inchangée car l'autorisation n'a pas été accordée.",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "Exporter maintenant nécessite l'autorisation d'enregistrer dans Téléchargements, et elle n'a pas été accordée.",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "Autorisez l'accès à Téléchargements pour continuer la sauvegarde",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "Ouvrir l'export automatique",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }
