@@ -1,6 +1,6 @@
 ---
 title: Auto-export
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: f658d7e50cc058b1
 description:
   'Programa exportaciones automáticas de marcadores en Chrome. Elige formatos,
   intervalo y carpeta, y Snug guarda los archivos sin diálogo de guardado.'
@@ -24,6 +24,28 @@ Snug puede exportar tus marcadores según un horario, sin ninguna acción manual
    una exportación programada, se pone al día automáticamente poco después de
    que el navegador vuelva a iniciarse, en lugar de esperar a la siguiente hora
    programada.
+
+Snug pide acceso a Descargas en tres casos: cuando activas la exportación
+automática con Descargas como destino, cuando cambias **Guardar en** a
+**Descargas** y cuando usas **Exportar ahora** sin ese acceso. El navegador
+muestra su propio aviso de permiso. Si lo rechazas, no se guarda nada: la
+exportación automática sigue desactivada, el destino se mantiene como estaba y
+la exportación no se ejecuta. La página indica entonces «La exportación
+automática sigue desactivada porque no se concedió el permiso. Puedes activarla
+de nuevo cuando quieras.», «El destino se mantiene como estaba porque no se
+concedió el permiso.» o «Exportar ahora necesita permiso para guardar en
+Descargas y no se concedió.», respectivamente. El popup sigue mostrando la
+exportación automática como desactivada.
+
+Si la exportación automática ya está activada con Descargas como destino y luego
+falta el acceso, por ejemplo porque lo revocaste en los ajustes del navegador,
+la página **Auto-export** muestra una alerta con el título «Snug necesita
+permiso para guardar en Descargas». La descripción dice «La exportación
+automática no puede ejecutarse hasta que lo permitas. Los archivos que ya
+guardaste no se ven afectados.» Selecciona **Permitir acceso** para concederlo
+de nuevo. El popup muestra entonces «Permite el acceso a Descargas para seguir
+haciendo copias» con un botón **Abrir exportación automática** que te lleva a la
+página.
 
 **Guardar en** define el destino. **Descargas** (el valor predeterminado) guarda
 en la carpeta de Descargas del navegador. **Carpeta personalizada** guarda en
@@ -61,6 +83,10 @@ abre la página Auto-export. Las ejecuciones correctas nunca notifican, y los
 fallos repetidos reemplazan la notificación anterior en lugar de acumularse. Una
 ejecución programada o de puesta al día que falla también coloca una insignia
 "!" en el ícono de la barra de herramientas hasta que una ejecución tenga éxito.
+Al activar este interruptor se solicita el permiso de notificaciones. Si lo
+rechazas, el interruptor sigue desactivado y la página indica «Las
+notificaciones siguen desactivadas. Una ejecución fallida seguirá apareciendo en
+el estado.».
 
 Los cambios en la página **Auto-export** se guardan automáticamente. Su tarjeta
 de estado siempre muestra el estado real del horario, independientemente de

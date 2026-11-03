@@ -1529,5 +1529,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "Access wasn't allowed. Auto-export can't save until you allow it.",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug needs permission to save to Downloads",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "Auto-export can't run until you allow it. Files you already saved are not affected.",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "Auto-export stays off because the permission wasn't granted. You can turn it on again anytime.",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "Notifications stay off. A failed run will still show in the status.",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "The destination stays as it was because the permission wasn't granted.",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "Export now needs permission to save to Downloads, and it wasn't granted.",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "Allow Downloads access to keep backing up",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "Open Auto-export",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

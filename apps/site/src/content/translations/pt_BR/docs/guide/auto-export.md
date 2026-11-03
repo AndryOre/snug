@@ -1,6 +1,6 @@
 ---
 title: Exportação automática
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: f658d7e50cc058b1
 description:
   'Agende a exportação automática dos seus favoritos no Chrome. Escolha
   formatos, intervalo e pasta, e o Snug salva os arquivos sem janela de
@@ -24,6 +24,28 @@ O Snug pode exportar seus favoritos em um agendamento, sem nenhuma ação manual
    ou a extensão indisponível quando uma exportação agendada venceu, ela é
    recuperada automaticamente logo depois que o navegador iniciar de novo, em
    vez de esperar o próximo horário agendado.
+
+O Snug pede acesso a Downloads em três casos: quando você ativa a exportação
+automática com Downloads como destino, quando você muda **Salvar em** para
+**Downloads** e quando você usa **Exportar agora** sem esse acesso. O navegador
+mostra o próprio aviso de permissão. Se você recusar, nada é salvo: a exportação
+automática continua desativada, o destino continua como estava e a exportação
+não é executada. A página informa, respectivamente, “A exportação automática
+continua desativada porque a permissão não foi concedida. Você pode ativá-la
+novamente quando quiser.”, “O destino continua como estava porque a permissão
+não foi concedida.” ou “Exportar agora precisa de permissão para salvar em
+Downloads, e ela não foi concedida.” O popup continua mostrando a exportação
+automática como desativada.
+
+Se a exportação automática já estiver ativada com Downloads como destino e o
+acesso passar a faltar depois, por exemplo porque você o revogou nas
+configurações do navegador, a página **Exportação automática** mostra um alerta
+com o título “O Snug precisa de permissão para salvar em Downloads”. A descrição
+diz “A exportação automática não pode ser executada até que você permita. Os
+arquivos que você já salvou não são afetados.” Selecione **Permitir acesso**
+para conceder o acesso de novo. Então o popup mostra “Permita o acesso a
+Downloads para continuar o backup” com um botão **Abrir exportação automática**
+que leva você de volta à página.
 
 **Salvar em** define o destino. **Downloads** (o padrão) salva na pasta
 Downloads do navegador. **Pasta personalizada** salva em uma pasta que você
@@ -59,7 +81,10 @@ motivo, quando uma execução falha. Ao clicar nela, a página Exportação
 automática abre. Execuções bem-sucedidas nunca notificam, e falhas repetidas
 substituem a notificação anterior em vez de se empilhar. Uma execução agendada
 ou de recuperação com falha também coloca um selo "!" no ícone da barra de
-ferramentas até que uma execução seja bem-sucedida.
+ferramentas até que uma execução seja bem-sucedida. Ao ativar esta chave, o Snug
+pede a permissão de notificações. Se você recusar, ela continua desativada e a
+página informa “As notificações continuam desativadas. Uma execução com falha
+ainda aparecerá no status.”
 
 As alterações na página **Exportação automática** são salvas automaticamente. O
 cartão de status mostra sempre o estado real do agendamento, independentemente

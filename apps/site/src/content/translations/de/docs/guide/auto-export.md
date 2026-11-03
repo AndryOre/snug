@@ -1,6 +1,6 @@
 ---
 title: Auto-Export
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: f658d7e50cc058b1
 description:
   'Plane den automatischen Export deiner Lesezeichen in Chrome. Wähle Formate,
   Intervall und Ordner, Snug speichert die Dateien ohne Speicherdialog.'
@@ -24,6 +24,28 @@ Zutun:
    geschlossen oder die Erweiterung nicht verfügbar war, als ein geplanter
    Export fällig wurde, holt sie ihn kurz nach dem nächsten Start des Browsers
    automatisch nach, statt auf den nächsten geplanten Zeitpunkt zu warten.
+
+Snug bittet in drei Fällen um Zugriff auf Downloads: wenn du den automatischen
+Export mit Downloads als Ziel einschaltest, wenn du bei **Speichern unter** auf
+**Downloads** wechselst und wenn du **Jetzt exportieren** ohne diesen Zugriff
+ausführst. Der Browser zeigt dazu seine eigene Berechtigungsabfrage. Lehnst du
+ab, wird nichts gespeichert: Der automatische Export bleibt aus, das Ziel bleibt
+unverändert, und der Export läuft nicht. Die Seite zeigt dann „Der automatische
+Export bleibt aus, weil die Berechtigung nicht erteilt wurde. Du kannst ihn
+jederzeit wieder einschalten.“, „Das Ziel bleibt unverändert, weil die
+Berechtigung nicht erteilt wurde.“ bzw. „Jetzt exportieren braucht die
+Erlaubnis, in Downloads zu speichern, und sie wurde nicht erteilt.“ Das Popup
+zeigt den automatischen Export weiterhin als aus an.
+
+Ist der automatische Export bereits mit Downloads als Ziel eingeschaltet und
+fehlt der Zugriff später, etwa weil du ihn in den Browsereinstellungen entzogen
+hast, zeigt die Seite **Auto-Export** einen Hinweis mit dem Titel „Snug braucht
+die Erlaubnis, in Downloads zu speichern“. Die Beschreibung lautet „Der
+automatische Export kann erst laufen, wenn du es erlaubst. Bereits gespeicherte
+Dateien sind nicht betroffen.“ Wähle **Zugriff erlauben**, um den Zugriff erneut
+zu erteilen. Das Popup zeigt dann „Erlaube den Zugriff auf Downloads, um weiter
+zu sichern“ mit der Schaltfläche **Automatischen Export öffnen**, die dich zur
+Seite zurückbringt.
 
 **Speichern unter** legt das Ziel fest. **Downloads** (Standard) speichert im
 Downloads-Ordner deines Browsers. **Eigener Ordner** speichert in einem Ordner,
@@ -60,7 +82,10 @@ Grund, wenn ein Lauf fehlschlägt. Ein Klick darauf öffnet die Seite Auto-Expor
 Erfolgreiche Läufe benachrichtigen nie, und wiederholte Fehler ersetzen die
 vorherige Benachrichtigung, statt sich zu stapeln. Ein fehlgeschlagener
 geplanter oder nachgeholter Lauf setzt außerdem ein „!“-Badge auf das
-Symbolleistensymbol, bis ein Lauf erfolgreich ist.
+Symbolleistensymbol, bis ein Lauf erfolgreich ist. Beim Einschalten wird die
+Berechtigung für Benachrichtigungen angefragt. Lehnst du ab, bleibt der Schalter
+aus, und die Seite zeigt „Benachrichtigungen bleiben aus. Ein fehlgeschlagener
+Lauf erscheint weiterhin im Status.“
 
 Änderungen auf der Seite **Auto-Export** werden automatisch gespeichert. Ihre
 Statuskarte zeigt immer den tatsächlichen Zustand des Zeitplans, unabhängig von

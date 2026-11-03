@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 10, 2026
+englishLastUpdated: November 3, 2026
 ---
 
 # Política de Privacidade do Snug
 
-Última atualização: 10 de outubro de 2026
+Última atualização: 3 de novembro de 2026
 
 ## Introdução
 
@@ -16,7 +16,9 @@ recebemos por meio da nossa extensão de navegador.
 
 O Snug não coleta, armazena nem transmite nenhuma informação pessoal sobre seus
 usuários. Nossa extensão funciona inteiramente dentro do seu navegador e não
-envia nenhum dado a servidores externos.
+envia seus favoritos nem suas configurações a servidores externos. O único
+contato de rede é a página de despedida opcional descrita mais abaixo em “Página
+de desinstalação”.
 
 ### Dados dos favoritos
 
@@ -65,6 +67,23 @@ envia nenhum dado a servidores externos.
   notificação do sistema no seu dispositivo com o motivo. Você pode desativá-la
   na página Exportação automática. Exportações bem-sucedidas nunca notificam, e
   nenhum conteúdo das notificações sai do seu dispositivo.
+- Permissões opcionais: as permissões `downloads` e `notifications` são
+  opcionais. O Snug solicita `downloads` quando você ativa a exportação
+  automática com o destino Downloads, quando muda o destino para Downloads ou
+  quando usa “Exportar agora” sem acesso a Downloads, e `notifications` somente
+  quando você ativa as notificações de falha. Se você recusar, o recurso
+  permanece desativado e nada mais muda.
+
+### Página de desinstalação
+
+- Ao desinstalar o Snug, seu navegador abre uma página de despedida em
+  `https://snug.andryore.dev/goodbye/`. O endereço que o Snug registra para isso
+  contém três valores: a versão da extensão, seu idioma e se os backups
+  agendados estão ativados (`?lang=<code>&v=<version>&ae=<0|1>`). Ele não contém
+  nenhum identificador nem nenhum dos seus favoritos.
+- A página de despedida usa o Umami, um serviço de análise sem cookies, para
+  contar a visita e o motivo em que você clica. Ela não define cookies. Escolher
+  um motivo é opcional.
 
 ## Armazenamento de dados
 
@@ -74,9 +93,10 @@ envia nenhum dado a servidores externos.
   salvos diretamente no seu dispositivo local: na pasta Downloads, por meio do
   recurso de download do navegador, ou, nas exportações automáticas, na pasta
   personalizada que você escolheu, por meio da File System Access API do
-  navegador. As exportações manuais usam um link `<a download>` padrão e não
-  precisam da permissão `downloads`; as exportações automáticas e o arquivo de
-  instantâneo de segurança usam a permissão `downloads`.
+  navegador. As exportações manuais e o arquivo de instantâneo de segurança usam
+  um link `<a download>` padrão e não precisam da permissão `downloads`; somente
+  as exportações automáticas salvas na pasta Downloads usam a permissão
+  `downloads`, que é opcional e solicitada como descrito acima.
 - A extensão armazena suas preferências e configurações locais — como tema,
   opções de exibição, opções de exportação, o modelo de nome de arquivo e a
   configuração da exportação automática — usando o armazenamento local do
@@ -109,21 +129,23 @@ envia nenhum dado a servidores externos.
 O Snug solicita as seguintes permissões do navegador, cada uma usada apenas para
 a finalidade descrita:
 
-| Permissão          | Finalidade                                                                                                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Ler e gravar os favoritos do seu navegador para permitir a importação e a exportação.                                                                                           |
-| `favicon`          | Exibir os ícones dos sites ao lado dos favoritos por meio da API `_favicon` integrada ao navegador.                                                                             |
-| `storage`          | Salvar suas preferências e configurações locais no seu dispositivo.                                                                                                             |
-| `alarms`           | Agendar e disparar as exportações automáticas de favoritos no intervalo configurado.                                                                                            |
-| `downloads`        | Salvar no seu dispositivo as exportações automáticas e os arquivos de instantâneo de segurança, e excluir os arquivos de exportação automática antigos do Snug (Retenção).      |
-| `notifications`    | Mostrar uma notificação no seu dispositivo quando uma exportação automática falhar. Você pode desativá-la.                                                                      |
-| `unlimitedStorage` | Manter no seu dispositivo os cinco instantâneos de segurança mais recentes dos seus favoritos, que podem ser grandes em bibliotecas extensas.                                   |
-| `offscreen`        | Criar um documento oculto de curta duração para que uma exportação automática seja convertida em um arquivo para download. Ele não tem interface e não carrega conteúdo remoto. |
+| Permissão          | Finalidade                                                                                                                                                                                                                                                                                            |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Ler e gravar os favoritos do seu navegador para permitir a importação e a exportação.                                                                                                                                                                                                                 |
+| `favicon`          | Exibir os ícones dos sites ao lado dos favoritos por meio da API `_favicon` integrada ao navegador.                                                                                                                                                                                                   |
+| `storage`          | Salvar suas preferências e configurações locais no seu dispositivo.                                                                                                                                                                                                                                   |
+| `alarms`           | Agendar e disparar as exportações automáticas de favoritos no intervalo configurado.                                                                                                                                                                                                                  |
+| `downloads`        | Opcional. Solicitada quando você ativa a exportação automática com o destino Downloads, muda o destino para Downloads ou usa “Exportar agora” sem acesso a Downloads. Salvar as exportações automáticas na pasta Downloads e excluir os arquivos de exportação automática antigos do Snug (Retenção). |
+| `notifications`    | Opcional. Solicitada somente quando você ativa as notificações de falha. Mostrar uma notificação no seu dispositivo quando uma exportação automática falhar. Você pode desativá-la.                                                                                                                   |
+| `unlimitedStorage` | Manter no seu dispositivo os cinco instantâneos de segurança mais recentes dos seus favoritos, que podem ser grandes em bibliotecas extensas.                                                                                                                                                         |
+| `offscreen`        | Criar um documento oculto de curta duração para que uma exportação automática seja convertida em um arquivo para download. Ele não tem interface e não carrega conteúdo remoto.                                                                                                                       |
 
 ## Serviços de terceiros
 
 Nossa extensão não se integra a nenhum serviço de terceiros nem ferramenta de
-análise, nem os utiliza.
+análise, nem os utiliza. A única exceção é a página de despedida do nosso site,
+que usa o Umami (sem cookies) conforme descrito acima em “Página de
+desinstalação”.
 
 ## Alterações nesta Política de Privacidade
 

@@ -19,28 +19,28 @@ Snapshot of
 `https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/efknehclgcncocgochoibgiiagklcnho`,
 taken on 2026-10-07.
 
-| Field          | Live listing                                                                                    | This pack                                                                                  |
-| -------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Name           | `Bookmark Import/Export` (old name)                                                             | `Snug: Bookmark Export, Import & Backup`                                                   |
-| Version        | 1.0.0 (last update 2024-08-09)                                                                  | 2.2.0                                                                                      |
-| Permissions    | 2: `bookmarks`, `favicon`                                                                       | 8: adds `storage`, `alarms`, `downloads`, `offscreen`, `unlimitedStorage`, `notifications` |
-| Category       | Productivity                                                                                    | Productivity (unchanged)                                                                   |
-| Search terms   | 7 terms, all bookmark-related                                                                   | 7 terms, 21 words or fewer                                                                 |
-| Privacy URL    | `https://github.com/AndryOre/bookmarks-import-export/blob/main/PRIVACY_POLICY.md`               | `https://snug.andryore.dev/privacy/`                                                       |
-| Website        | `https://github.com/AndryOre/bookmarks-import-export` (old repository slug)                     | `https://snug.andryore.dev/`                                                               |
-| Support        | `https://github.com/AndryOre/bookmarks-import-export/issues` (old slug, inside the description) | `https://github.com/AndryOre/snug/issues`                                                  |
-| Languages      | 1 (`en-US`)                                                                                     | 10                                                                                         |
-| Screenshots    | 5, old product                                                                                  | up to 6, new set                                                                           |
-| Videos         | none                                                                                            | none                                                                                       |
-| Rating / users | 0 ratings, 694 active installs                                                                  | not applicable                                                                             |
+| Field          | Live listing                                                                                    | This pack                                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Name           | `Bookmark Import/Export` (old name)                                                             | `Snug: Bookmark Export, Import & Backup`                                                                    |
+| Version        | 1.0.0 (last update 2024-08-09)                                                                  | 2.2.0                                                                                                       |
+| Permissions    | 2: `bookmarks`, `favicon`                                                                       | 8: adds `storage`, `alarms`, `offscreen`, `unlimitedStorage`, and the optional `downloads`, `notifications` |
+| Category       | Productivity                                                                                    | Productivity (unchanged)                                                                                    |
+| Search terms   | 7 terms, all bookmark-related                                                                   | 7 terms, 21 words or fewer                                                                                  |
+| Privacy URL    | `https://github.com/AndryOre/bookmarks-import-export/blob/main/PRIVACY_POLICY.md`               | `https://snug.andryore.dev/privacy/`                                                                        |
+| Website        | `https://github.com/AndryOre/bookmarks-import-export` (old repository slug)                     | `https://snug.andryore.dev/`                                                                                |
+| Support        | `https://github.com/AndryOre/bookmarks-import-export/issues` (old slug, inside the description) | `https://github.com/AndryOre/snug/issues`                                                                   |
+| Languages      | 1 (`en-US`)                                                                                     | 10                                                                                                          |
+| Screenshots    | 5, old product                                                                                  | up to 6, new set                                                                                            |
+| Videos         | none                                                                                            | none                                                                                                        |
+| Rating / users | 0 ratings, 694 active installs                                                                  | not applicable                                                                                              |
 
 What this means:
 
-1. **Permission increase.** Going from 2 to 8 permissions makes Edge show a
-   permission-increase prompt to the 694 current users, and the extension stays
-   disabled for each of them until they accept it. Expect some attrition. The
-   justifications below keep each permission specific and tied to a visible
-   feature.
+1. **Permission increase.** Going from 2 to 8 permissions (6 required, 2
+   optional) makes Edge show a permission-increase prompt to the 694 current
+   users, and the extension stays disabled for each of them until they accept
+   it. Expect some attrition. The justifications below keep each permission
+   specific and tied to a visible feature.
 2. **Rename.** The live name and description describe the old product. The name
    comes from the manifest (`extensionManifestName`), so the new package carries
    it. Replace the description in every locale.
@@ -322,10 +322,12 @@ Snug helps people keep their bookmarks portable and safe: export, import, back u
 
 ### Permission justifications
 
-One justification per permission declared in `wxt.config.ts`: 8 in total. The
-text is the Chrome Web Store text from [`../README.md`](../README.md), which
-already names no browser; the `notifications` entry adds the opt-out sentence.
-The code that uses each permission is listed in that file.
+One justification per permission declared in `wxt.config.ts`: 8 in total, of
+which `downloads` and `notifications` are optional (requested when the user
+turns on Auto-export to Downloads or the failure notification). The text is the
+Chrome Web Store text from [`../README.md`](../README.md), which already names
+no browser; the `notifications` entry adds the opt-out sentence. The code that
+uses each permission is listed in that file.
 
 `bookmarks` (598 chars):
 
@@ -357,10 +359,10 @@ Before a replace import, Snug saves a safety snapshot of the user's bookmarks in
 Snug uses one alarm to run the backup schedule the user configured, for example hourly, daily or weekly. The alarm wakes the extension at the chosen time so it can export bookmarks to the Downloads folder or the folder the user chose. There is no alarm unless the user turns scheduled backups on.
 ```
 
-`downloads` (380 chars):
+`downloads` (optional, 522 chars):
 
 ```text
-Snug saves scheduled backups and manual Export now runs to the user's Downloads folder, in a configurable subfolder. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. With Retention on, it removes only the oldest backup files that Snug itself saved. It only downloads files generated on the device from the user's own bookmarks.
+This permission is optional. Snug asks for it only when the user turns on scheduled backups to the Downloads folder or runs Export now there. Snug saves scheduled backups and manual Export now runs to the user's Downloads folder, in a configurable subfolder. A run saved to a folder the user chose uses the File System Access API and needs no extra permission. With Retention on, it removes only the oldest backup files that Snug itself saved. It only downloads files generated on the device from the user's own bookmarks.
 ```
 
 `offscreen` (307 chars):
@@ -369,10 +371,10 @@ Snug saves scheduled backups and manual Export now runs to the user's Downloads 
 Snug creates a short-lived offscreen document to turn an exported bookmark file into a Blob URL, because a service worker cannot create one and a data URL is too large for big bookmark libraries. The document is created for the download and closed when it finishes. It has no UI and loads no remote content.
 ```
 
-`notifications` (323 chars):
+`notifications` (optional, 423 chars):
 
 ```text
-Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed. The user can turn this notification off in the Auto-export settings and the extension keeps working.
+This permission is optional. Snug asks for it only when the user turns on the failure notification. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed. The user can turn this notification off in the Auto-export settings and the extension keeps working.
 ```
 
 Partner Center sits behind a web application firewall that answers `403` to some
@@ -435,7 +437,7 @@ Snug makes no network requests and loads no remote code. All data stays on the d
    content off.
 7. **Availability page.** Free, public, all markets (confirm unchanged).
 8. **Packages page.** Upload the Edge zip. Confirm the 8 permissions are
-   detected.
+   detected (6 required, `downloads` and `notifications` optional).
 9. **Store listings page, per language.** Add each locale and paste its
    description, then the search terms, website URL, support URL, logo,
    screenshots, small tile and large tile:

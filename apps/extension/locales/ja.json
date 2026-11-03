@@ -1513,5 +1513,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "アクセスが許可されませんでした。許可するまで自動エクスポートは保存できません。",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug にダウンロードフォルダーへの保存を許可してください",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "許可するまで自動エクスポートは実行されません。すでに保存したファイルには影響しません。",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "権限が許可されなかったため、自動エクスポートはオフのままです。いつでもオンに戻せます。",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "通知はオフのままです。失敗した実行はステータスに表示されます。",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "権限が許可されなかったため、保存先は変更されていません。",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "今すぐエクスポートにはダウンロードフォルダーへの保存の許可が必要ですが、許可されませんでした。",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "バックアップを続けるには、ダウンロードへのアクセスを許可してください",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "自動エクスポートを開く",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

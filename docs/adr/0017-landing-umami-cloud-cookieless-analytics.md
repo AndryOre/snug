@@ -7,11 +7,18 @@ Accepted. Partly supersedes
 its "no third-party scripts" and "no analytics" clauses no longer hold for
 `apps/site`. The extension clause (no analytics inside the extension, now or
 later) and the access-log and `/install` redirect measurement still stand.
+Partly superseded by
+[0029](0029-goodbye-page-with-non-identifying-parameters.md): the Goodbye page
+reads non-identifying parameters from the uninstall URL.
 
 Date: 2026-10-08
 
 Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
 recorded on both sides.
+
+Revised: 2026-11-03, the Goodbye page adds Umami attribute events and reads
+three non-identifying URL parameters (see ADR 0029). The extension still has no
+analytics.
 
 ## Context
 

@@ -1513,5 +1513,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "Доступ не был разрешён. Автоэкспорт не сможет сохранять, пока вы его не разрешите.",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug нужно разрешение на сохранение в «Загрузки»",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "Автоэкспорт не запустится, пока вы не разрешите. Уже сохранённые файлы это не затронет.",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "Автоэкспорт остаётся выключенным, так как разрешение не было получено. Вы можете включить его снова в любое время.",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "Уведомления остаются выключенными. Неудачный запуск по-прежнему будет виден в статусе.",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "Место сохранения не изменилось, так как разрешение не было получено.",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "Для кнопки «Экспортировать сейчас» нужно разрешение на сохранение в «Загрузки», но оно не было получено.",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "Разрешите доступ к «Загрузкам», чтобы резервное копирование продолжалось",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "Открыть автоэкспорт",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

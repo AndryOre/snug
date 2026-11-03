@@ -1530,5 +1530,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "No se permitió el acceso. La exportación automática no puede guardar hasta que lo permitas.",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug necesita permiso para guardar en Descargas",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "La exportación automática no puede ejecutarse hasta que lo permitas. Los archivos que ya guardaste no se ven afectados.",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "La exportación automática sigue desactivada porque no se concedió el permiso. Puedes activarla de nuevo cuando quieras.",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "Las notificaciones siguen desactivadas. Una ejecución fallida seguirá apareciendo en el estado.",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "El destino se mantiene como estaba porque no se concedió el permiso.",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "Exportar ahora necesita permiso para guardar en Descargas y no se concedió.",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "Permite el acceso a Descargas para seguir haciendo copias",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "Abrir exportación automática",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

@@ -214,7 +214,7 @@ relative to `apps/extension/` unless it starts with `packages/`.
   normalization to drop bookmarks that already exist (never in Restore-replace),
   and `import-duplicates.ts` summarizes the effect for the Import page.
 - **`safety-snapshot.ts`** — captures the two roots, saves them as a JSON file
-  through the offscreen download and keeps a list of snapshots, newest first and
+  through an `<a download>` link and keeps a list of snapshots, newest first and
   capped at five, in `local:safetySnapshot` (a WXT version 2 migration turned
   the old single item into a list). It restores or downloads a snapshot by
   `takenAt` and offers `takeSafetySnapshot` for the manual "take now". See
@@ -254,9 +254,14 @@ relative to `apps/extension/` unless it starts with `packages/`.
   single one-shot `browser.alarms` alarm — not `periodInMinutes`, which drifts
   across DST — armed at the next due time; `computeNextRun`, the pure function
   behind that due time) and the run itself (`runAutoExport`, which calls the
-  three exporters, saves each result to Downloads (`browser.downloads.download`)
+  three exporters, saves each result to Downloads (`browser.downloads.download`,
+  only with Downloads access, else the run fails with `downloads-access-needed`)
   or the Custom folder, records the outcome, and reschedules). See Data flows
   for the full next-run-store/ catch-up/badge model.
+- **`permission-access.ts`** — typed wrapper over `browser.permissions` for
+  Downloads access and Notification access (check, request, added, removed).
+  `uninstall-url.ts` builds and registers the Goodbye page uninstall URL (see
+  [ADR 0029](adr/0029-goodbye-page-with-non-identifying-parameters.md)).
 - **`storage.ts`** — every persisted setting and its default, as
   `storage.defineItem` calls from `wxt`'s storage wrapper.
 - **`use-storage-item.ts`** — a React hook that subscribes an exported store to
@@ -338,8 +343,9 @@ API surface available differs between them:
 
 - **The service worker** (`background.ts`) has no `window`, no `document`, and
   is torn down and restarted freely by Chrome between events. It can call
-  `chrome.bookmarks`, `chrome.alarms`, `chrome.downloads`,
-  `chrome.notifications`, and `chrome.storage`, but has no DOM.
+  `chrome.bookmarks`, `chrome.alarms`, `chrome.storage`, and, once the user
+  grants the optional Downloads access and Notification access,
+  `chrome.downloads` and `chrome.notifications`, but has no DOM.
 - **Extension pages** (the popup and the App) are ordinary web pages with a full
   DOM, rendered as React trees.
 - **The offscreen document** (`entrypoints/offscreen`) is an unlisted, hidden
@@ -451,9 +457,11 @@ from the history without deleting anything, and runs without access stay for the
 next run. A missing file is skipped, `0` keeps everything, and a failed run
 deletes nothing. On any failed run, manual included, `notifyAutoExportFailure`
 shows the Failure notification (fixed id, so repeats replace it) unless the user
-turned it off; the background's `notifications.onClicked` listener opens the
-Auto-export page. The interval can be hourly, 12 hours, daily, 3 days or weekly
-(`7d`, on `dayOfWeek`).
+turned it off or Notification access is missing; the background attaches its
+`notifications.onClicked` listener, which opens the Auto-export page, only while
+that access is granted. Retention skips Downloads files without Downloads access
+and retries on the next run. The interval can be hourly, 12 hours, daily, 3 days
+or weekly (`7d`, on `dayOfWeek`).
 
 **Custom folder** (background service worker): with the `folder` Export
 destination, `runAutoExport` does not download. `requireGrantedFolder` loads the
@@ -515,7 +523,8 @@ for the same condition, ahead of next run and last failed, and the status item's
   snapshot that holds any bookmarks is never evicted, so empty captures cannot
   push out the last useful one. Restoring or downloading targets a snapshot by
   `takenAt`, and restoring takes a fresh snapshot of the current bookmarks
-  first. Snapshots stay local and need no extra permission.
+  first. Snapshots stay local and need no extra permission, not even `downloads`
+  (see [ADR 0030](adr/0030-optional-downloads-and-notification-access.md)).
 - An Import batch is all-or-nothing: it holds the import lock for the whole
   batch and uses one writer and one rollback scope, so a cancel or a failure in
   any file leaves the bookmarks as they were before the batch started. A batch

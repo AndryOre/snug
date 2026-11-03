@@ -1513,5 +1513,37 @@
   "autoExportPage_folderAccessRefused": {
     "message": "未允许访问。在你允许之前，自动导出无法保存。",
     "description": "Alert body after the user declined the Folder access request"
+  },
+  "autoExportPage_downloadsAccessTitle": {
+    "message": "Snug 需要获得保存到“下载”的权限",
+    "description": "Title of the alert shown when Downloads access is missing"
+  },
+  "autoExportPage_downloadsAccessDescription": {
+    "message": "在你允许之前，自动导出无法运行。已保存的文件不受影响。",
+    "description": "Alert body when Downloads access is missing"
+  },
+  "autoExportPage_accessDeniedEnable": {
+    "message": "由于未授予权限，自动导出保持关闭。你可以随时重新开启。",
+    "description": "Inline message after the user declined the permission request when turning on Auto-export"
+  },
+  "autoExportPage_accessDeniedNotify": {
+    "message": "通知保持关闭。失败的运行仍会显示在状态中。",
+    "description": "Inline message after the user declined Notification access for the failure notification switch"
+  },
+  "autoExportPage_accessDeniedDestination": {
+    "message": "由于未授予权限，保存位置保持不变。",
+    "description": "Inline message after the user declined Downloads access when switching the destination to Downloads"
+  },
+  "autoExportPage_accessDeniedExport": {
+    "message": "立即导出需要保存到“下载”的权限，但未被授予。",
+    "description": "Inline message after the user declined Downloads access when pressing Export now"
+  },
+  "popup_statusDownloadsAccessTitle": {
+    "message": "请允许访问“下载”，以继续备份",
+    "description": "Popup status item title when Downloads access is missing"
+  },
+  "popup_statusDownloadsAccessAction": {
+    "message": "打开自动导出",
+    "description": "Popup status item button that opens the Auto-export page to allow Downloads access"
   }
 }

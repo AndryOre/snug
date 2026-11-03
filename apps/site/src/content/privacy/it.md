@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 10, 2026
+englishLastUpdated: November 3, 2026
 ---
 
 # Informativa sulla privacy di Snug
 
-Ultimo aggiornamento: 10 ottobre 2026
+Ultimo aggiornamento: 3 novembre 2026
 
 ## Introduzione
 
@@ -17,7 +17,9 @@ browser.
 
 Snug non raccoglie, non memorizza e non trasmette alcuna informazione personale
 sui propri utenti. La nostra estensione funziona interamente all'interno del tuo
-browser e non invia alcun dato a server esterni.
+browser e non invia i tuoi segnalibri né le tue impostazioni a server esterni.
+L'unico contatto di rete è la pagina di addio facoltativa descritta più avanti
+in «Pagina di disinstallazione».
 
 ### Dati dei segnalibri
 
@@ -67,6 +69,23 @@ browser e non invia alcun dato a server esterni.
   di sistema sul tuo dispositivo con il motivo. Puoi disattivarla nella pagina
   Esportazione automatica. Le esportazioni riuscite non generano mai notifiche e
   nessun contenuto delle notifiche lascia il tuo dispositivo.
+- Permessi facoltativi: i permessi `downloads` e `notifications` sono
+  facoltativi. Snug richiede `downloads` quando attivi l'esportazione automatica
+  con la destinazione Download, quando imposti la destinazione su Download o
+  quando usi «Esporta ora» senza accesso a Download, e `notifications` solo
+  quando attivi le notifiche di errore. Se rifiuti, la funzione resta
+  disattivata e non cambia nient'altro.
+
+### Pagina di disinstallazione
+
+- Quando disinstalli Snug, il browser apre una pagina di addio all'indirizzo
+  `https://snug.andryore.dev/goodbye/`. L'indirizzo che Snug registra a tal fine
+  contiene tre valori: la versione dell'estensione, la tua lingua e se i backup
+  programmati sono attivi (`?lang=<code>&v=<version>&ae=<0|1>`). Non contiene
+  alcun identificatore né alcuno dei tuoi segnalibri.
+- La pagina di addio usa Umami, un servizio di analisi senza cookie, per contare
+  la visita e il motivo su cui fai clic. Non imposta cookie. Scegliere un motivo
+  è facoltativo.
 
 ## Archiviazione dei dati
 
@@ -76,10 +95,11 @@ browser e non invia alcun dato a server esterni.
   salvati direttamente sul tuo dispositivo locale: nella cartella Download
   tramite la funzione di download del browser oppure, per le esportazioni
   automatiche, nella cartella personalizzata che hai scelto tramite la File
-  System Access API del browser. Le esportazioni manuali usano un normale link
-  `<a download>` e non richiedono il permesso `downloads`; le esportazioni
-  automatiche e il file dell'istantanea di sicurezza usano il permesso
-  `downloads`.
+  System Access API del browser. Le esportazioni manuali e il file
+  dell'istantanea di sicurezza usano un normale link `<a download>` e non
+  richiedono il permesso `downloads`; solo le esportazioni automatiche salvate
+  nella cartella Download usano il permesso `downloads`, che è facoltativo e
+  viene richiesto come descritto sopra.
 - L'estensione memorizza le tue preferenze e impostazioni locali — come il tema,
   le opzioni di visualizzazione, le opzioni di esportazione, il modello del nome
   del file e la configurazione dell'esportazione automatica — usando
@@ -113,21 +133,23 @@ browser e non invia alcun dato a server esterni.
 Snug richiede i seguenti permessi del browser, ciascuno usato esclusivamente per
 lo scopo descritto:
 
-| Permesso           | Scopo                                                                                                                                                                               |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Leggere e scrivere i segnalibri del tuo browser per supportare l'importazione e l'esportazione.                                                                                     |
-| `favicon`          | Mostrare le icone dei siti accanto ai segnalibri tramite l'API `_favicon` integrata nel browser.                                                                                    |
-| `storage`          | Salvare le tue preferenze e impostazioni locali sul tuo dispositivo.                                                                                                                |
-| `alarms`           | Pianificare e avviare le esportazioni automatiche dei segnalibri con l'intervallo configurato.                                                                                      |
-| `downloads`        | Salvare sul tuo dispositivo le esportazioni automatiche e i file delle istantanee di sicurezza, ed eliminare i vecchi file di esportazione automatica di Snug (Conservazione).      |
-| `notifications`    | Mostrare una notifica sul tuo dispositivo quando un'esportazione automatica non riesce. Puoi disattivarla.                                                                          |
-| `unlimitedStorage` | Conservare sul tuo dispositivo le ultime cinque istantanee di sicurezza dei tuoi segnalibri, che possono essere grandi per le raccolte voluminose.                                  |
-| `offscreen`        | Creare un documento nascosto di breve durata affinché un'esportazione automatica possa essere trasformata in un file scaricabile. Non ha interfaccia e non carica contenuti remoti. |
+| Permesso           | Scopo                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Leggere e scrivere i segnalibri del tuo browser per supportare l'importazione e l'esportazione.                                                                                                                                                                                                                           |
+| `favicon`          | Mostrare le icone dei siti accanto ai segnalibri tramite l'API `_favicon` integrata nel browser.                                                                                                                                                                                                                          |
+| `storage`          | Salvare le tue preferenze e impostazioni locali sul tuo dispositivo.                                                                                                                                                                                                                                                      |
+| `alarms`           | Pianificare e avviare le esportazioni automatiche dei segnalibri con l'intervallo configurato.                                                                                                                                                                                                                            |
+| `downloads`        | Facoltativo. Richiesto quando attivi l'esportazione automatica con la destinazione Download, imposti la destinazione su Download o usi «Esporta ora» senza accesso a Download. Salvare le esportazioni automatiche nella cartella Download ed eliminare i vecchi file di esportazione automatica di Snug (Conservazione). |
+| `notifications`    | Facoltativo. Richiesto solo quando attivi le notifiche di errore. Mostrare una notifica sul tuo dispositivo quando un'esportazione automatica non riesce. Puoi disattivarla.                                                                                                                                              |
+| `unlimitedStorage` | Conservare sul tuo dispositivo le ultime cinque istantanee di sicurezza dei tuoi segnalibri, che possono essere grandi per le raccolte voluminose.                                                                                                                                                                        |
+| `offscreen`        | Creare un documento nascosto di breve durata affinché un'esportazione automatica possa essere trasformata in un file scaricabile. Non ha interfaccia e non carica contenuti remoti.                                                                                                                                       |
 
 ## Servizi di terze parti
 
 La nostra estensione non si integra con alcun servizio di terze parti né
-strumento di analisi, e non ne utilizza.
+strumento di analisi, e non ne utilizza. L'unica eccezione è la pagina di addio
+del nostro sito web, che usa Umami (senza cookie) come descritto sopra in
+«Pagina di disinstallazione».
 
 ## Modifiche alla presente Informativa sulla privacy
 

@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 10, 2026
+englishLastUpdated: November 3, 2026
 ---
 
 # Datenschutzerklärung von Snug
 
-Zuletzt aktualisiert: 10. Oktober 2026
+Zuletzt aktualisiert: 3. November 2026
 
 ## Einleitung
 
@@ -16,8 +16,10 @@ weitergeben.
 ## Erhebung und Verwendung von Informationen
 
 Snug erhebt, speichert oder überträgt keine personenbezogenen Daten seiner
-Nutzer. Unsere Erweiterung läuft vollständig in deinem Browser und sendet keine
-Daten an externe Server.
+Nutzer. Unsere Erweiterung läuft vollständig in deinem Browser und sendet weder
+deine Lesezeichen noch deine Einstellungen an externe Server. Der einzige
+Netzwerkkontakt ist die optionale Abschiedsseite, die unter
+„Deinstallationsseite“ weiter unten beschrieben wird.
 
 ### Lesezeichendaten
 
@@ -66,6 +68,23 @@ Daten an externe Server.
   deinem Gerät eine Systembenachrichtigung mit dem Grund an. Du kannst sie auf
   der Seite Auto-Export deaktivieren. Erfolgreiche Exporte benachrichtigen nie,
   und kein Inhalt der Benachrichtigungen verlässt dein Gerät.
+- Optionale Berechtigungen: Die Berechtigungen `downloads` und `notifications`
+  sind optional. Snug fordert `downloads` an, wenn du den automatischen Export
+  mit dem Ziel Downloads aktivierst, wenn du das Ziel auf Downloads umstellst
+  oder wenn du „Jetzt exportieren“ ohne Zugriff auf Downloads verwendest, und
+  `notifications` nur, wenn du Benachrichtigungen bei Fehlern aktivierst. Lehnst
+  du ab, bleibt die Funktion ausgeschaltet und sonst ändert sich nichts.
+
+### Deinstallationsseite
+
+- Wenn du Snug deinstallierst, öffnet dein Browser eine Abschiedsseite unter
+  `https://snug.andryore.dev/goodbye/`. Die Adresse, die Snug dafür hinterlegt,
+  enthält drei Werte: die Version der Erweiterung, deine Sprache und ob geplante
+  Backups aktiviert sind (`?lang=<code>&v=<version>&ae=<0|1>`). Sie enthält
+  keine Kennung und keine deiner Lesezeichen.
+- Die Abschiedsseite verwendet Umami, einen Analysedienst ohne Cookies, um den
+  Besuch und den Grund zu zählen, auf den du klickst. Sie setzt keine Cookies.
+  Einen Grund auszuwählen ist freiwillig.
 
 ## Datenspeicherung
 
@@ -75,10 +94,11 @@ Daten an externe Server.
   auf deinem lokalen Gerät gespeichert: in deinem Download-Ordner über die
   Download-Funktion deines Browsers oder, bei automatischen Exporten, in dem
   benutzerdefinierten Ordner, den du gewählt hast, über die File System Access
-  API des Browsers. Manuelle Exporte verwenden einen Standard-Link
-  `<a download>` und benötigen die Berechtigung `downloads` nicht; automatische
-  Exporte und die Sicherheits-Snapshot-Datei verwenden die Berechtigung
-  `downloads`.
+  API des Browsers. Manuelle Exporte und die Sicherheits-Snapshot-Datei
+  verwenden einen Standard-Link `<a download>` und benötigen die Berechtigung
+  `downloads` nicht; nur automatische Exporte, die in deinem Download-Ordner
+  gespeichert werden, verwenden die Berechtigung `downloads`, die optional ist
+  und wie oben beschrieben angefordert wird.
 - Die Erweiterung speichert deine lokalen Einstellungen und Präferenzen, etwa
   das Design, Anzeigeoptionen, Exportoptionen, die Dateinamenvorlage und deine
   Einstellungen für den automatischen Export, im lokalen Speicher des Browsers
@@ -112,21 +132,23 @@ Daten an externe Server.
 Snug fordert die folgenden Browser-Berechtigungen an, die jeweils nur für den
 beschriebenen Zweck verwendet werden:
 
-| Berechtigung       | Zweck                                                                                                                                                                                        |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Die Lesezeichen deines Browsers lesen und schreiben, um Import und Export zu ermöglichen.                                                                                                    |
-| `favicon`          | Website-Symbole neben den Lesezeichen über die im Browser integrierte `_favicon`-API anzeigen.                                                                                               |
-| `storage`          | Deine lokalen Einstellungen und Präferenzen auf deinem Gerät speichern.                                                                                                                      |
-| `alarms`           | Automatische Lesezeichen-Exporte im konfigurierten Intervall planen und auslösen.                                                                                                            |
-| `downloads`        | Automatische Exporte und Sicherheits-Snapshot-Dateien auf deinem Gerät speichern und alte Auto-Export-Dateien von Snug löschen (Aufbewahrung).                                               |
-| `notifications`    | Eine Benachrichtigung auf deinem Gerät anzeigen, wenn ein automatischer Export fehlschlägt. Du kannst sie deaktivieren.                                                                      |
-| `unlimitedStorage` | Die fünf neuesten Sicherheits-Snapshots deiner Lesezeichen auf deinem Gerät behalten, die bei großen Bibliotheken umfangreich sein können.                                                   |
-| `offscreen`        | Ein kurzlebiges verstecktes Dokument erstellen, damit ein automatischer Export in eine herunterladbare Datei umgewandelt werden kann. Es hat keine Oberfläche und lädt keine Remote-Inhalte. |
+| Berechtigung       | Zweck                                                                                                                                                                                                                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Die Lesezeichen deines Browsers lesen und schreiben, um Import und Export zu ermöglichen.                                                                                                                                                                                                                        |
+| `favicon`          | Website-Symbole neben den Lesezeichen über die im Browser integrierte `_favicon`-API anzeigen.                                                                                                                                                                                                                   |
+| `storage`          | Deine lokalen Einstellungen und Präferenzen auf deinem Gerät speichern.                                                                                                                                                                                                                                          |
+| `alarms`           | Automatische Lesezeichen-Exporte im konfigurierten Intervall planen und auslösen.                                                                                                                                                                                                                                |
+| `downloads`        | Optional. Wird angefordert, wenn du den automatischen Export mit dem Ziel Downloads aktivierst, das Ziel auf Downloads umstellst oder „Jetzt exportieren“ ohne Zugriff auf Downloads verwendest. Automatische Exporte im Download-Ordner speichern und alte Auto-Export-Dateien von Snug löschen (Aufbewahrung). |
+| `notifications`    | Optional. Wird nur angefordert, wenn du Benachrichtigungen bei Fehlern aktivierst. Eine Benachrichtigung auf deinem Gerät anzeigen, wenn ein automatischer Export fehlschlägt. Du kannst sie deaktivieren.                                                                                                       |
+| `unlimitedStorage` | Die fünf neuesten Sicherheits-Snapshots deiner Lesezeichen auf deinem Gerät behalten, die bei großen Bibliotheken umfangreich sein können.                                                                                                                                                                       |
+| `offscreen`        | Ein kurzlebiges verstecktes Dokument erstellen, damit ein automatischer Export in eine herunterladbare Datei umgewandelt werden kann. Es hat keine Oberfläche und lädt keine Remote-Inhalte.                                                                                                                     |
 
 ## Dienste von Drittanbietern
 
 Unsere Erweiterung bindet keine Dienste oder Analysetools von Drittanbietern ein
-und verwendet sie nicht.
+und verwendet sie nicht. Die einzige Ausnahme ist die Abschiedsseite auf unserer
+Website, die Umami (ohne Cookies) verwendet, wie oben unter
+„Deinstallationsseite“ beschrieben.
 
 ## Änderungen dieser Datenschutzerklärung
 

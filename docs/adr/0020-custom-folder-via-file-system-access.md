@@ -4,13 +4,20 @@
 
 Accepted. Builds on Auto-export;
 [ADR 0008](0008-safety-snapshot-in-extension-storage.md) and
-[ADR 0016](0016-keep-five-safety-snapshots.md) are unchanged: Safety snapshots
-still go to Downloads.
+[ADR 0016](0016-keep-five-safety-snapshots.md) are unchanged by this decision.
+Amended by [0030](0030-optional-downloads-and-notification-access.md): the
+Downloads Export destination now needs Downloads access, requested when the user
+picks it.
 
 Date: 2026-10-10
 
 Revised: 2026-10-21, Status relation wording now uses the linked phrase form,
 recorded on both sides.
+
+Revised: 2026-11-03, Downloads access is optional and requested when the user
+chooses the Downloads destination; the Failure notification needs Notification
+access and is skipped without it (see ADR 0030). Safety snapshot files are saved
+with a download link.
 
 ## Context
 

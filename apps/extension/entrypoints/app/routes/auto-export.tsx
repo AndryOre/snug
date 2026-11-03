@@ -62,6 +62,11 @@ import {
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
+import {
+  AccessInlineMessage,
+  AutoExportAccessAlert,
+  didCommitWithAccess,
+} from '@/components/auto-export-access-alert'
 import { TimePicker } from '@/components/time-picker'
 import {
   readAutoExportLastRun,
@@ -93,6 +98,11 @@ import {
   saveFolderHandle,
 } from '@/lib/folder-handle'
 import { resolveNextRunStatus } from '@/lib/next-run-status'
+import {
+  didUserGrantAccess,
+  hasDownloadsAccess,
+  watchAccessChanges,
+} from '@/lib/permission-access'
 import {
   autoExportConfigStore,
   autoExportLastRunStore,
@@ -178,6 +188,7 @@ interface StatusCardProperties {
   folder: string
   destination: ExportDestination
   isFolderMissing: boolean
+  isDownloadsAccessMissing: boolean
 }
 
 /**
@@ -190,6 +201,8 @@ interface StatusCardProperties {
  * @param properties.destination The Export destination in effect on screen.
  * @param properties.isFolderMissing Whether Custom folder is selected without
  *   a chosen folder, which blocks Export now.
+ * @param properties.isDownloadsAccessMissing Whether the destination is
+ *   Downloads and Downloads access is missing, so Export now asks for it first.
  * @returns The status card element.
  */
 function StatusCard({
@@ -197,12 +210,14 @@ function StatusCard({
   folder,
   destination,
   isFolderMissing,
+  isDownloadsAccessMissing,
 }: StatusCardProperties) {
   const [nextRun] = useStorageItem(autoExportNextRunStore)
   const lastRun = useLastRun()
   const [isRunning, setIsRunning] = useState(false)
+  const [isAccessDenied, setIsAccessDenied] = useState(false)
 
-  const handleExportNow = async () => {
+  const runExport = async () => {
     setIsRunning(true)
     const message: RunManualExportMessage = {
       type: RUN_MANUAL_EXPORT_MESSAGE_TYPE,
@@ -236,6 +251,16 @@ function StatusCard({
     } finally {
       setIsRunning(false)
     }
+  }
+
+  const handleExportNow = async () => {
+    if (!isDownloadsAccessMissing) {
+      setIsAccessDenied(false)
+      await runExport()
+      return
+    }
+    const isGranted = await didCommitWithAccess(['downloads'], runExport)
+    setIsAccessDenied(!isGranted)
   }
 
   let lastRunBadge: React.ReactNode
@@ -306,12 +331,17 @@ function StatusCard({
               </AlertDescription>
             </Alert>
           )}
+          {isAccessDenied && (
+            <AccessInlineMessage>
+              {i18n.t('autoExportPage_accessDeniedExport')}
+            </AccessInlineMessage>
+          )}
         </div>
       </CardContent>
       <CardFooter>
         <Button
           variant="outline"
-          onClick={handleExportNow}
+          onClick={() => void handleExportNow()}
           disabled={isRunning || isFolderMissing}
         >
           {isRunning ? (
@@ -351,6 +381,11 @@ export function AutoExportRoute() {
   const isFolderMissing = destination === 'folder' && folderName === null
   const [folderAccess, setFolderAccess] = useState<FolderAccess | null>(null)
   const [wasAccessRefused, setWasAccessRefused] = useState(false)
+  const [downloadsAccess, setDownloadsAccess] = useState<boolean | null>(null)
+  const [accessMessage, setAccessMessage] = useState<
+    'enable' | 'destination' | 'notify' | null
+  >(null)
+  const [isRequestingEnable, setIsRequestingEnable] = useState(false)
   const hasChosenFolder = folderName !== null
   const accessAlert = resolveFolderAccessAlert({
     isFolderDestination: hasChosenFolder,
@@ -377,6 +412,26 @@ export function AutoExportRoute() {
       window.removeEventListener('focus', onFocus)
     }
   }, [hasChosenFolder, folderName])
+
+  useEffect(() => {
+    let isMounted = true
+    const refresh = async () => {
+      const hasAccess = await hasDownloadsAccess()
+      if (isMounted) setDownloadsAccess(hasAccess)
+    }
+    void refresh()
+    const unwatch = watchAccessChanges((change) => {
+      if (change.permission === 'downloads') {
+        setDownloadsAccess(change.isGranted)
+      }
+    })
+    return () => {
+      isMounted = false
+      unwatch()
+    }
+  }, [])
+  const isDownloadsAccessMissing =
+    destination === 'downloads' && downloadsAccess === false
   const keepLast = config.keepLast ?? 10
   const keepLastText = keepLastDraft ?? String(keepLast)
   const isKeepLastInvalid = parseKeepLast(keepLastText) === null
@@ -396,11 +451,59 @@ export function AutoExportRoute() {
   const changeDestination = async (next: ExportDestination) => {
     if (next === destination) return
     if (next === 'downloads') {
-      await clearFolderHandle()
-      await save({ destination: 'downloads', folderName: null })
+      setAccessMessage(null)
+      const isGranted = await didCommitWithAccess(['downloads'], async () => {
+        await clearFolderHandle()
+        await save({ destination: 'downloads', folderName: null })
+      })
+      if (!isGranted) setAccessMessage('destination')
       return
     }
     await save({ destination: 'folder' })
+  }
+
+  const changeEnabled = async (isEnabled: boolean) => {
+    if (!isEnabled || destination !== 'downloads') {
+      await save({ enabled: isEnabled })
+      return
+    }
+    setAccessMessage(null)
+    setIsRequestingEnable(true)
+    try {
+      const isGranted = await didCommitWithAccess(
+        notifyOnFailure ? ['downloads', 'notifications'] : ['downloads'],
+        () => save({ enabled: true }),
+      )
+      if (isGranted) return
+      if (notifyOnFailure && (await hasDownloadsAccess())) {
+        await setNotifyOnFailure(false)
+        await save({ enabled: true })
+        setAccessMessage('notify')
+        return
+      }
+      setAccessMessage('enable')
+    } finally {
+      setIsRequestingEnable(false)
+    }
+  }
+
+  const changeNotifyOnFailure = async (isOn: boolean) => {
+    if (!isOn) {
+      await setNotifyOnFailure(false)
+      notifySaved()
+      return
+    }
+    setAccessMessage(null)
+    const isGranted = await didCommitWithAccess(['notifications'], async () => {
+      await setNotifyOnFailure(true)
+      notifySaved()
+    })
+    if (!isGranted) setAccessMessage('notify')
+  }
+
+  const allowDownloadsAccess = async () => {
+    const isGranted = await didUserGrantAccess('downloads')
+    setDownloadsAccess(isGranted)
   }
 
   const chooseFolder = async () => {
@@ -459,6 +562,7 @@ export function AutoExportRoute() {
         folder={folder}
         destination={destination}
         isFolderMissing={isFolderMissing}
+        isDownloadsAccessMissing={isDownloadsAccessMissing}
       />
       <Card>
         <CardHeader>
@@ -478,12 +582,32 @@ export function AutoExportRoute() {
                   {i18n.t('enableAutoExportDescription')}
                 </FieldDescription>
               </FieldContent>
-              <Switch
-                id="auto-export-enabled"
-                checked={config.enabled}
-                onCheckedChange={(enabled) => save({ enabled })}
-              />
+              <div className="flex items-center gap-2">
+                {isRequestingEnable && <Spinner />}
+                <Switch
+                  id="auto-export-enabled"
+                  checked={config.enabled || isRequestingEnable}
+                  aria-busy={isRequestingEnable || undefined}
+                  disabled={isRequestingEnable}
+                  onCheckedChange={(isEnabled) => void changeEnabled(isEnabled)}
+                />
+              </div>
             </Field>
+
+            {config.enabled && isDownloadsAccessMissing && (
+              <AutoExportAccessAlert
+                onAllow={() => void allowDownloadsAccess()}
+              />
+            )}
+
+            {(accessMessage === 'enable' ||
+              accessMessage === 'destination') && (
+              <AccessInlineMessage>
+                {accessMessage === 'enable'
+                  ? i18n.t('autoExportPage_accessDeniedEnable')
+                  : i18n.t('autoExportPage_accessDeniedDestination')}
+              </AccessInlineMessage>
+            )}
 
             <FieldSet data-disabled={isOff || undefined} disabled={isOff}>
               <FieldLegend variant="label">
@@ -768,12 +892,15 @@ export function AutoExportRoute() {
               <Switch
                 id="auto-export-notify-on-failure"
                 checked={notifyOnFailure}
-                onCheckedChange={async (next) => {
-                  await setNotifyOnFailure(next)
-                  notifySaved()
-                }}
+                onCheckedChange={(isOn) => void changeNotifyOnFailure(isOn)}
               />
             </Field>
+
+            {accessMessage === 'notify' && (
+              <AccessInlineMessage>
+                {i18n.t('autoExportPage_accessDeniedNotify')}
+              </AccessInlineMessage>
+            )}
           </FieldGroup>
         </CardContent>
       </Card>
