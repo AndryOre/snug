@@ -66,7 +66,6 @@ export interface GoodbyeCopy {
   question: string
   reasons: Record<GoodbyeReasonId, string>
   replies: Record<GoodbyeReasonId, string>
-  replyLabel: string
   reinstall: string
   featureLink: string
   bugLink: string
@@ -110,7 +109,7 @@ export const GOODBYE_COPY_EN: GoodbyeCopy = {
     'didnt-recognize':
       'Snug, formerly Bookmarks Import & Export, is the same extension with a new name and icon. Your bookmarks were never touched.',
     permissions:
-      'Snug asks to save backups to Downloads and to notify you if one fails. Both are optional now and everything stays on your device.',
+      'Snug needs the bookmarks permission to read and restore your bookmarks. It also asks to save backups to Downloads and to notify you if one fails. Those two are optional now and everything stays on your device.',
     'one-time': 'Your files are yours. Come back anytime.',
     'missing-feature':
       'Thanks for telling us. Describe the feature you need and we will read it.',
@@ -118,7 +117,6 @@ export const GOODBYE_COPY_EN: GoodbyeCopy = {
     switched: 'Thanks for telling us. We wish you well with it.',
     other: 'Thanks for telling us. Write to us if you want to say more.',
   },
-  replyLabel: 'Our reply',
   reinstall: 'Reinstall Snug',
   featureLink: 'Request a feature on GitHub',
   bugLink: 'Report a bug on GitHub',
@@ -163,7 +161,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug, früher Bookmarks Import & Export, ist dieselbe Erweiterung mit neuem Namen und Icon. Deine Lesezeichen wurden nie angerührt.',
       permissions:
-        'Snug bittet darum, Backups in Downloads zu speichern und dich zu benachrichtigen, wenn eines fehlschlägt. Beides ist jetzt optional, und alles bleibt auf deinem Gerät.',
+        'Snug braucht die Lesezeichen-Berechtigung, um deine Lesezeichen zu lesen und wiederherzustellen. Außerdem bittet es darum, Backups in Downloads zu speichern und dich zu benachrichtigen, wenn eines fehlschlägt. Diese beiden sind jetzt optional, und alles bleibt auf deinem Gerät.',
       'one-time': 'Deine Dateien gehören dir. Komm jederzeit zurück.',
       'missing-feature':
         'Danke für den Hinweis. Beschreibe die Funktion, die du brauchst, wir lesen es.',
@@ -171,7 +169,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       switched: 'Danke für den Hinweis. Wir wünschen dir viel Erfolg damit.',
       other: 'Danke für den Hinweis. Schreib uns, wenn du mehr sagen möchtest.',
     },
-    replyLabel: 'Unsere Antwort',
     reinstall: 'Snug neu installieren',
     featureLink: 'Funktion auf GitHub vorschlagen',
     bugLink: 'Fehler auf GitHub melden',
@@ -211,7 +208,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug, antes Bookmarks Import & Export, es la misma extensión con un nuevo nombre e icono. Tus marcadores nunca se tocaron.',
       permissions:
-        'Snug pide guardar copias en Descargas y avisarte si una falla. Ambos permisos ahora son opcionales y todo permanece en tu dispositivo.',
+        'Snug necesita el permiso de marcadores para leer y restaurar tus marcadores. También pide guardar copias en Descargas y avisarte si una falla. Esos dos permisos ahora son opcionales y todo permanece en tu dispositivo.',
       'one-time': 'Tus archivos son tuyos. Vuelve cuando quieras.',
       'missing-feature':
         'Gracias por avisarnos. Describe la función que necesitas y la leeremos.',
@@ -219,7 +216,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       switched: 'Gracias por avisarnos. Te deseamos lo mejor con ella.',
       other: 'Gracias por avisarnos. Escríbenos si quieres contarnos más.',
     },
-    replyLabel: 'Nuestra respuesta',
     reinstall: 'Reinstalar Snug',
     featureLink: 'Solicitar una función en GitHub',
     bugLink: 'Reportar un error en GitHub',
@@ -260,7 +256,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug, anciennement Bookmarks Import & Export, est la même extension avec un nouveau nom et une nouvelle icône. Vos favoris n’ont jamais été touchés.',
       permissions:
-        'Snug demande à enregistrer les sauvegardes dans Téléchargements et à vous prévenir en cas d’échec. Les deux sont désormais facultatifs et tout reste sur votre appareil.',
+        'Snug a besoin de l’autorisation sur les favoris pour lire et restaurer vos favoris. Il demande aussi à enregistrer les sauvegardes dans Téléchargements et à vous prévenir en cas d’échec. Ces deux-là sont désormais facultatives et tout reste sur votre appareil.',
       'one-time': 'Vos fichiers vous appartiennent. Revenez quand vous voulez.',
       'missing-feature':
         'Merci de nous le dire. Décrivez la fonction dont vous avez besoin, nous la lirons.',
@@ -269,7 +265,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
         'Merci de nous le dire. Nous vous souhaitons le meilleur avec lui.',
       other: 'Merci de nous le dire. Écrivez-nous si vous voulez en dire plus.',
     },
-    replyLabel: 'Notre réponse',
     reinstall: 'Réinstaller Snug',
     featureLink: 'Demander une fonction sur GitHub',
     bugLink: 'Signaler un bug sur GitHub',
@@ -309,7 +304,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug, prima Bookmarks Import & Export, è la stessa estensione con un nuovo nome e una nuova icona. I tuoi segnalibri non sono mai stati toccati.',
       permissions:
-        'Snug chiede di salvare i backup in Download e di avvisarti se uno fallisce. Entrambi ora sono facoltativi e tutto resta sul tuo dispositivo.',
+        'Snug ha bisogno del permesso sui segnalibri per leggere e ripristinare i tuoi segnalibri. Chiede anche di salvare i backup in Download e di avvisarti se uno fallisce. Questi due ora sono facoltativi e tutto resta sul tuo dispositivo.',
       'one-time': 'I tuoi file sono tuoi. Torna quando vuoi.',
       'missing-feature':
         'Grazie per avercelo detto. Descrivi la funzione che ti serve e la leggeremo.',
@@ -317,7 +312,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       switched: 'Grazie per avercelo detto. Ti auguriamo il meglio.',
       other: 'Grazie per avercelo detto. Scrivici se vuoi aggiungere altro.',
     },
-    replyLabel: 'La nostra risposta',
     reinstall: 'Reinstalla Snug',
     featureLink: 'Richiedi una funzione su GitHub',
     bugLink: 'Segnala un bug su GitHub',
@@ -357,7 +351,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'O Snug, antes Bookmarks Import & Export, é a mesma extensão com novo nome e ícone. Seus favoritos nunca foram tocados.',
       permissions:
-        'O Snug pede para salvar backups em Downloads e avisar você se um falhar. Ambos agora são opcionais e tudo fica no seu dispositivo.',
+        'O Snug precisa da permissão de favoritos para ler e restaurar seus favoritos. Ele também pede para salvar backups em Downloads e avisar você se um falhar. Essas duas agora são opcionais e tudo fica no seu dispositivo.',
       'one-time': 'Seus arquivos são seus. Volte quando quiser.',
       'missing-feature':
         'Obrigado por nos contar. Descreva o recurso de que precisa e nós vamos ler.',
@@ -365,7 +359,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       switched: 'Obrigado por nos contar. Desejamos tudo de bom com ela.',
       other: 'Obrigado por nos contar. Escreva para nós se quiser dizer mais.',
     },
-    replyLabel: 'Nossa resposta',
     reinstall: 'Reinstalar o Snug',
     featureLink: 'Pedir um recurso no GitHub',
     bugLink: 'Relatar um bug no GitHub',
@@ -405,7 +398,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug, раньше Bookmarks Import & Export, это то же расширение с новым именем и значком. Ваши закладки не тронуты.',
       permissions:
-        'Snug просит разрешение сохранять бэкапы в «Загрузки» и сообщать о сбое. Оба разрешения теперь необязательны, всё остаётся на вашем устройстве.',
+        'Snug нужно разрешение на закладки, чтобы читать и восстанавливать ваши закладки. Ещё он просит разрешение сохранять бэкапы в «Загрузки» и сообщать о сбое. Эти два разрешения теперь необязательны, всё остаётся на вашем устройстве.',
       'one-time': 'Ваши файлы принадлежат вам. Возвращайтесь в любое время.',
       'missing-feature':
         'Спасибо, что сообщили. Опишите нужную функцию, мы прочитаем.',
@@ -413,7 +406,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       switched: 'Спасибо, что сообщили. Желаем удачи с ним.',
       other: 'Спасибо, что сообщили. Напишите нам, если хотите добавить.',
     },
-    replyLabel: 'Наш ответ',
     reinstall: 'Установить Snug снова',
     featureLink: 'Предложить функцию на GitHub',
     bugLink: 'Сообщить об ошибке на GitHub',
@@ -453,7 +445,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'SnugはBookmarks Import & Exportの新しい名前とアイコンで、同じ拡張機能です。ブックマークには一切手を加えていません。',
       permissions:
-        'Snugはバックアップをダウンロードに保存する権限と、失敗時に通知する権限を求めます。どちらも任意になり、すべてお使いの端末内に保たれます。',
+        'Snugはブックマークを読み取り・復元するためにブックマークの権限を必要とします。さらに、バックアップをダウンロードに保存する権限と、失敗時に通知する権限を求めます。この2つは任意になり、すべてお使いの端末内に保たれます。',
       'one-time': 'ファイルはあなたのものです。いつでもお戻りください。',
       'missing-feature':
         'お知らせありがとうございます。必要な機能を書いていただければ、目を通します。',
@@ -462,7 +454,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
         'お知らせありがとうございます。新しいツールでのご活躍をお祈りします。',
       other: 'お知らせありがとうございます。他にもあればご連絡ください。',
     },
-    replyLabel: 'こちらからの返信',
     reinstall: 'Snugを再インストール',
     featureLink: 'GitHubで機能をリクエスト',
     bugLink: 'GitHubで不具合を報告',
@@ -502,7 +493,7 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug는 이전 이름이 Bookmarks Import & Export인, 이름과 아이콘만 바뀐 같은 확장 프로그램입니다. 북마크는 전혀 건드리지 않았습니다.',
       permissions:
-        'Snug는 백업을 다운로드 폴더에 저장하고 실패 시 알려 줄 권한을 요청합니다. 둘 다 이제 선택 사항이며 모든 데이터는 기기에 남습니다.',
+        'Snug는 북마크를 읽고 복원하려면 북마크 권한이 필요합니다. 또한 백업을 다운로드 폴더에 저장하고 실패 시 알려 줄 권한을 요청합니다. 이 두 가지는 이제 선택 사항이며 모든 데이터는 기기에 남습니다.',
       'one-time': '파일은 여러분의 것입니다. 언제든 다시 오세요.',
       'missing-feature':
         '알려 주셔서 감사합니다. 필요한 기능을 적어 주시면 읽어 보겠습니다.',
@@ -511,7 +502,6 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
         '알려 주셔서 감사합니다. 새 도구와 좋은 시간 보내시길 바랍니다.',
       other: '알려 주셔서 감사합니다. 더 하실 말씀이 있다면 메일 주세요.',
     },
-    replyLabel: '저희 답변',
     reinstall: 'Snug 다시 설치',
     featureLink: 'GitHub에서 기능 요청',
     bugLink: 'GitHub에서 버그 신고',
@@ -550,14 +540,13 @@ const TRANSLATIONS: Partial<Record<Locale, GoodbyeCopy>> = {
       'didnt-recognize':
         'Snug 原名 Bookmarks Import & Export，是同一个扩展程序，只是换了名称和图标。你的书签从未被改动。',
       permissions:
-        'Snug 请求将备份保存到“下载”文件夹，并在备份失败时通知你。这两项现在都是可选的，所有数据都保留在你的设备上。',
+        'Snug 需要书签权限来读取和恢复你的书签。它还请求将备份保存到“下载”文件夹，并在备份失败时通知你。这两项现在是可选的，所有数据都保留在你的设备上。',
       'one-time': '你的文件属于你。随时欢迎回来。',
       'missing-feature': '感谢告诉我们。请描述你需要的功能，我们会认真阅读。',
       bug: '抱歉给你带来麻烦。附上操作步骤的简短报告能帮我们修复。',
       switched: '感谢告诉我们。祝你使用愉快。',
       other: '感谢告诉我们。如果还想多说几句，欢迎写信给我们。',
     },
-    replyLabel: '我们的回复',
     reinstall: '重新安装 Snug',
     featureLink: '在 GitHub 上提出功能请求',
     bugLink: '在 GitHub 上报告问题',
@@ -604,8 +593,24 @@ export interface GoodbyeParameters {
 const VERSION_PATTERN = /^\d{1,4}(?:\.\d{1,4}){0,3}$/
 
 /**
+ * Maps a raw `lang` value to a supported locale, ignoring case and treating
+ * `-` and `_` alike.
+ * @param raw - The raw `lang` query value, or `null` when absent.
+ * @returns The matching locale code, or `null` when none matches.
+ */
+export function normalizeGoodbyeLang(raw: string | null): Locale | null {
+  if (raw === null) return null
+  const key = raw.toLowerCase().replaceAll('_', '-')
+  return (
+    LOCALES.find(
+      (locale) => locale.toLowerCase().replaceAll('_', '-') === key,
+    ) ?? null
+  )
+}
+
+/**
  * Reads `v`, `lang` and `ae` from a query string. Anything that is not a
- * dotted version, a supported locale code or `0`/`1` becomes `null`, so a
+ * dotted version, a supported locale code (any case, `-` or `_`) or `0`/`1` becomes `null`, so a
  * malformed value is never shown.
  * @param search - A query string such as `location.search`.
  * @returns The validated values.
@@ -617,7 +622,7 @@ export function parseGoodbyeParameters(search: string): GoodbyeParameters {
   const backups = parameters.get('ae')
   return {
     version: version !== null && VERSION_PATTERN.test(version) ? version : null,
-    language: LOCALES.find((locale) => locale === language) ?? null,
+    language: normalizeGoodbyeLang(language),
     scheduledBackups: backups === '1' ? true : backups === '0' ? false : null,
   }
 }
