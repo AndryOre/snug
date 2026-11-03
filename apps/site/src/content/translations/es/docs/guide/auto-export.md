@@ -1,6 +1,6 @@
 ---
 title: Auto-export
-sourceHash: f658d7e50cc058b1
+sourceHash: 91674afc656322e9
 description:
   'Programa exportaciones automáticas de marcadores en Chrome. Elige formatos,
   intervalo y carpeta, y Snug guarda los archivos sin diálogo de guardado.'
@@ -28,7 +28,9 @@ Snug puede exportar tus marcadores según un horario, sin ninguna acción manual
 Snug pide acceso a Descargas en tres casos: cuando activas la exportación
 automática con Descargas como destino, cuando cambias **Guardar en** a
 **Descargas** y cuando usas **Exportar ahora** sin ese acceso. El navegador
-muestra su propio aviso de permiso. Si lo rechazas, no se guarda nada: la
+muestra su propio aviso de permiso. Si **Avisarme cuando falle una exportación**
+está activado (predeterminado), el primer caso también pide acceso a las
+notificaciones en el mismo aviso. Si lo rechazas, no se guarda nada: la
 exportación automática sigue desactivada, el destino se mantiene como estaba y
 la exportación no se ejecuta. La página indica entonces «La exportación
 automática sigue desactivada porque no se concedió el permiso. Puedes activarla
@@ -83,10 +85,12 @@ abre la página Auto-export. Las ejecuciones correctas nunca notifican, y los
 fallos repetidos reemplazan la notificación anterior en lugar de acumularse. Una
 ejecución programada o de puesta al día que falla también coloca una insignia
 "!" en el ícono de la barra de herramientas hasta que una ejecución tenga éxito.
-Al activar este interruptor se solicita el permiso de notificaciones. Si lo
-rechazas, el interruptor sigue desactivado y la página indica «Las
-notificaciones siguen desactivadas. Una ejecución fallida seguirá apareciendo en
-el estado.».
+El permiso de notificaciones se solicita junto con el acceso a Descargas cuando
+activas la exportación automática con este interruptor activado, y por separado
+cuando activas el interruptor o haces clic en **Permitir**. Mientras falte el
+acceso, el interruptor se muestra desactivado. Si lo rechazas, el interruptor
+sigue desactivado y la página indica «Las notificaciones siguen desactivadas.
+Una ejecución fallida seguirá apareciendo en el estado.».
 
 Los cambios en la página **Auto-export** se guardan automáticamente. Su tarjeta
 de estado siempre muestra el estado real del horario, independientemente de

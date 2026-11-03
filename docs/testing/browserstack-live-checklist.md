@@ -71,6 +71,19 @@ For each browser:
       interval, wait for a run or trigger it, and confirm the file appears with
       no save dialog. Retention and the " (1)" suffix behave as described in the
       [auto-export guide](../guide/auto-export.md).
+- [ ] Permission prompts: the install or update prompt shows no downloads or
+      notifications warning.
+- [ ] Downloads access: enabling Auto-export to Downloads shows the browser
+      prompt; declining keeps Auto-export off and shows the inline message.
+- [ ] Notifications access: the prompt appears with the Downloads prompt while
+      the failure notification is on, and on its own when the switch is turned
+      on; declining keeps the switch off with the inline message.
+- [ ] Revoked access: revoke Downloads access in the browser's extension
+      settings; the Auto-export page shows the alert and the popup shows the
+      "Allow" state.
+- [ ] Uninstall: removing the extension opens `/goodbye/?lang=&v=&ae=` on the
+      site.
+- [ ] What's new: the What's new page opens after a minor update.
 - [ ] Custom folder: if the Live session allows choosing a folder, select one
       and confirm a run saves there; otherwise note it as not testable on Live.
 - [ ] Theme and locale: switch the theme and one non-English locale; the popup

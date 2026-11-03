@@ -1,6 +1,6 @@
 ---
 title: Esportazione automatica
-sourceHash: f658d7e50cc058b1
+sourceHash: 91674afc656322e9
 description:
   "Pianifica l'esportazione automatica dei segnalibri in Chrome. Scegli formati,
   intervallo e cartella, e Snug salva i file senza finestre di dialogo."
@@ -29,7 +29,9 @@ manuale:
 Snug chiede l'accesso a Download in tre casi: quando attivi l'esportazione
 automatica con Download come destinazione, quando passi **Salva in** a
 **Download** e quando usi **Esporta ora** senza questo accesso. Il browser
-mostra la propria richiesta di permesso. Se rifiuti, non viene salvato nulla:
+mostra la propria richiesta di permesso. Se **Avvisami quando un'esportazione
+non riesce** è attivo (predefinito), il primo caso richiede anche l'accesso alle
+notifiche nella stessa richiesta. Se rifiuti, non viene salvato nulla:
 l'esportazione automatica resta disattivata, la destinazione resta invariata e
 l'esportazione non viene eseguita. La pagina indica allora «L'esportazione
 automatica resta disattivata perché il permesso non è stato concesso. Puoi
@@ -84,10 +86,12 @@ clic si apre la pagina Esportazione automatica. Le esecuzioni riuscite non
 notificano mai, e gli errori ripetuti sostituiscono la notifica precedente
 invece di accumularsi. Un'esecuzione pianificata o di recupero non riuscita
 aggiunge anche un badge "!" sull'icona della barra degli strumenti finché
-un'esecuzione non riesce. Attivando questo interruttore viene richiesto il
-permesso per le notifiche. Se rifiuti, l'interruttore resta disattivato e la
-pagina indica «Le notifiche restano disattivate. Un'esecuzione non riuscita
-comparirà comunque nello stato.»
+un'esecuzione non riesce. Il permesso per le notifiche viene richiesto insieme
+all'accesso a Download quando attivi l'esportazione automatica con questo
+interruttore attivo, e separatamente quando attivi l'interruttore o fai clic su
+**Consenti**. Finché l'accesso manca, l'interruttore appare disattivato. Se
+rifiuti, l'interruttore resta disattivato e la pagina indica «Le notifiche
+restano disattivate. Un'esecuzione non riuscita comparirà comunque nello stato.»
 
 Le modifiche nella pagina **Esportazione automatica** vengono salvate
 automaticamente. La sua scheda di stato mostra sempre lo stato reale della

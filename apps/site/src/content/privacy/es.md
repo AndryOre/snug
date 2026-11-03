@@ -70,9 +70,11 @@ desinstalación».
 - Permisos opcionales: los permisos `downloads` y `notifications` son
   opcionales. Snug solicita `downloads` cuando activas la exportación automática
   con el destino Descargas, cuando cambias el destino a Descargas o cuando usas
-  «Exportar ahora» sin acceso a Descargas, y `notifications` solo cuando activas
-  las notificaciones de errores. Si los rechazas, la función permanece
-  desactivada y nada más cambia.
+  «Exportar ahora» sin acceso a Descargas, y `notifications` junto con
+  `downloads` cuando activas la exportación automática con el destino Descargas
+  mientras las notificaciones de errores están activadas (predeterminado), y por
+  separado cuando activas esas notificaciones o haces clic en «Permitir». Si los
+  rechazas, la función permanece desactivada y nada más cambia.
 
 ### Página de desinstalación
 
@@ -129,16 +131,16 @@ desinstalación».
 Snug solicita los siguientes permisos del navegador, cada uno usado únicamente
 para el fin descrito:
 
-| Permiso            | Finalidad                                                                                                                                                                                                                                                                                                             |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Leer y escribir los marcadores de tu navegador para admitir la importación y la exportación.                                                                                                                                                                                                                          |
-| `favicon`          | Mostrar los iconos de los sitios junto a los marcadores mediante la API `_favicon` integrada en el navegador.                                                                                                                                                                                                         |
-| `storage`          | Guardar tus preferencias y ajustes locales en tu dispositivo.                                                                                                                                                                                                                                                         |
-| `alarms`           | Programar y activar las exportaciones automáticas de marcadores con el intervalo configurado.                                                                                                                                                                                                                         |
-| `downloads`        | Opcional. Se solicita cuando activas la exportación automática con el destino Descargas, cambias el destino a Descargas o usas «Exportar ahora» sin acceso a Descargas. Guardar las exportaciones automáticas en tu carpeta Descargas y eliminar los archivos de exportación automática antiguos de Snug (Retención). |
-| `notifications`    | Opcional. Se solicita solo cuando activas las notificaciones de errores. Mostrar una notificación en tu dispositivo cuando falla una exportación automática. Puedes desactivarla.                                                                                                                                     |
-| `unlimitedStorage` | Conservar en tu dispositivo las cinco últimas instantáneas de seguridad de tus marcadores, que pueden ser grandes en bibliotecas extensas.                                                                                                                                                                            |
-| `offscreen`        | Crear un documento oculto de corta duración para que una exportación automática se convierta en un archivo descargable. No tiene interfaz y no carga contenido remoto.                                                                                                                                                |
+| Permiso            | Finalidad                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Leer y escribir los marcadores de tu navegador para admitir la importación y la exportación.                                                                                                                                                                                                                                                                                  |
+| `favicon`          | Mostrar los iconos de los sitios junto a los marcadores mediante la API `_favicon` integrada en el navegador.                                                                                                                                                                                                                                                                 |
+| `storage`          | Guardar tus preferencias y ajustes locales en tu dispositivo.                                                                                                                                                                                                                                                                                                                 |
+| `alarms`           | Programar y activar las exportaciones automáticas de marcadores con el intervalo configurado.                                                                                                                                                                                                                                                                                 |
+| `downloads`        | Opcional. Se solicita cuando activas la exportación automática con el destino Descargas, cambias el destino a Descargas o usas «Exportar ahora» sin acceso a Descargas. Guardar las exportaciones automáticas en tu carpeta Descargas y eliminar los archivos de exportación automática antiguos de Snug (Retención).                                                         |
+| `notifications`    | Opcional. Se solicita junto con `downloads` cuando activas la exportación automática con el destino Descargas mientras las notificaciones de errores están activadas (predeterminado), y por separado cuando activas esas notificaciones o haces clic en «Permitir». Mostrar una notificación en tu dispositivo cuando falla una exportación automática. Puedes desactivarla. |
+| `unlimitedStorage` | Conservar en tu dispositivo las cinco últimas instantáneas de seguridad de tus marcadores, que pueden ser grandes en bibliotecas extensas.                                                                                                                                                                                                                                    |
+| `offscreen`        | Crear un documento oculto de corta duración para que una exportación automática se convierta en un archivo descargable. No tiene interfaz y no carga contenido remoto.                                                                                                                                                                                                        |
 
 ## Servicios de terceros
 

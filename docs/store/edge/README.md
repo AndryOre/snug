@@ -324,10 +324,13 @@ Snug helps people keep their bookmarks portable and safe: export, import, back u
 
 One justification per permission declared in `wxt.config.ts`: 8 in total, of
 which `downloads` and `notifications` are optional (requested when the user
-turns on Auto-export to Downloads or the failure notification). The text is the
-Chrome Web Store text from [`../README.md`](../README.md), which already names
-no browser; the `notifications` entry adds the opt-out sentence. The code that
-uses each permission is listed in that file.
+turns on Auto-export to Downloads, with `notifications` alongside while the
+failure notification is on, or turns on the failure notification). The text is
+the Chrome Web Store text from [`../README.md`](../README.md), which already
+names no browser; the `notifications` entry adds the opt-out sentence. The code
+that uses each permission is listed in that file. The uninstall URL carries the
+extension version, the browser language and whether scheduled backups are on,
+and no identifier.
 
 `bookmarks` (598 chars):
 
@@ -371,10 +374,10 @@ This permission is optional. Snug asks for it only when the user turns on schedu
 Snug creates a short-lived offscreen document to turn an exported bookmark file into a Blob URL, because a service worker cannot create one and a data URL is too large for big bookmark libraries. The document is created for the download and closed when it finishes. It has no UI and loads no remote content.
 ```
 
-`notifications` (optional, 423 chars):
+`notifications` (optional, 563 chars):
 
 ```text
-This permission is optional. Snug asks for it only when the user turns on the failure notification. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed. The user can turn this notification off in the Auto-export settings and the extension keeps working.
+This permission is optional. Snug asks for it together with Downloads access when the user enables Auto-export to Downloads while the failure notification is on (the default), and on its own when the user turns the failure notification on. Snug shows one notification when a scheduled backup fails, so the user finds out that a backup did not happen. Clicking it opens the Auto-export page. There is no other notification, and none is shown when backups succeed. The user can turn this notification off in the Auto-export settings and the extension keeps working.
 ```
 
 Partner Center sits behind a web application firewall that answers `403` to some

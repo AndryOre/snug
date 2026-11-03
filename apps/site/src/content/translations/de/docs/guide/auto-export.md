@@ -1,6 +1,6 @@
 ---
 title: Auto-Export
-sourceHash: f658d7e50cc058b1
+sourceHash: 91674afc656322e9
 description:
   'Plane den automatischen Export deiner Lesezeichen in Chrome. Wähle Formate,
   Intervall und Ordner, Snug speichert die Dateien ohne Speicherdialog.'
@@ -28,8 +28,10 @@ Zutun:
 Snug bittet in drei Fällen um Zugriff auf Downloads: wenn du den automatischen
 Export mit Downloads als Ziel einschaltest, wenn du bei **Speichern unter** auf
 **Downloads** wechselst und wenn du **Jetzt exportieren** ohne diesen Zugriff
-ausführst. Der Browser zeigt dazu seine eigene Berechtigungsabfrage. Lehnst du
-ab, wird nichts gespeichert: Der automatische Export bleibt aus, das Ziel bleibt
+ausführst. Der Browser zeigt dazu seine eigene Berechtigungsabfrage. Ist
+**Benachrichtigen, wenn ein Export fehlschlägt** an (Standard), fragt der erste
+Fall im selben Dialog auch den Zugriff auf Benachrichtigungen an. Lehnst du ab,
+wird nichts gespeichert: Der automatische Export bleibt aus, das Ziel bleibt
 unverändert, und der Export läuft nicht. Die Seite zeigt dann „Der automatische
 Export bleibt aus, weil die Berechtigung nicht erteilt wurde. Du kannst ihn
 jederzeit wieder einschalten.“, „Das Ziel bleibt unverändert, weil die
@@ -82,8 +84,11 @@ Grund, wenn ein Lauf fehlschlägt. Ein Klick darauf öffnet die Seite Auto-Expor
 Erfolgreiche Läufe benachrichtigen nie, und wiederholte Fehler ersetzen die
 vorherige Benachrichtigung, statt sich zu stapeln. Ein fehlgeschlagener
 geplanter oder nachgeholter Lauf setzt außerdem ein „!“-Badge auf das
-Symbolleistensymbol, bis ein Lauf erfolgreich ist. Beim Einschalten wird die
-Berechtigung für Benachrichtigungen angefragt. Lehnst du ab, bleibt der Schalter
+Symbolleistensymbol, bis ein Lauf erfolgreich ist. Die Berechtigung für
+Benachrichtigungen wird zusammen mit dem Zugriff auf Downloads angefragt, wenn
+du den automatischen Export bei eingeschaltetem Schalter aktivierst, und
+einzeln, wenn du den Schalter einschaltest oder **Zulassen** wählst. Solange der
+Zugriff fehlt, steht der Schalter auf aus. Lehnst du ab, bleibt der Schalter
 aus, und die Seite zeigt „Benachrichtigungen bleiben aus. Ein fehlgeschlagener
 Lauf erscheint weiterhin im Status.“
 
