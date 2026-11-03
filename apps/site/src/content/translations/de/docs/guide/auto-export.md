@@ -1,6 +1,6 @@
 ---
 title: Auto-Export
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: 822155e8c27f729d
 description:
   'Plane den automatischen Export deiner Lesezeichen in Chrome. Wähle Formate,
   Intervall und Ordner, Snug speichert die Dateien ohne Speicherdialog.'
@@ -24,6 +24,18 @@ Zutun:
    geschlossen oder die Erweiterung nicht verfügbar war, als ein geplanter
    Export fällig wurde, holt sie ihn kurz nach dem nächsten Start des Browsers
    automatisch nach, statt auf den nächsten geplanten Zeitpunkt zu warten.
+
+Snug bittet erst um Zugriff auf Downloads, wenn du den automatischen Export
+aktivierst. Der Browser zeigt dazu seine eigene Berechtigungsabfrage, und die
+Seite **Auto-Export** zeigt einen Hinweis mit dem Titel „Snug braucht die
+Berechtigung, in Downloads zu speichern“. Die Beschreibung lautet „Der
+automatische Export kann erst laufen, wenn du es erlaubst. Bereits gespeicherte
+Dateien sind davon nicht betroffen.“ Wähle **Erlauben**, um die Berechtigung zu
+erteilen. Wird sie nicht erteilt, steht auf der Seite „Der automatische Export
+bleibt ausgeschaltet, weil die Berechtigung nicht erteilt wurde. Du kannst ihn
+jederzeit wieder einschalten.“ Das Popup zeigt dann „Erlaube den Zugriff auf
+Downloads, damit weiter gesichert wird“ mit der Schaltfläche **Auto-Export
+öffnen**, die dich zur Seite zurückbringt.
 
 **Speichern unter** legt das Ziel fest. **Downloads** (Standard) speichert im
 Downloads-Ordner deines Browsers. **Eigener Ordner** speichert in einem Ordner,
@@ -60,7 +72,10 @@ Grund, wenn ein Lauf fehlschlägt. Ein Klick darauf öffnet die Seite Auto-Expor
 Erfolgreiche Läufe benachrichtigen nie, und wiederholte Fehler ersetzen die
 vorherige Benachrichtigung, statt sich zu stapeln. Ein fehlgeschlagener
 geplanter oder nachgeholter Lauf setzt außerdem ein „!“-Badge auf das
-Symbolleistensymbol, bis ein Lauf erfolgreich ist.
+Symbolleistensymbol, bis ein Lauf erfolgreich ist. Beim Einschalten wird die
+Berechtigung für Benachrichtigungen angefragt. Lehnst du ab, bleibt der Schalter
+aus, und die Seite zeigt „Benachrichtigungen bleiben ausgeschaltet. Ein
+fehlgeschlagener Lauf wird weiterhin im Status angezeigt.“
 
 Änderungen auf der Seite **Auto-Export** werden automatisch gespeichert. Ihre
 Statuskarte zeigt immer den tatsächlichen Zustand des Zeitplans, unabhängig von

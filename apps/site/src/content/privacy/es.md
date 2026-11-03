@@ -1,10 +1,10 @@
 ---
-englishLastUpdated: October 10, 2026
+englishLastUpdated: November 3, 2026
 ---
 
 # Política de privacidad de Snug
 
-Última actualización: 10 de octubre de 2026
+Última actualización: 3 de noviembre de 2026
 
 ## Introducción
 
@@ -15,8 +15,10 @@ que recibimos a través de nuestra extensión de navegador.
 ## Recogida y uso de la información
 
 Snug no recoge, almacena ni transmite ningún dato personal de sus usuarios.
-Nuestra extensión funciona por completo dentro de tu navegador y no envía ningún
-dato a servidores externos.
+Nuestra extensión funciona por completo dentro de tu navegador y no envía tus
+marcadores ni tus ajustes a servidores externos. El único contacto de red es la
+página de despedida opcional que se describe más abajo en «Página de
+desinstalación».
 
 ### Datos de los marcadores
 
@@ -65,6 +67,21 @@ dato a servidores externos.
   notificación del sistema en tu dispositivo con el motivo. Puedes desactivarla
   en la página de Exportación automática. Las exportaciones correctas nunca
   notifican, y ningún contenido de las notificaciones sale de tu dispositivo.
+- Permisos opcionales: los permisos `downloads` y `notifications` son
+  opcionales. Snug solicita `downloads` solo cuando activas la exportación
+  automática, y `notifications` solo cuando activas las notificaciones de
+  errores. Si los rechazas, la función permanece desactivada y nada más cambia.
+
+### Página de desinstalación
+
+- Cuando desinstalas Snug, tu navegador abre una página de despedida en
+  `https://snug.andryore.dev/goodbye/`. La dirección que Snug registra para ello
+  incluye tres valores: la versión de la extensión, tu idioma y si las copias de
+  seguridad programadas están activadas (`?lang=<code>&v=<version>&ae=<0|1>`).
+  No incluye ningún identificador ni ninguno de tus marcadores.
+- La página de despedida usa Umami, un servicio de analítica sin cookies, para
+  contar la visita y el motivo en el que haces clic. No establece cookies.
+  Elegir un motivo es opcional.
 
 ## Almacenamiento de datos
 
@@ -76,7 +93,8 @@ dato a servidores externos.
   carpeta personalizada que elegiste mediante la API File System Access del
   navegador. Las exportaciones manuales usan un enlace estándar `<a download>` y
   no necesitan el permiso `downloads`; las exportaciones automáticas y el
-  archivo de instantánea de seguridad sí usan el permiso `downloads`.
+  archivo de instantánea de seguridad sí usan el permiso `downloads`, que es
+  opcional y solo se solicita cuando activas la exportación automática.
 - La extensión guarda tus preferencias y ajustes locales, como el tema, las
   opciones de visualización, las opciones de exportación, la plantilla del
   nombre de archivo y tu configuración de exportación automática, mediante el
@@ -109,21 +127,23 @@ dato a servidores externos.
 Snug solicita los siguientes permisos del navegador, cada uno usado únicamente
 para el fin descrito:
 
-| Permiso            | Finalidad                                                                                                                                                                           |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bookmarks`        | Leer y escribir los marcadores de tu navegador para admitir la importación y la exportación.                                                                                        |
-| `favicon`          | Mostrar los iconos de los sitios junto a los marcadores mediante la API `_favicon` integrada en el navegador.                                                                       |
-| `storage`          | Guardar tus preferencias y ajustes locales en tu dispositivo.                                                                                                                       |
-| `alarms`           | Programar y activar las exportaciones automáticas de marcadores con el intervalo configurado.                                                                                       |
-| `downloads`        | Guardar en tu dispositivo las exportaciones automáticas y los archivos de instantánea de seguridad, y eliminar los archivos de exportación automática antiguos de Snug (Retención). |
-| `notifications`    | Mostrar una notificación en tu dispositivo cuando falla una exportación automática. Puedes desactivarla.                                                                            |
-| `unlimitedStorage` | Conservar en tu dispositivo las cinco últimas instantáneas de seguridad de tus marcadores, que pueden ser grandes en bibliotecas extensas.                                          |
-| `offscreen`        | Crear un documento oculto de corta duración para que una exportación automática se convierta en un archivo descargable. No tiene interfaz y no carga contenido remoto.              |
+| Permiso            | Finalidad                                                                                                                                                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bookmarks`        | Leer y escribir los marcadores de tu navegador para admitir la importación y la exportación.                                                                                                                                                             |
+| `favicon`          | Mostrar los iconos de los sitios junto a los marcadores mediante la API `_favicon` integrada en el navegador.                                                                                                                                            |
+| `storage`          | Guardar tus preferencias y ajustes locales en tu dispositivo.                                                                                                                                                                                            |
+| `alarms`           | Programar y activar las exportaciones automáticas de marcadores con el intervalo configurado.                                                                                                                                                            |
+| `downloads`        | Opcional. Se solicita solo cuando activas la exportación automática. Guardar en tu dispositivo las exportaciones automáticas y los archivos de instantánea de seguridad, y eliminar los archivos de exportación automática antiguos de Snug (Retención). |
+| `notifications`    | Opcional. Se solicita solo cuando activas las notificaciones de errores. Mostrar una notificación en tu dispositivo cuando falla una exportación automática. Puedes desactivarla.                                                                        |
+| `unlimitedStorage` | Conservar en tu dispositivo las cinco últimas instantáneas de seguridad de tus marcadores, que pueden ser grandes en bibliotecas extensas.                                                                                                               |
+| `offscreen`        | Crear un documento oculto de corta duración para que una exportación automática se convierta en un archivo descargable. No tiene interfaz y no carga contenido remoto.                                                                                   |
 
 ## Servicios de terceros
 
 Nuestra extensión no se integra con ningún servicio de terceros ni herramienta
-de analítica, ni los utiliza.
+de analítica, ni los utiliza. La única excepción es la página de despedida de
+nuestro sitio web, que usa Umami (sin cookies) como se describe arriba en
+«Página de desinstalación».
 
 ## Cambios en esta Política de privacidad
 

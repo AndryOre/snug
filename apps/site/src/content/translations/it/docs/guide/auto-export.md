@@ -1,6 +1,6 @@
 ---
 title: Esportazione automatica
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: 822155e8c27f729d
 description:
   "Pianifica l'esportazione automatica dei segnalibri in Chrome. Scegli formati,
   intervallo e cartella, e Snug salva i file senza finestre di dialogo."
@@ -25,6 +25,17 @@ manuale:
    un'esportazione pianificata, questa viene recuperata automaticamente poco
    dopo il successivo avvio del browser, senza aspettare la pianificazione
    successiva.
+
+Snug chiede l'accesso a Download solo quando attivi l'esportazione automatica.
+Il browser mostra la propria richiesta di permesso e la pagina **Esportazione
+automatica** mostra un avviso intitolato «Snug ha bisogno del permesso di
+salvare in Download». La descrizione dice «L'esportazione automatica non può
+funzionare finché non lo consenti. I file già salvati non sono interessati.»
+Seleziona **Consenti** per concederlo. Se il permesso non viene concesso, la
+pagina indica «L'esportazione automatica resta disattivata perché il permesso
+non è stato concesso. Puoi riattivarla in qualsiasi momento.» Il popup mostra
+allora «Consenti l'accesso a Download per continuare a fare il backup» con un
+pulsante **Apri Esportazione automatica** che ti riporta alla pagina.
 
 **Salva in** imposta la destinazione. **Download** (predefinito) salva nella
 cartella Download del browser. **Cartella personalizzata** salva in una cartella
@@ -62,7 +73,10 @@ clic si apre la pagina Esportazione automatica. Le esecuzioni riuscite non
 notificano mai, e gli errori ripetuti sostituiscono la notifica precedente
 invece di accumularsi. Un'esecuzione pianificata o di recupero non riuscita
 aggiunge anche un badge "!" sull'icona della barra degli strumenti finché
-un'esecuzione non riesce.
+un'esecuzione non riesce. Attivando questo interruttore viene richiesto il
+permesso per le notifiche. Se rifiuti, l'interruttore resta disattivato e la
+pagina indica «Le notifiche restano disattivate. Un'esecuzione non riuscita sarà
+comunque visibile nello stato.»
 
 Le modifiche nella pagina **Esportazione automatica** vengono salvate
 automaticamente. La sua scheda di stato mostra sempre lo stato reale della

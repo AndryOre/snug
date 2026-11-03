@@ -1,6 +1,6 @@
 ---
 title: Exportation automatique
-sourceHash: 5eb2acaa2e4867cc
+sourceHash: 822155e8c27f729d
 description:
   "Planifiez l'exportation automatique de vos favoris dans Chrome. Choisissez
   formats, intervalle et dossier, et Snug enregistre sans dialogue."
@@ -25,6 +25,19 @@ Snug peut exporter vos favoris selon un calendrier, sans action manuelle :
    navigateur était fermé ou l'extension indisponible au moment d'une
    exportation planifiée, elle se rattrape automatiquement peu après le prochain
    démarrage du navigateur, au lieu d'attendre l'heure planifiée suivante.
+
+Snug ne demande l'accès aux Téléchargements que lorsque vous activez l'export
+automatique. Le navigateur affiche sa propre demande d'autorisation, et la page
+**Exportation automatique** affiche une alerte intitulée « Snug a besoin de
+l'autorisation d'enregistrer dans Téléchargements ». Sa description indique «
+L'export automatique ne peut pas s'exécuter tant que vous ne l'autorisez pas.
+Les fichiers déjà enregistrés ne sont pas concernés. » Sélectionnez
+**Autoriser** pour l'accorder. Si l'autorisation n'est pas accordée, la page
+indique « L'export automatique reste désactivé, car l'autorisation n'a pas été
+accordée. Vous pouvez le réactiver à tout moment. » La fenêtre contextuelle
+affiche alors « Autorisez l'accès aux Téléchargements pour continuer à
+sauvegarder » avec un bouton **Ouvrir Exportation automatique** qui vous ramène
+à la page.
 
 **Enregistrer dans** définit la destination. **Téléchargements** (par défaut)
 enregistre dans le dossier Téléchargements du navigateur. **Dossier
@@ -64,7 +77,10 @@ motif, lorsqu'une exécution échoue. Cliquer dessus ouvre la page Exportation
 automatique. Les exécutions réussies ne notifient jamais, et les échecs répétés
 remplacent la notification précédente au lieu de s'empiler. Une exécution
 planifiée ou de rattrapage échouée affiche aussi un badge « ! » sur l'icône de
-la barre d'outils jusqu'à ce qu'une exécution réussisse.
+la barre d'outils jusqu'à ce qu'une exécution réussisse. L'activation de ce
+commutateur demande l'autorisation d'afficher des notifications. Si vous
+refusez, il reste désactivé et la page indique « Les notifications restent
+désactivées. Une exécution échouée apparaîtra quand même dans l'état. »
 
 Les modifications de la page **Exportation automatique** sont enregistrées
 automatiquement. Sa carte d'état affiche toujours l'état réel du calendrier,
