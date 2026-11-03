@@ -563,3 +563,52 @@ describe('self-healing alarm', () => {
     expect(syncAlarm).not.toHaveBeenCalled()
   })
 })
+
+function mockPermissions(options: { hasNotificationAccess: boolean }) {
+  const addedListeners: ((changed: { permissions?: string[] }) => void)[] = []
+  browser.permissions = {
+    contains: vi.fn(async () => options.hasNotificationAccess),
+    onAdded: {
+      addListener: (listener: (typeof addedListeners)[number]) => {
+        addedListeners.push(listener)
+      },
+      removeListener: vi.fn(),
+    },
+    onRemoved: { addListener: vi.fn(), removeListener: vi.fn() },
+  } as unknown as typeof browser.permissions
+  return addedListeners
+}
+
+function mockNotifications() {
+  const addListener = vi.fn()
+  browser.notifications = {
+    onClicked: { addListener },
+  } as unknown as typeof browser.notifications
+  return addListener
+}
+
+describe('Failure notification click listener', () => {
+  it('starts cleanly without Notification access and attaches after the grant', async () => {
+    browser.notifications = undefined as unknown as typeof browser.notifications
+    const addedListeners = mockPermissions({ hasNotificationAccess: false })
+
+    expect(() => background.main?.()).not.toThrow()
+    await new Promise((resolve) => setTimeout(resolve, 20))
+
+    const addListener = mockNotifications()
+    for (const listener of addedListeners) {
+      listener({ permissions: ['notifications'] })
+    }
+
+    expect(addListener).toHaveBeenCalledTimes(1)
+  })
+
+  it('attaches synchronously at start when Notification access is already granted', () => {
+    const addListener = mockNotifications()
+    mockPermissions({ hasNotificationAccess: true })
+
+    background.main?.()
+
+    expect(addListener).toHaveBeenCalledTimes(1)
+  })
+})

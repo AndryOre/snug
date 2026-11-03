@@ -4,7 +4,10 @@ import { WxtVitest } from 'wxt/testing/vitest-plugin'
 export default defineConfig({
   plugins: [WxtVitest({ root: import.meta.dirname })],
   test: {
-    setupFiles: ['./lib/testing/setup-locks.ts'],
+    setupFiles: [
+      './lib/testing/setup-locks.ts',
+      './lib/testing/fake-permissions.ts',
+    ],
     testTimeout: 20_000,
     exclude: [...configDefaults.exclude, 'e2e/**', 'e2e-store/**'],
     coverage: {

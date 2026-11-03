@@ -33,7 +33,13 @@ const SCANNED_LOCALES: readonly Locale[] = IS_FULL_MATRIX
 /**
  * Pages every locale carries, as locale-relative paths.
  */
-const LOCALE_PAGES = ['/', '/privacy/', '/guide/', '/guide/exporting/']
+const LOCALE_PAGES = [
+  '/',
+  '/privacy/',
+  '/goodbye/',
+  '/guide/',
+  '/guide/exporting/',
+]
 
 /**
  * Pages only the default locale carries.

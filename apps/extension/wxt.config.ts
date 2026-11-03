@@ -4,6 +4,17 @@ import { defineConfig } from 'wxt'
 
 import { SITE_URL } from './lib/brand'
 
+const REQUIRED_PERMISSIONS = [
+  'bookmarks',
+  'favicon',
+  'storage',
+  'alarms',
+  'offscreen',
+  'unlimitedStorage',
+]
+
+const OPTIONAL_PERMISSIONS = ['downloads', 'notifications']
+
 export default defineConfig({
   modules: [
     '@wxt-dev/module-react',
@@ -47,16 +58,14 @@ export default defineConfig({
     minimum_chrome_version: '119',
     homepage_url: SITE_URL,
     options_ui: { page: 'app.html', open_in_tab: true },
-    permissions: [
-      'bookmarks',
-      'favicon',
-      'storage',
-      'alarms',
-      'downloads',
-      'offscreen',
-      'unlimitedStorage',
-      'notifications',
-    ],
+    ...(process.env.SNUG_E2E_REQUIRED_PERMISSIONS === '1'
+      ? {
+          permissions: [...REQUIRED_PERMISSIONS, ...OPTIONAL_PERMISSIONS],
+        }
+      : {
+          permissions: REQUIRED_PERMISSIONS,
+          optional_permissions: OPTIONAL_PERMISSIONS,
+        }),
   }),
   vite: () => ({
     plugins: [tailwindcss()],

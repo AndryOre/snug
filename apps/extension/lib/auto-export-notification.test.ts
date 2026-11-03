@@ -24,9 +24,16 @@ function mockNotificationsApi() {
   return { create, clearSpy }
 }
 
+function mockNotificationAccess(isGranted: boolean) {
+  browser.permissions = {
+    contains: vi.fn(async () => isGranted),
+  } as unknown as typeof browser.permissions
+}
+
 beforeEach(() => {
   fakeBrowser.reset()
   resetFakeI18n()
+  mockNotificationAccess(true)
 })
 
 describe('notifyAutoExportFailure', () => {
@@ -63,6 +70,17 @@ describe('notifyAutoExportFailure', () => {
     await notifyAutoExportFailure('disk full')
 
     expect(create).not.toHaveBeenCalled()
+  })
+
+  it('skips silently when Notification access is missing', async () => {
+    const { create } = mockNotificationsApi()
+    mockNotificationAccess(false)
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    await expect(notifyAutoExportFailure('disk full')).resolves.toBeUndefined()
+
+    expect(create).not.toHaveBeenCalled()
+    expect(consoleError).not.toHaveBeenCalled()
   })
 
   it('defaults to on for users who never touched the switch', async () => {

@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
+import { triggerDownload } from './export-all-bookmarks'
 import { getImportPreview } from './import-preview'
-import { downloadViaOffscreenDocument } from './offscreen-download'
 import { runImport } from './run-import'
 import { readLatestSafetySnapshot } from './safety-snapshot'
 import {
@@ -12,11 +12,11 @@ import {
 } from './testing/fake-bookmarks'
 import type { ExtendedBookmarkTreeNode } from './types'
 
-vi.mock('./offscreen-download', () => ({
-  downloadViaOffscreenDocument: vi.fn(async () => 1),
+vi.mock('./export-all-bookmarks', () => ({
+  triggerDownload: vi.fn(),
 }))
 
-const downloadMock = vi.mocked(downloadViaOffscreenDocument)
+const downloadMock = vi.mocked(triggerDownload)
 
 function existing(): ExtendedBookmarkTreeNode[] {
   return [
@@ -57,7 +57,6 @@ beforeEach(() => {
   fakeBrowser.reset()
   resetFakeBookmarks()
   downloadMock.mockReset()
-  downloadMock.mockResolvedValue(1)
 })
 
 describe('runImport', () => {
@@ -189,16 +188,20 @@ describe('runImport', () => {
       ])
     })
 
-    it('does not delete anything when the snapshot cannot be saved', async () => {
+    it('still replaces when the snapshot file cannot be saved', async () => {
       seedFakeBookmarksTree(existing())
-      downloadMock.mockRejectedValueOnce(new Error('blocked'))
+      downloadMock.mockImplementationOnce(() => {
+        throw new Error('blocked')
+      })
+      vi.spyOn(console, 'error').mockImplementation(() => {})
 
-      await expect(
-        runImport(SINGLE_ROOT_JSON, 'application/json', 'restore-replace'),
-      ).rejects.toThrow()
+      await runImport(SINGLE_ROOT_JSON, 'application/json', 'restore-replace')
 
+      const stored = await readLatestSafetySnapshot()
+      expect(stored?.roots).toBeDefined()
       expect(collectUrls(getFakeBookmarksRoot().children ?? [])).toEqual([
-        'https://existing.example/',
+        'https://root-a.example/page',
+        'https://root-b.example/page',
       ])
     })
 
