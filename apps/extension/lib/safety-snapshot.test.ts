@@ -2,9 +2,9 @@ import type { Browser } from '@wxt-dev/browser'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fakeBrowser } from 'wxt/testing/fake-browser'
 
+import { triggerDownload } from './export-all-bookmarks'
 import { wasImportRestored } from './import-control'
 import { ImportLockHeldError, withImportLock } from './import-lock'
-import { downloadViaOffscreenDocument } from './offscreen-download'
 import {
   addSnapshotToList,
   captureSafetySnapshot,
@@ -13,6 +13,7 @@ import {
   readSafetySnapshots,
   restoreSafetySnapshot,
   safetySnapshotStore,
+  snapshotFileName,
   takeSafetySnapshot,
 } from './safety-snapshot'
 import type { SafetySnapshot } from './safety-snapshot'
@@ -23,11 +24,11 @@ import {
 } from './testing/fake-bookmarks'
 import type { ExtendedBookmarkTreeNode } from './types'
 
-vi.mock('./offscreen-download', () => ({
-  downloadViaOffscreenDocument: vi.fn(async () => 1),
+vi.mock('./export-all-bookmarks', () => ({
+  triggerDownload: vi.fn(),
 }))
 
-const downloadMock = vi.mocked(downloadViaOffscreenDocument)
+const downloadMock = vi.mocked(triggerDownload)
 
 function bookmark(title: string, url: string): ExtendedBookmarkTreeNode {
   return { id: `id-${title}`, title, url, dateAdded: 1, syncing: false }
@@ -76,7 +77,7 @@ beforeEach(async () => {
   fakeBrowser.reset()
   resetFakeBookmarks()
   downloadMock.mockClear()
-  downloadMock.mockResolvedValue(1)
+  downloadMock.mockReset()
 })
 
 describe('takeSafetySnapshot', () => {
@@ -105,14 +106,28 @@ describe('takeSafetySnapshot', () => {
     expect(second.roots[0]?.children).toHaveLength(1)
   })
 
-  it('throws and keeps the previous snapshot when the download fails', async () => {
+  it('names the file with snapshotFileName', async () => {
     seedSample()
-    const first = await takeSafetySnapshot()
-    downloadMock.mockRejectedValueOnce(new Error('disk full'))
 
-    await expect(takeSafetySnapshot()).rejects.toThrow()
+    const snapshot = await takeSafetySnapshot()
 
-    expect(await readLatestSafetySnapshot()).toEqual(first)
+    expect(downloadMock.mock.calls[0]?.[2]).toBe(
+      snapshotFileName(snapshot.takenAt),
+    )
+  })
+
+  it('still stores the snapshot and resolves when the file save fails', async () => {
+    seedSample()
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+    downloadMock.mockImplementationOnce(() => {
+      throw new Error('disk full')
+    })
+
+    const snapshot = await takeSafetySnapshot()
+
+    expect(await readLatestSafetySnapshot()).toEqual(snapshot)
+    expect(consoleError).toHaveBeenCalledTimes(1)
+    consoleError.mockRestore()
   })
 })
 
@@ -220,16 +235,31 @@ describe('restoreSafetySnapshot', () => {
     expect(stored?.roots[0]?.children?.[0]?.title).toBe('Current')
   })
 
-  it('deletes nothing when the snapshot cannot be saved', async () => {
+  it('does not block the restore when the file save fails', async () => {
     seedSample()
     const snapshot = await captureSafetySnapshot()
     seedFakeBookmarksTree([bookmark('Current', 'https://current.example/')])
-    downloadMock.mockRejectedValueOnce(new Error('blocked'))
+    downloadMock.mockImplementationOnce(() => {
+      throw new Error('blocked')
+    })
+    vi.spyOn(console, 'error').mockImplementation(() => {})
 
-    await expect(restoreSafetySnapshot(snapshot)).rejects.toThrow()
+    await restoreSafetySnapshot(snapshot)
 
     expect(rootOutline('1')).toEqual([
-      { title: 'Current', url: 'https://current.example/' },
+      { title: 'First', url: 'https://first.example/' },
+      {
+        title: 'Work',
+        children: [
+          { title: 'Docs', url: 'https://docs.example/' },
+          {
+            title: 'Deep',
+            children: [{ title: 'Nested', url: 'https://nested.example/' }],
+          },
+          { title: 'Last in work', url: 'https://work-last.example/' },
+        ],
+      },
+      { title: 'Third', url: 'https://third.example/' },
     ])
   })
 })
