@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 
+import { GOODBYE_REASON_IDS, goodbyePath } from '../src/i18n/goodbye'
 import { localePath, LOCALES } from '../src/i18n/locales'
 
 const FOOTER_OUTBOUND_TARGETS = [
@@ -94,5 +95,19 @@ for (const locale of LOCALES) {
         expect(value).toMatch(/^[A-Za-z-]+$/)
       }
     })
+  })
+}
+
+for (const locale of LOCALES) {
+  test(`${locale} Goodbye reasons carry uninstall-reason with stable ids`, async ({
+    page,
+  }) => {
+    await page.goto(goodbyePath(locale))
+    const entries = await page
+      .locator('button[data-umami-event="uninstall-reason"]')
+      .evaluateAll((buttons) =>
+        buttons.map((button) => button.dataset.umamiEventReason),
+      )
+    expect(entries).toEqual([...GOODBYE_REASON_IDS])
   })
 }

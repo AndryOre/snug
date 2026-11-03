@@ -1,0 +1,30 @@
+---
+import { getGoodbyeCopy, goodbyePath } from '../i18n/goodbye'
+import { type Locale, LOCALES } from '../i18n/locales'
+import { privacyPath } from '../i18n/privacy'
+import Layout from '../layouts/Layout.astro'
+import GoodbyeReasons from './GoodbyeReasons'
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const copy = getGoodbyeCopy(locale)
+const page = {
+  meta: copy.meta,
+  path: goodbyePath,
+  alternateLocales: LOCALES,
+}
+---
+
+<Layout locale={locale} notFound page={page}>
+  <main id="main" class="flex flex-1 flex-col">
+    <GoodbyeReasons
+      client:load
+      locale={locale}
+      copy={copy}
+      privacyHref={privacyPath(locale)}
+    />
+  </main>
+</Layout>
