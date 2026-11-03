@@ -3,6 +3,7 @@ import {
   isCurrentFolder,
   pruneFolderIdentities,
 } from '@/lib/folder-run-identity'
+import { hasDownloadsAccess } from '@/lib/permission-access'
 import {
   type AutoExportFolderRun,
   type AutoExportRun,
@@ -226,10 +227,23 @@ export async function applyRetention(keepLast: number): Promise<void> {
 
     const excessCount = Math.max(0, runs.length - keepLast)
     const remaining: AutoExportRun[] = runs.slice(excessCount)
-    const skipped: AutoExportFolderRun[] = []
+    const skipped: (
+      | AutoExportFolderRun
+      | Extract<AutoExportRun, { destination: 'downloads' }>
+    )[] = []
+    const hasDownloadsRuns = runs
+      .slice(0, excessCount)
+      .some((run) => run.destination === 'downloads')
+    const hasDownloads = hasDownloadsRuns && (await hasDownloadsAccess())
     for (const run of runs.slice(0, excessCount)) {
       if (run.destination === 'downloads') {
-        for (const downloadId of run.ids) await removeSavedDownload(downloadId)
+        if (hasDownloads) {
+          for (const downloadId of run.ids) {
+            await removeSavedDownload(downloadId)
+          }
+        } else {
+          skipped.push(run)
+        }
       } else if (context?.hasAccess) {
         for (const path of run.paths) {
           await removeSavedFolderFile(context.handle, path)

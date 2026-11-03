@@ -7,6 +7,7 @@ import {
   autoExportConfigStore,
   autoExportLastRunStore,
   autoExportNextRunStore,
+  autoExportNotifyOnFailureStore,
   autoExportRunInFlightStore,
   autoExportRunsStore,
   exportFilenameTemplateStore,
@@ -22,6 +23,7 @@ import type { AutoExportConfig } from '@/lib/types'
 
 import {
   ALARM_NAME,
+  DownloadsAccessNeededError,
   computeNextRun,
   computeNextRunAfterDue,
   readAutoExportLastRun,
@@ -786,6 +788,32 @@ describe('runAutoExport', () => {
       expect(create).toHaveBeenCalledTimes(1)
     },
   )
+
+  it('fails a Downloads run without Downloads access with a typed error, sets the badge and sends no notification', async () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date(2024, 5, 1, 8, 0, 0, 0))
+    await autoExportConfigStore.setValue(baseConfig({ formats: ['html'] }))
+    browser.permissions.contains = vi.fn(async () => false)
+    const { mock: downloadSpy } = mockDownload()
+    const { setBadgeText } = mockActionBadge()
+    const create = mockNotifications()
+    await autoExportNotifyOnFailureStore.setValue(true)
+
+    await expect(runAutoExport('scheduled')).rejects.toBeInstanceOf(
+      DownloadsAccessNeededError,
+    )
+
+    expect(await autoExportLastRunStore.getValue()).toEqual({
+      at: Date.now(),
+      ok: false,
+      error: 'downloads-access-needed',
+      errorCode: 'downloads-access-needed',
+      trigger: 'scheduled',
+    })
+    expect(downloadSpy).not.toHaveBeenCalled()
+    expect(setBadgeText).toHaveBeenCalledWith({ text: '!' })
+    expect(create).not.toHaveBeenCalled()
+  })
 
   it('creates no notification for a successful run', async () => {
     await autoExportConfigStore.setValue(baseConfig({ formats: ['html'] }))

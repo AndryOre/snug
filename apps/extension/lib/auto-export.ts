@@ -13,6 +13,7 @@ import { loadFolderHandle, queryFolderAccess } from '@/lib/folder-handle'
 import { registerFolderIdentity } from '@/lib/folder-run-identity'
 import { downloadViaOffscreenDocument } from '@/lib/offscreen-download'
 import { sanitizePathSegment } from '@/lib/path-segment'
+import { hasDownloadsAccess } from '@/lib/permission-access'
 import { renderExport } from '@/lib/render-export'
 import { markReviewPromptEligible } from '@/lib/review-prompt'
 import {
@@ -29,6 +30,7 @@ import {
   includeIconDataStore,
 } from '@/lib/storage'
 import type {
+  AutoExportErrorCode,
   AutoExportInterval,
   AutoExportLastRun,
   AutoExportTrigger,
@@ -384,6 +386,20 @@ export async function setFailureBadge(): Promise<void> {
 }
 
 /**
+ * The typed failure of an Auto-export run to Downloads without Downloads
+ * access. Its `code` is stored on the last run status, and it is the one
+ * failure that sends no Failure notification.
+ */
+export class DownloadsAccessNeededError extends Error {
+  readonly code = 'downloads-access-needed' satisfies AutoExportErrorCode
+
+  constructor() {
+    super('downloads-access-needed')
+    this.name = 'DownloadsAccessNeededError'
+  }
+}
+
+/**
  * Retention default used when a stored config predates `keepLast`.
  */
 const DEFAULT_KEEP_LAST = 10
@@ -510,6 +526,10 @@ export async function runAutoExport(
   }
 
   try {
+    if (!isFolderDestination && !(await hasDownloadsAccess())) {
+      throw new DownloadsAccessNeededError()
+    }
+
     const [
       includeIconData,
       includeDateAdded,
@@ -579,7 +599,11 @@ export async function runAutoExport(
     })
 
     await Promise.all(downloads)
-    await autoExportLastRunStore.setValue({ at: Date.now(), ok: true, trigger })
+    await autoExportLastRunStore.setValue({
+      at: Date.now(),
+      ok: true,
+      trigger,
+    })
     await markReviewPromptEligible(Date.now())
     await clearFailureBadge()
     await applyRetention(config.keepLast ?? DEFAULT_KEEP_LAST)
@@ -589,9 +613,14 @@ export async function runAutoExport(
       at: Date.now(),
       ok: false,
       error: message,
+      ...(error instanceof DownloadsAccessNeededError && {
+        errorCode: error.code,
+      }),
       trigger,
     })
-    await notifyAutoExportFailure(message)
+    if (!(error instanceof DownloadsAccessNeededError)) {
+      await notifyAutoExportFailure(message)
+    }
     if (isTrackedRun) {
       await setFailureBadge()
       await rescheduleAfterRun()
