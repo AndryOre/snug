@@ -12,10 +12,7 @@ import {
 } from '@/lib/auto-export'
 import { handleNotificationClick } from '@/lib/auto-export-notification'
 import { checkFolderAccessAtStartup } from '@/lib/folder-access-startup'
-import {
-  hasNotificationAccess,
-  watchAccessChanges,
-} from '@/lib/permission-access'
+import { watchAccessChanges } from '@/lib/permission-access'
 import {
   autoExportConfigStore,
   autoExportNextRunStore,
@@ -114,10 +111,12 @@ async function restoreMissingAlarm(): Promise<void> {
 
 /**
  * Registers the Failure notification click handler once Notification access
- * exists: immediately when already granted, otherwise when
- * `permissions.onAdded` reports the grant. Attaches at most once per worker
- * start and never throws, so a worker without Notification access starts
- * cleanly.
+ * exists: synchronously at worker start when the `notifications` namespace is
+ * already exposed (Chrome only exposes it once the optional permission is
+ * granted, and a click that wakes an idle worker is replayed only to listeners
+ * registered synchronously), otherwise when `permissions.onAdded` reports the
+ * grant. Attaches at most once per worker start and never throws, so a worker
+ * without Notification access starts cleanly.
  */
 function attachNotificationClickListenerWhenGranted(): void {
   let isAttached = false
@@ -128,9 +127,7 @@ function attachNotificationClickListenerWhenGranted(): void {
       void handleNotificationClick(notificationId).catch(console.error)
     })
   }
-  void hasNotificationAccess().then((isGranted) => {
-    if (isGranted) attach()
-  })
+  attach()
   watchAccessChanges(({ permission, isGranted }) => {
     if (permission === 'notifications' && isGranted) attach()
   })

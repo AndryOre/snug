@@ -603,12 +603,11 @@ describe('Failure notification click listener', () => {
     expect(addListener).toHaveBeenCalledTimes(1)
   })
 
-  it('attaches at start when Notification access is already granted', async () => {
+  it('attaches synchronously at start when Notification access is already granted', () => {
     const addListener = mockNotifications()
     mockPermissions({ hasNotificationAccess: true })
 
     background.main?.()
-    await new Promise((resolve) => setTimeout(resolve, 20))
 
     expect(addListener).toHaveBeenCalledTimes(1)
   })
