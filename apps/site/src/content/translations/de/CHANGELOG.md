@@ -1,11 +1,22 @@
 ---
 title: Neuigkeiten
-sourceHash: ee6130c5fed81df2
+sourceHash: 62946505ba156116
 description:
   'Versionshinweise zur Snug-Erweiterung für Chrome: was sich in jeder Version
   geändert hat, von neuen Auto-Export-Optionen bis zu Korrekturen.'
 seoTitle: 'Neuigkeiten in Snug: Versionshinweise und Änderungen'
 ---
+
+## 2.3.1
+
+2026-11-03
+
+- Wenn Snug Zugriff auf Downloads braucht, erscheinen jetzt verständlichere
+  Meldungen statt eines rohen Fehlercodes.
+- Der Schalter für Fehlerbenachrichtigungen wird jetzt als ausgeschaltet
+  angezeigt, wenn der Benachrichtigungszugriff fehlt, mit einer Schaltfläche
+  „Zulassen“.
+- Die Abschiedsseite versteht jetzt mehr Schreibweisen von Sprachcodes.
 
 ## 2.3.0
 

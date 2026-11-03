@@ -1413,6 +1413,15 @@
   "changelog_2_3_0_3": {
     "message": "Die Seite „Neuigkeiten“ beginnt jetzt mit einer Zeile, die erklärt, was Snug ist."
   },
+  "changelog_2_3_1_1": {
+    "message": "Wenn Snug Zugriff auf Downloads braucht, erscheinen jetzt verständlichere Meldungen statt eines rohen Fehlercodes."
+  },
+  "changelog_2_3_1_2": {
+    "message": "Der Schalter für Fehlerbenachrichtigungen wird jetzt als ausgeschaltet angezeigt, wenn der Benachrichtigungszugriff fehlt, mit einer Schaltfläche „Zulassen“."
+  },
+  "changelog_2_3_1_3": {
+    "message": "Die Abschiedsseite versteht jetzt mehr Schreibweisen von Sprachcodes."
+  },
   "reviewPrompt_title": {
     "message": "Funktioniert Snug für dich?",
     "description": "Popup Review prompt card title (also its accessible name)"

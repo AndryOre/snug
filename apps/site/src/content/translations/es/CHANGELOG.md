@@ -1,11 +1,22 @@
 ---
 title: Novedades
-sourceHash: ee6130c5fed81df2
+sourceHash: 62946505ba156116
 description:
   'Notas de versión de la extensión Snug para Chrome: qué cambió en cada
   versión, desde nuevas opciones de Auto-export hasta correcciones y mejoras.'
 seoTitle: 'Novedades de Snug: notas de versión y cambios'
 ---
+
+## 2.3.1
+
+2026-11-03
+
+- Ahora aparecen mensajes más claros cuando Snug necesita acceso a Descargas, en
+  lugar de un código de error sin formato.
+- El interruptor de avisos de fallo ahora aparece desactivado cuando falta el
+  acceso a Notificaciones, con un botón Permitir.
+- La página de despedida ahora entiende más formas de escribir los códigos de
+  idioma.
 
 ## 2.3.0
 

@@ -1420,6 +1420,15 @@
   "changelog_2_3_0_3": {
     "message": "The What’s new page now opens with a line saying what Snug is."
   },
+  "changelog_2_3_1_1": {
+    "message": "Clearer messages now appear when Snug needs Downloads access, instead of a raw error code."
+  },
+  "changelog_2_3_1_2": {
+    "message": "The failure notification switch now shows as off when Notification access is missing, with an Allow button to turn it back on."
+  },
+  "changelog_2_3_1_3": {
+    "message": "The Goodbye page now understands more spellings of language codes."
+  },
   "reviewPrompt_title": {
     "message": "Is Snug working for you?",
     "description": "Popup Review prompt card title (also its accessible name)"
