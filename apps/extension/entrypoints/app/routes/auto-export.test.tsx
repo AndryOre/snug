@@ -309,6 +309,15 @@ describe('AutoExportRoute Notification access alert', () => {
     expect(await autoExportNotifyOnFailureStore.getValue()).toBe(true)
   })
 
+  it('hides the alert while Auto-export is off', async () => {
+    installPermissions({ held: ['downloads'], isRequestGranted: true })
+    await mountRoute({ enabled: false, destination: 'downloads' }, true)
+
+    expect(document.body.textContent).not.toContain(
+      en.autoExportPage_notificationAccessTitle.message,
+    )
+  })
+
   it('requests before any await, turns the switch on on grant and never rewrites the setting', async () => {
     installPermissions({ held: ['downloads'], isRequestGranted: true })
     await mountRoute({ enabled: true, destination: 'downloads' }, true)

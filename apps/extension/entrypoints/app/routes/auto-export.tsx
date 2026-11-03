@@ -922,7 +922,7 @@ export function AutoExportRoute() {
               />
             </Field>
 
-            {notifyOnFailure && isNotificationAccessMissing && (
+            {!isOff && notifyOnFailure && isNotificationAccessMissing && (
               <NotificationAccessAlert
                 onAllow={() => void allowNotificationAccess()}
               />
