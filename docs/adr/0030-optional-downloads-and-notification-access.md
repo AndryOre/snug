@@ -8,6 +8,9 @@ Accepted. Amends [0008](0008-safety-snapshot-in-extension-storage.md),
 
 Date: 2026-11-03
 
+Revised: 2026-11-03, Notification access is also requested together with
+Downloads access when enabling Auto-export.
+
 ## Context
 
 Adding `downloads` and `notifications` in 2.0.1 made Chrome and Edge disable the
@@ -28,8 +31,10 @@ prompt. Snug asks for them in a user gesture, at the moment they are needed:
 - **Downloads access** when the user enables Auto-export with the Downloads
   destination, switches the destination to Downloads or runs Export now without
   it.
-- **Notification access** when the user turns on the Failure notification
-  switch.
+- **Notification access** together with Downloads access when the user enables
+  Auto-export to Downloads while the Failure notification is on (its default),
+  and on its own when the user turns the Failure notification switch on or
+  allows it from the alert.
 
 When the user denies a request the change is not saved and the page says why.
 Without Downloads access an Auto-export run to Downloads fails with a specific
