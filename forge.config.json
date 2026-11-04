@@ -17,20 +17,12 @@
   },
   "tracker": {
     "kind": "linear",
-    "readyLabel": "ready-for-agent",
-    "triageLabels": [
-      "needs-triage",
-      "needs-info",
-      "ready-for-agent",
-      "ready-for-human",
-      "wontfix"
-    ],
     "transitions": {
       "onStart": "worker",
       "onPrOpen": "automatic",
       "onPrMerge": "automatic"
     },
-    "prReference": "Refs: {id}"
+    "team": "AO"
   },
   "preflight": {
     "requiredFiles": [],
