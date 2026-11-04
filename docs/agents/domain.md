@@ -8,9 +8,9 @@ repo's domain documentation, and how it relates to any existing `docs/` tree.
 
 An existing `docs/` tree (if this repo has one) is **published** ground:
 finished reference material, written and maintained by hand. Don't restructure
-it or fold `CONTEXT.md` into it.
+it or fold `GLOSSARY.md` into it.
 
-`CONTEXT.md` and `docs/adr/` are the **live** ground that `domain-modeling`
+`GLOSSARY.md` and `docs/adr/` are the **live** ground that `domain-modeling`
 maintains as `/forge` runs features through this repo: its ubiquitous language
 and the architectural decisions made along the way. Both start empty and are
 created lazily — only when a term or a decision actually crystallizes during a
@@ -18,7 +18,7 @@ created lazily — only when a term or a decision actually crystallizes during a
 
 ## Before exploring, read these
 
-- **`CONTEXT.md`** at the repo root, if it exists.
+- **`GLOSSARY.md`** at the repo root, if it exists.
 - **`docs/adr/`**, if it exists: read ADRs that touch the area you're about to
   work in.
 
@@ -29,11 +29,11 @@ suggest creating them upfront.
 
 Single-context bun-workspaces monorepo
 ([ADR 0010](../adr/0010-bun-workspaces-monorepo.md)): `apps/*` and `packages/*`
-share one root `CONTEXT.md` and one `docs/adr/`.
+share one root `GLOSSARY.md` and one `docs/adr/`.
 
 ```
 /
-├── CONTEXT.md
+├── GLOSSARY.md
 └── docs/adr/
     ├── 0001-....md
     └── 0002-....md
@@ -42,7 +42,7 @@ share one root `CONTEXT.md` and one `docs/adr/`.
 ## Use the glossary's vocabulary
 
 When your output names a domain concept (an issue title, a ticket, a test name),
-use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary
+use the term as defined in `GLOSSARY.md`. Don't drift to synonyms the glossary
 explicitly avoids.
 
 If the concept you need isn't in the glossary yet, that's a signal: either

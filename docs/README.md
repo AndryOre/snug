@@ -21,7 +21,7 @@ An index of every document in this repository.
   e2e build step, lychee, forge worktrees, BrowserStack, and the Coolify deploy.
 - [`docs/architecture.md`](architecture.md) — a matklad-style code map of the
   codebase's shape: runtime contexts, data flows, and invariants.
-- [`CONTEXT.md`](../CONTEXT.md) — a glossary of domain terms used consistently
+- [`GLOSSARY.md`](../GLOSSARY.md) — a glossary of domain terms used consistently
   across code, docs, and UI.
 
 ## Architecture decision records

@@ -61,4 +61,5 @@ the root.
 - The Chrome Web Store sources zip needs `zip.sourcesRoot` at the repo root with
   an allowlist, or reviewers cannot rebuild the extension.
 - `turbo prune` is not used with `bun.lock`.
-- `docs/agents/domain.md` now describes a monorepo with one shared `CONTEXT.md`.
+- `docs/agents/domain.md` now describes a monorepo with one shared
+  `GLOSSARY.md`.

@@ -4,7 +4,7 @@ This document is the extension's assurance case: what it does and doesn't do
 with your data, the threats it's designed against, and where those defenses fall
 short today. It's written for users, badge reviewers (OpenSSF Best Practices,
 OpenSSF Scorecard), and security researchers. Terms below (root folder, import
-mode, Import preview, and so on) follow [`CONTEXT.md`](../CONTEXT.md).
+mode, Import preview, and so on) follow [`GLOSSARY.md`](../GLOSSARY.md).
 
 > Paths to extension code (`lib/`, `entrypoints/`, `locales/`, `e2e-store/`) are
 > relative to `apps/extension/`.
