@@ -49,7 +49,7 @@ for Linear in this setup.
 `onPrMerge: automatic` — this team's Linear↔GitHub integration is configured
 (`On PR or commit open → In Review`, `On PR or commit merge → Done`), same as
 `andryore-dev`. If that integration ever gets disconnected for this repo, switch
-both to `coordinator` here and in `forge.config.json`'s `tracker.transitions` so
+both to `coordinator` here and in `emet.config.json`'s `tracker.transitions` so
 the coordinator writes them explicitly instead.
 
 Also verify **Settings → My Account → Preferences → Behavior → "On move to
