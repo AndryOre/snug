@@ -59,7 +59,7 @@ with the coordinator's reason; a stale lock from an earlier run blocks it.
 
 **Fix:** Run `bun install --silent` in the worktree before `bun run check`. If a
 lock is stale, run `git worktree unlock .` and lock again with the reason the
-coordinator gave. See [`agents/forge.md`](agents/forge.md#worktree-setup).
+coordinator gave. See [`agents/emet.md`](agents/emet.md#worktree-setup).
 
 ## BrowserStack run fails, is skipped, or opens an issue
 

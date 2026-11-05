@@ -73,7 +73,7 @@ An index of every document in this repository.
   scripts to run, conventions, and escalation ladders.
 - [`docs/agents/domain.md`](agents/domain.md) — how domain-modeling-aware skills
   should use this repo's domain docs.
-- [`docs/agents/forge.md`](agents/forge.md) — repo-specific config for the
+- [`docs/agents/emet.md`](agents/emet.md) — repo-specific config for the
   `/forge` command.
 - [`docs/agents/issue-tracker.md`](agents/issue-tracker.md) — where issues and
   specs live (Linear) and how to work with them.
