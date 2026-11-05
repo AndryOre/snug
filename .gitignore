@@ -24,8 +24,8 @@ apps/video/node_modules/
 apps/video/public/sfx/epidemic/
 apps/video/public/music/
 
-# forge coordination artifacts
-.forge
+# emet coordination artifacts
+.emet
 .claude/worktrees
 
 # Editor directories and files
