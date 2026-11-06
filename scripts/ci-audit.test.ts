@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   aggregateJobs,
+  fromApiJob,
   formatTable,
   median,
   parseArguments,
@@ -92,5 +93,57 @@ describe('parseArguments', () => {
     expect(() => parseArguments(['--runs', '0'])).toThrow()
     expect(() => parseArguments(['--runs'])).toThrow()
     expect(() => parseArguments(['--nope'])).toThrow()
+  })
+})
+
+describe('fromApiJob', () => {
+  const apiJob = {
+    name: 'Quality',
+    conclusion: 'success',
+    created_at: '2026-01-01T00:00:00Z',
+    started_at: '2026-01-01T00:00:10Z',
+    completed_at: '2026-01-01T00:02:10Z',
+    steps: [
+      {
+        name: 'Set up job',
+        started_at: '2026-01-01T00:00:10Z',
+        completed_at: '2026-01-01T00:00:12Z',
+      },
+      {
+        name: 'Prepare the extension workspace',
+        started_at: '2026-01-01T00:00:12Z',
+        completed_at: '2026-01-01T00:00:30Z',
+      },
+      {
+        name: 'Skipped step',
+        started_at: null,
+        completed_at: null,
+      },
+      {
+        name: 'Check and test workspaces',
+        started_at: '2026-01-01T00:00:30Z',
+        completed_at: '2026-01-01T00:02:10Z',
+      },
+    ],
+  }
+
+  it('keeps the queue wait that the REST payload carries', () => {
+    expect(summarizeJob(fromApiJob(apiJob)).waitSeconds).toBe(10)
+  })
+
+  it('drops steps that never started', () => {
+    expect(fromApiJob(apiJob).steps?.map((step) => step.name)).toEqual([
+      'Set up job',
+      'Prepare the extension workspace',
+      'Check and test workspaces',
+    ])
+  })
+
+  it('counts the prepare step as setup, not as the main run', () => {
+    expect(summarizeJob(fromApiJob(apiJob))).toEqual({
+      waitSeconds: 10,
+      setupSeconds: 20,
+      runSeconds: 100,
+    })
   })
 })

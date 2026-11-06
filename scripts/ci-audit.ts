@@ -24,7 +24,50 @@ export type JobSummary = {
 export type JobRow = JobSummary & { name: string; samples: number }
 
 const SETUP_STEP_PATTERN =
-  /^(Set up job|Run [^\s]+@[^\s]+|Install |Setup |Set up |Restore |Cache |Download )/i
+  /^(Set up job|Run [^\s]+@[^\s]+|Install |Setup |Set up |Restore |Cache |Download |Prepare |Read the )/i
+
+export type ApiJobStep = {
+  name: string
+  started_at: string | null
+  completed_at: string | null
+}
+
+export type ApiJob = {
+  name: string
+  conclusion: string | null
+  created_at: string
+  started_at: string | null
+  completed_at: string | null
+  steps?: ApiJobStep[]
+}
+
+/**
+ * Maps a job from the REST `actions/runs/<id>/jobs` payload, which carries the
+ * queue timestamp (`created_at`) that `gh run view --json jobs` omits.
+ * @param job - A job as returned by the GitHub REST API.
+ * @returns The audit shape; steps that never started are dropped.
+ */
+export function fromApiJob(job: ApiJob): AuditJob {
+  const steps: AuditStep[] = []
+  const apiSteps = job.steps ?? []
+  for (const step of apiSteps) {
+    if (step.started_at && step.completed_at) {
+      steps.push({
+        name: step.name,
+        startedAt: step.started_at,
+        completedAt: step.completed_at,
+      })
+    }
+  }
+  return {
+    name: job.name,
+    conclusion: job.conclusion ?? undefined,
+    createdAt: job.created_at,
+    startedAt: job.started_at ?? '',
+    completedAt: job.completed_at ?? '',
+    steps,
+  }
+}
 
 function secondsBetween(from: string, to: string): number {
   const difference = (Date.parse(to) - Date.parse(from)) / 1000
@@ -33,7 +76,7 @@ function secondsBetween(from: string, to: string): number {
 
 /**
  * Splits one job into queue wait, setup and main-run seconds.
- * @param job - A job from `gh run view --json jobs`.
+ * @param job - A job mapped from the REST API by `fromApiJob`.
  * @returns Wait (created to started), setup (leading checkout/install/cache
  * steps) and run (everything after the setup steps) in seconds.
  */
@@ -173,12 +216,26 @@ function main(): void {
       'databaseId',
     ]),
   ) as { databaseId: number }[]
-  const jobs = listed.flatMap(({ databaseId }) => {
-    const view = JSON.parse(
-      runGh(['run', 'view', String(databaseId), '--json', 'jobs']),
-    ) as { jobs: AuditJob[] }
-    return view.jobs
-  })
+  const jobs = listed.flatMap(({ databaseId }) =>
+    runGh([
+      'api',
+      [
+        'repos',
+        '{owner}',
+        '{repo}',
+        'actions',
+        'runs',
+        databaseId,
+        'jobs',
+      ].join('/'),
+      '--paginate',
+      '--jq',
+      '.jobs[]',
+    ])
+      .split('\n')
+      .filter((line) => line.trim() !== '')
+      .map((line) => fromApiJob(JSON.parse(line) as ApiJob)),
+  )
   console.log(`${workflow}: ${listed.length} runs`)
   console.log(formatTable(aggregateJobs(jobs)))
 }
