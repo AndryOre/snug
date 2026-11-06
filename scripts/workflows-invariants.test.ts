@@ -14,6 +14,16 @@ const FULL_SHA_PATTERN = /^[\da-f]{40}$/
 const VERSION_COMMENT_PATTERN = /#\s*v\d+\.\d+\.\d+\s*$/
 const USES_LINE_PATTERN = /^\s*(?:-\s+)?uses:\s*(\S+)(.*)$/
 
+interface ShardedJob {
+  readonly name?: string
+  readonly 'runs-on'?: string
+  readonly strategy?: {
+    readonly 'fail-fast'?: boolean
+    readonly matrix?: { readonly shard?: readonly number[] }
+  }
+  readonly steps?: readonly WorkflowStep[]
+}
+
 function collectSteps(workflow: Workflow): WorkflowStep[] {
   return Object.values(workflow.jobs ?? {}).flatMap((job) => job.steps ?? [])
 }
@@ -237,6 +247,60 @@ describe('ci.yml', () => {
       )
       expect(checkout?.with?.['fetch-depth']).toBe(0)
     }
+  })
+
+  describe('sharded e2e', () => {
+    const { jobs } = parse(readWorkflowText('ci.yml')) as {
+      jobs?: Record<string, ShardedJob>
+    }
+    const e2e = jobs?.e2e
+    const e2eRun = e2e?.steps?.find((step) =>
+      step.run?.includes('turbo run test:e2e'),
+    )
+
+    test('e2e runs as 4 shards', () => {
+      expect(e2e?.strategy?.['fail-fast']).toBe(false)
+      expect(e2e?.strategy?.matrix?.shard).toEqual([1, 2, 3, 4])
+      expect(e2e?.name).toBe('E2E (Playwright ${{ matrix.shard }}/4)')
+      expect(e2e?.['runs-on']).toBe('ubuntu-latest')
+    })
+
+    test('forwards --shard to turbo', () => {
+      expect(e2eRun?.env?.SHARD).toBe('${{ matrix.shard }}')
+      expect(e2eRun?.run).toMatch(
+        /bunx turbo run test:e2e "\$\{affected_flags\[@\]\}" -- --shard="\$\{SHARD\}\/4"/,
+      )
+      expect(hasAffectedFlag(e2eRun ?? {})).toBe(true)
+    })
+
+    test('failure artifacts are named per shard', () => {
+      const uploads = (e2e?.steps ?? []).filter((step) =>
+        step.uses?.startsWith('actions/upload-artifact@'),
+      )
+      expect(uploads.map((step) => step.with?.name)).toEqual([
+        'playwright-report-${{ matrix.shard }}',
+        'site-playwright-report-${{ matrix.shard }}',
+      ])
+      for (const upload of uploads) {
+        expect(upload.if).toBe('failure()')
+      }
+    })
+
+    test('the site Playwright config splits shards inside files', () => {
+      const siteConfig = readFileSync(
+        new URL('../apps/site/playwright.config.ts', import.meta.url),
+        'utf8',
+      )
+      expect(siteConfig).toMatch(/^\s*fullyParallel:\s*true,/m)
+    })
+
+    test('CI passed fails when any shard fails or is cancelled', () => {
+      const checkStep = workflow.jobs?.['ci-passed']?.steps?.[0]
+      const failed = String(checkStep?.env?.FAILED)
+      expect(workflow.jobs?.['ci-passed']?.if).toBe('always()')
+      expect(failed).toContain("contains(needs.*.result, 'failure')")
+      expect(failed).toMatch(/contains\(needs\.\*\.result,\s*'cancelled'\)/)
+    })
   })
 
   test('affected runs resolve the pull request base ref', () => {
