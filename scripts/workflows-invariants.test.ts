@@ -48,6 +48,31 @@ const ROUTED_JOBS: readonly string[] = [
 
 const FORBIDDEN_RUNNER_LABEL_PATTERN = /^vps-|^self-hosted$/
 
+/**
+ * The artifact the `build-site` job uploads and every E2E shard downloads.
+ */
+const SITE_DIST_ARTIFACT = 'site-dist'
+
+interface SiteBuildJob {
+  readonly needs?: unknown
+  readonly outputs?: Record<string, string>
+}
+
+/**
+ * Tells whether one line of a `run` script runs `astro build`, directly or
+ * through the site's `build` or `test:e2e` scripts.
+ * @param line One line of a step's `run` script.
+ * @returns True when the line builds the site.
+ */
+function isSiteBuildLine(line: string): boolean {
+  return (
+    /\bastro build\b/.test(line) ||
+    /--filter=@snug\/site\b/.test(line) ||
+    (/\bturbo run (?:\S+ )*test:e2e(?:\s|$)/.test(line) &&
+      !line.includes("--filter='!@snug/site'"))
+  )
+}
+
 interface RunnerJob {
   readonly 'runs-on'?: unknown
   readonly uses?: string
@@ -353,7 +378,13 @@ describe('ci.yml', () => {
   test('keeps BrowserStack out of the ci-passed needs on purpose', () => {
     const needs = workflow.jobs?.['ci-passed']?.needs
     expect(needs).toEqual(
-      expect.arrayContaining(['quality', 'build', 'e2e', 'commitlint']),
+      expect.arrayContaining([
+        'quality',
+        'build',
+        'build-site',
+        'e2e',
+        'commitlint',
+      ]),
     )
     expect(needs).not.toContain('browserstack')
   })
@@ -440,7 +471,7 @@ describe('ci.yml', () => {
     }
   })
 
-  describe.each(['quality', 'build', 'e2e'])(
+  describe.each(['quality', 'build', 'build-site', 'e2e'])(
     '%s restores node_modules on an exact bun.lock hit',
     (jobName) => {
       const steps = workflow.jobs?.[jobName]?.steps ?? []
@@ -477,12 +508,118 @@ describe('ci.yml', () => {
         )
       })
 
-      test('reruns the extension postinstall on a hit', () => {
-        const prepare = steps.find((step) => step.if === hit)
-        expect(prepare?.run).toBe('bun run --cwd apps/extension postinstall')
-      })
+      test.runIf(jobName !== 'build-site')(
+        'reruns the extension postinstall on a hit',
+        () => {
+          const prepare = steps.find((step) => step.if === hit)
+          expect(prepare?.run).toBe('bun run --cwd apps/extension postinstall')
+        },
+      )
     },
   )
+
+  describe('build-site builds the site once per run', () => {
+    const { jobs } = parse(readWorkflowText('ci.yml')) as {
+      jobs?: Record<string, ShardedJob & SiteBuildJob>
+    }
+    const buildSite = jobs?.['build-site']
+    const buildSiteSteps = buildSite?.steps ?? []
+    const buildStep = buildSiteSteps.find((step) =>
+      step.run?.includes('turbo run build'),
+    )
+    const e2eSteps = jobs?.e2e?.steps ?? []
+    const download = e2eSteps.find((step) =>
+      step.uses?.startsWith('actions/download-artifact@'),
+    )
+    const e2eRun = e2eSteps.find((step) => step.run?.includes('turbo run'))
+
+    test('runs on a literal ubuntu-latest', () => {
+      expect(buildSite?.['runs-on']).toBe('ubuntu-latest')
+      expect(ROUTED_JOBS).not.toContain('ci.yml:build-site')
+    })
+
+    test('builds only the site, scoped to affected workspaces', () => {
+      expect(buildStep?.id).toBe('site-build')
+      expect(buildStep?.run).toMatch(
+        /bunx turbo run build --filter=@snug\/site "\$\{affected_flags\[@\]\}"/,
+      )
+      expect(hasAffectedFlag(buildStep ?? {})).toBe(true)
+      expect(buildStep?.run).toContain('apps/site/dist/index.html')
+      expect(buildSite?.outputs?.built).toBe(
+        '${{ steps.site-build.outputs.built }}',
+      )
+    })
+
+    test(`uploads apps/site/dist as ${SITE_DIST_ARTIFACT} only when built`, () => {
+      const upload = buildSiteSteps.find((step) =>
+        step.uses?.startsWith('actions/upload-artifact@'),
+      )
+      expect(upload?.if).toBe("steps.site-build.outputs.built == 'true'")
+      expect(upload?.with).toMatchObject({
+        name: SITE_DIST_ARTIFACT,
+        path: 'apps/site/dist',
+        'if-no-files-found': 'error',
+      })
+    })
+
+    test('every shard needs build-site and downloads dist only when built', () => {
+      expect(needsList(jobs?.e2e?.needs)).toContain('build-site')
+      expect(download?.if).toBe("needs.build-site.outputs.built == 'true'")
+      expect(download?.with).toMatchObject({
+        name: SITE_DIST_ARTIFACT,
+        path: 'apps/site/dist',
+      })
+      expect(e2eSteps.indexOf(download ?? {})).toBeLessThan(
+        e2eSteps.indexOf(e2eRun ?? {}),
+      )
+    })
+
+    test('shards run the site suite against the downloaded dist', () => {
+      expect(e2eRun?.run).toMatch(
+        /bunx turbo run test:e2e:prebuilt "\$\{affected_flags\[@\]\}" -- --shard="\$\{SHARD\}\/4"/,
+      )
+      const siteScripts = (
+        JSON.parse(
+          readFileSync(
+            new URL('../apps/site/package.json', import.meta.url),
+            'utf8',
+          ),
+        ) as { scripts: Record<string, string> }
+      ).scripts
+      expect(siteScripts['test:e2e:prebuilt']).toBe('playwright test')
+      const turboTasks = (
+        JSON.parse(
+          readFileSync(new URL('../turbo.json', import.meta.url), 'utf8'),
+        ) as { tasks: Record<string, unknown> }
+      ).tasks
+      expect(turboTasks['test:e2e:prebuilt']).toEqual(turboTasks['test:e2e'])
+    })
+
+    test('astro build runs in build-site and nowhere else', () => {
+      const siteBuilders = Object.entries(jobs ?? {}).flatMap(
+        ([jobName, job]) =>
+          (job.steps ?? []).flatMap((step) =>
+            (step.run ?? '')
+              .split('\n')
+              .filter((line) => isSiteBuildLine(line))
+              .map(() => jobName),
+          ),
+      )
+      expect(siteBuilders).toEqual(['build-site'])
+    })
+
+    test.each([
+      ['bunx astro build', true],
+      ['bunx turbo run build --filter=@snug/site', true],
+      ['bunx turbo run test:e2e "${affected_flags[@]}"', true],
+      ['bunx turbo run check test:e2e', true],
+      ["bunx turbo run test:e2e --filter='!@snug/site'", false],
+      ['bunx turbo run test:e2e:prebuilt', false],
+      ['bunx turbo run zip', false],
+    ])('a step line "%s" builds the site: %s', (line, expected) => {
+      expect(isSiteBuildLine(line)).toBe(expected)
+    })
+  })
 
   describe('sharded e2e', () => {
     const { jobs } = parse(readWorkflowText('ci.yml')) as {
@@ -503,7 +640,10 @@ describe('ci.yml', () => {
     test('forwards --shard to turbo', () => {
       expect(e2eRun?.env?.SHARD).toBe('${{ matrix.shard }}')
       expect(e2eRun?.run).toMatch(
-        /bunx turbo run test:e2e "\$\{affected_flags\[@\]\}" -- --shard="\$\{SHARD\}\/4"/,
+        /bunx turbo run test:e2e --filter='!@snug\/site' "\$\{affected_flags\[@\]\}" -- --shard="\$\{SHARD\}\/4"/,
+      )
+      expect(e2eRun?.run).toMatch(
+        /bunx turbo run test:e2e:prebuilt "\$\{affected_flags\[@\]\}" -- --shard="\$\{SHARD\}\/4"/,
       )
       expect(hasAffectedFlag(e2eRun ?? {})).toBe(true)
     })

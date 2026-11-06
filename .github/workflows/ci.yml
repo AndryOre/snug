@@ -164,8 +164,79 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  # Builds the site once per run for every E2E shard. An unaffected site
+  # leaves built=false, so the shards skip the download.
+  build-site:
+    name: Build (site dist)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    outputs:
+      built: ${{ steps.site-build.outputs.built }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+
+      # Exact-hit only: no restore-keys, so a stale tree is never reused.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: node-modules
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('bun.lock') }}
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: steps.node-modules.outputs.cache-hit != 'true'
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        if: steps.node-modules.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Build the site
+        id: site-build
+        env:
+          TURBO_SCM_BASE: origin/${{ github.base_ref }}
+          AFFECTED:
+            ${{ github.event_name == 'pull_request' && '--affected' || '' }}
+        run: |
+          read -r -a affected_flags <<< "$AFFECTED"
+          bunx turbo run build --filter=@snug/site "${affected_flags[@]}"
+          if [[ -f apps/site/dist/index.html ]]; then
+            echo "built=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "built=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: steps.site-build.outputs.built == 'true'
+        with:
+          name: site-dist
+          path: apps/site/dist
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
   e2e:
     name: E2E (Playwright ${{ matrix.shard }}/4)
+    needs: [build-site]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -242,6 +313,14 @@ jobs:
         working-directory: apps/extension
         run: bunx playwright install-deps chromium
 
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: needs.build-site.outputs.built == 'true'
+        with:
+          name: site-dist
+          path: apps/site/dist
+
+      # The site runs Playwright only, against the downloaded dist; the other
+      # workspaces keep test:e2e. Both run at once, as one turbo run would.
       - name: Run E2E tests
         env:
           TURBO_SCM_BASE: origin/${{ github.base_ref }}
@@ -252,7 +331,14 @@ jobs:
           SHARD: ${{ matrix.shard }}
         run: |
           read -r -a affected_flags <<< "$AFFECTED"
-          bunx turbo run test:e2e "${affected_flags[@]}" -- --shard="${SHARD}/4"
+          bunx turbo run test:e2e --filter='!@snug/site' "${affected_flags[@]}" -- --shard="${SHARD}/4" &
+          workspaces_pid=$!
+          bunx turbo run test:e2e:prebuilt "${affected_flags[@]}" -- --shard="${SHARD}/4" &
+          site_pid=$!
+          status=0
+          wait "${workspaces_pid}" || status=1
+          wait "${site_pid}" || status=1
+          exit "${status}"
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
@@ -364,9 +450,10 @@ jobs:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: bunx commitlint --from "${BASE_SHA}" --to "${HEAD_SHA}" --verbose
 
-  # Stable status-check name for branch protection: aggregates quality/build/e2e/commitlint
-  # so a single required check covers the whole pipeline regardless of which jobs
-  # run for a given trigger (e.g. commitlint is skipped on push).
+  # Stable status-check name for branch protection: aggregates
+  # quality/build/build-site/e2e/commitlint so a single required check covers
+  # the whole pipeline regardless of which jobs run for a given trigger (e.g.
+  # commitlint is skipped on push).
   ci-passed:
     name: CI passed
     runs-on:
@@ -375,7 +462,7 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
-    needs: [quality, build, e2e, commitlint]
+    needs: [quality, build, build-site, e2e, commitlint]
     if: always()
     steps:
       - name: Check job results

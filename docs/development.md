@@ -87,16 +87,37 @@ Hooks are installed via Husky and live in `.husky/`:
 ## CI
 
 Every PR — including docs-only changes — runs the full `ci.yml` pipeline:
-`quality`, `build`, `e2e`, and `commitlint`. The `CI passed` job aggregates
-their results and is one of the three status checks required to merge, with
-`Validate PR title` and `Check markdown links`; it passes once every needed job
-is `success` or `skipped` (e.g. `commitlint` is skipped on `push` runs), and
-fails if any needed job is `failure` or `cancelled`.
+`quality`, `build`, `build-site`, `e2e`, and `commitlint`. The `CI passed` job
+aggregates their results and is one of the three status checks required to
+merge, with `Validate PR title` and `Check markdown links`; it passes once every
+needed job is `success` or `skipped` (e.g. `commitlint` is skipped on `push`
+runs), and fails if any needed job is `failure` or `cancelled`.
 
 `e2e` runs as 4 parallel shards, `E2E (Playwright 1/4)` to `4/4`, each passing
-`--shard=N/4` through `turbo run test:e2e` to Playwright; `CI passed` fails if
-any shard fails. On failure each shard uploads `playwright-report-N` and
-`site-playwright-report-N`.
+`--shard=N/4` to Playwright; `CI passed` fails if any shard fails. On failure
+each shard uploads `playwright-report-N` and `site-playwright-report-N`.
+
+The site is built once per run. `build-site` runs `astro build` (with
+`--affected` on PRs) and uploads `apps/site/dist` as the `site-dist` artifact.
+Each shard needs `build-site`, downloads `site-dist`, and runs the site's
+Playwright-only `test:e2e:prebuilt` next to `turbo run test:e2e` for the other
+workspaces. If the site is not affected, nothing is uploaded and the shards skip
+the download.
+
+Jobs avoid repeated setup:
+
+- `node_modules` is cached on `hashFiles('bun.lock')`, exact hit only; a hit
+  skips `bun install` and reruns the extension `postinstall`.
+- Playwright browsers are cached on the installed Playwright version; a hit runs
+  only `playwright install-deps chromium`.
+- Checkouts use `fetch-depth: 0` with `filter: blob:none` (blobless, history
+  kept for `--affected` and commitlint).
+- Site E2E uses all 4 vCPU (`workers: '100%'` in CI); extension E2E stays at 1
+  worker.
+
+`bun run ci:audit -- --runs 20` prints the median wait, setup and run seconds
+per job of recent `ci.yml` runs. Measured shard times are in
+[ADR 0031](adr/0031-github-hosted-ci-with-sharded-e2e-and-optional-blacksmith-runner.md#consequences).
 
 Runners follow the andryorelabs CI runner standard
 ([ADR 0031](adr/0031-github-hosted-ci-with-sharded-e2e-and-optional-blacksmith-runner.md)).
