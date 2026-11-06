@@ -4,6 +4,7 @@ import { LAYOUT_SPECS } from './playwright.layout-specs'
 
 export default defineConfig({
   testDir: './e2e',
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [['html', { open: 'never' }]] : 'list',
