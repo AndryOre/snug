@@ -93,6 +93,24 @@ their results and is one of the three status checks required to merge, with
 is `success` or `skipped` (e.g. `commitlint` is skipped on `push` runs), and
 fails if any needed job is `failure` or `cancelled`.
 
+`e2e` runs as 4 parallel shards, `E2E (Playwright 1/4)` to `4/4`, each passing
+`--shard=N/4` through `turbo run test:e2e` to Playwright; `CI passed` fails if
+any shard fails. On failure each shard uploads `playwright-report-N` and
+`site-playwright-report-N`.
+
+Runners follow the andryorelabs CI runner standard
+([ADR 0031](adr/0031-github-hosted-ci-with-sharded-e2e-and-optional-blacksmith-runner.md)).
+Only the light jobs listed in `ROUTED_JOBS`
+(`scripts/workflows-invariants.test.ts`) read the optional `BLACKSMITH_RUNNER`
+repository variable, and fork PRs always use `ubuntu-latest`. Every other job
+keeps a literal `runs-on: ubuntu-latest`, and no job uses a VPS or self-hosted
+runner. The variable is unset in snug, so everything runs on GitHub-hosted
+runners. Turn routing on with
+`gh variable set BLACKSMITH_RUNNER --body blacksmith-2vcpu-ubuntu-2404` and roll
+it back with `gh variable delete BLACKSMITH_RUNNER`. A new job must either join
+`ROUTED_JOBS` with the routed expression or use a literal `ubuntu-latest`;
+`bun run test` fails otherwise.
+
 `.github/workflows/codeql.yml` runs CodeQL static analysis
 (`javascript-typescript`) on every PR, on push to `main`, and weekly. It's not
 part of the `CI passed` aggregator — findings surface via code scanning, not as
