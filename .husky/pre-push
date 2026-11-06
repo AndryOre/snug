@@ -15,3 +15,5 @@ while read -r _local_ref local_sha remote_ref _remote_sha; do
     exit 1
   fi
 done
+
+TURBO_SCM_BASE=origin/main bunx turbo run check --affected || exit 1
