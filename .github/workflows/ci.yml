@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          filter: blob:none
           persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -36,14 +37,32 @@ jobs:
         with:
           bun-version-file: package.json
 
+      # Exact-hit only: no restore-keys, so a stale tree is never reused.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: node-modules
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('bun.lock') }}
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: steps.node-modules.outputs.cache-hit != 'true'
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
           restore-keys: ${{ runner.os }}-bun-
 
       - name: Install dependencies
+        if: steps.node-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
+
+      # A restored tree skips bun install, so rerun the postinstall that
+      # generates apps/extension/.wxt (its tsconfig extends it).
+      - name: Prepare the extension workspace
+        if: steps.node-modules.outputs.cache-hit == 'true'
+        run: bun run --cwd apps/extension postinstall
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
@@ -85,20 +104,39 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          filter: blob:none
           persist-credentials: false
 
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version-file: package.json
 
+      # Exact-hit only: no restore-keys, so a stale tree is never reused.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: node-modules
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('bun.lock') }}
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: steps.node-modules.outputs.cache-hit != 'true'
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
           restore-keys: ${{ runner.os }}-bun-
 
       - name: Install dependencies
+        if: steps.node-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
+
+      # A restored tree skips bun install, so rerun the postinstall that
+      # generates apps/extension/.wxt (its tsconfig extends it).
+      - name: Prepare the extension workspace
+        if: steps.node-modules.outputs.cache-hit == 'true'
+        run: bun run --cwd apps/extension postinstall
 
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
@@ -140,6 +178,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          filter: blob:none
           persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -150,18 +189,58 @@ jobs:
         with:
           bun-version-file: package.json
 
+      # Exact-hit only: no restore-keys, so a stale tree is never reused.
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: node-modules
+        with:
+          path: |
+            node_modules
+            apps/*/node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('bun.lock') }}
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: steps.node-modules.outputs.cache-hit != 'true'
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
           restore-keys: ${{ runner.os }}-bun-
 
       - name: Install dependencies
+        if: steps.node-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
 
+      # A restored tree skips bun install, so rerun the postinstall that
+      # generates apps/extension/.wxt (its tsconfig extends it).
+      - name: Prepare the extension workspace
+        if: steps.node-modules.outputs.cache-hit == 'true'
+        run: bun run --cwd apps/extension postinstall
+
+      - name: Read the Playwright version
+        id: playwright-version
+        working-directory: apps/extension
+        run: |
+          version="$(bunx playwright --version)"
+          echo "version=${version#Version }" >> "$GITHUB_OUTPUT"
+
+      # System libraries are not cached, so a hit still runs install-deps.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key:
+            ${{ runner.os }}-playwright-${{
+            steps.playwright-version.outputs.version }}
+
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         working-directory: apps/extension
         run: bunx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        working-directory: apps/extension
+        run: bunx playwright install-deps chromium
 
       - name: Run E2E tests
         env:
@@ -207,6 +286,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          filter: blob:none
           persist-credentials: false
 
       - name: Detect changes under apps/site and packages/ui
@@ -262,6 +342,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          filter: blob:none
           persist-credentials: false
 
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0

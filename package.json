@@ -59,6 +59,7 @@
     "zip": "turbo run zip",
     "check": "turbo run check check:root",
     "fix": "bun run format:write && bun run lint:fix && bun run typecheck",
+    "ci:audit": "bun scripts/ci-audit.ts",
     "ci:local": "bun install --frozen-lockfile && bun run lint:commits && bun run lint:docs && bun run check && bun run test:coverage && bun run build && bun run test:e2e",
     "typecheck": "node node_modules/typescript7/bin/tsc --noEmit && bun run --cwd packages/ui check && bun run --cwd apps/extension check && bun run --cwd apps/video check && bun run --cwd apps/site check",
     "i18n:status": "bun run --cwd apps/site i18n:status",

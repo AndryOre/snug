@@ -130,6 +130,23 @@ function usesReferences(source: string): { target: string; rest: string }[] {
   })
 }
 
+function isCacheStep(step: WorkflowStep): boolean {
+  return /^actions\/cache(?:\/restore|\/save)?@/.test(step.uses ?? '')
+}
+
+function cachedPaths(step: WorkflowStep): string[] {
+  const path = step.with?.path
+  const lines = typeof path === 'string' ? path.split('\n') : []
+  return lines.map((line) => line.trim()).filter((line) => line !== '')
+}
+
+function isNodeModulesCache(step: WorkflowStep): boolean {
+  return (
+    isCacheStep(step) &&
+    cachedPaths(step).some((entry) => entry.endsWith('node_modules'))
+  )
+}
+
 function hasAffectedFlag(step: WorkflowStep): boolean {
   const environmentValues = Object.values(step.env ?? {}).map(String)
   return [step.run ?? '', ...environmentValues].some((text) =>
@@ -178,6 +195,22 @@ function findViolations(workflow: Workflow, source: string): string[] {
     ) {
       violations.push('actions/checkout without persist-credentials: false')
     }
+    if (
+      step.uses?.startsWith('actions/checkout@') &&
+      step.with?.['fetch-depth'] === 0 &&
+      step.with['filter'] !== 'blob:none'
+    ) {
+      violations.push('full-history actions/checkout without filter: blob:none')
+    }
+    if (
+      isCacheStep(step) &&
+      !FULL_SHA_PATTERN.test(step.uses?.split('@', 2)[1] ?? '')
+    ) {
+      violations.push(`cache step ${step.uses} is not SHA-pinned`)
+    }
+    if (isNodeModulesCache(step) && step.with?.['restore-keys'] !== undefined) {
+      violations.push('node_modules cache falls back through restore-keys')
+    }
     if (step.run?.includes('${{')) {
       violations.push(`run interpolates an expression: ${step.run.trim()}`)
     }
@@ -225,7 +258,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+      - uses: actions/cache/restore@v6
+        with:
+          path: node_modules
+          key: modules
+          restore-keys: modules-
       - run: echo \${{ github.head_ref }}
       - run: bunx turbo run check --affected
 `
@@ -237,6 +277,9 @@ jobs:
     'job "build" has no timeout-minutes',
     'job "build" does not declare permissions',
     'actions/checkout without persist-credentials: false',
+    'full-history actions/checkout without filter: blob:none',
+    'cache step actions/cache/restore@v6 is not SHA-pinned',
+    'node_modules cache falls back through restore-keys',
     'actions/checkout@v4 is not pinned to a 40-hex SHA',
     'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 has no # vX.Y.Z version comment',
     'run interpolates an expression: echo ${{ github.head_ref }}',
@@ -381,8 +424,65 @@ describe('ci.yml', () => {
         step.uses?.startsWith('actions/checkout@'),
       )
       expect(checkout?.with?.['fetch-depth']).toBe(0)
+      expect(checkout?.with?.['filter']).toBe('blob:none')
     }
   })
+
+  test('commitlint and change detection keep a blobless full history', () => {
+    for (const jobName of ['commitlint', 'changes']) {
+      const checkout = workflow.jobs?.[jobName]?.steps?.find((step) =>
+        step.uses?.startsWith('actions/checkout@'),
+      )
+      expect(checkout?.with).toMatchObject({
+        'fetch-depth': 0,
+        filter: 'blob:none',
+      })
+    }
+  })
+
+  describe.each(['quality', 'build', 'e2e'])(
+    '%s restores node_modules on an exact bun.lock hit',
+    (jobName) => {
+      const steps = workflow.jobs?.[jobName]?.steps ?? []
+      const cache = steps.find((step) => isNodeModulesCache(step))
+      const skipped = `steps.${cache?.id ?? '?'}.outputs.cache-hit != 'true'`
+      const hit = `steps.${cache?.id ?? '?'}.outputs.cache-hit == 'true'`
+
+      test('caches root and workspace node_modules on the lockfile hash', () => {
+        expect(cache?.id).toBe('node-modules')
+        expect(cache?.with?.key).toBe(
+          "${{ runner.os }}-node-modules-${{ hashFiles('bun.lock') }}",
+        )
+        expect(cache?.with?.['restore-keys']).toBeUndefined()
+        expect(cachedPaths(cache ?? {})).toEqual([
+          'node_modules',
+          'apps/*/node_modules',
+          'packages/*/node_modules',
+        ])
+      })
+
+      test('skips the bun cache and bun install on a hit', () => {
+        const install = steps.find((step) =>
+          step.run?.startsWith('bun install'),
+        )
+        const bunCache = steps.find(
+          (step) =>
+            isCacheStep(step) &&
+            String(step.with?.path).includes('.bun/install/cache'),
+        )
+        expect(install?.if).toBe(skipped)
+        expect(bunCache?.if).toBe(skipped)
+        expect(steps.indexOf(cache ?? {})).toBeLessThan(
+          steps.indexOf(bunCache ?? {}),
+        )
+      })
+
+      test('reruns the extension postinstall on a hit', () => {
+        const prepare = steps.find((step) => step.if === hit)
+        expect(prepare?.run).toBe('bun run --cwd apps/extension postinstall')
+      })
+    },
+  )
 
   describe('sharded e2e', () => {
     const { jobs } = parse(readWorkflowText('ci.yml')) as {
@@ -446,6 +546,46 @@ describe('ci.yml', () => {
     for (const step of affectedSteps) {
       expect(step.env?.TURBO_SCM_BASE).toBe('origin/${{ github.base_ref }}')
     }
+  })
+})
+
+describe.each([
+  ['ci.yml', 'e2e'],
+  ['site-quality.yml', 'site-quality'],
+])('%s:%s caches Playwright browsers', (fileName, jobName) => {
+  const steps = readWorkflow(fileName).jobs?.[jobName]?.steps ?? []
+  const version = steps.find((step) => step.id === 'playwright-version')
+  const cache = steps.find(
+    (step) =>
+      isCacheStep(step) && cachedPaths(step).includes('~/.cache/ms-playwright'),
+  )
+  const installs = steps.filter((step) =>
+    /^bunx playwright install\b/.test(step.run ?? ''),
+  )
+
+  test('keys the browser cache on the installed Playwright version', () => {
+    expect(version?.run).toContain('bunx playwright --version')
+    expect(cache?.id).toBe('playwright-cache')
+    expect(cache?.with?.key).toBe(
+      '${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}',
+    )
+    expect(cache?.with?.['restore-keys']).toBeUndefined()
+    expect(steps.indexOf(version ?? {})).toBeLessThan(
+      steps.indexOf(cache ?? {}),
+    )
+  })
+
+  test('downloads browsers on a miss and only system deps on a hit', () => {
+    expect(installs.map((step) => ({ if: step.if, run: step.run }))).toEqual([
+      {
+        if: "steps.playwright-cache.outputs.cache-hit != 'true'",
+        run: 'bunx playwright install --with-deps chromium',
+      },
+      {
+        if: "steps.playwright-cache.outputs.cache-hit == 'true'",
+        run: 'bunx playwright install-deps chromium',
+      },
+    ])
   })
 })
 

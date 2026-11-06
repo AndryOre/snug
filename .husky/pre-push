@@ -1,8 +1,11 @@
 zero='0000000000000000000000000000000000000000'
 valid='^(main|renovate/.+|(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)/[a-z0-9._-]+)$'
 
+pushes_commits=0
+
 while read -r _local_ref local_sha remote_ref _remote_sha; do
   [ "$local_sha" = "$zero" ] && continue                       # branch deletion
+  pushes_commits=1
   case "$remote_ref" in refs/heads/*) ;; *) continue ;; esac   # tags/notes: skip
   branch="${remote_ref#refs/heads/}"
 
@@ -15,3 +18,7 @@ while read -r _local_ref local_sha remote_ref _remote_sha; do
     exit 1
   fi
 done
+
+[ "$pushes_commits" = "0" ] && exit 0                          # delete-only push
+
+TURBO_SCM_BASE=origin/main bunx turbo run check --affected || exit 1
