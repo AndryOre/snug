@@ -286,6 +286,14 @@ describe('ci.yml', () => {
       }
     })
 
+    test('the site Playwright config splits shards inside files', () => {
+      const siteConfig = readFileSync(
+        new URL('../apps/site/playwright.config.ts', import.meta.url),
+        'utf8',
+      )
+      expect(siteConfig).toMatch(/^\s*fullyParallel:\s*true,/m)
+    })
+
     test('CI passed fails when any shard fails or is cancelled', () => {
       const checkStep = workflow.jobs?.['ci-passed']?.steps?.[0]
       const failed = String(checkStep?.env?.FAILED)
