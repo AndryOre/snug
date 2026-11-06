@@ -16,7 +16,9 @@ permissions:
 jobs:
   quality:
     name: Quality (format · lint · typecheck · knip · test)
-    runs-on: ubuntu-latest
+    runs-on:
+      ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' ||
+      vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read
@@ -193,7 +195,9 @@ jobs:
   changes:
     name: Detect site changes
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on:
+      ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' ||
+      vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -247,7 +251,9 @@ jobs:
 
   commitlint:
     name: Commitlint
-    runs-on: ubuntu-latest
+    runs-on:
+      ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' ||
+      vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -282,7 +288,9 @@ jobs:
   # run for a given trigger (e.g. commitlint is skipped on push).
   ci-passed:
     name: CI passed
-    runs-on: ubuntu-latest
+    runs-on:
+      ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' ||
+      vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read

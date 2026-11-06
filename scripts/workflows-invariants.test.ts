@@ -24,6 +24,87 @@ interface ShardedJob {
   readonly steps?: readonly WorkflowStep[]
 }
 
+/**
+ * The `runs-on` expression of every light job (ADR 0031): GitHub-hosted for
+ * fork PRs, otherwise the optional `BLACKSMITH_RUNNER` repository variable,
+ * falling back to `ubuntu-latest` when it is unset.
+ */
+const ROUTED_RUNS_ON =
+  "${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}"
+
+/**
+ * The only jobs, as `<file>:<job>`, allowed to use {@link ROUTED_RUNS_ON}.
+ */
+const ROUTED_JOBS: readonly string[] = [
+  'ci.yml:quality',
+  'ci.yml:changes',
+  'ci.yml:commitlint',
+  'ci.yml:ci-passed',
+  'lint-pr.yml:validate-title',
+  'lint-docs.yml:check-links',
+  'lint-workflows.yml:lint',
+  'labels.yml:sync',
+]
+
+const FORBIDDEN_RUNNER_LABEL_PATTERN = /^vps-|^self-hosted$/
+
+interface RunnerJob {
+  readonly 'runs-on'?: unknown
+  readonly uses?: string
+}
+
+function runnerLabels(runsOn: unknown): string[] {
+  if (typeof runsOn === 'string') return [runsOn]
+  if (Array.isArray(runsOn)) {
+    return runsOn.flatMap((entry: unknown) => runnerLabels(entry))
+  }
+  if (runsOn !== null && typeof runsOn === 'object') {
+    return Object.values(runsOn).flatMap((entry: unknown) =>
+      runnerLabels(entry),
+    )
+  }
+  return []
+}
+
+/**
+ * Applies the runner routing rules of ADR 0031 to one workflow.
+ * @param fileName The workflow file name, used to build `<file>:<job>` keys.
+ * @param source The raw workflow text.
+ * @param routedJobs The `<file>:<job>` keys allowed to use the routed runner.
+ * @returns One message per violation; empty when the workflow is clean.
+ */
+function findRunnerViolations(
+  fileName: string,
+  source: string,
+  routedJobs: readonly string[] = ROUTED_JOBS,
+): string[] {
+  const { jobs } = parse(source) as { jobs?: Record<string, RunnerJob> }
+  const violations: string[] = []
+  const jobEntries = Object.entries(jobs ?? {})
+  for (const [jobName, job] of jobEntries) {
+    const key = `${fileName}:${jobName}`
+    const runsOn = job['runs-on']
+    for (const label of runnerLabels(runsOn)) {
+      if (FORBIDDEN_RUNNER_LABEL_PATTERN.test(label)) {
+        violations.push(`${key} uses the forbidden runner label ${label}`)
+      }
+    }
+    if (routedJobs.includes(key)) {
+      if (runsOn !== ROUTED_RUNS_ON) {
+        violations.push(`${key} does not use the routed runs-on expression`)
+      }
+      continue
+    }
+    if (JSON.stringify(job).includes('vars.BLACKSMITH_RUNNER')) {
+      violations.push(`${key} reads vars.BLACKSMITH_RUNNER outside the list`)
+    }
+    if (runsOn !== 'ubuntu-latest' && job.uses === undefined) {
+      violations.push(`${key} does not use a literal ubuntu-latest`)
+    }
+  }
+  return violations
+}
+
 function collectSteps(workflow: Workflow): WorkflowStep[] {
   return Object.values(workflow.jobs ?? {}).flatMap((job) => job.steps ?? [])
 }
@@ -162,6 +243,60 @@ jobs:
     '--affected without TURBO_SCM_BASE in the step env',
   ])('reports: %s', (message) => {
     expect(violations).toContain(message)
+  })
+})
+
+describe('runner routing (ADR 0031)', () => {
+  test.each(allFiles)('%s follows the runner routing rules', (fileName) => {
+    expect(findRunnerViolations(fileName, readWorkflowText(fileName))).toEqual(
+      [],
+    )
+  })
+
+  test('every routed job exists', () => {
+    const existing = new Set(
+      allFiles.flatMap((fileName) =>
+        Object.keys(readWorkflow(fileName).jobs ?? {}).map(
+          (jobName) => `${fileName}:${jobName}`,
+        ),
+      ),
+    )
+    for (const key of ROUTED_JOBS) {
+      expect(existing).toContain(key)
+    }
+  })
+
+  describe('the rules reject a broken workflow', () => {
+    const broken = `
+jobs:
+  light:
+    runs-on: ubuntu-latest
+  heavy:
+    runs-on: \${{ vars.BLACKSMITH_RUNNER || 'ubuntu-latest' }}
+  vps:
+    runs-on: vps-dind
+  hosted:
+    runs-on: [self-hosted, linux]
+  sneaky:
+    runs-on: ubuntu-latest
+    env:
+      RUNNER: \${{ vars.BLACKSMITH_RUNNER }}
+`
+    const violations = findRunnerViolations('broken.yml', broken, [
+      'broken.yml:light',
+    ])
+
+    test.each([
+      'broken.yml:light does not use the routed runs-on expression',
+      'broken.yml:heavy reads vars.BLACKSMITH_RUNNER outside the list',
+      'broken.yml:heavy does not use a literal ubuntu-latest',
+      'broken.yml:vps uses the forbidden runner label vps-dind',
+      'broken.yml:vps does not use a literal ubuntu-latest',
+      'broken.yml:hosted uses the forbidden runner label self-hosted',
+      'broken.yml:sneaky reads vars.BLACKSMITH_RUNNER outside the list',
+    ])('reports: %s', (message) => {
+      expect(violations).toContain(message)
+    })
   })
 })
 
