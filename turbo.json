@@ -48,6 +48,10 @@
       "cache": false,
       "passThroughEnv": ["PWDEBUG", "AXE_MATRIX"]
     },
+    "test:e2e:prebuilt": {
+      "cache": false,
+      "passThroughEnv": ["PWDEBUG", "AXE_MATRIX"]
+    },
     "build": {
       "dependsOn": ["transit"],
       "inputs": [
