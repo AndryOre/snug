@@ -30,6 +30,7 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+          filter: blob:none
 
       - name: Compute last-modified dates
         id: dates
