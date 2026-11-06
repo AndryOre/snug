@@ -1,7 +1,12 @@
 import { defineConfig } from 'vitest/config'
 
+/**
+ * `isolate: false` reuses each worker's module registry across files; measured
+ * about 0.7-2 s faster on this suite, which keeps no shared module state.
+ */
 export default defineConfig({
   test: {
+    isolate: false,
     include: ['src/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',

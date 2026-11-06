@@ -1,7 +1,12 @@
 import { defineConfig } from 'vitest/config'
 
+/**
+ * Keeps `isolate: true`: `isolate: false` gave no consistent speed-up on the
+ * tooling suites (import-bound, 22 files), so the safer default stays.
+ */
 export default defineConfig({
   test: {
+    isolate: true,
     include: [
       'scripts/**/*.test.ts',
       'eslint-rules/**/*.test.ts',
